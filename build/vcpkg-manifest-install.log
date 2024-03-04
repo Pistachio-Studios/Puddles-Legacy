@@ -1,6 +1,6 @@
 Detecting compiler hash for triplet x64-linux...
 All requested packages are currently installed.
-Total install time: 310 ns
+Total install time: 400 ns
 box2d provides CMake targets:
 
   # this is heuristically generated, and may not be correct

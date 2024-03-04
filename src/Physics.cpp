@@ -14,6 +14,7 @@
 #include <box2d/box2d.h>
 #include <box2d/b2_contact.h>
 #include <box2d/b2_body.h>
+#include <box2d/b2_distance_joint.h>
 #elif _MSC_VER
 #include "SDL/include/SDL_keycode.h"
 #include "Box2D/Box2D/Box2D.h"
@@ -92,8 +93,8 @@ bool Physics::PreUpdate()
 		if (c->IsTouching() && c->GetFixtureA()->IsSensor())
 		{
 			// If so, we call the OnCollision listener function (only of the sensor), passing as inputs our custom PhysBody classes
-			PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
-			PhysBody* pb2 = (PhysBody*)c->GetFixtureB()->GetBody()->GetUserData();
+			PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData().pointer;
+			PhysBody* pb2 = (PhysBody*)c->GetFixtureB()->GetBody()->GetUserData().pointer;
 			
 			if (pb1 && pb2 && pb1->listener)
 				pb1->listener->OnCollision(pb1, pb2);
@@ -132,7 +133,7 @@ PhysBody* Physics::CreateRectangle(int x, int y, int width, int height, bodyType
 
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
-	b->SetUserData(pbody);
+	b->GetUserData().pointer = reinterpret_cast<uintptr_t>(pbody);
 	pbody->width = width * 0.5f;
 	pbody->height = height * 0.5f;
 
@@ -169,7 +170,7 @@ PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type)
 	// Create our custom PhysBody class
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
-	b->SetUserData(pbody);
+	b->GetUserData().pointer = reinterpret_cast<uintptr_t>(pbody);
 	pbody->width = radious * 0.5f;
 	pbody->height = radious * 0.5f;
 
@@ -205,7 +206,7 @@ PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bo
 	// Create our custom PhysBody class
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
-	b->SetUserData(pbody);
+	b->GetUserData().pointer = reinterpret_cast<uintptr_t>(pbody);
 	pbody->width = width;
 	pbody->height = height;
 
@@ -248,7 +249,7 @@ PhysBody* Physics::CreateChain(int x, int y, int* points, int size, bodyType typ
 	// Create our custom PhysBody class
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
-	b->SetUserData(pbody);
+	b->GetUserData().pointer = reinterpret_cast<uintptr_t>(pbody);
 	pbody->width = pbody->height = 0;
 
 	// Return our PhysBody class
@@ -288,19 +289,19 @@ bool Physics::PostUpdate()
 				case b2Shape::e_polygon:
 				{
 					b2PolygonShape* polygonShape = (b2PolygonShape*)f->GetShape();
-					int32 count = polygonShape->GetVertexCount();
+					int32 count = polygonShape->m_count;
 					b2Vec2 prev, v;
 
 					for (int32 i = 0; i < count; ++i)
 					{
-						v = b->GetWorldPoint(polygonShape->GetVertex(i));
+						v = b->GetWorldPoint(polygonShape->m_vertices[i]);
 						if (i > 0)
 							app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 255, 255, 100);
 
 						prev = v;
 					}
 
-					v = b->GetWorldPoint(polygonShape->GetVertex(0));
+					v = b->GetWorldPoint(polygonShape->m_vertices[0]);
 					app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 255, 100, 100);
 				}
 				break;
@@ -364,8 +365,8 @@ bool Physics::PostUpdate()
 						def.bodyA = ground; // First body must be a static ground
 						def.bodyB = mouseBody; // Second body will be the body to attach to the mouse
 						def.target = mousePosition; // The second body will be pulled towards this location
-						def.dampingRatio = 0.5f; // Play with this value
-						def.frequencyHz = 2.0f; // Play with this value
+						//def.damping = 0.5f; // Play with this value
+						//def.frequencyHz = 2.0f; // Play with this value
 						def.maxForce = 200.0f * mouseBody->GetMass(); // Play with this value
 
 						// Add the new mouse joint into the World
@@ -434,8 +435,8 @@ bool Physics::CleanUp()
 void Physics::BeginContact(b2Contact* contact)
 {
 	// Call the OnCollision listener function to bodies A and B, passing as inputs our custom PhysBody classes
-	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
-	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData().pointer;
+	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData().pointer;
 
 	if (physA != nullptr && physA->listener != NULL)
 		physA->listener->OnCollision(physA, physB);
@@ -447,8 +448,8 @@ void Physics::BeginContact(b2Contact* contact)
 void Physics::EndContact(b2Contact* contact)
 {
 	// Call the OnCollision listener function to bodies A and B, passing as inputs our custom PhysBody classes
-	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
-	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData().pointer;
+	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData().pointer;
 
 	if (physA && physA->listener != NULL)
 		physA->listener->EndCollision(physA, physB);
@@ -585,7 +586,7 @@ PhysBody* Physics::CreateRope(int x, int y, int length, float segmentWidth, floa
 
 	b2Body** segments = new b2Body*[length];
 	b2RevoluteJoint** joints = new b2RevoluteJoint*[length - 1];
-	b2RopeJoint** ropeJoints = new b2RopeJoint*[length - 1];
+	b2DistanceJoint** ropeJoints = new b2DistanceJoint*[length - 1];
 	PhysBody* bodies = new PhysBody[length];
 
 	b2BodyDef* bodyDef = new b2BodyDef();
@@ -604,7 +605,7 @@ PhysBody* Physics::CreateRope(int x, int y, int length, float segmentWidth, floa
 		segments[i]->CreateFixture(shape, 1.0f);
 
 		bodies[i].body = segments[i];
-		segments[i]->SetUserData(&bodies[i]);
+		segments[i]->GetUserData().pointer = reinterpret_cast<uintptr_t>(&bodies[i]);
 		bodies[i].width = METERS_TO_PIXELS(width);
 		bodies[i].height = METERS_TO_PIXELS(height);
 	}
@@ -623,7 +624,7 @@ PhysBody* Physics::CreateRope(int x, int y, int length, float segmentWidth, floa
 		joints[i] = (b2RevoluteJoint*)world->CreateJoint(jointDef);
 	}
 
-	b2RopeJointDef* ropeJointDef = new b2RopeJointDef();
+	b2DistanceJointDef* ropeJointDef = new b2DistanceJointDef();
 	ropeJointDef->localAnchorA.Set(0, -height / 2);
 	ropeJointDef->localAnchorB.Set(0, height / 2);
 	ropeJointDef->maxLength = height;
@@ -632,7 +633,7 @@ PhysBody* Physics::CreateRope(int x, int y, int length, float segmentWidth, floa
 	{
 		ropeJointDef->bodyA = segments[i];
 		ropeJointDef->bodyB = segments[i + 1];
-		ropeJoints[i] = (b2RopeJoint*)world->CreateJoint(ropeJointDef);
+		ropeJoints[i] = (b2DistanceJoint*)world->CreateJoint(ropeJointDef);
 	}
 
 	return bodies;
@@ -641,7 +642,7 @@ PhysBody* Physics::CreateRope(int x, int y, int length, float segmentWidth, floa
 PhysBody* Physics::CreateRope(b2Vec2 startPos, int length, float segmentWidth, float segmentHeight) {
 	b2Body** segments = new b2Body*[length];
     b2RevoluteJoint** joints = new b2RevoluteJoint*[length + 1];
-    b2RopeJoint** ropeJoints = new b2RopeJoint*[length - 1];
+    b2DistanceJoint** ropeJoints = new b2DistanceJoint*[length - 1];
 	PhysBody* bodies = new PhysBody[length];
 
     b2BodyDef* bodyDef = new b2BodyDef();
@@ -660,7 +661,7 @@ PhysBody* Physics::CreateRope(b2Vec2 startPos, int length, float segmentWidth, f
         segments[i]->CreateFixture(shape, 1.0f);
 
 		bodies[i].body = segments[i];
-		segments[i]->SetUserData(&bodies[i]);
+		segments[i]->GetUserData().pointer = reinterpret_cast<uintptr_t>(&bodies[i]);
 		bodies[i].width = METERS_TO_PIXELS(width);
 		bodies[i].height = METERS_TO_PIXELS(height);
 	}
@@ -688,7 +689,7 @@ PhysBody* Physics::CreateRope(b2Vec2 startPos, int length, float segmentWidth, f
         joints[i + 1] = (b2RevoluteJoint*)world->CreateJoint(jointDef);
     }
 
-    b2RopeJointDef* ropeJointDef = new b2RopeJointDef();
+    b2DistanceJointDef* ropeJointDef = new b2DistanceJointDef();
     ropeJointDef->localAnchorA.Set(0, -height / 2);
     ropeJointDef->localAnchorB.Set(0, height / 2);
     ropeJointDef->maxLength = height;
@@ -697,7 +698,7 @@ PhysBody* Physics::CreateRope(b2Vec2 startPos, int length, float segmentWidth, f
     {
         ropeJointDef->bodyA = segments[i];
         ropeJointDef->bodyB = segments[i + 1];
-        ropeJoints[i] = (b2RopeJoint*)world->CreateJoint(ropeJointDef);
+        ropeJoints[i] = (b2DistanceJoint*)world->CreateJoint(ropeJointDef);
     }
 
     return bodies;
@@ -707,7 +708,7 @@ PhysBody* Physics::CreateRope(b2Vec2 startPos, b2Vec2 endPos, int length, float 
 {
     b2Body** segments = new b2Body*[length];
     b2RevoluteJoint** joints = new b2RevoluteJoint*[length + 1];
-    b2RopeJoint** ropeJoints = new b2RopeJoint*[length - 1];
+    b2DistanceJoint** ropeJoints = new b2DistanceJoint*[length - 1];
 	PhysBody* bodies = new PhysBody[length];
 
     b2BodyDef* bodyDef = new b2BodyDef();
@@ -727,7 +728,7 @@ for (int i = 0; i < length; i++)
 	segments[i]->CreateFixture(shape, 1.0f);
 
 	bodies[i].body = segments[i];
-	segments[i]->SetUserData(&bodies[i]);
+	segments[i]->GetUserData().pointer = reinterpret_cast<uintptr_t>(&bodies[i]);
 	bodies[i].width = METERS_TO_PIXELS(width);
 	bodies[i].height = METERS_TO_PIXELS(height);
 }
@@ -763,7 +764,7 @@ b2BodyDef anchorBodyDef;
     jointDef->bodyB = endAnchor;
     joints[length] = (b2RevoluteJoint*)world->CreateJoint(jointDef);
 
-    b2RopeJointDef* ropeJointDef = new b2RopeJointDef();
+    b2DistanceJointDef* ropeJointDef = new b2DistanceJointDef();
     ropeJointDef->localAnchorA.Set(0, -height / 2);
     ropeJointDef->localAnchorB.Set(0, height / 2);
     ropeJointDef->maxLength = height;
@@ -772,7 +773,7 @@ b2BodyDef anchorBodyDef;
     {
         ropeJointDef->bodyA = segments[i];
         ropeJointDef->bodyB = segments[i + 1];
-        ropeJoints[i] = (b2RopeJoint*)world->CreateJoint(ropeJointDef);
+        ropeJoints[i] = (b2DistanceJoint*)world->CreateJoint(ropeJointDef);
     }
 
     return bodies;

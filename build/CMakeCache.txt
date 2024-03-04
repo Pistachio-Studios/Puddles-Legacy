@@ -425,6 +425,12 @@ box2d_DIR:PATH=/home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-
 //The directory containing a CMake configuration file for pugixml.
 pugixml_DIR:PATH=/home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/share/pugixml
 
+//The directory containing a CMake configuration file for unoffi.
+unoffi_DIR:PATH=unoffi_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for unofficial-box2d.
+unofficial-box2d_DIR:PATH=unofficial-box2d_DIR-NOTFOUND
+
 //The directory containing a CMake configuration file for wavpack.
 wavpack_DIR:PATH=/home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/share/wavpack
 
