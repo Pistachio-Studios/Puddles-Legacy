@@ -11,10 +11,9 @@
 
 #ifdef __linux__
 #include <SDL_keycode.h>
-#include <Box2D/Box2D.h>
-#include <Box2D/Dynamics/Contacts/b2Contact.h>
-#include "External/Optick/include/optick.h"
-#include <Box2D/Dynamics/b2Body.h>
+#include <box2d/box2d.h>
+#include <box2d/b2_contact.h>
+#include <box2d/b2_body.h>
 #elif _MSC_VER
 #include "SDL/include/SDL_keycode.h"
 #include "Box2D/Box2D/Box2D.h"
@@ -69,7 +68,7 @@ bool Physics::Start()
 bool Physics::PreUpdate()
 {
 	// OPTICK PROFILIN
-	OPTICK_EVENT();
+	//OPTICK_EVENT();
 
 	bool ret = true;
 
@@ -261,7 +260,7 @@ bool Physics::PostUpdate()
 {
 
 	// OPTICK PROFILIN
-	OPTICK_EVENT();
+	//OPTICK_EVENT();
 
 	bool ret = true;
 	

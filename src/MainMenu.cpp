@@ -61,7 +61,7 @@ bool MainMenu::Start()
 bool MainMenu::PreUpdate()
 {
 	// OPTICK PROFILIN
-	//OPTICK_EVENT();
+	////OPTICK_EVENT();
 
 	return true;
 }
@@ -70,7 +70,7 @@ bool MainMenu::PreUpdate()
 bool MainMenu::Update(float dt)
 {
 	// OPTICK PROFILIN
-	//OPTICK_EVENT();
+	////OPTICK_EVENT();
 
 	return true;
 }
@@ -79,7 +79,7 @@ bool MainMenu::Update(float dt)
 bool MainMenu::PostUpdate()
 {
 	// OPTICK PROFILIN
-	//OPTICK_EVENT();
+	////OPTICK_EVENT();
 
 	bool ret = true;
 

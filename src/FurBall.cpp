@@ -10,7 +10,7 @@
 #include "Physics.h"
 
 #ifdef __linux__
-#include <Box2D/Dynamics/b2Body.h>
+#include <box2d/b2_body.h>
 #endif
 
 FurBall::FurBall() : Entity(EntityType::FURBALL)

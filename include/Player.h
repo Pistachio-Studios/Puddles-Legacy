@@ -10,9 +10,9 @@
 #include "StateMachine.h"
 
 #ifdef __linux__
-#include <Box2D/Dynamics/b2Fixture.h>
+#include <box2d/b2_fixture.h>
 #include <SDL.h>
-#include <Box2D/Common/b2Math.h>
+#include <box2d/b2_math.h>
 #elif _MSC_VER
 #include "SDL/include/SDL.h"
 #endif

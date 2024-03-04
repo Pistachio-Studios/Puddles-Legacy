@@ -14,7 +14,7 @@
 #include "GuiManager.h"
 
 #ifdef __linux__
-#include <Box2D/Dynamics/b2Body.h>
+#include <box2d/b2_body.h>
 
 #elif _MSC_VER
 #include "Optick/include/optick.h"
@@ -117,7 +117,7 @@ bool FinalScene::Start()
 bool FinalScene::PreUpdate()
 {
 	// OPTICK PROFILIN
-	//OPTICK_EVENT();
+	////OPTICK_EVENT();
 
 	return true;
 }
@@ -126,7 +126,7 @@ bool FinalScene::PreUpdate()
 bool FinalScene::Update(float dt)
 {
 	// OPTICK PROFILIN
-	//OPTICK_EVENT();
+	////OPTICK_EVENT();
 
 	if(freeCam)
 	{
@@ -160,7 +160,7 @@ bool FinalScene::Update(float dt)
 bool FinalScene::PostUpdate()
 {
 	// OPTICK PROFILIN
-	//OPTICK_EVENT();
+	////OPTICK_EVENT();
 
 	bool ret = true;
 

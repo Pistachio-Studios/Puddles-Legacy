@@ -148,7 +148,7 @@ void EntityManager::AddEntity(Entity* entity)
 bool EntityManager::Update(float dt)
 {
 	// OPTICK PROFILIN
-	//OPTICK_EVENT();
+	////OPTICK_EVENT();
 
 	bool ret = true;
 	ListItem<Entity*>* item;

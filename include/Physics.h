@@ -5,8 +5,8 @@
 
 #ifdef __linux__
 //#include <box2d/box2d.h>
-#include <Box2D/Dynamics/b2WorldCallbacks.h>
-#include <Box2D/Common/b2Math.h>
+#include <box2d/b2_world_callbacks.h>
+#include <box2d/b2_math.h>
 class b2Body;
 class b2Contact;
 class b2World;

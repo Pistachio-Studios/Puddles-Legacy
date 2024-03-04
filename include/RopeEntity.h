@@ -6,7 +6,7 @@
 
 #ifdef __linux__
 #include <SDL.h>
-#include <Box2D/Common/b2Math.h>
+#include <box2d/b2_math.h>
 #elif _MSC_VER
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Common/b2math.h"
