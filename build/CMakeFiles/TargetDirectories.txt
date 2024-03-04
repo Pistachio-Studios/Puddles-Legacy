@@ -1,5 +1,0 @@
-/home/hugo/Documentos/GitHub/Proyecto2/build/CMakeFiles/Proyecto-2.dir
-/home/hugo/Documentos/GitHub/Proyecto2/build/CMakeFiles/package.dir
-/home/hugo/Documentos/GitHub/Proyecto2/build/CMakeFiles/package_source.dir
-/home/hugo/Documentos/GitHub/Proyecto2/build/CMakeFiles/edit_cache.dir
-/home/hugo/Documentos/GitHub/Proyecto2/build/CMakeFiles/rebuild_cache.dir
