@@ -1,0 +1,278 @@
+[
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/App.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/App.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/App.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/App.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Audio.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Audio.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Audio.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Audio.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Checkpoint.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Checkpoint.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Checkpoint.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Checkpoint.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/DogEnemy.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/DogEnemy.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/DogEnemy.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/DogEnemy.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/EntityManager.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/EntityManager.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/EntityManager.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/EntityManager.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/FadeToBlack.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/FadeToBlack.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/FadeToBlack.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/FadeToBlack.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/FinalScene.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/FinalScene.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/FinalScene.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/FinalScene.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/FoodItem.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/FoodItem.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/FoodItem.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/FoodItem.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/FurBall.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/FurBall.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/FurBall.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/FurBall.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/GuiControlButton.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/GuiControlButton.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/GuiControlButton.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/GuiControlButton.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/GuiControlLabel.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/GuiControlLabel.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/GuiControlLabel.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/GuiControlLabel.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/GuiManager.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/GuiManager.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/GuiManager.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/GuiManager.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Input.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Input.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Input.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Input.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Log.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Log.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Log.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Log.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Main.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Main.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Main.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Main.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/MainMenu.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/MainMenu.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/MainMenu.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/MainMenu.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Map.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Map.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Map.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Map.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/OwlEnemy.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/OwlEnemy.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/OwlEnemy.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/OwlEnemy.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Pathfinding.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Pathfinding.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Pathfinding.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Pathfinding.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/PerfTimer.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/PerfTimer.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/PerfTimer.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/PerfTimer.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Physics.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Physics.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Physics.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Physics.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Player.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Player.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Player.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Player.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Render.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Render.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Render.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Render.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/RopeEntity.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/RopeEntity.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/RopeEntity.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/RopeEntity.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Scene.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Scene.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Scene.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Scene.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/ScoreItem.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/ScoreItem.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/ScoreItem.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/ScoreItem.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/DogEnemy/DogEnemyAttackState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/DogEnemy/DogEnemyAttackState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/DogEnemy/DogEnemyAttackState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/DogEnemy/DogEnemyAttackState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/DogEnemy/DogEnemyDeadState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/DogEnemy/DogEnemyDeadState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/DogEnemy/DogEnemyDeadState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/DogEnemy/DogEnemyDeadState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/DogEnemy/DogEnemyHurtState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/DogEnemy/DogEnemyHurtState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/DogEnemy/DogEnemyHurtState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/DogEnemy/DogEnemyHurtState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/DogEnemy/DogEnemyIdleState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/DogEnemy/DogEnemyIdleState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/DogEnemy/DogEnemyIdleState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/DogEnemy/DogEnemyIdleState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/DogEnemy/DogEnemyMoveState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/DogEnemy/DogEnemyMoveState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/DogEnemy/DogEnemyMoveState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/DogEnemy/DogEnemyMoveState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/OwlEnemy/OwlEnemyAttackState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/OwlEnemy/OwlEnemyAttackState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/OwlEnemy/OwlEnemyAttackState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/OwlEnemy/OwlEnemyAttackState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/OwlEnemy/OwlEnemyDeadState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/OwlEnemy/OwlEnemyDeadState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/OwlEnemy/OwlEnemyDeadState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/OwlEnemy/OwlEnemyDeadState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/OwlEnemy/OwlEnemyHurtState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/OwlEnemy/OwlEnemyHurtState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/OwlEnemy/OwlEnemyHurtState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/OwlEnemy/OwlEnemyHurtState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/OwlEnemy/OwlEnemyIdleState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/OwlEnemy/OwlEnemyIdleState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/OwlEnemy/OwlEnemyIdleState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/OwlEnemy/OwlEnemyIdleState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/OwlEnemy/OwlEnemyMoveState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/OwlEnemy/OwlEnemyMoveState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/OwlEnemy/OwlEnemyMoveState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/OwlEnemy/OwlEnemyMoveState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerClimbState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerClimbState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerClimbState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerClimbState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerDeadState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerDeadState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerDeadState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerDeadState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerHurtState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerHurtState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerHurtState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerHurtState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerIdleState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerIdleState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerIdleState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerIdleState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerMoveState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerMoveState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerMoveState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerMoveState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerNoClipState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerNoClipState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerNoClipState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerNoClipState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerWinState.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerWinState.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/States/Player/PlayerWinState.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/States/Player/PlayerWinState.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Textures.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Textures.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Textures.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Textures.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Timer.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Timer.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Timer.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Timer.cpp.o"
+},
+{
+  "directory": "/home/hugo/Documentos/GitHub/Proyecto2/build",
+  "command": "/usr/bin/clang++ -I/home/hugo/Documentos/GitHub/Proyecto2/include -I/home/hugo/Documentos/GitHub/Proyecto2/Proyecto-2 -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include -isystem /home/hugo/Documentos/GitHub/Proyecto2/build/vcpkg_installed/x64-linux/include/SDL2  -fpermissive -std=c++2a  -l Box2D -g -o CMakeFiles/Proyecto-2.dir/src/Window.cpp.o -c /home/hugo/Documentos/GitHub/Proyecto2/src/Window.cpp",
+  "file": "/home/hugo/Documentos/GitHub/Proyecto2/src/Window.cpp",
+  "output": "CMakeFiles/Proyecto-2.dir/src/Window.cpp.o"
+}
+]

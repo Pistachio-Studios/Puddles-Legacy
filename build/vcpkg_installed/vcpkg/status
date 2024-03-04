@@ -1,0 +1,331 @@
+Package: vcpkg-cmake-config
+Version: 2022-02-06
+Port-Version: 1
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 4ceaac205eecb13627db40b73aea18cf78072b0a60d1624b6ba46e777aba2359
+Status: install ok installed
+
+Package: vcpkg-cmake
+Version: 2023-05-04
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 52bd27db8f538d3df9352bda366877ae0ed08f2581e5401f88fc1a47b44a5966
+Status: install ok installed
+
+Package: box2d
+Version: 2.4.1
+Port-Version: 3
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 2a48f8702767e16cbd511cf5bd777c49a7ba3b34a95df9944af54c86227f5fc4
+Description: An open source C++ engine for simulating rigid bodies in 2D
+Status: install ok installed
+
+Package: pugixml
+Version: 1.14
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 538eda84974d469af3caac60811780e55496578cc321687d8944d31e234b4959
+Description: Light-weight, simple and fast XML parser for C++ with XPath support
+Status: install ok installed
+
+Package: zstd
+Version: 1.5.5
+Port-Version: 2
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 142f9fda3c90d0ff438186c76dc8cc4957dd9e6e90db10a34c5336768803c898
+Description: Zstandard - Fast real-time compression algorithm
+Status: install ok installed
+
+Package: vcpkg-tool-meson
+Version: 0.63
+Port-Version: 2
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 2c9d8eb98f6c24bb8efe8ab640b72ec2d84f7d5100c566467834b5263de72b71
+Description: Meson build system
+Status: install ok installed
+
+Package: lz4
+Version: 1.9.4
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 355f8a7ceff694495908ff9deaea244ae03db0cb454b9f88829c11198bd8b4d8
+Description: Lossless compression algorithm, providing compression speed at 400 MB/s per core.
+Status: install ok installed
+
+Package: libxcrypt
+Version: 4.4.36
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 252f992251a63bd802ed543aa0a96574f252721be313b4058735485f9879cab2
+Description: libxcrypt is a modern library for one-way hashing of passwords. On Linux-based systems, by default libxcrypt will be binary backward compatible with the libcrypt.so.1 shipped as part of the GNU C Library.
+Status: install ok installed
+
+Package: libmount
+Version: 2.39
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 2f730c3b8169811b9c4e74bf16bdf8147924f40d19e6ebac3f58c098fadc8cfa
+Description: Block device identification library from util-linux
+Status: install ok installed
+
+Package: liblzma
+Version: 5.4.4
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: e59435066381267182aee8976a09a07cc8b6adead9bf80f3be0338c616725d7b
+Description: Compression library with an API similar to that of zlib.
+Status: install ok installed
+
+Package: vcpkg-cmake-get-vars
+Version: 2023-12-31
+Depends: vcpkg-cmake
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 18ddc3ae472b65186b07dbe3c2fbcfd1b6b3a0f64ae5adbdf1d567b19f391a0d
+Status: install ok installed
+
+Package: libcap
+Version: 2.69
+Port-Version: 3
+Depends: vcpkg-cmake-get-vars
+Architecture: x64-linux
+Multi-Arch: same
+Abi: f2fc8f8c71e6a65767ed5c98a48c167788ffff95529052a4bb53e14695f41e3a
+Description: A library for getting and setting POSIX.1e (formerly POSIX 6) draft 15 capabilities.
+Status: install ok installed
+
+Package: gperf
+Version: 3.1
+Port-Version: 6
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: d0d52a00643aebd530a399f517949bd3667f8570eff631be61645b25cb2e7940
+Description: GNU perfect hash function generator
+Status: install ok installed
+
+Package: libsystemd
+Version: 254
+Port-Version: 2
+Depends: gperf, libcap, liblzma, libmount, libxcrypt, lz4, vcpkg-tool-meson, zstd
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 0eececd33e9f60f5113265afb4b1604ec527589b47040e39b95e0b153a3c7586
+Description: Libsystemd
+Status: install ok installed
+
+Package: expat
+Version: 2.6.0
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 55fd42fd15718d9dc959e223ccd6585a91d700764c68356682c4bc0f1b58a684
+Description: XML parser library written in C
+Status: install ok installed
+
+Package: dbus
+Version: 1.15.8
+Port-Version: 2
+Depends: expat, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 376bae87ea1084baf6872437776ce21cf997d89f799e15faa418c43534b2926a
+Description: D-Bus specification and reference implementation, including libdbus and dbus-daemon
+Default-Features: systemd
+Status: install ok installed
+
+Package: dbus
+Feature: systemd
+Depends: libsystemd
+Architecture: x64-linux
+Multi-Arch: same
+Description: Build with systemd at_console support
+Status: install ok installed
+
+Package: sdl2
+Version: 2.30.0
+Depends: dbus, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: d98f21b76c7d262a727aef18de481487812c3e0056ef351ebc2913ef9918a226
+Description: Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D.
+Default-Features: ibus, wayland, x11
+Status: install ok installed
+
+Package: sdl2
+Feature: ibus
+Architecture: x64-linux
+Multi-Arch: same
+Description: Build with ibus IME support
+Status: install ok installed
+
+Package: sdl2
+Feature: wayland
+Architecture: x64-linux
+Multi-Arch: same
+Description: Build with Wayland support
+Status: install ok installed
+
+Package: sdl2
+Feature: x11
+Architecture: x64-linux
+Multi-Arch: same
+Description: Build with X11 support
+Status: install ok installed
+
+Package: zlib
+Version: 1.3.1
+Depends: vcpkg-cmake
+Architecture: x64-linux
+Multi-Arch: same
+Abi: fb0ca38ccf8fd0673932225d235361599fb39e4d88d20de90b27055715b8b049
+Description: A compression library
+Status: install ok installed
+
+Package: libpng
+Version: 1.6.43
+Depends: vcpkg-cmake, vcpkg-cmake-config, zlib
+Architecture: x64-linux
+Multi-Arch: same
+Abi: c5f52f069ce832d4b2ebbe562428e9b0687c396efcbcd21c6cb53d9831ab88f2
+Description: libpng is a library implementing an interface for reading and writing PNG (Portable Network Graphics) format files
+Status: install ok installed
+
+Package: sdl2-image
+Version: 2.8.2
+Depends: libpng, sdl2, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: f358c97d28d842adfb50a7ef73ad74b9be01d2bb354d1c86fba2fa29cbb76410
+Description: SDL_image is an image file loading library. It loads images as SDL surfaces and textures, and supports the following formats: BMP, GIF, JPEG, LBM, PCX, PNG, PNM, TGA, TIFF, WEBP, XCF, XPM, XV
+Status: install ok installed
+
+Package: wavpack
+Version: 5.6.0
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 44b52c92ee16b81983232617b54a6d2b72a8bdd16b832ea30e2586b43352bddc
+Description: WavPack encode/decode library, command-line programs, and several plugins
+Status: install ok installed
+
+Package: libogg
+Version: 1.3.5
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: e990fa1c5f47375d3cf3f6ee4b45ff08215401d3a7dbf68daf5df2fc1a356a00
+Description: Ogg is a multimedia container format, and the native file and stream format for the Xiph.org multimedia codecs.
+Status: install ok installed
+
+Package: libvorbis
+Version: 1.3.7
+Port-Version: 2
+Depends: libogg, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 11317cf6e717dd8524726ccdc42e5d18847d6a23d0e348dc14b90a92c13bfa41
+Description: Ogg Vorbis is a fully open, non-proprietary, patent-and-royalty-free, general-purpose compressed audio format
+Status: install ok installed
+
+Package: sdl2-mixer
+Version: 2.8.0
+Port-Version: 1
+Depends: libvorbis, sdl2, vcpkg-cmake, vcpkg-cmake-config, wavpack
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 565ef8b3a28d1e42eed5e81546f27a4c0067f7efb76d5293d2d63d26508ee923
+Description: Multi-channel audio mixer library for SDL.
+Status: install ok installed
+
+Package: bzip2
+Version: 1.0.8
+Port-Version: 5
+Depends: vcpkg-cmake
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 9db648ba34b186e86a185265ed1f3e28a803be4094e5a69aa3d8c6a60d825292
+Description: bzip2 is a freely available, patent free, high-quality data compressor. It typically compresses files to within 10% to 15% of the best available techniques (the PPM family of statistical compressors), whilst being around twice as fast at compression and six times faster at decompression.
+Default-Features: tool
+Status: install ok installed
+
+Package: bzip2
+Feature: tool
+Architecture: x64-linux
+Multi-Arch: same
+Description: Builds bzip2 executable
+Status: install ok installed
+
+Package: brotli
+Version: 1.1.0
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 6557bf27e918eb107b4a4aed2b4c55a255a87505b9b78f7b61aae8e2277d0e5a
+Description: a generic-purpose lossless compression algorithm that compresses data using a combination of a modern variant of the LZ77 algorithm, Huffman coding and 2nd order context modeling.
+Status: install ok installed
+
+Package: freetype
+Version: 2.13.2
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 960829022b84723214b7c51c440f61c2395b1dc404a1ae7570782986ab98930c
+Description: A library to render fonts.
+Default-Features: brotli, bzip2, png, zlib
+Status: install ok installed
+
+Package: freetype
+Feature: brotli
+Depends: brotli
+Architecture: x64-linux
+Multi-Arch: same
+Description: Support decompression of WOFF2 streams
+Status: install ok installed
+
+Package: freetype
+Feature: bzip2
+Depends: bzip2
+Architecture: x64-linux
+Multi-Arch: same
+Description: Support bzip2 compressed fonts.
+Status: install ok installed
+
+Package: freetype
+Feature: png
+Depends: libpng
+Architecture: x64-linux
+Multi-Arch: same
+Description: Support PNG compressed OpenType embedded bitmaps.
+Status: install ok installed
+
+Package: freetype
+Feature: zlib
+Depends: zlib
+Architecture: x64-linux
+Multi-Arch: same
+Description: Use zlib instead of internal library for DEFLATE
+Status: install ok installed
+
+Package: sdl2-ttf
+Version: 2.22.0
+Depends: freetype, sdl2, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: f525fbc303176a805c0f7098952588d666779f5424c2562442659685e992c5be
+Description: A library for rendering TrueType fonts with SDL
+Status: install ok installed
+

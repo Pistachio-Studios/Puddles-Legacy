@@ -1,0 +1,18 @@
+{
+    "vcpkg.general.enable": true,
+    "cmake.configureArgs": [
+        "-DVCPKG_APPLOCAL_DEPS=ON",
+        "-DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON",
+        "-DVCPKG_TARGET_TRIPLET=x64-linux",
+        "-DVCPKG_MANIFEST_MODE=ON"
+    ],
+    "vcpkg.target.hostTriplet": "x64-linux",
+    "vcpkg.target.defaultTriplet": "x64-linux",
+    "vcpkg.target.useStaticLib": false,
+    "cmake.configureSettings": {
+        "CMAKE_TOOLCHAIN_FILE": "/home/hugo/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    },
+    "vcpkg.target.installDependencies": true,
+    "vcpkg.target.preferSystemLibs": false,
+    "vcpkg.target.useManifest": true
+}

@@ -1,0 +1,13 @@
+# ninja log v5
+17	871	1709576086054814867	CMakeFiles/Proyecto-2.dir/src/Log.cpp.o	2bfb37afffb77fde
+5	1559	1709576322780196958	CMakeFiles/Proyecto-2.dir/src/GuiControlLabel.cpp.o	f6f6fb978f253282
+3	1887	1709576323109193274	CMakeFiles/Proyecto-2.dir/src/FadeToBlack.cpp.o	169cfc892f9ff02
+6	1821	1709576323045193990	CMakeFiles/Proyecto-2.dir/src/GuiManager.cpp.o	5b673a2451451555
+2	1715	1709576322935195222	CMakeFiles/Proyecto-2.dir/src/Audio.cpp.o	a40fc2fe0af0f9
+3	1842	1709576323065193767	CMakeFiles/Proyecto-2.dir/src/GuiControlButton.cpp.o	661ea157d4c7abc8
+6	1497	1709576322719197640	CMakeFiles/Proyecto-2.dir/src/Input.cpp.o	cacebf6265e70505
+6	1805	1709576323028194181	CMakeFiles/Proyecto-2.dir/src/Main.cpp.o	76c67142f9636270
+9	486	1709576384235507106	CMakeFiles/Proyecto-2.dir/src/PerfTimer.cpp.o	6581c29a5252838e
+5	1835	1709576385588491880	CMakeFiles/Proyecto-2.dir/src/MainMenu.cpp.o	dfe967356c254487
+8	1850	1709576385603491711	CMakeFiles/Proyecto-2.dir/src/Pathfinding.cpp.o	187df7ff7945a7a3
+486	2143	1709576385898488391	CMakeFiles/Proyecto-2.dir/src/Render.cpp.o	8f90b21c2f4e7a4
