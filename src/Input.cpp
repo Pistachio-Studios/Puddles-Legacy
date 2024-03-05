@@ -53,6 +53,8 @@ bool Input::Awake(pugi::xml_node& config)
 bool Input::Start()
 {
 	SDL_StopTextInput();
+
+	windowEvents[0] = false;
 	return true;
 }
 

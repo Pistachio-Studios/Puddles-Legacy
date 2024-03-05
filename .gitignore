@@ -297,6 +297,7 @@ __pycache__/
 *.code-workspace
 /buildtrees/
 /build*/
+/out*/
 /downloads/
 /installed*/
 /vcpkg_installed*/

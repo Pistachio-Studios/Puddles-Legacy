@@ -166,7 +166,7 @@ bool App::Update()
 	bool ret = true;
 	PrepareUpdate();
 
-	if(input->GetWindowEvent(WE_QUIT) == true)
+	if (input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
 
 	if(ret == true)

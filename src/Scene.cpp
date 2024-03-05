@@ -103,7 +103,7 @@ bool Scene::Start()
 	app->win->GetWindowSize(windowW, windowH);
 
 	//Get the size of the texture
-	app->tex->GetSize(img, texW, texH);
+	//app->tex->GetSize(img, texW, texH);
 
 	textPosX = (float)windowW / 2 - (float)texW / 2;
 	textPosY = (float)windowH / 2 - (float)texH / 2;
