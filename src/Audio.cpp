@@ -1,7 +1,6 @@
 #include "App.h"
 #include "Audio.h"
 
-#include "Defs.h"
 #include "Log.h"
 
 // NOTE: Recommended using: Additional Include Directories,
@@ -9,9 +8,6 @@
 
 #include <SDL.h>
 #include <SDL_mixer.h>
-
-// NOTE: Library linkage is configured in Linker Options
-//#pragma comment(lib, "../Game/Source/External/SDL_mixer/libx86/SDL2_mixer.lib")
 
 Audio::Audio() : Module()
 {

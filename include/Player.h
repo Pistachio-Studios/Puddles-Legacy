@@ -9,13 +9,9 @@
 #include "State.h"
 #include "StateMachine.h"
 
-#ifdef __linux__
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
 #include <box2d/b2_math.h>
-#elif _MSC_VER
-#include "SDL/include/SDL.h"
-#endif
 
 struct SDL_Texture;
 

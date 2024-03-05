@@ -4,11 +4,8 @@
 #include "Animation.h"
 #include "Entity.h"
 #include "Point.h"
-#ifdef __linux__
+
 #include <SDL.h>
-#elif _MSC_VER
-#include "SDL/include/SDL.h"
-#endif
 
 struct SDL_Texture;
 

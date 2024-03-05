@@ -4,6 +4,7 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include <pugixml.hpp>
 #include <SDL.h>
 
 Window::Window() : Module()

@@ -19,6 +19,7 @@
 #include <sstream>
 
 #include <SDL_image.h>
+#include <pugixml.hpp>
 
 
 // Constructor

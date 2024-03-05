@@ -7,11 +7,7 @@
 #include "Timer.h"
 #include "EntityManager.h"
 
-#ifdef __linux__
 #include <pugixml.hpp>
-#elif _MSC_VER
-#include "PugiXml/src/pugixml.hpp"
-#endif
 
 // Modules
 class Window;

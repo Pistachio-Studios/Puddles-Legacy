@@ -8,11 +8,7 @@
 #include "Point.h"
 #include "SString.h"
 
-#ifdef __linux__
 #include <SDL.h>
-#elif _MSC_VER
-#include "SDL/include/SDL.h"
-#endif
 
 enum class GuiControlType
 {

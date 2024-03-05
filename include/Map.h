@@ -6,12 +6,8 @@
 #include "List.h"
 #include "Point.h"
 
-#ifdef __linux__
 #include <pugixml.hpp>
 #include <SDL.h>
-#elif _MSC_VER
-#include "PugiXml\src\pugixml.hpp"
-#endif
 
 #include "Defs.h"
 #include "Log.h"
