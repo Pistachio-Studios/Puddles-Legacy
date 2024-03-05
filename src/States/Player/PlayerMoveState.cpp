@@ -5,6 +5,8 @@
 #include "SString.h"
 #include "State.h"
 
+#include "box2d/box2d.h"
+
 void PlayerMoveState::Enter()
 {
     LOG("PlayerMoveState::Enter()\n");

@@ -10,6 +10,7 @@
 #include "Map.h"
 #include "Physics.h"
 
+#include <box2d/b2_fixture.h>
 #include <box2d/b2_body.h>
 
 Checkpoint::Checkpoint() : Entity(EntityType::CHECKPOINT)

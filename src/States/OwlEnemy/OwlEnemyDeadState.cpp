@@ -6,6 +6,8 @@
 #include "SString.h"
 #include "State.h"
 
+#include "box2d/box2d.h"
+
 void OwlEnemyDeadState::Enter()
 {
     LOG("OwlEnemyDeadState::Enter()\n");

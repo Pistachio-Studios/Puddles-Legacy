@@ -6,6 +6,8 @@
 #include "SString.h"
 #include "State.h"
 
+#include "box2d/box2d.h"
+
 void DogEnemyAttackState::Enter()
 {
     LOG("DogEnemyAttackState::Enter()\n");
