@@ -4,11 +4,8 @@
 #include "Module.h"
 #include <cstdint>
 
-#ifdef __linux__
 #include <SDL2/SDL_rect.h>
-#elif _MSC_VER
-#include "SDL/include/SDL_rect.h"
-#endif
+
 
 class FadeToBlack : public Module
 {

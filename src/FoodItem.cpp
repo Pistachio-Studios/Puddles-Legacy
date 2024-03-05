@@ -11,9 +11,7 @@
 #include "Map.h"
 #include <cstdlib>
 
-#ifdef __linux__
 #include <box2d/b2_body.h>
-#endif
 
 FoodItem::FoodItem() : Entity(EntityType::FOODITEM)
 {

@@ -13,11 +13,6 @@
 #include "Defs.h"
 #include "Log.h"
 
-#ifdef __linux__
-#elif _MSC_VER
-#include "Optick/include/optick.h"
-#endif
-
 EntityManager::EntityManager() : Module()
 {
 	name.Create("entitymanager");

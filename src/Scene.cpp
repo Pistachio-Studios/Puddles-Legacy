@@ -16,13 +16,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 
-#ifdef __linux__
-
 #include <box2d/b2_body.h>
-
-#elif _MSC_VER
-#include "Optick/include/optick.h"
-#endif
 
 Scene::Scene() : Module()
 {

@@ -5,14 +5,11 @@
 
 #include "Point.h"
 
-#ifdef __linux__
+
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <limits.h>
-#elif _MSC_VER
-#include "SDL/include/SDL.h"
-#include "SDL_ttf/include/SDL_ttf.h"
-#endif
+
 
 class Entity;
 

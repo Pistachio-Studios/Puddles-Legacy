@@ -9,24 +9,11 @@
 #include "Player.h"
 #include "Window.h"
 
-#ifdef __linux__
 #include <SDL_keycode.h>
 #include <box2d/box2d.h>
 #include <box2d/b2_contact.h>
 #include <box2d/b2_body.h>
 #include <box2d/b2_distance_joint.h>
-#elif _MSC_VER
-#include "SDL/include/SDL_keycode.h"
-#include "Box2D/Box2D/Box2D.h"
-#include "Optick/include/optick.h"
-
-// Tell the compiler to reference the compiled Box2D libraries
-#ifdef _DEBUG
-#pragma comment( lib, "../Game/Source/External/Box2D/libx86/DebugLib/Box2D.lib" )
-#else
-#pragma comment( lib, "../Game/Source/External/Box2D/libx86/ReleaseLib/Box2D.lib" )
-#endif
-#endif
 
 
 Physics::Physics() : Module()

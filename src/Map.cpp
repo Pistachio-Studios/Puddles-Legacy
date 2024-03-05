@@ -17,13 +17,9 @@
 
 #include <math.h>
 
-#ifdef __linux__
 #include <SDL_image.h>
 #include <box2d/b2_fixture.h>
-#elif _MSC_VER
-#include "SDL_image/include/SDL_image.h"
-#include "Optick/include/optick.h"
-#endif
+
 
 Map::Map() : Module(), mapLoaded(false)
 {

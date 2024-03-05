@@ -9,9 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 
-#ifdef __linux__
 #include <box2d/b2_body.h>
-#endif
 
 RopeEntity::RopeEntity() : Entity(EntityType::ROPE)
 {

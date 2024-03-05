@@ -7,11 +7,7 @@
 #include "Defs.h"
 #include "Log.h"
 
-#ifdef __linux__
 #include <SDL2/SDL_render.h>
-#elif _MSC_VER
-#include "SDL/include/SDL_render.h"
-#endif
 
 FadeToBlack::FadeToBlack(bool startEnabled) : Module(startEnabled)
 {

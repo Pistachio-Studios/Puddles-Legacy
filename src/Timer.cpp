@@ -3,11 +3,9 @@
 // ----------------------------------------------------
 
 #include "Timer.h"
-#ifdef __linux__
+
 #include <SDL_timer.h>
-#elif _MSC_VER
-#include "SDL\include\SDL_timer.h"
-#endif
+
 	
 Timer::Timer()
 {

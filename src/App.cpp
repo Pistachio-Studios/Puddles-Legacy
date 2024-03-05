@@ -18,12 +18,8 @@
 #include <iostream>
 #include <sstream>
 
-#ifdef __linux__
 #include <SDL_image.h>
-#elif _MSC_VER
-#include "Optick/include/optick.h"
-#include "SDL_image/include/SDL_image.h"
-#endif
+
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)

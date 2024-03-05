@@ -3,7 +3,6 @@
 #include "Module.h"
 #include "Entity.h"
 
-#ifdef __linux__
 //#include <box2d/box2d.h>
 #include <box2d/b2_world_callbacks.h>
 #include <box2d/b2_math.h>
@@ -14,9 +13,6 @@ class b2RevoluteJoint;
 class b2PrismaticJoint;
 class b2WeldJoint;
 class b2MouseJoint;
-#elif _MSC_VER
-#include "Box2D/Box2D/Box2D.h"
-#endif
 
 #define GRAVITY_X 0.0f
 #define GRAVITY_Y -10.0f

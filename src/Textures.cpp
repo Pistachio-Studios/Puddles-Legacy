@@ -5,11 +5,8 @@
 #include "Defs.h"
 #include "Log.h"
 
-#ifdef __linux__
 #include <SDL_image.h>
-#elif _MSC_VER
-#include "SDL_image/include/SDL_image.h"
-#endif
+
 
 //#pragma comment(lib, "../Game/Source/External/SDL_image/libx86/SDL2_image.lib")
 

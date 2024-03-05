@@ -23,11 +23,9 @@
 #include "States/OwlEnemy/OwlEnemyAttackState.h"
 #include "States/OwlEnemy/OwlEnemyDeadState.h"
 
-#ifdef __linux__
 #include <box2d/b2_math.h>
 #include <box2d/b2_body.h>
 #include <box2d/b2_fixture.h>
-#endif
 
 OwlEnemy::OwlEnemy() : Entity(EntityType::OWLENEMY)
 {

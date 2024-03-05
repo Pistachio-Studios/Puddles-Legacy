@@ -22,12 +22,10 @@
 #include <cmath>
 #include <iostream>
 
-#ifdef __linux__
 #include <box2d/b2_math.h>
 #include <box2d/b2_body.h>
 #include <box2d/b2_fixture.h>
 #include <SDL_render.h>
-#endif
 
 DogEnemy::DogEnemy() : Entity(EntityType::DOGENEMY)
 {

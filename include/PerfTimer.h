@@ -1,6 +1,7 @@
 #ifndef __PERFTIMER_H__
 #define __PERFTIMER_H__
 
+#include <cstdint>
 #include "Defs.h"
 
 class PerfTimer

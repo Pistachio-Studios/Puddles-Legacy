@@ -10,9 +10,7 @@
 #include "Map.h"
 #include "Physics.h"
 
-#ifdef __linux__
 #include <box2d/b2_body.h>
-#endif
 
 ScoreItem::ScoreItem() : Entity(EntityType::SCOREITEM)
 {

@@ -7,11 +7,7 @@
 #include "Log.h"
 #include <iostream>
 
-#ifdef __linux__
-#include <SDL_render.h> 
-#elif _MSC_VER
-#include "Optick/include/optick.h"
-#endif
+#include <SDL_render.h>
 
 #define VSYNC true
 
