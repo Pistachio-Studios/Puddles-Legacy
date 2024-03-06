@@ -20,7 +20,7 @@ void Log(const char file[], int line, const char* format, ...)
 	OutputDebugString(tmpString2);
 }
 
-#elif _MSC_VER
+#else
 
 #include <stdio.h>
 #include <cstdarg>
@@ -54,6 +54,5 @@ void Log(const char* file, int line, const char* format, ...) {
 
 	va_end(args);
 }
-//#endif
 
 #endif
