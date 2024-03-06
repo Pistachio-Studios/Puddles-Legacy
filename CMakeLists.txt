@@ -4,6 +4,8 @@ project(Proyecto-2 VERSION 1.0.0 LANGUAGES C CXX)
 #include(CTest)
 #enable_testing()
 
+# Set the desired runtime library for your project
+
 set(SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 #set(RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
@@ -20,6 +22,7 @@ file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.cpp" "${INCLUDE_DIR}/*.h")
 
 include_directories(${INCLUDE_DIR})
 
+find_package(libpng CONFIG REQUIRED)
 find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_mixer CONFIG REQUIRED)
 find_package(SDL2_image CONFIG REQUIRED)
@@ -29,10 +32,11 @@ find_package(box2d CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIRS})
+include_directories(${PROJECT_NAME} ${PNG_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIRS})
 
 add_compile_options(-Winconsistent-missing-override)
-target_link_libraries(${PROJECT_NAME} PRIVATE $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> 
+target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG
+                                              $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> 
                                               $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static> 
                                               $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
                                               $<IF:$<TARGET_EXISTS:SDL2_mixer::SDL2_mixer>,SDL2_mixer::SDL2_mixer,SDL2_mixer::SDL2_mixer-static>
