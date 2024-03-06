@@ -1,0 +1,9 @@
+EJECUTAR "enable-vcpkg-without-admin.bat"
+
+ABRIR Y COPIAR EL CONTENIDO DE "vcpkg-path.txt"
+
+RENOMBRAR CMakePresets.json a CMakeUserPresets.json
+
+SUBSTITUIR $env{VCPKG_ROOT} con el contenido de "vcpkg-path.txt"
+
+IMPORTANTE!!! NO SUBIR LOS CAMBIOS AL GITHUB DE CMakePresets.json
