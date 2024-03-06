@@ -7,8 +7,7 @@
     "sdl2-mixer",
     "sdl2-ttf",
     "pugixml",
-    "box2d",
-    "libpng"
+    "box2d"
   ],
   "builtin-baseline": "fbf25ddd1119211278c257f2e19c96a9d5a6ede7"
 }
