@@ -160,7 +160,7 @@ bool App::Update()
 {
 
 	// OPTICK PROFILIN
-	//OPTICK_FRAME("Main Loop");
+	ZoneScoped;
 
 	bool ret = true;
 	PrepareUpdate();
