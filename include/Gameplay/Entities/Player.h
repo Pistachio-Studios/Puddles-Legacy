@@ -47,6 +47,10 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
+	//Movement
+	float moveForce = 1.0f;
+	float maxSpeed = 2.0f;
+
 	PhysBody* pbody;
 };
 

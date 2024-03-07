@@ -48,8 +48,8 @@ bool Player::Start() {
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
-	pbody->body->GetFixtureList()->SetFriction(25.0f);
-	pbody->body->SetLinearDamping(1);
+	//pbody->body->GetFixtureList()->SetFriction(25.0f);
+	pbody->body->SetLinearDamping(10.0f);
 
 	return true;
 }
@@ -57,6 +57,27 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
+
+	b2Vec2 impulse = {0, 0};
+
+	if(pbody->body->GetLinearVelocity().Length() < maxSpeed)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			impulse.x = -pbody->body->GetMass() * moveForce;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			impulse.x = pbody->body->GetMass() * moveForce;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			impulse.y = -pbody->body->GetMass() * moveForce;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			impulse.y = pbody->body->GetMass() * moveForce;
+		}
+		pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
+	}
+	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y, 255, 255, 0);
+	
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
