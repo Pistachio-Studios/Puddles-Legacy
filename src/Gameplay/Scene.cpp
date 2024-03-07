@@ -16,6 +16,7 @@
 #include "Core/GuiManager.h"
 
 #include <box2d/b2_body.h>
+#include <tracy/Tracy.hpp>
 
 Scene::Scene() : Module()
 {
@@ -107,7 +108,7 @@ bool Scene::Start()
 bool Scene::PreUpdate()
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	return true;
 }
@@ -116,7 +117,7 @@ bool Scene::PreUpdate()
 bool Scene::Update(float dt)
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	if(freeCam)
 	{
@@ -142,7 +143,7 @@ bool Scene::Update(float dt)
 bool Scene::PostUpdate()
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	bool ret = true;
 

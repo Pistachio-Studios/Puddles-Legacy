@@ -20,18 +20,19 @@ endif()
 
 file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.cpp" "${INCLUDE_DIR}/*.h")
 
-include_directories(${INCLUDE_DIR})
-
 find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_mixer CONFIG REQUIRED)
 find_package(SDL2_image CONFIG REQUIRED)
 find_package(SDL2_ttf CONFIG REQUIRED)
 find_package(pugixml CONFIG REQUIRED)
 find_package(box2d CONFIG REQUIRED)
+find_package(Tracy CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIRS} ${Tracy_INCLUDE_DIRS})
 
 add_compile_options(-Winconsistent-missing-override)
 target_link_libraries(${PROJECT_NAME} PRIVATE $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> 
@@ -40,7 +41,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE $<TARGET_NAME_IF_EXISTS:SDL2::SDL2
                                               $<IF:$<TARGET_EXISTS:SDL2_mixer::SDL2_mixer>,SDL2_mixer::SDL2_mixer,SDL2_mixer::SDL2_mixer-static>
                                               $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
                                               pugixml::pugixml
-                                              box2d::box2d)
+                                              box2d::box2d
+                                              Tracy::TracyClient)
 
 #target_compile_definitions(Proyecto-2 PRIVATE uint32=unsigned\ __int32 uint64=unsigned\ __int64)
 

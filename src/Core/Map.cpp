@@ -16,6 +16,7 @@
 
 #include <SDL_image.h>
 #include <box2d/b2_fixture.h>
+#include <tracy/Tracy.hpp>
 
 
 Map::Map() : Module(), mapLoaded(false)
@@ -63,7 +64,7 @@ bool Map::Start() {
 bool Map::Update(float dt)
 {
     // OPTICK PROFILIN
-    ////OPTICK_EVENT();
+    ZoneScoped;
 
     if(mapLoaded == false)
         return false;
@@ -223,7 +224,7 @@ bool Map::CleanUp()
     LOG("Unloading map");
 
     //Clean up pathfing class 
-    if(pathfinding != nullptr)pathfinding->CleanUp();//TODO Mirar porque necesita esta comprobación, no deberia necesitarla.
+    if(pathfinding != nullptr)pathfinding->CleanUp();//TODO Mirar porque necesita esta comprobaciï¿½n, no deberia necesitarla.
 
     // L05: DONE 2: Make sure you clean up any memory allocated from tilesets/map
     ListItem<TileSet*>* tileset;

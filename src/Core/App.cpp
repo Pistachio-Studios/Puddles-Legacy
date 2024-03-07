@@ -20,6 +20,8 @@
 #include <SDL_image.h>
 #include <pugixml.hpp>
 
+#include <tracy/Tracy.hpp>
+
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
@@ -200,7 +202,6 @@ bool App::LoadConfig()
 void App::PrepareUpdate()
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
 	frameTime.Start();
 }
 
@@ -208,7 +209,7 @@ void App::PrepareUpdate()
 void App::FinishUpdate()
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	// This is a good place to call Load / Save functions
 	double currentDt = frameTime.ReadMs();
@@ -268,7 +269,7 @@ void App::FinishUpdate()
 bool App::PreUpdate()
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	bool ret = true;
 
@@ -301,7 +302,7 @@ bool App::DoUpdate()
 {
 
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	bool ret = true;
 	ListItem<Module*>* item;
@@ -327,7 +328,7 @@ bool App::PostUpdate()
 {
 
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	bool ret = true;
 	ListItem<Module*>* item;

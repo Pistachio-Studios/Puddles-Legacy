@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include <SDL_render.h>
+#include <tracy/Tracy.hpp>
 
 #define VSYNC true
 
@@ -91,7 +92,7 @@ bool Render::Start()
 bool Render::PreUpdate()
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	SDL_RenderClear(renderer);
 
@@ -101,7 +102,7 @@ bool Render::PreUpdate()
 bool Render::Update(float dt)
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	cameraInterpolation(camera.target, camera.lerpSpeed, dt, camera.offset);
 	return true;
@@ -110,7 +111,7 @@ bool Render::Update(float dt)
 bool Render::PostUpdate()
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	SetViewPort({
 		0,
@@ -120,6 +121,8 @@ bool Render::PostUpdate()
 		});
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.b, background.a);
 	SDL_RenderPresent(renderer);
+
+	FrameMark;
 	
 	return true;
 }

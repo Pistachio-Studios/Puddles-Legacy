@@ -10,6 +10,7 @@
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
+#include <tracy/Tracy.hpp>
 
 
 MainMenu::MainMenu() : Module()
@@ -57,7 +58,7 @@ bool MainMenu::Start()
 bool MainMenu::PreUpdate()
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	return true;
 }
@@ -66,7 +67,7 @@ bool MainMenu::PreUpdate()
 bool MainMenu::Update(float dt)
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	return true;
 }
@@ -75,7 +76,7 @@ bool MainMenu::Update(float dt)
 bool MainMenu::PostUpdate()
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	bool ret = true;
 

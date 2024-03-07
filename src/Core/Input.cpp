@@ -6,6 +6,7 @@
 #include "Utils/Log.h"
 
 #include <SDL.h>
+#include <tracy/Tracy.hpp>
 
 #define MAX_KEYS 300
 
@@ -62,7 +63,7 @@ bool Input::Start()
 bool Input::PreUpdate()
 {
 	// OPTICK PROFILIN
-	////OPTICK_EVENT();
+	ZoneScoped;
 
 	static SDL_Event event;
 
