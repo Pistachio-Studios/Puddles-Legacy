@@ -70,7 +70,7 @@ public:
 
 		bool useInterpolation;
 		float lerpSpeed;
-		Entity* target;
+		Entity* target = nullptr;
 		iPoint offset;
 	}camera;
 

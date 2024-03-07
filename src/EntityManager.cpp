@@ -124,14 +124,21 @@ Entity* EntityManager::CreateEntity(EntityType type)
 
 void EntityManager::DestroyEntity(Entity* entity)
 {
-	ListItem<Entity*>* item;
+	ListItem<Entity*>* item = entities.start;
+	ListItem<Entity*>* nextItem = nullptr;
 
-	for (item = entities.start; item != NULL; item = item->next)
+	while (item != nullptr)
 	{
-		if (item->data == entity){
+		nextItem = item->next; // Store the next item before possibly deleting current item
+
+		if (item->data == entity)
+		{
 			item->data->CleanUp();
 			entities.Del(item);
-		} 
+			break; // Exit the loop after deleting the entity
+		}
+
+		item = nextItem; // Move to the next item
 	}
 }
 
