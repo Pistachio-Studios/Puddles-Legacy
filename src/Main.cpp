@@ -1,7 +1,7 @@
-#include "App.h"
+#include "Core/App.h"
 
-#include "Defs.h"
-#include "Log.h"
+#include "Utils/Defs.h"
+#include "Utils/Log.h"
 
 // NOTE: SDL redefines main function
 #include <SDL.h>
