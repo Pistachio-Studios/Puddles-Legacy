@@ -199,9 +199,9 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 8:
 		app->fade->Fade(this, (Module*)app->mainMenu, 60);
-		app->physics->Disable();
 		app->map->Disable();
 		app->entityManager->Disable();
+		app->physics->Disable();
 	break;
 	case 9:
 		exitPressed = true;

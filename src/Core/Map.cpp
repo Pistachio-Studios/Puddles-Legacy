@@ -223,7 +223,7 @@ bool Map::CleanUp()
     LOG("Unloading map");
 
     //Clean up pathfing class 
-    if(pathfinding != nullptr)pathfinding->CleanUp();
+    if(pathfinding != nullptr)pathfinding->CleanUp();//TODO Mirar porque necesita esta comprobación, no deberia necesitarla.
 
     // L05: DONE 2: Make sure you clean up any memory allocated from tilesets/map
     ListItem<TileSet*>* tileset;
@@ -245,6 +245,8 @@ bool Map::CleanUp()
         RELEASE(layerItem->data);
         layerItem = layerItem->next;
     }
+
+    mapData.maplayers.Clear();
 
     return true;
 }

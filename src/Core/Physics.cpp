@@ -412,6 +412,14 @@ bool Physics::CleanUp()
 {
 	LOG("Destroying physics world");
 
+	// Remove all bodies scheduled for deletion
+	for (int i = 0; i < bodiesToBeDeleted.Count(); i++) { //Unificar esto en una funcion!!
+		world->DestroyBody(bodiesToBeDeleted[i]->body);
+		bodiesToBeDeleted[i]->body = nullptr;
+		bodiesToBeDeleted[i] = nullptr;
+	}
+	bodiesToBeDeleted.Clear();
+
 	// Delete the whole physics world!
 	delete world;
 
