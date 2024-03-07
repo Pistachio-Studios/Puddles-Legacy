@@ -1,14 +1,8 @@
 #include "Core/EntityManager.h"
 #include "Gameplay/Entities/Player.h"
-#include "Gameplay/Entities/OwlEnemy.h"
-#include "Gameplay/Entities/DogEnemy.h"
-#include "Gameplay/Entities/FurBall.h"
 #include "Core/App.h"
 #include "Core/Textures.h"
 #include "Gameplay/Scene.h"
-#include "Gameplay/Entities/ScoreItem.h"
-#include "Gameplay/Entities/FoodItem.h"
-#include "Gameplay/Entities/Checkpoint.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -94,24 +88,6 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	{
 	case EntityType::PLAYER:
 		entity = new Player();
-		break;
-	case EntityType::OWLENEMY:
-		entity = new OwlEnemy();
-		break;
-	case EntityType::DOGENEMY:
-		entity = new DogEnemy();
-		break;
-	case EntityType::FURBALL:
-		entity = new FurBall();
-		break;
-	case EntityType::SCOREITEM:
-		entity = new ScoreItem();
-		break;
-	case EntityType::FOODITEM:
-		entity = new FoodItem();
-		break;
-	case EntityType::CHECKPOINT:
-		entity = new Checkpoint();
 		break;
 	default:
 		break;

@@ -8,9 +8,6 @@
 #include "Core/Physics.h"
 #include "Core/Window.h"
 #include "Gameplay/Scene.h"
-#include "Gameplay/Entities/ScoreItem.h"
-#include "Gameplay/Entities/FoodItem.h"
-#include "Gameplay/Entities/Checkpoint.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -549,7 +546,7 @@ bool Map::LoadColliders(pugi::xml_node mapFile)
             for (item = objectGroup.child("object"); item && ret; item = item.next_sibling("object"))
             { 
 
-               if (SString(item.attribute("type").as_string()) == "coin") {
+               /* if (SString(item.attribute("type").as_string()) == "coin") {
                    ScoreItem* itemEntity = (ScoreItem*)app->entityManager->CreateEntity(EntityType::SCOREITEM);
                    
                    itemEntity->position.x = item.attribute("x").as_int();
@@ -562,11 +559,11 @@ bool Map::LoadColliders(pugi::xml_node mapFile)
                    foodItem->position.x = item.attribute("x").as_int();
                    foodItem->position.y = item.attribute("y").as_int();
                }
-               
+                */
             }
         }
 
-        if (objectType == "checkpoint") {
+        /* if (objectType == "checkpoint") {
             pugi::xml_node checkpoint;
             for (checkpoint = objectGroup.child("object"); checkpoint && ret; checkpoint = checkpoint.next_sibling("object"))
             {
@@ -578,7 +575,7 @@ bool Map::LoadColliders(pugi::xml_node mapFile)
                 checkpointEntity->size.y = checkpoint.attribute("height").as_int();
                 checkpointEntity->texturePath = "Assets/Textures/bridge.png";
             }
-        }
+        } */
     }
 
     return ret;

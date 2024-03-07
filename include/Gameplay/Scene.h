@@ -5,8 +5,6 @@
 #include "Core/Module.h"
 #include "Core/Physics.h"
 #include "Gameplay/Entities/Player.h"
-#include "Gameplay/Entities/OwlEnemy.h"
-#include "Gameplay/Entities/DogEnemy.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
 

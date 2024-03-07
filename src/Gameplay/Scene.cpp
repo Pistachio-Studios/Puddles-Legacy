@@ -1,7 +1,6 @@
 #include "Core/App.h"
 #include "Core/FadeToBlack.h"
 #include "Core/Input.h"
-#include "Gameplay/Entities/RopeEntity.h"
 #include "Utils/SString.h"
 #include "Core/Textures.h"
 #include "Core/Audio.h"
@@ -41,32 +40,9 @@ bool Scene::Awake(pugi::xml_node& config)
 	// iterate all objects in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
 
-	for (pugi::xml_node ropeNode = config.child("rope"); ropeNode; ropeNode = ropeNode.next_sibling("rope"))
-	{
-		RopeEntity* rope = new RopeEntity();
-		app->entityManager->AddEntity(rope);
-		rope->parameters = ropeNode;
-	}
-
 	if (config.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = config.child("player");
-	}
-	
-	if (config.child("enemies"))
-	{
-		pugi::xml_node enemies = config.child("enemies");
-		for (pugi::xml_node enemyNode = enemies.child("owl_enemy"); enemyNode; enemyNode = enemyNode.next_sibling("owl_enemy"))
-		{
-			OwlEnemy* owlEnemy = (OwlEnemy*)app->entityManager->CreateEntity(EntityType::OWLENEMY);
-			owlEnemy->parameters = enemyNode;
-		}
-
-		for (pugi::xml_node enemyNode = enemies.child("dog_enemy"); enemyNode; enemyNode = enemyNode.next_sibling("dog_enemy"))
-		{
-			DogEnemy* dogEnemy = (DogEnemy*)app->entityManager->CreateEntity(EntityType::DOGENEMY);
-			dogEnemy->parameters = enemyNode;
-		}
 	}
 	
 	if (config.child("map")) {
@@ -105,20 +81,6 @@ bool Scene::Start()
 	//Get the size of the texture
 	//app->tex->GetSize(img, texW, texH);
 
-	textPosX = (float)windowW / 2 - (float)texW / 2;
-	textPosY = (float)windowH / 2 - (float)texH / 2;
-
-	//Create a Label
-	std::string scoreString = std::to_string(player->score);
-	gcScore = (GuiControlLabel*)app->guiManager->CreateGuiControl(GuiControlType::LABEL, 4, scoreString.c_str(), { (int)windowW - 200,20,150,25 }, this);
-
-	gcLives = (GuiControlLabel*)app->guiManager->CreateGuiControl(GuiControlType::LABEL, 5, "", { 5,5,50,25 }, this);
-	gcLives->SetTexture(app->map->GetAnimByName("livesAnimation")->texture);
-	gcLives->section = app->map->GetAnimByName("livesAnimation")->GetCurrentFrame();
-
-	std::string timeString = std::to_string(playingTime->ReadSec());
-	gcTime = (GuiControlLabel*)app->guiManager->CreateGuiControl(GuiControlType::LABEL, 4, scoreString.c_str(), { (int)windowW / 2 + 100,20,50,25 }, this);
-
 	//Pause Menu UI
 	gcResume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Resume", { (int)windowW / 2 - 50, (int)windowH / 2 - 100, 150, 50 }, this);
 	gcResume->SetObserver(this);
@@ -135,13 +97,6 @@ bool Scene::Start()
 	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 50, (int)windowH / 2 + 50, 150, 50 }, this);
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
-
-	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
-		app->map->mapData.width,
-		app->map->mapData.height,
-		app->map->mapData.tileWidth,
-		app->map->mapData.tileHeight,
-		app->map->mapData.tilesets.Count());
 
 	return true;
 }
@@ -177,16 +132,6 @@ bool Scene::Update(float dt)
 		if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
-
-	// Renders the image in the center of the screen 
-	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
-
-	/* for (int i = 0; rope1[i + 1] != NULL; i++)
-	{
-		app->render->DrawLine(rope1[i].body->GetPosition().x * 100, rope1[i].body->GetPosition().y * 100, rope1[i + 1].body->GetPosition().x * 100, rope1[i + 1].body->GetPosition().y * 100, 255, 255, 255);
-	}  */
-
-	RenderGUI();
 
 	return true;
 }
@@ -264,15 +209,4 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	return true;
-}
-
-void Scene::RenderGUI()
-{
-	std::string scoreString = "Points:" + std::to_string(player->score);
-	gcScore->text = scoreString.c_str();
-
-	gcLives->section = app->map->GetAnimByName("livesAnimation")->GetCurrentFrame();
-	app->map->GetAnimByName("livesAnimation")->loop = true;
-
-	gcTime->text = std::to_string(playingTime->ReadSec()).c_str();
 }
