@@ -67,6 +67,8 @@ private:
 	bool exitPressed = false;
 
 	Timer* playingTime;
+
+	pugi::xml_node parameters;
 };
 
 #endif // __SCENE_H__

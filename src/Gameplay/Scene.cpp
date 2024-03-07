@@ -37,25 +37,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	// iterate all objects in the scene
-	// Check https://pugixml.org/docs/quickstart.html#access
-
-	if (config.child("player")) {
-		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-		player->parameters = config.child("player");
-	}
-	
-	if (config.child("map")) {
-		//Get the map name from the config file and assigns the value in the module
-		app->map->name = config.child("map").attribute("name").as_string();
-		app->map->path = config.child("map").attribute("path").as_string();
-	}
-
-	if (config.child("camera")) {
-		//Get the map name from the config file and assigns the value in the module
-		app->render->camera.x = config.child("camera").attribute("x").as_int();
-		app->render->camera.y = config.child("camera").attribute("y").as_int();
-	}
+	parameters = config;
 
 	return ret;
 }
@@ -63,10 +45,30 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
+	// iterate all objects in the scene
+	// Check https://pugixml.org/docs/quickstart.html#access
+
+	if (parameters.child("player")) {
+		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+		player->parameters = parameters.child("player");
+		player->Enable();
+	}
+
+	if (parameters.child("map")) {
+		//Get the map name from the config file and assigns the value in the module
+		app->map->name = parameters.child("map").attribute("name").as_string();
+		app->map->path = parameters.child("map").attribute("path").as_string();
+	}
+
+	if (parameters.child("camera")) {
+		//Get the map name from the config file and assigns the value in the module
+		app->render->camera.x = parameters.child("camera").attribute("x").as_int();
+		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
+	}
+
 	app->physics->Enable();
 	app->map->Enable();
 	app->entityManager->Enable();
-	app->guiManager->Enable();
 
 	app->render->camera.target = player;
 	app->render->camera.useInterpolation = true;
@@ -199,8 +201,9 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 8:
 		app->fade->Fade(this, (Module*)app->mainMenu, 60);
-		app->map->Disable();
+		//IMPORTANTE: DESCARGAR EN ORDEN INVERSO AL CARGADO EN EL APP
 		app->entityManager->Disable();
+		app->map->Disable();
 		app->physics->Disable();
 	break;
 	case 9:

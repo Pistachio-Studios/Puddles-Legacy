@@ -82,7 +82,7 @@ bool EntityManager::CleanUp()
 
 Entity* EntityManager::CreateEntity(EntityType type)
 {
-	Entity* entity = nullptr; 
+	Entity* entity = nullptr;
 
 	switch (type)
 	{
