@@ -21,9 +21,9 @@ DebugUI::DebugUI(bool startEnabled) : Module(startEnabled)
 
 DebugUI::~DebugUI() {}
 
-bool DebugUI::Awake(pugi::xml_node&)
+bool DebugUI::Start()
 {
-    // From 2.0.18: Enable native IME.
+     // From 2.0.18: Enable native IME.
     #ifdef SDL_HINT_IME_SHOW_UI
         SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
     #endif
@@ -38,33 +38,34 @@ bool DebugUI::Awake(pugi::xml_node&)
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
 
-    /* // Setup Platform/Renderer bindings
+    // Setup Platform/Renderer bindings
     ImGui_ImplSDL2_InitForSDLRenderer(app->win->window, app->render->renderer);
-    ImGui_ImplSDLRenderer2_Init(app->render->renderer); */
+    ImGui_ImplSDLRenderer2_Init(app->render->renderer);
 
     //TODO: LOAD FONTS
 
     return true;
 }
 
-bool DebugUI::Start()
-{
-    // Setup Platform/Renderer bindings
-    ImGui_ImplSDL2_InitForSDLRenderer(app->win->window, app->render->renderer);
-    ImGui_ImplSDLRenderer2_Init(app->render->renderer);
-
-    return true;
-}
-
-bool DebugUI::Update(float dt)
+bool DebugUI::PreUpdate()
 {
     // Start the Dear ImGui frame
     ImGui_ImplSDLRenderer2_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
 
+    return true;
+}
+
+bool DebugUI::Update(float dt)
+{
     ImGui::ShowDemoWindow((bool*)true);
 
+    return true;
+}
+
+bool DebugUI::PostUpdate()
+{
     // Rendering
     ImGui::Render();
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());

@@ -20,6 +20,8 @@
 #include <box2d/b2_body.h>
 #include <box2d/b2_fixture.h>
 
+#include <imgui.h>
+
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
@@ -97,6 +99,14 @@ bool Player::Update(float dt)
 /* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
 	currentAnimation->Update(dt); */
+
+	ImGui::Begin("Player");
+	ImGui::Text("Player Position: %d, %d", position.x, position.y);
+	ImGui::Text("Player Speed: %f", pbody->body->GetLinearVelocity().Length());
+	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
+	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
+	ImGui::End();
+
 
 	return true;
 }
