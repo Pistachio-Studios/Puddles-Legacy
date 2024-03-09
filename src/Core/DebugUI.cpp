@@ -1,5 +1,6 @@
 #include "Core/DebugUI.h"
 #include "Core/App.h"
+#include "Core/Input.h"
 #include "Core/Window.h"
 #include "Core/Render.h"
 
@@ -65,6 +66,7 @@ bool DebugUI::Update(float dt)
 
     if (debug)
     {
+        // Main Menu Bar
         ImGui::BeginMainMenuBar();
         if (ImGui::BeginMenu("Entity Manager"))
         {
@@ -77,7 +79,51 @@ bool DebugUI::Update(float dt)
             if (ImGui::MenuItem("Info", NULL, renderInfo)) {renderInfo = !renderInfo;}
             ImGui::EndMenu();
         }
+        if (ImGui::BeginMenu("Performance"))
+        {
+            if (ImGui::MenuItem("Metrics")) {PerformanceMetrics = !PerformanceMetrics;}
+            ImGui::EndMenu();
+        }
         ImGui::EndMainMenuBar();
+
+
+        // FPS Metrics
+
+        // Modify your PostUpdate function
+        if(PerformanceMetrics)
+        {
+            // Add this at the top of your file or in your class definition
+            static float fps_values[1000] = { 0 };
+            static int fps_idx = 0;
+            ImGui::Begin("Performance Metrics", &PerformanceMetrics, ImGuiWindowFlags_AlwaysAutoResize);
+
+            // Record FPS value
+            float current_fps = ImGui::GetIO().Framerate;
+            fps_values[fps_idx] = current_fps;
+            fps_idx = (fps_idx + 1) % 1000; // Move to the next index, wrap around at 100
+
+            ImGui::Text("FPS: %.1f", current_fps); // Display the current FPS
+
+            // Calculate maximum FPS value
+            float max_fps = fps_values[0];
+            for (int i = 1; i < 1000; i++) {
+                if (fps_values[i] > max_fps) {
+                    max_fps = fps_values[i];
+                }
+            }
+
+            // Change histogram color to red
+            //ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+            ImGui::PlotHistogram("", fps_values, IM_ARRAYSIZE(fps_values), 0, NULL, 0.0f, max_fps*2, ImVec2(0, 60)); // Plot FPS histogram
+            //ImGui::PopStyleColor();
+
+            ImGui::Text("Average FPS: %.1u", app->GetAverageFps());
+            ImGui::Text("Frame Duration: %.3f s", app->GetDt() * 0.001f); // Display the frame duration in milliseconds
+            ImGui::Text("Time Since Startup: %d s", (int)app->GetSecondsSinceStartup()); // Display the time since the application started
+            ImGui::Text("Frame Count: %lu", app->GetFrameCount());
+
+            ImGui::End();
+        }
     }
 
     //ImGui::ShowDemoWindow((bool*)true);

@@ -55,6 +55,12 @@ public:
 	const char* GetArgv(int index) const;
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
+	const float GetDt() const;
+	const float GetSecondsSinceStartup() const;
+	const uint64_t GetFrameCount() const;
+	const uint32_t GetFramesPerSecond() const;
+	const uint32_t GetAverageFps() const;
+
 
 	// Request a save data in an XML file 
 	bool LoadRequest();

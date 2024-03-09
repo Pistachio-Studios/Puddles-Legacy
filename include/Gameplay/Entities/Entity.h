@@ -4,7 +4,6 @@
 #include "Utils/Point.h"
 #include "Utils/SString.h"
 #include "Core/Input.h"
-#include "Core/Render.h"
 
 class PhysBody;
 class b2Fixture;
@@ -14,27 +13,12 @@ typedef float float32;
 enum class EntityType
 {
 	PLAYER,
-	FOODITEM,
-	SCOREITEM,
-	CHECKPOINT,
-	OWLENEMY,
-	DOGENEMY,
-	ROPE,
-	FURBALL,
 	UNKNOWN
 };
 
 enum class EntityState {
 	NONE,
-	IDLE,
-	MOVE,
-	JUMP,
-	HURT,
-	CLIMB,
-	ATTACK,
-	WIN,
-	DEAD,
-	NO_CLIP
+	IDLE
 };
 
 class Entity
@@ -77,11 +61,6 @@ public:
 		return true;
 	}
 
-	virtual void Move(float dt) {};
-	virtual void Jump(float dt) {};
-	virtual void Climb(float dt) {};
-	virtual void Attack(float dt) {};
-
 	void Enable()
 	{
 		if (!active)
@@ -101,11 +80,9 @@ public:
 	}
 
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
-
 	};
 
 	virtual void EndCollision(PhysBody* physA, PhysBody* physB) {
-
 	};
 
 	virtual void OnRaycastHit(b2Fixture* fixture, const b2Vec2& point,
@@ -124,7 +101,6 @@ public:
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
 	iPoint position;       
-	iPoint newPosition;
 	bool renderable = true;
 
 	bool entityDebugDraw = false;

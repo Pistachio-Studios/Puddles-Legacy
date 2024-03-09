@@ -36,6 +36,8 @@ public:
 
     bool renderInfo = false;
 
+    bool PerformanceMetrics = false;
+
 };
 
 #endif // __DEBUG_UI_H__

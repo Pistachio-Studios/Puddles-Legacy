@@ -452,6 +452,31 @@ const char* App::GetOrganization() const
 	return organization.GetString();
 }
 
+const float App::GetDt() const
+{
+	return dt;
+}
+
+const float App::GetSecondsSinceStartup() const
+{
+	return secondsSinceStartup;
+}
+
+const uint64_t App::GetFrameCount() const
+{
+	return frameCount;
+}
+
+const uint32_t App::GetFramesPerSecond() const
+{
+	return framesPerSecond;
+}
+
+const uint32_t App::GetAverageFps() const
+{
+	return averageFps;
+}
+
 
 // L14: TODO 1: Implement the methods LoadRequest() and SaveRequest() to request and call the Load / Save the game state at the end of the frame
 // The real execution of load / save will be implemented in TODO 5 and 7
