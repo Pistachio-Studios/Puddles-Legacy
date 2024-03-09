@@ -32,6 +32,8 @@ public:
 
 	bool CleanUp() override;
 
+	void DrawImGui() override;
+
 	void OnCollision(PhysBody* physA, PhysBody* physB) override;
 
 	void EndCollision(PhysBody* physA, PhysBody* physB) override;

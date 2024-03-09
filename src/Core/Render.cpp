@@ -2,6 +2,7 @@
 #include "Core/Window.h"
 #include "Core/Render.h"
 #include "Gameplay/Entities/Entity.h"
+#include "Core/DebugUI.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -112,9 +113,22 @@ bool Render::Update(float dt)
 
 void Render::DrawImGui()
 {
-	ImGui::Begin("Render");
-	ImGui::Text("camera interpolation: %s", camera.useInterpolation ? "true" : "false");
-	ImGui::End();
+	if(app->debugUI->renderInfo)
+	{
+		ImGui::Begin("Render");
+		ImGui::Text("camera x: %d", camera.x);
+		ImGui::Text("camera y: %d", camera.y);
+		ImGui::Text("camera w: %d", camera.w);
+		ImGui::Text("camera h: %d", camera.h);
+
+		ImGui::Text("camera interpolation: %s", camera.useInterpolation ? "true" : "false");
+		ImGui::Text("camera lerp speed: %f", camera.lerpSpeed);
+		ImGui::Text("camera target: %s", camera.target != nullptr ? camera.target->name.GetString() : "null");
+		ImGui::Text("camera offset x: %d", camera.offset.x);
+		ImGui::Text("camera offset y: %d", camera.offset.y);
+		
+		ImGui::End();
+	}
 }
 
 bool Render::PostUpdate()

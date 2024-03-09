@@ -63,7 +63,24 @@ bool DebugUI::Update(float dt)
 		debug = !debug;
 	}
 
-    ImGui::ShowDemoWindow((bool*)true);
+    if (debug)
+    {
+        ImGui::BeginMainMenuBar();
+        if (ImGui::BeginMenu("Entity Manager"))
+        {
+            if (ImGui::MenuItem("Entity List", NULL, entityManagerEntityList)) {entityManagerEntityList = !entityManagerEntityList;}
+            if (ImGui::MenuItem("Info", NULL, entityManagerInfo)) {entityManagerInfo = !entityManagerInfo;}
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Render"))
+        {
+            if (ImGui::MenuItem("Info", NULL, renderInfo)) {renderInfo = !renderInfo;}
+            ImGui::EndMenu();
+        }
+        ImGui::EndMainMenuBar();
+    }
+
+    //ImGui::ShowDemoWindow((bool*)true);
 
     return true;
 }

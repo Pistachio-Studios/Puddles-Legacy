@@ -28,6 +28,14 @@ public:
     // Called before quitting
     bool CleanUp();
 
+    public:
+
+
+    bool entityManagerEntityList = false;
+    bool entityManagerInfo = false;
+
+    bool renderInfo = false;
+
 };
 
 #endif // __DEBUG_UI_H__

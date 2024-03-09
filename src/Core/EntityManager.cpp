@@ -3,6 +3,7 @@
 #include "Core/App.h"
 #include "Core/Textures.h"
 #include "Gameplay/Scene.h"
+#include "Core/DebugUI.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -141,6 +142,7 @@ bool EntityManager::Update(float dt)
 
 		if (pEntity->active == false) continue;
 		ret = item->data->Update(dt);
+		if(pEntity->entityDebugDraw) pEntity->DrawImGui();
 	}
 
 	return ret;
@@ -148,9 +150,29 @@ bool EntityManager::Update(float dt)
 
 void EntityManager::DrawImGui()
 {
-	ImGui::Begin("Entity Manager");
-	ImGui::Text("Entities: %d", entities.Count());
-	ImGui::End();
+	if(app->debugUI->entityManagerEntityList)
+	{
+		ListItem<Entity*>* item;
+		Entity* pEntity = nullptr;
+		
+		ImGui::Begin("Entity List");
+		for (item = entities.start; item != nullptr; item = item->next)
+		{
+			pEntity = item->data;
+			if (ImGui::Selectable(pEntity->name.GetString(), pEntity->entityDebugDraw)) {
+				pEntity->entityDebugDraw = !pEntity->entityDebugDraw;
+			}
+		}
+		ImGui::End();
+	}
+
+	if(app->debugUI->entityManagerInfo)
+	{
+		ImGui::Begin("Entity Manager");
+		ImGui::Text("Entities: %d", entities.Count());
+		ImGui::End();
+	
+	}
 }
 
 bool EntityManager::SaveState(pugi::xml_node node) {

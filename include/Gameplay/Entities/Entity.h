@@ -63,6 +63,10 @@ public:
 		return true;
 	}
 
+	virtual void DrawImGui()
+	{
+	}
+
 	virtual bool LoadState(pugi::xml_node&)
 	{
 		return true;
@@ -122,6 +126,8 @@ public:
 	iPoint position;       
 	iPoint newPosition;
 	bool renderable = true;
+
+	bool entityDebugDraw = false;
 };
 
 #endif // __ENTITY_H__
