@@ -115,17 +115,15 @@ void Render::DrawImGui()
 {
 	if(app->debugUI->renderInfo)
 	{
-		ImGui::Begin("Render");
-		ImGui::Text("camera x: %d", camera.x);
-		ImGui::Text("camera y: %d", camera.y);
-		ImGui::Text("camera w: %d", camera.w);
-		ImGui::Text("camera h: %d", camera.h);
+		ImGui::Begin("Render", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::Text("Camera Position:"); ImGui::SameLine();
+		ImGui::DragInt2("##Camera Position", &camera.x, 1.0f);
 
-		ImGui::Text("camera interpolation: %s", camera.useInterpolation ? "true" : "false");
+		ImGui::Checkbox("Camera Interpolation", &camera.useInterpolation);
+
 		ImGui::Text("camera lerp speed: %f", camera.lerpSpeed);
+		ImGui::SliderFloat("Camera Lerp Speed", &camera.lerpSpeed, 0.0f, 16.0f);
 		ImGui::Text("camera target: %s", camera.target != nullptr ? camera.target->name.GetString() : "null");
-		ImGui::Text("camera offset x: %d", camera.offset.x);
-		ImGui::Text("camera offset y: %d", camera.offset.y);
 		
 		ImGui::End();
 	}
@@ -191,7 +189,7 @@ void Render::cameraInterpolation(Entity* target, float lerpSpeed, float dt, iPoi
 	}
 	else
 	{
-		camera.useInterpolation = true;
+		camera.useInterpolation = true;//TODO: Arreglar para que no setee cada frame
 	}
 
 	if(target != nullptr)

@@ -70,6 +70,7 @@ bool DebugUI::Update(float dt)
         ImGui::BeginMainMenuBar();
         if (ImGui::BeginMenu("Entity Manager"))
         {
+            if (ImGui::MenuItem("Spawn Entity", NULL, entityManagerSpawnEntity)) {entityManagerSpawnEntity = !entityManagerSpawnEntity;}
             if (ImGui::MenuItem("Entity List", NULL, entityManagerEntityList)) {entityManagerEntityList = !entityManagerEntityList;}
             if (ImGui::MenuItem("Info", NULL, entityManagerInfo)) {entityManagerInfo = !entityManagerInfo;}
             ImGui::EndMenu();

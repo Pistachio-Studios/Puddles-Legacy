@@ -30,7 +30,7 @@ public:
 
     public:
 
-
+    bool entityManagerSpawnEntity = false;
     bool entityManagerEntityList = false;
     bool entityManagerInfo = false;
 

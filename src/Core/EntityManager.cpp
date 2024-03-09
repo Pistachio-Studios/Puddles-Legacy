@@ -150,6 +150,28 @@ bool EntityManager::Update(float dt)
 
 void EntityManager::DrawImGui()
 {
+	if(app->debugUI->entityManagerSpawnEntity)
+	{
+		ImGui::Begin("Entity Manager");
+		
+		static EntityType selectedEntityType = EntityType::PLAYER;
+		
+		const char* entityTypes[] = { "PLAYER", "ENEMY"};
+
+		ImGui::Combo("Entity Type", (int*)&selectedEntityType, entityTypes, IM_ARRAYSIZE(entityTypes));
+		if (ImGui::Button("Spawn Entity"))
+		{
+			EntityType type = static_cast<EntityType>(selectedEntityType);
+
+			Entity* entity;
+
+			entity = CreateEntity(type);
+			entity->Start();
+		}
+		
+		ImGui::End();
+	}
+
 	if(app->debugUI->entityManagerEntityList)
 	{
 		ListItem<Entity*>* item;
