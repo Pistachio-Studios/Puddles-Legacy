@@ -84,10 +84,6 @@ bool Player::Update(float dt)
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		debug = !debug;
-	}
 	
 	if (debug) {
 		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {

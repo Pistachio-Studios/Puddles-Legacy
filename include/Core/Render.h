@@ -35,6 +35,8 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
+	void DrawImGui() override;
+
 	// Called before quitting
 	bool CleanUp();
 

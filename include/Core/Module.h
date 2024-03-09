@@ -59,6 +59,10 @@ public:
 	{
 		return true;
 	}
+
+	virtual void DrawImGui()
+	{
+	}
 	
 	// L14: TODO 2: Create new virtual methods to LoadState / SaveState
 

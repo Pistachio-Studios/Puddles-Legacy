@@ -59,6 +59,10 @@ bool DebugUI::PreUpdate()
 
 bool DebugUI::Update(float dt)
 {
+    if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		debug = !debug;
+	}
+
     ImGui::ShowDemoWindow((bool*)true);
 
     return true;

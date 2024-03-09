@@ -321,6 +321,7 @@ bool App::DoUpdate()
 		}
 
 		ret = item->data->Update(dt);
+		if(debug)item->data->DrawImGui();
 	}
 
 	return ret;

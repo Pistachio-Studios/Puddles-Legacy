@@ -9,6 +9,7 @@
 
 #include <SDL_render.h>
 #include <tracy/Tracy.hpp>
+#include <imgui.h>
 
 #define VSYNC true
 
@@ -105,7 +106,15 @@ bool Render::Update(float dt)
 	ZoneScoped;
 
 	cameraInterpolation(camera.target, camera.lerpSpeed, dt, camera.offset);
+
 	return true;
+}
+
+void Render::DrawImGui()
+{
+	ImGui::Begin("Render");
+	ImGui::Text("camera interpolation: %s", camera.useInterpolation ? "true" : "false");
+	ImGui::End();
 }
 
 bool Render::PostUpdate()

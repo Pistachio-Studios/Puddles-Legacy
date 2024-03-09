@@ -8,6 +8,8 @@
 #include "Utils/Log.h"
 #include <tracy/Tracy.hpp>
 
+#include <imgui.h>
+
 EntityManager::EntityManager() : Module()
 {
 	name.Create("entitymanager");
@@ -142,6 +144,13 @@ bool EntityManager::Update(float dt)
 	}
 
 	return ret;
+}
+
+void EntityManager::DrawImGui()
+{
+	ImGui::Begin("Entity Manager");
+	ImGui::Text("Entities: %d", entities.Count());
+	ImGui::End();
 }
 
 bool EntityManager::SaveState(pugi::xml_node node) {

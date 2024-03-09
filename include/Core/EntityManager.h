@@ -28,6 +28,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void DrawImGui() override;
+
 	// Additional methods
 	Entity* CreateEntity(EntityType type);
 
