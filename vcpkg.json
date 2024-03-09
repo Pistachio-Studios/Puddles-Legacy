@@ -8,7 +8,11 @@
     "sdl2-ttf",
     "pugixml",
     "box2d",
-    "tracy"
+    "tracy",
+    {
+      "name": "imgui",
+      "features":["sdl2-binding","sdl2-renderer-binding"]
+    }
   ],
   "builtin-baseline": "fbf25ddd1119211278c257f2e19c96a9d5a6ede7"
 }

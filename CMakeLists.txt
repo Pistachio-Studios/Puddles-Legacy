@@ -27,6 +27,7 @@ find_package(SDL2_ttf CONFIG REQUIRED)
 find_package(pugixml CONFIG REQUIRED)
 find_package(box2d CONFIG REQUIRED)
 find_package(Tracy CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
@@ -42,7 +43,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE $<TARGET_NAME_IF_EXISTS:SDL2::SDL2
                                               $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
                                               pugixml::pugixml
                                               box2d::box2d
-                                              Tracy::TracyClient)
+                                              Tracy::TracyClient
+                                              imgui::imgui)
 
 #target_compile_definitions(Proyecto-2 PRIVATE uint32=unsigned\ __int32 uint64=unsigned\ __int64)
 

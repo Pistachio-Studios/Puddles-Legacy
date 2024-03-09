@@ -23,6 +23,7 @@ class EntityManager;
 class Map;
 class Physics;
 class GuiManager;
+class DebugUI;
 
 class App
 {
@@ -103,6 +104,7 @@ public:
 	Map* map;
 	Physics* physics;
 	GuiManager* guiManager;
+	DebugUI* debugUI;
 
 private:
 

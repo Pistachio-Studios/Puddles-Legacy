@@ -10,6 +10,7 @@
 #include "Core/Map.h"
 #include "Core/Physics.h"
 #include "Core/GuiManager.h"
+#include "Core/DebugUI.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -45,6 +46,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(false);
 	entityManager = new EntityManager(false);
 	guiManager = new GuiManager(true);
+	debugUI = new DebugUI(true);
 
 
 	// Ordered for awake / Start / Update
@@ -60,6 +62,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(guiManager);
+	AddModule(debugUI);
 
 	// Render last to swap buffer
 	AddModule(render);
