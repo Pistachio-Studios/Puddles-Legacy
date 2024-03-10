@@ -18,10 +18,10 @@ public:
     void Spawn(iPoint position, int size);
 	void Update();
 public:
-    float lifetime = 5;
-    bool active = true;
-    iPoint spawnPosition;
-    int size;
+    bool active = false;
+    float lifetime = 1.0f;
+    iPoint spawnPosition = {0,0};
+    int size = 5;
     bool markedForDeletion = false;
     PhysBody* pbody;
 private:
@@ -57,9 +57,6 @@ public:
     // Destructor
     virtual ~ParticleManager();
 
-    // Called before render is available
-    bool Awake(pugi::xml_node& conf) override;
-
     // Called after Awake
     bool Start() override;
 
@@ -74,6 +71,9 @@ public:
 
     void DrawImGui() override;
 
+    void AddGenerator(ParticleGenerator* generator);
+
+    ParticleGenerator* CreateGenerator();//No se si esta o la de AddGenerator
 private:
     List<ParticleGenerator*> generators;
 };

@@ -101,7 +101,7 @@ void ParticleGenerator::Update()
         EmitParticles();
         updateTimer->Start();
     }
-    
+
     ListItem<Particle*>* item = particles.start;
     while(item != nullptr)
     {
@@ -124,13 +124,9 @@ ParticleManager::~ParticleManager()
 {
 }
 
-bool ParticleManager::Awake(pugi::xml_node& conf)
-{
-    return true;
-}
-
 bool ParticleManager::Start()
 {
+    //BORRAR!!!
     ParticleGenerator* generator = new ParticleGenerator();
     generator->emiting = true;
     generator->amount = 1;
@@ -164,9 +160,15 @@ bool ParticleManager::Update(float dt)
 
 bool ParticleManager::CleanUp()
 {
+    //TODO: Clean up the generators and particles
     return true;
 }
 
 void ParticleManager::DrawImGui()
 {
+}
+
+void ParticleManager::AddGenerator(ParticleGenerator* generator)
+{
+    generators.Add(generator);
 }
