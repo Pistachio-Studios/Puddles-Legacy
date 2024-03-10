@@ -15,22 +15,25 @@ class Particle
 public:
     Particle();
     ~Particle();
+    void Spawn(iPoint position, int size);
 	void Update();
 public:
-    int lifetime = 5;
+    float lifetime = 5;
     bool active = true;
     iPoint spawnPosition;
+    int size;
+    bool markedForDeletion = false;
+    PhysBody* pbody;
 private:
-	PhysBody* pbody;
     iPoint position;
     Timer* timer;
-    int size;
 };
 
 class ParticleGenerator
 {
 public:
     ParticleGenerator();
+    void PreUpdate();
     void Update();
     void EmitParticles();
 public:
@@ -39,7 +42,8 @@ public:
     iPoint position;
     private:
     List<Particle*> particles;
-    int spawnRate;
+    Timer* updateTimer;
+    int updateRate = 1000;
 };
 
 class ParticleManager : public Module
@@ -59,6 +63,7 @@ public:
     // Called after Awake
     bool Start() override;
 
+    // Called every frame
     bool PreUpdate() override;
 
     // Called every frame

@@ -8,10 +8,6 @@
 
 Particle::Particle() 
 {
-    timer = new Timer();
-
-    pbody = app->physics->CreateRectangleSensor(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.x), size, size, bodyType::DYNAMIC);
-    
 }
 
 Particle::~Particle()
@@ -19,12 +15,30 @@ Particle::~Particle()
     // Release the particle's body
 }
 
+void Particle::Spawn(iPoint position, int size)
+{
+    // Set the particle's position
+    this->position = position;
+    this->size = size;
+
+    // Set the particle's lifetime
+    lifetime = 0.5f;
+
+    // Set the particle's active state
+    active = true;
+
+    pbody = app->physics->CreateRectangleSensor(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.x), size, size, bodyType::DYNAMIC);
+
+    // Start the particle's timer
+    timer = new Timer();
+}
+
 void Particle::Update()
 {
     if(active)
     {
         // Update the particle's lifetime
-        if(timer->ReadSec() <= lifetime)
+        if(timer->ReadMSec() <= lifetime * 1000)
         {
             pbody->body->ApplyForceToCenter({0, 9.8}, true);
             
@@ -36,14 +50,17 @@ void Particle::Update()
         }
         else
         {
-            app->physics->DestroyBody(pbody);
             active = false;
+            markedForDeletion = true;
         }
     }
 }
 
 
-ParticleGenerator::ParticleGenerator() {}
+ParticleGenerator::ParticleGenerator() 
+{
+    updateTimer = new Timer();
+}
 
 void ParticleGenerator::EmitParticles()
 {
@@ -53,29 +70,40 @@ void ParticleGenerator::EmitParticles()
        {
               // Create a new particle and add it to the particles array
               Particle* particle = new Particle();
-              particle->spawnPosition = position;
+              particle->Spawn(position, 10);
               particles.Add(particle);
        }
    }
 }
 
-void ParticleGenerator::Update()
+void ParticleGenerator::PreUpdate()
 {
-    EmitParticles();
     ListItem<Particle*>* item = particles.start;
     while(item != nullptr)
     {
-        if(item->data->active)
+        ListItem<Particle*>* nextItem = item->next; // Save the next item
+
+        if(item->data->markedForDeletion)
         {
-            item->data->Update();
-        }
-        else
-        {
-            delete item->data;
-            item->data = nullptr;
+            app->physics->DestroyBody(item->data->pbody);
             particles.Del(item);
         }
-        item = item->next;
+        item = nextItem; // Go to the next item
+    }
+}
+
+void ParticleGenerator::Update()
+{
+    if(updateTimer->ReadMSec() >= updateRate)
+    {
+        EmitParticles();
+        ListItem<Particle*>* item = particles.start;
+        while(item != nullptr)
+        {
+            item->data->Update();
+            item = item->next;
+        }
+        updateTimer->Start();
     }
 }
 
@@ -102,7 +130,7 @@ bool ParticleManager::Start()
 {
     ParticleGenerator* generator = new ParticleGenerator();
     generator->emiting = true;
-    generator->amount = 10;
+    generator->amount = 1;
     generator->position = {600, 1500};
     generators.Add(generator);
 
@@ -114,7 +142,7 @@ bool ParticleManager::PreUpdate()
     ListItem<ParticleGenerator*>* item = generators.start;
     while(item != nullptr)
     {
-        item->data->Update();
+        item->data->PreUpdate();
         item = item->next;
     }
     return true;
@@ -122,6 +150,12 @@ bool ParticleManager::PreUpdate()
 
 bool ParticleManager::Update(float dt)
 {
+    ListItem<ParticleGenerator*>* item = generators.start;
+    while(item != nullptr)
+    {
+        item->data->Update();
+        item = item->next;
+    }
     return true;
 }
 
