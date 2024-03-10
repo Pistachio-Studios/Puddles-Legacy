@@ -195,11 +195,17 @@ void ParticleManager::DrawImGui()
                 ImGui::DragInt("Amount", &generator->amount);
                 ImGui::DragInt2("position", &generator->position.x, 1);
                 ImGui::SliderFloat("Explosiveness", &generator->explosiveness, 0, 1);
+
+                ImGui::SetNextWindowBgAlpha(0.0f); // Set window background alpha to 0 for transparency
+                ImGui::Begin("Spawner Position", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove); // Set ImGuiWindowFlags to remove background, title bar, resize, and move functionality
+                ImGui::SetWindowPos(ImVec2(generator->position.x, generator->position.y)); // Set window position to top-left corner
+                ImGui::Bullet();
+                ImGui::End();
             }
         }
     }
     ImGui::End();
-
+    
 }
 
 void ParticleManager::AddGenerator(ParticleGenerator* generator)
