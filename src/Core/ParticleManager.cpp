@@ -5,6 +5,7 @@
 
 #include "Utils/List.h"
 #include "box2d/b2_body.h"
+#include <imgui.h>
 
 Particle::Particle() 
 {
@@ -68,13 +69,26 @@ void ParticleGenerator::EmitParticles()
 {
    if(emiting)
    {
-       for (int i = 0; i < amount; i++)
+       /* for (int i = 0; i < amount; i++)
        {
               // Create a new particle and add it to the particles array
               Particle* particle = new Particle();
               particle->Spawn(position, 10);
               particles.Add(particle);
-       }
+       } */
+
+        if (emitedParticles < amount)
+        {
+            float interval = static_cast<float>(updateRate) / amount;
+            if (updateTimer->ReadMSec() >= interval * emitedParticles * explosiveness)
+            {
+                // Create a new particle and add it to the particles array
+                Particle* particle = new Particle();
+                particle->Spawn(position, 10);
+                particles.Add(particle);
+                emitedParticles++;
+            }
+        }
    }
 }
 
@@ -96,9 +110,13 @@ void ParticleGenerator::PreUpdate()
 
 void ParticleGenerator::Update()
 {
-    if(updateTimer->ReadMSec() >= updateRate)
+    if(updateTimer->ReadMSec() <= updateRate)
     {
         EmitParticles();
+    }
+    else
+    {
+        emitedParticles = 0;
         updateTimer->Start();
     }
 
@@ -166,6 +184,22 @@ bool ParticleManager::CleanUp()
 
 void ParticleManager::DrawImGui()
 {
+    if(ImGui::Begin("Particle Manager"))
+    {
+        for (int i = 0; i < generators.Count(); i++)
+        {
+            ParticleGenerator* generator = generators[i];
+            if (ImGui::CollapsingHeader("Generator %d", i))
+            {
+                ImGui::Checkbox("Emitting", &generator->emiting);
+                ImGui::DragInt("Amount", &generator->amount);
+                ImGui::DragInt2("position", &generator->position.x, 1);
+                ImGui::SliderFloat("Explosiveness", &generator->explosiveness, 0, 1);
+            }
+        }
+    }
+    ImGui::End();
+
 }
 
 void ParticleManager::AddGenerator(ParticleGenerator* generator)

@@ -40,10 +40,14 @@ public:
     bool emiting;
     int amount;
     iPoint position;
+
+    float explosiveness = 1.0f;
     private:
     List<Particle*> particles;
     Timer* updateTimer;
     int updateRate = 1000;
+
+    int emitedParticles = 0;
 };
 
 class ParticleManager : public Module
