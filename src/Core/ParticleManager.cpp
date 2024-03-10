@@ -18,16 +18,16 @@ Particle::~Particle()
 void Particle::Spawn(iPoint position, int size)
 {
     // Set the particle's position
-    this->position = position;
+    this->spawnPosition = position;
     this->size = size;
 
     // Set the particle's lifetime
-    lifetime = 0.5f;
+    lifetime = 2.0f;
 
     // Set the particle's active state
     active = true;
 
-    pbody = app->physics->CreateRectangleSensor(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.x), size, size, bodyType::DYNAMIC);
+    pbody = app->physics->CreateRectangleSensor(spawnPosition.x, spawnPosition.y, size, size, bodyType::DYNAMIC);
 
     // Start the particle's timer
     timer = new Timer();
@@ -42,11 +42,13 @@ void Particle::Update()
         {
             pbody->body->ApplyForceToCenter({0, 9.8}, true);
             
-            // Update the particle's position
-            pbody->GetPosition(position.x, position.y);
+            // Get the particle's position
+            b2Vec2 pos = pbody->body->GetPosition();
+            position.x = METERS_TO_PIXELS(pos.x);
+            position.y = METERS_TO_PIXELS(pos.y);
 
             // Draw the particle
-            app->render->DrawRectangle({position.x, position.y}, 255, 255, 255);
+            app->render->DrawRectangle({position.x, position.y, size, size}, 255, 255, 255);
         }
         else
         {
@@ -97,13 +99,14 @@ void ParticleGenerator::Update()
     if(updateTimer->ReadMSec() >= updateRate)
     {
         EmitParticles();
-        ListItem<Particle*>* item = particles.start;
-        while(item != nullptr)
-        {
-            item->data->Update();
-            item = item->next;
-        }
         updateTimer->Start();
+    }
+    
+    ListItem<Particle*>* item = particles.start;
+    while(item != nullptr)
+    {
+        item->data->Update();
+        item = item->next;
     }
 }
 
@@ -131,7 +134,7 @@ bool ParticleManager::Start()
     ParticleGenerator* generator = new ParticleGenerator();
     generator->emiting = true;
     generator->amount = 1;
-    generator->position = {600, 1500};
+    generator->position = {600, 300};
     generators.Add(generator);
 
     return true;
