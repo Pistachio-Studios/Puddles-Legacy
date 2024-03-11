@@ -113,6 +113,8 @@ public:
 	PhysBody* CreateRope(b2Vec2 startPos, int length, float segmentWidth = 0.1f, float segmentHeight = 0.25f);
 	PhysBody* CreateRope(b2Vec2 startPos, b2Vec2 endPos, int length, float segmentWidth = 0.1f);
 
+	PhysBody* CreateParticle(int x, int y, int width, int height);
+
 	Raycast* CreateRaycast(Entity* listener, b2Vec2 rayStart, b2Vec2 rayEnd);
 
 	// Destroy physics objects

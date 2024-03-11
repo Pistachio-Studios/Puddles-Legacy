@@ -7,67 +7,44 @@
 #include "box2d/b2_body.h"
 #include <box2d/b2_math.h>
 #include <imgui.h>
+#include <tracy/Tracy.hpp>
 
-Particle::Particle() 
+
+Particle::Particle()
 {
+    pbody = app->physics->CreateParticle(position.x, position.y, size, size);
+    
 }
 
 Particle::~Particle()
 {
-    // Release the particle's body
+    app->physics->DestroyBody(pbody);
 }
 
-void Particle::Spawn(iPoint position, b2Vec2 direction, int size, float lifetime)
+void Particle::Spawn()
 {
-    // Set the particle's position
-    this->spawnPosition = position;
-    this->size = size;
-
-    // Set the particle's direction
-    this->direction = direction;
-
-    // Set the particle's lifetime
-    this->lifetime = lifetime;
-
-    // Set the particle's active state
     active = true;
-
-    pbody = app->physics->CreateRectangleSensor(spawnPosition.x, spawnPosition.y, size, size, bodyType::DYNAMIC);
-
-    // Start the particle's timer
-    timer = new Timer();
+    lifetimeTimer = new Timer();
 }
 
-void Particle::Update()
+void Particle::Update()//alomejor seria mejor llamarle draw
 {
-    if(active)
-    {
-        // Update the particle's lifetime
-        if(timer->ReadMSec() <= lifetime * 1000)
-        {
-            //Apply impulse to the particle
-            direction.Normalize();
-            float mass = pbody->body->GetMass();
-            float impulseMagnitude = mass * initialVelocity;
-            b2Vec2 impulseForce = impulseMagnitude * direction;
-            pbody->body->ApplyForceToCenter(impulseForce, true);
-            
-            // Get the particle's position
-            b2Vec2 pos = pbody->body->GetPosition();
-            position.x = METERS_TO_PIXELS(pos.x);
-            position.y = METERS_TO_PIXELS(pos.y);
+    // Update the particle's lifetime
+    if(lifetimeTimer->ReadMSec() <= lifetime * 1000)
+    { 
+        // Get the particle's position
+        b2Vec2 pos = pbody->body->GetPosition();
+        position.x = METERS_TO_PIXELS(pos.x);
+        position.y = METERS_TO_PIXELS(pos.y);
 
-            // Draw the particle
-            app->render->DrawRectangle({position.x - size / 2, position.y - size / 2, size, size}, 255, 255, 255);
-        }
-        else
-        {
-            active = false;
-            markedForDeletion = true;
-        }
+        // Draw the particle
+        app->render->DrawRectangle({position.x - size / 2, position.y - size / 2, size, size}, 255 * lifetime, 255, 255);
+    }
+    else
+    {
+        active = false;
     }
 }
-
 
 ParticleGenerator::ParticleGenerator() 
 {
@@ -76,42 +53,77 @@ ParticleGenerator::ParticleGenerator()
 
 void ParticleGenerator::EmitParticles()
 {
-    if (emitedParticles <= amount)
+    ZoneScoped;
+    /* if (emitedParticles <= amount)
     {
         float interval = static_cast<float>(updateRate) / amount;
 
-        //while(updateTimer->ReadMSec() >= interval * emitedParticles)
-        while(updateTimer->ReadMSec() >= interval * emitedParticles * (1.1f - explosiveness))//REVISAR ESTO
-        {
-            Particle* particle = new Particle();
-            particle->lifetime = lifetime;
-            particle->initialVelocity = initialVelocity;
-            //particle->Spawn(position, {static_cast<float>(rand() % 10 - 5), static_cast<float>(rand() % 10 - 5)}, size, lifetime);
-            particle->Spawn(position, direction, size, lifetime);
-            particles.Add(particle);
+        while(updateTimer->ReadMSec() >= interval * emitedParticles) {
+            if (emitedParticles < particles.Count()) {
+                Particle* particle = particles[emitedParticles];
+                particle->lifetime = lifetime;
+                particle->initialVelocity = initialVelocity;
+                particle->Spawn(position, direction, size, lifetime);
+            }
             emitedParticles++;
         }
+    } */
+
+/*     for(int i = 0; i < amount - 1; i++)
+    {
+        Particle* particle = particles[i];
+        if(!particle->active)
+        {
+            particle->lifetime = lifetime;
+            particle->size = size;
+            particle->position = position;
+            particle->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
+            particle->pbody->body->SetLinearVelocity(b2Vec2(direction.x * initialVelocity, direction.y * initialVelocity));
+            particle->Spawn();
+        }
+    } */
+
+    float interval = static_cast<float>(updateRate) / amount;
+    while(updateTimer->ReadMSec() >= interval * emitedParticles) {
+        if (emitedParticles < particles.Count()) {
+            Particle* particle = particles[emitedParticles];
+            particle->lifetime = lifetime;
+            particle->size = size;
+            particle->position = position;
+            particle->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
+            particle->pbody->body->SetLinearVelocity(b2Vec2(direction.x * initialVelocity, direction.y * initialVelocity));
+            particle->Spawn();
+        }
+        emitedParticles++;
     }
 }
 
 void ParticleGenerator::PreUpdate()
 {
-    ListItem<Particle*>* item = particles.start;
-    while(item != nullptr)
-    {
-        ListItem<Particle*>* nextItem = item->next; // Save the next item
+    ZoneScoped;
+    int particlesCount = particles.Count();
 
-        if(item->data->markedForDeletion)
+    if(amount < particlesCount)
+    {
+        for(int i = 0; i < particlesCount; i++)
         {
-            app->physics->DestroyBody(item->data->pbody);
-            particles.Del(item);
+            delete particles.end->data;
+            particles.Del(particles.end);
         }
-        item = nextItem; // Go to the next item
+    }
+    else
+    {
+        for(int i = 0; i < amount - particlesCount; i++)
+        {
+            particles.Add(new Particle());
+        }
+
     }
 }
 
 void ParticleGenerator::Update()
 {
+    ZoneScoped;
     if(emiting)
     {
         if(updateTimer->ReadMSec() <= updateRate)
@@ -125,11 +137,20 @@ void ParticleGenerator::Update()
         }
     }
     
-
+    //creo que aqui deberia de actualizar las propiedades de las particulas y aplicar las fuerzas
     ListItem<Particle*>* item = particles.start;
     while(item != nullptr)
     {
-        item->data->Update();
+        PhysBody* pbody = item->data->pbody;
+
+        //Apply impulse to the particle
+        direction.Normalize();
+        float mass = pbody->body->GetMass();
+        float impulseMagnitude = mass * initialVelocity;
+        b2Vec2 impulseForce = impulseMagnitude * direction;
+        pbody->body->ApplyForceToCenter(impulseForce, false);
+
+        if(item->data->active)item->data->Update();
         item = item->next;
     }
 }

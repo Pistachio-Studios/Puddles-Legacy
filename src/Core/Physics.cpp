@@ -10,10 +10,14 @@
 #include "Core/Window.h"
 
 #include <SDL_keycode.h>
+#include <box2d/b2_circle_shape.h>
+#include <box2d/b2_shape.h>
 #include <box2d/box2d.h>
 #include <box2d/b2_contact.h>
 #include <box2d/b2_body.h>
 #include <box2d/b2_distance_joint.h>
+#include <cmath>
+#include <tracy/Tracy.hpp>
 
 
 Physics::Physics() : Module()
@@ -56,24 +60,27 @@ bool Physics::Start()
 bool Physics::PreUpdate()
 {
 	// OPTICK PROFILIN
-	//OPTICK_EVENT();
+	ZoneScoped;
 
 	bool ret = true;
 
 	// Step (update) the World
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
+	ZoneNamedN(WorldStep, "WorldStep", true);
 	world->Step(1.0f / 60.0f, 6, 2);
 
 	// Remove all bodies scheduled for deletion
+	ZoneNamedN(RemoveBodies, "RemoveBodies", true);
 	for (int i = 0; i < bodiesToBeDeleted.Count(); i++) {
-        world->DestroyBody(bodiesToBeDeleted[i]->body);
+		world->DestroyBody(bodiesToBeDeleted[i]->body);
 		bodiesToBeDeleted[i]->body = nullptr;
 		bodiesToBeDeleted[i] = nullptr;
-    }
+	}
     bodiesToBeDeleted.Clear();
 
 	// Because Box2D does not automatically broadcast collisions/contacts with sensors, 
 	// we have to manually search for collisions and "call" the equivalent to the ModulePhysics::BeginContact() ourselves...
+	ZoneNamedN(HandleCollisionsForSensors, "HandleCollisionsForSensors", true);
 	for (b2Contact* c = world->GetContactList(); c; c = c->GetNext())
 	{
 		// For each contact detected by Box2D, see if the first one colliding is a sensor
@@ -248,7 +255,7 @@ bool Physics::PostUpdate()
 {
 
 	// OPTICK PROFILIN
-	//OPTICK_EVENT();
+	ZoneScoped;
 
 	bool ret = true;
 	
@@ -772,6 +779,39 @@ b2BodyDef anchorBodyDef;
     }
 
     return bodies;
+}
+
+PhysBody* Physics::CreateParticle(int x, int y, int width, int height)
+{
+	b2BodyDef body;
+	body.type = b2_dynamicBody;
+
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+	//b2PolygonShape box;
+	b2CircleShape circle;
+	//box.SetAsBox(PIXEL_TO_METERS(width) * 0.5f, PIXEL_TO_METERS(height) * 0.5f);
+	circle.m_radius = PIXEL_TO_METERS(width) * 0.5f;
+
+	b2FixtureDef fixture;
+	fixture.shape = &circle;
+	fixture.density = 1.0f;
+	b->ResetMassData();
+
+	// Set the collision filter
+	fixture.filter.categoryBits = 0x0002;
+	fixture.filter.maskBits = 0x0000; // Will not collide with anything
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->GetUserData().pointer = reinterpret_cast<uintptr_t>(pbody);
+	pbody->width = width * 0.5f;
+	pbody->height = height * 0.5f;
+
+	return pbody;
 }
 
 Raycast* Physics::CreateRaycast(Entity* listener, b2Vec2 rayStart, b2Vec2 rayEnd){
