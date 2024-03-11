@@ -46,6 +46,7 @@ public:
     void PreUpdate();
     void Update();
     void EmitParticles();
+    void ResetParticles();
 public:
     bool emiting = true;
     int amount = 8;

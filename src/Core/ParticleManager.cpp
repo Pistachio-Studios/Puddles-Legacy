@@ -13,6 +13,8 @@
 Particle::Particle()
 {
     pbody = app->physics->CreateParticle(position.x, position.y, size, size);
+
+    lifetimeTimer = new Timer();
     
 }
 
@@ -24,7 +26,7 @@ Particle::~Particle()
 void Particle::Spawn()
 {
     active = true;
-    lifetimeTimer = new Timer();
+    lifetimeTimer->Start();
 }
 
 void Particle::Update()//alomejor seria mejor llamarle draw
@@ -110,14 +112,15 @@ void ParticleGenerator::PreUpdate()
             delete particles.end->data;
             particles.Del(particles.end);
         }
+        ResetParticles();
     }
-    else
+    else if(amount > particlesCount)
     {
         for(int i = 0; i < amount - particlesCount; i++)
         {
             particles.Add(new Particle());
         }
-
+        ResetParticles();
     }
 }
 
@@ -152,6 +155,18 @@ void ParticleGenerator::Update()
 
         if(item->data->active)item->data->Update();
         item = item->next;
+    }
+}
+
+void ParticleGenerator::ResetParticles()
+{
+    for(int i = 0; i < particles.Count(); i++)
+    {
+        particles[i]->lifetime = lifetime;
+        particles[i]->size = size;
+        particles[i]->position = position;
+        particles[i]->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
+        particles[i]->pbody->body->SetLinearVelocity(b2Vec2(direction.x * initialVelocity, direction.y * initialVelocity));
     }
 }
 
