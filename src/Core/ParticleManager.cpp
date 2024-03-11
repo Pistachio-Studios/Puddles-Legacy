@@ -5,6 +5,7 @@
 
 #include "Utils/List.h"
 #include "box2d/b2_body.h"
+#include <box2d/b2_math.h>
 #include <imgui.h>
 
 Particle::Particle() 
@@ -16,14 +17,17 @@ Particle::~Particle()
     // Release the particle's body
 }
 
-void Particle::Spawn(iPoint position, int size)
+void Particle::Spawn(iPoint position, b2Vec2 direction, int size, float lifetime)
 {
     // Set the particle's position
     this->spawnPosition = position;
     this->size = size;
 
+    // Set the particle's direction
+    this->direction = direction;
+
     // Set the particle's lifetime
-    lifetime = 2.0f;
+    this->lifetime = lifetime;
 
     // Set the particle's active state
     active = true;
@@ -41,7 +45,12 @@ void Particle::Update()
         // Update the particle's lifetime
         if(timer->ReadMSec() <= lifetime * 1000)
         {
-            pbody->body->ApplyForceToCenter({0, 9.8}, true);
+            //Apply impulse to the particle
+            direction.Normalize();
+            float mass = pbody->body->GetMass();
+            float impulseMagnitude = mass * initialVelocity;
+            b2Vec2 impulseForce = impulseMagnitude * direction;
+            pbody->body->ApplyForceToCenter(impulseForce, true);
             
             // Get the particle's position
             b2Vec2 pos = pbody->body->GetPosition();
@@ -49,7 +58,7 @@ void Particle::Update()
             position.y = METERS_TO_PIXELS(pos.y);
 
             // Draw the particle
-            app->render->DrawRectangle({position.x, position.y, size, size}, 255, 255, 255);
+            app->render->DrawRectangle({position.x - size / 2, position.y - size / 2, size, size}, 255, 255, 255);
         }
         else
         {
@@ -67,29 +76,22 @@ ParticleGenerator::ParticleGenerator()
 
 void ParticleGenerator::EmitParticles()
 {
-   if(emiting)
-   {
-       /* for (int i = 0; i < amount; i++)
-       {
-              // Create a new particle and add it to the particles array
-              Particle* particle = new Particle();
-              particle->Spawn(position, 10);
-              particles.Add(particle);
-       } */
+    if (emitedParticles <= amount)
+    {
+        float interval = static_cast<float>(updateRate) / amount;
 
-        if (emitedParticles < amount)
+        //while(updateTimer->ReadMSec() >= interval * emitedParticles)
+        while(updateTimer->ReadMSec() >= interval * emitedParticles * (1.1f - explosiveness))//REVISAR ESTO
         {
-            float interval = static_cast<float>(updateRate) / amount;
-            if (updateTimer->ReadMSec() >= interval * emitedParticles * explosiveness)
-            {
-                // Create a new particle and add it to the particles array
-                Particle* particle = new Particle();
-                particle->Spawn(position, 10);
-                particles.Add(particle);
-                emitedParticles++;
-            }
+            Particle* particle = new Particle();
+            particle->lifetime = lifetime;
+            particle->initialVelocity = initialVelocity;
+            //particle->Spawn(position, {static_cast<float>(rand() % 10 - 5), static_cast<float>(rand() % 10 - 5)}, size, lifetime);
+            particle->Spawn(position, direction, size, lifetime);
+            particles.Add(particle);
+            emitedParticles++;
         }
-   }
+    }
 }
 
 void ParticleGenerator::PreUpdate()
@@ -110,15 +112,19 @@ void ParticleGenerator::PreUpdate()
 
 void ParticleGenerator::Update()
 {
-    if(updateTimer->ReadMSec() <= updateRate)
+    if(emiting)
     {
-        EmitParticles();
+        if(updateTimer->ReadMSec() <= updateRate)
+        {
+            EmitParticles();
+        }
+        else
+        {
+            emitedParticles = 0;
+            updateTimer->Start();
+        }
     }
-    else
-    {
-        emitedParticles = 0;
-        updateTimer->Start();
-    }
+    
 
     ListItem<Particle*>* item = particles.start;
     while(item != nullptr)
@@ -147,7 +153,7 @@ bool ParticleManager::Start()
     //BORRAR!!!
     ParticleGenerator* generator = new ParticleGenerator();
     generator->emiting = true;
-    generator->amount = 1;
+    generator->amount = 10;
     generator->position = {600, 300};
     generators.Add(generator);
 
@@ -195,6 +201,11 @@ void ParticleManager::DrawImGui()
                 ImGui::DragInt("Amount", &generator->amount);
                 ImGui::DragInt2("position", &generator->position.x, 1);
                 ImGui::SliderFloat("Explosiveness", &generator->explosiveness, 0, 1);
+                ImGui::DragFloat("lifetime", &generator->lifetime, 0.1f);
+                ImGui::Text("Particles: %d", generator->particles.Count());
+                ImGui::DragFloat2("Direction", &generator->direction.x, 1);
+                ImGui::DragInt("Size", &generator->size, 1, 1);
+                ImGui::DragFloat("initialVelocity", &generator->initialVelocity);
 
                 ImGui::SetNextWindowBgAlpha(0.0f); // Set window background alpha to 0 for transparency
                 ImGui::Begin("Spawner Position", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove); // Set ImGuiWindowFlags to remove background, title bar, resize, and move functionality

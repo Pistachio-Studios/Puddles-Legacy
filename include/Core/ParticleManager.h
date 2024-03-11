@@ -6,6 +6,7 @@
 #include "Utils/List.h"
 #include "Utils/Point.h"
 #include "Utils/Timer.h"
+#include <box2d/b2_math.h>
 
 class PhysBody;
 class Animation;
@@ -15,13 +16,20 @@ class Particle
 public:
     Particle();
     ~Particle();
-    void Spawn(iPoint position, int size);
+    void Spawn(iPoint position, b2Vec2 direction, int size, float lifetime);
 	void Update();
 public:
     bool active = false;
+
+    // Particle's properties
     float lifetime = 1.0f;
     iPoint spawnPosition = {0,0};
     int size = 5;
+    
+    b2Vec2 direction = {0,0};
+    float initialVelocity = 1.0f;
+    
+    
     bool markedForDeletion = false;
     PhysBody* pbody;
 private:
@@ -37,13 +45,22 @@ public:
     void Update();
     void EmitParticles();
 public:
-    bool emiting;
-    int amount;
-    iPoint position;
+    bool emiting = true;
+    int amount = 8;
+    iPoint position = {0,0};
 
+    // Particle's properties
     float explosiveness = 1.0f;
-    private:
+    float lifetime = 1.0f;
+    int size = 5;
+    b2Vec2 direction = {1,0};
+    float spread = 45.0f;
+
+    float initialVelocity = 1.0f;
+
     List<Particle*> particles;
+    private:
+    
     Timer* updateTimer;
     int updateRate = 1000;
 
