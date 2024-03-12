@@ -58,6 +58,7 @@ public:
     int size = 5;
     b2Vec2 direction = {1,0};
     float spread = 45.0f;
+    float Damping = 0.0f;
 
     float initialVelocity = 1.0f;
 
@@ -65,7 +66,7 @@ public:
     private:
     
     Timer* updateTimer;
-    int updateRate = 1000;
+    int updateRate = 100;//revisar este numero (antes estaba a 1000)
 
     int emitedParticles = 0;
 };

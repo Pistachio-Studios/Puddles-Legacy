@@ -6,6 +6,7 @@
 #include "Utils/List.h"
 #include "box2d/b2_body.h"
 #include <box2d/b2_math.h>
+#include <cstdlib>
 #include <imgui.h>
 #include <tracy/Tracy.hpp>
 
@@ -40,7 +41,7 @@ void Particle::Update()//alomejor seria mejor llamarle draw
         position.y = METERS_TO_PIXELS(pos.y);
 
         // Draw the particle
-        app->render->DrawRectangle({position.x - size / 2, position.y - size / 2, size, size}, 255 * lifetime, 255, 255);
+        app->render->DrawRectangle({position.x - size / 2, position.y - size / 2, size, size}, 255, 255, 255);
     }
     else
     {
@@ -86,15 +87,24 @@ void ParticleGenerator::EmitParticles()
     } */
 
     float interval = static_cast<float>(updateRate) / amount;
-    while(updateTimer->ReadMSec() >= interval * emitedParticles) {
+    while(updateTimer->ReadMSec() >= interval * emitedParticles * (1.1f - explosiveness)) {
         if (emitedParticles < particles.Count()) {
             Particle* particle = particles[emitedParticles];
-            particle->lifetime = lifetime;
-            particle->size = size;
-            particle->position = position;
-            particle->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
-            particle->pbody->body->SetLinearVelocity(b2Vec2(direction.x * initialVelocity, direction.y * initialVelocity));
-            particle->Spawn();
+            if(!particle->active){
+                particle->lifetime = lifetime;
+                particle->size = size;
+                particle->position = position;
+                particle->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
+                /* particle->pbody->body->SetAwake(false);
+                particle->pbody->body->SetAwake(true); */
+
+                float angle = atan2(direction.y, direction.x);
+                float randomFactor = static_cast<float>(rand()) / RAND_MAX * 2.0f - 1.0f;
+                float angle1_rad = angle + DEGTORAD * (spread * randomFactor);
+                b2Vec2 direction = b2Vec2(cos(angle1_rad), sin(angle1_rad));
+                particle->pbody->body->SetLinearVelocity(b2Vec2(direction.x * initialVelocity, direction.y * initialVelocity));
+                particle->Spawn();
+            }
         }
         emitedParticles++;
     }
@@ -146,14 +156,20 @@ void ParticleGenerator::Update()
     {
         PhysBody* pbody = item->data->pbody;
 
+        //Update Particles
+
         //Apply impulse to the particle
-        direction.Normalize();
+        /* direction.Normalize();
         float mass = pbody->body->GetMass();
         float impulseMagnitude = mass * initialVelocity;
         b2Vec2 impulseForce = impulseMagnitude * direction;
-        pbody->body->ApplyForceToCenter(impulseForce, false);
+        pbody->body->ApplyForceToCenter(impulseForce, false); */
 
-        if(item->data->active)item->data->Update();
+        //Apply damping to the particle
+        pbody->body->SetLinearDamping(Damping);
+
+        //if(item->data->active)item->data->Update();
+        item->data->Update();
         item = item->next;
     }
 }
@@ -166,7 +182,9 @@ void ParticleGenerator::ResetParticles()
         particles[i]->size = size;
         particles[i]->position = position;
         particles[i]->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
-        particles[i]->pbody->body->SetLinearVelocity(b2Vec2(direction.x * initialVelocity, direction.y * initialVelocity));
+        particles[i]->pbody->body->SetAwake(false);
+        particles[i]->pbody->body->SetAwake(true);
+        //particles[i]->pbody->body->SetLinearVelocity(b2Vec2(direction.x * initialVelocity, direction.y * initialVelocity));
     }
 }
 
@@ -242,6 +260,8 @@ void ParticleManager::DrawImGui()
                 ImGui::DragFloat2("Direction", &generator->direction.x, 1);
                 ImGui::DragInt("Size", &generator->size, 1, 1);
                 ImGui::DragFloat("initialVelocity", &generator->initialVelocity);
+                ImGui::DragFloat("Damping", &generator->Damping);
+                ImGui::SliderFloat("Spread", &generator->spread, 0, 180);
 
                 ImGui::SetNextWindowBgAlpha(0.0f); // Set window background alpha to 0 for transparency
                 ImGui::Begin("Spawner Position", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove); // Set ImGuiWindowFlags to remove background, title bar, resize, and move functionality
