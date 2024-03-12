@@ -66,7 +66,7 @@ public:
     private:
     
     Timer* updateTimer;
-    int updateRate = 100;//revisar este numero (antes estaba a 1000)
+    int updateRate = 1000;//revisar este numero (antes estaba a 1000)
 
     int emitedParticles = 0;
 };

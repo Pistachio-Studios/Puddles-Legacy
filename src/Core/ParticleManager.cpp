@@ -87,7 +87,7 @@ void ParticleGenerator::EmitParticles()
     } */
 
     float interval = static_cast<float>(updateRate) / amount;
-    while(updateTimer->ReadMSec() >= interval * emitedParticles * (1.1f - explosiveness)) {
+    while(updateTimer->ReadMSec() >= interval * emitedParticles) {
         if (emitedParticles < particles.Count()) {
             Particle* particle = particles[emitedParticles];
             if(!particle->active){
