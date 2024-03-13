@@ -12,6 +12,10 @@
 #include <Utils/Log.h>
 
 
+#include <Core/Animation.h>//BORRAR
+#include <Core/Textures.h>
+
+
 Particle::Particle()
 {
     pbody = app->physics->CreateParticle(position.x, position.y, size, size);
@@ -248,7 +252,13 @@ bool ParticleManager::Start()
     generator->emiting = true;
     generator->amount = 10;
     generator->position = {600, 300};
-    generator->emissionShape = EmissionShape::POINT;
+
+    Animation* test = new Animation();
+
+    test->loop = true;
+    test->texture = app->tex->Load("C:/Users/hugopm/Documents/GitHub/Proyecto2/bin/Assets/Textures/Explosion_Sheet.png");
+
+    generator->anim;
     generators.Add(generator);
 
     return true;

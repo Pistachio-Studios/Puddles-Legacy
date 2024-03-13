@@ -23,17 +23,13 @@ public:
 
     // Particle's properties
     float lifetime = 1.0f;
-    //iPoint spawnPosition = {0,0};
     int size = 5;
-    
-    //b2Vec2 direction = {0,0};
-    //float initialVelocity = 1.0f;
-    
-    
-    //bool markedForDeletion = false;
+
     PhysBody* pbody;
 
     iPoint position;
+
+    Animation* anim = nullptr;
 private:
     
     Timer* lifetimeTimer;
@@ -64,9 +60,9 @@ public:
 
     bool oneShoot = true;
 
-    EmissionShape emissionShape = EmissionShape::POINT;
-
     float spawnRadius = 1.0f;
+
+    Animation* anim = nullptr;
 
     List<Particle*> particles; //poner en privado en algun momento, esta para mostrar el num de part. en imgui
     private:
