@@ -46,7 +46,15 @@ void Particle::Update()//alomejor seria mejor llamarle draw
         position.y = METERS_TO_PIXELS(pos.y);
 
         // Draw the particle
-        app->render->DrawRectangle({position.x - size / 2, position.y - size / 2, size, size}, 255, 255, 255);
+        if (anim != nullptr)
+        {
+            app->render->DrawTexture(anim->texture, position.x - size / 2, position.y - size / 2, &anim->GetCurrentFrame(), 1.0f);
+            //anim->Update(16.666);
+        }
+        else
+        {
+            app->render->DrawRectangle({ position.x - size / 2, position.y - size / 2, size, size }, 255, 255, 255);
+        }
     }
     else
     {
@@ -124,6 +132,9 @@ void ParticleGenerator::EmitParticles()
         if (!particle->active and updateTimer->ReadMSec() >= interval * emitedParticles * (1.0f - explosiveness)) {
             particle->lifetime = lifetime;
             particle->size = size;
+            
+            if(anim != nullptr)
+                particle->anim = anim; //PONER EN UN SITIO QUE SOLO SE HAGA UNA VEZ
 
             iPoint spawnPosition = { 0,0 };
 
@@ -256,9 +267,13 @@ bool ParticleManager::Start()
     Animation* test = new Animation();
 
     test->loop = true;
-    test->texture = app->tex->Load("C:/Users/hugopm/Documents/GitHub/Proyecto2/bin/Assets/Textures/Explosion_Sheet.png");
+    test->pingpong = true;
+    test->speed = 2;
+    test->texture = app->tex->Load("Assets/Textures/fire_01.png");
+    test->PushBack({ 0,0, 64,64 });
+    test->PushBack({ 64,0, 64,64 });
 
-    generator->anim;
+    generator->anim = test;
     generators.Add(generator);
 
     return true;
