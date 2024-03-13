@@ -172,6 +172,7 @@ void ParticleGenerator::Update()
         else
         {
             updateTimer->Start();
+            if (oneShoot) emiting = false;
         }
 
 
@@ -200,7 +201,7 @@ void ParticleGenerator::Update()
     }
     else
     {
-        updateTimer->Start();
+        updateTimer->Start();//para solucionar los problemas al desactivar y activar emission
     }
 }
 
@@ -284,6 +285,7 @@ void ParticleManager::DrawImGui()
                 ImGui::Text("Si algo hace como pulsaciones al cambiar\nun valor, activa y desactiva Emiting!!!");
 
                 ImGui::Checkbox("Emitting", &generator->emiting);
+                ImGui::Checkbox("One Shoot", &generator->oneShoot);
                 ImGui::DragInt("Amount", &generator->amount);
                 ImGui::DragInt2("position", &generator->position.x, 1);
                 ImGui::SliderFloat("Explosiveness", &generator->explosiveness, 0, 1);

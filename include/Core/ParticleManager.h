@@ -62,6 +62,8 @@ public:
 
     float initialVelocity = 1.0f;
 
+    bool oneShoot = true;
+
     List<Particle*> particles;
     private:
     
