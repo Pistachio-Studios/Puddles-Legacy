@@ -51,9 +51,6 @@ bool MainMenu::Start()
 	SDL_Rect exitPos = { static_cast<int>(windowW / 2 + 200), static_cast<int>(windowH / 2 + 125), 240,50};
 	exitButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", exitPos, this);
 
-	app->render->camera.x = 0;
-	app->render->camera.y = 0;
-
 	return true;
 }
 

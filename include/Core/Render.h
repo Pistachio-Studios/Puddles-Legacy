@@ -65,8 +65,8 @@ public:
 
 	struct Camera
 	{
-		int x;
-		int y;
+		int x = 0;
+		int y = 0;
 		int w;
 		int h;
 

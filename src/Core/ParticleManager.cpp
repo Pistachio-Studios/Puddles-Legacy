@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <imgui.h>
 #include <tracy/Tracy.hpp>
+#include <Utils/Log.h>
 
 
 Particle::Particle()
@@ -86,27 +87,52 @@ void ParticleGenerator::EmitParticles()
         }
     } */
 
-    float interval = static_cast<float>(updateRate) / amount;
-    while(updateTimer->ReadMSec() >= interval * emitedParticles) {
-        if (emitedParticles < particles.Count()) {
-            Particle* particle = particles[emitedParticles];
-            if(!particle->active){
-                particle->lifetime = lifetime;
-                particle->size = size;
-                particle->position = position;
-                particle->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
-                /* particle->pbody->body->SetAwake(false);
-                particle->pbody->body->SetAwake(true); */
+    //float interval = static_cast<float>(updateRate) / amount;
+    //while(updateTimer->ReadMSec() >= interval * emitedParticles) {
+    //    if (emitedParticles < particles.Count()) {
+    //        Particle* particle = particles[emitedParticles];
+    //        if(!particle->active){
+    //            particle->lifetime = lifetime;
+    //            particle->size = size;
+    //            particle->position = position;
+    //            particle->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
+    //            /* particle->pbody->body->SetAwake(false);
+    //            particle->pbody->body->SetAwake(true); */
 
-                float angle = atan2(direction.y, direction.x);
-                float randomFactor = static_cast<float>(rand()) / RAND_MAX * 2.0f - 1.0f;
-                float angle1_rad = angle + DEGTORAD * (spread * randomFactor);
-                b2Vec2 direction = b2Vec2(cos(angle1_rad), sin(angle1_rad));
-                particle->pbody->body->SetLinearVelocity(b2Vec2(direction.x * initialVelocity, direction.y * initialVelocity));
-                particle->Spawn();
-            }
+    //            float angle = atan2(direction.y, direction.x);
+    //            float randomFactor = static_cast<float>(rand()) / RAND_MAX * 2.0f - 1.0f;
+    //            float angle1_rad = angle + DEGTORAD * (spread * randomFactor);
+    //            b2Vec2 direction = b2Vec2(cos(angle1_rad), sin(angle1_rad));
+    //            particle->pbody->body->SetLinearVelocity(b2Vec2(direction.x * initialVelocity, direction.y * initialVelocity));
+    //            particle->Spawn();
+    //        }
+    //    }
+    //    emitedParticles++;
+    //}
+    //iterar 
+    //la particula no tiene que estar activa y ademas 
+    float interval = static_cast<float>(lifetime * 1000) / amount;
+
+    if (emitedParticles >= amount)emitedParticles = 0;
+
+    for(; emitedParticles < amount; emitedParticles++) {
+        Particle* particle = particles[emitedParticles];
+        if (!particle->active and updateTimer->ReadMSec() >= interval * emitedParticles * (1.0f - explosiveness)) {
+            particle->lifetime = lifetime;
+            particle->size = size;
+            particle->position = position;
+            particle->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
+            /* particle->pbody->body->SetAwake(false);
+            particle->pbody->body->SetAwake(true); */
+
+            float angle = atan2(direction.y, direction.x);
+            float randomFactor = static_cast<float>(rand()) / RAND_MAX * 2.0f - 1.0f;
+            float angle1_rad = angle + DEGTORAD * (spread * randomFactor);
+            b2Vec2 direction = b2Vec2(cos(angle1_rad), sin(angle1_rad));
+            particle->pbody->body->SetLinearVelocity(b2Vec2(direction.x * initialVelocity, direction.y * initialVelocity));
+            particle->Spawn();
+            emitedParticles++;
         }
-        emitedParticles++;
     }
 }
 
@@ -115,7 +141,7 @@ void ParticleGenerator::PreUpdate()
     ZoneScoped;
     int particlesCount = particles.Count();
 
-    if(amount < particlesCount)
+    if(amount < particlesCount or !emiting)//TODO!! cuando cambias el lifetime con imgui deberia de entrar aqui también
     {
         for(int i = 0; i < particlesCount; i++)
         {
@@ -137,40 +163,44 @@ void ParticleGenerator::PreUpdate()
 void ParticleGenerator::Update()
 {
     ZoneScoped;
-    if(emiting)
+    if (emiting)
     {
-        if(updateTimer->ReadMSec() <= updateRate)
+        if (updateTimer->ReadMSec() <= lifetime * 1000)
         {
             EmitParticles();
         }
         else
         {
-            emitedParticles = 0;
             updateTimer->Start();
         }
+
+
+        //creo que aqui deberia de actualizar las propiedades de las particulas y aplicar las fuerzas
+        ListItem<Particle*>* item = particles.start;
+        while (item != nullptr)
+        {
+            PhysBody* pbody = item->data->pbody;
+
+            //Update Particles
+
+            //Apply impulse to the particle
+            /* direction.Normalize();
+            float mass = pbody->body->GetMass();
+            float impulseMagnitude = mass * initialVelocity;
+            b2Vec2 impulseForce = impulseMagnitude * direction;
+            pbody->body->ApplyForceToCenter(impulseForce, false); */
+
+            //Apply damping to the particle
+            pbody->body->SetLinearDamping(Damping);
+
+            //if(item->data->active)item->data->Update();
+            item->data->Update();
+            item = item->next;
+        }
     }
-    
-    //creo que aqui deberia de actualizar las propiedades de las particulas y aplicar las fuerzas
-    ListItem<Particle*>* item = particles.start;
-    while(item != nullptr)
+    else
     {
-        PhysBody* pbody = item->data->pbody;
-
-        //Update Particles
-
-        //Apply impulse to the particle
-        /* direction.Normalize();
-        float mass = pbody->body->GetMass();
-        float impulseMagnitude = mass * initialVelocity;
-        b2Vec2 impulseForce = impulseMagnitude * direction;
-        pbody->body->ApplyForceToCenter(impulseForce, false); */
-
-        //Apply damping to the particle
-        pbody->body->SetLinearDamping(Damping);
-
-        //if(item->data->active)item->data->Update();
-        item->data->Update();
-        item = item->next;
+        updateTimer->Start();
     }
 }
 
