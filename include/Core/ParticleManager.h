@@ -6,6 +6,8 @@
 #include "Utils/List.h"
 #include "Utils/Point.h"
 #include "Utils/Timer.h"
+
+#include <SDL_pixels.h>
 #include <box2d/b2_math.h>
 
 class PhysBody;
@@ -25,6 +27,7 @@ public:
     float lifetime = 1.0f;
     int size = 5;
     float angle;
+    SDL_Color color = {255,255,255,255};
 
     PhysBody* pbody;
 
@@ -56,6 +59,8 @@ public:
     b2Vec2 direction = {1,0};
     float spread = 45.0f;
     float Damping = 0.0f;
+
+    SDL_Color color = {255,255,255,255};
 
     float angleRandomness = 0.0f;
 

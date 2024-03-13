@@ -5,6 +5,7 @@
 
 #include "Utils/List.h"
 #include "box2d/b2_body.h"
+#include <SDL_render.h>
 #include <box2d/b2_math.h>
 #include <cstdlib>
 #include <imgui.h>
@@ -45,17 +46,25 @@ void Particle::Update()//alomejor seria mejor llamarle draw
         position.x = METERS_TO_PIXELS(pos.x);
         position.y = METERS_TO_PIXELS(pos.y);
 
-        // Draw the particle
-        if (anim != nullptr)
-        {
+        
+        //int opacity = 1 - (lifetimeTimer->ReadMSec() / (lifetime * 1000) * 255);
 
-            app->render->DrawTexture(anim->texture, position.x - size / 2, position.y - size / 2, &anim->GetCurrentFrame(), 1.0f, angle);
+        // Draw the particle
+        if (anim != nullptr and anim->texture != nullptr)
+        {
+            if(color.r < 255 and color.g < 255 and color.b < 255)
+            SDL_SetTextureColorMod(anim->texture, color.r, color.g, color.b);
+            
+            if(color.a < 255)
+            SDL_SetTextureAlphaMod(anim->texture, color.a);
+
+            app->render->DrawTexture(anim->texture, position.x - anim->GetCurrentFrame().w / 2, position.y - anim->GetCurrentFrame().h / 2, &anim->GetCurrentFrame(), 1.0f, angle);
             size *= lifetimeTimer->ReadMSec();
             //anim->Update(16.666);
         }
         else
         {
-            app->render->DrawRectangle({ position.x - size / 2, position.y - size / 2, size, size }, 255, 255, 255);
+            app->render->DrawRectangle({ position.x - size / 2, position.y - size / 2, size, size }, color.r, color.g, color.b, color.a);
         }
     }
     else
@@ -134,6 +143,7 @@ void ParticleGenerator::EmitParticles()
         if (!particle->active and updateTimer->ReadMSec() >= interval * emitedParticles * (1.0f - explosiveness)) {
             particle->lifetime = lifetime;
             particle->size = size;
+            particle->color = color;
             
             float randomAngle = static_cast<float>(rand()) / RAND_MAX * 360.0f;
             particle->angle = randomAngle * angleRandomness;
@@ -274,7 +284,7 @@ bool ParticleManager::Start()
     test->loop = true;
     test->pingpong = true;
     //test->speed = 2;
-    test->texture = app->tex->Load("/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Textures/goldCoin.png");
+    //test->texture = app->tex->Load("/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Textures/goldCoin.png");
     test->PushBack({ 0,0, 64,64 });
     test->PushBack({ 64,0, 64,64 });
     test->PushBack({ 64*2,0, 64,64 });
@@ -345,6 +355,19 @@ void ParticleManager::DrawImGui()
                 ImGui::SliderFloat("Spread", &generator->spread, 0, 180);
                 ImGui::DragFloat("Angle Randomness", &generator->angleRandomness, .1, -3, 3);
 
+                ImVec4 imguiColor;
+                imguiColor.x = generator->color.r / 255.0f;
+                imguiColor.y = generator->color.g / 255.0f;
+                imguiColor.z = generator->color.b / 255.0f;
+                imguiColor.w = generator->color.a / 255.0f;
+
+                ImGui::ColorEdit4("Color", (float*)&imguiColor);
+
+                generator->color.r = static_cast<Uint8>(imguiColor.x * 255);
+                generator->color.g = static_cast<Uint8>(imguiColor.y * 255);
+                generator->color.b = static_cast<Uint8>(imguiColor.z * 255);
+                generator->color.a = static_cast<Uint8>(imguiColor.w * 255);
+                
                 ImGui::SetNextWindowBgAlpha(0.0f); // Set window background alpha to 0 for transparency
                 ImGui::Begin("Spawner Position", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove); // Set ImGuiWindowFlags to remove background, title bar, resize, and move functionality
                 ImGui::SetWindowPos(ImVec2(generator->position.x, generator->position.y)); // Set window position to top-left corner
