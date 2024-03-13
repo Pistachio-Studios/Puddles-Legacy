@@ -48,7 +48,8 @@ void Particle::Update()//alomejor seria mejor llamarle draw
         // Draw the particle
         if (anim != nullptr)
         {
-            app->render->DrawTexture(anim->texture, position.x - size / 2, position.y - size / 2, &anim->GetCurrentFrame(), 1.0f);
+            app->render->DrawTexture(anim->texture, position.x - size / 2, position.y - size / 2, &anim->GetCurrentFrame(), 1.0f, (rand() / RAND_MAX) * M_PI * 2 * RADTODEG);
+            size *= lifetimeTimer->ReadMSec();
             //anim->Update(16.666);
         }
         else
@@ -268,10 +269,17 @@ bool ParticleManager::Start()
 
     test->loop = true;
     test->pingpong = true;
-    test->speed = 2;
-    test->texture = app->tex->Load("Assets/Textures/fire_01.png");
+    //test->speed = 2;
+    test->texture = app->tex->Load("C:/Users/hugopm/Documents/GitHub/Proyecto2/bin/Assets/Textures/smoke.png");
     test->PushBack({ 0,0, 64,64 });
     test->PushBack({ 64,0, 64,64 });
+    test->PushBack({ 64*2,0, 64,64 });
+    test->PushBack({ 64*3,0, 64,64 });
+    test->PushBack({ 64*4,0, 64,64 });
+    test->PushBack({ 64*5,0, 64,64 });
+    test->PushBack({ 64*6,0, 64,64 });
+    test->PushBack({ 64*7,0, 64,64 });
+    test->PushBack({ 64*8,0, 64,64 });
 
     generator->anim = test;
     generators.Add(generator);
