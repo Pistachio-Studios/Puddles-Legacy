@@ -281,6 +281,8 @@ void ParticleManager::DrawImGui()
             ParticleGenerator* generator = generators[i];
             if (ImGui::CollapsingHeader("Generator %d", i))
             {
+                ImGui::Text("Si algo hace como pulsaciones al cambiar\nun valor, activa y desactiva Emiting!!!");
+
                 ImGui::Checkbox("Emitting", &generator->emiting);
                 ImGui::DragInt("Amount", &generator->amount);
                 ImGui::DragInt2("position", &generator->position.x, 1);
