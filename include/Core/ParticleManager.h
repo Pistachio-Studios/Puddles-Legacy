@@ -64,7 +64,11 @@ public:
 
     bool oneShoot = true;
 
-    List<Particle*> particles;
+    EmissionShape emissionShape = EmissionShape::POINT;
+
+    float spawnRadius = 1.0f;
+
+    List<Particle*> particles; //poner en privado en algun momento, esta para mostrar el num de part. en imgui
     private:
     
     Timer* updateTimer;

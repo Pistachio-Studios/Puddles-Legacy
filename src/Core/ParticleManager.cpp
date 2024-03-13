@@ -120,8 +120,16 @@ void ParticleGenerator::EmitParticles()
         if (!particle->active and updateTimer->ReadMSec() >= interval * emitedParticles * (1.0f - explosiveness)) {
             particle->lifetime = lifetime;
             particle->size = size;
-            particle->position = position;
-            particle->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
+
+            iPoint spawnPosition = { 0,0 };
+
+            spawnPosition = {
+                static_cast<int>(position.x + SDL_cos(rand()) * spawnRadius),
+                static_cast<int>(position.y + SDL_sin(rand()) * spawnRadius)
+            };
+
+            particle->position = spawnPosition;
+            particle->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawnPosition.x), PIXEL_TO_METERS(spawnPosition.y)), 0);
             /* particle->pbody->body->SetAwake(false);
             particle->pbody->body->SetAwake(true); */
 
@@ -240,6 +248,7 @@ bool ParticleManager::Start()
     generator->emiting = true;
     generator->amount = 10;
     generator->position = {600, 300};
+    generator->emissionShape = EmissionShape::POINT;
     generators.Add(generator);
 
     return true;
@@ -287,6 +296,7 @@ void ParticleManager::DrawImGui()
                 ImGui::Checkbox("Emitting", &generator->emiting);
                 ImGui::Checkbox("One Shoot", &generator->oneShoot);
                 ImGui::DragInt("Amount", &generator->amount);
+                ImGui::DragFloat("Spawn Radius", &generator->spawnRadius);
                 ImGui::DragInt2("position", &generator->position.x, 1);
                 ImGui::SliderFloat("Explosiveness", &generator->explosiveness, 0, 1);
                 ImGui::DragFloat("lifetime", &generator->lifetime, 0.1f);
