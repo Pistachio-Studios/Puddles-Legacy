@@ -53,7 +53,7 @@ public:
     iPoint position = {0,0};
 
     // Particle's properties
-    float explosiveness = 1.0f;
+    float explosiveness =0.0f;
     float lifetime = 1.0f;
     int size = 5;
     b2Vec2 direction = {1,0};
