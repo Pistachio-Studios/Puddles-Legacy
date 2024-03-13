@@ -24,6 +24,7 @@ public:
     // Particle's properties
     float lifetime = 1.0f;
     int size = 5;
+    float angle;
 
     PhysBody* pbody;
 
@@ -56,9 +57,11 @@ public:
     float spread = 45.0f;
     float Damping = 0.0f;
 
+    float angleRandomness = 0.0f;
+
     float initialVelocity = 1.0f;
 
-    bool oneShoot = true;
+    bool oneShoot = false;
 
     float spawnRadius = 1.0f;
 

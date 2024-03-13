@@ -48,7 +48,8 @@ void Particle::Update()//alomejor seria mejor llamarle draw
         // Draw the particle
         if (anim != nullptr)
         {
-            app->render->DrawTexture(anim->texture, position.x - size / 2, position.y - size / 2, &anim->GetCurrentFrame(), 1.0f, (rand() / RAND_MAX) * M_PI * 2 * RADTODEG);
+
+            app->render->DrawTexture(anim->texture, position.x - size / 2, position.y - size / 2, &anim->GetCurrentFrame(), 1.0f, angle);
             size *= lifetimeTimer->ReadMSec();
             //anim->Update(16.666);
         }
@@ -134,6 +135,9 @@ void ParticleGenerator::EmitParticles()
             particle->lifetime = lifetime;
             particle->size = size;
             
+            float randomAngle = static_cast<float>(rand()) / RAND_MAX * 360.0f;
+            particle->angle = randomAngle * angleRandomness;
+            
             if(anim != nullptr)
                 particle->anim = anim; //PONER EN UN SITIO QUE SOLO SE HAGA UNA VEZ
 
@@ -165,7 +169,7 @@ void ParticleGenerator::PreUpdate()
     ZoneScoped;
     int particlesCount = particles.Count();
 
-    if(amount < particlesCount or !emiting)//TODO!! cuando cambias el lifetime con imgui deberia de entrar aqui también
+    if(amount < particlesCount or !emiting)//TODO!! cuando cambias el lifetime con imgui deberia de entrar aqui tambiï¿½n
     {
         for(int i = 0; i < particlesCount; i++)
         {
@@ -270,7 +274,7 @@ bool ParticleManager::Start()
     test->loop = true;
     test->pingpong = true;
     //test->speed = 2;
-    test->texture = app->tex->Load("C:/Users/hugopm/Documents/GitHub/Proyecto2/bin/Assets/Textures/smoke.png");
+    test->texture = app->tex->Load("/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Textures/goldCoin.png");
     test->PushBack({ 0,0, 64,64 });
     test->PushBack({ 64,0, 64,64 });
     test->PushBack({ 64*2,0, 64,64 });
@@ -339,6 +343,7 @@ void ParticleManager::DrawImGui()
                 ImGui::DragFloat("initialVelocity", &generator->initialVelocity);
                 ImGui::DragFloat("Damping", &generator->Damping);
                 ImGui::SliderFloat("Spread", &generator->spread, 0, 180);
+                ImGui::DragFloat("Angle Randomness", &generator->angleRandomness, .1, -3, 3);
 
                 ImGui::SetNextWindowBgAlpha(0.0f); // Set window background alpha to 0 for transparency
                 ImGui::Begin("Spawner Position", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove); // Set ImGuiWindowFlags to remove background, title bar, resize, and move functionality
