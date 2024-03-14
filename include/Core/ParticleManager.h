@@ -29,6 +29,10 @@ public:
     float angle;
     SDL_Color color = {255,255,255,255};
 
+    //no se si se podria optimizar esto sacandolo de aqui
+    float opacityFade = 0.0f;
+    float sizeFade = 0.0f;
+
     PhysBody* pbody;
 
     iPoint position;
@@ -63,6 +67,9 @@ public:
     SDL_Color color = {255,255,255,255};
 
     float angleRandomness = 0.0f;
+
+    float opacityFade = 0.0f; //0.0f = no fade, -1.0f = fade to 0, 1.0f = fade to 255
+    float sizeFade = 0.0f; //0.0f = no fade, -1.0f = fade to 0, 1.0f = fade to max size
 
     float initialVelocity = 1.0f;
 

@@ -46,8 +46,33 @@ void Particle::Update()//alomejor seria mejor llamarle draw
         position.x = METERS_TO_PIXELS(pos.x);
         position.y = METERS_TO_PIXELS(pos.y);
 
+        // Calculate the ratio of the elapsed time to the total lifetime
+        float ratio = static_cast<float>(lifetimeTimer->ReadMSec()) / (lifetime * 1000);
+
+        // Interpolate the opacity based on the ratio
+        if(opacityFade < 0)
+        {
+            // Fade out from full opacity to none
+            color.a = static_cast<Uint8>((1.0f - ratio) * 255);
+        }
+        else if(opacityFade > 0)
+        {
+            // Fade in from no opacity to full
+            color.a = static_cast<Uint8>(ratio * 255);
+        }
         
-        //int opacity = 1 - (lifetimeTimer->ReadMSec() / (lifetime * 1000) * 255);
+        int newSize = size;
+        // Interpolate the size based on the ratio
+        if(sizeFade < 0)
+        {
+            // Shrink from full size to none
+            newSize = static_cast<int>((1.0f - ratio) * size);
+        }
+        else if(sizeFade > 0)
+        {
+            // Grow from no size to full
+            newSize = static_cast<int>(ratio * size);
+        }
 
         // Draw the particle
         if (anim != nullptr and anim->texture != nullptr)
@@ -64,7 +89,7 @@ void Particle::Update()//alomejor seria mejor llamarle draw
         }
         else
         {
-            app->render->DrawRectangle({ position.x - size / 2, position.y - size / 2, size, size }, color.r, color.g, color.b, color.a);
+            app->render->DrawRectangle({ position.x - newSize / 2, position.y - newSize / 2, newSize, newSize }, color.r, color.g, color.b, color.a);
         }
     }
     else
@@ -144,6 +169,8 @@ void ParticleGenerator::EmitParticles()
             particle->lifetime = lifetime;
             particle->size = size;
             particle->color = color;
+            particle->opacityFade = opacityFade;
+            particle->sizeFade = sizeFade;
             
             float randomAngle = static_cast<float>(rand()) / RAND_MAX * 360.0f;
             particle->angle = randomAngle * angleRandomness;
@@ -284,7 +311,7 @@ bool ParticleManager::Start()
     test->loop = true;
     test->pingpong = true;
     //test->speed = 2;
-    //test->texture = app->tex->Load("/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Textures/goldCoin.png");
+    test->texture = app->tex->Load("/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Textures/goldCoin.png");
     test->PushBack({ 0,0, 64,64 });
     test->PushBack({ 64,0, 64,64 });
     test->PushBack({ 64*2,0, 64,64 });
@@ -345,15 +372,17 @@ void ParticleManager::DrawImGui()
                 ImGui::DragInt("Amount", &generator->amount);
                 ImGui::DragFloat("Spawn Radius", &generator->spawnRadius);
                 ImGui::DragInt2("position", &generator->position.x, 1);
-                ImGui::SliderFloat("Explosiveness", &generator->explosiveness, 0, 1);
                 ImGui::DragFloat("lifetime", &generator->lifetime, 0.1f);
+                ImGui::SliderFloat("Explosiveness", &generator->explosiveness, 0, 1);
                 ImGui::Text("Particles: %d", generator->particles.Count());
                 ImGui::DragFloat2("Direction", &generator->direction.x, 1);
                 ImGui::DragInt("Size", &generator->size, 1, 1);
-                ImGui::DragFloat("initialVelocity", &generator->initialVelocity);
+                ImGui::DragFloat("Initial Velocity", &generator->initialVelocity);
                 ImGui::DragFloat("Damping", &generator->Damping);
                 ImGui::SliderFloat("Spread", &generator->spread, 0, 180);
                 ImGui::DragFloat("Angle Randomness", &generator->angleRandomness, .1, -3, 3);
+                ImGui::DragFloat("Opacity Fade", &generator->opacityFade, 1, -1, 1);
+                ImGui::DragFloat("Size Fade", &generator->sizeFade, 1, -1, 1);
 
                 ImVec4 imguiColor;
                 imguiColor.x = generator->color.r / 255.0f;
