@@ -19,7 +19,7 @@ public:
     Particle();
     ~Particle();
     void Spawn();
-	void Update();
+	void Update(float dt);
 public:
     bool active = false;
 
@@ -48,7 +48,7 @@ class ParticleGenerator
 public:
     ParticleGenerator();
     void PreUpdate();
-    void Update();
+    void Update(float dt);
     void EmitParticles();
     void ResetParticles();
 public:

@@ -36,7 +36,7 @@ void Particle::Spawn()
     lifetimeTimer->Start();
 }
 
-void Particle::Update()//alomejor seria mejor llamarle draw
+void Particle::Update(float dt)//alomejor seria mejor llamarle draw
 {
     // Update the particle's lifetime
     if(lifetimeTimer->ReadMSec() <= lifetime * 1000)
@@ -85,7 +85,7 @@ void Particle::Update()//alomejor seria mejor llamarle draw
 
             app->render->DrawTexture(anim->texture, position.x - anim->GetCurrentFrame().w / 2, position.y - anim->GetCurrentFrame().h / 2, &anim->GetCurrentFrame(), 1.0f, angle);
             size *= lifetimeTimer->ReadMSec();
-            //anim->Update(16.666);
+            anim->Update(dt);
         }
         else
         {
@@ -225,7 +225,7 @@ void ParticleGenerator::PreUpdate()
     }
 }
 
-void ParticleGenerator::Update()
+void ParticleGenerator::Update(float dt)
 {
     ZoneScoped;
     if (emiting)
@@ -260,7 +260,7 @@ void ParticleGenerator::Update()
             pbody->body->SetLinearDamping(Damping);
 
             //if(item->data->active)item->data->Update();
-            item->data->Update();
+            item->data->Update(dt);
             item = item->next;
         }
     }
@@ -311,7 +311,7 @@ bool ParticleManager::Start()
     test->loop = true;
     test->pingpong = true;
     //test->speed = 2;
-    test->texture = app->tex->Load("/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Textures/goldCoin.png");
+    //test->texture = app->tex->Load("/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Textures/goldCoin.png");
     test->PushBack({ 0,0, 64,64 });
     test->PushBack({ 64,0, 64,64 });
     test->PushBack({ 64*2,0, 64,64 });
@@ -344,7 +344,7 @@ bool ParticleManager::Update(float dt)
     ListItem<ParticleGenerator*>* item = generators.start;
     while(item != nullptr)
     {
-        item->data->Update();
+        item->data->Update(dt);
         item = item->next;
     }
     return true;
