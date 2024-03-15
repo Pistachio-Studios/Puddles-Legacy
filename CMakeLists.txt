@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5.0)
+cmake_minimum_required(VERSION 3.21.0)
 project(Proyecto-2 VERSION 1.0.0 LANGUAGES C CXX)
 
 #include(CTest)
