@@ -14,12 +14,12 @@ class Window;
 class Input;
 class Render;
 class Textures;
+class Lighting;
 class Audio;
 class MainMenu;
 class Scene;
 class FinalScene;
 class FadeToBlack;
-class EntityManager;
 class Map;
 class Physics;
 class GuiManager;
@@ -101,6 +101,7 @@ public:
 	Input* input;
 	Render* render;
 	Textures* tex;
+	Lighting* lighting;
 	Audio* audio;
 	FadeToBlack* fade;
 	MainMenu* mainMenu;
@@ -111,6 +112,7 @@ public:
 	Physics* physics;
 	GuiManager* guiManager;
 	DebugUI* debugUI;
+
 
 private:
 
