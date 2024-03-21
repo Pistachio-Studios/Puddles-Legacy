@@ -2,6 +2,7 @@
 
 #include "Core/App.h"
 #include "Core/Textures.h"
+#include "Core/Window.h"
 #include "Utils/List.h"
 #include "Utils/Log.h"
 #include <SDL_blendmode.h>
@@ -44,10 +45,11 @@ bool Lighting::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool Lighting::Start()
 {
-    //ambientLight = { 60, 50, 70, 255 };
-    ambientLight = { 0, 0, 0, 255 };
+    ambientLight = { 60, 50, 70, 255 };
+    //ambientLight = { 0, 0, 0, 255 };
 
     AddLight({600,2000}, 0, {255,255,255,255});
+    
     return true;
 }
 
@@ -64,19 +66,28 @@ bool Lighting::Update(float dt)
 
 bool Lighting::PostUpdate()
 {
-    //Set the ambient light
+    // Save the original render target
+    SDL_Texture* originalTarget;
+    originalTarget = SDL_GetRenderTarget(app->render->renderer);
+
+    // Get the window size
+    int windowWidth, windowHeight;
+    SDL_GetWindowSize(app->win->window, &windowWidth, &windowHeight);
+
+    // Create a texture with the window size
+    SDL_Texture* lightingTarget = SDL_CreateTexture(app->render->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, windowWidth, windowHeight);
+
+    // Set the render target to the new texture
+    SDL_SetRenderTarget(app->render->renderer, lightingTarget);
 
     // Set the color you want to multiply with
     SDL_SetRenderDrawColor(app->render->renderer, ambientLight.r, ambientLight.g, ambientLight.b, ambientLight.a);
 
     // Set the blend mode to modulate the color
-    SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_MUL); // o SDL_BLENDMODE_MUL, ni idea
+    //SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_MUL); // o SDL_BLENDMODE_MUL, ni idea
 
     // Fill the entire app->render->renderer with the color
     SDL_RenderFillRect(app->render->renderer, NULL);
-
-    // Reset the blend mode to its default value
-    //SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 
     Light* pLight = nullptr;
     for (ListItem<Light*>* item = lights.start; item; item = item->next)
@@ -88,6 +99,20 @@ bool Lighting::PostUpdate()
             pLight->Draw();
         }
     }
+
+    SDL_SetRenderTarget(app->render->renderer, originalTarget);
+
+    // Set the blend mode to multiply the colors
+    SDL_SetTextureBlendMode(lightingTarget, SDL_BLENDMODE_MUL); //o SDL_BLENDMODE_MOD
+
+    // Draw the lightingTarget
+    SDL_RenderCopy(app->render->renderer, lightingTarget, NULL, NULL);
+
+    SDL_DestroyTexture(lightingTarget);
+    //SDL_DestroyTexture(originalTarget);
+
+    // Reset the blend mode to its default value
+    SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 
     return true;
 }
