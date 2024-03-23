@@ -40,7 +40,10 @@ sync_dir*
 x64/
 x86/
 bld/
-[Bb]in/
+# Ignore everything in bin/...
+[Bb]in/*
+# ...except for bin/Assets/
+![Bb]in/Assets/
 [Oo]bj/
 [Ll]og/
 # Ignore the executable
