@@ -123,7 +123,7 @@ bool TestScene::PostUpdate()
 	bool ret = true;
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		if(!paused){
+		if(paused){
 			paused = false;
 			gcResume->state = GuiControlState::NORMAL;
 			gcSettings->state = GuiControlState::NORMAL;
