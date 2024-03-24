@@ -1,11 +1,9 @@
 #ifndef __GUICONTROL_H__
 #define __GUICONTROL_H__
 
-#include "Core/Input.h"
-#include "Core/Render.h"
 #include "Core/Module.h"
 
-#include "Utils/Point.h"
+#include "Gameplay/Scene.h"
 #include "Utils/SString.h"
 
 #include <SDL.h>
@@ -66,9 +64,9 @@ public:
 	}
 
 	// 
-	void SetObserver(Module* module)
+	void SetObserver(Scene* scene)
 	{
-		observer = module;
+		observer = scene;
 	}
 
 	// 
@@ -90,7 +88,9 @@ public:
 	SDL_Texture* texture = nullptr;   // Texture atlas reference
 	SDL_Rect section;       // Texture atlas base section
 
-	Module* observer;        // Observer 
+	Scene* observer;        // Observer 
+
+	bool markedToDelete = false;
 };
 
 #endif // __GUICONTROL_H__
