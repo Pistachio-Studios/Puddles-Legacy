@@ -2,8 +2,6 @@
 #define __LIGHTING_H__
 
 #include "Core/Module.h"
-#include "Core/Render.h"
-#include "Utils/DynArray.h"
 #include "Utils/List.h"
 #include "Utils/Point.h"
 #include <SDL2/SDL_pixels.h>
@@ -54,6 +52,7 @@ public:
 private:
 	List<Light*> lights;
 	SDL_Color ambientLight;
+	SDL_Texture* lightTexture;
 };
 
 #endif // __LIGHTING_H__

@@ -1,6 +1,7 @@
 #include "Core/Lighting.h"
 
 #include "Core/App.h"
+#include "Core/Render.h"
 #include "Core/Textures.h"
 #include "Core/Window.h"
 #include "Utils/List.h"
@@ -11,7 +12,6 @@
 
 void Light::Draw()
 {
-    texture = app->tex->Load("Assets/Textures/light.png");
     SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_ADD);
     SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
     SDL_SetTextureAlphaMod(texture, color.a);
@@ -45,6 +45,9 @@ bool Lighting::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool Lighting::Start()
 {
+    LOG("Creating Lighting");
+    lightTexture = app->tex->Load("Assets/Textures/light.png"); //MEJOR CARGAR ESTO DESDE EL CONFIG!!!
+
     ambientLight = { 60, 50, 70, 255 };
     //ambientLight = { 0, 0, 0, 255 };
 
@@ -114,6 +117,8 @@ bool Lighting::PostUpdate()
     // Reset the blend mode to its default value
     SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 
+    SDL_DestroyTexture(originalTarget);
+
     return true;
 }
 
@@ -158,6 +163,7 @@ Light* Lighting::AddLight(iPoint position, int radius, const SDL_Color& color)
     light->position = position;
     light->color = color;
     light->active = true;
+    light->texture = lightTexture;
     lights.Add(light);
     return light;
 }
