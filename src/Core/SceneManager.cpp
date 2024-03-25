@@ -1,10 +1,13 @@
 #include "Core/SceneManager.h"
+#include "Core/App.h"
+#include "Core/DebugUI.h"
 #include "Gameplay/MainMenu.h"
 #include "Gameplay/Scene.h"
 #include "Gameplay/TestScene.h"
 #include "Utils/Defs.h"
 #include "Utils/List.h"
 #include "Utils/Log.h"
+#include <imgui.h>
 
 SceneManager::SceneManager() : Module()
 {
@@ -116,6 +119,60 @@ bool SceneManager::CleanUp()
     scenes.Clear();
 
     return ret;
+}
+
+void SceneManager::DrawImGui()
+{
+    if(app->debugUI->sceneManagerLoadScene){
+        ImGui::Begin("Load Scene", &app->debugUI->sceneManagerLoadScene, ImGuiWindowFlags_AlwaysAutoResize);
+        ImGui::Text("Scene List:");
+
+        // Create an array of scene names
+        std::vector<const char*> sceneNames;
+        for (int i = 0; i < scenes.Count(); i++)
+        {
+            sceneNames.push_back(scenes[i]->name.GetString());
+        }
+
+        // Create a static variable to store the current selection
+        static int currentSelection = 0;
+
+        // Create the list box
+        ImGui::ListBox("##Scenes", &currentSelection, &sceneNames[0], sceneNames.size());
+
+        // If the selected scene is not the current scene, change the scene
+        if (ImGui::Button("Load Scene") && scenes[currentSelection]->name != currentScene->name)
+        {
+            ChangeScene(scenes[currentSelection]->name);
+        }
+
+        ImGui::End();
+    /* 
+        ImGui::Begin("Scene Manager");
+        ImGui::Text("Scene List:");
+
+        // Create an array of scene names
+        std::vector<const char*> sceneNames;
+        for (int i = 0; i < scenes.Count(); i++)
+        {
+            sceneNames.push_back(scenes[i]->name.GetString());
+        }
+
+        // Create a static variable to store the current selection
+        static int currentSelection = 0;
+
+        // Create the list box
+        if (ImGui::ListBox("##Scenes", &currentSelection, &sceneNames[0], sceneNames.size()))
+        {
+            // If the selected scene is not the current scene, change the scene
+            if (scenes[currentSelection]->name != currentScene->name)
+            {
+                ChangeScene(scenes[currentSelection]->name);
+            }
+        }
+
+        ImGui::End(); */
+    }
 }
 
 Scene* SceneManager::CreateScene(SString sceneName)

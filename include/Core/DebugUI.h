@@ -30,6 +30,8 @@ public:
 
     public:
 
+    bool sceneManagerLoadScene = false;
+
     bool entityManagerSpawnEntity = false;
     bool entityManagerEntityList = false;
     bool entityManagerInfo = false;

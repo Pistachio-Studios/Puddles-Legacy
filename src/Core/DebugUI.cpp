@@ -68,6 +68,11 @@ bool DebugUI::Update(float dt)
     {
         // Main Menu Bar
         ImGui::BeginMainMenuBar();
+        if (ImGui::BeginMenu("Scene Manager"))
+        {
+            if (ImGui::MenuItem("Load Scene", NULL, sceneManagerLoadScene)) {sceneManagerLoadScene = !sceneManagerLoadScene;}
+            ImGui::EndMenu();
+        }
         if (ImGui::BeginMenu("Entity Manager"))
         {
             if (ImGui::MenuItem("Spawn Entity", NULL, entityManagerSpawnEntity)) {entityManagerSpawnEntity = !entityManagerSpawnEntity;}

@@ -37,6 +37,8 @@ public:
     // Called before quitting
     bool CleanUp();
 
+    void DrawImGui() override;
+
     Scene* CreateScene(SString sceneName);
 
     Scene* FindScene(SString sceneName) const;
