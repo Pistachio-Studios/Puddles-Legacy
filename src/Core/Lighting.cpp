@@ -63,12 +63,12 @@ bool Lighting::PreUpdate()
     return true;
 }
 
-bool Lighting::Update(float dt)
+bool Lighting::PostUpdate()
 {
     return true;
 }
 
-bool Lighting::PostUpdate()
+bool Lighting::Update(float dt)
 {
     // Save the original render target
     SDL_Texture* originalTarget;
