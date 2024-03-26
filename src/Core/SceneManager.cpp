@@ -1,22 +1,24 @@
 #include "Core/SceneManager.h"
 #include "Core/App.h"
 #include "Core/DebugUI.h"
+#include "Gameplay/LightingDemo.h"
 #include "Gameplay/MainMenu.h"
+#include "Gameplay/ParticleDemo.h"
 #include "Gameplay/Scene.h"
 #include "Gameplay/TestScene.h"
 #include "Utils/Defs.h"
-#include "Utils/List.h"
 #include "Utils/Log.h"
+#include <cassert>
 #include <imgui.h>
 
 SceneManager::SceneManager() : Module()
 {
-    name.Create("scenemanager");
+    name.Create("scene_manager");
 }
 
 SceneManager::SceneManager(bool startEnabled) : Module(startEnabled)
 {
-    name.Create("scenemanager");
+    name.Create("scene_manager");
 }
 
 // Destructor
@@ -41,8 +43,7 @@ bool SceneManager::Awake(pugi::xml_node& config)
         Scene* scene = CreateScene(sceneName.c_str());
         if(scene == nullptr)
         {
-            LOG("Scene %s not found\n", sceneName.c_str());
-            ret = false;
+            //ret = false;
             break;
         }
 
@@ -185,9 +186,17 @@ Scene* SceneManager::CreateScene(SString sceneName)
     {
         return new TestScene(sceneName);
     }
+    else if(sceneName == "particle_demo")
+    {
+        return new ParticleDemo(sceneName);
+    }
+    else if(sceneName == "lighting_demo")
+    {
+        return new LightingDemo(sceneName);
+    }
     else
     {
-        LOG("Scene %s not found\n", sceneName.GetString());
+        LOG_ERROR("Scene %s not found\n", sceneName.GetString());
         return nullptr;
     }
 }

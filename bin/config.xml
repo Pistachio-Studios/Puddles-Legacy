@@ -23,7 +23,7 @@
     <fx volume="128"/>
   </audio>
 
-  <scenemanager startScene="mainmenu">
+  <scene_manager startScene="mainmenu">
     <mainmenu>
     </mainmenu>
     <testscene>
@@ -37,6 +37,10 @@
         <dog_enemy x="886" y="1725" texturepath=""/>
       </enemies>
     </testscene>
-  </scenemanager>
+    <particle_demo>
+    </particle_demo>
+    <lighting_demo>
+    </lighting_demo>
+  </scene_manager>
   
 </config>

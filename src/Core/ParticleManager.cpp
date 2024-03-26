@@ -86,7 +86,6 @@ void Particle::Update(float dt)//alomejor seria mejor llamarle draw
 
             app->render->DrawTexture(anim->texture, position.x - anim->GetCurrentFrame().w / 2, position.y - anim->GetCurrentFrame().h / 2, &anim->GetCurrentFrame(), 1.0f, angle);
             size *= lifetimeTimer->ReadMSec();
-            anim->Update(dt);
         }
         else
         {
@@ -102,6 +101,7 @@ void Particle::Update(float dt)//alomejor seria mejor llamarle draw
 ParticleGenerator::ParticleGenerator() 
 {
     updateTimer = new Timer();
+    app->particleManager->AddGenerator(this);
 }
 
 void ParticleGenerator::EmitParticles()
@@ -229,7 +229,7 @@ void ParticleGenerator::PreUpdate()
 void ParticleGenerator::Update(float dt)
 {
     ZoneScoped;
-    if (emiting)
+    if (emiting and particles.Count() > 0)
     {
         if (updateTimer->ReadMSec() <= lifetime * 1000)
         {
@@ -241,6 +241,10 @@ void ParticleGenerator::Update(float dt)
             if (oneShoot) emiting = false;
         }
 
+        if(anim != nullptr)
+        {
+            anim->Update(dt);
+        }
 
         //creo que aqui deberia de actualizar las propiedades de las particulas y aplicar las fuerzas
         ListItem<Particle*>* item = particles.start;
@@ -302,29 +306,13 @@ ParticleManager::~ParticleManager()
 bool ParticleManager::Start()
 {
     //BORRAR!!!
-    ParticleGenerator* generator = new ParticleGenerator();
+    /* ParticleGenerator* generator = new ParticleGenerator();
     generator->emiting = true;
     generator->amount = 10;
     generator->position = {600, 300};
 
-    Animation* test = new Animation();
-
-    test->loop = true;
-    test->pingpong = true;
-    //test->speed = 2;
-    //test->texture = app->tex->Load("/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Textures/goldCoin.png");
-    test->PushBack({ 0,0, 64,64 });
-    test->PushBack({ 64,0, 64,64 });
-    test->PushBack({ 64*2,0, 64,64 });
-    test->PushBack({ 64*3,0, 64,64 });
-    test->PushBack({ 64*4,0, 64,64 });
-    test->PushBack({ 64*5,0, 64,64 });
-    test->PushBack({ 64*6,0, 64,64 });
-    test->PushBack({ 64*7,0, 64,64 });
-    test->PushBack({ 64*8,0, 64,64 });
-
     generator->anim = test;
-    generators.Add(generator);
+    generators.Add(generator); */
 
     return true;
 }
