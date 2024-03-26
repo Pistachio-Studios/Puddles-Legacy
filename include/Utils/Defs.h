@@ -5,7 +5,6 @@
 
 #ifdef __linux__
 #define sprintf_s(buffer, size, format, ...) sprintf(buffer, format, __VA_ARGS__)
-#include <cstdint>
 #elif _MSC_VER
 
 #endif
