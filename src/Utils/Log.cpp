@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <stdio.h>
 
-void Log(const char file[], int line, const char* format, ...)
+void Log(LogLevel level, const char file[], int line, const char* format, ...)
 {
 	static char tmpString1[4096];
 	static char tmpString2[4096];
@@ -38,21 +38,34 @@ void Log(const char file[], int line, const char* format, ...)
 // }
 //#elif
 #include <string>
-void Log(const char* file, int line, const char* format, ...) {
-	va_list args;
-	va_start(args, format);
+void Log(LogLevel level, const char* file, int line, const char* format, ...) {
+    va_list args;
+    va_start(args, format);
 
-	std::string filePath(file);
-	size_t lastSlash = filePath.find_last_of("/\\");
-	if (lastSlash != std::string::npos) {
-		filePath = filePath.substr(lastSlash + 1);
-	}
+    std::string filePath(file);
+    size_t lastSlash = filePath.find_last_of("/\\");
+    if (lastSlash != std::string::npos) {
+        filePath = filePath.substr(lastSlash + 1);
+    }
 
-	printf("[%s:%d] ", filePath.c_str(), line);
-	vprintf(format, args);
-	printf("\n");
+    const char* color;
+    switch (level) {
+        case INFO:
+            color = "\033[0m";  // Reset to default color
+            break;
+        case WARNING:
+            color = "\033[33m";  // Yellow
+            break;
+        case ERROR:
+            color = "\033[31m";  // Red
+            break;
+    }
 
-	va_end(args);
+    printf("%s[%s:%d] ", color, filePath.c_str(), line);
+    vprintf(format, args);
+    printf("\033[0m\n");  // Reset to default color
+
+    va_end(args);
 }
 
 #endif
