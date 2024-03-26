@@ -1,6 +1,7 @@
 #include "Core/Lighting.h"
 
 #include "Core/App.h"
+#include "Core/DebugUI.h"
 #include "Core/Render.h"
 #include "Core/Textures.h"
 #include "Core/Window.h"
@@ -124,23 +125,43 @@ bool Lighting::PostUpdate()
 
 void Lighting::DrawImGui()
 {
-    for (ListItem<Light*>* item = lights.start; item; item = item->next)
+    if(app->debugUI->renderLighting)
     {
-        Light* light = item->data;
-        ImGui::DragInt2("Position", &light->position.x, 1.0f);
-
+        ImGui::Begin("Lighting", &app->debugUI->renderLighting, ImGuiWindowFlags_AlwaysAutoResize);
+        ImGui::Text("Ambient Light:");
+        
         ImVec4 imguiColor;
-        imguiColor.x = light->color.r / 255.0f;
-        imguiColor.y = light->color.g / 255.0f;
-        imguiColor.z = light->color.b / 255.0f;
-        imguiColor.w = light->color.a / 255.0f;
+        imguiColor.x = ambientLight.r / 255.0f;
+        imguiColor.y = ambientLight.g / 255.0f;
+        imguiColor.z = ambientLight.b / 255.0f;
+        imguiColor.w = ambientLight.a / 255.0f;
 
         ImGui::ColorEdit4("Color", (float*)&imguiColor);
 
-        light->color.r = static_cast<Uint8>(imguiColor.x * 255);
-        light->color.g = static_cast<Uint8>(imguiColor.y * 255);
-        light->color.b = static_cast<Uint8>(imguiColor.z * 255);
-        light->color.a = static_cast<Uint8>(imguiColor.w * 255);
+        ambientLight.r = static_cast<Uint8>(imguiColor.x * 255);
+        ambientLight.g = static_cast<Uint8>(imguiColor.y * 255);
+        ambientLight.b = static_cast<Uint8>(imguiColor.z * 255);
+        ambientLight.a = static_cast<Uint8>(imguiColor.w * 255);
+
+        for (ListItem<Light*>* item = lights.start; item; item = item->next)
+        {
+            Light* light = item->data;
+            ImGui::DragInt2("Position", &light->position.x, 1.0f);
+
+            ImVec4 imguiColor;
+            imguiColor.x = light->color.r / 255.0f;
+            imguiColor.y = light->color.g / 255.0f;
+            imguiColor.z = light->color.b / 255.0f;
+            imguiColor.w = light->color.a / 255.0f;
+
+            ImGui::ColorEdit4("Color", (float*)&imguiColor);
+
+            light->color.r = static_cast<Uint8>(imguiColor.x * 255);
+            light->color.g = static_cast<Uint8>(imguiColor.y * 255);
+            light->color.b = static_cast<Uint8>(imguiColor.z * 255);
+            light->color.a = static_cast<Uint8>(imguiColor.w * 255);
+        }
+        ImGui::End();
     }
 }
 

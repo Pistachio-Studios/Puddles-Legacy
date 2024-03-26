@@ -1,5 +1,6 @@
 #include "Core/ParticleManager.h"
 #include "Core/App.h"
+#include "Core/DebugUI.h"
 #include "Core/Physics.h"
 #include "Core/Render.h"
 
@@ -358,7 +359,9 @@ bool ParticleManager::CleanUp()
 
 void ParticleManager::DrawImGui()
 {
-    if(ImGui::Begin("Particle Manager"))
+    if(app->debugUI->particleManagerGenerators)
+    {
+        if(ImGui::Begin("Particle Manager"))
     {
         for (int i = 0; i < generators.Count(); i++)
         {
@@ -406,6 +409,7 @@ void ParticleManager::DrawImGui()
         }
     }
     ImGui::End();
+    }
     
 }
 

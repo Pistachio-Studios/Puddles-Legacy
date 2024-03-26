@@ -4,6 +4,7 @@
 #include "Core/Window.h"
 #include "Core/Render.h"
 
+#include "Utils/Log.h"
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
@@ -80,8 +81,14 @@ bool DebugUI::Update(float dt)
             if (ImGui::MenuItem("Info", NULL, entityManagerInfo)) {entityManagerInfo = !entityManagerInfo;}
             ImGui::EndMenu();
         }
+        if (ImGui::BeginMenu("Particle Manager"))
+        {
+            if (ImGui::MenuItem("Generators", NULL, particleManagerGenerators)) {particleManagerGenerators = !particleManagerGenerators;}
+            ImGui::EndMenu();
+        }
         if (ImGui::BeginMenu("Render"))
         {
+            if (ImGui::MenuItem("Lighting", NULL, renderLighting)) {renderLighting = !renderLighting;}
             if (ImGui::MenuItem("Info", NULL, renderInfo)) {renderInfo = !renderInfo;}
             ImGui::EndMenu();
         }

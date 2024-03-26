@@ -36,6 +36,9 @@ public:
     bool entityManagerEntityList = false;
     bool entityManagerInfo = false;
 
+    bool particleManagerGenerators = false;
+
+    bool renderLighting = false;
     bool renderInfo = false;
 
     bool PerformanceMetrics = false;

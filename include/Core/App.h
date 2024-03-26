@@ -152,8 +152,8 @@ private:
 
 extern App* app;
 
-static bool debug = false;
-static bool fpsLimiter = false;
-static bool freeCam = false;
+extern bool debug;
+extern bool fpsLimiter;
+extern bool freeCam;
 
 #endif	// __APP_H__
