@@ -17,9 +17,6 @@
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
 
-#include <iostream>
-#include <sstream>
-
 #include <SDL_image.h>
 #include <pugixml.hpp>
 
