@@ -9,6 +9,7 @@
 #include "Gameplay/Scene.h"
 #include "Core/Map.h"
 #include "Core/Physics.h"
+#include "Core/ParticleManager.h"
 #include "Core/GuiManager.h"
 #include "Core/DebugUI.h"
 
@@ -39,12 +40,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render(true);
 	tex = new Textures(true);
 	audio = new Audio(true);
-	physics = new Physics(false);
+	physics = new Physics(true);
 	fade = new FadeToBlack(true);
 	mainMenu = new MainMenu(true);
 	scene = new Scene(false);
 	map = new Map(false);
 	entityManager = new EntityManager(false);
+	particleManager = new ParticleManager(true);
 	guiManager = new GuiManager(true);
 	debugUI = new DebugUI(true);
 
@@ -61,6 +63,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(particleManager);
 	AddModule(guiManager);
 	AddModule(debugUI);
 

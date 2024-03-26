@@ -2,6 +2,7 @@
 #define __APP_H__
 
 #include "Core/Module.h"
+#include "Core/ParticleManager.h"
 #include "Utils/List.h"
 #include "Utils/PerfTimer.h"
 #include "Utils/Timer.h"
@@ -22,6 +23,7 @@ class FadeToBlack;
 class EntityManager;
 class Map;
 class Physics;
+class ParticleManager;
 class GuiManager;
 class DebugUI;
 
@@ -109,6 +111,7 @@ public:
 	EntityManager* entityManager;
 	Map* map;
 	Physics* physics;
+	ParticleManager* particleManager;
 	GuiManager* guiManager;
 	DebugUI* debugUI;
 
