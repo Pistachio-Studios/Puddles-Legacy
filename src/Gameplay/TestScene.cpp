@@ -123,20 +123,24 @@ bool TestScene::PostUpdate()
 	bool ret = true;
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		if(paused){
+	{
+		if(paused)
+		{
 			paused = false;
 			gcResume->state = GuiControlState::NORMAL;
 			gcSettings->state = GuiControlState::NORMAL;
 			gcBackToTitle->state = GuiControlState::NORMAL;
 			gcExit->state = GuiControlState::NORMAL;
-			}
-		else{
+		}
+		else
+		{
 			paused = true;
 			gcResume->state = GuiControlState::DISABLED;
 			gcSettings->state = GuiControlState::DISABLED;
 			gcBackToTitle->state = GuiControlState::DISABLED;
 			gcExit->state = GuiControlState::DISABLED;
 		}
+	}
 
 	if(exitPressed)
 		ret = false;
@@ -149,7 +153,7 @@ bool TestScene::Exit()
 	//IMPORTANTE: DESCARGAR EN ORDEN INVERSO AL CARGADO EN EL APP
 	app->entityManager->Disable();
 	app->map->Disable();
-	
+
 	app->guiManager->RemoveGuiControl(gcScore);
 	app->guiManager->RemoveGuiControl(gcLives);
 	app->guiManager->RemoveGuiControl(gcResume);
