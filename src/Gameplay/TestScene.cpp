@@ -1,16 +1,12 @@
 #include "Core/App.h"
-#include "Core/FadeToBlack.h"
 #include "Core/Input.h"
 #include "Utils/SString.h"
-#include "Core/Textures.h"
-#include "Core/Audio.h"
 #include "Core/Render.h"
 #include "Utils/Timer.h"
 #include "Core/Window.h"
-#include "Gameplay/Scene.h"
+#include "Gameplay/TestScene.h"
 #include "Core/Map.h"
-
-#include "Utils/Defs.h"
+#include "Core/SceneManager.h"
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
@@ -18,35 +14,14 @@
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
 
-Scene::Scene() : Module()
-{
-	name.Create("scene");
-}
-
-Scene::Scene(bool startEnabled) : Module(startEnabled)
-{
-	name.Create("scene");
-}
-
 // Destructor
-Scene::~Scene()
+TestScene::~TestScene()
 {}
 
-// Called before render is available
-bool Scene::Awake(pugi::xml_node& config)
-{
-	LOG("Loading Scene");
-	bool ret = true;
-
-	parameters = config;
-
-	return ret;
-}
-
 // Called before the first frame
-bool Scene::Start()
+bool TestScene::Enter()
 {
-	// iterate all objects in the scene
+	// iterate all objects in the testscene
 	// Check https://pugixml.org/docs/quickstart.html#access
 
 	if (parameters.child("player")) {
@@ -105,7 +80,7 @@ bool Scene::Start()
 }
 
 // Called each loop iteration
-bool Scene::PreUpdate()
+bool TestScene::PreUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
@@ -114,7 +89,7 @@ bool Scene::PreUpdate()
 }
 
 // Called each loop iteration
-bool Scene::Update(float dt)
+bool TestScene::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
@@ -140,7 +115,7 @@ bool Scene::Update(float dt)
 }
 
 // Called each loop iteration
-bool Scene::PostUpdate()
+bool TestScene::PostUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
@@ -169,10 +144,12 @@ bool Scene::PostUpdate()
 	return ret;
 }
 
-// Called before quitting
-bool Scene::CleanUp()
+bool TestScene::Exit()
 {
-	LOG("Freeing scene");
+	//IMPORTANTE: DESCARGAR EN ORDEN INVERSO AL CARGADO EN EL APP
+	app->entityManager->Disable();
+	app->map->Disable();
+	app->physics->Disable();
 
 	app->guiManager->RemoveGuiControl(gcScore);
 	app->guiManager->RemoveGuiControl(gcLives);
@@ -184,7 +161,22 @@ bool Scene::CleanUp()
 	return true;
 }
 
-bool Scene::OnGuiMouseClickEvent(GuiControl* control)
+// Called before quitting
+bool TestScene::CleanUp()
+{
+	LOG("Freeing testscene");
+
+	app->guiManager->RemoveGuiControl(gcScore);
+	app->guiManager->RemoveGuiControl(gcLives);
+	app->guiManager->RemoveGuiControl(gcResume);
+	app->guiManager->RemoveGuiControl(gcSettings);
+	app->guiManager->RemoveGuiControl(gcBackToTitle);
+	app->guiManager->RemoveGuiControl(gcExit);
+
+	return true;
+}
+
+bool TestScene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
@@ -201,11 +193,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	case 7:
 		break;
 	case 8:
-		app->fade->Fade(this, (Module*)app->mainMenu, 60);
-		//IMPORTANTE: DESCARGAR EN ORDEN INVERSO AL CARGADO EN EL APP
-		app->entityManager->Disable();
-		app->map->Disable();
-		app->physics->Disable();
+		app->sceneManager->ChangeScene("mainmenu");
 	break;
 	case 9:
 		exitPressed = true;

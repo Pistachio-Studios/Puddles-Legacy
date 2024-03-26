@@ -4,8 +4,7 @@
 #include "Core/Render.h"
 #include "Core/Textures.h"
 #include "Core/Audio.h"
-#include "Core/FadeToBlack.h"
-#include "Gameplay/MainMenu.h"
+#include "Core/SceneManager.h"
 #include "Gameplay/Scene.h"
 #include "Core/Map.h"
 #include "Core/Physics.h"
@@ -40,10 +39,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render(true);
 	tex = new Textures(true);
 	audio = new Audio(true);
-	physics = new Physics(true);
-	fade = new FadeToBlack(true);
-	mainMenu = new MainMenu(true);
-	scene = new Scene(false);
+	physics = new Physics(false);
+	sceneManager = new SceneManager(true);
 	map = new Map(false);
 	entityManager = new EntityManager(false);
 	particleManager = new ParticleManager(true);
@@ -58,9 +55,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(physics);
-	AddModule(fade);
-	AddModule(mainMenu);
-	AddModule(scene);
+	AddModule(sceneManager);
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(particleManager);

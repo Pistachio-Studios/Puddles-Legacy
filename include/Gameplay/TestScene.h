@@ -1,21 +1,24 @@
-#ifndef __MAINMENU_H__
-#define __MAINMENU_H__
+#ifndef __TESTSCENE_H__
+#define __TESTSCENE_H__
 
-#include "Gameplay/Scene.h"
+#include "Core/GuiControlLabel.h"
+#include "Core/Module.h"
+#include "Gameplay/Entities/Player.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
+#include "Gameplay/Scene.h"
 
 struct SDL_Texture;
 
-class MainMenu : public Scene
+class TestScene : public Scene
 {
 public:
 
 	// Constructor
-	MainMenu(const SString& name) : Scene(name) {}
+	TestScene(const SString& name) : Scene(name) {}
 
 	// Destructor
-	virtual ~MainMenu();
+	virtual ~TestScene();
 
 	// Called before the first frame
 	bool Enter() override;
@@ -40,17 +43,28 @@ public:
 	void RenderGUI();
 
 public:
+	bool winCondition = false;
+	Player* player;
 
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
-	GuiControlButton* playButton;
-	GuiControlButton* optionsButton;
-	GuiControlButton* exitButton;
+	GuiControlButton* gcButton;
+	GuiControlLabel* gcScore;
+	GuiControlLabel* gcLives;
+	GuiControlLabel* gcTime;
 
+	GuiControlButton* gcResume;
+	GuiControlButton* gcSettings;
+	GuiControlButton* gcBackToTitle;
+	GuiControlButton* gcExit;
+
+	bool paused = false;
 	bool exitPressed = false;
+
+	Timer* playingTime;
 };
 
-#endif // __MAINMENU_H__
+#endif // __TESTSCENE_H__

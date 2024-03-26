@@ -7,6 +7,7 @@
 #include "Core/GuiControlButton.h"
 #include "Core/GuiControlLabel.h"
 #include "Core/Audio.h"
+#include <cstddef>
 
 GuiManager::GuiManager() :Module()
 {
@@ -26,7 +27,7 @@ bool GuiManager::Start()
 }
 
 // L15: DONE1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Scene* observer, SDL_Rect sliderBounds)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -52,22 +53,39 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 
 void GuiManager::RemoveGuiControl(GuiControl* entity)
 {
-	ListItem<GuiControl*>* control = guiControlsList.start;
+/* 	ListItem<GuiControl*>* control = guiControlsList.start;
+	ListItem<GuiControl*>* nextControl = nullptr;
 
 	while (control != nullptr)
 	{
+		nextControl = control->next;
+
 		if (control->data == entity)
 		{
 			guiControlsList.Del(control);
+			control = nullptr;
 			break;
 		}
-		control = control->next;
-	}
+		control = nextControl;
+	} */
+
+	controlsToDelete.PushBack(entity);
 
 }
 
 bool GuiManager::Update(float dt)
 {	
+	//Delete the controls that are marked to be deleted
+	for (uint i = 0; i < controlsToDelete.Count(); i++)
+	{
+		GuiControl* controlData = controlsToDelete[i];
+		int index = guiControlsList.Find(controlData);
+		ListItem<GuiControl*>* controlItem = guiControlsList.At(index);
+		guiControlsList.Del(controlItem);
+
+		//BORRAR!!!!!!!!
+		//guiControlsList.Del(guiControlsList.At(guiControlsList.Find(controlsToDelete[i])));
+	}
 
 	ListItem<GuiControl*>* control = guiControlsList.start;
 

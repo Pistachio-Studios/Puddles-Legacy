@@ -1,43 +1,20 @@
 #include "Core/App.h"
-#include "Core/FadeToBlack.h"
-#include "Core/Textures.h"
-#include "Core/Audio.h"
-#include "Core/Render.h"
+#include "Core/SceneManager.h"
 #include "Core/Window.h"
 #include "Gameplay/MainMenu.h"
 
-#include "Utils/Defs.h"
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
 #include <tracy/Tracy.hpp>
 
 
-MainMenu::MainMenu() : Module()
-{
-	name.Create("mainmenu");
-}
-
-MainMenu::MainMenu(bool startEnabled) : Module(startEnabled)
-{
-	name.Create("mainmenu");
-}
-
 // Destructor
 MainMenu::~MainMenu()
 {}
 
-// Called before render is available
-bool MainMenu::Awake(pugi::xml_node& config)
-{
-	LOG("Loading MainMenu");
-	bool ret = true;
-	
-	return ret;
-}
-
 // Called before the first frame
-bool MainMenu::Start()
+bool MainMenu::Enter()
 {
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -89,6 +66,14 @@ bool MainMenu::PostUpdate()
 	return ret;
 }
 
+bool MainMenu::Exit()
+{
+	app->guiManager->RemoveGuiControl(playButton);
+	app->guiManager->RemoveGuiControl(optionsButton);
+	app->guiManager->RemoveGuiControl(exitButton);
+	return true;
+}
+
 // Called before quitting
 bool MainMenu::CleanUp()
 {
@@ -107,7 +92,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	switch (control->id)
 	{
 	case 1:
-		app->fade->Fade(this, (Module*)app->scene, 60);
+		app->sceneManager->ChangeScene("testscene");
 		break;
 	case 2:
 		break;

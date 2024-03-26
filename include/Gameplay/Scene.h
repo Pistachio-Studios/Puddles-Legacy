@@ -1,74 +1,104 @@
 #ifndef __SCENE_H__
 #define __SCENE_H__
 
-#include "Core/GuiControlLabel.h"
-#include "Core/Module.h"
-#include "Core/Physics.h"
-#include "Gameplay/Entities/Player.h"
-#include "Core/GuiControl.h"
-#include "Core/GuiControlButton.h"
+#include "Utils/SString.h"
 
-struct SDL_Texture;
+#include <pugixml.hpp>
 
-class Scene : public Module
+
+
+class App;
+class GuiControl;
+
+class Scene
 {
 public:
 
-	Scene();
+	Scene() : active(false)
+	{}
 
-	Scene(bool startEnabled);
-
-	// Destructor
-	virtual ~Scene();
-
-	// Called before render is available
-	bool Awake(pugi::xml_node& conf);
+	Scene(SString sceneName) : name(sceneName) {}
 
 	// Called before the first frame
-	bool Start();
-
-	// Called before all Updates
-	bool PreUpdate();
+	virtual bool Enter()
+	{
+		return true;
+	}
 
 	// Called each loop iteration
-	bool Update(float dt);
+	virtual bool PreUpdate()
+	{
+		return true;
+	}
 
-	// Called before all Updates
-	bool PostUpdate();
+	// Called each loop iteration
+	virtual bool Update(float dt)
+	{
+		return true;
+	}
+
+	// Called each loop iteration
+	virtual bool PostUpdate()
+	{
+		return true;
+	}
+
+	virtual bool Exit()
+	{
+		return true;
+	}
 
 	// Called before quitting
-	bool CleanUp();
+	virtual bool CleanUp()
+	{
+		return true;
+	}
 
-	// Handles multiple Gui Event methods
-	bool OnGuiMouseClickEvent(GuiControl* control);
+	virtual void DrawImGui()
+	{
+	}
 
-	void RenderGUI();
+	// Called when we want to load data from XML
+	virtual bool LoadState(pugi::xml_node node)
+	{
+		return true;
+	}
+
+	// Called when we want to save data from XML
+	virtual bool SaveState(pugi::xml_node node)
+	{
+		return true;
+	}
+
+	virtual bool OnGuiMouseClickEvent(GuiControl* control)
+	{
+		return true;
+	}
+/* 
+	void Enable()
+	{
+		if (!active)
+		{
+			active = true;
+			Start();
+		}
+	}
+
+	void Disable()
+	{
+		// TODO 0: Call CleanUp() when disabling a Scene
+		if (active)
+		{
+			active = false;
+			CleanUp();
+		}
+	} */
 
 public:
-	bool winCondition = false;
-	Player* player;
 
-private:
-	SDL_Texture* img;
-	float textPosX, textPosY = 0;
-	uint texW, texH;
-	uint windowW, windowH;
-	GuiControlButton* gcButton;
-	GuiControlLabel* gcScore;
-	GuiControlLabel* gcLives;
-	GuiControlLabel* gcTime;
-
-	GuiControlButton* gcResume;
-	GuiControlButton* gcSettings;
-	GuiControlButton* gcBackToTitle;
-	GuiControlButton* gcExit;
-
-	bool paused = false;
-	bool exitPressed = false;
-
-	Timer* playingTime;
-
+	SString name;
+	bool active;
 	pugi::xml_node parameters;
 };
 
-#endif // __SCENE_H__
+#endif // __Scene_H__
