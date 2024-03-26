@@ -39,7 +39,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render(true);
 	tex = new Textures(true);
 	audio = new Audio(true);
-	physics = new Physics(false);
+	physics = new Physics(true);
 	sceneManager = new SceneManager(true);
 	map = new Map(false);
 	entityManager = new EntityManager(false);

@@ -149,8 +149,7 @@ bool TestScene::Exit()
 	//IMPORTANTE: DESCARGAR EN ORDEN INVERSO AL CARGADO EN EL APP
 	app->entityManager->Disable();
 	app->map->Disable();
-	app->physics->Disable();
-
+	
 	app->guiManager->RemoveGuiControl(gcScore);
 	app->guiManager->RemoveGuiControl(gcLives);
 	app->guiManager->RemoveGuiControl(gcResume);
