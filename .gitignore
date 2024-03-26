@@ -342,3 +342,4 @@ pythonenv3.8/
 CMakeUserPresets.json
 /.cache*/
 vcpkg-path.txt
+/.linux-test
