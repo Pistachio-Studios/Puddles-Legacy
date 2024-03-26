@@ -15,6 +15,7 @@ class Window;
 class Input;
 class Render;
 class Textures;
+class Lighting;
 class Audio;
 class SceneManager;
 class EntityManager;
@@ -100,6 +101,7 @@ public:
 	Input* input;
 	Render* render;
 	Textures* tex;
+	Lighting* lighting;
 	Audio* audio;
 	SceneManager* sceneManager;
 	EntityManager* entityManager;
@@ -108,6 +110,7 @@ public:
 	ParticleManager* particleManager;
 	GuiManager* guiManager;
 	DebugUI* debugUI;
+
 
 private:
 

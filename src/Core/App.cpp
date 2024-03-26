@@ -11,6 +11,8 @@
 #include "Core/ParticleManager.h"
 #include "Core/GuiManager.h"
 #include "Core/DebugUI.h"
+#include "Core/EntityManager.h"
+#include "Core/Lighting.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -38,6 +40,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	input = new Input(true);
 	render = new Render(true);
 	tex = new Textures(true);
+	lighting = new Lighting(true);
 	audio = new Audio(true);
 	physics = new Physics(true);
 	sceneManager = new SceneManager(true);
@@ -59,6 +62,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(particleManager);
+	AddModule(lighting);
 	AddModule(guiManager);
 	AddModule(debugUI);
 
