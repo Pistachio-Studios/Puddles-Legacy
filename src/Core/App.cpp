@@ -13,6 +13,7 @@
 #include "Core/DebugUI.h"
 #include "Core/EntityManager.h"
 #include "Core/Lighting.h"
+#include "Core/DialogManager.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -46,6 +47,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	particleManager = new ParticleManager(true);
 	guiManager = new GuiManager(true);
 	debugUI = new DebugUI(true);
+	dialogManager = new DialogManager(true);
 
 
 	// Ordered for awake / Start / Update
@@ -62,6 +64,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(lighting);
 	AddModule(guiManager);
 	AddModule(debugUI);
+	AddModule(dialogManager);
 
 	// Render last to swap buffer
 	AddModule(render);
