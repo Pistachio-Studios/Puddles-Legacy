@@ -29,6 +29,8 @@ public:
 
     DialogManager();
 
+    DialogManager(bool startEnabled);
+
     // Destructor
     virtual ~DialogManager();
 

@@ -1,8 +1,9 @@
-#include "DialogManager.h"
+#include "Core/App.h"
+#include "Core/DialogManager.h"
 #include "rapidcsv.h"
+#include <Utils/Log.h>
 
 DialogManager::DialogManager() {
-    // Constructor implementation
     name.Create("dialogManager");
 }
 
@@ -21,7 +22,7 @@ bool DialogManager::Awake(pugi::xml_node config) {
     bool ret = true;
 
     // Load dialog data from CSV file using rapidcsv
-    LoadDialogs("dialogs.csv", dialogs);
+    //LoadDialogs("dialogs.csv", dialogs);
 
     // Check if the dialogs were loaded successfully
     if (dialogs.empty()) {
@@ -69,34 +70,13 @@ bool DialogManager::SaveState(pugi::xml_node&) const {
 }
 
 void DialogManager::StartDialog(int dialogId) {
-    // Convert dialogId to string
-    std::string dialogIdStr = std::to_string(dialogId);
 
-    // Check if the dialog exists
-    if (dialogs.find(dialogIdStr) != dialogs.end()) {
-        // Start the dialog
-        currentDialogId = dialogIdStr;
-    }
 }
 
 void DialogManager::NextDialog() {
-    // Get the current dialog
-    Dialog& dialog = dialogs[currentDialogId];
 
-    // If the dialog has choices, let the user select a choice
-    if (dialog.type == "choose") {
-        // Let the user select a choice (this is just an example, replace with your own code)
-        int choiceIndex = GetUserChoice();
-
-        // Get the next dialog ID from the selected choice
-        std::string nextDialogId = dialog.choices[choiceIndex].second;
-
-        // Start the next dialog
-        StartDialog(std::stoi(nextDialogId));
-    }
 }
 
 void DialogManager::EndDialog() {
-    // End the current dialog
-    currentDialogId = "";
+
 }
