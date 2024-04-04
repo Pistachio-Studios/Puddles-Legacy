@@ -1,11 +1,8 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-#include "Core/Animation.h"
 #include "Core/Physics.h"
-#include "Utils/Point.h"
-#include "Utils/State.h"
-#include "Utils/StateMachine.h"
+#include "Utils/Timer.h"
 
 #include <box2d/b2_fixture.h>
 #include <SDL.h>

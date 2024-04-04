@@ -14,13 +14,14 @@
 #include <Utils/Log.h>
 
 
-#include <Core/Animation.h>//BORRAR
 #include <Core/Textures.h>
 
 
 Particle::Particle()
 {
     pbody = app->physics->CreateParticle(position.x, position.y, size, size);
+
+    anim = Animation();
 
     lifetimeTimer = new Timer();
     
@@ -35,6 +36,8 @@ void Particle::Spawn()
 {
     active = true;
     lifetimeTimer->Start();
+    anim.Reset();
+    anim.currentFrame = rand() % anim.totalFrames;
 }
 
 void Particle::Update(float dt)//alomejor seria mejor llamarle draw
@@ -76,16 +79,18 @@ void Particle::Update(float dt)//alomejor seria mejor llamarle draw
         }
 
         // Draw the particle
-        if (anim != nullptr and anim->texture != nullptr)
+        if (anim.texture != NULL)
         {
             if(color.r < 255 and color.g < 255 and color.b < 255)
-            SDL_SetTextureColorMod(anim->texture, color.r, color.g, color.b);
+            SDL_SetTextureColorMod(anim.texture, color.r, color.g, color.b);
             
             if(color.a < 255)
-            SDL_SetTextureAlphaMod(anim->texture, color.a);
+            SDL_SetTextureAlphaMod(anim.texture, color.a);
 
-            app->render->DrawTexture(anim->texture, position.x - anim->GetCurrentFrame().w / 2, position.y - anim->GetCurrentFrame().h / 2, &anim->GetCurrentFrame(), 1.0f, angle);
+            app->render->DrawTexture(anim.texture, position.x - anim.GetCurrentFrame().w / 2, position.y - anim.GetCurrentFrame().h / 2, &anim.GetCurrentFrame(), 1.0f, angle);
             size *= lifetimeTimer->ReadMSec();
+
+            anim.Update(dt);
         }
         else
         {
@@ -175,9 +180,6 @@ void ParticleGenerator::EmitParticles()
             
             float randomAngle = static_cast<float>(rand()) / RAND_MAX * 360.0f;
             particle->angle = randomAngle * angleRandomness;
-            
-            if(anim != nullptr)
-                particle->anim = anim; //PONER EN UN SITIO QUE SOLO SE HAGA UNA VEZ
 
             iPoint spawnPosition = { 0,0 };
 
@@ -220,7 +222,10 @@ void ParticleGenerator::PreUpdate()
     {
         for(int i = 0; i < amount - particlesCount; i++)
         {
-            particles.Add(new Particle());
+            Particle* particle = new Particle();
+            particles.Add(particle);
+            if(anim.texture != NULL)
+                particle->anim = anim; //PONER EN UN SITIO QUE SOLO SE HAGA UNA VEZ
         }
         ResetParticles();
     }
@@ -239,11 +244,6 @@ void ParticleGenerator::Update(float dt)
         {
             updateTimer->Start();
             if (oneShoot) emiting = false;
-        }
-
-        if(anim != nullptr)
-        {
-            anim->Update(dt);
         }
 
         //creo que aqui deberia de actualizar las propiedades de las particulas y aplicar las fuerzas

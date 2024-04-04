@@ -1,7 +1,6 @@
 #ifndef __ANIMATION_H__
 #define __ANIMATION_H__
 
-#include "Core/App.h"
 #include "Utils/SString.h"
 
 #include <SDL_render.h>

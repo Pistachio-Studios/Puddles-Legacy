@@ -1,6 +1,7 @@
 #ifndef __PARTICLEMANAGER_H__
 #define __PARTICLEMANAGER_H__
 
+#include "Core/Animation.h"
 #include "Core/Module.h"
 #include "Utils/DynArray.h"
 #include "Utils/List.h"
@@ -37,7 +38,7 @@ public:
 
     iPoint position;
 
-    Animation* anim = nullptr;
+    Animation anim;
 private:
     
     Timer* lifetimeTimer;
@@ -77,7 +78,7 @@ public:
 
     float spawnRadius = 1.0f;
 
-    Animation* anim = nullptr;
+    Animation anim;
 
     List<Particle*> particles; //poner en privado en algun momento, esta para mostrar el num de part. en imgui
     private:

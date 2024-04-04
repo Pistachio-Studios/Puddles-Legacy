@@ -10,6 +10,7 @@
 #include "Utils/Log.h"
 #include <cassert>
 #include <imgui.h>
+#include <vector>
 
 SceneManager::SceneManager() : Module()
 {
