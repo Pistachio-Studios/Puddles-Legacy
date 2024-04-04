@@ -7,6 +7,11 @@
 #include "Gameplay/Scene.h"
 #include "Utils/Point.h"
 #include "Core/Physics.h"
+#include "Utils/StateMachine.h"
+
+
+#include "Gameplay/States/Player/PlayerIdleState.hpp"
+#include "Gameplay/States/Player/PlayerMoveState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -48,32 +53,20 @@ bool Player::Start() {
 	//pbody->body->GetFixtureList()->SetFriction(25.0f);
 	pbody->body->SetLinearDamping(10.0f);
 
+	movementFSM = new StateMachine<Player>(this);
+	movementFSM->AddState(new PlayerIdleState("idle"));
+	movementFSM->AddState(new PlayerMoveState("move"));
+
 	return true;
 }
 
 bool Player::Update(float dt)
 {
+	movementFSM->Update(dt);
+
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-	b2Vec2 impulse = {0, 0};
-
-	if(pbody->body->GetLinearVelocity().Length() < maxSpeed)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			impulse.x = -pbody->body->GetMass() * moveForce;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			impulse.x = pbody->body->GetMass() * moveForce;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-			impulse.y = -pbody->body->GetMass() * moveForce;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			impulse.y = pbody->body->GetMass() * moveForce;
-		}
-		pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
-	}
-	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y, 255, 255, 0);
+	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x*10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 	
 
 	//Update player position in pixels

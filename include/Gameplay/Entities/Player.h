@@ -3,6 +3,7 @@
 
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
+#include "Utils/StateMachine.h"
 
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
@@ -49,6 +50,9 @@ public:
 	//Movement
 	float moveForce = 1.0f;
 	float maxSpeed = 2.0f;
+
+	//State Machines
+	StateMachine<Player>* movementFSM = nullptr;
 
 	PhysBody* pbody;
 };

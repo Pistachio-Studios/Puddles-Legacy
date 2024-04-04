@@ -5,7 +5,11 @@
 
 template <typename T>
 class State {
-    public:
+public:
+    SString name;
+    StateMachine<T>* StateMachineReference;
+
+public:
     State() {}
     State(SString name) : name(name) {}
     virtual void Enter() {}
@@ -13,8 +17,5 @@ class State {
     virtual void Update(float dt) {}
     virtual void PostUpdate() {}
     virtual void Exit() {}
-
-    SString name;
-    StateMachine<T>* StateMachineReference;
 };
 #endif // __STATE_H__
