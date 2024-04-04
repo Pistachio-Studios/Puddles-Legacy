@@ -61,6 +61,8 @@ public:
     void NextDialog();
     void EndDialog();
 
+    bool LoadDialogs(string, map<int, string>);
+
 private:
     map<int, string> dialogs;   // Map of dialog ID to Dialog data
     int currentDialogId;        // Current dialog ID

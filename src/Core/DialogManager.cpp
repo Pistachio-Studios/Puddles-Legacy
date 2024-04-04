@@ -22,7 +22,7 @@ bool DialogManager::Awake(pugi::xml_node config) {
     bool ret = true;
 
     // Load dialog data from CSV file using rapidcsv
-    //LoadDialogs("dialogs.csv", dialogs);
+    LoadDialogs("dialogs.csv", dialogs);
 
     // Check if the dialogs were loaded successfully
     if (dialogs.empty()) {
@@ -79,4 +79,14 @@ void DialogManager::NextDialog() {
 
 void DialogManager::EndDialog() {
 
+}
+
+bool DialogManager::LoadDialogs(string path, map<int, string> dialogs)
+{
+    bool ret = true;
+
+    // rapidcsv::Document doc("examples/colhdr.csv");
+    // TODO load dialog csv
+
+    return ret;
 }
