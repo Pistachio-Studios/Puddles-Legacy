@@ -30,6 +30,7 @@ Particle::Particle()
 Particle::~Particle()
 {
     app->physics->DestroyBody(pbody);
+    delete lifetimeTimer;
 }
 
 void Particle::Spawn()
@@ -346,6 +347,7 @@ bool ParticleManager::Update(float dt)
 bool ParticleManager::CleanUp()
 {
     //TODO: Clean up the generators and particles
+
     return true;
 }
 
