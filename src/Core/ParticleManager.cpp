@@ -36,8 +36,12 @@ void Particle::Spawn()
 {
     active = true;
     lifetimeTimer->Start();
-    anim.Reset();
-    anim.currentFrame = rand() % anim.totalFrames;
+
+    if(anim.texture != NULL)
+    {
+        anim.Reset();
+        anim.currentFrame = rand() % anim.totalFrames;
+    }
 }
 
 void Particle::Update(float dt)//alomejor seria mejor llamarle draw

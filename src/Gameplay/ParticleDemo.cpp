@@ -26,7 +26,7 @@ bool ParticleDemo::Enter()
 
 
     Animation smoke = Animation();
-    smoke.texture = app->tex->Load("/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Textures/Particles/smoke_scaled.png");
+    smoke.texture = app->tex->Load("Assets/Textures/Particles/smoke_scaled.png");
     SDL_SetTextureBlendMode(smoke.texture, SDL_BLENDMODE_ADD);
     smoke.PushBack({0,0,114,114});
     smoke.PushBack({114,0,114,114});
