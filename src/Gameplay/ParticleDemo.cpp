@@ -2,11 +2,13 @@
 #include "Gameplay/ParticleDemo.h"
 #include "Core/Animation.h"
 #include "Core/ParticleManager.h"
+#include "Core/Render.h"
 #include "Core/Textures.h"
 
 
 #include <SDL_blendmode.h>
 #include <SDL_render.h>
+#include <cstddef>
 
 ParticleDemo::~ParticleDemo()
 {
@@ -69,7 +71,7 @@ bool ParticleDemo::PreUpdate()
 
 bool ParticleDemo::Update(float dt)
 {
-    //particleSource1->position = { app->input->GetMouseX(), app->input->GetMouseY() };
+    particleSource1->position = { app->input->GetMouseX(), app->input->GetMouseY() };
     return true;
 }
 

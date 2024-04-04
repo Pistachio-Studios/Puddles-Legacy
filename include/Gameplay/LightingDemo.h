@@ -1,9 +1,10 @@
 #ifndef __LIGHTINGDEMO_H__
 #define __LIGHTINGDEMO_H__
 
+#include "Core/Lighting.h"
 #include "Gameplay/Scene.h"
 
-class ParticleGenerator;
+const int MAX_LIGHTS = 10;
 
 struct SDL_Texture;
 
@@ -35,10 +36,10 @@ public:
 	bool CleanUp() override;
 
 private:
-	ParticleGenerator* particleSource1;
-	ParticleGenerator* particleSource2;
-	ParticleGenerator* particleSource3;
-	ParticleGenerator* particleSource4;
+
+	SDL_Texture* background = nullptr;
+
+	Light* lights[MAX_LIGHTS];
 };
 
 #endif // __LIGHTINGDEMO_H__
