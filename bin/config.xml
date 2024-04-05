@@ -23,6 +23,9 @@
     <fx volume="128"/>
   </audio>
 
+  <dialog_manager>
+  </dialog_manager>
+
   <scene_manager startScene="mainmenu">
     <mainmenu>
     </mainmenu>
@@ -42,5 +45,6 @@
     <lighting_demo>
     </lighting_demo>
   </scene_manager>
+
   
 </config>

@@ -4,12 +4,12 @@
 #include <Utils/Log.h>
 
 DialogManager::DialogManager() {
-    name.Create("dialogManager");
+    name.Create("dialog_manager");
 }
 
 DialogManager::DialogManager(bool startEnabled) : Module(startEnabled)
 {
-	name.Create("dialogManager");
+	name.Create("dialog_manager");
 }
 
 DialogManager::~DialogManager() {
@@ -27,7 +27,7 @@ bool DialogManager::Awake(pugi::xml_node config) {
     // Check if the dialogs were loaded successfully
     if (dialogs.empty()) {
         // Handle the case when the file failed to load
-        LOG("Failed to load dialog data from CSV file");
+        LOG("Failed to load dialog data from dialogs.csv file");
         ret = false;
     }
 
@@ -85,8 +85,8 @@ bool DialogManager::LoadDialogs(string path, map<int, string> dialogs)
 {
     bool ret = true;
 
-    // rapidcsv::Document doc("examples/colhdr.csv");
     // TODO load dialog csv
+    rapidcsv::Document doc(path);
 
     return ret;
 }
