@@ -35,7 +35,7 @@ public:
     virtual ~DialogManager();
 
     // Called before render is available
-    bool Awake(pugi::xml_node config);
+    bool Awake(pugi::xml_node& conf);
 
     // Called before the first frame
     bool Start();

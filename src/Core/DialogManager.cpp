@@ -16,7 +16,7 @@ DialogManager::~DialogManager() {
     // Destructor implementation
 }
 
-bool DialogManager::Awake(pugi::xml_node config) {
+bool DialogManager::Awake(pugi::xml_node& config) {
 
     LOG("Loading Dialog Manager");
     bool ret = true;
@@ -86,7 +86,7 @@ bool DialogManager::LoadDialogs(string path, map<int, string> dialogs)
     bool ret = true;
 
     // TODO load dialog csv
-    rapidcsv::Document doc(path);
+    //rapidcsv::Document doc(path);
 
     return ret;
 }
