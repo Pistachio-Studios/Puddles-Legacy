@@ -2,6 +2,7 @@
 #include "Core/DialogManager.h"
 #include "rapidcsv.h"
 #include <Utils/Log.h>
+#include "Core/Render.h"
 
 DialogManager::DialogManager() {
     name.Create("dialog_manager");
@@ -23,6 +24,9 @@ bool DialogManager::Awake(pugi::xml_node& config) {
 
     // Load dialog data from CSV file using rapidcsv
     LoadDialogs("dialogs.csv", dialogs);
+
+    // Load the font for rendering the dialog text
+    font = TTF_OpenFont("arial.ttf", 24);
 
     /*
     // TODO remove this debug code
@@ -54,6 +58,8 @@ bool DialogManager::PreUpdate() {
 
 bool DialogManager::Update(float dt) {
     // Update code
+    StartDialog(1);
+    ShowDialog();
     return true;
 }
 
@@ -64,6 +70,7 @@ bool DialogManager::PostUpdate() {
 
 bool DialogManager::CleanUp() {
     // Cleanup code
+    dialogs.clear();
     return true;
 }
 
@@ -78,15 +85,43 @@ bool DialogManager::SaveState(pugi::xml_node&) const {
 }
 
 void DialogManager::StartDialog(int dialogId) {
-
+    currentDialogId = dialogId;
+    // Set the current dialog text to the first line of the dialog
+    currentDialogLine = dialogs.at(dialogId).ES;
 }
 
 void DialogManager::NextDialog() {
-
+    // Get the current dialog
+    Dialog& dialog = dialogs.at(currentDialogId);
+    // Advance to the next line or choice in the dialog
+    // Set the current dialog text to the next line or choice
+    if (dialog.type == DialogType::DIALOG) {
+        // If the dialog is a dialog, advance to the next line
+        // If there are no more lines, end the dialog
+        // Otherwise, set the current dialog text to the next line
+    } else if (dialog.type == DialogType::CHOICE) {
+        // If the dialog is a choice, advance to the next choice
+        // If there are no more choices, end the dialog
+        // Otherwise, set the current dialog text to the next choice
+    }
 }
 
 void DialogManager::EndDialog() {
+    // Clear the current dialog
+    currentDialogId = -1;
+    currentDialogLine.clear();
+}
 
+void DialogManager::ShowDialog() {
+    if (currentDialogId != -1) {
+        // Render the current dialog text on the screen
+        // You'll need to replace this with your actual rendering code
+        SDL_Surface* surface = TTF_RenderText_Solid(font, currentDialogLine.c_str(), textColor);
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(app->render->renderer, surface);
+        SDL_RenderCopy(app->render->renderer, texture, NULL, &textRect);
+        SDL_FreeSurface(surface);
+        SDL_DestroyTexture(texture);
+    }
 }
 
 bool DialogManager::LoadDialogs(string path, map<int, Dialog>& dialogs)

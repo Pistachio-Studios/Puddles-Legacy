@@ -60,12 +60,19 @@ public:
     void StartDialog(int dialogId);
     void NextDialog();
     void EndDialog();
+    void ShowDialog();
 
     bool LoadDialogs(string, map<int, Dialog>& dialogs);
 
 private:
     map<int, Dialog> dialogs;   // Map of dialog ID to Dialog data
     int currentDialogId;        // Current dialog ID
+    string currentDialogLine;      // Current dialog line
+
+    // Font
+    TTF_Font* font;
+    SDL_Color textColor = { 255, 255, 255, 255 }; // White color
+    SDL_Rect textRect;
 
 };
 
