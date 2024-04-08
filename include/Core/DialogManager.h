@@ -61,10 +61,10 @@ public:
     void NextDialog();
     void EndDialog();
 
-    bool LoadDialogs(string, map<int, string>);
+    bool LoadDialogs(string, map<int, Dialog>& dialogs);
 
 private:
-    map<int, string> dialogs;   // Map of dialog ID to Dialog data
+    map<int, Dialog> dialogs;   // Map of dialog ID to Dialog data
     int currentDialogId;        // Current dialog ID
 
 };
