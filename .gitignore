@@ -343,3 +343,4 @@ CMakeUserPresets.json
 /.cache*/
 vcpkg-path.txt
 /.linux-test
+CMakePresets.json
