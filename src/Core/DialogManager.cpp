@@ -60,6 +60,9 @@ bool DialogManager::Update(float dt) {
     // Update code
     StartDialog(1);
     ShowDialog();
+
+    LOG("update");
+
     return true;
 }
 
@@ -110,18 +113,58 @@ void DialogManager::EndDialog() {
     // Clear the current dialog
     currentDialogId = -1;
     currentDialogLine.clear();
+    // TODO clean dialogs map
 }
 
 void DialogManager::ShowDialog() {
     if (currentDialogId != -1) {
+
+        SDL_Texture* textTexture = nullptr;
+        SDL_Texture* textNameTexture = nullptr;
+        SDL_Texture* options1NameTexture = nullptr;
+        SDL_Texture* options2NameTexture = nullptr;
+
+        string actualText = currentDialogLine.substr(0, currentDialogId);
+
         // Render the current dialog text on the screen
-        // You'll need to replace this with your actual rendering code
-        SDL_Surface* surface = TTF_RenderText_Solid(font, currentDialogLine.c_str(), textColor);
-        SDL_Texture* texture = SDL_CreateTextureFromSurface(app->render->renderer, surface);
-        SDL_RenderCopy(app->render->renderer, texture, NULL, &textRect);
-        SDL_FreeSurface(surface);
-        SDL_DestroyTexture(texture);
+        textTexture = CreateTextTexture(font, currentDialogLine.c_str(), textColor, 200/*TODO text bound widht*/);
+        app->render->DrawTexture(textTexture, 0/*TODO pos x*/, 0/*TODO pos y*/, 0, 0);
+
+        // TODO draw character texture
+        //if (dialog->face_tex != nullptr) {
+        //    app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, 0, 0);
+        //}
+
+        SDL_DestroyTexture(textTexture);
+        SDL_DestroyTexture(textNameTexture);
+        SDL_DestroyTexture(options1NameTexture);
+        SDL_DestroyTexture(options2NameTexture);
+
+        /*
+        if (actualText.size() < currentDialogLine.size()) {
+
+            if (charTimer.ReadMSec() >= charTimeMS) {
+                indexText++;
+                charTimer.Start();
+            }
+
+        }
+        */
+
     }
+}
+
+SDL_Texture* DialogManager::CreateTextTexture(TTF_Font* font, const char* text, SDL_Color color, int textBoundWidth)
+{
+    SDL_Surface* textSurface = nullptr;
+    SDL_Texture* textTexture = nullptr;
+
+    textSurface = TTF_RenderUTF8_Blended_Wrapped(font, text, color, textBoundWidth);
+    textTexture = SDL_CreateTextureFromSurface(app->render->renderer, textSurface);
+
+    SDL_FreeSurface(textSurface);
+
+    return textTexture;
 }
 
 bool DialogManager::LoadDialogs(string path, map<int, Dialog>& dialogs)

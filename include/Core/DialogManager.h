@@ -62,6 +62,8 @@ public:
     void EndDialog();
     void ShowDialog();
 
+    SDL_Texture* CreateTextTexture(TTF_Font* font, const char* text, SDL_Color color, int textBoundWidth);
+
     bool LoadDialogs(string, map<int, Dialog>& dialogs);
 
 private:
