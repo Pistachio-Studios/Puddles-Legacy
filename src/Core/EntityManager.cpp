@@ -1,5 +1,6 @@
 #include "Core/EntityManager.h"
 #include "Gameplay/Entities/Player.h"
+#include "Gameplay/Entities/Enemy.h"
 #include "Core/App.h"
 #include "Core/Textures.h"
 #include "Gameplay/Scene.h"
@@ -92,6 +93,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	{
 	case EntityType::PLAYER:
 		entity = new Player();
+		break;
+	case EntityType::ENEMY:
+		entity = new Enemy();
 		break;
 	default:
 		break;

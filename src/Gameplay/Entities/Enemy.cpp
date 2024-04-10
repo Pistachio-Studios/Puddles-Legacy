@@ -1,4 +1,4 @@
-#include "Gameplay/Entities/Player.h"
+#include "Gameplay/Entities/Enemy.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Core/Textures.h"
@@ -10,8 +10,8 @@
 #include "Utils/StateMachine.h"
 
 
-#include "Gameplay/States/Player/PlayerIdleState.hpp"
-#include "Gameplay/States/Player/PlayerMoveState.hpp"
+//#include "Gameplay/States/Enemy/EnemyIdleState.hpp"
+//#include "Gameplay/States/Enemy/EnemyMoveState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -22,21 +22,21 @@
 
 #include <imgui.h>
 
-Player::Player() : Entity(EntityType::PLAYER)
+Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
-	name.Create("Player");
+	name.Create("Enemy");
 }
 
-Player::~Player() {
+Enemy::~Enemy() {
 
 }
 
-bool Player::Awake() {
-	
+bool Enemy::Awake() {
+
 	return true;
 }
 
-bool Player::Start() {
+bool Enemy::Start() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -46,33 +46,28 @@ bool Player::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 20, 10, bodyType::DYNAMIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::PLAYER;
+	pbody->ctype = ColliderType::ENEMY;
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
 	//pbody->body->GetFixtureList()->SetFriction(25.0f);
 	pbody->body->SetLinearDamping(10.0f);
 
-	movementFSM = new StateMachine<Player>(this);
-	movementFSM->AddState(new PlayerIdleState("idle"));
-	movementFSM->AddState(new PlayerMoveState("move"));
 
 	return true;
 }
 
-bool Player::Update(float dt)
+bool Enemy::Update(float dt)
 {
-	movementFSM->Update(dt);
-
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x*10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
-	
+	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
+
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-	
+
 	if (debug) {
 		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
 			freeCam = !freeCam;
@@ -81,26 +76,26 @@ bool Player::Update(float dt)
 
 	app->render->DrawRectangle({ position.x,position.y,20,10 }, 255, 255, 255);
 
-/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
+	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
-	currentAnimation->Update(dt); */
+		currentAnimation->Update(dt); */
 
 	return true;
 }
 
-void Player::DrawImGui()
+void Enemy::DrawImGui()
 {
-	ImGui::Begin("Player");
-	ImGui::Text("Player Position: %d, %d", position.x, position.y);
-	ImGui::Text("Player Speed: %f", pbody->body->GetLinearVelocity().Length());
+	ImGui::Begin("Enemy");
+	ImGui::Text("Enemy Position: %d, %d", position.x, position.y);
+	ImGui::Text("Enemy Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
 	ImGui::End();
 }
 
-bool Player::SaveState(pugi::xml_node& node) {
+bool Enemy::SaveState(pugi::xml_node& node) {
 
-	pugi::xml_node playerAttributes = node.append_child("player");
+	pugi::xml_node playerAttributes = node.append_child("enemy");
 	playerAttributes.append_attribute("x").set_value(this->position.x);
 	playerAttributes.append_attribute("y").set_value(this->position.y);
 
@@ -108,9 +103,9 @@ bool Player::SaveState(pugi::xml_node& node) {
 
 }
 
-bool Player::LoadState(pugi::xml_node& node)
+bool Enemy::LoadState(pugi::xml_node& node)
 {
-	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("player").attribute("x").as_int()), PIXEL_TO_METERS(node.child("player").attribute("y").as_int()) }, node.child("player").attribute("angle").as_int());
+	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("enemy").attribute("x").as_int()), PIXEL_TO_METERS(node.child("enemy").attribute("y").as_int()) }, node.child("enemy").attribute("angle").as_int());
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
@@ -118,7 +113,7 @@ bool Player::LoadState(pugi::xml_node& node)
 	return true;
 }
 
-bool Player::CleanUp() {
+bool Enemy::CleanUp() {
 
 	app->tex->UnLoad(texture);
 	app->physics->DestroyBody(pbody);
@@ -126,14 +121,14 @@ bool Player::CleanUp() {
 	return true;
 }
 
-void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 }
 
-void Player::EndCollision(PhysBody* physA, PhysBody* physB){
-	
+void Enemy::EndCollision(PhysBody* physA, PhysBody* physB) {
+
 }
 
-void Player::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction){
-	
+void Enemy::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
+
 }
