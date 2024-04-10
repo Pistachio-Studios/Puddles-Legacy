@@ -24,9 +24,9 @@ bool LightingDemo::Enter()
         int x = rand() % 720;
         int y = rand() % 720;
         int radius = rand() % 100;
-        int r = rand() % 256;
-        int g = rand() % 256;
-        int b = rand() % 256;
+        uint8 r = rand() % 256;
+        uint8 g = rand() % 256;
+        uint8 b = rand() % 256;
         lights[i] = app->lighting->AddLight({ x, y }, radius, { r, g, b, 255 });
     }
 
@@ -48,9 +48,9 @@ bool LightingDemo::Update(float dt)
         int y = static_cast<int>((sin(SDL_GetTicks() * 0.001 + i * MAX_LIGHTS * 4) + 1) / 2 * 600);
         lights[i]->position = { x, y };
 
-        int r = sin (SDL_GetTicks() * 0.001 + i * MAX_LIGHTS) * 128 + 128;
-        int g = sin (SDL_GetTicks() * 0.002 + i * MAX_LIGHTS) * 128 + 128;
-        int b = sin (SDL_GetTicks() * 0.003 + i * MAX_LIGHTS) * 128 + 128;
+        uint8 r = sin (SDL_GetTicks() * 0.001 + i * MAX_LIGHTS) * 128 + 128;
+        uint8 g = sin (SDL_GetTicks() * 0.002 + i * MAX_LIGHTS) * 128 + 128;
+        uint8 b = sin (SDL_GetTicks() * 0.003 + i * MAX_LIGHTS) * 128 + 128;
 
         lights[i]->color = { r, g, b, 255 };
     }
