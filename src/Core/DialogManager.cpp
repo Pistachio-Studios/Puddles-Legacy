@@ -48,6 +48,10 @@ bool DialogManager::Awake(pugi::xml_node& config) {
 
 bool DialogManager::Start() {
     // Initialization code
+    StartDialog(1);
+
+    indexText = 1;
+
     return true;
 }
 
@@ -58,8 +62,13 @@ bool DialogManager::PreUpdate() {
 
 bool DialogManager::Update(float dt) {
     // Update code
-    StartDialog(1);
     ShowDialog();
+
+    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+    {
+        NextDialog();
+        StartDialog(currentDialogId);
+    }
 
     LOG("update");
 
@@ -102,10 +111,13 @@ void DialogManager::NextDialog() {
         // If the dialog is a dialog, advance to the next line
         // If there are no more lines, end the dialog
         // Otherwise, set the current dialog text to the next line
+        currentDialogId++;
+        indexText = 1;
     } else if (dialog.type == DialogType::CHOICE) {
         // If the dialog is a choice, advance to the next choice
         // If there are no more choices, end the dialog
         // Otherwise, set the current dialog text to the next choice
+
     }
 }
 
@@ -124,10 +136,10 @@ void DialogManager::ShowDialog() {
         SDL_Texture* options1NameTexture = nullptr;
         SDL_Texture* options2NameTexture = nullptr;
 
-        string actualText = currentDialogLine.substr(0, currentDialogId);
+        string actualText = currentDialogLine.substr(0, indexText);
 
         // Render the current dialog text on the screen
-        textTexture = CreateTextTexture(font, currentDialogLine.c_str(), textColor, 200/*TODO text bound widht*/);
+        textTexture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
         app->render->DrawTexture(textTexture, 0/*TODO pos x*/, 0/*TODO pos y*/, 0, 0);
 
         // TODO draw character texture
@@ -140,7 +152,7 @@ void DialogManager::ShowDialog() {
         SDL_DestroyTexture(options1NameTexture);
         SDL_DestroyTexture(options2NameTexture);
 
-        /*
+        
         if (actualText.size() < currentDialogLine.size()) {
 
             if (charTimer.ReadMSec() >= charTimeMS) {
@@ -149,7 +161,7 @@ void DialogManager::ShowDialog() {
             }
 
         }
-        */
+        
 
     }
 }
@@ -159,7 +171,7 @@ SDL_Texture* DialogManager::CreateTextTexture(TTF_Font* font, const char* text, 
     SDL_Surface* textSurface = nullptr;
     SDL_Texture* textTexture = nullptr;
 
-    textSurface = TTF_RenderUTF8_Blended_Wrapped(font, text, color, textBoundWidth);
+    textSurface = TTF_RenderUTF8_Blended_Wrapped(app->render->font, text, color, textBoundWidth);
     textTexture = SDL_CreateTextureFromSurface(app->render->renderer, textSurface);
 
     SDL_FreeSurface(textSurface);
@@ -210,6 +222,7 @@ bool DialogManager::LoadDialogs(string path, map<int, Dialog>& dialogs)
         }
     } catch (const std::ios_base::failure& e) {
         std::cerr << "Failed to open or read file at " << path << ": " << e.what() << std::endl;
+        LOG_ERROR("Failed to open or read file at %s : %s", path.c_str(), e.what());
         ret = false;
     }
 

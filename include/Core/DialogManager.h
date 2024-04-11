@@ -3,6 +3,7 @@
 
 #include "Core/Module.h"
 #include "Utils/List.h"
+#include "Utils/Timer.h"
 #include <SDL_ttf.h>
 #include <map>
 #include <string>
@@ -75,6 +76,11 @@ private:
     TTF_Font* font;
     SDL_Color textColor = { 255, 255, 255, 255 }; // White color
     SDL_Rect textRect;
+
+    int indexText;
+    Timer charTimer;
+
+    int charTimeMS = 100;
 
 };
 
