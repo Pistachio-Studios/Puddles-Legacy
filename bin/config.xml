@@ -1,6 +1,6 @@
 <config>
   <app>
-    <title>Gato-Juego Marugo</title>
+    <title>Proyecto-2</title>
     <maxFrameDuration value="16.666"/>
     <icon path="Assets/Textures/icon.png"/>
   </app>

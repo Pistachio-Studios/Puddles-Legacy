@@ -44,7 +44,7 @@ bool Player::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 20, 10, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
@@ -54,7 +54,7 @@ bool Player::Start() {
 	pbody->body->SetLinearDamping(10.0f);
 
 	movementFSM = new StateMachine<Player>(this);
-	movementFSM->AddState(new PlayerIdleState("idle"));
+	movementFSM->AddState(new PlayerIdleState("idle")); 
 	movementFSM->AddState(new PlayerMoveState("move"));
 
 	return true;
@@ -83,6 +83,12 @@ bool Player::Update(float dt)
 /* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
 	currentAnimation->Update(dt); */
+
+	if (debug)
+	{
+		b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
+		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(mouseWorldPosition.x), METERS_TO_PIXELS(mouseWorldPosition.y), 255, 0, 0);
+	}
 
 	return true;
 }
