@@ -99,8 +99,8 @@ void Window::SetTitle(const char* new_title)
 
 void Window::GetWindowSize(uint& width, uint& height) const
 {
-	width = this->width;
-	height = this->height;
+	width = 1920;
+	height = 1080;
 }
 
 uint Window::GetScale() const

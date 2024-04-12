@@ -13,6 +13,7 @@
 #include <imgui.h>
 
 #define VSYNC true
+#define SDL_HINT_RENDER_SCALE_QUALITY = 1;
 
 Render::Render() : Module()
 {
@@ -61,12 +62,13 @@ bool Render::Awake(pugi::xml_node& config)
 	{
 		// camera.w = app->win->screenSurface->w;
 		// camera.h = app->win->screenSurface->h;
-		SDL_RendererInfo info;
-		SDL_GetRendererOutputSize(renderer, &camera.w, &camera.h);
+		//SDL_RendererInfo info;
+		//SDL_GetRendererOutputSize(renderer, &camera.w, &camera.h);
+		camera.w = 1920;
+		camera.h = 1080;
 		//camera.x = 0;
 		//camera.y = 0;
 	}
-
 
 	//initialise the SDL_ttf library
 	TTF_Init();
@@ -210,6 +212,8 @@ void Render::cameraInterpolation(Entity* target, float lerpSpeed, float dt, iPoi
 // Blit to screen
 bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, SDL_RendererFlip flip, int pivotX, int pivotY) const
 {
+	SDL_RenderSetLogicalSize(renderer, 1920, 1080);
+
 	bool ret = true;
 	uint scale = app->win->GetScale();
 
