@@ -40,13 +40,13 @@ bool EnemyBoss::Start() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string();
+	texturePath = parameters.attribute("texturepath").as_string(); 
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 20, 10, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 20, 10, bodyType::DYNAMIC); 
 	pbody->listener = this;
-	pbody->ctype = ColliderType::PLAYER;
+	pbody->ctype = ColliderType::ENEMY; 
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
@@ -74,7 +74,7 @@ bool EnemyBoss::Update(float dt)
 		}
 	}
 
-	app->render->DrawRectangle({ position.x,position.y,20,10 }, 255, 255, 255);
+	app->render->DrawRectangle({position.x, position.y, 20, 10}, 255, 255, 255);
 
 	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
@@ -97,9 +97,9 @@ void EnemyBoss::DrawImGui()
 
 bool EnemyBoss::SaveState(pugi::xml_node& node) {
 
-	pugi::xml_node playerAttributes = node.append_child("EnemyBoss");
-	playerAttributes.append_attribute("x").set_value(this->position.x);
-	playerAttributes.append_attribute("y").set_value(this->position.y);
+	pugi::xml_node enemybossAttributes = node.append_child("enemies").append_child("EnemyBoss");
+	enemybossAttributes.append_attribute("x").set_value(this->position.x);
+	enemybossAttributes.append_attribute("y").set_value(this->position.y);
 
 	return true;
 
@@ -107,7 +107,7 @@ bool EnemyBoss::SaveState(pugi::xml_node& node) {
 
 bool EnemyBoss::LoadState(pugi::xml_node& node)
 {
-	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("boss").attribute("x").as_int()), PIXEL_TO_METERS(node.child("boss").attribute("y").as_int()) }, node.child("boss").attribute("angle").as_int());
+	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("enemies").child("EnemyBoss").attribute("x").as_int()), PIXEL_TO_METERS(node.child("enemies").child("EnemyBoss").attribute("y").as_int())}, node.child("enemies").child("EnemyBoss").attribute("angle").as_int());
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);

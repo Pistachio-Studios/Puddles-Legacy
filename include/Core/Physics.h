@@ -38,7 +38,7 @@ enum class ColliderType {
 	FOOD,
 	SCOREITEM,
 	CHECKPOINT,
-	ENEMYBOSS,
+	ENEMY,
 	BULLET,
 	PLATFORM,
 	DEATH,

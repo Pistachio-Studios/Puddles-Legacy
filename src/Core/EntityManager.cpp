@@ -160,7 +160,7 @@ void EntityManager::DrawImGui()
 		
 		static EntityType selectedEntityType = EntityType::PLAYER;
 		
-		const char* entityTypes[] = { "PLAYER", "ENEMY"};
+		const char* entityTypes[] = { "PLAYER", "ENEMYBOSS"};
 
 		ImGui::Combo("Entity Type", (int*)&selectedEntityType, entityTypes, IM_ARRAYSIZE(entityTypes));
 		if (ImGui::Button("Spawn Entity"))

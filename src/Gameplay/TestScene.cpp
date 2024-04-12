@@ -30,11 +30,21 @@ bool TestScene::Enter()
 		player->Enable();
 	}
 
-	if (parameters.child("EnemyBoss")) {
+	if (parameters.child("enemies").child("EnemyBoss")) {
 		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
-		enemyboss->parameters = parameters.child("EnemyBoss");
+		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
 		enemyboss->Enable();
 	}
+
+	/*if (parameters.child("enemies"))
+	{
+		pugi::xml_node enemies = parameters.child("enemies");
+		for (pugi::xml_node enemyNode = enemies.child("EnemyBoss"); enemyNode; enemyNode = enemyNode.next_sibling("EnemyBoss"))
+		{
+			EnemyBoss* enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
+			enemyboss->parameters = enemyNode;
+		}
+	}*/
 
 	if (parameters.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
