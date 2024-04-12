@@ -63,6 +63,7 @@ public:
     void NextDialog();
     void EndDialog();
     void ShowDialog();
+    int ChoiceSelector(vector<int> choices);
 
     SDL_Texture* CreateTextTexture(TTF_Font* font, const char* text, SDL_Color color, int textBoundWidth);
 

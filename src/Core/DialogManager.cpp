@@ -127,7 +127,6 @@ void DialogManager::EndDialog() {
     // Clear the current dialog
     currentDialogId = -1;
     currentDialogLine.clear();
-    // TODO clean dialogs map
 }
 
 void DialogManager::ShowDialog() {
@@ -157,6 +156,12 @@ void DialogManager::ShowDialog() {
                 SDL_DestroyTexture(texture);
             }
 
+            // Select the choice
+            int choice = ChoiceSelector(currentDialog->choices);
+            if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+                StartDialog(choice);
+            }
+            
         }
 
         // TODO draw character texture
@@ -175,6 +180,27 @@ void DialogManager::ShowDialog() {
 
     }
 }
+
+int DialogManager::ChoiceSelector(vector<int> choices)
+{
+    static int currentChoice = 0; // Keeps track of the current choice
+
+    if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+        if (currentChoice > 0) { // Ensure we don't go out of bounds
+            currentChoice--;
+        }
+    }
+    
+    if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+        if (currentChoice < choices.size() - 1) { // Ensure we don't go out of bounds
+            currentChoice++;
+        }
+    }
+
+    LOG("current choice: %d", choices[currentChoice]); // TODO remove debug code
+    return choices[currentChoice];
+}
+
 
 SDL_Texture* DialogManager::CreateTextTexture(TTF_Font* font, const char* text, SDL_Color color, int textBoundWidth)
 {
