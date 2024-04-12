@@ -15,9 +15,9 @@ Input::Input() : Module()
 {
 	name.Create("input");
 
-	keyboard = new KeyState[MAX_KEYS];
-	memset(keyboard, KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
-	memset(mouseButtons, KEY_IDLE, sizeof(KeyState) * NUM_MOUSE_BUTTONS);
+	keyboard = new Key_State[MAX_KEYS];
+	memset(keyboard, KEY_IDLE, sizeof(Key_State) * MAX_KEYS);
+	memset(mouseButtons, KEY_IDLE, sizeof(Key_State) * NUM_MOUSE_BUTTONS);
 
 }
 
@@ -25,9 +25,9 @@ Input::Input(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("input");
 
-	keyboard = new KeyState[MAX_KEYS];
-	memset(keyboard, KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
-	memset(mouseButtons, KEY_IDLE, sizeof(KeyState) * NUM_MOUSE_BUTTONS);
+	keyboard = new Key_State[MAX_KEYS];
+	memset(keyboard, KEY_IDLE, sizeof(Key_State) * MAX_KEYS);
+	memset(mouseButtons, KEY_IDLE, sizeof(Key_State) * NUM_MOUSE_BUTTONS);
 	memset(&pads[0], 0, sizeof(GamePad) * MAX_PADS);
 }
 
