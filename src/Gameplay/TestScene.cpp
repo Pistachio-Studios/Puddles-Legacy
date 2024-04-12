@@ -30,6 +30,12 @@ bool TestScene::Enter()
 		player->Enable();
 	}
 
+	if (parameters.child("EnemyBoss")) {
+		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
+		enemyboss->parameters = parameters.child("EnemyBoss");
+		enemyboss->Enable();
+	}
+
 	if (parameters.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
 		app->map->name = parameters.child("map").attribute("name").as_string();

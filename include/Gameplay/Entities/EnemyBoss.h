@@ -1,5 +1,5 @@
-#ifndef __ENEMY_H__
-#define __ENEMY_H__
+#ifndef __ENEMYBOSS_H__
+#define __ENEMYBOSS_H__
 
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
@@ -11,16 +11,16 @@
 
 struct SDL_Texture;
 
-class Enemy : public Entity
+class EnemyBoss : public Entity
 {
 public:
 
 	bool startTimer = true;
 	Timer timer;
 
-	Enemy();
+	EnemyBoss();
 
-	virtual ~Enemy();
+	virtual ~EnemyBoss();
 
 	bool Awake() override;
 
@@ -52,9 +52,10 @@ public:
 	float maxSpeed = 2.0f;
 
 	//State Machines
-	StateMachine<Enemy>* movementFSM = nullptr;
+	StateMachine<EnemyBoss>* movementFSM = nullptr;
 
 	PhysBody* pbody;
+
 };
 
-#endif // __ENEMY_H__
+#endif // __ENEMYBOSS_H__

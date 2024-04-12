@@ -1,4 +1,4 @@
-#include "Gameplay/Entities/Enemy.h"
+#include "Gameplay/Entities/EnemyBoss.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Core/Textures.h"
@@ -22,21 +22,21 @@
 
 #include <imgui.h>
 
-Enemy::Enemy() : Entity(EntityType::ENEMY)
+EnemyBoss::EnemyBoss() : Entity(EntityType::ENEMYBOSS)
 {
-	name.Create("Enemy");
+	name.Create("EnemyBoss");
 }
 
-Enemy::~Enemy() {
+EnemyBoss::~EnemyBoss() {
 
 }
 
-bool Enemy::Awake() {
+bool EnemyBoss::Awake() {
 
 	return true;
 }
 
-bool Enemy::Start() {
+bool EnemyBoss::Start() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -46,7 +46,7 @@ bool Enemy::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 20, 10, bodyType::DYNAMIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY;
+	pbody->ctype = ColliderType::PLAYER;
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
@@ -57,7 +57,7 @@ bool Enemy::Start() {
 	return true;
 }
 
-bool Enemy::Update(float dt)
+bool EnemyBoss::Update(float dt)
 {
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
@@ -80,10 +80,12 @@ bool Enemy::Update(float dt)
 
 		currentAnimation->Update(dt); */
 
+
+
 	return true;
 }
 
-void Enemy::DrawImGui()
+void EnemyBoss::DrawImGui()
 {
 	ImGui::Begin("Enemy");
 	ImGui::Text("Enemy Position: %d, %d", position.x, position.y);
@@ -93,9 +95,9 @@ void Enemy::DrawImGui()
 	ImGui::End();
 }
 
-bool Enemy::SaveState(pugi::xml_node& node) {
+bool EnemyBoss::SaveState(pugi::xml_node& node) {
 
-	pugi::xml_node playerAttributes = node.append_child("enemy");
+	pugi::xml_node playerAttributes = node.append_child("EnemyBoss");
 	playerAttributes.append_attribute("x").set_value(this->position.x);
 	playerAttributes.append_attribute("y").set_value(this->position.y);
 
@@ -103,9 +105,9 @@ bool Enemy::SaveState(pugi::xml_node& node) {
 
 }
 
-bool Enemy::LoadState(pugi::xml_node& node)
+bool EnemyBoss::LoadState(pugi::xml_node& node)
 {
-	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("enemy").attribute("x").as_int()), PIXEL_TO_METERS(node.child("enemy").attribute("y").as_int()) }, node.child("enemy").attribute("angle").as_int());
+	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("boss").attribute("x").as_int()), PIXEL_TO_METERS(node.child("boss").attribute("y").as_int()) }, node.child("boss").attribute("angle").as_int());
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
@@ -113,7 +115,7 @@ bool Enemy::LoadState(pugi::xml_node& node)
 	return true;
 }
 
-bool Enemy::CleanUp() {
+bool EnemyBoss::CleanUp() {
 
 	app->tex->UnLoad(texture);
 	app->physics->DestroyBody(pbody);
@@ -121,14 +123,14 @@ bool Enemy::CleanUp() {
 	return true;
 }
 
-void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
+void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 }
 
-void Enemy::EndCollision(PhysBody* physA, PhysBody* physB) {
+void EnemyBoss::EndCollision(PhysBody* physA, PhysBody* physB) {
 
 }
 
-void Enemy::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
+void EnemyBoss::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
 
 }

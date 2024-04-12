@@ -79,7 +79,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	app->render->DrawRectangle({ position.x,position.y,20,10 }, 255, 255, 255);
+	app->render->DrawRectangle({ position.x + 5,position.y + 13,20,36 }, 255, 255, 255);
 
 /* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
