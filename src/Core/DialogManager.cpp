@@ -1,5 +1,6 @@
 #include "Core/App.h"
 #include "Core/DialogManager.h"
+#include "Core/Textures.h"
 #include "rapidcsv.h"
 #include <Utils/Log.h>
 #include "Core/Render.h"
@@ -39,6 +40,8 @@ bool DialogManager::Awake(pugi::xml_node& config) {
         std::cout << std::endl << "-------------------" << std::endl;
     }
     */
+
+    background = app->tex->Load(config.child("background").attribute("path").as_string());
 
     return ret;
 }

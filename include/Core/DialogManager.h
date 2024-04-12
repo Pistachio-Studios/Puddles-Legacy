@@ -87,6 +87,9 @@ private:
 
     DialogType currentDialogType;
 
+    SDL_Texture* background = nullptr;
+    map<string, SDL_Texture*> characterTextures;
+
 };
 
 #endif // DIALOG_MANAGER_H
