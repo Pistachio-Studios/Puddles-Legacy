@@ -1,0 +1,6 @@
+id,character,ES,EN,CAT,type,choices
+1,character_1,bombardeen,bomb,bombarde,D,
+2,character_2,Como estás?,Como estás?,Como estás?,C,"3,4"
+3,character_2,Bien,Bien,Bien,D,
+4,character_2,Mal,Mal,Mal,D,
+5,character_1,adios,adios,adios,D,
