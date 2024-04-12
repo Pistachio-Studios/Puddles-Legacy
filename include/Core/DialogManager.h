@@ -89,7 +89,8 @@ private:
 
     SDL_Texture* background = nullptr;
     map<string, SDL_Texture*> characterTextures;
-
+    
+    pugi::xml_node parameters;
 };
 
 #endif // DIALOG_MANAGER_H

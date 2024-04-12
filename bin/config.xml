@@ -26,10 +26,9 @@
   <dialog_manager>
 	  <!--Aqui hay que almacenar el fondo del dialogo y las caras de los personajes-->
 	  <background path="Assets/Dialog/background.png"/>
-	  <character_1 path="Assets/Dialog/character_1.png"/>
-	  <character_2 path="Assets/Dialog/character_2.png"/>
-	  <character_3 path="Assets/Dialog/character_3.png"/>
-	  
+    <character_1 path="Assets/Dialog/character_1.png"/>
+    <character_2 path="Assets/Dialog/character_2.png"/>
+    <character_3 path="Assets/Dialog/character_3.png"/>
   </dialog_manager>
 
   <scene_manager startScene="mainmenu">

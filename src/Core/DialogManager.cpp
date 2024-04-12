@@ -1,8 +1,8 @@
 #include "Core/App.h"
 #include "Core/DialogManager.h"
 #include "Core/Textures.h"
-#include "rapidcsv.h"
-#include <Utils/Log.h>
+#include <rapidcsv.h>
+#include "Utils/Log.h"
 #include "Core/Render.h"
 
 DialogManager::DialogManager() {
@@ -41,13 +41,20 @@ bool DialogManager::Awake(pugi::xml_node& config) {
     }
     */
 
-    background = app->tex->Load(config.child("background").attribute("path").as_string());
+    parameters = config;
 
     return ret;
 }
 
 bool DialogManager::Start() {
     // Initialization code
+
+    background = app->tex->Load(parameters.child("background").attribute("path").as_string());
+
+    for (pugi::xml_node node = parameters.child("character_1"); node; node = node.next_sibling()) {
+        characterTextures[node.name()] = app->tex->Load(node.attribute("path").as_string());
+    }
+
     StartDialog(1);
 
     indexText = 1;
@@ -141,6 +148,12 @@ void DialogManager::ShowDialog() {
 
         // Render the current dialog text on the screen
 
+        app->render->DrawTexture(background, 0, 0);
+
+        texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
+        app->render->DrawTexture(texture, 0/*TODO pos x*/, 0/*TODO pos y*/, 0, 0);
+        SDL_DestroyTexture(texture);
+
         if (currentDialog->type == DialogType::DIALOG) {
             texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
             app->render->DrawTexture(texture, 0/*TODO pos x*/, 0/*TODO pos y*/, 0, 0);
@@ -171,6 +184,8 @@ void DialogManager::ShowDialog() {
         //if (dialog->character != nullptr) {
         //    app->render->DrawTexture(dialog->character, 100, 100, 0, 0);
         //}
+
+        app->render->DrawTexture(characterTextures[currentDialog->character], 0, 0);
 
         if (actualText.size() < currentDialogLine.size()) {
 
