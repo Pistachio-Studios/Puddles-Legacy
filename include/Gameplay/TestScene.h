@@ -4,7 +4,7 @@
 #include "Core/GuiControlLabel.h"
 #include "Core/Module.h"
 #include "Gameplay/Entities/Player.h"
-#include "Gameplay/Entities/EnemyBoss.h"
+#include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
 #include "Gameplay/Scene.h"

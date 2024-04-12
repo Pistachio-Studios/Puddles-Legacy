@@ -1,6 +1,6 @@
 #include "Core/EntityManager.h"
 #include "Gameplay/Entities/Player.h"
-#include "Gameplay/Entities/EnemyBoss.h"
+#include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Core/App.h"
 #include "Core/Textures.h"
 #include "Gameplay/Scene.h"

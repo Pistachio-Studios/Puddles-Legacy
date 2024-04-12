@@ -1,4 +1,4 @@
-#include "Gameplay/Entities/EnemyBoss.h"
+#include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Core/Textures.h"
@@ -10,8 +10,11 @@
 #include "Utils/StateMachine.h"
 
 
-//#include "Gameplay/States/Enemy/EnemyIdleState.hpp"
-//#include "Gameplay/States/Enemy/EnemyMoveState.hpp"
+#include "Gameplay/States/EnemyBoss/EnemyBossIdleState.hpp"
+#include "Gameplay/States/EnemyBoss/EnemyBossAttackState.hpp"
+#include "Gameplay/States/EnemyBoss/EnemyBossMoveState.hpp"
+#include "Gameplay/States/EnemyBoss/EnemyBossHurtState.hpp"
+#include "Gameplay/States/EnemyBoss/EnemyBossDeadState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -44,7 +47,7 @@ bool EnemyBoss::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 20, 10, bodyType::DYNAMIC); 
+	pbody = app->physics->CreateRectangle(position.x, position.y, 36, 36, bodyType::DYNAMIC); 
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY; 
 
@@ -53,6 +56,12 @@ bool EnemyBoss::Start() {
 	//pbody->body->GetFixtureList()->SetFriction(25.0f);
 	pbody->body->SetLinearDamping(10.0f);
 
+	movementFSM = new StateMachine<EnemyBoss>(this);
+	movementFSM->AddState(new EnemyBossIdleState("idle"));
+	movementFSM->AddState(new EnemyBossMoveState("move"));
+	movementFSM->AddState(new EnemyBossHurtState("hurt"));
+	movementFSM->AddState(new EnemyBossAttackState("attack"));
+	movementFSM->AddState(new EnemyBossDeadState("die"));
 
 	return true;
 }
@@ -74,12 +83,11 @@ bool EnemyBoss::Update(float dt)
 		}
 	}
 
-	app->render->DrawRectangle({position.x, position.y, 20, 10}, 255, 255, 255);
+	app->render->DrawRectangle({position.x - 1, position.y - 2, 36, 36}, 255, 255, 255);
 
 	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
 		currentAnimation->Update(dt); */
-
 
 
 	return true;
@@ -102,7 +110,6 @@ bool EnemyBoss::SaveState(pugi::xml_node& node) {
 	enemybossAttributes.append_attribute("y").set_value(this->position.y);
 
 	return true;
-
 }
 
 bool EnemyBoss::LoadState(pugi::xml_node& node)
@@ -125,6 +132,30 @@ bool EnemyBoss::CleanUp() {
 
 void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 
+	switch (physB->ctype) {
+
+	//case ColliderType::ARMAPLAYER:
+	//	LOG("Collision ARMAPLAYER");
+	// 	if (state != EntityState::DEAD and !invencible){
+	//		if (lives <= 1)
+	//		{
+	//			// AUDIO DONE boss death
+	//			app->audio->PlayFx(bossDeath);
+	//			movementStateMachine->ChangeState("die");
+	//			reviveTimer.Start();
+	//		}
+	//		else {
+	//			// AUDIO DONE boss hit
+	//			app->audio->PlayFx(bossHit);
+	//			movementStateMachine->ChangeState("hurt");
+	//			lives--;
+	//		}
+	//	}
+	//	break;
+	case ColliderType::UNKNOWN:
+		LOG("Colision UNKNOWN");
+		break;
+	}
 }
 
 void EnemyBoss::EndCollision(PhysBody* physA, PhysBody* physB) {

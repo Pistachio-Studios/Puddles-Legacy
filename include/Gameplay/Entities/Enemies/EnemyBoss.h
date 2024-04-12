@@ -56,6 +56,11 @@ public:
 
 	PhysBody* pbody;
 
+	int health;
+	float damage = 3;
+	bool invencible = false;
+	Timer reviveTimer;
+
 };
 
 #endif // __ENEMYBOSS_H__
