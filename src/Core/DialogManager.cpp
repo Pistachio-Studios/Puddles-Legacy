@@ -148,16 +148,13 @@ void DialogManager::ShowDialog() {
             app->render->DrawTexture(texture, 0/*TODO pos x*/, 0/*TODO pos y*/, 0, 0);
             SDL_DestroyTexture(texture);
 
-            ListItem<int>* choice = currentDialog->choices.start;
-
-            while (currentDialog->choices.Count() > 0)
-            {
-                string currentChoice = dialogs.at(choice->data).ES;
-                texture = CreateTextTexture(font, currentChoice.c_str(), textColor, 200/*TODO text bound widht*/);
-                app->render->DrawTexture(texture, 0/*TODO pos x*/, 0/*TODO pos y*/, 0, 0);
+            // Render the choices
+            for (int i = 0; i < currentDialog->choices.size(); i++) {
+                Dialog& dialog = dialogs.at(currentDialog->choices[i]);
+                string choiceText = dialog.ES;
+                texture = CreateTextTexture(font, choiceText.c_str(), textColor, 200/*TODO text bound widht*/);
+                app->render->DrawTexture(texture, 0/*TODO pos x*/, 100 * (i+1)/*TODO pos y*/, 0, 0);
                 SDL_DestroyTexture(texture);
-
-                choice = choice->next;
             }
 
         }
@@ -229,7 +226,7 @@ bool DialogManager::LoadDialogs(string path, map<int, Dialog>& dialogs)
 
             if (choices[i] != "") {
                 while (getline(ss, token, ',')) {
-                    dialog.choices.Add(stoi(token));
+                    dialog.choices.push_back(stoi(token));
                 }
             }
 

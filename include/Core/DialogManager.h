@@ -7,6 +7,7 @@
 #include <SDL_ttf.h>
 #include <map>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -22,7 +23,7 @@ struct Dialog {
     string EN;
     string CAT;
     DialogType type;
-    List<int> choices;
+    vector<int> choices;
 };
 
 class DialogManager : public Module {
