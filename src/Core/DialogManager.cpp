@@ -25,9 +25,6 @@ bool DialogManager::Awake(pugi::xml_node& config) {
     // Load dialog data from CSV file using rapidcsv
     LoadDialogs("dialogs.csv", dialogs);
 
-    // Load the font for rendering the dialog text
-    font = TTF_OpenFont("arial.ttf", 24);
-
     /*
     // TODO remove this debug code
     for (const auto& pair : dialogs) {
@@ -100,24 +97,29 @@ void DialogManager::StartDialog(int dialogId) {
     currentDialogId = dialogId;
     // Set the current dialog text to the first line of the dialog
     currentDialogLine = dialogs.at(dialogId).ES;
+
+    currentDialog = &dialogs.at(currentDialogId);
 }
 
 void DialogManager::NextDialog() {
     // Get the current dialog
-    Dialog& dialog = dialogs.at(currentDialogId);
+    currentDialog = &dialogs.at(currentDialogId);
     // Advance to the next line or choice in the dialog
     // Set the current dialog text to the next line or choice
-    if (dialog.type == DialogType::DIALOG) {
+    if (currentDialog->type== DialogType::DIALOG) {
         // If the dialog is a dialog, advance to the next line
         // If there are no more lines, end the dialog
         // Otherwise, set the current dialog text to the next line
         currentDialogId++;
         indexText = 1;
-    } else if (dialog.type == DialogType::CHOICE) {
+        currentDialogType = DialogType::DIALOG;
+    } else if (currentDialog->type == DialogType::CHOICE) {
         // If the dialog is a choice, advance to the next choice
         // If there are no more choices, end the dialog
         // Otherwise, set the current dialog text to the next choice
-
+        currentDialogId++;
+        indexText = 1;
+        currentDialogType = DialogType::CHOICE;
     }
 }
 
@@ -131,28 +133,40 @@ void DialogManager::EndDialog() {
 void DialogManager::ShowDialog() {
     if (currentDialogId != -1) {
 
-        SDL_Texture* textTexture = nullptr;
-        SDL_Texture* textNameTexture = nullptr;
-        SDL_Texture* options1NameTexture = nullptr;
-        SDL_Texture* options2NameTexture = nullptr;
+        SDL_Texture* texture = nullptr;
 
         string actualText = currentDialogLine.substr(0, indexText);
 
         // Render the current dialog text on the screen
-        textTexture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
-        app->render->DrawTexture(textTexture, 0/*TODO pos x*/, 0/*TODO pos y*/, 0, 0);
+
+        if (currentDialog->type == DialogType::DIALOG) {
+            texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
+            app->render->DrawTexture(texture, 0/*TODO pos x*/, 0/*TODO pos y*/, 0, 0);
+            SDL_DestroyTexture(texture);
+        } else if (currentDialog->type == DialogType::CHOICE) {
+            texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
+            app->render->DrawTexture(texture, 0/*TODO pos x*/, 0/*TODO pos y*/, 0, 0);
+            SDL_DestroyTexture(texture);
+
+            ListItem<int>* choice = currentDialog->choices.start;
+
+            while (currentDialog->choices.Count() > 0)
+            {
+                string currentChoice = dialogs.at(choice->data).ES;
+                texture = CreateTextTexture(font, currentChoice.c_str(), textColor, 200/*TODO text bound widht*/);
+                app->render->DrawTexture(texture, 0/*TODO pos x*/, 0/*TODO pos y*/, 0, 0);
+                SDL_DestroyTexture(texture);
+
+                choice = choice->next;
+            }
+
+        }
 
         // TODO draw character texture
-        //if (dialog->face_tex != nullptr) {
-        //    app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, 0, 0);
+        //if (dialog->character != nullptr) {
+        //    app->render->DrawTexture(dialog->character, 100, 100, 0, 0);
         //}
 
-        SDL_DestroyTexture(textTexture);
-        SDL_DestroyTexture(textNameTexture);
-        SDL_DestroyTexture(options1NameTexture);
-        SDL_DestroyTexture(options2NameTexture);
-
-        
         if (actualText.size() < currentDialogLine.size()) {
 
             if (charTimer.ReadMSec() >= charTimeMS) {
@@ -161,7 +175,6 @@ void DialogManager::ShowDialog() {
             }
 
         }
-        
 
     }
 }
@@ -211,11 +224,13 @@ bool DialogManager::LoadDialogs(string path, map<int, Dialog>& dialogs)
                 std::cerr << "Invalid dialog type: " << types[i] << std::endl;
                 continue;
             }
+            string token;
+            stringstream ss(choices[i]);
 
-            stringstream choicesStream(choices[i]);
-            string choice;
-            while (getline(choicesStream, choice, ',')) {
-                dialog.choices.Add(stoi(choice));
+            if (choices[i] != "") {
+                while (getline(ss, token, ',')) {
+                    dialog.choices.Add(stoi(token));
+                }
             }
 
             dialogs[dialog.id] = dialog;

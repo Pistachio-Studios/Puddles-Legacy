@@ -69,8 +69,9 @@ public:
 
 private:
     map<int, Dialog> dialogs;   // Map of dialog ID to Dialog data
-    int currentDialogId;        // Current dialog ID
-    string currentDialogLine;      // Current dialog line
+    Dialog* currentDialog;
+    int currentDialogId;
+    string currentDialogLine;
 
     // Font
     TTF_Font* font;
@@ -81,6 +82,8 @@ private:
     Timer charTimer;
 
     int charTimeMS = 100;
+
+    DialogType currentDialogType;
 
 };
 
