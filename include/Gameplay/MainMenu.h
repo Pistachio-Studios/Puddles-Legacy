@@ -4,6 +4,8 @@
 #include "Gameplay/Scene.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
+#include "Core/GuiControlPopUp.h"
+#include "Core/GuiControlSlider.h"
 
 struct SDL_Texture;
 
@@ -49,7 +51,10 @@ private:
 	GuiControlButton* playButton;
 	GuiControlButton* optionsButton;
 	GuiControlButton* exitButton;
-
+	GuiControlPopUp* popUpOptions = nullptr;
+	GuiControlButton* crossOButton = nullptr;
+	GuiControlSlider* music = nullptr;
+	
 	bool exitPressed = false;
 };
 

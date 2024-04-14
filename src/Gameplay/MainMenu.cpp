@@ -1,6 +1,7 @@
 #include "Core/App.h"
 #include "Core/SceneManager.h"
 #include "Core/Window.h"
+#include "Core/Audio.h"
 #include "Gameplay/MainMenu.h"
 
 #include "Utils/Log.h"
@@ -95,10 +96,31 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		app->sceneManager->ChangeScene("testscene");
 		break;
 	case 2:
+		if (popUpOptions == nullptr) {
+			popUpOptions = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", { 0,0,0,0 }, this);
+			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 100), static_cast<int>(windowH / 2 - 25), 30, 30 };
+			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
+			SDL_Rect musicPos = { static_cast<int>(windowW / 2 - 70), static_cast<int>(windowH / 2 + 10), 150, 20 };
+			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 6, "Music ", musicPos, this, 0, 128);
+		}
 		break;
 	case 3:
 		exitPressed = true;
 		break;
+	case 5:
+		if (crossOButton != nullptr) {
+				app->guiManager->RemoveGuiControl(popUpOptions);
+				popUpOptions = nullptr;
+				app->guiManager->RemoveGuiControl(crossOButton);
+				crossOButton = nullptr;
+				app->guiManager->RemoveGuiControl(music);
+				music = nullptr;
+		}
+		break;
+	case 6:
+		if (popUpOptions != nullptr) {
+			app->audio->SetVolume(music->currentValue, true);
+		}  
 	}
 	
 	return true;
