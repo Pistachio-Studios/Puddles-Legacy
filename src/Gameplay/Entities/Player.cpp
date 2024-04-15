@@ -14,6 +14,7 @@
 #include "Gameplay/States/Player/PlayerMoveState.hpp"
 #include "Gameplay/States/Player/PlayerCombatIdleState.hpp"
 #include "Gameplay/States/Player/PlayerCombatAttackState.hpp"
+#include "Gameplay/States/Player/PlayerCombatBlockState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -62,6 +63,7 @@ bool Player::Start() {
 	combatFSM = new StateMachine<Player>(this);
 	combatFSM->AddState(new PlayerCombatIdleState("idle"));
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
+	combatFSM->AddState(new PlayerCombatBlockState("block"));
 
 	return true;
 }

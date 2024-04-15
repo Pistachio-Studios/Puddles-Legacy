@@ -24,6 +24,10 @@ public:
 
             StateMachineReference->ChangeState("attack");
         }
+        else if (app->input->GetMouseButtonDown(3))
+        {
+            StateMachineReference->ChangeState("block");
+        }
     }
     inline void Exit() override
     {

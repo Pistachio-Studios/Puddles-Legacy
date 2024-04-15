@@ -1,6 +1,7 @@
 #include "Core/EntityManager.h"
 #include "Gameplay/Entities/Player.h"
 #include "Gameplay/Entities/Sword.h"
+#include "Gameplay/Entities/Shield.h"
 #include "Core/App.h"
 #include "Core/Textures.h"
 #include "Gameplay/Scene.h"
@@ -96,6 +97,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::SWORD:
 		entity = new Sword();
+		break;
+	case EntityType::SHIELD:
+		entity = new Shield();
 		break;
 	default:
 		break;
