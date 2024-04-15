@@ -16,11 +16,6 @@ enum class EntityType
 	UNKNOWN
 };
 
-enum class EntityState {
-	NONE,
-	IDLE
-};
-
 class Entity
 {
 public:
@@ -94,7 +89,6 @@ public:
 
 	SString name;
 	EntityType type;
-	EntityState state;
 	bool active = true;
 	pugi::xml_node parameters;
 

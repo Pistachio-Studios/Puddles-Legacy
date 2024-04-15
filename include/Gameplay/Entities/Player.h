@@ -53,8 +53,15 @@ public:
 
 	//State Machines
 	StateMachine<Player>* movementFSM = nullptr;
+	StateMachine<Player>* combatFSM = nullptr;
 
 	PhysBody* pbody;
+
+	b2Vec2 lookingDir;
+	float lookingAngle = 0;
+
+	//tmp
+	PhysBody* sword;
 };
 
 #endif // __PLAYER_H__

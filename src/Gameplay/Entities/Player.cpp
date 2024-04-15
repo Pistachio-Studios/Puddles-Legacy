@@ -12,6 +12,8 @@
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
 #include "Gameplay/States/Player/PlayerMoveState.hpp"
+#include "Gameplay/States/Player/PlayerCombatIdleState.hpp"
+#include "Gameplay/States/Player/PlayerCombatAttackState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -44,7 +46,7 @@ bool Player::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 64 / 2, 128 / 2, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
@@ -57,12 +59,19 @@ bool Player::Start() {
 	movementFSM->AddState(new PlayerIdleState("idle")); 
 	movementFSM->AddState(new PlayerMoveState("move"));
 
+	combatFSM = new StateMachine<Player>(this);
+	combatFSM->AddState(new PlayerCombatIdleState("idle"));
+	combatFSM->AddState(new PlayerCombatAttackState("attack"));
+
+	sword = app->physics->CreateRectangle(position.x, position.y, 30, 10, bodyType::DYNAMIC);
+
 	return true;
 }
 
 bool Player::Update(float dt)
 {
 	movementFSM->Update(dt);
+	combatFSM->Update(dt);
 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
@@ -84,9 +93,16 @@ bool Player::Update(float dt)
 
 	currentAnimation->Update(dt); */
 
+	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
+
+	lookingDir = mouseWorldPosition - pbody->body->GetPosition();
+	lookingDir.Normalize();
+
+	lookingAngle = -app->physics->lookAt(b2Vec2(1, 0), lookingDir) * 2;
+
 	if (debug)
 	{
-		b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
+		mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(mouseWorldPosition.x), METERS_TO_PIXELS(mouseWorldPosition.y), 255, 0, 0);
 	}
 
@@ -100,6 +116,10 @@ void Player::DrawImGui()
 	ImGui::Text("Player Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
+
+	ImGui::Text("Looking Dir: (%f, %f)", lookingDir.x, lookingDir.y);
+	ImGui::Text("Looking Angle: %f", lookingAngle);
+
 	ImGui::End();
 }
 
