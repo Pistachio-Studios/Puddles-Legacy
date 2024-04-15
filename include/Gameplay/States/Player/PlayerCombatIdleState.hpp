@@ -20,10 +20,6 @@ public:
     }
     inline void Update(float dt) override
     {
-        b2Vec2 playerPos = player->pbody->body->GetPosition();
-        b2Vec2 swordPos = { playerPos.x + (float)cos(player->lookingAngle), playerPos.y + (float)sin(player->lookingAngle) };
-        player->sword->body->SetTransform(swordPos, player->lookingAngle);
-
         if (app->input->GetMouseButtonDown(1)) {
 
             StateMachineReference->ChangeState("attack");

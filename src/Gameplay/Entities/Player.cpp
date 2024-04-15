@@ -63,8 +63,6 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatIdleState("idle"));
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 
-	sword = app->physics->CreateRectangle(position.x, position.y, 30, 10, bodyType::DYNAMIC);
-
 	return true;
 }
 
