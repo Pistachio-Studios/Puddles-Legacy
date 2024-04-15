@@ -25,7 +25,7 @@ public:
         if (enemyboss->reviveTimer.ReadSec() >= 5)
         {
             StateMachineReference->ChangeState("idle");
-            enemyboss->health = 5;
+            //enemyboss->health = 5;
         }
     }
     inline void Exit() override

@@ -131,6 +131,24 @@ void EntityManager::AddEntity(Entity* entity)
 	if ( entity != nullptr) entities.Add(entity);
 }
 
+Player* EntityManager::GetPlayerEntity()
+{
+	bool ret = true;
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+
+	for (item = entities.start; item != NULL && ret == true; item = item->next)
+	{
+		pEntity = item->data;
+		if (pEntity->type == EntityType::PLAYER)
+		{
+			return (Player*)pEntity;
+		}
+	}
+	LOG_WARNING("Player Entity not found!");
+	return nullptr;
+}
+
 bool EntityManager::Update(float dt)
 {
 	// OPTICK PROFILIN

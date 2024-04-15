@@ -5,10 +5,13 @@
 #include "Utils/State.h"
 #include "Utils/SString.h"
 #include "Utils/Defs.h"
+#include "Gameplay/Entities/Player.h"
 
+class Player;
 class EnemyBossMoveState : public State<EnemyBoss> {
 private:
     EnemyBoss* enemyboss;
+    Player* player;
 
 public:
     EnemyBossMoveState(SString name) : State(name) {}
@@ -22,17 +25,19 @@ public:
     {
         LOG("EnemyBossMoveState Update()");
 
-        //enemyboss->pathfindingMovement(dt);
-        //if (PIXEL_TO_METERS(app->scene->player->position.DistanceTo(enemyboss->position)) < 1.0f) {
-        //    if (enemyboss->attackTimer.ReadSec() >= 2)
-        //    {
-        //        StateMachineReference->ChangeState("attack");
-        //    }
-        //}
-        //else if ((PIXEL_TO_METERS(app->scene->player->position.DistanceTo(enemyboss->position)) > 5.0f)) {
-        //    enemyboss->moveToSpawnPoint();
-        //    StateMachineReference->ChangeState("idle");
-        //}
+        player = app->entityManager->GetPlayerEntity();
+
+        enemyboss->pathfindingMovement(dt);
+        if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 1.0f) {
+            //if (enemyboss->attackTimer.ReadSec() >= 2)
+            //{
+            //    StateMachineReference->ChangeState("attack");
+            //}
+        }
+        else if ((PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 5.0f)) {
+            enemyboss->moveToSpawnPoint();
+            StateMachineReference->ChangeState("idle");
+        }
     }
     inline void Exit() override
     {
