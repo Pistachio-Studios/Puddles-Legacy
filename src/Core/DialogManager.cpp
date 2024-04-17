@@ -153,7 +153,7 @@ void DialogManager::ShowDialog(int x, int y) {
         //texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
         //app->render->DrawTexture(texture, x, y, 0, 0);
         //SDL_DestroyTexture(texture);
-
+        0
         if (currentDialog->type == DialogType::DIALOG) {
             texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
             app->render->DrawTexture(texture, x, y, 0, 0);
