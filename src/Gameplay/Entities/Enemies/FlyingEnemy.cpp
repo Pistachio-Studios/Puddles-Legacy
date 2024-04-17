@@ -1,4 +1,4 @@
-#include "Gameplay/Entities/Enemies/EnemyBoss.h"
+#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -13,11 +13,11 @@
 #include "Core/Map.h"
 
 
-#include "Gameplay/States/EnemyBoss/EnemyBossIdleState.hpp"
-#include "Gameplay/States/EnemyBoss/EnemyBossAttackState.hpp"
-#include "Gameplay/States/EnemyBoss/EnemyBossMoveState.hpp"
-#include "Gameplay/States/EnemyBoss/EnemyBossHurtState.hpp"
-#include "Gameplay/States/EnemyBoss/EnemyBossDeadState.hpp"
+#include "Gameplay/States/FlyingEnemy/FlyingEnemyIdleState.hpp"
+#include "Gameplay/States/FlyingEnemy/FlyingEnemyAttackState.hpp"
+#include "Gameplay/States/FlyingEnemy/FlyingEnemyMoveState.hpp"
+#include "Gameplay/States/FlyingEnemy/FlyingEnemyHurtState.hpp"
+#include "Gameplay/States/FlyingEnemy/FlyingEnemyDeadState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -28,32 +28,32 @@
 
 #include <imgui.h>
 
-EnemyBoss::EnemyBoss() : Entity(EntityType::ENEMYBOSS)
+FlyingEnemy::FlyingEnemy() : Entity(EntityType::FLYINGENEMY)
 {
-	name.Create("EnemyBoss");
+	name.Create("FlyingEnemy");
 }
 
-EnemyBoss::~EnemyBoss() {
+FlyingEnemy::~FlyingEnemy() {
 
 }
 
-bool EnemyBoss::Awake() {
+bool FlyingEnemy::Awake() {
 
 	return true;
 }
 
-bool EnemyBoss::Start() {
+bool FlyingEnemy::Start() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string(); 
+	texturePath = parameters.attribute("texturepath").as_string();
 	newPosition = spawnPosition = position;
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 36, 36, bodyType::DYNAMIC); 
+	pbody = app->physics->CreateRectangle(position.x, position.y, 36, 36, bodyType::DYNAMIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY; 
+	pbody->ctype = ColliderType::ENEMY;
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
@@ -62,19 +62,19 @@ bool EnemyBoss::Start() {
 
 	player = app->entityManager->GetPlayerEntity();
 
-	movementFSM = new StateMachine<EnemyBoss>(this);
-	movementFSM->AddState(new EnemyBossIdleState("idle"));
-	movementFSM->AddState(new EnemyBossMoveState("move"));
-	movementFSM->AddState(new EnemyBossHurtState("hurt"));
-	movementFSM->AddState(new EnemyBossAttackState("attack"));
-	movementFSM->AddState(new EnemyBossDeadState("die"));
+	movementFSM = new StateMachine<FlyingEnemy>(this);
+	movementFSM->AddState(new FlyingEnemyIdleState("idle"));
+	movementFSM->AddState(new FlyingEnemyMoveState("move"));
+	movementFSM->AddState(new FlyingEnemyHurtState("hurt"));
+	movementFSM->AddState(new FlyingEnemyAttackState("attack"));
+	movementFSM->AddState(new FlyingEnemyDeadState("die"));
 
 	return true;
 }
 
-bool EnemyBoss::Update(float dt)
+bool FlyingEnemy::Update(float dt)
 {
-	movementFSM->Update(dt); 
+	movementFSM->Update(dt);
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
 	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
@@ -89,9 +89,10 @@ bool EnemyBoss::Update(float dt)
 			freeCam = !freeCam;
 		}
 	}
-	//Dibujar un circulo - sombra
-	app->render->DrawRectangle({position.x - 1, position.y - 2, 36, 36}, 255, 255, 255); 
 
+	app->render->DrawRectangle({ position.x - 1, position.y - 2, 36, 36 }, 0, 50, 255);
+
+	app->render->DrawCircle(position.x, position.y + 5, 1, 0, 0, 0, 0);
 	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
 		currentAnimation->Update(dt); */
@@ -100,41 +101,41 @@ bool EnemyBoss::Update(float dt)
 	return true;
 }
 
-void EnemyBoss::DrawImGui()
+void FlyingEnemy::DrawImGui()
 {
-	ImGui::Begin("Enemy");
-	ImGui::Text("Enemy Position: %d, %d", position.x, position.y);
-	ImGui::Text("Enemy Speed: %f", pbody->body->GetLinearVelocity().Length());
+	ImGui::Begin("FlyingEnemy");
+	ImGui::Text("FlyingEnemy Position: %d, %d", position.x, position.y);
+	ImGui::Text("FlyingEnemy Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
 	ImGui::End();
 }
 
-void EnemyBoss::Idle(float dt) {
+void FlyingEnemy::Idle(float dt) {
 
 }
 
-void EnemyBoss::Move(float dt) {
+void FlyingEnemy::Move(float dt) {
 	// TODO move logic
 }
 
-void EnemyBoss::Attack(float dt)
+void FlyingEnemy::Attack(float dt)
 {
 
 }
 
-bool EnemyBoss::SaveState(pugi::xml_node& node) {
+bool FlyingEnemy::SaveState(pugi::xml_node& node) {
 
-	pugi::xml_node enemybossAttributes = node.append_child("enemies").append_child("EnemyBoss");
+	pugi::xml_node enemybossAttributes = node.append_child("enemies").append_child("FlyingEnemy");
 	enemybossAttributes.append_attribute("x").set_value(this->position.x);
 	enemybossAttributes.append_attribute("y").set_value(this->position.y);
 
 	return true;
 }
 
-bool EnemyBoss::LoadState(pugi::xml_node& node)
+bool FlyingEnemy::LoadState(pugi::xml_node& node)
 {
-	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("enemies").child("EnemyBoss").attribute("x").as_int()), PIXEL_TO_METERS(node.child("enemies").child("EnemyBoss").attribute("y").as_int())}, node.child("enemies").child("EnemyBoss").attribute("angle").as_int());
+	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("enemies").child("FlyingEnemy").attribute("x").as_int()), PIXEL_TO_METERS(node.child("enemies").child("FlyingEnemy").attribute("y").as_int()) }, node.child("enemies").child("FlyingEnemy").attribute("angle").as_int());
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
@@ -142,18 +143,18 @@ bool EnemyBoss::LoadState(pugi::xml_node& node)
 	return true;
 }
 
-void EnemyBoss::StopMoving() 
+void FlyingEnemy::StopMoving()
 {
 	if (PIXEL_TO_METERS(player->position.DistanceTo(position)) > 5.0f) { updateSpeed == noSpeed; }
 	else { updateSpeed == moveSpeed; }
-	
-	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)}, 0); 
+
+	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
 
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
 }
 
-void EnemyBoss::moveToSpawnPoint()
+void FlyingEnemy::moveToSpawnPoint()
 {
 	position = spawnPosition;
 
@@ -163,7 +164,7 @@ void EnemyBoss::moveToSpawnPoint()
 	pbody->body->SetAwake(true);
 }
 
-bool EnemyBoss::CleanUp() {
+bool FlyingEnemy::CleanUp() {
 
 	app->tex->UnLoad(texture);
 	app->physics->DestroyBody(pbody);
@@ -171,45 +172,45 @@ bool EnemyBoss::CleanUp() {
 	return true;
 }
 
-void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
+void FlyingEnemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype) {
 
-	//case ColliderType::ARMAPLAYER:
-	//	LOG("Collision ARMAPLAYER");
-	// 	if (state != EntityState::DEAD and !invencible){
-	//		if (lives <= 1)
-	//		{
-	//			// AUDIO DONE boss death
-	//			app->audio->PlayFx(bossDeath);
-	//			movementStateMachine->ChangeState("die");
-	//			reviveTimer.Start();
-	//		}
-	//		else {
-	//			// AUDIO DONE boss hit
-	//			app->audio->PlayFx(bossHit);
-	//			movementStateMachine->ChangeState("hurt");
-	//			lives--;
-	//		}
-	//	}
-	//	break;
+		//case ColliderType::ARMAPLAYER:
+		//	LOG("Collision ARMAPLAYER");
+		// 	if (state != EntityState::DEAD and !invencible){
+		//		if (lives <= 1)
+		//		{
+		//			// AUDIO DONE boss death
+		//			app->audio->PlayFx(bossDeath);
+		//			movementStateMachine->ChangeState("die");
+		//			reviveTimer.Start();
+		//		}
+		//		else {
+		//			// AUDIO DONE boss hit
+		//			app->audio->PlayFx(bossHit);
+		//			movementStateMachine->ChangeState("hurt");
+		//			lives--;
+		//		}
+		//	}
+		//	break;
 	case ColliderType::UNKNOWN:
 		LOG("Colision UNKNOWN");
 		break;
 	}
 }
 
-void EnemyBoss::EndCollision(PhysBody* physA, PhysBody* physB) {
+void FlyingEnemy::EndCollision(PhysBody* physA, PhysBody* physB) {
 
 }
 
-void EnemyBoss::pathfindingMovement(float dt) {
+void FlyingEnemy::pathfindingMovement(float dt) {
 
 	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //añadir el tile size / 2 hace que el owl se acerque mas 
 
 	if (timer.ReadMSec() > 250) {
 		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //añadir el tile size / 2 hace que el owl se acerque mas
-		app->map->pathfinding->CreatePath(origin, destination); 
+		app->map->pathfinding->CreatePath(origin, destination);
 		timer.Start();
 		currentPathPos = 0;
 	}
@@ -226,10 +227,10 @@ void EnemyBoss::pathfindingMovement(float dt) {
 		}
 	}
 
-	pbody->body->SetTransform( 
+	pbody->body->SetTransform(
 		{
-			std::lerp(pbody->body->GetPosition().x, PIXEL_TO_METERS(newPosition.x), dt * moveSpeed / 1000), 
-			std::lerp(pbody->body->GetPosition().y, PIXEL_TO_METERS(newPosition.y), dt * moveSpeed / 1000) 
+			std::lerp(pbody->body->GetPosition().x, PIXEL_TO_METERS(newPosition.x), dt * moveSpeed / 1000),
+			std::lerp(pbody->body->GetPosition().y, PIXEL_TO_METERS(newPosition.y), dt * moveSpeed / 1000)
 
 		},
 
@@ -252,6 +253,6 @@ void EnemyBoss::pathfindingMovement(float dt) {
 	}
 }
 
-void EnemyBoss::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
+void FlyingEnemy::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
 
 }

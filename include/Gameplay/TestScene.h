@@ -5,6 +5,7 @@
 #include "Core/Module.h"
 #include "Gameplay/Entities/Player.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
+#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
 #include "Gameplay/Scene.h"
@@ -47,6 +48,7 @@ public:
 	bool winCondition = false;
 	Player* player;
 	EnemyBoss* enemyboss;
+	FlyingEnemy* flyingenemy;
 
 private:
 	SDL_Texture* img;
