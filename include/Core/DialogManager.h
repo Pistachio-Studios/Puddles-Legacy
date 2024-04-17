@@ -8,6 +8,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <Utils/Point.h>
 
 using namespace std;
 
@@ -62,7 +63,7 @@ public:
     void StartDialog(int dialogId);
     void NextDialog();
     void EndDialog();
-    void ShowDialog();
+    void ShowDialog(int x = 0, int y = 0);
     int ChoiceSelector(vector<int> choices);
 
     SDL_Texture* CreateTextTexture(TTF_Font* font, const char* text, SDL_Color color, int textBoundWidth);
