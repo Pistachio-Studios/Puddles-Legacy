@@ -1,5 +1,6 @@
 #include "Core/App.h"
 #include "Core/Input.h"
+#include "Gameplay/Entities/Npcs/Tabernero.h"
 #include "Utils/SString.h"
 #include "Core/Render.h"
 #include "Utils/Timer.h"
@@ -10,6 +11,7 @@
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
+#include "Gameplay/Entities/Npcs/Loco.h"
 
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
@@ -31,14 +33,18 @@ bool TestScene::Enter()
 	}
 
 	if (parameters.child("Npcs").child("loco")) {
-		loco = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
-		loco->parameters = parameters.child("loco");
+
+		Loco* loco = new Loco();
+		app->entityManager->AddEntity(loco);
+		loco->parameters = parameters.child("Npcs").child("loco");
 		loco->Enable();
 	}
 
-	if (parameters.child("Npcs").child("tabernero")) {
-		tabernero = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
-		tabernero->parameters = parameters.child("tabernero");
+ 	if (parameters.child("Npcs").child("tabernero")) {
+		
+		Tabernero* tabernero = new Tabernero();
+		app->entityManager->AddEntity(tabernero);
+		tabernero->parameters = parameters.child("Npcs").child("tabernero");
 		tabernero->Enable();
 	}
 

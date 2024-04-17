@@ -23,12 +23,19 @@ Npc::~Npc() {
 }
 
 bool Npc::Awake() {
+
 	return true;
 }
 
 bool Npc::Start() {
 
 	timer = Timer();
+
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
+	texturePath = parameters.attribute("texturepath").as_string();
+
+	texture = app->tex->Load(texturePath);
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::STATIC);
 	pbody->listener = this;
@@ -41,9 +48,14 @@ bool Npc::Update(float dt)
 {
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
+	int width, height;
+	SDL_QueryTexture(texture, NULL, NULL, &width, &height);
+
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2;
+
+	app->render->DrawTexture(texture, position.x, position.y);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 

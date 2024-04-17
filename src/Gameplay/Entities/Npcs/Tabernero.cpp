@@ -32,12 +32,7 @@ bool Tabernero::Awake() {
 }
 
 bool Tabernero::Start() {
-
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string();
-
-	texture = app->tex->Load(texturePath);
+	Npc::Start();
 
 	timer = Timer();
 
@@ -48,13 +43,12 @@ bool Tabernero::Update(float dt)
 {
 	Npc::Update(dt);
 
-	app->render->DrawTexture(texture, position.x, position.y);
-
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 
 	return true;
 }
 
 bool Tabernero::CleanUp() {
+	Npc::CleanUp();
 	return true; 
 }

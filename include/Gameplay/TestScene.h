@@ -46,8 +46,6 @@ public:
 public:
 	bool winCondition = false;
 	Player* player;
-	Npc* loco;
-	Npc* tabernero;
 
 private:
 	SDL_Texture* img;

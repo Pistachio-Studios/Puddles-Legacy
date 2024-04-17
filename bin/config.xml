@@ -37,8 +37,8 @@
         <dog_enemy x="886" y="1725" texturepath=""/>
       </enemies>
 	  <Npcs>
-		<loco x="672" y="2032" texturepath="Assets/Textures/Npcs/Loco"/>
-	    <tabernero x="700" y="2032" texturepath="Assets/Textures/Npcs/Tabernero"/>
+		  <loco x="672" y="2032" texturepath="Assets/Textures/Npcs/Loco.png"/>
+	    <tabernero x="700" y="2032" texturepath="Assets/Textures/Npcs/Tabernero.png"/>
 	  </Npcs>
       
     </testscene>
