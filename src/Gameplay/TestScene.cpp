@@ -36,15 +36,15 @@ bool TestScene::Enter()
 		enemyboss->Enable();
 	}
 
-	//if (parameters.child("enemies"))
-	//{
-	//	pugi::xml_node enemies = parameters.child("enemies");
-	//	for (pugi::xml_node flyEnemyNode = enemies.child("FlyEnemy"); flyEnemyNode; flyEnemyNode = flyEnemyNode.next_sibling("FlyEnemy"))
-	//	{
-	//		FlyEnemy* flyeenemy = (FlyEnemy*)app->entityManager->CreateEntity(EntityType::FLYENEMY);
-	//		flyeenemy->parameters = flyEnemyNode;
-	//	}
-	//}
+	if (parameters.child("enemies"))
+	{
+		pugi::xml_node enemies = parameters.child("enemies");
+		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
+		{
+			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
+			flyingenemy->parameters = FlyingEnemyNode;
+		}
+	}
 
 	if (parameters.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
