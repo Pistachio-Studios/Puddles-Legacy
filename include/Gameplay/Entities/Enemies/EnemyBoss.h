@@ -19,6 +19,10 @@ public:
 	bool startTimer = true;
 	Timer timer;
 
+	void Idle(float dt);
+	void Move(float dt) override;
+	void Attack(float dt) override;
+
 	EnemyBoss();
 
 	virtual ~EnemyBoss();
@@ -46,6 +50,7 @@ public:
 	bool LoadState(pugi::xml_node& node) override;
 
 	void moveToSpawnPoint();
+	void StopMoving();
 
 public:
 
@@ -56,6 +61,8 @@ public:
 
 	//Movement
 	int moveSpeed = 2;
+	int noSpeed = 0;
+	int updateSpeed;
 	float moveForce = 1.0f;
 	float maxSpeed = 2.0f;
 
@@ -72,6 +79,7 @@ public:
 	int health;
 	float damage = 3;
 	bool invencible = false;
+
 	Timer reviveTimer;
 	Timer attackTimer;
 	Player* player;

@@ -29,13 +29,14 @@ public:
 
         enemyboss->pathfindingMovement(dt);
         if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 1.0f) {
-            //if (enemyboss->attackTimer.ReadSec() >= 2)
-            //{
-            //    StateMachineReference->ChangeState("attack");
-            //}
+            if (enemyboss->attackTimer.ReadSec() >= 2)
+            {
+                StateMachineReference->ChangeState("attack");
+            }
         }
         else if ((PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 5.0f)) {
-            enemyboss->moveToSpawnPoint();
+            //enemyboss->moveToSpawnPoint();
+            enemyboss->StopMoving();
             StateMachineReference->ChangeState("idle");
         }
     }

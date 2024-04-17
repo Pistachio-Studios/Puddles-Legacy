@@ -110,6 +110,19 @@ void EnemyBoss::DrawImGui()
 	ImGui::End();
 }
 
+void EnemyBoss::Idle(float dt) {
+
+}
+
+void EnemyBoss::Move(float dt) {
+	// TODO move logic
+}
+
+void EnemyBoss::Attack(float dt)
+{
+
+}
+
 bool EnemyBoss::SaveState(pugi::xml_node& node) {
 
 	pugi::xml_node enemybossAttributes = node.append_child("enemies").append_child("EnemyBoss");
@@ -127,6 +140,17 @@ bool EnemyBoss::LoadState(pugi::xml_node& node)
 	pbody->body->SetAwake(true);
 
 	return true;
+}
+
+void EnemyBoss::StopMoving() 
+{
+	if (PIXEL_TO_METERS(player->position.DistanceTo(position)) > 5.0f) { updateSpeed == noSpeed; }
+	else { updateSpeed == moveSpeed; }
+	
+	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)}, 0); 
+
+	pbody->body->SetAwake(false);
+	pbody->body->SetAwake(true);
 }
 
 void EnemyBoss::moveToSpawnPoint()

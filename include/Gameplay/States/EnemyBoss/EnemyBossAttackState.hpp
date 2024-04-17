@@ -5,10 +5,13 @@
 #include "Utils/State.h"
 #include "Utils/SString.h"
 #include "Utils/Defs.h"
+#include "Gameplay/Entities/Player.h"
 
+class Player;
 class EnemyBossAttackState : public State<EnemyBoss> {
 private:
     EnemyBoss* enemyboss;
+    Player* player;
 
 public:
     EnemyBossAttackState(SString name) : State(name) {}
@@ -22,16 +25,16 @@ public:
     {
         LOG("EnemyBossAttackState Update()");
 
-        //b2Vec2 attackDirection = { (float32)app->scene->player->position.x - dogEnemy->position.x, (float32)app->scene->player->position.y - dogEnemy->position.y };
-        //attackDirection.Normalize();
+        /*b2Vec2 attackDirection = { (float32)player->position.x - enemyboss->position.x, (float32)player->position.y - enemyboss->position.y };
+        attackDirection.Normalize(); 
 
-        //b2Vec2 attackImpulse = { attackDirection.x / 4, attackDirection.y / 4 };
+        b2Vec2 attackImpulse = { attackDirection.x, attackDirection.y }; 
 
-        //dogEnemy->pbody->body->ApplyLinearImpulse(attackImpulse, dogEnemy->pbody->body->GetWorldCenter(), true);
+        enemyboss->pbody->body->ApplyLinearImpulse(attackImpulse, enemyboss->pbody->body->GetWorldCenter(), true);*/
+        app->render->DrawRectangle({ enemyboss->position.x - 5, enemyboss->position.y - 2, 36, 36 }, 0, 50, 255);
 
-        //dogEnemy->attackTimer.Start();
-
-        //StateMachineReference->ChangeState("move");
+        enemyboss->attackTimer.Start(); 
+        StateMachineReference->ChangeState("move"); 
     }
     inline void Exit() override
     {

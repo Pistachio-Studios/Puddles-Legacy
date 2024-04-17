@@ -19,6 +19,8 @@ enum class EntityType
 
 enum class EntityState {
 	NONE,
+	MOVE,
+	ATTACK,
 	IDLE
 };
 
@@ -61,6 +63,9 @@ public:
 	{
 		return true;
 	}
+
+	virtual void Move(float dt) {};
+	virtual void Attack(float dt) {}; 
 
 	void Enable()
 	{

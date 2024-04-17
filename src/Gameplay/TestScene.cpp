@@ -23,7 +23,7 @@ bool TestScene::Enter()
 {
 	// iterate all objects in the testscene
 	// Check https://pugixml.org/docs/quickstart.html#access
-
+	
 	if (parameters.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = parameters.child("player");
@@ -36,15 +36,15 @@ bool TestScene::Enter()
 		enemyboss->Enable();
 	}
 
-	/*if (parameters.child("enemies"))
-	{
-		pugi::xml_node enemies = parameters.child("enemies");
-		for (pugi::xml_node enemyNode = enemies.child("EnemyBoss"); enemyNode; enemyNode = enemyNode.next_sibling("EnemyBoss"))
-		{
-			EnemyBoss* enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
-			enemyboss->parameters = enemyNode;
-		}
-	}*/
+	//if (parameters.child("enemies"))
+	//{
+	//	pugi::xml_node enemies = parameters.child("enemies");
+	//	for (pugi::xml_node flyEnemyNode = enemies.child("FlyEnemy"); flyEnemyNode; flyEnemyNode = flyEnemyNode.next_sibling("FlyEnemy"))
+	//	{
+	//		FlyEnemy* flyeenemy = (FlyEnemy*)app->entityManager->CreateEntity(EntityType::FLYENEMY);
+	//		flyeenemy->parameters = flyEnemyNode;
+	//	}
+	//}
 
 	if (parameters.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
