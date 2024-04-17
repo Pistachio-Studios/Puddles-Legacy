@@ -1,5 +1,5 @@
-#ifndef __NPCMANAGER_H__
-#define __NPCMANAGER_H__
+#ifndef __NPCS_H__
+#define __NPCS_H__
 
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
@@ -7,16 +7,16 @@
 
 struct SDL_Texture;
 
-class NPCManager : public Entity
+class Npc : public Entity
 {
 public:
 
 	bool startTimer = true;
 	Timer timer;
 
-	NPCManager();
+	Npc();
 
-	virtual ~NPCManager();
+	virtual ~Npc();
 
 	bool Awake() override;
 
@@ -43,4 +43,4 @@ public:
 
 };
 
-#endif // __NPCMANAGER_H__
+#endif // __NPCS_H__

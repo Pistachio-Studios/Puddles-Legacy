@@ -30,6 +30,18 @@ bool TestScene::Enter()
 		player->Enable();
 	}
 
+	if (parameters.child("Npcs").child("loco")) {
+		loco = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
+		loco->parameters = parameters.child("loco");
+		loco->Enable();
+	}
+
+	if (parameters.child("Npcs").child("tabernero")) {
+		tabernero = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
+		tabernero->parameters = parameters.child("tabernero");
+		tabernero->Enable();
+	}
+
 	if (parameters.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
 		app->map->name = parameters.child("map").attribute("name").as_string();
