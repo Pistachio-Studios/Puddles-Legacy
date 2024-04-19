@@ -8,6 +8,7 @@
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
 #include <box2d/b2_math.h>
+#include <Core/Pathfinding.h>
 
 struct SDL_Texture;
 class Player;
@@ -86,6 +87,7 @@ public:
 
 	int currentPathPos;
 
+	PathFinding* pathfinding;
 
 };
 

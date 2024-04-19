@@ -209,12 +209,12 @@ void CentipideEnemy::pathfindingMovement(float dt) {
 
 	if (timer.ReadMSec() > 250) {
 		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //añadir el tile size / 2 hace que el owl se acerque mas
-		app->map->pathfinding->CreatePath(origin, destination); 
+		pathfinding->CreatePath(origin, destination); 
 		timer.Start();
 		currentPathPos = 0;
 	}
 
-	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+	const DynArray<iPoint>* path = pathfinding->GetLastPath();
 
 	if (movementDelay.ReadMSec() > 100) {
 		if (currentPathPos < path->Count())

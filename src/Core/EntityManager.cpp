@@ -2,6 +2,7 @@
 #include "Gameplay/Entities/Player.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Entities/Enemies/FlyingEnemy.h"
+#include "Gameplay/Entities/Enemies/CentipideEnemy.h"
 #include "Core/App.h"
 #include "Core/Textures.h"
 #include "Gameplay/Scene.h"
@@ -101,6 +102,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::FLYINGENEMY:
 		entity = new FlyingEnemy();
 		break;
+	case EntityType::CENTIPIDEENEMY:
+		entity = new CentipideEnemy();
+		break;
 	default:
 		break;
 	}
@@ -182,7 +186,7 @@ void EntityManager::DrawImGui()
 		
 		static EntityType selectedEntityType = EntityType::PLAYER;
 		
-		const char* entityTypes[] = { "PLAYER", "ENEMYBOSS"};
+		const char* entityTypes[] = { "PLAYER", "ENEMYBOSS", "FYLINGENEMY", "CENTIPIDEENEMY"};
 
 		ImGui::Combo("Entity Type", (int*)&selectedEntityType, entityTypes, IM_ARRAYSIZE(entityTypes));
 		if (ImGui::Button("Spawn Entity"))

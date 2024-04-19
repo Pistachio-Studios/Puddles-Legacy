@@ -44,6 +44,10 @@ bool FlyingEnemy::Awake() {
 
 bool FlyingEnemy::Start() {
 
+	pathfinding = new PathFinding();
+
+	pathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, app->map->navigationMap);
+
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -210,12 +214,12 @@ void FlyingEnemy::pathfindingMovement(float dt) {
 
 	if (timer.ReadMSec() > 250) {
 		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //añadir el tile size / 2 hace que el owl se acerque mas
-		app->map->pathfinding->CreatePath(origin, destination);
+		pathfinding->CreatePath(origin, destination);
 		timer.Start();
 		currentPathPos = 0;
 	}
 
-	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+	const DynArray<iPoint>* path = pathfinding->GetLastPath();
 
 	if (movementDelay.ReadMSec() > 100) {
 		if (currentPathPos < path->Count())
