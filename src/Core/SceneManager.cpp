@@ -6,6 +6,7 @@
 #include "Gameplay/ParticleDemo.h"
 #include "Gameplay/Scene.h"
 #include "Gameplay/TestScene.h"
+#include "Gameplay/Intro.h"
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
 #include <cassert>
@@ -194,6 +195,10 @@ Scene* SceneManager::CreateScene(SString sceneName)
     else if(sceneName == "lighting_demo")
     {
         return new LightingDemo(sceneName);
+    }
+    else if (sceneName == "intro")
+    {
+        return new Intro(sceneName);
     }
     else
     {
