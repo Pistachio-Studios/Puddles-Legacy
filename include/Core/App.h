@@ -23,6 +23,7 @@ class Map;
 class Physics;
 class ParticleManager;
 class GuiManager;
+class VideoPlayer;
 class DebugUI;
 
 class App
@@ -109,6 +110,7 @@ public:
 	Physics* physics;
 	ParticleManager* particleManager;
 	GuiManager* guiManager;
+	VideoPlayer* videoPlayer;
 	DebugUI* debugUI;
 
 
