@@ -35,12 +35,12 @@ bool Npc::Start() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	texturePath2 = parameters.attribute("texturepath2").as_string();
+	path = parameters.attribute("path").as_string();
 
 	texture = app->tex->Load(texturePath);
-	texture2 = app->tex->Load(texturePath2);
+	texture2 = app->tex->Load(path);
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::STATIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 90, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
@@ -61,7 +61,7 @@ bool Npc::Update(float dt)
 	app->render->DrawTexture(texture, position.x, position.y);
 
 	if (touchingNpc) {
-		app->render->DrawTexture(texture2, position.x, position.y);
+		app->render->DrawTexture(texture2, position.x - 40, position.y - 20);
 	}
 
 	return true;
@@ -79,6 +79,7 @@ bool Npc::LoadState(pugi::xml_node& node) {
 bool Npc::CleanUp() {
 
 	app->tex->UnLoad(texture);
+	app->tex->UnLoad(texture2);
 	app->physics->DestroyBody(pbody);
 
 	return true;
@@ -100,7 +101,7 @@ void Npc::EndCollision(PhysBody* physA, PhysBody* physB)
 {
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
-
+	        
 	switch (physB->ctype)
 	{
 	case ColliderType::PLAYER:

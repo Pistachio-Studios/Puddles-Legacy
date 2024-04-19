@@ -38,7 +38,7 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
-	const char* texturePath2;
+	const char* path;
 	SDL_Texture* texture2 = NULL;
 
 	bool touchingNpc = false; 

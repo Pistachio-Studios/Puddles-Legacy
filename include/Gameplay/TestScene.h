@@ -4,7 +4,6 @@
 #include "Core/GuiControlLabel.h"
 #include "Core/Module.h"
 #include "Gameplay/Entities/Player.h"
-#include "Gameplay/Entities/Npcs/Npc.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
 #include "Gameplay/Scene.h"
@@ -46,7 +45,6 @@ public:
 public:
 	bool winCondition = false;
 	Player* player;
-	Npc* npc;
 
 private:
 	SDL_Texture* img;

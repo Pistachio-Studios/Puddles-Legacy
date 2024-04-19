@@ -2,7 +2,6 @@
 #include "Gameplay/Entities/Player.h"
 #include "Gameplay/Entities/Sword.h"
 #include "Gameplay/Entities/Shield.h"
-#include "Gameplay/Entities/Npcs/Npc.h"
 #include "Core/App.h"
 #include "Core/Textures.h"
 #include "Gameplay/Scene.h"
@@ -101,9 +100,6 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::SHIELD:
 		entity = new Shield();
-		break;
-	case EntityType::NPC:
-		entity = new Npc();
 		break;
 	default:
 		break;
