@@ -88,7 +88,6 @@ public:
 
 	int currentPathPos;
 
-
 	PathFinding* pathfinding;
 
 };

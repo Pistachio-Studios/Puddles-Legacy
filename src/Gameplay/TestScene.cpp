@@ -39,10 +39,17 @@ bool TestScene::Enter()
 	if (parameters.child("enemies"))
 	{
 		pugi::xml_node enemies = parameters.child("enemies");
+
 		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
 		{
 			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
 			flyingenemy->parameters = FlyingEnemyNode;
+		}
+
+		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
+		{
+			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
+			centipidenemy->parameters = CentipideEnemyNode;
 		}
 	}
 

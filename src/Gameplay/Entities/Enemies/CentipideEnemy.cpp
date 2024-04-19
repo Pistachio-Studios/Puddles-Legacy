@@ -43,6 +43,10 @@ bool CentipideEnemy::Awake() {
 }
 
 bool CentipideEnemy::Start() {
+	
+	pathfinding = new PathFinding();
+
+	pathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, app->map->navigationMap);
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -207,7 +211,7 @@ void CentipideEnemy::pathfindingMovement(float dt) {
 
 	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //añadir el tile size / 2 hace que el owl se acerque mas 
 
-	if (timer.ReadMSec() > 250) {
+	if (timer.ReadMSec() > 2000) {
 		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //añadir el tile size / 2 hace que el owl se acerque mas
 		pathfinding->CreatePath(origin, destination); 
 		timer.Start();
@@ -216,13 +220,13 @@ void CentipideEnemy::pathfindingMovement(float dt) {
 
 	const DynArray<iPoint>* path = pathfinding->GetLastPath();
 
-	if (movementDelay.ReadMSec() > 100) {
+	if (movementDelay.ReadMSec() >= 0) {
 		if (currentPathPos < path->Count())
 		{
 			newPosition = app->map->MapToWorld(path->At(currentPathPos)->x, path->At(currentPathPos)->y);
 			currentPathPos++;
 			//LOG("%d", currentPathPos);
-			movementDelay.Start();
+			//movementDelay.Start();
 		}
 	}
 

@@ -61,11 +61,11 @@ public:
 	SDL_Texture* texture = NULL;
 
 	//Movement
-	int moveSpeed = 2;
+	int moveSpeed = 3;
 	int noSpeed = 0;
 	int updateSpeed;
 	float moveForce = 1.0f;
-	float maxSpeed = 2.0f;
+	float maxSpeed = 3.0f;
 
 	int angle;
 	b2Vec2 movementDirection;
