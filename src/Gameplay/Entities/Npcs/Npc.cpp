@@ -6,6 +6,7 @@
 #include "Core/Render.h"
 #include "Gameplay/Scene.h"
 #include "Utils/Point.h"
+#include "Utils/Log.h"
 
 #include <box2d/b2_math.h>
 #include <box2d/b2_body.h>
@@ -34,8 +35,10 @@ bool Npc::Start() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	texturePath2 = parameters.attribute("texturepath2").as_string();
 
 	texture = app->tex->Load(texturePath);
+	texture2 = app->tex->Load(texturePath2);
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::STATIC);
 	pbody->listener = this;
@@ -57,7 +60,9 @@ bool Npc::Update(float dt)
 
 	app->render->DrawTexture(texture, position.x, position.y);
 
-	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
+	if (touchingNpc) {
+		app->render->DrawTexture(texture2, position.x, position.y);
+	}
 
 	return true;
 }
@@ -80,9 +85,26 @@ bool Npc::CleanUp() {
 }
 
 void Npc::OnCollision(PhysBody* physA, PhysBody* physB) {
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
 
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		touchingNpc = true; 
+		break;
+	}
 }
 
-void Npc::EndCollision(PhysBody* physA, PhysBody* physB) {
+void Npc::EndCollision(PhysBody* physA, PhysBody* physB)
+{
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
 
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		touchingNpc = false;
+		break;
+	}
 }

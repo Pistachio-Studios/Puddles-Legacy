@@ -5,6 +5,7 @@
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
+#include "Core/GuiControlButton.h"
 
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
@@ -35,6 +36,8 @@ public:
 
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
+
+	GuiControlButton* pressE = nullptr; 
 
 	PhysBody* pbody;
 };

@@ -6,6 +6,8 @@
 #include "Core/Render.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Scene.h"
+#include "Core/GuiControl.h"
+#include "Core/GuiManager.h"
 #include "Utils/Point.h"
 #include "Core/Physics.h"
 
@@ -43,9 +45,6 @@ bool Loco::Start() {
 bool Loco::Update(float dt)
 {
 	Npc::Update(dt);
-
-	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
-
 	return true;
 }
 

@@ -38,6 +38,10 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
+	const char* texturePath2;
+	SDL_Texture* texture2 = NULL;
+
+	bool touchingNpc = false; 
 
 	PhysBody* pbody;
 

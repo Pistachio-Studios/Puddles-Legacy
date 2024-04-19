@@ -32,6 +32,12 @@ bool TestScene::Enter()
 		player->Enable();
 	}
 
+	if (parameters.child("Npcs")) {
+		npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
+		npc->parameters = parameters.child("Npcs");
+		npc->Enable();
+	}
+
 	if (parameters.child("Npcs").child("loco")) {
 
 		Loco* loco = new Loco();

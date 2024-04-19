@@ -102,6 +102,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::SHIELD:
 		entity = new Shield();
 		break;
+	case EntityType::NPC:
+		entity = new Npc();
+		break;
 	default:
 		break;
 	}

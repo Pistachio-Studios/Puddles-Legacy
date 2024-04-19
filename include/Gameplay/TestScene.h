@@ -46,6 +46,7 @@ public:
 public:
 	bool winCondition = false;
 	Player* player;
+	Npc* npc;
 
 private:
 	SDL_Texture* img;
