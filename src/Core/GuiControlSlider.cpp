@@ -23,7 +23,7 @@ GuiControlSlider::~GuiControlSlider()
 
 bool GuiControlSlider::Update(float dt)
 {
-	app->render->DrawText(text.GetString(), bounds.x - 110, bounds.y - 10, 80, 30);
+	app->render->DrawText(text.GetString(), bounds.x - 90, bounds.y - 10, 80, 30);
 	if (state != GuiControlState::DISABLED)
 	{
 		// L15: DONE 3: Update the state of the GUiButton according to the mouse position
@@ -59,13 +59,13 @@ bool GuiControlSlider::Update(float dt)
 			break;
 		case GuiControlState::NORMAL:
 			app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
-			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 15, bounds.y - 2, 20, 15);
+			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60, bounds.y, 20, 15);
 			app->render->DrawRectangle(rect2, 0, 0, 0, 255, true, false);
 			break;
 		case GuiControlState::PRESSED:
 			app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
-			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 15, bounds.y - 2, 20, 15);
-			app->render->DrawRectangle(rect2, 100, 255, 137, 255, true, false);
+			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60, bounds.y, 20, 15);
+			app->render->DrawRectangle(rect2, 255, 128, 0, 255, true, false);
 			break;
 		}
 
