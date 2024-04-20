@@ -39,6 +39,49 @@ CentipideEnemy::~CentipideEnemy() {
 
 bool CentipideEnemy::Awake() {
 
+	particleSource1 = new ParticleGenerator();
+	particleSource1->position = { 800, 2000 };
+	particleSource1->amount = 30;
+	particleSource1->spawnRadius = 1;
+	particleSource1->lifetime = 3.0f;
+	particleSource1->direction = { 0, -1 };
+	particleSource1->spread = 18;
+	particleSource1->opacityFade = -1.0f;
+	particleSource1->color = { 230, 98, 18, 255 };
+
+
+	Animation smoke = Animation();
+	smoke.texture = app->tex->Load("Assets/Textures/Particles/smoke_scaled.png");
+	SDL_SetTextureBlendMode(smoke.texture, SDL_BLENDMODE_ADD);
+	smoke.PushBack({ 0,0,114,114 });
+	smoke.PushBack({ 114,0,114,114 });
+	smoke.PushBack({ 228,0,114,114 });
+	smoke.PushBack({ 342,0,114,114 });
+	smoke.PushBack({ 456,0,114,114 });
+	smoke.PushBack({ 570,0,114,114 });
+	smoke.PushBack({ 0,114,114,114 });
+	smoke.PushBack({ 114,114,114,114 });
+	smoke.PushBack({ 228,114,114,114 });
+	smoke.PushBack({ 342,114,114,114 });
+	smoke.PushBack({ 456,114,114,114 });
+	smoke.PushBack({ 570,114,114,114 });
+	smoke.PushBack({ 0,228,114,114 });
+	smoke.PushBack({ 114,228,114,114 });
+	smoke.PushBack({ 228,228,114,114 });
+	smoke.PushBack({ 342,228,114,114 });
+	smoke.PushBack({ 456,228,114,114 });
+	smoke.PushBack({ 570,228,114,114 });
+	smoke.PushBack({ 0,342,114,114 });
+	smoke.PushBack({ 114,342,114,114 });
+	smoke.PushBack({ 228,342,114,114 });
+	smoke.PushBack({ 342,342,114,114 });
+	smoke.PushBack({ 456,342,114,114 });
+	smoke.PushBack({ 570,342,114,114 });
+
+	smoke.speed = 16.0f;
+	smoke.loop = true;
+
+
 	return true;
 }
 
@@ -55,7 +98,7 @@ bool CentipideEnemy::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 36, 36, bodyType::DYNAMIC); 
+	pbody = app->physics->CreateRectangle(position.x, position.y, 36, 18, bodyType::DYNAMIC); 
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY; 
 
@@ -81,12 +124,19 @@ bool CentipideEnemy::Update(float dt)
 	movementFSM->Update(dt); 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
+	// Calculate the angle between the enemy and the player
+	float angleToPlayer = atan2(player->position.y - position.y, player->position.x - position.x);
 
+	// Set the rotation of the enemy's body to face the player
+	pbody->body->SetTransform(pbody->body->GetPosition(), angleToPlayer);
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+
+	app->render->DrawRectangle({ position.x - 1, position.y + 8, 36, 18 }, 255, 0, 0);
+
+	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 
 	if (debug) {
 		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
@@ -94,7 +144,8 @@ bool CentipideEnemy::Update(float dt)
 		}
 	}
 
-	app->render->DrawRectangle({position.x - 1, position.y - 2, 36, 36}, 255, 255, 255);
+	//particleSource1->direction = { 0, -1 };
+	//particleSource1->position = { position.x, position.y };
 
 	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
@@ -211,7 +262,7 @@ void CentipideEnemy::pathfindingMovement(float dt) {
 
 	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //añadir el tile size / 2 hace que el owl se acerque mas 
 
-	if (timer.ReadMSec() > 2000) {
+	if (timer.ReadMSec() >= 3000) {
 		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //añadir el tile size / 2 hace que el owl se acerque mas
 		pathfinding->CreatePath(origin, destination); 
 		timer.Start();
@@ -220,7 +271,7 @@ void CentipideEnemy::pathfindingMovement(float dt) {
 
 	const DynArray<iPoint>* path = pathfinding->GetLastPath();
 
-	if (movementDelay.ReadMSec() >= 0) {
+	if (movementDelay.ReadMSec() > 3000) {
 		if (currentPathPos < path->Count())
 		{
 			newPosition = app->map->MapToWorld(path->At(currentPathPos)->x, path->At(currentPathPos)->y);
