@@ -46,7 +46,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager(false);
 	particleManager = new ParticleManager(true);
 	guiManager = new GuiManager(true);
-	videoPlayer = new VideoPlayer(false);
+	videoPlayer = new VideoPlayer(true);
 	debugUI = new DebugUI(true);
 
 

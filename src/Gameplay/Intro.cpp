@@ -8,7 +8,6 @@
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
 #include <tracy/Tracy.hpp>
-#include <windows.h>
 
 
 // Destructor

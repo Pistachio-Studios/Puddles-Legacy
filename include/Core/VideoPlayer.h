@@ -1,16 +1,22 @@
 #ifndef __VIDEOPLAYER_H__
 #define __VIDEOPLAYER_H__
 
-#include "Module.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <time.h>
-#include <windows.h>
+#include "Core/Module.h"
+/* #include <stdbool.h>
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
-#include <libavutil/frame.h> // revisar
+#include <libavutil/frame.h> // revisar */
 #include <SDL2/SDL.h>
+
+class AVCodecContext;
+class AVPacket;
+class AVFrame;
+class SDL_Rect;
+class SDL_Texture;
+class SDL_Renderer;
+class AVFormatContext;
+class AVCodec;
+class AVCodecParameters;
 
 class VideoPlayer : public Module
 {
@@ -24,16 +30,16 @@ public:
     virtual ~VideoPlayer();
 
     // Called after Awake
-    bool Start() override;
+    bool Start();
 
     // Called every frame
-    bool PreUpdate() override;
+    bool PreUpdate();
 
     // Called every frame
-    bool Update(float dt) override;
+    bool Update(float dt);
 
     // Called before quitting
-    bool CleanUp() override;
+    bool CleanUp();
 
     void display(AVCodecContext*, AVPacket*, AVFrame*, SDL_Rect*, SDL_Texture*, SDL_Renderer*, double);
 
@@ -52,12 +58,8 @@ private:
 
     //sdl part
     int swidth, sheight;
-    SDL_Window* screen;
-    SDL_Renderer* renderer;
     SDL_Texture* texture;
     SDL_Rect rect;
-    SDL_AudioDeviceID auddev;
-    SDL_AudioSpec want, have;
 
 };
 
