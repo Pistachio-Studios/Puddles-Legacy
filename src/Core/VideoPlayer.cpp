@@ -13,6 +13,8 @@ VideoPlayer::VideoPlayer(bool startEnabled) : Module(startEnabled)
     name.Create("videoPlayer");
 }
 
+VideoPlayer::~VideoPlayer() {}
+
 bool VideoPlayer::Start()
 {
     /* pFormatCtx = avformat_alloc_context();
