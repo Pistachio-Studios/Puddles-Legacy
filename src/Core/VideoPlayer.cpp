@@ -3,6 +3,11 @@
 #include "Core/Render.h"
 #include "Core/DebugUI.h"
 
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#include <libavutil/frame.h>
+#include <SDL2/SDL.h>
+
 VideoPlayer::VideoPlayer() :Module()
 {
     name.Create("videoPlayer");
@@ -17,7 +22,7 @@ VideoPlayer::~VideoPlayer() {}
 
 bool VideoPlayer::Start()
 {
-    /* pFormatCtx = avformat_alloc_context();
+    pFormatCtx = avformat_alloc_context();
     char bufmsg[1024];
     if (avformat_open_input(&pFormatCtx, "/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Video/Intro/example.mp4", NULL, NULL) < 0) {
         sprintf(bufmsg, "Cannot open %s", "/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Video/Intro/example.mp4");
@@ -86,7 +91,7 @@ bool VideoPlayer::Start()
     rect.x = 0;
     rect.y = 0;
     rect.w = swidth;
-    rect.h = sheight; */
+    rect.h = sheight;
 
 	return true;
 }
@@ -98,13 +103,13 @@ bool VideoPlayer::PreUpdate()
 
 bool VideoPlayer::Update(float dt)
 {
-   /*  while (av_read_frame(pFormatCtx, packet) >= 0)
-        {
-            if (packet->stream_index == vidId) {
-                display(vidCtx, packet, vframe, &rect, texture, app->render->renderer, fpsrendering);
-            }
-            av_packet_unref(packet);
-        } */
+    while (av_read_frame(pFormatCtx, packet) >= 0)
+    {
+        if (packet->stream_index == vidId) {
+            display(vidCtx, packet, vframe, &rect, texture, app->render->renderer, fpsrendering);
+        }
+        av_packet_unref(packet);
+    }
 
 	return true;
 }
@@ -123,7 +128,7 @@ bool VideoPlayer::CleanUp()
 	return true;
 }
 
-/* void display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect,
+void display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect,
     SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend)
 {
     time_t start = time(NULL);
@@ -156,7 +161,7 @@ bool VideoPlayer::CleanUp()
         printf("diffms: %f, delay time %d ms.\n", diffms, diff);
         SDL_Delay(diff);
     }
-} */
+}
 //
 //void playaudio(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame,
 //    SDL_AudioDeviceID auddev)
