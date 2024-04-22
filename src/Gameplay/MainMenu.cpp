@@ -93,7 +93,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	switch (control->id)
 	{
 	case 1:
-		app->sceneManager->ChangeScene("testscene");
+		app->sceneManager->ChangeScene("tutorialscene");
 		app->guiManager->RemoveGuiControl(crossOButton);
 		crossOButton = nullptr;
 		app->guiManager->RemoveGuiControl(music);

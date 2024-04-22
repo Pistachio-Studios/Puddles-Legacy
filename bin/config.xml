@@ -50,7 +50,7 @@
       </enemies>
     </tavernscene>
     <tutorialscene>
-      <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
+	  <map path="Assets/Maps/Tutorial-Level/" name="Playa_tutorial.tmx"/>
       <camera x="-530" y="-1949"/>
       <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
       <enemies>
