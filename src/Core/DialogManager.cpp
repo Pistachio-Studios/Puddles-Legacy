@@ -148,26 +148,30 @@ void DialogManager::ShowDialog(int x, int y) {
 
         // Render the current dialog text on the screen
 
-        app->render->DrawTexture(background, x, y);
+        app->render->DrawTexture(background, x + 200, y + 200, 0, 0);
+
+        texture = CreateTextTexture(font, currentDialog->character.c_str(), textColor, 200/*TODO text bound widht*/);
+        app->render->DrawTexture(texture, x + 375, y + 225, 0, 0);
+        SDL_DestroyTexture(texture);
 
         //texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
         //app->render->DrawTexture(texture, x, y, 0, 0);
         //SDL_DestroyTexture(texture);
         if (currentDialog->type == DialogType::DIALOG) {
             texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
-            app->render->DrawTexture(texture, x + 150, y + 100, 0, 0);
+            app->render->DrawTexture(texture, x + 285, y + 290, 0, 0);
             SDL_DestroyTexture(texture);
         } else if (currentDialog->type == DialogType::CHOICE) {
-            //texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
-            //app->render->DrawTexture(texture, x, y, 0, 0);
-            //SDL_DestroyTexture(texture);
+            texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
+            app->render->DrawTexture(texture, x + 285, y + 280, 0, 0);
+            SDL_DestroyTexture(texture);
 
             // Render the choices
             for (int i = 0; i < currentDialog->choices.size(); i++) {
                 Dialog& dialog = dialogs.at(currentDialog->choices[i]);
                 string choiceText = dialog.ES;
                 texture = CreateTextTexture(font, choiceText.c_str(), textColor, 200/*TODO text bound widht*/);
-                app->render->DrawTexture(texture, x, y + 100 * (i+1), 0, 0);
+                app->render->DrawTexture(texture, x + 285, y + 50 * (i+6.75), 0, 0);
                 SDL_DestroyTexture(texture);
             }
 
@@ -176,7 +180,6 @@ void DialogManager::ShowDialog(int x, int y) {
             if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
                 StartDialog(choice);
             }
-            
         }
 
         // TODO draw character texture
@@ -184,7 +187,7 @@ void DialogManager::ShowDialog(int x, int y) {
         //    app->render->DrawTexture(dialog->character, 100, 100, 0, 0);
         //}
 
-        app->render->DrawTexture(characterTextures[currentDialog->character], x + 32, y + 75);
+        app->render->DrawTexture(characterTextures[currentDialog->character], x + 35, y + 250, 0, 0);
 
         if (actualText.size() < currentDialogLine.size()) {
 
@@ -192,7 +195,6 @@ void DialogManager::ShowDialog(int x, int y) {
                 indexText++;
                 charTimer.Start();
             }
-
         }
 
     }
