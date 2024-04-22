@@ -41,11 +41,19 @@ public:
 	const char* path;
 	SDL_Texture* texture2 = NULL;
 
+	const char* path2;
+	SDL_Texture* texture3 = NULL;
+
 	bool touchingNpc = false; 
 
 	PhysBody* pbody;
 	PhysBody* npcSensor;
+	bool npcClick = false;
 
+	b2Vec2 mouseWorldPosition;
+
+private:
+	int mouseX, mouseY;
 };
 
 #endif // __NPCS_H__
