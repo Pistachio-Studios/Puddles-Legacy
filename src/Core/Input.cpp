@@ -18,6 +18,7 @@ Input::Input() : Module()
 	keyboard = new Key_State[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(Key_State) * MAX_KEYS);
 	memset(mouseButtons, KEY_IDLE, sizeof(Key_State) * NUM_MOUSE_BUTTONS);
+	memset(&pads[0], 0, sizeof(GamePad) * MAX_PADS);
 
 }
 
@@ -114,6 +115,16 @@ bool Input::PreUpdate()
 		ImGui_ImplSDL2_ProcessEvent(&event);
 		switch(event.type)
 		{
+			case(SDL_CONTROLLERDEVICEADDED):
+			{
+				HandleDeviceConnection(event.cdevice.which);
+				break;
+			}
+			case(SDL_CONTROLLERDEVICEREMOVED):
+			{
+				HandleDeviceRemoval(event.cdevice.which);
+				break;
+			}
 			case SDL_QUIT:
 				windowEvents[WE_QUIT] = true;
 			break;
@@ -159,6 +170,8 @@ bool Input::PreUpdate()
 		}
 	}
 
+	UpdateGamepadsInput();
+
 	return true;
 }
 
@@ -166,6 +179,19 @@ bool Input::PreUpdate()
 bool Input::CleanUp()
 {
 	LOG("Quitting SDL event subsystem");
+	// Stop rumble from all gamepads and deactivate SDL functionallity
+	for (uint i = 0; i < MAX_PADS; ++i)
+	{
+		if (pads[i].haptic != nullptr)
+		{
+			SDL_HapticStopAll(pads[i].haptic);
+			SDL_HapticClose(pads[i].haptic);
+		}
+		if (pads[i].controller != nullptr) SDL_GameControllerClose(pads[i].controller);
+	}
+
+	SDL_QuitSubSystem(SDL_INIT_HAPTIC);
+	SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }

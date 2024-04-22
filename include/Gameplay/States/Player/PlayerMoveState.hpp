@@ -1,6 +1,7 @@
 #ifndef __PLAYERMOVESTATE_H__
 #define __PLAYERMOVESTATE_H__
 
+#include "Core/App.h"
 #include "Gameplay/Entities/Player.h"
 #include "Utils/State.h"
 #include "Utils/SString.h"
@@ -22,22 +23,26 @@ public:
     {
         LOG("PlayerMoveState Update()");
 
+        GamePad& pad = app->input->pads[0];
+
+        LOG("pad.l_x: %f", pad.l_x);
+
         PhysBody* pbody = player->pbody;
 
         b2Vec2 impulse = { 0, 0 };
 
         if (pbody->body->GetLinearVelocity().Length() < player->maxSpeed)
         {
-            if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+            if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0.0f) {
                 impulse.x = -pbody->body->GetMass() * player->moveForce;
             }
-            if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+            if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || pad.l_x > 0.0f) {
                 impulse.x = pbody->body->GetMass() * player->moveForce;
             }
-            if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+            if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || pad.l_y < 0.0f) {
                impulse.y = -pbody->body->GetMass() * player->moveForce;
             }
-            if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+            if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || pad.l_y > 0.0f) {
                 impulse.y = pbody->body->GetMass() * player->moveForce;
             }
             pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
