@@ -331,18 +331,29 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-bool Render::DrawText(const char* text, int posx, int posy, int w, int h) {
+bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Color color) {
 
-	SDL_Color color = { 255, 255, 255 };
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
+	TTF_SetFontSize(app->render->font, h * 0.75);
+
+	SDL_Surface* surface = TTF_RenderUTF8_Blended(app->render->font, text, color);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
-	int texW = 0;
-	int texH = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	SDL_Rect dstrect = { posx, posy, w, h };
+	uint scale = app->win->GetScale();
+
+	SDL_Rect rect;
+	rect.x = ((int)posx) * scale;
+	rect.y = ((int)posy) * scale;
+
+	SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+
+	rect.w *= scale;
+	rect.h *= scale;
+
+	SDL_Rect dstrect = { rect.x * scale,  rect.y * scale, rect.w * scale, rect.h * scale };
 
 	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
+	//DrawTexture(texture, posx, posy, 0, 0);
 
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);
