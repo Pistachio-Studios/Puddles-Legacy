@@ -44,6 +44,18 @@ bool FlyingEnemy::Awake() {
 
 bool FlyingEnemy::Start() {
 
+	particleSource1 = new ParticleGenerator();
+	particleSource1->position = { 800, 2000 };
+	particleSource1->direction = { 0, -1 };
+	particleSource1->initialVelocity = 4.0f;
+	particleSource1->spread = 8;
+
+	particleSource1->amount = 30;
+	particleSource1->spawnRadius = 1;
+	particleSource1->lifetime = 3.0f;
+	particleSource1->opacityFade = -1.0f;
+	particleSource1->color = { 230, 98, 18, 255 };
+
 	pathfinding = new PathFinding();
 
 	pathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, app->map->navigationMap);
@@ -83,7 +95,6 @@ bool FlyingEnemy::Update(float dt)
 
 	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 
-
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
@@ -101,6 +112,11 @@ bool FlyingEnemy::Update(float dt)
 
 		currentAnimation->Update(dt); */
 
+	// Calculate the angle between the enemy and the player
+	float angleToPlayer = atan2(player->position.y - position.y, player->position.x - position.x);
+
+	particleSource1->direction = { cos(angleToPlayer), sin(angleToPlayer)};
+	particleSource1->position = { position.x, position.y };
 
 	return true;
 }

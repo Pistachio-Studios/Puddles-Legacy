@@ -12,7 +12,7 @@ class Animation
 {
 public:
 	SString name;
-	SDL_Texture* texture;
+	SDL_Texture* texture = nullptr;
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
 	bool loop = true;

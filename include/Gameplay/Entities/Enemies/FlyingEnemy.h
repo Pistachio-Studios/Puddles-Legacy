@@ -14,6 +14,8 @@
 struct SDL_Texture;
 class Player;
 
+class ParticleGenerator;
+
 class FlyingEnemy : public Entity
 {
 public:
@@ -91,6 +93,7 @@ public:
 
 	PathFinding* pathfinding;
 
+	ParticleGenerator* particleSource1;
 
 };
 

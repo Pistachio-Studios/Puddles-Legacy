@@ -13,8 +13,6 @@
 struct SDL_Texture;
 class Player;
 
-class ParticleGenerator;
-
 class CentipideEnemy : public Entity
 {
 public:
@@ -90,8 +88,6 @@ public:
 	int currentPathPos;
 
 	PathFinding* pathfinding;
-
-	ParticleGenerator* particleSource1;
 
 };
 
