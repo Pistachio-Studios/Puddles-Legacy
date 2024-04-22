@@ -165,20 +165,20 @@ void DialogManager::ShowDialog(int x, int y) {
             texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
             app->render->DrawTexture(texture, x + 285, y + 280, 0, 0);
             SDL_DestroyTexture(texture);
+            
+            // Select the choice
+            int choice = ChoiceSelector(currentDialog->choices);
+            if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+                StartDialog(choice);
+            }
 
             // Render the choices
             for (int i = 0; i < currentDialog->choices.size(); i++) {
                 Dialog& dialog = dialogs.at(currentDialog->choices[i]);
                 string choiceText = dialog.ES;
-                texture = CreateTextTexture(font, choiceText.c_str(), textColor, 200/*TODO text bound widht*/);
+                texture = CreateTextTexture(font, choiceText.c_str(), currentDialog->choices[i] == choice ? selectedColor : textColor, 200/*TODO text bound widht*/);
                 app->render->DrawTexture(texture, x + 285, y + 50 * (i+6.75), 0, 0);
                 SDL_DestroyTexture(texture);
-            }
-
-            // Select the choice
-            int choice = ChoiceSelector(currentDialog->choices);
-            if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-                StartDialog(choice);
             }
         }
 
