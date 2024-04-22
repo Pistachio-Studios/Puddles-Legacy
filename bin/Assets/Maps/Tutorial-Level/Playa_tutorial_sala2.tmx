@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="40" tilewidth="128" tileheight="128" infinite="0" nextlayerid="4" nextobjectid="1">
  <tileset firstgid="1" name="Beach Tileset reescalado" tilewidth="128" tileheight="128" tilecount="162" columns="18">
   <image source="Beach Tileset reescalado.png" width="2304" height="1152"/>
+  <tile id="55">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="-0.666667" y="-0.666667">
+     <polygon points="0,0 127.333,0.666667 128,54.6667 51.3333,54 57.3333,126.667 1.33333,126.667"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="56">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="-0.666667" width="128.667" height="66"/>
+   </objectgroup>
+  </tile>
+  <tile id="59">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="-0.666667" y="66.6667" width="68.6667" height="58.6667"/>
+   </objectgroup>
+  </tile>
+  <tile id="73">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.666667" y="-0.666667" width="64" height="128"/>
+   </objectgroup>
+  </tile>
+  <tile id="77">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="62" height="66.6667"/>
+   </objectgroup>
+  </tile>
+  <tile id="91">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="-1.33333" y="-0.666667">
+     <polygon points="0,0 59.3333,0 59.3333,68 129.333,67.3333 128.667,128 0.666667,127.333"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="92">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="-2" y="66.6667" width="130" height="60"/>
+   </objectgroup>
+  </tile>
  </tileset>
- <tileset firstgid="163" name="Beach-and-caves-tileset_Reescalado" tilewidth="64" tileheight="64" tilecount="360" columns="15">
+ <tileset firstgid="163" name="Beach-and-caves-tileset_Reescalado" tilewidth="64" tileheight="64" tilecount="0" columns="15">
   <image source="Beach-and-caves-tileset_Reescalado.png" width="960" height="1536"/>
  </tileset>
  <layer id="1" name="Terrain" width="30" height="40">
