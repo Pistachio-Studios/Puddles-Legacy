@@ -7,6 +7,7 @@
 #include <libavformat/avformat.h>
 #include <libavutil/frame.h>
 #include <SDL2/SDL.h>
+#include <ctime>
 
 VideoPlayer::VideoPlayer() :Module()
 {
