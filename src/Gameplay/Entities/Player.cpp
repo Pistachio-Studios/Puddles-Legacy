@@ -47,6 +47,8 @@ bool Player::Start() {
 
 	timer = Timer();
 
+	texture = app->tex->Load(texturePath);
+
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64 / 2, 128 / 2, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
@@ -77,6 +79,7 @@ bool Player::Update(float dt)
 
 	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x*10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 	
+	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
