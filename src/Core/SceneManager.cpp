@@ -7,6 +7,7 @@
 #include "Gameplay/Scene.h"
 #include "Gameplay/TestScene.h"
 #include "Gameplay/Level1Scene.h"
+#include "Gameplay/ForestScene.h"
 #include "Gameplay/TownScene.h"
 #include "Gameplay/TutorialScene.h"
 #include "Gameplay/TavernScene.h"
@@ -194,6 +195,10 @@ Scene* SceneManager::CreateScene(SString sceneName)
     else if(sceneName == "level1scene")
     {
         return new Level1Scene(sceneName);
+    }
+    else if (sceneName == "forestscene")
+    {
+        return new ForestScene(sceneName);
     }
     else if(sceneName == "townscene")
     {
