@@ -230,7 +230,10 @@ void App::FinishUpdate()
 	secondsSinceStartup = startupTime.ReadSec();
 	
 	// Amount of ms took the last update (dt)
-	dt = (float) frameTime.ReadMs();
+	if (paused)
+		dt = 0;
+	else
+		dt = (float) frameTime.ReadMs();
 
 	// Amount of frames during the last second
 	lastSecFrameCount++;

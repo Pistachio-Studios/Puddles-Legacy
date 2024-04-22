@@ -135,18 +135,18 @@ bool TestScene::PostUpdate()
 		if(paused)
 		{
 			paused = false;
-			gcResume->state = GuiControlState::NORMAL;
-			gcSettings->state = GuiControlState::NORMAL;
-			gcBackToTitle->state = GuiControlState::NORMAL;
-			gcExit->state = GuiControlState::NORMAL;
-		}
-		else
-		{
-			paused = true;
 			gcResume->state = GuiControlState::DISABLED;
 			gcSettings->state = GuiControlState::DISABLED;
 			gcBackToTitle->state = GuiControlState::DISABLED;
 			gcExit->state = GuiControlState::DISABLED;
+		}
+		else
+		{
+			paused = true;
+			gcResume->state = GuiControlState::NORMAL;
+			gcSettings->state = GuiControlState::NORMAL;
+			gcBackToTitle->state = GuiControlState::NORMAL;
+			gcExit->state = GuiControlState::NORMAL;
 		}
 	}
 
@@ -204,6 +204,7 @@ bool TestScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 7:
 		break;
 	case 8:
+		paused = false;
 		app->sceneManager->ChangeScene("mainmenu");
 	break;
 	case 9:

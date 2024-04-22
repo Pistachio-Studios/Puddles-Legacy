@@ -61,7 +61,6 @@ private:
 	GuiControlButton* gcBackToTitle;
 	GuiControlButton* gcExit;
 
-	bool paused = false;
 	bool exitPressed = false;
 
 	Timer* playingTime;
