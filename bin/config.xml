@@ -26,6 +26,38 @@
   <scene_manager startScene="mainmenu">
     <mainmenu>
     </mainmenu>
+
+    <!-- TODO cambiar toda la configuración de las escenas -->
+    <level1scene>
+      <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
+      <camera x="-530" y="-1949"/>
+      <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
+      <enemies>
+      </enemies>
+    </level1scene>
+    <townscene>
+      <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
+      <camera x="-530" y="-1949"/>
+      <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
+      <enemies>
+      </enemies>
+    </townscene>
+    <tavernscene>
+      <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
+      <camera x="-530" y="-1949"/>
+      <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
+      <enemies>
+      </enemies>
+    </tavernscene>
+    <tutorialscene>
+      <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
+      <camera x="-530" y="-1949"/>
+      <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
+      <enemies>
+      </enemies>
+    </tutorialscene>
+    <!-- TODO cambiar toda la configuración de las escenas -->
+      
     <testscene>
       <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
       <camera x="-530" y="-1949"/>

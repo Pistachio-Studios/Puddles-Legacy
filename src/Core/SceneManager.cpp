@@ -6,6 +6,10 @@
 #include "Gameplay/ParticleDemo.h"
 #include "Gameplay/Scene.h"
 #include "Gameplay/TestScene.h"
+#include "Gameplay/Level1Scene.h"
+#include "Gameplay/TownScene.h"
+#include "Gameplay/TutorialScene.h"
+#include "Gameplay/TavernScene.h"
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
 #include <cassert>
@@ -186,6 +190,22 @@ Scene* SceneManager::CreateScene(SString sceneName)
     else if(sceneName == "testscene")
     {
         return new TestScene(sceneName);
+    }
+    else if(sceneName == "level1scene")
+    {
+        return new Level1Scene(sceneName);
+    }
+    else if(sceneName == "townscene")
+    {
+        return new TownScene(sceneName);
+    }
+    else if(sceneName == "tavernscene")
+    {
+        return new TavernScene(sceneName);
+    }
+    else if(sceneName == "tutorialscene")
+    {
+        return new TutorialScene(sceneName);
     }
     else if(sceneName == "particle_demo")
     {
