@@ -107,30 +107,6 @@ bool Map::Update(float dt)
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
-
-                    // TODO 
-                    // HACER QUE EL PARALAX NO TENGA DESFASE DE COORDENADAS POR LA ESCALA
-                    /*
-                    
-                    if (mapLayerItem->data->parallaxFactor == 1.0f)
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x,
-                            pos.y,
-                            &r,
-                            mapLayerItem->data->parallaxFactor);
-                    }
-                    else
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x * mapLayerItem->data->parallaxFactor,
-                            pos.y * mapLayerItem->data->parallaxFactor,
-                            &r,
-                            mapLayerItem->data->parallaxFactor);
-                    }
-                    
-                    */
-
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
                         pos.y,

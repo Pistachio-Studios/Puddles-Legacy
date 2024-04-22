@@ -36,7 +36,7 @@
       </enemies>
     </level1scene>
 	 <forestscene>
-	    <map path="Assets/Maps/Forest-Level" name="Bosque.tmx"/>
+	    <map path="Assets/Maps/Forest-Level/" name="Bosque.tmx"/>
 	    <camera x="-530" y="-1949"/>
 	    <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/>
 		<enemies>
