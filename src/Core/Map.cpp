@@ -1,4 +1,3 @@
-
 #include "Core/Animation.h"
 #include "Core/App.h"
 #include "Core/Render.h"

@@ -5,6 +5,27 @@
  </tileset>
  <tileset firstgid="78" name="Hills" tilewidth="128" tileheight="128" tilecount="77" columns="11">
   <image source="Hills.png" width="1408" height="896"/>
+  <tile id="37">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="8" y="55.6667" width="119.667" height="71.3333"/>
+    <object id="2" x="71.6667" y="-66.6667"/>
+   </objectgroup>
+  </tile>
+  <tile id="38">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.333333" y="55.6667" width="127.333" height="71.6667"/>
+   </objectgroup>
+  </tile>
+  <tile id="39">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.666667" y="55.6667" width="128.333" height="71.6667"/>
+   </objectgroup>
+  </tile>
+  <tile id="40">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.333333" y="56.3333" width="118.667" height="70.6667"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="155" name="Water" tilewidth="128" tileheight="128" tilecount="16" columns="8">
   <image source="Water.png" width="1024" height="256"/>
