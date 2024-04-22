@@ -105,12 +105,13 @@ bool DialogManager::SaveState(pugi::xml_node&) const {
 
 void DialogManager::StartDialog(int dialogId) {
 
-    if (dialogs.at(dialogId).type == DialogType::ANSWER) {
-        currentDialogId = currentDialog->choices[0];
+    if (dialogId < 0) return;
+
+    if (dialogs.at(dialogId).type == DialogType::ANSWER or dialogs.at(dialogId).type == DialogType::DIALOG) {
+        vector<int>* choices = &dialogs.at(dialogId).choices;
+       if (!choices->empty()) dialogId = dialogs.at(dialogId).choices[0];
     }
-    else {
-        currentDialogId = dialogId;
-    }
+    currentDialogId = dialogId;
     // Set the current dialog text to the first line of the dialog
     currentDialogLine = dialogs.at(dialogId).ES;
 
@@ -136,6 +137,11 @@ void DialogManager::NextDialog() {
         currentDialogId++;
         indexText = 1;
         currentDialogType = DialogType::QUESTION;
+    }
+    
+    if (dialogs.size() < currentDialogId)
+    {
+        EndDialog();
     }
 }
 

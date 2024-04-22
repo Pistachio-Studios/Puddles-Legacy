@@ -1,6 +1,9 @@
 id,character,ES,EN,CAT,type,choices
 1,character_1,bombardeen,bomb,bombarde,D,
 2,character_2,Como estás?,Como estás?,Como estás?,Q,"3,4"
-3,character_2,Bien,Bien,Bien,A,"5"
-4,character_2,Mal,Mal,Mal,A,"5"
-5,character_1,adios,adios,adios,D,
+3,character_1,Bien,Bien,Bien,A,"5"
+4,character_1,Mal,Mal,Mal,A,"6"
+5,character_2,Me Alegro!,Me Alegro!,Me Alegro!,D,"7"
+6,character_2,Jo :(,Jo :(,Jo :(,D,"7"
+7,character_1,adios,adios,adios,D,
+8,character_2,adios,adios,adios,D,
