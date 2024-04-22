@@ -82,8 +82,8 @@ bool Player::Update(float dt)
 	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 32;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
 	
 	if (debug) {
 		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {

@@ -49,7 +49,7 @@ public:
 
 	//Movement
 	float moveForce = 1.0f;
-	float maxSpeed = 2.0f;
+	float maxSpeed = 10.0f;
 
 	//State Machines
 	StateMachine<Player>* movementFSM = nullptr;

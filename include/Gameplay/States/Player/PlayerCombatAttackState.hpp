@@ -17,6 +17,7 @@ private:
     float attackValue;
     float playerLookingAngle;
     float attackSpeed;
+    float radius;
 
     Sword* swordEntity = nullptr;
 
@@ -34,13 +35,14 @@ public:
         attackValue = -attackRange / 2;
         playerLookingAngle = player->lookingAngle;
         attackSpeed = 500;
+        radius = 2.5;
     }
     inline void Update(float dt) override
     {
         if (attackValue < attackRange / 2)
         {
             b2Vec2 playerPos = player->pbody->body->GetPosition();
-            b2Vec2 swordPos = { playerPos.x + (float)cos(playerLookingAngle + attackValue * DEGTORAD), playerPos.y + (float)sin(playerLookingAngle + attackValue * DEGTORAD) };
+            b2Vec2 swordPos = { playerPos.x + (float)cos(playerLookingAngle + attackValue * DEGTORAD) * radius, playerPos.y + (float)sin(playerLookingAngle + attackValue * DEGTORAD) * radius };
             swordEntity->pbody->body->SetTransform(swordPos, playerLookingAngle + attackValue * DEGTORAD);
             attackValue += dt / 1000 * attackSpeed;
         }

@@ -15,6 +15,8 @@ private:
 
     Shield* shieldEntity = nullptr;
 
+    float radius;
+
 public:
     PlayerCombatBlockState(SString name) : State(name) {}
     inline void Enter() override
@@ -24,11 +26,12 @@ public:
         player = StateMachineReference->owner;
         shieldEntity = (Shield*)app->entityManager->CreateEntity(EntityType::SHIELD);
         shieldEntity->Start();
+        radius = 2;
     }
     inline void Update(float dt) override
     {
         b2Vec2 playerPos = player->pbody->body->GetPosition();
-        b2Vec2 swordPos = { playerPos.x + (float)cos(player->lookingAngle), playerPos.y + (float)sin(player->lookingAngle) };
+        b2Vec2 swordPos = { playerPos.x + (float)cos(player->lookingAngle) * radius, playerPos.y + (float)sin(player->lookingAngle) * radius };
         shieldEntity->pbody->body->SetTransform(swordPos, player->lookingAngle);
         if (!app->input->GetMouseButtonDown(3))
         {

@@ -19,7 +19,7 @@ bool Shield::Awake() {
 }
 
 bool Shield::Start() {
-	pbody = app->physics->CreateRectangle(position.x, position.y, 10, 30, bodyType::KINEMATIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 20, 60, bodyType::KINEMATIC);
 	return true;
 }
 

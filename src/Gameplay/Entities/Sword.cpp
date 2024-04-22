@@ -19,7 +19,7 @@ bool Sword::Awake() {
 }
 
 bool Sword::Start() {
-	pbody = app->physics->CreateRectangle(position.x, position.y, 30, 10, bodyType::KINEMATIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 20, bodyType::KINEMATIC);
 	return true;
 }
 
