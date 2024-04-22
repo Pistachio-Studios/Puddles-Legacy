@@ -104,7 +104,13 @@ bool DialogManager::SaveState(pugi::xml_node&) const {
 }
 
 void DialogManager::StartDialog(int dialogId) {
-    currentDialogId = dialogId;
+
+    if (dialogs.at(dialogId).type == DialogType::ANSWER) {
+        currentDialogId = currentDialog->choices[0];
+    }
+    else {
+        currentDialogId = dialogId;
+    }
     // Set the current dialog text to the first line of the dialog
     currentDialogLine = dialogs.at(dialogId).ES;
 
@@ -123,13 +129,13 @@ void DialogManager::NextDialog() {
         currentDialogId++;
         indexText = 1;
         currentDialogType = DialogType::DIALOG;
-    } else if (currentDialog->type == DialogType::CHOICE) {
+    } else if (currentDialog->type == DialogType::QUESTION) {
         // If the dialog is a choice, advance to the next choice
         // If there are no more choices, end the dialog
         // Otherwise, set the current dialog text to the next choice
         currentDialogId++;
         indexText = 1;
-        currentDialogType = DialogType::CHOICE;
+        currentDialogType = DialogType::QUESTION;
     }
 }
 
@@ -161,7 +167,7 @@ void DialogManager::ShowDialog(int x, int y) {
             texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
             app->render->DrawTexture(texture, x + 285, y + 290, 0, 0);
             SDL_DestroyTexture(texture);
-        } else if (currentDialog->type == DialogType::CHOICE) {
+        } else if (currentDialog->type == DialogType::QUESTION) {
             texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
             app->render->DrawTexture(texture, x + 285, y + 280, 0, 0);
             SDL_DestroyTexture(texture);
@@ -260,8 +266,10 @@ bool DialogManager::LoadDialogs(string path, map<int, Dialog>& dialogs)
             // Check the type and parse it to the DialogType enum
             if (types[i] == "D") {
                 dialog.type = DialogType::DIALOG;
-            } else if (types[i] == "C") {
-                dialog.type = DialogType::CHOICE;
+            } else if (types[i] == "Q") {
+                dialog.type = DialogType::QUESTION;
+            } else if (types[i] == "A") {
+                dialog.type = DialogType::ANSWER;
             } else {
                 std::cerr << "Invalid dialog type: " << types[i] << std::endl;
                 continue;

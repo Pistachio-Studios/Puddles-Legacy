@@ -14,7 +14,8 @@ using namespace std;
 
 enum DialogType {
     DIALOG,
-    CHOICE
+    QUESTION,
+    ANSWER
 };
 
 struct Dialog {
