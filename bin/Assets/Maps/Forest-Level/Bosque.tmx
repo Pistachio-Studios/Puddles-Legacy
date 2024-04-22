@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="128" tileheight="128" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="128" tileheight="128" infinite="0" nextlayerid="6" nextobjectid="17">
  <tileset firstgid="1" name="Grass" tilewidth="128" tileheight="128" tilecount="77" columns="11">
   <image source="Grass.png" width="1408" height="896"/>
  </tileset>
@@ -181,6 +181,33 @@
  </tileset>
  <tileset firstgid="171" name="Basic_Grass_Biom_things" tilewidth="128" tileheight="128" tilecount="45" columns="9">
   <image source="Basic_Grass_Biom_things.png" width="1152" height="640"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6" y="0.25" width="113.75" height="127.5"/>
+   </objectgroup>
+  </tile>
+  <tile id="2">
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="-0.0625" y="7.875">
+     <polygon points="0,0 0,120.125 96.25,120.063 96,96.0625 88,96 88.125,80 96.0625,79.9375 96,56.125 87.9375,56.1875 87.9375,39.75 80.1875,39.6875 80.1875,31.375 72.25,31.25 72.1875,23.625 64,23.5 64.125,15.375 48.75,14.9375 48.8125,7.125 40.75,6.9375 40.625,-0.5"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="9">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="7.83333" y="-0.25" width="111.417" height="40"/>
+   </objectgroup>
+  </tile>
+  <tile id="10">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="32" y="-0.666667" width="96" height="64.3333"/>
+   </objectgroup>
+  </tile>
+  <tile id="11">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="95.6667" height="62.3333"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <layer id="3" name="Fondo" width="50" height="50">
   <properties>
@@ -5196,7 +5223,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="Segundo nivel" width="50" height="50">
+ <layer id="2" name="Floor2" width="50" height="50">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -7751,8 +7778,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="185"/>
+   <tile gid="186"/>
    <tile/>
    <tile/>
    <tile/>
@@ -7867,7 +7894,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="203"/>
    <tile/>
    <tile/>
    <tile/>
@@ -7912,7 +7939,7 @@
    <tile/>
    <tile/>
    <tile gid="171"/>
-   <tile/>
+   <tile gid="179"/>
    <tile/>
    <tile/>
    <tile/>
@@ -7971,7 +7998,7 @@
    <tile gid="171"/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="197"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8021,7 +8048,7 @@
    <tile gid="180"/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="206"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8135,7 +8162,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="203"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8394,7 +8421,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="197"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8444,6 +8471,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="206"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8483,8 +8511,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="176"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8604,7 +8631,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="178"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8783,6 +8810,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="185"/>
+   <tile gid="186"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8813,6 +8842,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="203"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8822,10 +8852,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="197"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8875,7 +8902,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="206"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8950,7 +8977,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="203"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9068,7 +9095,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="176"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9197,6 +9224,20 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="197"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="204"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9219,21 +9260,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="203"/>
    <tile/>
    <tile/>
    <tile gid="181"/>
@@ -9247,7 +9274,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="206"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9540,6 +9567,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="185"/>
+   <tile gid="186"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9548,9 +9577,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="176"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9624,7 +9651,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="179"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9945,7 +9972,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="204"/>
    <tile/>
    <tile/>
    <tile/>
@@ -10072,8 +10099,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="185"/>
+   <tile gid="186"/>
    <tile/>
    <tile/>
    <tile/>

@@ -43,7 +43,7 @@
       </enemies>
 	</forestscene>
     <townscene>
-      <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
+      <map path="Assets/Maps/Town-Scene/" name="Town.tmx"/>
       <camera x="-530" y="-1949"/>
       <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
       <enemies>
