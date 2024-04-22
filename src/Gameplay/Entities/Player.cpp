@@ -47,9 +47,9 @@ bool Player::Start() {
 
 	timer = Timer();
 
-	texture = app->tex->Load(texturePath);
+	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 64 / 2, 128 / 2, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
