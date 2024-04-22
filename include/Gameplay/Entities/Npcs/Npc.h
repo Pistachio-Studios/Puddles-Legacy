@@ -44,6 +44,7 @@ public:
 	bool touchingNpc = false; 
 
 	PhysBody* pbody;
+	PhysBody* npcSensor;
 
 };
 

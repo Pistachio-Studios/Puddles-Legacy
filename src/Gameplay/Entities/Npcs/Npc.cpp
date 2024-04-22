@@ -40,9 +40,13 @@ bool Npc::Start() {
 	texture = app->tex->Load(texturePath);
 	texture2 = app->tex->Load(path);
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 90, bodyType::STATIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 42, 65, bodyType::KINEMATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
+
+	npcSensor = app->physics->CreateRectangleSensor(position.x, position.y, 128, 128, bodyType::STATIC);
+	npcSensor->listener = this;
+	npcSensor->ctype = ColliderType::NPC;
 
 	return true;
 }
