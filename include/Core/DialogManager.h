@@ -94,6 +94,8 @@ private:
     map<string, SDL_Texture*> characterTextures;
     
     pugi::xml_node parameters;
+
+    bool isDialogStarted = false; // TODO change this when fixed dialog bug
 };
 
 #endif // DIALOG_MANAGER_H
