@@ -461,7 +461,8 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
                     Colliders c = it->second;
                     if(c.width != 0 && c.height != 0)
                     {
-                        app->physics->CreateRectangle(c.x, c.y, c.width, c.height, bodyType::STATIC);
+                        iPoint pos = layer->Get(i);
+                        app->physics->CreateRectangle(pos.x + c.x, pos.y + c.y, c.width, c.height, bodyType::STATIC);
                     }
                 }
             }

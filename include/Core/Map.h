@@ -108,6 +108,14 @@ struct MapLayer
 	{
 		return data[(y * width) + x];
 	}
+
+	iPoint Get(int index) const
+	{
+		iPoint ret;
+		ret.x = index % width;
+		ret.y = index / width;
+		return ret;
+	}
 };
 
 struct MapData
