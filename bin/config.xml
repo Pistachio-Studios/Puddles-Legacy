@@ -70,6 +70,9 @@
       <camera x="-530" y="-1949"/>
       <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
       <enemies>
+		  <EnemyBoss x="600" y="2032" texturepath=""/>
+		  <FlyingEnemy x="600" y="2050" texturepath=""/>
+		  <CentipideEnemy x="650" y="2100" texturepath=""/>
       </enemies>
     </tutorialscene>
     <testscene>
@@ -77,9 +80,6 @@
       <camera x="-530" y="-1949"/>
       <player x="672" y="2032" texturepath ="Assets/Textures/playerx128-test.png"/>
       <enemies>
-        <EnemyBoss x="800" y="2032" texturepath=""/>
-        <FlyingEnemy x="800" y="1900" texturepath=""/>
-		    <CentipideEnemy x="850" y="2000" texturepath=""/>
       </enemies>
       <Npcs>
 		    <loco x="1000" y="1720" texturepath="Assets/Textures/Npcs/Loco.png"/>
