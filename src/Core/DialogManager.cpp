@@ -77,8 +77,6 @@ bool DialogManager::Update(float dt) {
         StartDialog(currentDialogId);
     }
 
-    LOG("update");
-
     return true;
 }
 
