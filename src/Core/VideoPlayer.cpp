@@ -2,12 +2,16 @@
 #include "Core/App.h"
 #include "Core/Render.h"
 #include "Core/DebugUI.h"
-
-#include <libavcodec/avcodec.h>
-#include <libavformat/avformat.h>
-#include <libavutil/frame.h>
 #include <SDL2/SDL.h>
 #include <ctime>
+
+extern "C" {
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#include <libavutil/imgutils.h>
+#include <libavutil/avutil.h>
+#include <libswscale/swscale.h>
+}
 
 VideoPlayer::VideoPlayer() :Module()
 {
@@ -25,8 +29,8 @@ bool VideoPlayer::Start()
 {
     pFormatCtx = avformat_alloc_context();
     char bufmsg[1024];
-    if (avformat_open_input(&pFormatCtx, "/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Video/Intro/example.mp4", NULL, NULL) < 0) {
-        sprintf(bufmsg, "Cannot open %s", "/home/hugo/Documentos/GitHub/Proyecto2/bin/Assets/Video/Intro/example.mp4");
+    if (avformat_open_input(&pFormatCtx, "Assets/Video/Intro/example.mp4", NULL, NULL) < 0) {
+        sprintf(bufmsg, "Cannot open %s", "Assets/Video/Intro/example.mp4");
         perror(bufmsg);
         avformat_close_input(&pFormatCtx);
         avformat_free_context(pFormatCtx);;
@@ -129,7 +133,7 @@ bool VideoPlayer::CleanUp()
 	return true;
 }
 
-void display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect,
+void VideoPlayer::display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect,
     SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend)
 {
     time_t start = time(NULL);
