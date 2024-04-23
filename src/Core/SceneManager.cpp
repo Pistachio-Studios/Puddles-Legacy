@@ -231,6 +231,10 @@ Scene* SceneManager::CreateScene(SString sceneName)
         return nullptr;
     }
 }
+Scene* SceneManager::GetCurrentScene()
+{
+    return currentScene;
+}
 
 Scene* SceneManager::FindScene(SString sceneName) const
 {
