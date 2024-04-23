@@ -86,7 +86,7 @@ bool TutorialScene::Enter()
 	if (parameters.child("enemies").child("EnemyBoss")) {
 		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
 		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
-		enemyboss->Enable();
+		enemyboss->Start();
 	}
 
 	if (parameters.child("enemies"))
@@ -97,12 +97,14 @@ bool TutorialScene::Enter()
 		{
 			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
 			flyingenemy->parameters = FlyingEnemyNode;
+			flyingenemy->Start();
 		}
 
 		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
 		{
 			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
 			centipidenemy->parameters = CentipideEnemyNode;
+			centipidenemy->Start();
 		}
 	}
 

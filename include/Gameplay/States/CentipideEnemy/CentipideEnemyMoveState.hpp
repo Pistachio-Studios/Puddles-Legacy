@@ -28,13 +28,13 @@ public:
         player = app->entityManager->GetPlayerEntity();
 
         CentipideEnemy->pathfindingMovement(dt);
-        if (PIXEL_TO_METERS(player->position.DistanceTo(CentipideEnemy->position)) < 1.0f) {
+        if (PIXEL_TO_METERS(player->position.DistanceTo(CentipideEnemy->position)) < 3.0f) {
             if (CentipideEnemy->attackTimer.ReadSec() >= 2)
             {
                 StateMachineReference->ChangeState("attack");
             }
         }
-        else if ((PIXEL_TO_METERS(player->position.DistanceTo(CentipideEnemy->position)) > 5.0f)) {
+        else if ((PIXEL_TO_METERS(player->position.DistanceTo(CentipideEnemy->position)) > 10.0f)) {
             //CentipideEnemy->moveToSpawnPoint();
             CentipideEnemy->StopMoving();
             StateMachineReference->ChangeState("idle");

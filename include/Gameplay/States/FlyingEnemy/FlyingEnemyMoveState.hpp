@@ -28,13 +28,13 @@ public:
         player = app->entityManager->GetPlayerEntity();
 
         flyingenemy->pathfindingMovement(dt);
-        if (PIXEL_TO_METERS(player->position.DistanceTo(flyingenemy->position)) < 1.0f) {
+        if (PIXEL_TO_METERS(player->position.DistanceTo(flyingenemy->position)) < 3.0f) {
             if (flyingenemy->attackTimer.ReadSec() >= 2)
             {
                 StateMachineReference->ChangeState("attack");
             }
         }
-        else if ((PIXEL_TO_METERS(player->position.DistanceTo(flyingenemy->position)) > 5.0f)) {
+        else if ((PIXEL_TO_METERS(player->position.DistanceTo(flyingenemy->position)) > 10.0f)) {
             //flyingenemy->moveToSpawnPoint();
             flyingenemy->StopMoving();
             StateMachineReference->ChangeState("idle");
