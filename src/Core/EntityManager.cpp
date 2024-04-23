@@ -1,10 +1,12 @@
 #include "Core/EntityManager.h"
+#include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Entities/Enemies/FlyingEnemy.h"
 #include "Gameplay/Entities/Enemies/CentipideEnemy.h"
 #include "Gameplay/Entities/Sword.h"
 #include "Gameplay/Entities/Shield.h"
+#include "Gameplay/Entities/Staff.h"
 #include "Core/App.h"
 #include "Core/Textures.h"
 #include "Gameplay/Scene.h"
@@ -112,6 +114,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::SHIELD:
 		entity = new Shield();
+		break;
+	case EntityType::STAFF:
+		entity = new Staff();
 		break;
 	default:
 		break;
