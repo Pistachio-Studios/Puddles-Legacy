@@ -4,6 +4,7 @@
 #include "Gameplay/Scene.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
+#include <vector>
 
 struct SDL_Texture;
 
@@ -37,7 +38,11 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control) override;
 
-	void RenderGUI();
+    void SelectPreviousButton();
+
+    void SelectNextButton();
+
+    void RenderGUI();
 
 public:
 
@@ -49,6 +54,13 @@ private:
 	GuiControlButton* playButton;
 	GuiControlButton* optionsButton;
 	GuiControlButton* exitButton;
+	GuiControlButton* currentButton;
+
+	std::vector<GuiControl*> buttons;
+	int selectedButtonIndex;
+
+	bool wasUpPressed;
+    bool wasDownPressed;
 
 	bool exitPressed = false;
 };

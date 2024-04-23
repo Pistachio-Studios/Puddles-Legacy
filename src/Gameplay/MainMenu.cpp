@@ -28,6 +28,16 @@ bool MainMenu::Enter()
 	SDL_Rect exitPos = { static_cast<int>(windowW / 2 + 200), static_cast<int>(windowH / 2 + 125), 240,50};
 	exitButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", exitPos, this);
 
+	// Add the buttons to the buttons list
+	buttons.push_back(playButton);
+	buttons.push_back(optionsButton);
+	buttons.push_back(exitButton);
+
+	selectedButtonIndex = 0;
+
+	wasUpPressed = false;
+    wasDownPressed = false;
+
 	return true;
 }
 
@@ -43,6 +53,33 @@ bool MainMenu::PreUpdate()
 // Called each loop iteration
 bool MainMenu::Update(float dt)
 {
+
+	// Check for gamepad inputs
+    if(app->input->pads[0].a == KEY_DOWN) {
+        // Simulate a click on the currently selected button
+        OnGuiMouseClickEvent(currentButton);
+    }
+    
+	if(app->input->pads[0].up == KEY_DOWN) {
+        if(!wasUpPressed) {
+            // Move the selection up
+            SelectPreviousButton();
+        }
+        wasUpPressed = true;
+    } else {
+        wasUpPressed = false;
+    }
+
+    if(app->input->pads[0].down == KEY_DOWN) {
+        if(!wasDownPressed) {
+            // Move the selection down
+            SelectNextButton();
+        }
+        wasDownPressed = true;
+    } else {
+        wasDownPressed = false;
+    }
+
 	// OPTICK PROFILIN
 	ZoneScoped;
 
@@ -102,6 +139,46 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	
 	return true;
+}
+
+void MainMenu::SelectPreviousButton()
+{
+    // Deselect the current button
+    buttons[selectedButtonIndex]->state = GuiControlState::NORMAL;
+
+    // Move the selection up
+    selectedButtonIndex--;
+    if(selectedButtonIndex < 0)
+    {
+        selectedButtonIndex = buttons.size() - 1; // Wrap around to the last button
+    }
+
+    // Select the new button
+	currentButton = static_cast<GuiControlButton*>(buttons[selectedButtonIndex]);
+	currentButton->state = GuiControlState::FOCUSED;
+
+	// Debug
+	LOG("Selected button: %d", selectedButtonIndex);
+}
+
+void MainMenu::SelectNextButton()
+{
+	// Deselect the current button
+	buttons[selectedButtonIndex]->state = GuiControlState::NORMAL;
+
+	// Move the selection down
+	selectedButtonIndex++;
+	if(selectedButtonIndex >= buttons.size())
+	{
+		selectedButtonIndex = 0; // Wrap around to the first button
+	}
+
+	// Select the new button
+	currentButton = static_cast<GuiControlButton*>(buttons[selectedButtonIndex]);
+	currentButton->state = GuiControlState::FOCUSED;
+
+	// Debug
+	LOG("Selected button: %d", selectedButtonIndex);
 }
 
 void MainMenu::RenderGUI()
