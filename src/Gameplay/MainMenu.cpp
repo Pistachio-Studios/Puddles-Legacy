@@ -112,6 +112,7 @@ bool MainMenu::Exit()
 	app->guiManager->RemoveGuiControl(exitButton);
 
 	// TODO fix bug where if you clean the buttons, the pause menu doesn't change the scene to main menu
+	// https://github.com/Bomboclat-Studios/Proyecto2/issues/5
 	buttons.clear();
 
 	return true;
