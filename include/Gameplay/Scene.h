@@ -73,25 +73,6 @@ public:
 	{
 		return true;
 	}
-/* 
-	void Enable()
-	{
-		if (!active)
-		{
-			active = true;
-			Start();
-		}
-	}
-
-	void Disable()
-	{
-		// TODO 0: Call CleanUp() when disabling a Scene
-		if (active)
-		{
-			active = false;
-			CleanUp();
-		}
-	} */
 
 public:
 

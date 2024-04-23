@@ -196,9 +196,8 @@ bool Map::CleanUp()
     LOG("Unloading map");
 
     //Clean up pathfing class 
-    //if(pathfinding != nullptr)pathfinding->CleanUp();//TODO Mirar porque necesita esta comprobaci�n, no deberia necesitarla.
+    //if(pathfinding != nullptr)pathfinding->CleanUp(); //TODO Mirar porque necesita esta comprobaci�n, no deberia necesitarla.
 
-    // L05: DONE 2: Make sure you clean up any memory allocated from tilesets/map
     ListItem<TileSet*>* tileset;
     tileset = mapData.tilesets.start;
 
@@ -209,7 +208,6 @@ bool Map::CleanUp()
 
     mapData.tilesets.Clear();
 
-    // L06: DONE 2: clean up all layer data
     ListItem<MapLayer*>* layerItem;
     layerItem = mapData.maplayers.start;
 
@@ -457,7 +455,6 @@ bool Map::LoadColliders(pugi::xml_node mapFile)
     bool ret = true; 
     uint scale = app->win->GetScale();
 
-    //TODO!! check if the objectgroup's class is collider
     pugi::xml_node objectGroup;
     for (objectGroup = mapFile.child("map").child("objectgroup"); objectGroup && ret; objectGroup = objectGroup.next_sibling("objectgroup"))
     {

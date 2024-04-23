@@ -37,8 +37,6 @@
     <mainmenu>
 		  <gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png"/>
     </mainmenu>
-
-    <!-- TODO cambiar toda la configuración de las escenas -->
     <level1scene>
       <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
       <camera x="-530" y="-1949"/>
@@ -74,8 +72,6 @@
       <enemies>
       </enemies>
     </tutorialscene>
-    <!-- TODO cambiar toda la configuración de las escenas -->
-      
     <testscene>
       <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
       <camera x="-530" y="-1949"/>

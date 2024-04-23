@@ -63,8 +63,6 @@ public:
 	virtual void DrawImGui()
 	{
 	}
-	
-	// L14: TODO 2: Create new virtual methods to LoadState / SaveState
 
 	// Called when we want to load data from XML
 	virtual bool LoadState(pugi::xml_node node)
@@ -94,7 +92,6 @@ public:
 
 	void Disable()
 	{
-		// TODO 0: Call CleanUp() when disabling a module
 		if (active)
 		{
 			active = false;

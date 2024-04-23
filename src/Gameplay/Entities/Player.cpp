@@ -79,17 +79,10 @@ bool Player::Update(float dt)
 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x*10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 	
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
-	
-	if (debug) {
-		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-			freeCam = !freeCam;
-		}
-	}
 
 	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 
@@ -100,10 +93,13 @@ bool Player::Update(float dt)
 
 	lookingAngle = -app->physics->lookAt(b2Vec2(1, 0), lookingDir) * 2;
 
-	if (debug)
-	{
+	if (debug) {
 		mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(mouseWorldPosition.x), METERS_TO_PIXELS(mouseWorldPosition.y), 255, 0, 0);
+		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x*10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
+		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+			freeCam = !freeCam;
+		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)

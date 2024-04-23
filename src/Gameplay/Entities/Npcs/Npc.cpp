@@ -10,6 +10,8 @@
 #include "Utils/Point.h"
 #include "Utils/Log.h"
 
+#include "Core/DialogManager.h"
+
 #include <box2d/b2_math.h>
 #include <box2d/b2_body.h>
 #include <box2d/b2_fixture.h>
@@ -76,6 +78,7 @@ bool Npc::Update(float dt)
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 				npcClick = true;
 				//sale dialogo
+				// app->dialogManager->StartDialog(1); // TODO poner dialogo
 			}
 		}
 	}

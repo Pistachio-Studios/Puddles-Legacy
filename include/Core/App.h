@@ -145,7 +145,7 @@ private:
 
 	float maxFrameDuration = 16.666f;
 
-	float maxFps = 30; // TODO hacer esto variable
+	float maxFps = 30; // TODO remove legacy code
 
 	bool loadRequest = false;
 	bool saveRequest = false;
