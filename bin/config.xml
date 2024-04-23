@@ -31,19 +31,11 @@
     <character_3 path="Assets/Dialog/character_3.png"/>
   </dialog_manager>
 
-  <dialog_manager>
-	  <!--Aqui hay que almacenar el fondo del dialogo y las caras de los personajes-->
-	  <background path="Assets/Dialog/background.png"/>
-    <character_1 path="Assets/Dialog/character_1.png"/>
-    <character_2 path="Assets/Dialog/character_2.png"/>
-    <character_3 path="Assets/Dialog/character_3.png"/>
-  </dialog_manager>
-
   <scene_manager startScene="teamlogo">
 	  <teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG">
 	  </teamlogo>
     <mainmenu>
-		<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.PNG"/>
+		  <gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.PNG"/>
     </mainmenu>
 
     <!-- TODO cambiar toda la configuración de las escenas -->
@@ -54,13 +46,13 @@
       <enemies>
       </enemies>
     </level1scene>
-	<forestscene>
-	  <map path="Assets/Maps/Forest-Level/" name="Bosque.tmx"/>
-	  <camera x="-530" y="-1949"/>
-	  <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/>
+    <forestscene>
+      <map path="Assets/Maps/Forest-Level/" name="Bosque.tmx"/>
+      <camera x="-530" y="-1949"/>
+      <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/>
       <enemies>
       </enemies>
-	</forestscene>
+    </forestscene>
     <townscene>
       <map path="Assets/Maps/Town-Scene/" name="Town.tmx"/>
       <camera x="-530" y="-1949"/>
@@ -91,7 +83,7 @@
       <enemies>
         <EnemyBoss x="800" y="2032" texturepath=""/>
         <FlyingEnemy x="800" y="1900" texturepath=""/>
-		<CentipideEnemy x="850" y="2000" texturepath=""/>
+		    <CentipideEnemy x="850" y="2000" texturepath=""/>
       </enemies>
     </testscene>
     <particle_demo>
@@ -99,6 +91,4 @@
     <lighting_demo>
     </lighting_demo>
   </scene_manager>
-
-  
 </config>
