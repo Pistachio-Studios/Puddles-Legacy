@@ -162,7 +162,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::CHANGESCENE:
 		if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")
 		{
-			app->sceneManager->ChangeScene("town");
+			app->sceneManager->ChangeScene("townscene");
 		}
 		break;
 	}
