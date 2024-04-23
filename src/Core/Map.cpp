@@ -389,6 +389,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
                 }
             }
         }
+        mapData.tilesets.Add(set);
     }
 
     return ret;

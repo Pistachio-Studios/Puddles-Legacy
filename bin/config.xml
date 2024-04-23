@@ -23,7 +23,7 @@
     <fx volume="128"/>
   </audio>
 
-  <scene_manager startScene="mainmenu">
+  <scene_manager startScene="forestscene">
     <mainmenu>
     </mainmenu>
 
