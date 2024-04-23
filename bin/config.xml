@@ -74,6 +74,10 @@
 		  <FlyingEnemy x="600" y="2050" texturepath=""/>
 		  <CentipideEnemy x="650" y="2100" texturepath=""/>
       </enemies>
+	  <Npcs>
+		  <loco x="900" y="2500" texturepath="Assets/Textures/Npcs/Loco.png"/>
+	      <tabernero x="900" y="2800" texturepath="Assets/Textures/Npcs/Tabernero.png"/>
+	  </Npcs>
     </tutorialscene>
     <testscene>
       <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
@@ -81,10 +85,6 @@
       <player x="672" y="2032" texturepath ="Assets/Textures/playerx128-test.png"/>
       <enemies>
       </enemies>
-      <Npcs>
-		    <loco x="1000" y="1720" texturepath="Assets/Textures/Npcs/Loco.png"/>
-	      <tabernero x="1020" y="2035" texturepath="Assets/Textures/Npcs/Tabernero.png"/>
-	    </Npcs>
     </testscene>
     <particle_demo>
     </particle_demo>

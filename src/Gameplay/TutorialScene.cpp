@@ -8,6 +8,9 @@
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Entities/Enemies/CentipideEnemy.h"
 #include "Gameplay/Entities/Enemies/FlyingEnemy.h"
+#include "Gameplay/Entities/Npcs/Loco.h"
+#include "Gameplay/Entities/Npcs/Npc.h"
+#include "Gameplay/Entities/Npcs/Tabernero.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -106,6 +109,20 @@ bool TutorialScene::Enter()
 			centipidenemy->parameters = CentipideEnemyNode;
 			centipidenemy->Start();
 		}
+	}
+
+	if (parameters.child("Npcs").child("loco")) {
+		Loco* loco = new Loco();
+		app->entityManager->AddEntity(loco);
+		loco->parameters = parameters.child("Npcs").child("loco");
+		loco->Start();
+	}
+
+	if (parameters.child("Npcs").child("tabernero")) {
+		Tabernero* tabernero = new Tabernero();
+		app->entityManager->AddEntity(tabernero);
+		tabernero->parameters = parameters.child("Npcs").child("tabernero");
+		tabernero->Start();
 	}
 
 	return true;
