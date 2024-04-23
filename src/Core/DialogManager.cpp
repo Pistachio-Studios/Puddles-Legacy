@@ -71,7 +71,7 @@ bool DialogManager::Update(float dt) {
     // Update code
     ShowDialog(200, 200);
 
-    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN and currentDialogId != -1)
     {
         NextDialog();
         StartDialog(currentDialogId);

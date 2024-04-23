@@ -338,6 +338,9 @@ bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Co
 	SDL_Surface* surface = TTF_RenderUTF8_Blended(app->render->font, text, color);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
+	//Reset font size
+	TTF_SetFontSize(app->render->font, 25);
+
 	uint scale = app->win->GetScale();
 
 	SDL_Rect rect;
