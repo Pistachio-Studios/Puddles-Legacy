@@ -382,11 +382,25 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
             pugi::xml_node objectGroup = tile.child("objectgroup");
             if(objectGroup)
             {
+                DynArray<Colliders> colliderArray;
                 pugi::xml_node colliderNode = objectGroup.child("object");
-                if(colliderNode.attribute("width").as_int() != 0 && colliderNode.attribute("height").as_int() != 0)
+                if (colliderNode.attribute("width").as_int() != 0 && colliderNode.attribute("height").as_int() != 0)
                 {
-                    set->tileColliders[set->firstgid + tile.attribute("id").as_int()] = {colliderNode.attribute("x").as_int(), colliderNode.attribute("y").as_int(), colliderNode.attribute("width").as_int(), colliderNode.attribute("height").as_int()};
+                    for (colliderNode = objectGroup.child("object"); colliderNode && ret; colliderNode = colliderNode.next_sibling("object"))
+                    {
+                        if (colliderNode.attribute("width").as_int() != 0 && colliderNode.attribute("height").as_int() != 0)
+                        {
+                            colliderArray.PushBack({ colliderNode.attribute("x").as_int(), colliderNode.attribute("y").as_int(), colliderNode.attribute("width").as_int(), colliderNode.attribute("height").as_int() });
+                        }
+                    }
                 }
+                else
+                {
+                    colliderArray.PushBack({ 0,0,0,0 });
+                }
+                    
+                if(colliderArray[0].width > 0 && colliderArray[0].height > 0)
+                    set->tileColliders[set->firstgid + tile.attribute("id").as_int()] = colliderArray;
             }
         }
         mapData.tilesets.Add(set);
@@ -458,12 +472,15 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
                 auto it = set->tileColliders.find(tileGid);
                 if(it != set->tileColliders.end())
                 {
-                    Colliders c = it->second;
-                    if(c.width != 0 && c.height != 0)
+                    DynArray<Colliders> c = it->second;
+                    for (int i = 0; i < c.GetCapacity(); i++)
                     {
-                        iPoint pos = layer->Get(i);
-                        pos = MapToWorld(pos.x, pos.y);
-                        app->physics->CreateRectangle(pos.x + c.x + c.width / 2, pos.y + c.y + c.height / 2, c.width, c.height, bodyType::STATIC);
+                        if (c[i].width != 0 && c[i].height != 0)
+                        {
+                            iPoint pos = layer->Get(i);
+                            pos = MapToWorld(pos.x, pos.y);
+                            app->physics->CreateRectangle(pos.x + c[i].x + c[i].width / 2, pos.y + c[i].y + c[i].height / 2, c[i].width, c[i].height, bodyType::STATIC);
+                        }
                     }
                 }
             }

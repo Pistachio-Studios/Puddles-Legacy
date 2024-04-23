@@ -41,7 +41,7 @@ struct TileSet
 	int columns;
 	int tilecount;
 
-	std::unordered_map<int, Colliders> tileColliders;
+	std::unordered_map<int, DynArray<Colliders>> tileColliders;
 
 	SDL_Texture* texture;
 	SDL_Rect GetTileRect(int gid) const;
