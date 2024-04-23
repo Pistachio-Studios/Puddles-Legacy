@@ -18,6 +18,7 @@ enum class EntityType
 	CENTIPIDEENEMY,
 	NPC,
 	SWORD,
+	STAFF,
 	SHIELD,
 	UNKNOWN
 };

@@ -11,6 +11,12 @@
 
 struct SDL_Texture;
 
+enum PlayerClass
+{
+	KNIGHT,
+	WIZARD
+};
+
 class Player : public Entity
 {
 public:
@@ -59,6 +65,8 @@ public:
 
 	b2Vec2 lookingDir;
 	float lookingAngle = 0;
+
+	PlayerClass currentClass = KNIGHT;
 
 	//tmp
 	PhysBody* sword;

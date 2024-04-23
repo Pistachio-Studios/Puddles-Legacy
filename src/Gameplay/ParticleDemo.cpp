@@ -71,7 +71,7 @@ bool ParticleDemo::PreUpdate()
 
 bool ParticleDemo::Update(float dt)
 {
-    particleSource1->position = { app->input->GetMouseX(), app->input->GetMouseY() };
+    //particleSource1->position = { app->input->GetMouseX(), app->input->GetMouseY() };
     return true;
 }
 
