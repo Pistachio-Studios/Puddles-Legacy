@@ -32,7 +32,7 @@ find_package(box2d CONFIG REQUIRED)
 find_package(Tracy CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES} "src/Gameplay/Entities/Enemies/CentipideEnemy.cpp")
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
 

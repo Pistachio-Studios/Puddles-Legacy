@@ -1,5 +1,8 @@
 #include "Core/EntityManager.h"
 #include "Gameplay/Entities/Player.h"
+#include "Gameplay/Entities/Enemies/EnemyBoss.h"
+#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
+#include "Gameplay/Entities/Enemies/CentipideEnemy.h"
 #include "Gameplay/Entities/Sword.h"
 #include "Gameplay/Entities/Shield.h"
 #include "Core/App.h"
@@ -95,6 +98,15 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::PLAYER:
 		entity = new Player();
 		break;
+	case EntityType::ENEMYBOSS:
+		entity = new EnemyBoss();
+		break;
+	case EntityType::FLYINGENEMY:
+		entity = new FlyingEnemy();
+		break;
+	case EntityType::CENTIPIDEENEMY:
+		entity = new CentipideEnemy();
+		break;
 	case EntityType::SWORD:
 		entity = new Sword();
 		break;
@@ -135,6 +147,24 @@ void EntityManager::AddEntity(Entity* entity)
 	if ( entity != nullptr) entities.Add(entity);
 }
 
+Player* EntityManager::GetPlayerEntity()
+{
+	bool ret = true;
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+
+	for (item = entities.start; item != NULL && ret == true; item = item->next)
+	{
+		pEntity = item->data;
+		if (pEntity->type == EntityType::PLAYER)
+		{
+			return (Player*)pEntity;
+		}
+	}
+	LOG_WARNING("Player Entity not found!");
+	return nullptr;
+}
+
 bool EntityManager::Update(float dt)
 {
 	// OPTICK PROFILIN
@@ -164,7 +194,7 @@ void EntityManager::DrawImGui()
 		
 		static EntityType selectedEntityType = EntityType::PLAYER;
 		
-		const char* entityTypes[] = { "PLAYER", "ENEMY"};
+		const char* entityTypes[] = { "PLAYER", "ENEMYBOSS", "FYLINGENEMY", "CENTIPIDEENEMY"};
 
 		ImGui::Combo("Entity Type", (int*)&selectedEntityType, entityTypes, IM_ARRAYSIZE(entityTypes));
 		if (ImGui::Button("Spawn Entity"))

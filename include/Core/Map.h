@@ -173,7 +173,8 @@ public:
 	MapData mapData;
 	SString name;
 	SString path;
-	PathFinding* pathfinding;
+
+	uchar* navigationMap;
 
 private:
 	bool mapLoaded;

@@ -25,12 +25,21 @@ bool TestScene::Enter()
 {
 	// iterate all objects in the testscene
 	// Check https://pugixml.org/docs/quickstart.html#access
-
+	
 	if (parameters.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = parameters.child("player");
 		player->Enable();
 	}
+
+	
+
+	for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
+	{
+		CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
+		centipidenemy->parameters = CentipideEnemyNode;
+	}
+	
 
 	if (parameters.child("Npcs").child("loco")) {
 		Loco* loco = new Loco();

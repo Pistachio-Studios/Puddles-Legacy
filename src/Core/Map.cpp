@@ -49,14 +49,11 @@ bool Map::Start() {
     mapPath += name;
     bool ret = Load(mapPath);
 
-    //Initialize pathfinding 
-    pathfinding = new PathFinding();
-
     //Initialize the navigation map
-    uchar* navigationMap = NULL;
+    navigationMap = NULL;
     CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
-    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
-    RELEASE_ARRAY(navigationMap);
+
+    //RELEASE_ARRAY(navigationMap);
 
     return ret;
 }
@@ -224,7 +221,7 @@ bool Map::CleanUp()
     LOG("Unloading map");
 
     //Clean up pathfing class 
-    if(pathfinding != nullptr)pathfinding->CleanUp();//TODO Mirar porque necesita esta comprobaci�n, no deberia necesitarla.
+    //if(pathfinding != nullptr)pathfinding->CleanUp();//TODO Mirar porque necesita esta comprobaci�n, no deberia necesitarla.
 
     // L05: DONE 2: Make sure you clean up any memory allocated from tilesets/map
     ListItem<TileSet*>* tileset;
