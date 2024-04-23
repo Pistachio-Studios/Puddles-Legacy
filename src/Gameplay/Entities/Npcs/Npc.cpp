@@ -67,7 +67,7 @@ bool Npc::Update(float dt)
 
 	app->render->DrawTexture(texture, position.x, position.y);
 
-	if (app->sceneManager->GetCurrentScene()->name == "testscene") //TODO!! Cambiarlo por el nombre de la scena de la taverna
+	if (app->sceneManager->GetCurrentScene()->name == "tavernscene") 
 	{
 		int mouseX = METERS_TO_PIXELS(mouseWorldPosition.x);
 		int mouseY = METERS_TO_PIXELS(mouseWorldPosition.y);
@@ -75,7 +75,7 @@ bool Npc::Update(float dt)
 			app->render->DrawTexture(texture3, position.x - 40, position.y - 50);
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 				npcClick = true;
-				LOG("BEEEEP");
+				//sale dialogo
 			}
 		}
 	}
@@ -101,6 +101,7 @@ bool Npc::CleanUp() {
 
 	app->tex->UnLoad(texture);
 	app->tex->UnLoad(texture2);
+	app->tex->UnLoad(texture3);
 	app->physics->DestroyBody(pbody);
 
 	return true;
