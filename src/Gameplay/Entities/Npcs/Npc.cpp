@@ -69,8 +69,7 @@ bool Npc::Update(float dt)
 
 	app->render->DrawTexture(texture, position.x, position.y);
 
-	if (app->sceneManager->GetCurrentScene()->name == "tavernscene") 
-	{
+	if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")  { // TODO change this if
 		int mouseX = METERS_TO_PIXELS(mouseWorldPosition.x);
 		int mouseY = METERS_TO_PIXELS(mouseWorldPosition.y);
 		if (mouseX > position.x && mouseX < position.x + width && mouseY > position.y && mouseY < position.y + height) {
@@ -78,12 +77,10 @@ bool Npc::Update(float dt)
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 				npcClick = true;
 				//sale dialogo
-				// app->dialogManager->StartDialog(1); // TODO poner dialogo
+				app->dialogManager->StartDialog(1);
 			}
 		}
-	}
-	else
-	{
+	} else {
 		if(touchingNpc)
 			app->render->DrawTexture(texture2, position.x - 40, position.y - 20);
 	}

@@ -40,7 +40,7 @@ bool DialogManager::Start() {
         characterTextures[node.name()] = app->tex->Load(node.attribute("path").as_string());
     }
     
-    app->dialogManager->StartDialog(1);
+    // app->dialogManager->StartDialog(1); TODO change this when fixed dialog bug
 
     indexText = 1;
 
@@ -54,12 +54,14 @@ bool DialogManager::PreUpdate() {
 
 bool DialogManager::Update(float dt) {
     // Update code
-    ShowDialog(200, 200);
+    if (isDialogStarted) { // TODO change this when fixed dialog bug
+        ShowDialog(200, 200);
 
-    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN and currentDialogId != -1)
-    {
-        NextDialog();
-        StartDialog(currentDialogId);
+        if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN and currentDialogId != -1)
+        {
+            NextDialog();
+            StartDialog(currentDialogId);
+        }
     }
 
     return true;
@@ -99,6 +101,8 @@ void DialogManager::StartDialog(int dialogId) {
     currentDialogLine = dialogs.at(dialogId).ES;
 
     currentDialog = &dialogs.at(currentDialogId);
+
+    isDialogStarted = true; // TODO change this when fixed dialog bug
 }
 
 void DialogManager::NextDialog() {
@@ -132,6 +136,8 @@ void DialogManager::EndDialog() {
     // Clear the current dialog
     currentDialogId = -1;
     currentDialogLine.clear();
+
+    isDialogStarted = false; // TODO change this when fixed dialog bug
 }
 
 void DialogManager::ShowDialog(int x, int y) {
