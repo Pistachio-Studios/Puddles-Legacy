@@ -10,7 +10,7 @@
   </renderer>
 
   <window>
-    <resolution width="1280" height="720" scale="1"/>
+    <resolution width="1920" height="1080" scale="1"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -24,7 +24,9 @@
   </audio>
 
   <scene_manager startScene="mainmenu">
+	<teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG"/>
     <mainmenu>
+		<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.PNG"/>
     </mainmenu>
 
     <!-- TODO cambiar toda la configuración de las escenas -->

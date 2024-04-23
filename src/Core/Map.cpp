@@ -368,11 +368,11 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
         texPath += tileset.child("image").attribute("source").as_string();
         set->texture = app->tex->Load(texPath.GetString());
 
-        if(tileset.child("tile")) //check if the tileset is an Animation (no se si seria mejor checkear si tiene un animation child)
-        {
-            LoadAnimation(tileset.child("tile"), set);
-        }
-        else
+        //if(tileset.child("tile")) //check if the tileset is an Animation (no se si seria mejor checkear si tiene un animation child)
+        //{
+        //    LoadAnimation(tileset.child("tile"), set);
+        //}
+        //else
         {
             mapData.tilesets.Add(set);
         }
