@@ -22,13 +22,6 @@ enum class EntityType
 	UNKNOWN
 };
 
-enum class EntityState {
-	NONE,
-	MOVE,
-	ATTACK,
-	IDLE
-};
-
 class Entity
 {
 public:
