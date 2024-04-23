@@ -17,6 +17,7 @@
 #include "Gameplay/States/Player/PlayerCombatAttackState.hpp"
 #include "Gameplay/States/Player/PlayerCombatBlockState.hpp"
 
+#include <SDL_scancode.h>
 #include <cmath>
 #include <iostream>
 
@@ -103,6 +104,18 @@ bool Player::Update(float dt)
 	{
 		mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(mouseWorldPosition.x), METERS_TO_PIXELS(mouseWorldPosition.y), 255, 0, 0);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+	{
+		if (currentClass == PlayerClass::KNIGHT)
+		{
+			currentClass = PlayerClass::WIZARD;
+		}
+		else
+		{
+			currentClass = PlayerClass::KNIGHT;
+		}
 	}
 
 	return true;
