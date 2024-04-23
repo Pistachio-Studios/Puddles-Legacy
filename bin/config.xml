@@ -81,6 +81,10 @@
         <FlyingEnemy x="800" y="1900" texturepath=""/>
 		    <CentipideEnemy x="850" y="2000" texturepath=""/>
       </enemies>
+      <Npcs>
+		    <loco x="1000" y="1720" texturepath="Assets/Textures/Npcs/Loco.png"/>
+	      <tabernero x="1020" y="2035" texturepath="Assets/Textures/Npcs/Tabernero.png"/>
+	    </Npcs>
     </testscene>
     <particle_demo>
     </particle_demo>
