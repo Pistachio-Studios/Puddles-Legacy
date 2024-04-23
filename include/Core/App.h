@@ -24,6 +24,7 @@ class Physics;
 class ParticleManager;
 class GuiManager;
 class DebugUI;
+class DialogManager;
 
 class App
 {
@@ -110,6 +111,7 @@ public:
 	ParticleManager* particleManager;
 	GuiManager* guiManager;
 	DebugUI* debugUI;
+	DialogManager* dialogManager;
 
 
 private:
@@ -155,5 +157,6 @@ extern App* app;
 extern bool debug;
 extern bool fpsLimiter;
 extern bool freeCam;
+extern bool paused;
 
 #endif	// __APP_H__

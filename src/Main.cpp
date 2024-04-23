@@ -25,6 +25,7 @@ App* app = NULL;
 bool debug = false;
 bool fpsLimiter = false;
 bool freeCam = false;
+bool paused = false;
 
 int main(int argc, char* args[])
 {

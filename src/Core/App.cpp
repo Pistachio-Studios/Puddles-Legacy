@@ -13,6 +13,7 @@
 #include "Core/DebugUI.h"
 #include "Core/EntityManager.h"
 #include "Core/Lighting.h"
+#include "Core/DialogManager.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -39,13 +40,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	lighting = new Lighting(false);
 	audio = new Audio(true);
-	physics = new Physics(true);
+	physics = new Physics(false);
 	sceneManager = new SceneManager(true);
 	map = new Map(false);
 	entityManager = new EntityManager(false);
 	particleManager = new ParticleManager(true);
 	guiManager = new GuiManager(true);
 	debugUI = new DebugUI(true);
+	dialogManager = new DialogManager(true);
 
 
 	// Ordered for awake / Start / Update
@@ -62,6 +64,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(lighting);
 	AddModule(guiManager);
 	AddModule(debugUI);
+	AddModule(dialogManager);
 
 	// Render last to swap buffer
 	AddModule(render);
@@ -230,7 +233,10 @@ void App::FinishUpdate()
 	secondsSinceStartup = startupTime.ReadSec();
 	
 	// Amount of ms took the last update (dt)
-	dt = (float) frameTime.ReadMs();
+	if (paused)
+		dt = 0;
+	else
+		dt = (float) frameTime.ReadMs();
 
 	// Amount of frames during the last second
 	lastSecFrameCount++;

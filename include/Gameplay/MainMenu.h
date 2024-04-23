@@ -1,10 +1,12 @@
-#ifndef __MAINMENU_H__
-#define __MAINMENU_H__
+#ifndef __MainMenu_H__
+#define __MainMenu_H__
 
 #include "Gameplay/Scene.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
 #include <vector>
+#include "Core/GuiControlPopUp.h"
+#include "Core/GuiControlSlider.h"
 
 struct SDL_Texture;
 
@@ -61,8 +63,14 @@ private:
 
 	bool wasUpPressed;
     bool wasDownPressed;
-
+	GuiControlPopUp* popUpOptions = nullptr;
+	GuiControlButton* crossOButton = nullptr;
+	GuiControlSlider* music = nullptr;
+	
 	bool exitPressed = false;
+
+	const char* texturePath;
+	SDL_Texture* gameTitle = NULL;
 };
 
-#endif // __MAINMENU_H__
+#endif // __MainMenu_H__

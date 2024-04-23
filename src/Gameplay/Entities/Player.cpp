@@ -8,10 +8,14 @@
 #include "Utils/Point.h"
 #include "Core/Physics.h"
 #include "Utils/StateMachine.h"
+#include "Core/SceneManager.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
 #include "Gameplay/States/Player/PlayerMoveState.hpp"
+#include "Gameplay/States/Player/PlayerCombatIdleState.hpp"
+#include "Gameplay/States/Player/PlayerCombatAttackState.hpp"
+#include "Gameplay/States/Player/PlayerCombatBlockState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -44,7 +48,9 @@ bool Player::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 20, 10, bodyType::DYNAMIC);
+	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
+
+	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
@@ -54,8 +60,13 @@ bool Player::Start() {
 	pbody->body->SetLinearDamping(10.0f);
 
 	movementFSM = new StateMachine<Player>(this);
-	movementFSM->AddState(new PlayerIdleState("idle"));
+	movementFSM->AddState(new PlayerIdleState("idle")); 
 	movementFSM->AddState(new PlayerMoveState("move"));
+
+	combatFSM = new StateMachine<Player>(this);
+	combatFSM->AddState(new PlayerCombatIdleState("idle"));
+	combatFSM->AddState(new PlayerCombatAttackState("attack"));
+	combatFSM->AddState(new PlayerCombatBlockState("block"));
 
 	return true;
 }
@@ -63,15 +74,15 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	movementFSM->Update(dt);
+	combatFSM->Update(dt);
 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
 	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x*10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 	
-
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
 	
 	if (debug) {
 		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
@@ -79,10 +90,20 @@ bool Player::Update(float dt)
 		}
 	}
 
+	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 
-/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
+	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 
-	currentAnimation->Update(dt); */
+	lookingDir = mouseWorldPosition - pbody->body->GetPosition();
+	lookingDir.Normalize();
+
+	lookingAngle = -app->physics->lookAt(b2Vec2(1, 0), lookingDir) * 2;
+
+	if (debug)
+	{
+		mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
+		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(mouseWorldPosition.x), METERS_TO_PIXELS(mouseWorldPosition.y), 255, 0, 0);
+	}
 
 	return true;
 }
@@ -94,6 +115,10 @@ void Player::DrawImGui()
 	ImGui::Text("Player Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
+
+	ImGui::Text("Looking Dir: (%f, %f)", lookingDir.x, lookingDir.y);
+	ImGui::Text("Looking Angle: %f", lookingAngle);
+
 	ImGui::End();
 }
 
@@ -125,8 +150,17 @@ bool Player::CleanUp() {
 	return true;
 }
 
+//TODO arreglar esta cochinada
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
-
+	switch (physB->ctype)
+	{
+	case ColliderType::CHANGESCENE:
+		if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")
+		{
+			app->sceneManager->ChangeScene("townscene");
+		}
+		break;
+	}
 }
 
 void Player::EndCollision(PhysBody* physA, PhysBody* physB){

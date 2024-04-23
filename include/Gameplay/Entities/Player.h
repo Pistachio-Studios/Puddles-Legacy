@@ -49,12 +49,19 @@ public:
 
 	//Movement
 	float moveForce = 1.0f;
-	float maxSpeed = 2.0f;
+	float maxSpeed = 10.0f;
 
 	//State Machines
 	StateMachine<Player>* movementFSM = nullptr;
+	StateMachine<Player>* combatFSM = nullptr;
 
 	PhysBody* pbody;
+
+	b2Vec2 lookingDir;
+	float lookingAngle = 0;
+
+	//tmp
+	PhysBody* sword;
 };
 
 #endif // __PLAYER_H__

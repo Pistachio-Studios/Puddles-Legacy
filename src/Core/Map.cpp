@@ -1,4 +1,3 @@
-
 #include "Core/Animation.h"
 #include "Core/App.h"
 #include "Core/Render.h"
@@ -49,14 +48,11 @@ bool Map::Start() {
     mapPath += name;
     bool ret = Load(mapPath);
 
-    //Initialize pathfinding 
-    pathfinding = new PathFinding();
-
     //Initialize the navigation map
-    uchar* navigationMap = NULL;
+    navigationMap = NULL;
     CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
-    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
-    RELEASE_ARRAY(navigationMap);
+
+    //RELEASE_ARRAY(navigationMap);
 
     return ret;
 }
@@ -106,30 +102,6 @@ bool Map::Update(float dt)
 
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
-
-
-                    // TODO 
-                    // HACER QUE EL PARALAX NO TENGA DESFASE DE COORDENADAS POR LA ESCALA
-                    /*
-                    
-                    if (mapLayerItem->data->parallaxFactor == 1.0f)
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x,
-                            pos.y,
-                            &r,
-                            mapLayerItem->data->parallaxFactor);
-                    }
-                    else
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x * mapLayerItem->data->parallaxFactor,
-                            pos.y * mapLayerItem->data->parallaxFactor,
-                            &r,
-                            mapLayerItem->data->parallaxFactor);
-                    }
-                    
-                    */
 
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
@@ -224,7 +196,7 @@ bool Map::CleanUp()
     LOG("Unloading map");
 
     //Clean up pathfing class 
-    if(pathfinding != nullptr)pathfinding->CleanUp();//TODO Mirar porque necesita esta comprobaci�n, no deberia necesitarla.
+    //if(pathfinding != nullptr)pathfinding->CleanUp();//TODO Mirar porque necesita esta comprobaci�n, no deberia necesitarla.
 
     // L05: DONE 2: Make sure you clean up any memory allocated from tilesets/map
     ListItem<TileSet*>* tileset;
@@ -288,8 +260,8 @@ bool Map::Load(SString mapFileName)
         ret = LoadColliders(mapFileXML);
     }
 
-    PhysBody* c1 = app->physics->CreateRectangle(238, 632, 480 * 50, 16, STATIC);
-    c1->ctype = ColliderType::PLATFORM;
+    //PhysBody* c1 = app->physics->CreateRectangle(238, 632, 480 * 50, 16, STATIC);
+    //c1->ctype = ColliderType::PLATFORM;
 
    /* PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
     c2->ctype = ColliderType::PLATFORM;
@@ -393,11 +365,11 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
         texPath += tileset.child("image").attribute("source").as_string();
         set->texture = app->tex->Load(texPath.GetString());
 
-        if(tileset.child("tile")) //check if the tileset is an Animation (no se si seria mejor checkear si tiene un animation child)
-        {
-            LoadAnimation(tileset.child("tile"), set);
-        }
-        else
+        //if(tileset.child("tile")) //check if the tileset is an Animation (no se si seria mejor checkear si tiene un animation child)
+        //{
+        //    LoadAnimation(tileset.child("tile"), set);
+        //}
+        //else
         {
             mapData.tilesets.Add(set);
         }

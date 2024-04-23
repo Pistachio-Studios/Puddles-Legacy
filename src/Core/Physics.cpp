@@ -67,7 +67,7 @@ bool Physics::PreUpdate()
 	// Step (update) the World
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
 	ZoneNamedN(WorldStep, "WorldStep", true);
-	world->Step(1.0f / 60.0f, 6, 2);
+	if(!paused)world->Step(1.0f / 60.0f, 6, 2);
 
 	// Remove all bodies scheduled for deletion
 	ZoneNamedN(RemoveBodies, "RemoveBodies", true);

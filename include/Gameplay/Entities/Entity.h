@@ -13,12 +13,13 @@ typedef float float32;
 enum class EntityType
 {
 	PLAYER,
+	FLYINGENEMY,
+	ENEMYBOSS,
+	CENTIPIDEENEMY,
+	NPC,
+	SWORD,
+	SHIELD,
 	UNKNOWN
-};
-
-enum class EntityState {
-	NONE,
-	IDLE
 };
 
 class Entity
@@ -61,6 +62,9 @@ public:
 		return true;
 	}
 
+	virtual void Move(float dt) {};
+	virtual void Attack(float dt) {}; 
+
 	void Enable()
 	{
 		if (!active)
@@ -94,13 +98,13 @@ public:
 
 	SString name;
 	EntityType type;
-	EntityState state;
 	bool active = true;
 	pugi::xml_node parameters;
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
-	iPoint position;       
+	iPoint position; 
+	iPoint newPosition;
 	bool renderable = true;
 
 	bool entityDebugDraw = false;

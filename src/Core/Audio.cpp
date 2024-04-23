@@ -179,3 +179,17 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 
 	return ret;
 }
+
+void Audio::SetVolume(int volume, bool isMusic) {
+	if (active) {
+		volume = std::max(0, std::min(volume, MIX_MAX_VOLUME));
+
+		if (active && music != NULL)Mix_VolumeMusic(volume);
+		else {
+			for (ListItem<Mix_Chunk*>* item = fx.start; item != NULL; item = item->next)
+			{
+				Mix_VolumeChunk(item->data, volume);
+			}
+		}
+	}
+}

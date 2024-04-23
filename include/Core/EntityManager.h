@@ -5,6 +5,8 @@
 #include "Gameplay/Entities/Entity.h"
 #include "Utils/List.h"
 
+class Player;
+
 class EntityManager : public Module
 {
 public:
@@ -36,6 +38,8 @@ public:
 	void DestroyEntity(Entity* entity);
 
 	void AddEntity(Entity* entity);
+
+	Player* GetPlayerEntity();
 
 	// Called when we want to load data from XML
 	bool LoadState(pugi::xml_node node);

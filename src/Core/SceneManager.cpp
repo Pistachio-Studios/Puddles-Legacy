@@ -3,9 +3,15 @@
 #include "Core/DebugUI.h"
 #include "Gameplay/LightingDemo.h"
 #include "Gameplay/MainMenu.h"
+#include "Gameplay/TeamLogo.h"
 #include "Gameplay/ParticleDemo.h"
 #include "Gameplay/Scene.h"
 #include "Gameplay/TestScene.h"
+#include "Gameplay/Level1Scene.h"
+#include "Gameplay/ForestScene.h"
+#include "Gameplay/TownScene.h"
+#include "Gameplay/TutorialScene.h"
+#include "Gameplay/TavernScene.h"
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
 #include <cassert>
@@ -183,9 +189,33 @@ Scene* SceneManager::CreateScene(SString sceneName)
     {
         return new MainMenu(sceneName);
     }
+    else if (sceneName == "teamlogo")
+    {
+        return new TeamLogo(sceneName);
+    }
     else if(sceneName == "testscene")
     {
         return new TestScene(sceneName);
+    }
+    else if(sceneName == "level1scene")
+    {
+        return new Level1Scene(sceneName);
+    }
+    else if (sceneName == "forestscene")
+    {
+        return new ForestScene(sceneName);
+    }
+    else if(sceneName == "townscene")
+    {
+        return new TownScene(sceneName);
+    }
+    else if(sceneName == "tavernscene")
+    {
+        return new TavernScene(sceneName);
+    }
+    else if(sceneName == "tutorialscene")
+    {
+        return new TutorialScene(sceneName);
     }
     else if(sceneName == "particle_demo")
     {
@@ -200,6 +230,10 @@ Scene* SceneManager::CreateScene(SString sceneName)
         LOG_ERROR("Scene %s not found\n", sceneName.GetString());
         return nullptr;
     }
+}
+Scene* SceneManager::GetCurrentScene()
+{
+    return currentScene;
 }
 
 Scene* SceneManager::FindScene(SString sceneName) const
@@ -249,4 +283,3 @@ bool SceneManager::SaveState(pugi::xml_node& node) const
 
     return ret;
 }
-

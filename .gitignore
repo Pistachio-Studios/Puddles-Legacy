@@ -44,6 +44,7 @@ bld/
 [Bb]in/*
 # ...except for bin/Assets/
 ![Bb]in/Assets/
+![Bb]in/dialogs.csv
 [Oo]bj/
 [Ll]og/
 # Ignore the executable
