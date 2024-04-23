@@ -76,6 +76,10 @@ bool TownScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
+	PhysBody* changeForest = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
+	changeForest->ctype = ColliderType::CHANGESCENE;
+	changeForest->listener = player;
+
 	return true;
 }
 
@@ -109,6 +113,13 @@ bool TownScene::Update(float dt)
 
 		if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
+	}
+	static Timer* t = new Timer();
+	if (t->ReadSec() > 1)
+	{
+		PhysBody* body = app->physics->CreateCircle(900, 1440, 5, bodyType::DYNAMIC);
+		body->body->ApplyLinearImpulseToCenter({ 0.25,0 }, true);
+		t->Start();
 	}
 
 
