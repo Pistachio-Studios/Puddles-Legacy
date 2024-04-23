@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="128" tileheight="128" infinite="0" nextlayerid="6" nextobjectid="17">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="128" tileheight="128" infinite="0" nextlayerid="6" nextobjectid="17">
  <tileset firstgid="1" name="Grass" tilewidth="128" tileheight="128" tilecount="77" columns="11">
   <image source="Grass.png" width="1408" height="896"/>
+  <tile id="1">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.5" y="15.5" width="127" height="32.5"/>
+   </objectgroup>
+  </tile>
+  <tile id="2">
+   <objectgroup draworder="index" id="4">
+    <object id="4" x="81.5" y="15.25" width="28.75" height="111.75"/>
+    <object id="5" x="0.25" y="16" width="81" height="31.5"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="78" name="Hills" tilewidth="128" tileheight="128" tilecount="77" columns="11">
   <image source="Hills.png" width="1408" height="896"/>
+  <tile id="1">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="128" height="24.25"/>
+   </objectgroup>
+  </tile>
   <tile id="4">
    <objectgroup draworder="index" id="2">
     <object id="1" x="120.667" y="64" width="7.66667" height="64"/>
@@ -85,11 +101,6 @@
     <object id="1" x="0" y="56.6667" width="128" height="71.6667"/>
    </objectgroup>
   </tile>
-  <tile id="44">
-   <objectgroup draworder="index" id="3">
-    <object id="2" x="0.333333" y="0.333333" width="127" height="127.333"/>
-   </objectgroup>
-  </tile>
   <tile id="45">
    <objectgroup draworder="index" id="2">
     <object id="1" x="0.333333" y="56" width="127" height="71.6667"/>
@@ -98,86 +109,6 @@
  </tileset>
  <tileset firstgid="155" name="Water" tilewidth="128" tileheight="128" tilecount="16" columns="8">
   <image source="Water.png" width="1024" height="256"/>
-  <tile id="0">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0.333333" y="0.333333" width="127.333" height="127"/>
-   </objectgroup>
-  </tile>
-  <tile id="1">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0.333333" y="0.333333" width="127.667" height="127.333"/>
-   </objectgroup>
-  </tile>
-  <tile id="2">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0.333333" y="0.333333" width="127.333" height="127"/>
-   </objectgroup>
-  </tile>
-  <tile id="3">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="0.333333" width="127.667" height="127.333"/>
-   </objectgroup>
-  </tile>
-  <tile id="4">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0.333333" y="0.333333" width="127.667" height="127.667"/>
-   </objectgroup>
-  </tile>
-  <tile id="5">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="0" width="127.667" height="127.667"/>
-   </objectgroup>
-  </tile>
-  <tile id="6">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0.333333" y="0.333333" width="128" height="127.333"/>
-   </objectgroup>
-  </tile>
-  <tile id="7">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0.333333" y="0" width="127" height="127.667"/>
-   </objectgroup>
-  </tile>
-  <tile id="8">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="0.333333" width="127.667" height="127.667"/>
-   </objectgroup>
-  </tile>
-  <tile id="9">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="0.333333" width="128.333" height="127"/>
-   </objectgroup>
-  </tile>
-  <tile id="10">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0.333333" y="0.333333" width="128" height="127"/>
-   </objectgroup>
-  </tile>
-  <tile id="11">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0.333333" y="0.333333" width="127.667" height="127.333"/>
-   </objectgroup>
-  </tile>
-  <tile id="12">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="0" width="128" height="127.667"/>
-   </objectgroup>
-  </tile>
-  <tile id="13">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="0" width="127.667" height="127.333"/>
-   </objectgroup>
-  </tile>
-  <tile id="14">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="-0.333333" width="127.667" height="128"/>
-   </objectgroup>
-  </tile>
-  <tile id="15">
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0.333333" y="0.333333" width="127.333" height="127.333"/>
-   </objectgroup>
-  </tile>
  </tileset>
  <tileset firstgid="171" name="Basic_Grass_Biom_things" tilewidth="128" tileheight="128" tilecount="45" columns="9">
   <image source="Basic_Grass_Biom_things.png" width="1152" height="640"/>

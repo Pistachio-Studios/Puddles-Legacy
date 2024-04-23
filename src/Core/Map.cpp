@@ -462,7 +462,8 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
                     if(c.width != 0 && c.height != 0)
                     {
                         iPoint pos = layer->Get(i);
-                        app->physics->CreateRectangle(pos.x + c.x, pos.y + c.y, c.width, c.height, bodyType::STATIC);
+                        pos = MapToWorld(pos.x, pos.y);
+                        app->physics->CreateRectangle(pos.x + c.x + c.width / 2, pos.y + c.y + c.height / 2, c.width, c.height, bodyType::STATIC);
                     }
                 }
             }
