@@ -76,6 +76,10 @@ bool TutorialScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
+	PhysBody* changeTown = app->physics->CreateRectangleSensor(670, 1800, 480 * 50, 16, STATIC);
+	changeTown->ctype = ColliderType::CHANGESCENE;
+	changeTown->listener = player;
+
 	return true;
 }
 
@@ -117,7 +121,6 @@ bool TutorialScene::Update(float dt)
 		body->body->ApplyLinearImpulseToCenter({ 0.25,0 }, true);
 		t->Start();
 	}
-
 
 	return true;
 }

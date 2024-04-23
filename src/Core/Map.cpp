@@ -263,8 +263,8 @@ bool Map::Load(SString mapFileName)
         ret = LoadColliders(mapFileXML);
     }
 
-    PhysBody* c1 = app->physics->CreateRectangle(238, 632, 480 * 50, 16, STATIC);
-    c1->ctype = ColliderType::PLATFORM;
+    //PhysBody* c1 = app->physics->CreateRectangle(238, 632, 480 * 50, 16, STATIC);
+    //c1->ctype = ColliderType::PLATFORM;
 
    /* PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
     c2->ctype = ColliderType::PLATFORM;

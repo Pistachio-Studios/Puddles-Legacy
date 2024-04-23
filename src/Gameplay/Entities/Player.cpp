@@ -8,6 +8,7 @@
 #include "Utils/Point.h"
 #include "Core/Physics.h"
 #include "Utils/StateMachine.h"
+#include "Core/SceneManager.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -154,8 +155,17 @@ bool Player::CleanUp() {
 	return true;
 }
 
+//TODO arreglar esta cochinada
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
-
+	switch (physB->ctype)
+	{
+	case ColliderType::CHANGESCENE:
+		if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")
+		{
+			app->sceneManager->ChangeScene("town");
+		}
+		break;
+	}
 }
 
 void Player::EndCollision(PhysBody* physA, PhysBody* physB){
