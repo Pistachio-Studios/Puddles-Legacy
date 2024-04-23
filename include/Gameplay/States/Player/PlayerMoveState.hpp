@@ -15,17 +15,18 @@ public:
     PlayerMoveState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("PlayerMoveState Enter()");
-
         player = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("PlayerMoveState Update()");
-
         GamePad& pad = app->input->pads[0];
 
+        // Debug pad values
+        LOG("pad.l_y: %f", pad.l_y);
         LOG("pad.l_x: %f", pad.l_x);
+        LOG("pad.r_y: %f", pad.r_y);
+        LOG("pad.r_x: %f", pad.r_x);
+        LOG("pad.enabled: %d", pad.enabled);
 
         PhysBody* pbody = player->pbody;
 
