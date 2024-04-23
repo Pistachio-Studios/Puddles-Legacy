@@ -26,21 +26,6 @@ bool DialogManager::Awake(pugi::xml_node& config) {
     // Load dialog data from CSV file using rapidcsv
     LoadDialogs("dialogs.csv", dialogs);
 
-    /*
-    // TODO remove this debug code
-    for (const auto& pair : dialogs) {
-        const Dialog& dialog = pair.second;
-        std::cout << "Dialog ID: " << dialog.id << std::endl;
-        std::cout << "Character: " << dialog.character << std::endl;
-        std::cout << "ES: " << dialog.ES << std::endl;
-        std::cout << "EN: " << dialog.EN << std::endl;
-        std::cout << "CAT: " << dialog.CAT << std::endl;
-        std::cout << "Type: " << (dialog.type == DialogType::DIALOG ? "DIALOG" : "CHOICE") << std::endl;
-        std::cout << "Choices: ";
-        std::cout << std::endl << "-------------------" << std::endl;
-    }
-    */
-
     parameters = config;
 
     return ret;
@@ -54,8 +39,8 @@ bool DialogManager::Start() {
     for (pugi::xml_node node = parameters.child("character_1"); node; node = node.next_sibling()) {
         characterTextures[node.name()] = app->tex->Load(node.attribute("path").as_string());
     }
-
-    StartDialog(1);
+    
+    app->dialogManager->StartDialog(1);
 
     indexText = 1;
 
