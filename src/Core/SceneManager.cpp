@@ -231,6 +231,11 @@ void SceneManager::ChangeScene(SString sceneName)
     currentScene->Enter();
 }
 
+Scene* SceneManager::GetCurrentScene()
+{
+    return currentScene;
+}
+
 // Load / Save
 bool SceneManager::LoadState(pugi::xml_node& node)
 {

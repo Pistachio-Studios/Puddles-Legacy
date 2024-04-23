@@ -10,7 +10,9 @@
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
-  
+#include "Gameplay/Entities/Npcs/Loco.h"
+#include "Gameplay/Entities/Npcs/Tabernero.h"
+
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
 
@@ -28,6 +30,20 @@ bool TestScene::Enter()
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = parameters.child("player");
 		player->Enable();
+	}
+
+	if (parameters.child("Npcs").child("loco")) {
+		Loco* loco = new Loco();
+		app->entityManager->AddEntity(loco);
+		loco->parameters = parameters.child("Npcs").child("loco");
+		loco->Enable();
+	}
+
+ 	if (parameters.child("Npcs").child("tabernero")) {
+		Tabernero* tabernero = new Tabernero();
+		app->entityManager->AddEntity(tabernero);
+		tabernero->parameters = parameters.child("Npcs").child("tabernero");
+		tabernero->Enable();
 	}
 
 	if (parameters.child("map")) {

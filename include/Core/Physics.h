@@ -44,6 +44,7 @@ enum class ColliderType {
 	DEATH,
 	LIMITS,
 	WIN,
+	NPC,
 	UNKNOWN,
 	// ..
 };
