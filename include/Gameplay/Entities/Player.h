@@ -66,7 +66,7 @@ public:
 	b2Vec2 lookingDir;
 	float lookingAngle = 0;
 
-	PlayerClass currentClass = WIZARD;
+	PlayerClass currentClass = KNIGHT;
 
 	//tmp
 	PhysBody* sword;
