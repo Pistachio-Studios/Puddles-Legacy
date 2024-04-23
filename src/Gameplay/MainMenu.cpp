@@ -3,9 +3,12 @@
 #include "Core/Window.h"
 #include "Core/Audio.h"
 #include "Gameplay/MainMenu.h"
+#include "Core/Textures.h"
+#include "Core/Render.h"
 
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
+#include "Core/GuiControlButton.h"
 #include "Core/GuiManager.h"
 #include <tracy/Tracy.hpp>
 
@@ -20,14 +23,16 @@ bool MainMenu::Enter()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	SDL_Rect playPos = { static_cast<int>(windowW / 2 + 200), static_cast<int>(windowH / 2 - 25), 240,50};
+	SDL_Rect playPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 50), 340,75};
 	playButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "  Play  ", playPos, this);
 
-	SDL_Rect optionsPos = { static_cast<int>(windowW / 2 + 200), static_cast<int>(windowH / 2 + 50), 240,50};
+	SDL_Rect optionsPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 150), 340,75};
 	optionsButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, " Options ", optionsPos, this);
 
-	SDL_Rect exitPos = { static_cast<int>(windowW / 2 + 200), static_cast<int>(windowH / 2 + 125), 240,50};
+	SDL_Rect exitPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 250), 340,75};
 	exitButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "  Exit  ", exitPos, this);
+
+	gameTitle = app->tex->Load(parameters.child("gameTitle").attribute("texturepath").as_string());
 
 	return true;
 }
@@ -46,6 +51,8 @@ bool MainMenu::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	app->render->DrawTexture(gameTitle, 0, 0);
 
 	return true;
 }
@@ -78,7 +85,8 @@ bool MainMenu::Exit()
 // Called before quitting
 bool MainMenu::CleanUp()
 {
-	LOG("Freeing mainmenu");
+	LOG("Freeing MainMenu");
+	app->tex->UnLoad(gameTitle);
 	app->guiManager->RemoveGuiControl(playButton);
 	app->guiManager->RemoveGuiControl(optionsButton);
 	app->guiManager->RemoveGuiControl(exitButton);
@@ -93,7 +101,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	switch (control->id)
 	{
 	case 1:
-		app->sceneManager->ChangeScene("testscene");
+		app->sceneManager->ChangeScene("tutorialscene");
 		app->guiManager->RemoveGuiControl(crossOButton);
 		crossOButton = nullptr;
 		app->guiManager->RemoveGuiControl(music);

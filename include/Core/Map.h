@@ -157,7 +157,7 @@ public:
 private:
 
 	// clipping margin to prevent seeing the tiles generating in the border of the screen
-	const int clippingMargin = 1;
+	const int clippingMargin = 2;
 
 	bool LoadMap(pugi::xml_node mapFile);
 	bool LoadTileSet(pugi::xml_node mapFile);

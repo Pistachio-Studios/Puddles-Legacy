@@ -4,69 +4,30 @@
 #include "Core/Render.h"
 #include "Utils/Timer.h"
 #include "Core/Window.h"
-#include "Gameplay/TestScene.h"
+#include "Gameplay/Level1Scene.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
-#include "Gameplay/Entities/Npcs/Loco.h"
-#include "Gameplay/Entities/Npcs/Tabernero.h"
-
+  
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
 
 // Destructor
-TestScene::~TestScene()
+Level1Scene::~Level1Scene()
 {}
 
 // Called before the first frame
-bool TestScene::Enter()
+bool Level1Scene::Enter()
 {
 	// iterate all objects in the testscene
 	// Check https://pugixml.org/docs/quickstart.html#access
-	
+
 	if (parameters.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = parameters.child("player");
 		player->Enable();
-	}
-
-	if (parameters.child("enemies").child("EnemyBoss")) {
-		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
-		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
-		enemyboss->Enable();
-	}
-
-	if (parameters.child("enemies"))
-	{
-		pugi::xml_node enemies = parameters.child("enemies");
-
-		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
-		{
-			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
-			flyingenemy->parameters = FlyingEnemyNode;
-		}
-
-		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
-		{
-			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
-			centipidenemy->parameters = CentipideEnemyNode;
-		}
-	}
-
-	if (parameters.child("Npcs").child("loco")) {
-		Loco* loco = new Loco();
-		app->entityManager->AddEntity(loco);
-		loco->parameters = parameters.child("Npcs").child("loco");
-		loco->Enable();
-	}
-
- 	if (parameters.child("Npcs").child("tabernero")) {
-		Tabernero* tabernero = new Tabernero();
-		app->entityManager->AddEntity(tabernero);
-		tabernero->parameters = parameters.child("Npcs").child("tabernero");
-		tabernero->Enable();
 	}
 
 	if (parameters.child("map")) {
@@ -99,19 +60,19 @@ bool TestScene::Enter()
 	//app->tex->GetSize(img, texW, texH);
 
 	//Pause Menu UI
-	gcResume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Resume", { (int)windowW / 2 - 175, (int)windowH / 2 - 100, 300, 50 }, this);
+	gcResume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Resume", { (int)windowW / 2 - 175, (int)windowH / 2 - 100, 250, 50 }, this);
 	gcResume->SetObserver(this);
 	gcResume->state = GuiControlState::DISABLED;
 
-	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 250, 50 }, this);
 	gcSettings->SetObserver(this);
 	gcSettings->state = GuiControlState::DISABLED;
 
-	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
+	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2, 250, 50 }, this);
 	gcBackToTitle->SetObserver(this);
 	gcBackToTitle->state = GuiControlState::DISABLED;
 
-	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
+	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 250, 50 }, this);
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
@@ -119,7 +80,7 @@ bool TestScene::Enter()
 }
 
 // Called each loop iteration
-bool TestScene::PreUpdate()
+bool Level1Scene::PreUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
@@ -128,7 +89,7 @@ bool TestScene::PreUpdate()
 }
 
 // Called each loop iteration
-bool TestScene::Update(float dt)
+bool Level1Scene::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
@@ -162,7 +123,7 @@ bool TestScene::Update(float dt)
 }
 
 // Called each loop iteration
-bool TestScene::PostUpdate()
+bool Level1Scene::PostUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
@@ -174,18 +135,18 @@ bool TestScene::PostUpdate()
 		if(paused)
 		{
 			paused = false;
-			gcResume->state = GuiControlState::DISABLED;
-			gcSettings->state = GuiControlState::DISABLED;
-			gcBackToTitle->state = GuiControlState::DISABLED;
-			gcExit->state = GuiControlState::DISABLED;
-		}
-		else
-		{
-			paused = true;
 			gcResume->state = GuiControlState::NORMAL;
 			gcSettings->state = GuiControlState::NORMAL;
 			gcBackToTitle->state = GuiControlState::NORMAL;
 			gcExit->state = GuiControlState::NORMAL;
+		}
+		else
+		{
+			paused = true;
+			gcResume->state = GuiControlState::DISABLED;
+			gcSettings->state = GuiControlState::DISABLED;
+			gcBackToTitle->state = GuiControlState::DISABLED;
+			gcExit->state = GuiControlState::DISABLED;
 		}
 	}
 
@@ -195,7 +156,7 @@ bool TestScene::PostUpdate()
 	return ret;
 }
 
-bool TestScene::Exit()
+bool Level1Scene::Exit()
 {
 	//IMPORTANTE: DESCARGAR EN ORDEN INVERSO AL CARGADO EN EL APP
 	app->entityManager->Disable();
@@ -212,7 +173,7 @@ bool TestScene::Exit()
 }
 
 // Called before quitting
-bool TestScene::CleanUp()
+bool Level1Scene::CleanUp()
 {
 	LOG("Freeing testscene");
 
@@ -226,7 +187,7 @@ bool TestScene::CleanUp()
 	return true;
 }
 
-bool TestScene::OnGuiMouseClickEvent(GuiControl* control)
+bool Level1Scene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
@@ -243,7 +204,6 @@ bool TestScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 7:
 		break;
 	case 8:
-		paused = false;
 		app->sceneManager->ChangeScene("mainmenu");
 	break;
 	case 9:

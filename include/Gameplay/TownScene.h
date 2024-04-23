@@ -1,23 +1,24 @@
-#ifndef __MainMenu_H__
-#define __MainMenu_H__
+#ifndef __TOWNSCENE_H__
+#define __TOWNSCENE_H__
 
-#include "Gameplay/Scene.h"
+#include "Core/GuiControlLabel.h"
+#include "Core/Module.h"
+#include "Gameplay/Entities/Player.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
-#include "Core/GuiControlPopUp.h"
-#include "Core/GuiControlSlider.h"
+#include "Gameplay/Scene.h"
 
 struct SDL_Texture;
 
-class MainMenu : public Scene
+class TownScene : public Scene
 {
 public:
 
 	// Constructor
-	MainMenu(const SString& name) : Scene(name) {}
+	TownScene(const SString& name) : Scene(name) {}
 
 	// Destructor
-	virtual ~MainMenu();
+	virtual ~TownScene();
 
 	// Called before the first frame
 	bool Enter() override;
@@ -42,23 +43,28 @@ public:
 	void RenderGUI();
 
 public:
+	bool winCondition = false;
+	Player* player;
 
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
-	GuiControlButton* playButton;
-	GuiControlButton* optionsButton;
-	GuiControlButton* exitButton;
-	GuiControlPopUp* popUpOptions = nullptr;
-	GuiControlButton* crossOButton = nullptr;
-	GuiControlSlider* music = nullptr;
-	
+	GuiControlButton* gcButton;
+	GuiControlLabel* gcScore;
+	GuiControlLabel* gcLives;
+	GuiControlLabel* gcTime;
+
+	GuiControlButton* gcResume;
+	GuiControlButton* gcSettings;
+	GuiControlButton* gcBackToTitle;
+	GuiControlButton* gcExit;
+
+	bool paused = false;
 	bool exitPressed = false;
 
-	const char* texturePath;
-	SDL_Texture* gameTitle = NULL;
+	Timer* playingTime;
 };
 
-#endif // __MainMenu_H__
+#endif // __TOWNSCENE_H__

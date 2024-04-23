@@ -341,7 +341,7 @@ bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Co
 	uint scale = app->win->GetScale();
 
 	SDL_Rect rect;
-	rect.x = ((int)posx) * scale;
+	rect.x = ((int)posx + w / 4) * scale; //TODO: revisar este / 4 porque no lo entiendo muy bien
 	rect.y = ((int)posy) * scale;
 
 	SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);

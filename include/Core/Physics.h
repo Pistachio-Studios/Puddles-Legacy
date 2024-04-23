@@ -41,6 +41,7 @@ enum class ColliderType {
 	ENEMY,
 	BULLET,
 	PLATFORM,
+	CHANGESCENE,
 	DEATH,
 	LIMITS,
 	WIN,

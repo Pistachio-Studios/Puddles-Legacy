@@ -10,7 +10,7 @@
   </renderer>
 
   <window>
-    <resolution width="1280" height="720" scale="1"/>
+    <resolution width="1920" height="1080" scale="1"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -31,9 +31,59 @@
     <character_3 path="Assets/Dialog/character_3.png"/>
   </dialog_manager>
 
-  <scene_manager startScene="mainmenu">
+  <dialog_manager>
+	  <!--Aqui hay que almacenar el fondo del dialogo y las caras de los personajes-->
+	  <background path="Assets/Dialog/background.png"/>
+    <character_1 path="Assets/Dialog/character_1.png"/>
+    <character_2 path="Assets/Dialog/character_2.png"/>
+    <character_3 path="Assets/Dialog/character_3.png"/>
+  </dialog_manager>
+
+  <scene_manager startScene="teamlogo">
+	  <teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG">
+	  </teamlogo>
     <mainmenu>
+		<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.PNG"/>
     </mainmenu>
+
+    <!-- TODO cambiar toda la configuración de las escenas -->
+    <level1scene>
+      <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
+      <camera x="-530" y="-1949"/>
+      <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
+      <enemies>
+      </enemies>
+    </level1scene>
+	<forestscene>
+	  <map path="Assets/Maps/Forest-Level/" name="Bosque.tmx"/>
+	  <camera x="-530" y="-1949"/>
+	  <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/>
+      <enemies>
+      </enemies>
+	</forestscene>
+    <townscene>
+      <map path="Assets/Maps/Town-Scene/" name="Town.tmx"/>
+      <camera x="-530" y="-1949"/>
+      <player x="1000" y="2200" texturepath ="Assets/Textures/Player.png"/> 
+      <enemies>
+      </enemies>
+    </townscene>
+    <tavernscene>
+      <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
+      <camera x="-530" y="-1949"/>
+      <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
+      <enemies>
+      </enemies>
+    </tavernscene>
+    <tutorialscene>
+	  <map path="Assets/Maps/Tutorial-Level/" name="Playa_tutorial.tmx"/>
+      <camera x="-530" y="-1949"/>
+      <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
+      <enemies>
+      </enemies>
+    </tutorialscene>
+    <!-- TODO cambiar toda la configuración de las escenas -->
+      
     <testscene>
       <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
       <camera x="-530" y="-1949"/>
@@ -43,11 +93,6 @@
         <FlyingEnemy x="800" y="1900" texturepath=""/>
 		<CentipideEnemy x="850" y="2000" texturepath=""/>
       </enemies>
-	  <Npcs>
-		<loco x="1000" y="1720" texturepath="Assets/Textures/Npcs/Loco.png"/>
-	    <tabernero x="1020" y="2035" texturepath="Assets/Textures/Npcs/Tabernero.png"/>
-	  </Npcs>
-      
     </testscene>
     <particle_demo>
     </particle_demo>

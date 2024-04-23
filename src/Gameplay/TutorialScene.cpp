@@ -4,69 +4,30 @@
 #include "Core/Render.h"
 #include "Utils/Timer.h"
 #include "Core/Window.h"
-#include "Gameplay/TestScene.h"
+#include "Gameplay/TutorialScene.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
-#include "Gameplay/Entities/Npcs/Loco.h"
-#include "Gameplay/Entities/Npcs/Tabernero.h"
-
+  
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
 
 // Destructor
-TestScene::~TestScene()
+TutorialScene::~TutorialScene()
 {}
 
 // Called before the first frame
-bool TestScene::Enter()
+bool TutorialScene::Enter()
 {
 	// iterate all objects in the testscene
 	// Check https://pugixml.org/docs/quickstart.html#access
-	
+
 	if (parameters.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = parameters.child("player");
 		player->Enable();
-	}
-
-	if (parameters.child("enemies").child("EnemyBoss")) {
-		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
-		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
-		enemyboss->Enable();
-	}
-
-	if (parameters.child("enemies"))
-	{
-		pugi::xml_node enemies = parameters.child("enemies");
-
-		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
-		{
-			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
-			flyingenemy->parameters = FlyingEnemyNode;
-		}
-
-		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
-		{
-			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
-			centipidenemy->parameters = CentipideEnemyNode;
-		}
-	}
-
-	if (parameters.child("Npcs").child("loco")) {
-		Loco* loco = new Loco();
-		app->entityManager->AddEntity(loco);
-		loco->parameters = parameters.child("Npcs").child("loco");
-		loco->Enable();
-	}
-
- 	if (parameters.child("Npcs").child("tabernero")) {
-		Tabernero* tabernero = new Tabernero();
-		app->entityManager->AddEntity(tabernero);
-		tabernero->parameters = parameters.child("Npcs").child("tabernero");
-		tabernero->Enable();
 	}
 
 	if (parameters.child("map")) {
@@ -115,11 +76,15 @@ bool TestScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
+	PhysBody* changeTown = app->physics->CreateRectangleSensor(670, 1800, 480 * 50, 16, STATIC);
+	changeTown->ctype = ColliderType::CHANGESCENE;
+	changeTown->listener = player;
+
 	return true;
 }
 
 // Called each loop iteration
-bool TestScene::PreUpdate()
+bool TutorialScene::PreUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
@@ -128,7 +93,7 @@ bool TestScene::PreUpdate()
 }
 
 // Called each loop iteration
-bool TestScene::Update(float dt)
+bool TutorialScene::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
@@ -157,12 +122,11 @@ bool TestScene::Update(float dt)
 		t->Start();
 	}
 
-
 	return true;
 }
 
 // Called each loop iteration
-bool TestScene::PostUpdate()
+bool TutorialScene::PostUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
@@ -174,18 +138,18 @@ bool TestScene::PostUpdate()
 		if(paused)
 		{
 			paused = false;
-			gcResume->state = GuiControlState::DISABLED;
-			gcSettings->state = GuiControlState::DISABLED;
-			gcBackToTitle->state = GuiControlState::DISABLED;
-			gcExit->state = GuiControlState::DISABLED;
-		}
-		else
-		{
-			paused = true;
 			gcResume->state = GuiControlState::NORMAL;
 			gcSettings->state = GuiControlState::NORMAL;
 			gcBackToTitle->state = GuiControlState::NORMAL;
 			gcExit->state = GuiControlState::NORMAL;
+		}
+		else
+		{
+			paused = true;
+			gcResume->state = GuiControlState::DISABLED;
+			gcSettings->state = GuiControlState::DISABLED;
+			gcBackToTitle->state = GuiControlState::DISABLED;
+			gcExit->state = GuiControlState::DISABLED;
 		}
 	}
 
@@ -195,7 +159,7 @@ bool TestScene::PostUpdate()
 	return ret;
 }
 
-bool TestScene::Exit()
+bool TutorialScene::Exit()
 {
 	//IMPORTANTE: DESCARGAR EN ORDEN INVERSO AL CARGADO EN EL APP
 	app->entityManager->Disable();
@@ -212,7 +176,7 @@ bool TestScene::Exit()
 }
 
 // Called before quitting
-bool TestScene::CleanUp()
+bool TutorialScene::CleanUp()
 {
 	LOG("Freeing testscene");
 
@@ -226,7 +190,7 @@ bool TestScene::CleanUp()
 	return true;
 }
 
-bool TestScene::OnGuiMouseClickEvent(GuiControl* control)
+bool TutorialScene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
@@ -243,7 +207,6 @@ bool TestScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 7:
 		break;
 	case 8:
-		paused = false;
 		app->sceneManager->ChangeScene("mainmenu");
 	break;
 	case 9:
