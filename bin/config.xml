@@ -35,7 +35,7 @@
 	  <teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG">
 	  </teamlogo>
     <mainmenu>
-		  <gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.PNG"/>
+		  <gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png"/>
     </mainmenu>
 
     <!-- TODO cambiar toda la configuración de las escenas -->
