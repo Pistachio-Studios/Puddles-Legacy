@@ -76,7 +76,7 @@ bool TutorialScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
-	PhysBody* changeTown = app->physics->CreateRectangleSensor(670, 1800, 480 * 50, 16, STATIC);
+	PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
 	changeTown->ctype = ColliderType::CHANGESCENE;
 	changeTown->listener = player;
 

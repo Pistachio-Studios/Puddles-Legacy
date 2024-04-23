@@ -159,6 +159,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			app->sceneManager->ChangeScene("townscene");
 		}
+		if (app->sceneManager->GetCurrentScene()->name == "townscene")
+		{
+			app->sceneManager->ChangeScene("forestscene");
+		}
+		if (app->sceneManager->GetCurrentScene()->name == "forestscene")
+		{
+			app->sceneManager->ChangeScene("townscene");
+		}
+
 		break;
 	}
 }
