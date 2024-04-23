@@ -368,13 +368,26 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
         texPath += tileset.child("image").attribute("source").as_string();
         set->texture = app->tex->Load(texPath.GetString());
 
-        if(tileset.child("tile")) //check if the tileset is an Animation (no se si seria mejor checkear si tiene un animation child)
+        /* if(tileset.child("tile")) //check if the tileset is an Animation (no se si seria mejor checkear si tiene un animation child)
         {
             LoadAnimation(tileset.child("tile"), set);
         }
         else
         {
             mapData.tilesets.Add(set);
+        } */
+        pugi::xml_node tile;
+        for (tile = tileset.child("tile"); tile && ret; tile = tile.next_sibling("tile"))
+        {
+            pugi::xml_node objectGroup = tile.child("objectgroup");
+            if(objectGroup)
+            {
+                pugi::xml_node colliderNode = objectGroup.child("object");
+                if(colliderNode.attribute("width").as_int() != 0 && colliderNode.attribute("height").as_int() != 0)
+                {
+                    set->tileColliders[set->firstgid + tile.attribute("id").as_int()] = {colliderNode.attribute("x").as_int(), colliderNode.attribute("y").as_int(), colliderNode.attribute("width").as_int(), colliderNode.attribute("height").as_int()};
+                }
+            }
         }
     }
 
@@ -432,7 +445,27 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     int i = 0;
     for (tile = node.child("data").child("tile"); tile && ret; tile = tile.next_sibling("tile"))
     {
-        layer->data[i] = tile.attribute("gid").as_int();
+        int tileGid = tile.attribute("gid").as_int();
+        layer->data[i] = tileGid;
+
+        //Load tile colliders
+        if(tileGid != 0)
+        {
+            TileSet* set = GetTilesetFromTileId(tileGid);
+            if(set != nullptr)
+            {
+                auto it = set->tileColliders.find(tileGid);
+                if(it != set->tileColliders.end())
+                {
+                    Colliders c = it->second;
+                    if(c.width != 0 && c.height != 0)
+                    {
+                        app->physics->CreateRectangle(c.x, c.y, c.width, c.height, bodyType::STATIC);
+                    }
+                }
+            }
+        }
+
         i++;
     }
 

@@ -8,6 +8,7 @@
 
 #include <pugixml.hpp>
 #include <SDL.h>
+#include <unordered_map>
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -19,6 +20,14 @@ enum MapOrientation
 };
 
 class Animation;
+
+struct Colliders
+{
+	int x;
+	int y;
+	int width;
+	int height;
+};
 
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 struct TileSet
@@ -32,16 +41,10 @@ struct TileSet
 	int columns;
 	int tilecount;
 
+	std::unordered_map<int, Colliders> tileColliders;
+
 	SDL_Texture* texture;
 	SDL_Rect GetTileRect(int gid) const;
-};
-
-struct Colliders
-{
-	int x;
-	int y;
-	int width;
-	int height;
 };
 
 //  We create an enum for map type, just for convenience,
