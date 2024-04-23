@@ -228,7 +228,6 @@ int DialogManager::ChoiceSelector(vector<int> choices)
         }
     }
 
-    LOG("current choice: %d", choices[currentChoice]); // TODO remove debug code
     return choices[currentChoice];
 }
 

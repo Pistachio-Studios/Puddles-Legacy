@@ -214,7 +214,7 @@ void ParticleGenerator::PreUpdate()
     ZoneScoped;
     int particlesCount = particles.Count();
 
-    if(amount < particlesCount or !emiting)//TODO!! cuando cambias el lifetime con imgui deberia de entrar aqui tambi�n
+    if(amount < particlesCount or !emiting) //TODO!! cuando cambias el lifetime con imgui deberia de entrar aqui tambi�n
     {
         for(int i = 0; i < particlesCount; i++)
         {
