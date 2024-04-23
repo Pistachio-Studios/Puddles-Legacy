@@ -2,7 +2,6 @@
 #define __TEAMLOGO_H__
 
 #include "Gameplay/Scene.h"
-#include "Core/GuiControl.h"
 #include "Utils/Timer.h"
 
 struct SDL_Texture;
@@ -42,7 +41,7 @@ private:
 	uint windowW, windowH;
 
 	const char* texturePath;
-	SDL_Texture* teamLogo = NULL;
+	SDL_Texture* texture = NULL;
 
 	Timer* timer = nullptr;
 };

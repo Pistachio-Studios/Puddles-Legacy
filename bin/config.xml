@@ -23,8 +23,9 @@
     <fx volume="128"/>
   </audio>
 
-  <scene_manager startScene="mainmenu">
-	<teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG"/>
+  <scene_manager startScene="teamlogo">
+	  <teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG">
+	  </teamlogo>
     <mainmenu>
 		<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.PNG"/>
     </mainmenu>
@@ -47,7 +48,7 @@
     <townscene>
       <map path="Assets/Maps/Town-Scene/" name="Town.tmx"/>
       <camera x="-530" y="-1949"/>
-      <player x="672" y="2032" texturepath ="Assets/Textures/Player.png"/> 
+      <player x="1000" y="2200" texturepath ="Assets/Textures/Player.png"/> 
       <enemies>
       </enemies>
     </townscene>

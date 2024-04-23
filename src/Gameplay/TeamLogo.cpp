@@ -8,8 +8,6 @@
 #include "Core/Render.h"
 
 #include "Utils/Log.h"
-#include "Core/GuiControl.h"
-#include "Core/GuiManager.h"
 #include <tracy/Tracy.hpp>
 
 
@@ -25,7 +23,7 @@ bool TeamLogo::Enter()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	teamLogo = app->tex->Load(parameters.child("teamlogo").attribute("texturepath").as_string());
+	texture = app->tex->Load(parameters.attribute("texturepath").as_string());
 
 	return true;
 }
@@ -45,13 +43,13 @@ bool TeamLogo::Update(float dt)
 	// OPTICK PROFILIN
 	ZoneScoped;
 
-	//app->render->DrawTexture(teamLogo, 100, 100);
+	app->render->DrawTexture(texture, 0, 0);
 
-	//if (timer->ReadSec() >= 2)
-	//{
-	//	LOG("timer teamlogo %d", timer->ReadSec());
-	//	app->sceneManager->ChangeScene("teamlogo");
-	//}
+	if (timer->ReadSec() >= 3)
+	{
+		LOG("timer teamlogo %d", timer->ReadSec());
+		app->sceneManager->ChangeScene("mainmenu");
+	}
 
 	return true;
 }
@@ -76,6 +74,6 @@ bool TeamLogo::Exit()
 bool TeamLogo::CleanUp()
 {
 	LOG("Freeing teamlogo");
-	//app->render.te
+	app->tex->UnLoad(texture);
 	return true;
 }

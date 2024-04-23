@@ -86,6 +86,7 @@ bool MainMenu::Exit()
 bool MainMenu::CleanUp()
 {
 	LOG("Freeing MainMenu");
+	app->tex->UnLoad(gameTitle);
 	app->guiManager->RemoveGuiControl(playButton);
 	app->guiManager->RemoveGuiControl(optionsButton);
 	app->guiManager->RemoveGuiControl(exitButton);
