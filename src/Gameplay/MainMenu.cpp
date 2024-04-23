@@ -34,6 +34,8 @@ bool MainMenu::Enter()
 	buttons.push_back(exitButton);
 
 	selectedButtonIndex = 0;
+	currentButton = static_cast<GuiControlButton*>(buttons[selectedButtonIndex]);
+	currentButton->isFocused = true;
 
 	wasUpPressed = false;
     wasDownPressed = false;
@@ -108,6 +110,10 @@ bool MainMenu::Exit()
 	app->guiManager->RemoveGuiControl(playButton);
 	app->guiManager->RemoveGuiControl(optionsButton);
 	app->guiManager->RemoveGuiControl(exitButton);
+
+	// TODO fix bug where if you clean the buttons, the pause menu doesn't change the scene to main menu
+	// buttons.clear();
+
 	return true;
 }
 
@@ -118,6 +124,7 @@ bool MainMenu::CleanUp()
 	app->guiManager->RemoveGuiControl(playButton);
 	app->guiManager->RemoveGuiControl(optionsButton);
 	app->guiManager->RemoveGuiControl(exitButton);
+	buttons.clear();
 	return true;
 }
 
@@ -143,9 +150,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 
 void MainMenu::SelectPreviousButton()
 {
-    // Deselect the current button
-    buttons[selectedButtonIndex]->state = GuiControlState::NORMAL;
-
+	currentButton->isFocused = false;
     // Move the selection up
     selectedButtonIndex--;
     if(selectedButtonIndex < 0)
@@ -155,7 +160,7 @@ void MainMenu::SelectPreviousButton()
 
     // Select the new button
 	currentButton = static_cast<GuiControlButton*>(buttons[selectedButtonIndex]);
-	currentButton->state = GuiControlState::FOCUSED;
+	currentButton->isFocused = true;
 
 	// Debug
 	LOG("Selected button: %d", selectedButtonIndex);
@@ -163,9 +168,7 @@ void MainMenu::SelectPreviousButton()
 
 void MainMenu::SelectNextButton()
 {
-	// Deselect the current button
-	buttons[selectedButtonIndex]->state = GuiControlState::NORMAL;
-
+	currentButton->isFocused = false;
 	// Move the selection down
 	selectedButtonIndex++;
 	if(selectedButtonIndex >= buttons.size())
@@ -175,7 +178,8 @@ void MainMenu::SelectNextButton()
 
 	// Select the new button
 	currentButton = static_cast<GuiControlButton*>(buttons[selectedButtonIndex]);
-	currentButton->state = GuiControlState::FOCUSED;
+
+	currentButton->isFocused = true;
 
 	// Debug
 	LOG("Selected button: %d", selectedButtonIndex);

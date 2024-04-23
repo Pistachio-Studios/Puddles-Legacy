@@ -28,7 +28,7 @@ bool GuiControlButton::Update(float dt)
 		mouseY *= app->win->GetScale();
 
 		//If the position of the mouse if inside the bounds of the button 
-		if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
+		if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h or isFocused) {
 		
 			state = GuiControlState::FOCUSED;
 
