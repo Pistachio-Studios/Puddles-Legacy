@@ -108,8 +108,6 @@ bool GuiManager::CleanUp()
 	}
 
 	return true;
-
-	return false;
 }
 
 
