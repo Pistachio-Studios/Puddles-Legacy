@@ -140,23 +140,23 @@ iPoint Map::WorldToMap(int x, int y)
     return ret;
 }
 
-Animation* Map::GetAnimByName(SString name)
-{
-    ListItem<Animation*>* item = mapData.animations.start;
-    Animation* set = NULL;
-
-    while (item)
-    {
-        set = item->data;
-        if (item->data->name == name)
-        {
-            return set;
-        }
-        item = item->next;
-    }
-
-    return set;
-}
+//Animation* Map::GetAnimByName(SString name)
+//{
+//    ListItem<Animation*>* item = mapData.animations.start;
+//    Animation* set = NULL;
+//
+//    while (item)
+//    {
+//        set = item->data;
+//        if (item->data->name == name)
+//        {
+//            return set;
+//        }
+//        item = item->next;
+//    }
+//
+//    return set;
+//}
 
 // Get relative Tile rectangle
 SDL_Rect TileSet::GetTileRect(int gid) const
@@ -376,27 +376,27 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
     return ret;
 }
 
-bool Map::LoadAnimation(pugi::xml_node node, TileSet* tileset)
-{
-    bool ret = true;
-
-    Animation* anim = new Animation();
-    anim->name = tileset->name;
-    anim->texture = tileset->texture;
-
-    for (pugi::xml_node frameNode = node.child("animation").child("frame"); frameNode && ret; frameNode = frameNode.next_sibling("frame"))
-    {
-        int id = frameNode.attribute("tileid").as_int();
-        int tilesPerRow = tileset->columns;
-        int x = (id % tilesPerRow) * tileset->tileWidth;
-        int y = (id / tilesPerRow) * tileset->tileHeight;
-        anim->PushBack({x, y, tileset->tileWidth, tileset->tileHeight});
-    }
-
-    mapData.animations.Add(anim);
-
-    return ret;
-}
+//bool Map::LoadAnimation(pugi::xml_node node, TileSet* tileset)
+//{
+//    bool ret = true;
+//
+//    Animation* anim = new Animation();
+//    anim->name = tileset->name;
+//    anim->texture = tileset->texture;
+//
+//    for (pugi::xml_node frameNode = node.child("animation").child("frame"); frameNode && ret; frameNode = frameNode.next_sibling("frame"))
+//    {
+//        int id = frameNode.attribute("tileid").as_int();
+//        int tilesPerRow = tileset->columns;
+//        int x = (id % tilesPerRow) * tileset->tileWidth;
+//        int y = (id / tilesPerRow) * tileset->tileHeight;
+//        anim->PushBack({x, y, tileset->tileWidth, tileset->tileHeight});
+//    }
+//
+//    mapData.animations.Add(anim);
+//
+//    return ret;
+//}
 
 bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 {

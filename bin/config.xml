@@ -81,6 +81,7 @@
     </tutorialscene>
     <testscene>
       <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
+      <animations path="Assets/Animations/" name="Animations.tmx"/>
       <camera x="-530" y="-1949"/>
       <player x="672" y="2032" texturepath ="Assets/Textures/playerx128-test.png"/>
       <enemies>
