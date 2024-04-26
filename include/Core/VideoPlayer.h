@@ -60,6 +60,8 @@ private:
     int swidth, sheight;
     SDL_Texture* texture;
     SDL_Rect rect;
+    SDL_AudioDeviceID auddev;
+    SDL_AudioSpec want, have;
 
 };
 

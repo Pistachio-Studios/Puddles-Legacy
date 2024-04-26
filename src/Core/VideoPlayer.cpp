@@ -11,6 +11,7 @@ extern "C" {
 #include <libavutil/imgutils.h>
 #include <libavutil/avutil.h>
 #include <libswscale/swscale.h>
+#include <libswresample/swresample.h>
 }
 
 VideoPlayer::VideoPlayer() :Module()
@@ -85,6 +86,8 @@ bool VideoPlayer::Start()
     vframe = av_frame_alloc();
     aframe = av_frame_alloc();
     packet = av_packet_alloc();
+    swidth = vidpar->width;
+    sheight = vidpar->height;
 
     texture = SDL_CreateTexture(app->render->renderer, SDL_PIXELFORMAT_IYUV,
         SDL_TEXTUREACCESS_STREAMING | SDL_TEXTUREACCESS_TARGET,
@@ -97,6 +100,25 @@ bool VideoPlayer::Start()
     rect.y = 0;
     rect.w = swidth;
     rect.h = sheight;
+
+    // Audio setup
+    SDL_zero(want);
+    SDL_zero(have);
+    want.samples = audpar->sample_rate;
+    want.channels = audpar->channels;
+    want.format = audpar->format;
+    want.freq = audpar->sample_rate;
+    
+    auddev = SDL_OpenAudioDevice(NULL, 0, &want, &have, 0);
+
+    if (auddev == 0) {
+        SDL_Log("Failed to open audio: %s", SDL_GetError());
+    } else {
+        if (have.format != want.format) {
+            SDL_Log("We didn't get the wanted audio format.");
+        }
+        SDL_PauseAudioDevice(auddev, 0); /* start audio playing. */
+    }
 
 	return true;
 }
@@ -112,6 +134,8 @@ bool VideoPlayer::Update(float dt)
     {
         if (packet->stream_index == vidId) {
             display(vidCtx, packet, vframe, &rect, texture, app->render->renderer, fpsrendering);
+        } else if (packet->stream_index == audId) {
+            playaudio(audCtx, packet, aframe, auddev);
         }
         av_packet_unref(packet);
     }
@@ -121,7 +145,7 @@ bool VideoPlayer::Update(float dt)
 
 bool VideoPlayer::CleanUp()
 {
-/*     SDL_CloseAudioDevice(auddev);
+    SDL_CloseAudioDevice(auddev);
     SDL_DestroyTexture(texture);
     av_packet_free(&packet);
     av_frame_free(&vframe);
@@ -129,14 +153,14 @@ bool VideoPlayer::CleanUp()
     avcodec_free_context(&vidCtx);
     avcodec_free_context(&audCtx);
     avformat_close_input(&pFormatCtx);
-    avformat_free_context(pFormatCtx); */
+    avformat_free_context(pFormatCtx);
 	return true;
 }
 
 void VideoPlayer::display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect,
     SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend)
 {
-    time_t start = time(NULL);
+    time_t start = SDL_GetTicks64();
     if (avcodec_send_packet(ctx, pkt) < 0) {
         perror("send packet");
         return;
@@ -152,14 +176,23 @@ void VideoPlayer::display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SD
             framenum, frame->pkt_size, frame->pts, frame->pkt_dts, frame->key_frame,
             frame->coded_picture_number, frame->display_picture_number);
     }
-    SDL_UpdateYUVTexture(texture, rect,
-        frame->data[0], frame->linesize[0],
-        frame->data[1], frame->linesize[1],
-        frame->data[2], frame->linesize[2]);
-    SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, texture, NULL, rect);
+    if (SDL_UpdateYUVTexture(texture, rect,
+            frame->data[0], frame->linesize[0],
+            frame->data[1], frame->linesize[1],
+            frame->data[2], frame->linesize[2]) < 0) {
+        printf("SDL_UpdateYUVTexture Error: %s\n", SDL_GetError());
+        return;
+    }
+    if (SDL_RenderClear(renderer) < 0) {
+        printf("SDL_RenderClear Error: %s\n", SDL_GetError());
+        return;
+    }
+    if (SDL_RenderCopy(renderer, texture, NULL, rect) < 0) {
+        printf("SDL_RenderCopy Error: %s\n", SDL_GetError());
+        return;
+    }
     SDL_RenderPresent(renderer);
-    time_t end = time(NULL);
+    time_t end = SDL_GetTicks64();
     double diffms = difftime(end, start) / 1000.0;
     if (diffms < fpsrend) {
         uint32_t diff = (uint32_t)((fpsrend - diffms) * 1000);
@@ -167,35 +200,39 @@ void VideoPlayer::display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SD
         SDL_Delay(diff);
     }
 }
-//
-//void playaudio(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame,
-//    SDL_AudioDeviceID auddev)
-//{
-//    if (avcodec_send_packet(ctx, pkt) < 0) {
-//        perror("send packet");
-//        return;
-//    }
-//    if (avcodec_receive_frame(ctx, frame) < 0) {
-//        perror("receive frame");
-//        return;
-//    }
-//    int size;
-//    int bufsize = av_samples_get_buffer_size(&size, ctx->channels, frame->nb_samples, frame->format, 0);
-//    bool isplanar = av_sample_fmt_is_planar(frame->format) == 1;
-//    for (int ch = 0; ch < ctx->channels; ch++) {
-//        if (!isplanar) {
-//            if (SDL_QueueAudio(auddev, frame->data[ch], frame->linesize[ch]) < 0) {
-//                perror("playaudio");
-//                printf(" %s\n", SDL_GetError());
-//                return;
-//            }
-//        }
-//        else {
-//            if (SDL_QueueAudio(auddev, frame->data[0] + size * ch, size) < 0) {
-//                perror("playaudio");
-//                printf(" %s\n", SDL_GetError());
-//                return;
-//            }
-//        }
-//    }
-//}
+
+void VideoPlayer::playaudio(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_AudioDeviceID auddev)
+{
+    if (avcodec_send_packet(ctx, pkt) < 0) {
+        SDL_Log("Error in send packet: %s", SDL_GetError());
+        return;
+    }
+    if (avcodec_receive_frame(ctx, frame) < 0) {
+        SDL_Log("Error in receive frame: %s", SDL_GetError());
+        return;
+    }
+
+    SwrContext* swr = swr_alloc_set_opts(NULL, av_get_default_channel_layout(ctx->channels), AV_SAMPLE_FMT_S16, ctx->sample_rate,
+        av_get_default_channel_layout(ctx->channels), (AVSampleFormat)frame->format, ctx->sample_rate, 0, NULL);
+
+    if (!swr || swr_init(swr) < 0) {
+        SDL_Log("Failed to initialize resampler: %s", SDL_GetError());
+        return;
+    }
+
+    uint8_t* buffer = NULL;
+    int numSamples = av_rescale_rnd(swr_get_delay(swr, ctx->sample_rate) + frame->nb_samples, ctx->sample_rate, ctx->sample_rate, AV_ROUND_UP);
+    av_samples_alloc(&buffer, NULL, ctx->channels, numSamples, AV_SAMPLE_FMT_S16, 0);
+
+    numSamples = swr_convert(swr, &buffer, numSamples, (const uint8_t**)frame->data, frame->nb_samples);
+
+    if (SDL_QueueAudio(auddev, buffer, numSamples * ctx->channels * av_get_bytes_per_sample(AV_SAMPLE_FMT_S16)) < 0) {
+        SDL_Log("Error in playaudio: %s", SDL_GetError());
+    }
+
+    if (buffer) {
+        av_freep(&buffer);
+    }
+
+    swr_free(&swr);
+}
