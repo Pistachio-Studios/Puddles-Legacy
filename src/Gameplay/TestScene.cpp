@@ -6,6 +6,7 @@
 #include "Core/Window.h"
 #include "Gameplay/TestScene.h"
 #include "Core/Map.h"
+#include "Core/AnimationManager.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
@@ -73,6 +74,12 @@ bool TestScene::Enter()
 		//Get the map name from the config file and assigns the value in the module
 		app->map->name = parameters.child("map").attribute("name").as_string();
 		app->map->path = parameters.child("map").attribute("path").as_string();
+	}
+
+	if (parameters.child("animations")) {
+		//Get the map name from the config file and assigns the value in the module
+		app->animations->name = parameters.child("animations").attribute("name").as_string();
+		app->animations->path = parameters.child("animations").attribute("path").as_string();
 	}
 
 	if (parameters.child("camera")) {

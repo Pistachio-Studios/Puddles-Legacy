@@ -20,6 +20,7 @@ class Audio;
 class SceneManager;
 class EntityManager;
 class Map;
+class AnimationManager;
 class Physics;
 class ParticleManager;
 class GuiManager;
@@ -107,6 +108,7 @@ public:
 	SceneManager* sceneManager;
 	EntityManager* entityManager;
 	Map* map;
+	AnimationManager* animations;
 	Physics* physics;
 	ParticleManager* particleManager;
 	GuiManager* guiManager;

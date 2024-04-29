@@ -7,6 +7,7 @@
 #include "Core/SceneManager.h"
 #include "Gameplay/Scene.h"
 #include "Core/Map.h"
+#include "Core/AnimationManager.h"
 #include "Core/Physics.h"
 #include "Core/ParticleManager.h"
 #include "Core/GuiManager.h"
@@ -43,6 +44,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics(false);
 	sceneManager = new SceneManager(true);
 	map = new Map(false);
+	animations = new AnimationManager(false);
 	entityManager = new EntityManager(false);
 	particleManager = new ParticleManager(true);
 	guiManager = new GuiManager(true);
@@ -59,6 +61,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(sceneManager);
 	AddModule(map);
+	AddModule(animations);
 	AddModule(entityManager);
 	AddModule(particleManager);
 	AddModule(lighting);
