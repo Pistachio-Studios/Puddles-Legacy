@@ -31,6 +31,8 @@
     <character_3 path="Assets/Dialog/character_3.png"/>
   </dialog_manager>
 
+  <animation_manager path = "Assets/Animations/Animations.tmx"/>
+	
   <scene_manager startScene="teamlogo">
 	  <teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG">
 	  </teamlogo>
@@ -81,7 +83,6 @@
     </tutorialscene>
     <testscene>
       <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
-      <animations path="Assets/Animations/" name="Animations.tmx"/>
       <camera x="-530" y="-1949"/>
       <player x="672" y="2032" texturepath ="Assets/Textures/playerx128-test.png"/>
       <enemies>

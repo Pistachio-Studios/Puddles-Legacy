@@ -37,6 +37,8 @@ bool Loco::Awake() {
 bool Loco::Start() {
 	Npc::Start();
 
+	//anim = app->animation_manager->GetAnimByName("YOKESE");
+
 	timer = Timer();
 
 	return true;

@@ -76,12 +76,6 @@ bool TestScene::Enter()
 		app->map->path = parameters.child("map").attribute("path").as_string();
 	}
 
-	if (parameters.child("animations")) {
-		//Get the map name from the config file and assigns the value in the module
-		app->animations->name = parameters.child("animations").attribute("name").as_string();
-		app->animations->path = parameters.child("animations").attribute("path").as_string();
-	}
-
 	if (parameters.child("camera")) {
 		//Get the map name from the config file and assigns the value in the module
 		app->render->camera.x = parameters.child("camera").attribute("x").as_int();

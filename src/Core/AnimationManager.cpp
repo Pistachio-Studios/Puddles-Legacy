@@ -20,12 +20,12 @@
 
 AnimationManager::AnimationManager() : Module(), animLoaded(false)
 {
-    name.Create("animations");
+    name.Create("animation_manager");
 }
 
 AnimationManager::AnimationManager(bool startEnabled) : Module(startEnabled), animLoaded(false)
 {
-    name.Create("animations");
+    name.Create("animation_manager");
 }
 
 // Destructor
@@ -38,6 +38,8 @@ bool AnimationManager::Awake(pugi::xml_node& config)
     LOG("Loading Anim Parser");
     bool ret = true;
 
+    path = config.attribute("path").as_string();
+
     return ret;
 }
 
@@ -45,7 +47,6 @@ bool AnimationManager::Start() {
 
     //Calls the functon to load the animations, make sure that the filename is assigned
     SString animPath = path;
-    animPath += name;
     bool ret = Load(animPath);
 
     return ret;
@@ -76,19 +77,6 @@ Animation* AnimationManager::GetAnimByName(SString name)
 
     return set;
 }
-
-//SDL_Rect TileSet::GetTileRect(int gid) const
-//{
-//    SDL_Rect rect = { 0 };
-//    int relativeIndex = gid - firstgid;
-//
-//    rect.w = tileWidth;
-//    rect.h = tileHeight;
-//    rect.x = margin + (tileWidth + spacing) * (relativeIndex % columns);
-//    rect.y = margin + (tileWidth + spacing) * (relativeIndex / columns);
-//
-//    return rect;
-//}
 
 TileSet* AnimationManager::GetTilesetFromTileId(int gid) const
 {
@@ -237,22 +225,4 @@ bool AnimationManager::LoadProperties(pugi::xml_node& node, Properties& properti
 
     return ret;
 }
-//
-//Properties::Property* Properties::GetProperty(const char* name)
-//{
-//    ListItem<Property*>* item = list.start;
-//    Property* p = NULL;
-//
-//    while (item)
-//    {
-//        if (item->data->name == name) {
-//            p = item->data;
-//            break;
-//        }
-//        item = item->next;
-//    }
-//
-//    return p;
-//}
-
 
