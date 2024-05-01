@@ -108,7 +108,7 @@ public:
 	SceneManager* sceneManager;
 	EntityManager* entityManager;
 	Map* map;
-	AnimationManager* animations;
+	AnimationManager* animationManager;
 	Physics* physics;
 	ParticleManager* particleManager;
 	GuiManager* guiManager;

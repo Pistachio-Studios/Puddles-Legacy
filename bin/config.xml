@@ -31,7 +31,7 @@
     <character_3 path="Assets/Dialog/character_3.png"/>
   </dialog_manager>
 
-  <animation_manager path = "Assets/Animations/Animations.tmx"/>
+	<animation_manager path = "Assets/Animations/" name2="Animations.tmx"/>
 	
   <scene_manager startScene="teamlogo">
 	  <teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG">
@@ -77,8 +77,8 @@
 		  <CentipideEnemy x="650" y="2100" texturepath=""/>
       </enemies>
 	  <Npcs>
-		  <loco x="900" y="2500" texturepath="Assets/Textures/Npcs/Loco.png"/>
-	      <tabernero x="900" y="2800" texturepath="Assets/Textures/Npcs/Tabernero.png"/>
+		  <loco x="900" y="2500"/>
+	      <tabernero x="900" y="2800"/>
 	  </Npcs>
     </tutorialscene>
     <testscene>

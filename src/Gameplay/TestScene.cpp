@@ -56,20 +56,6 @@ bool TestScene::Enter()
 		}
 	}
 
-	if (parameters.child("Npcs").child("loco")) {
-		Loco* loco = new Loco();
-		app->entityManager->AddEntity(loco);
-		loco->parameters = parameters.child("Npcs").child("loco");
-		loco->Enable();
-	}
-
- 	if (parameters.child("Npcs").child("tabernero")) {
-		Tabernero* tabernero = new Tabernero();
-		app->entityManager->AddEntity(tabernero);
-		tabernero->parameters = parameters.child("Npcs").child("tabernero");
-		tabernero->Enable();
-	}
-
 	if (parameters.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
 		app->map->name = parameters.child("map").attribute("name").as_string();

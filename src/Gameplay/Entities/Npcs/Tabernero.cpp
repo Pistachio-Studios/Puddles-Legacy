@@ -3,6 +3,7 @@
 #include "Gameplay/Entities/Entity.h"
 #include "Core/Textures.h"
 #include "Core/Input.h"
+#include "Core/AnimationManager.h"
 #include "Core/Render.h"
 #include "Gameplay/Scene.h"
 #include "Utils/Point.h"
@@ -33,6 +34,9 @@ bool Tabernero::Awake() {
 
 bool Tabernero::Start() {
 	Npc::Start();
+
+	anim = *app->animationManager->GetAnimByName("testerAnim2");
+	anim.speed = 10.0f;
 
 	timer = Timer();
 

@@ -66,13 +66,11 @@ private:
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
 public:
-
-	AnimData animData;
-	SString name;
 	SString path;
+	SString name2;
 
 private:
-	bool animLoaded;
+	AnimData animData;
 };
 
 #endif // __ANIMATIONMANAGER_H__

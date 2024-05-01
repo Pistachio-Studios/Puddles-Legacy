@@ -1,6 +1,7 @@
 #ifndef __NPCS_H__
 #define __NPCS_H__
 
+#include "Core/Animation.h"
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
 
@@ -35,8 +36,7 @@ public:
 
 public:
 
-	const char* texturePath;
-	SDL_Texture* texture = NULL;
+	Animation anim; 
 
 	const char* path;
 	SDL_Texture* texture2 = NULL;

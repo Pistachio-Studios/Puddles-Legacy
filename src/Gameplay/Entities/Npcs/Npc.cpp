@@ -4,6 +4,7 @@
 #include "Gameplay/Entities/Entity.h"
 #include "Core/Textures.h"
 #include "Core/Input.h"
+#include "Core/Animation.h"
 #include "Core/Render.h"
 #include "Gameplay/Scene.h"
 #include "Core/SceneManager.h"
@@ -38,7 +39,7 @@ bool Npc::Start() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-
+  
 	texture2 = app->tex->Load("Assets/Textures/pressE.png");
 	texture3 = app->tex->Load("Assets/Textures/click.png");
 
@@ -59,22 +60,15 @@ bool Npc::Update(float dt)
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
 	int width, height;
-	SDL_QueryTexture(texture, NULL, NULL, &width, &height);
+	SDL_QueryTexture(anim.texture, NULL, NULL, &width, &height);
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2;
 
+	app->render->DrawTexture(anim.texture, position.x, position.y, &anim.GetCurrentFrame());
+	anim.Update(dt);
 
-	//if(anim.texture != nullptr)
-	//{
-	// app->render->DrawTexture(anim.texture, position.x, position.y, anim.Get...);
-	// anim.Update(dt);
-	//}else{
-	//	app->render->DrawRectangle({position.x, position.y,...})
-	//}
-
-	app->render->DrawTexture(texture, position.x, position.y);
 
 	if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")  { // TODO change this if
 		int mouseX = METERS_TO_PIXELS(mouseWorldPosition.x);
@@ -106,7 +100,6 @@ bool Npc::LoadState(pugi::xml_node& node) {
 
 bool Npc::CleanUp() {
 
-	app->tex->UnLoad(texture);
 	app->tex->UnLoad(texture2);
 	app->tex->UnLoad(texture3);
 	app->physics->DestroyBody(pbody);

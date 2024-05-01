@@ -3,11 +3,10 @@
 #include "Gameplay/Entities/Entity.h"
 #include "Core/Textures.h"
 #include "Core/Input.h"
+#include "Core/AnimationManager.h"
 #include "Core/Render.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Scene.h"
-#include "Core/GuiControl.h"
-#include "Core/GuiManager.h"
 #include "Utils/Point.h"
 #include "Core/Physics.h"
 
@@ -37,7 +36,8 @@ bool Loco::Awake() {
 bool Loco::Start() {
 	Npc::Start();
 
-	//anim = app->animation_manager->GetAnimByName("YOKESE");
+	anim = *app->animationManager->GetAnimByName("testerAnim");
+	anim.speed = 10.0f;
 
 	timer = Timer();
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
  <tileset firstgid="1" name="testerAnim" tilewidth="32" tileheight="32" tilecount="11" columns="11">
-  <image source="i:/UsersCarlos/Descargas/Pixel Adventure 1/Free/Main Characters/Virtual Guy/Idle (32x32).png" width="352" height="32"/>
+  <image source="Virtual-Guy/Idle.png" width="352" height="32"/>
   <tile id="0">
    <animation>
     <frame tileid="0" duration="50"/>
@@ -19,7 +19,7 @@
   </tile>
  </tileset>
  <tileset firstgid="12" name="testerAnim2" tilewidth="32" tileheight="32" tilecount="11" columns="11">
-  <image source="i:/UsersCarlos/Descargas/Pixel Adventure 1/Free/Main Characters/Mask Dude/Idle (32x32).png" width="352" height="32"/>
+  <image source="Mask-Dude/Idle.png" width="352" height="32"/>
   <tile id="0">
    <animation>
     <frame tileid="0" duration="50"/>

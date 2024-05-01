@@ -18,12 +18,12 @@
 #include <tracy/Tracy.hpp>
 
 
-AnimationManager::AnimationManager() : Module(), animLoaded(false)
+AnimationManager::AnimationManager() : Module()
 {
     name.Create("animation_manager");
 }
 
-AnimationManager::AnimationManager(bool startEnabled) : Module(startEnabled), animLoaded(false)
+AnimationManager::AnimationManager(bool startEnabled) : Module(startEnabled)
 {
     name.Create("animation_manager");
 }
@@ -39,6 +39,8 @@ bool AnimationManager::Awake(pugi::xml_node& config)
     bool ret = true;
 
     path = config.attribute("path").as_string();
+    name2 = config.attribute("name2").as_string();
+    LOG("path: %s", path.GetString());
 
     return ret;
 }
@@ -47,16 +49,14 @@ bool AnimationManager::Start() {
 
     //Calls the functon to load the animations, make sure that the filename is assigned
     SString animPath = path;
-    bool ret = Load(animPath);
+    animPath += name2;
+    bool ret = Load(animPath); //Assets/Animations/Animation.tmx
 
     return ret;
 }
 
 bool AnimationManager::Update(float dt)
 {
-    if (animLoaded == false)
-        return false;
-
     return true;
 }
 
@@ -119,7 +119,7 @@ bool AnimationManager::Load(SString animFileName)
 
     pugi::xml_document animFileXML;
     pugi::xml_parse_result result = animFileXML.load_file(animFileName.GetString());
-
+    LOG("animFileName: %s", animFileName.GetString());
     if (result == NULL)
     {
         LOG("Could not load animations xml file %s. pugi error: %s", animFileName.GetString(), result.description());
@@ -152,8 +152,6 @@ bool AnimationManager::Load(SString animFileName)
 
     if (animFileXML) animFileXML.reset();
 
-    animLoaded = ret;
-
     return ret;
 }
 
@@ -171,7 +169,7 @@ bool AnimationManager::LoadTileSet(pugi::xml_node animFile) {
         set->margin = tileset.attribute("margin").as_int();
         set->spacing = tileset.attribute("spacing").as_int();
         set->tileWidth = tileset.attribute("tilewidth").as_int();
-        set->tileHeight = tileset.attribute("tileheight").as_int();
+        set->tileHeight = tileset.attribute("tileheight").as_int();     
         set->columns = tileset.attribute("columns").as_int();
         set->tilecount = tileset.attribute("tilecount").as_int();
 
@@ -199,6 +197,7 @@ bool AnimationManager::LoadAnimation(pugi::xml_node node, TileSet* tileset)
     for (pugi::xml_node frameNode = node.child("animation").child("frame"); frameNode && ret; frameNode = frameNode.next_sibling("frame"))
     {
         int id = frameNode.attribute("tileid").as_int();
+     /*   int duration = frameNode.attribute("duration").as_int();*/
         int tilesPerRow = tileset->columns;
         int x = (id % tilesPerRow) * tileset->tileWidth;
         int y = (id / tilesPerRow) * tileset->tileHeight;
