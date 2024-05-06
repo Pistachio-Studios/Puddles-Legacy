@@ -36,7 +36,7 @@ bool Tabernero::Start() {
 	Npc::Start();
 
 	anim = *app->animationManager->GetAnimByName("testerAnim2");
-	anim.speed = 10.0f;
+	anim.speed = 2.0f;
 
 	timer = Timer();
 

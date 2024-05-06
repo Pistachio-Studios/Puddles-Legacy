@@ -66,10 +66,6 @@ bool Npc::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2;
 
-	app->render->DrawTexture(anim.texture, position.x, position.y, &anim.GetCurrentFrame());
-	anim.Update(dt);
-
-
 	if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")  { // TODO change this if
 		int mouseX = METERS_TO_PIXELS(mouseWorldPosition.x);
 		int mouseY = METERS_TO_PIXELS(mouseWorldPosition.y);
@@ -85,6 +81,9 @@ bool Npc::Update(float dt)
 		if(touchingNpc)
 			app->render->DrawTexture(texture2, position.x - 40, position.y - 20);
 	}
+
+	app->render->DrawTexture(anim.texture, position.x, position.y, &anim.GetCurrentFrame());
+	anim.Update(dt);
 
 	return true;
 }

@@ -4,17 +4,17 @@
   <image source="Virtual-Guy/Idle.png" width="352" height="32"/>
   <tile id="0">
    <animation>
-    <frame tileid="0" duration="50"/>
-    <frame tileid="1" duration="50"/>
-    <frame tileid="2" duration="50"/>
-    <frame tileid="3" duration="50"/>
-    <frame tileid="4" duration="50"/>
-    <frame tileid="5" duration="50"/>
-    <frame tileid="6" duration="50"/>
-    <frame tileid="7" duration="50"/>
-    <frame tileid="8" duration="50"/>
-    <frame tileid="9" duration="50"/>
-    <frame tileid="10" duration="50"/>
+    <frame tileid="0" duration="150"/>
+    <frame tileid="1" duration="150"/>
+    <frame tileid="2" duration="150"/>
+    <frame tileid="3" duration="150"/>
+    <frame tileid="4" duration="150"/>
+    <frame tileid="5" duration="150"/>
+    <frame tileid="6" duration="150"/>
+    <frame tileid="7" duration="150"/>
+    <frame tileid="8" duration="150"/>
+    <frame tileid="9" duration="150"/>
+    <frame tileid="10" duration="150"/>
    </animation>
   </tile>
  </tileset>
@@ -22,17 +22,48 @@
   <image source="Mask-Dude/Idle.png" width="352" height="32"/>
   <tile id="0">
    <animation>
-    <frame tileid="0" duration="50"/>
-    <frame tileid="1" duration="50"/>
-    <frame tileid="2" duration="50"/>
-    <frame tileid="3" duration="50"/>
-    <frame tileid="4" duration="50"/>
-    <frame tileid="5" duration="50"/>
-    <frame tileid="6" duration="50"/>
-    <frame tileid="7" duration="50"/>
-    <frame tileid="8" duration="50"/>
-    <frame tileid="9" duration="50"/>
-    <frame tileid="10" duration="50"/>
+    <frame tileid="0" duration="150"/>
+    <frame tileid="1" duration="150"/>
+    <frame tileid="2" duration="150"/>
+    <frame tileid="3" duration="150"/>
+    <frame tileid="4" duration="150"/>
+    <frame tileid="5" duration="150"/>
+    <frame tileid="6" duration="150"/>
+    <frame tileid="7" duration="150"/>
+    <frame tileid="8" duration="150"/>
+    <frame tileid="9" duration="150"/>
+    <frame tileid="10" duration="150"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="23" name="smoke_scaled" tilewidth="114" tileheight="114" tilecount="24" columns="6">
+  <image source="Particles/smoke_scaled.png" width="685" height="473"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="200"/>
+    <frame tileid="1" duration="200"/>
+    <frame tileid="2" duration="200"/>
+    <frame tileid="3" duration="200"/>
+    <frame tileid="4" duration="200"/>
+    <frame tileid="5" duration="200"/>
+    <frame tileid="6" duration="200"/>
+    <frame tileid="7" duration="200"/>
+    <frame tileid="8" duration="200"/>
+    <frame tileid="9" duration="200"/>
+    <frame tileid="10" duration="200"/>
+    <frame tileid="11" duration="200"/>
+    <frame tileid="12" duration="200"/>
+    <frame tileid="13" duration="200"/>
+    <frame tileid="14" duration="200"/>
+    <frame tileid="15" duration="200"/>
+    <frame tileid="16" duration="200"/>
+    <frame tileid="17" duration="200"/>
+    <frame tileid="18" duration="200"/>
+    <frame tileid="19" duration="200"/>
+    <frame tileid="20" duration="200"/>
+    <frame tileid="21" duration="200"/>
+    <frame tileid="22" duration="200"/>
+    <frame tileid="23" duration="200"/>
    </animation>
   </tile>
  </tileset>

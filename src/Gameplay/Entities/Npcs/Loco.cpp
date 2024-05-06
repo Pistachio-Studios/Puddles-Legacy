@@ -37,7 +37,7 @@ bool Loco::Start() {
 	Npc::Start();
 
 	anim = *app->animationManager->GetAnimByName("testerAnim");
-	anim.speed = 10.0f;
+	anim.speed = 2.0f;
 
 	timer = Timer();
 
