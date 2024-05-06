@@ -20,6 +20,7 @@ enum class EntityType
 	SWORD,
 	STAFF,
 	SHIELD,
+	FOODITEM,
 	UNKNOWN
 };
 

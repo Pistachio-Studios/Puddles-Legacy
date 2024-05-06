@@ -7,6 +7,7 @@
 #include "Gameplay/Entities/Sword.h"
 #include "Gameplay/Entities/Shield.h"
 #include "Gameplay/Entities/Staff.h"
+#include "Gameplay/Entities/Items/FoodItem.h"
 #include "Core/App.h"
 #include "Core/Textures.h"
 #include "Gameplay/Scene.h"
@@ -117,6 +118,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::STAFF:
 		entity = new Staff();
+		break;
+	case EntityType::FOODITEM:
+		entity = new FoodItem();
 		break;
 	default:
 		break;
