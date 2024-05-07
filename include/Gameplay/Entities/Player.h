@@ -70,6 +70,8 @@ public:
 
 	//tmp
 	PhysBody* sword;
+
+	int lives = 10;
 };
 
 #endif // __PLAYER_H__
