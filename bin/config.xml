@@ -78,8 +78,12 @@
       </enemies>
 	  <Npcs>
 		  <loco x="900" y="2500"/>
-	      <tabernero x="900" y="2800"/>
+	      <tabernero x="900" y="2800"/> 
 	  </Npcs>
+	  <Items>
+		  <EnergyPotion x="1200" y="2300" texturepath="Assets/Textures/Items/EnergyPotion.png"/>
+		  <HealPotion x="1200" y="2500" texturepath="Assets/Textures/Items/HealPotion.png"/>
+	  </Items>
     </tutorialscene>
     <testscene>
       <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>

@@ -1,5 +1,5 @@
-#ifndef __FOOD_H__
-#define __FOOD_H__
+#ifndef __ITEM_H__
+#define __ITEM_H__
 
 #include "Core/Animation.h"
 #include "Core/Physics.h"
@@ -13,11 +13,13 @@
 #endif
 
 struct SDL_Texture;
-class Player;
 
 class Item : public Entity
 {
 public:
+
+	bool startTimer = true;
+	Timer timer;
 
 	Item();
 	virtual ~Item();
@@ -32,17 +34,18 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB) override;
 
+	void EndCollision(PhysBody* physA, PhysBody* physB);
+
 public:
 
 	bool isPicked = false;
-	SDL_Texture* texture;
+	bool touchingItem = false;
+	SDL_Texture* texture1 = nullptr;
+	SDL_Texture* texture = nullptr;
 	const char* texturePath;
-	Player* player;
 
 private:
 	PhysBody* pbody;
-
-	Animation foodTextures;
 };
 
-#endif // __FOOD_H__
+#endif // __ITEM_H__

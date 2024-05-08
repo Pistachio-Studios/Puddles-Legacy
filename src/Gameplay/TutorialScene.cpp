@@ -11,6 +11,9 @@
 #include "Gameplay/Entities/Npcs/Loco.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
+#include "Gameplay/Entities/Items/EnergyPotion.h"
+#include "Gameplay/Entities/Items/HealPotion.h"
+#include "Gameplay/Entities/Items/Item.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -126,6 +129,20 @@ bool TutorialScene::Enter()
 		app->entityManager->AddEntity(tabernero);
 		tabernero->parameters = parameters.child("Npcs").child("tabernero");
 		tabernero->Start();
+	}
+
+	if (parameters.child("Items").child("EnergyPotion")) {
+		EnergyPotion* energyPotion = new EnergyPotion();
+		app->entityManager->AddEntity(energyPotion);
+		energyPotion->parameters = parameters.child("Items").child("EnergyPotion");
+		energyPotion->Start();
+	}
+
+	if (parameters.child("Items").child("HealPotion")) {
+		HealPotion* healPotion = new HealPotion();
+		app->entityManager->AddEntity(healPotion);
+		healPotion->parameters = parameters.child("Items").child("HealPotion");
+		healPotion->Start();
 	}
 
 	return true;
