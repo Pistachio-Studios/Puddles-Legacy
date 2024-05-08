@@ -80,16 +80,6 @@
 		  <loco x="900" y="2500"/>
 	      <tabernero x="900" y="2800"/>
 	  </Npcs>
-		<Items>
-			<Potions>
-				<EnergyPotion x="400" y="2000"/>
-				<HealPotion x="430" y="2000"/>
-				<VeloPotion x="460" y="2000"/>
-			</Potions>
-			<Plants>
-				
-			</Plants>
-		</Items>
     </tutorialscene>
     <testscene>
       <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
