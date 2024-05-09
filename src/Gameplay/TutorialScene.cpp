@@ -13,6 +13,7 @@
 #include "Gameplay/Entities/Npcs/Tabernero.h"
 #include "Gameplay/Entities/Items/EnergyPotion.h"
 #include "Gameplay/Entities/Items/HealPotion.h"
+#include "Gameplay/Entities/Items/VeloPotion.h"
 #include "Gameplay/Entities/Items/Item.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
@@ -145,6 +146,13 @@ bool TutorialScene::Enter()
 		healPotion->Start();
 	}
 
+	if (parameters.child("Items").child("VeloPotion")) {
+		VeloPotion* veloPotion = new VeloPotion();
+		app->entityManager->AddEntity(veloPotion);
+		veloPotion->parameters = parameters.child("Items").child("VeloPotion");
+		veloPotion->Start();
+	}
+
 	return true;
 }
 
@@ -179,13 +187,6 @@ bool TutorialScene::Update(float dt)
 		if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
-
-
-
-
-
-
-
 
 	return true;
 }

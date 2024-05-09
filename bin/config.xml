@@ -83,6 +83,7 @@
 	  <Items>
 		  <EnergyPotion x="1200" y="2300" texturepath="Assets/Textures/Items/EnergyPotion.png"/>
 		  <HealPotion x="1200" y="2500" texturepath="Assets/Textures/Items/HealPotion.png"/>
+		  <VeloPotion x="1200" y="2100" texturepath="Assets/Textures/Items/VeloPotion.png"/>
 	  </Items>
     </tutorialscene>
     <testscene>
