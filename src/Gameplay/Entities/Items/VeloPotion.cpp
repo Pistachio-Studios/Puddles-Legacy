@@ -46,9 +46,10 @@ bool VeloPotion::Update(float dt)
 {
 	Item::Update(dt);
 
-	if (isPicked) {
-		VelocityBuff();
-	}
+	//TODO: Modify maxSpeed to go faster
+	//if (isPicked) {
+	//	VelocityBuff();
+	//}
 
 	return true;
 }
