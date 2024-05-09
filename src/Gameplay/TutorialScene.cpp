@@ -14,6 +14,7 @@
 #include "Gameplay/Entities/Items/EnergyPotion.h"
 #include "Gameplay/Entities/Items/HealPotion.h"
 #include "Gameplay/Entities/Items/VeloPotion.h"
+#include "Gameplay/Entities/Items/AbilityPotion.h"
 #include "Gameplay/Entities/Items/Item.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
@@ -151,6 +152,13 @@ bool TutorialScene::Enter()
 		app->entityManager->AddEntity(veloPotion);
 		veloPotion->parameters = parameters.child("Items").child("VeloPotion");
 		veloPotion->Start();
+	}
+
+	if (parameters.child("Items").child("AbilityPotion")) {
+		AbilityPotion* abilityPotion = new AbilityPotion();
+		app->entityManager->AddEntity(abilityPotion);
+		abilityPotion->parameters = parameters.child("Items").child("AbilityPotion");
+		abilityPotion->Start();
 	}
 
 	return true;

@@ -60,6 +60,7 @@ bool Item::Update(float dt)
 	if (touchingItem) {
 		app->render->DrawTexture(texture1, position.x - 40, position.y - 20);
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+			//TODO: Destroy collider
 			app->tex->UnLoad(texture); 
 			app->tex->UnLoad(texture1);
 			isPicked = true; 
