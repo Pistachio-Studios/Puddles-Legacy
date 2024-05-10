@@ -213,7 +213,7 @@ void VideoPlayer::playaudio(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, 
     }
 
     SwrContext* swr = swr_alloc_set_opts(NULL, av_get_default_channel_layout(ctx->channels), AV_SAMPLE_FMT_S16, ctx->sample_rate,
-        av_get_default_channel_layout(ctx->channels), (AVSampleFormat)frame->format, ctx->sample_rate, 0, NULL);
+        frame->channel_layout, (AVSampleFormat)frame->format, ctx->sample_rate, 0, NULL);
 
     if (!swr || swr_init(swr) < 0) {
         SDL_Log("Failed to initialize resampler: %s", SDL_GetError());
