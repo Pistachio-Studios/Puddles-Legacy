@@ -3,7 +3,6 @@
 
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
-#include "Utils/StateMachine.h"
 
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
@@ -38,6 +37,8 @@ public:
 
 public:
 	PhysBody* pbody;
+
+	SDL_Texture* texture = nullptr;
 };
 
 #endif // __PLAYER_H__

@@ -45,12 +45,15 @@ public:
 
     void ChangeScene(SString sceneName);
 
+    Scene* GetCurrentScene();
+
     // Load / Save
     bool LoadState(pugi::xml_node&);
     bool SaveState(pugi::xml_node&) const;
 
-private:
+public:
     Scene* currentScene = nullptr;
+private:
     DynArray<Scene*> scenes;
 };
 

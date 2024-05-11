@@ -72,7 +72,7 @@ bool Render::Awake(pugi::xml_node& config)
 	TTF_Init();
 
 	//load a font into memory
-	font = TTF_OpenFont("Assets/Fonts/arial/arial.ttf", 25);
+	font = TTF_OpenFont("Assets/Fonts/VecnaBold.ttf", 25);
 	//TTF_SetFontStyle(font, TTF_STYLE_NORMAL);
 	//TTF_SetFontOutline(font, 0);
 	//TTF_SetFontKerning(font, 0);
@@ -331,18 +331,32 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-bool Render::DrawText(const char* text, int posx, int posy, int w, int h) {
+bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Color color) {
 
-	SDL_Color color = { 255, 255, 255 };
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
+	TTF_SetFontSize(app->render->font, h * 0.75);
+
+	SDL_Surface* surface = TTF_RenderUTF8_Blended(app->render->font, text, color);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
-	int texW = 0;
-	int texH = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	SDL_Rect dstrect = { posx, posy, w, h };
+	//Reset font size
+	TTF_SetFontSize(app->render->font, 25);
+
+	uint scale = app->win->GetScale();
+
+	SDL_Rect rect;
+	rect.x = ((int)posx + w / 4) * scale; //TODO: revisar este / 4 porque no lo entiendo muy bien
+	rect.y = ((int)posy) * scale;
+
+	SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+
+	rect.w *= scale;
+	rect.h *= scale;
+
+	SDL_Rect dstrect = { rect.x * scale,  rect.y * scale, rect.w * scale, rect.h * scale };
 
 	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
+	//DrawTexture(texture, posx, posy, 0, 0);
 
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);
@@ -350,7 +364,6 @@ bool Render::DrawText(const char* text, int posx, int posy, int w, int h) {
 	return true;
 }
 
-// L14: TODO 6: Implement a method to load the state
 // for now load camera's x and y
 bool Render::LoadState(pugi::xml_node node) {
 
@@ -360,7 +373,6 @@ bool Render::LoadState(pugi::xml_node node) {
 	return true;
 }
 
-// L14: TODO 8: Create a method to save the state of the renderer
 // using append_child and append_attribute
 bool Render::SaveState(pugi::xml_node node) {
 

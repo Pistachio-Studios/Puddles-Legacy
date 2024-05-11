@@ -7,12 +7,14 @@
 #include "Core/SceneManager.h"
 #include "Gameplay/Scene.h"
 #include "Core/Map.h"
+#include "Core/AnimationManager.h"
 #include "Core/Physics.h"
 #include "Core/ParticleManager.h"
 #include "Core/GuiManager.h"
 #include "Core/DebugUI.h"
 #include "Core/EntityManager.h"
 #include "Core/Lighting.h"
+#include "Core/DialogManager.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -39,13 +41,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	lighting = new Lighting(false);
 	audio = new Audio(true);
-	physics = new Physics(true);
+	physics = new Physics(false);
 	sceneManager = new SceneManager(true);
 	map = new Map(false);
+	animationManager = new AnimationManager(true);
 	entityManager = new EntityManager(false);
 	particleManager = new ParticleManager(true);
 	guiManager = new GuiManager(true);
 	debugUI = new DebugUI(true);
+	dialogManager = new DialogManager(true);
 
 
 	// Ordered for awake / Start / Update
@@ -57,11 +61,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(sceneManager);
 	AddModule(map);
+	AddModule(animationManager); 
 	AddModule(entityManager);
 	AddModule(particleManager);
 	AddModule(lighting);
 	AddModule(guiManager);
 	AddModule(debugUI);
+	AddModule(dialogManager);
 
 	// Render last to swap buffer
 	AddModule(render);
@@ -117,6 +123,7 @@ bool App::Awake()
 			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
+			LOG("item: %s", item->data->name.GetString());
 			pugi::xml_node node = configNode.child(item->data->name.GetString());
 			ret = item->data->Awake(node);
 			item = item->next;
@@ -230,7 +237,10 @@ void App::FinishUpdate()
 	secondsSinceStartup = startupTime.ReadSec();
 	
 	// Amount of ms took the last update (dt)
-	dt = (float) frameTime.ReadMs();
+	if (paused)
+		dt = 0;
+	else
+		dt = (float) frameTime.ReadMs();
 
 	// Amount of frames during the last second
 	lastSecFrameCount++;

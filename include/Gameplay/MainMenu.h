@@ -1,5 +1,5 @@
-#ifndef __MAINMENU_H__
-#define __MAINMENU_H__
+#ifndef __MainMenu_H__
+#define __MainMenu_H__
 
 #include "Gameplay/Scene.h"
 #include "Core/GuiControl.h"
@@ -56,6 +56,9 @@ private:
 	GuiControlSlider* music = nullptr;
 	
 	bool exitPressed = false;
+
+	const char* texturePath;
+	SDL_Texture* gameTitle = NULL;
 };
 
-#endif // __MAINMENU_H__
+#endif // __MainMenu_H__

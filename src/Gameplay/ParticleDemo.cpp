@@ -2,6 +2,7 @@
 #include "Gameplay/ParticleDemo.h"
 #include "Core/Animation.h"
 #include "Core/ParticleManager.h"
+#include "Core/AnimationManager.h"
 #include "Core/Render.h"
 #include "Core/Textures.h"
 
@@ -27,39 +28,40 @@ bool ParticleDemo::Enter()
     particleSource1->color = { 230, 98, 18, 255 };
 
 
-    Animation smoke = Animation();
-    smoke.texture = app->tex->Load("Assets/Textures/Particles/smoke_scaled.png");
-    SDL_SetTextureBlendMode(smoke.texture, SDL_BLENDMODE_ADD);
-    smoke.PushBack({0,0,114,114});
-    smoke.PushBack({114,0,114,114});
-    smoke.PushBack({228,0,114,114});
-    smoke.PushBack({342,0,114,114});
-    smoke.PushBack({456,0,114,114});
-    smoke.PushBack({570,0,114,114});
-    smoke.PushBack({0,114,114,114});
-    smoke.PushBack({114,114,114,114});
-    smoke.PushBack({228,114,114,114});
-    smoke.PushBack({342,114,114,114});
-    smoke.PushBack({456,114,114,114});
-    smoke.PushBack({570,114,114,114});
-    smoke.PushBack({0,228,114,114});
-    smoke.PushBack({114,228,114,114});
-    smoke.PushBack({228,228,114,114});
-    smoke.PushBack({342,228,114,114});
-    smoke.PushBack({456,228,114,114});
-    smoke.PushBack({570,228,114,114});
-    smoke.PushBack({0,342,114,114});
-    smoke.PushBack({114,342,114,114});
-    smoke.PushBack({228,342,114,114});
-    smoke.PushBack({342,342,114,114});
-    smoke.PushBack({456,342,114,114});
-    smoke.PushBack({570,342,114,114});
+    //Animation smoke = Animation();
+    //smoke.texture = app->tex->Load("Assets/Textures/Particles/smoke_scaled.png");
+    //SDL_SetTextureBlendMode(smoke.texture, SDL_BLENDMODE_ADD);
+    //smoke.PushBack({0,0,114,114});
+    //smoke.PushBack({114,0,114,114});
+    //smoke.PushBack({228,0,114,114});
+    //smoke.PushBack({342,0,114,114});
+    //smoke.PushBack({456,0,114,114});
+    //smoke.PushBack({570,0,114,114});
+    //smoke.PushBack({0,114,114,114});
+    //smoke.PushBack({114,114,114,114});
+    //smoke.PushBack({228,114,114,114});
+    //smoke.PushBack({342,114,114,114});
+    //smoke.PushBack({456,114,114,114});
+    //smoke.PushBack({570,114,114,114});
+    //smoke.PushBack({0,228,114,114});
+    //smoke.PushBack({114,228,114,114});
+    //smoke.PushBack({228,228,114,114});
+    //smoke.PushBack({342,228,114,114});
+    //smoke.PushBack({456,228,114,114});
+    //smoke.PushBack({570,228,114,114});
+    //smoke.PushBack({0,342,114,114});
+    //smoke.PushBack({114,342,114,114});
+    //smoke.PushBack({228,342,114,114});
+    //smoke.PushBack({342,342,114,114});
+    //smoke.PushBack({456,342,114,114});
+    //smoke.PushBack({570,342,114,114});
 
+    smoke = *app->animationManager->GetAnimByName("smoke_scaled");
     smoke.speed = 16.0f;
     smoke.loop = true;
 
 
-    particleSource1->anim = smoke;
+  /*  particleSource1->anim = smoke;*/
 
     return true;
 }
@@ -71,7 +73,11 @@ bool ParticleDemo::PreUpdate()
 
 bool ParticleDemo::Update(float dt)
 {
-    particleSource1->position = { app->input->GetMouseX(), app->input->GetMouseY() };
+    //particleSource1->position = { app->input->GetMouseX(), app->input->GetMouseY() };
+    
+    app->render->DrawTexture(smoke.texture, particleSource1->position.x, particleSource1->position.y, &smoke.GetCurrentFrame());
+    smoke.Update(dt);
+
     return true;
 }
 

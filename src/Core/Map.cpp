@@ -1,4 +1,3 @@
-
 #include "Core/Animation.h"
 #include "Core/App.h"
 #include "Core/Render.h"
@@ -49,14 +48,11 @@ bool Map::Start() {
     mapPath += name;
     bool ret = Load(mapPath);
 
-    //Initialize pathfinding 
-    pathfinding = new PathFinding();
-
     //Initialize the navigation map
-    uchar* navigationMap = NULL;
+    navigationMap = NULL;
     CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
-    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
-    RELEASE_ARRAY(navigationMap);
+
+    //RELEASE_ARRAY(navigationMap);
 
     return ret;
 }
@@ -107,30 +103,6 @@ bool Map::Update(float dt)
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
-
-                    // TODO 
-                    // HACER QUE EL PARALAX NO TENGA DESFASE DE COORDENADAS POR LA ESCALA
-                    /*
-                    
-                    if (mapLayerItem->data->parallaxFactor == 1.0f)
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x,
-                            pos.y,
-                            &r,
-                            mapLayerItem->data->parallaxFactor);
-                    }
-                    else
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x * mapLayerItem->data->parallaxFactor,
-                            pos.y * mapLayerItem->data->parallaxFactor,
-                            &r,
-                            mapLayerItem->data->parallaxFactor);
-                    }
-                    
-                    */
-
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
                         pos.y,
@@ -166,24 +138,6 @@ iPoint Map::WorldToMap(int x, int y)
     ret.y = y / mapData.tileHeight;
 
     return ret;
-}
-
-Animation* Map::GetAnimByName(SString name)
-{
-    ListItem<Animation*>* item = mapData.animations.start;
-    Animation* set = NULL;
-
-    while (item)
-    {
-        set = item->data;
-        if (item->data->name == name)
-        {
-            return set;
-        }
-        item = item->next;
-    }
-
-    return set;
 }
 
 // Get relative Tile rectangle
@@ -224,9 +178,8 @@ bool Map::CleanUp()
     LOG("Unloading map");
 
     //Clean up pathfing class 
-    if(pathfinding != nullptr)pathfinding->CleanUp();//TODO Mirar porque necesita esta comprobaci�n, no deberia necesitarla.
+    //if(pathfinding != nullptr)pathfinding->CleanUp(); //TODO Mirar porque necesita esta comprobaci�n, no deberia necesitarla.
 
-    // L05: DONE 2: Make sure you clean up any memory allocated from tilesets/map
     ListItem<TileSet*>* tileset;
     tileset = mapData.tilesets.start;
 
@@ -237,7 +190,6 @@ bool Map::CleanUp()
 
     mapData.tilesets.Clear();
 
-    // L06: DONE 2: clean up all layer data
     ListItem<MapLayer*>* layerItem;
     layerItem = mapData.maplayers.start;
 
@@ -288,8 +240,8 @@ bool Map::Load(SString mapFileName)
         ret = LoadColliders(mapFileXML);
     }
 
-    PhysBody* c1 = app->physics->CreateRectangle(238, 632, 480 * 50, 16, STATIC);
-    c1->ctype = ColliderType::PLATFORM;
+    //PhysBody* c1 = app->physics->CreateRectangle(238, 632, 480 * 50, 16, STATIC);
+    //c1->ctype = ColliderType::PLATFORM;
 
    /* PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
     c2->ctype = ColliderType::PLATFORM;
@@ -393,37 +345,10 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
         texPath += tileset.child("image").attribute("source").as_string();
         set->texture = app->tex->Load(texPath.GetString());
 
-        if(tileset.child("tile")) //check if the tileset is an Animation (no se si seria mejor checkear si tiene un animation child)
-        {
-            LoadAnimation(tileset.child("tile"), set);
-        }
-        else
         {
             mapData.tilesets.Add(set);
         }
     }
-
-    return ret;
-}
-
-bool Map::LoadAnimation(pugi::xml_node node, TileSet* tileset)
-{
-    bool ret = true;
-
-    Animation* anim = new Animation();
-    anim->name = tileset->name;
-    anim->texture = tileset->texture;
-
-    for (pugi::xml_node frameNode = node.child("animation").child("frame"); frameNode && ret; frameNode = frameNode.next_sibling("frame"))
-    {
-        int id = frameNode.attribute("tileid").as_int();
-        int tilesPerRow = tileset->columns;
-        int x = (id % tilesPerRow) * tileset->tileWidth;
-        int y = (id / tilesPerRow) * tileset->tileHeight;
-        anim->PushBack({x, y, tileset->tileWidth, tileset->tileHeight});
-    }
-
-    mapData.animations.Add(anim);
 
     return ret;
 }
@@ -485,7 +410,6 @@ bool Map::LoadColliders(pugi::xml_node mapFile)
     bool ret = true; 
     uint scale = app->win->GetScale();
 
-    //TODO!! check if the objectgroup's class is collider
     pugi::xml_node objectGroup;
     for (objectGroup = mapFile.child("map").child("objectgroup"); objectGroup && ret; objectGroup = objectGroup.next_sibling("objectgroup"))
     {

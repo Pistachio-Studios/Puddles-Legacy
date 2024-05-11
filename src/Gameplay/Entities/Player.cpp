@@ -8,6 +8,7 @@
 #include "Utils/Point.h"
 #include "Core/Physics.h"
 #include "Utils/StateMachine.h"
+#include "Core/SceneManager.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -16,6 +17,7 @@
 #include "Gameplay/States/Player/PlayerCombatAttackState.hpp"
 #include "Gameplay/States/Player/PlayerCombatBlockState.hpp"
 
+#include <SDL_scancode.h>
 #include <cmath>
 #include <iostream>
 
@@ -47,7 +49,9 @@ bool Player::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 64 / 2, 128 / 2, bodyType::DYNAMIC);
+	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
+
+	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
@@ -75,23 +79,12 @@ bool Player::Update(float dt)
 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x*10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 	
-
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-	
-	if (debug) {
-		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-			freeCam = !freeCam;
-		}
-	}
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
 
-
-/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
-
-	currentAnimation->Update(dt); */
+	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 
@@ -100,10 +93,25 @@ bool Player::Update(float dt)
 
 	lookingAngle = -app->physics->lookAt(b2Vec2(1, 0), lookingDir) * 2;
 
-	if (debug)
-	{
+	if (debug) {
 		mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(mouseWorldPosition.x), METERS_TO_PIXELS(mouseWorldPosition.y), 255, 0, 0);
+		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x*10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
+		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+			freeCam = !freeCam;
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+	{
+		if (currentClass == PlayerClass::KNIGHT)
+		{
+			currentClass = PlayerClass::WIZARD;
+		}
+		else
+		{
+			currentClass = PlayerClass::KNIGHT;
+		}
 	}
 
 	return true;
@@ -151,8 +159,26 @@ bool Player::CleanUp() {
 	return true;
 }
 
+//TODO arreglar esta cochinada
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype)
+	{
+	case ColliderType::CHANGESCENE:
+		if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")
+		{
+			app->sceneManager->ChangeScene("townscene");
+		}
+		if (app->sceneManager->GetCurrentScene()->name == "townscene")
+		{
+			app->sceneManager->ChangeScene("forestscene");
+		}
+		if (app->sceneManager->GetCurrentScene()->name == "forestscene")
+		{
+			app->sceneManager->ChangeScene("townscene");
+		}
 
+		break;
+	}
 }
 
 void Player::EndCollision(PhysBody* physA, PhysBody* physB){

@@ -18,7 +18,7 @@ enum MapOrientation
 	ISOMETRIC
 };
 
-class Animation;
+class Map;
 
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 struct TileSet
@@ -117,7 +117,6 @@ struct MapData
 	MapTypes type;
 
 	List<MapLayer*> maplayers;
-	List<Animation*> animations;
 };
 
 class Map : public Module {
@@ -149,19 +148,16 @@ public:
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y);
 
-	Animation* GetAnimByName(SString name);
-
 	// L13: Create navigation map for pathfinding
     void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
 
 private:
 
 	// clipping margin to prevent seeing the tiles generating in the border of the screen
-	const int clippingMargin = 1;
+	const int clippingMargin = 2;
 
 	bool LoadMap(pugi::xml_node mapFile);
 	bool LoadTileSet(pugi::xml_node mapFile);
-	bool LoadAnimation(pugi::xml_node node, TileSet* tileset);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadAllLayers(pugi::xml_node mapNode);
 	bool LoadColliders(pugi::xml_node mapFile);
@@ -173,7 +169,8 @@ public:
 	MapData mapData;
 	SString name;
 	SString path;
-	PathFinding* pathfinding;
+
+	uchar* navigationMap;
 
 private:
 	bool mapLoaded;

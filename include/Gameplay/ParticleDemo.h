@@ -39,6 +39,9 @@ private:
 	ParticleGenerator* particleSource2;
 	ParticleGenerator* particleSource3;
 	ParticleGenerator* particleSource4;
+
+public: 
+	Animation smoke;
 };
 
 #endif // __PARTICLEDEMO_H__

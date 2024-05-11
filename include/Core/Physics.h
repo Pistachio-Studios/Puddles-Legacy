@@ -41,9 +41,11 @@ enum class ColliderType {
 	ENEMY,
 	BULLET,
 	PLATFORM,
+	CHANGESCENE,
 	DEATH,
 	LIMITS,
 	WIN,
+	NPC,
 	UNKNOWN,
 	// ..
 };
@@ -69,7 +71,7 @@ public:
 	ColliderType ctype;
 };
 
-class RaycastCallback : public b2RayCastCallback { //TODO: Hablar con mario de si dejar la definicion aqui o pasarla al cpp
+class RaycastCallback : public b2RayCastCallback {
 public:
     float32 ReportFixture(b2Fixture* fixture, const b2Vec2& point,
                        const b2Vec2& normal, float32 fraction) override;

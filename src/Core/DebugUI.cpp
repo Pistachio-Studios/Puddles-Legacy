@@ -43,8 +43,6 @@ bool DebugUI::Start()
     ImGui_ImplSDL2_InitForSDLRenderer(app->win->window, app->render->renderer);
     ImGui_ImplSDLRenderer2_Init(app->render->renderer);
 
-    //TODO: LOAD FONTS
-
     return true;
 }
 

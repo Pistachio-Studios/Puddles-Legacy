@@ -20,10 +20,12 @@ class Audio;
 class SceneManager;
 class EntityManager;
 class Map;
+class AnimationManager;
 class Physics;
 class ParticleManager;
 class GuiManager;
 class DebugUI;
+class DialogManager;
 
 class App
 {
@@ -106,10 +108,12 @@ public:
 	SceneManager* sceneManager;
 	EntityManager* entityManager;
 	Map* map;
+	AnimationManager* animationManager;
 	Physics* physics;
 	ParticleManager* particleManager;
 	GuiManager* guiManager;
 	DebugUI* debugUI;
+	DialogManager* dialogManager;
 
 
 private:
@@ -143,7 +147,7 @@ private:
 
 	float maxFrameDuration = 16.666f;
 
-	float maxFps = 30; // TODO hacer esto variable
+	float maxFps = 30; // TODO remove legacy code
 
 	bool loadRequest = false;
 	bool saveRequest = false;
@@ -155,5 +159,6 @@ extern App* app;
 extern bool debug;
 extern bool fpsLimiter;
 extern bool freeCam;
+extern bool paused;
 
 #endif	// __APP_H__
