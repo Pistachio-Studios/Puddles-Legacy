@@ -37,7 +37,7 @@
 	  <teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG">
 	  </teamlogo>
     <mainmenu>
-		  <gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png"/>
+		  <gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png" FxPath="Assets/Audio/Fx/UIButton.ogg"/>
     </mainmenu>
     <level1scene>
       <map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
