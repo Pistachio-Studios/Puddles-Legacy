@@ -33,6 +33,7 @@ bool MainMenu::Enter()
 	exitButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "  Exit  ", exitPos, this);
 
 	gameTitle = app->tex->Load(parameters.child("gameTitle").attribute("texturepath").as_string());
+	FxId = app->audio->LoadFx(parameters.child("gameTitle").attribute("FxPath").as_string());
 
 	return true;
 }
@@ -101,6 +102,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	switch (control->id)
 	{
 	case 1:
+		app->audio->PlayFx(FxId);
 		app->sceneManager->ChangeScene("tutorialscene");
 		app->guiManager->RemoveGuiControl(crossOButton);
 		crossOButton = nullptr;
