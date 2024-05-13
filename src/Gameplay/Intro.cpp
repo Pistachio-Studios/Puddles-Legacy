@@ -3,6 +3,7 @@
 #include "Core/Window.h"
 #include "Core/Audio.h"
 #include "Gameplay/Intro.h"
+#include "Core/VideoPlayer.h"
 
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
@@ -19,6 +20,9 @@ bool Intro::Enter()
 {
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
+
+	// Load the intro video
+	app->videoPlayer->ConvertPixels(0, 1);
 
 	return true;
 }

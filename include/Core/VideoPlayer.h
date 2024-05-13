@@ -2,21 +2,20 @@
 #define __VIDEOPLAYER_H__
 
 #include "Core/Module.h"
-/* #include <stdbool.h>
+#include <SDL2/SDL.h>
+#include <queue>
+
+#include <SDL2/SDL.h>
+#include <ctime>
+
+extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
-#include <libavutil/frame.h> // revisar */
-#include <SDL2/SDL.h>
-
-class AVCodecContext;
-class AVPacket;
-class AVFrame;
-class SDL_Rect;
-class SDL_Texture;
-class SDL_Renderer;
-class AVFormatContext;
-class AVCodec;
-class AVCodecParameters;
+#include <libavutil/imgutils.h>
+#include <libavutil/avutil.h>
+#include <libswscale/swscale.h>
+#include <libswresample/swresample.h>
+}
 
 class VideoPlayer : public Module
 {
@@ -29,11 +28,10 @@ public:
     // Destructor
     virtual ~VideoPlayer();
 
+    bool Awake(pugi::xml_node& conf);
+
     // Called after Awake
     bool Start();
-
-    // Called every frame
-    bool PreUpdate();
 
     // Called every frame
     bool Update(float dt);
@@ -41,27 +39,32 @@ public:
     // Called before quitting
     bool CleanUp();
 
-    void display(AVCodecContext*, AVPacket*, AVFrame*, SDL_Rect*, SDL_Texture*, SDL_Renderer*, double);
+    bool OpenCodecContext(int* index);
+    bool OpenVideoCodecContext(int index);
+    bool OpenAudioCodecContext(int index);
+    bool ConvertPixels(int videoIndex, int audioIndex);
+    bool AllocImage(AVFrame* dstFrame);
+    void RenderCutscene();
+    void ProcessAudio();
 
-    void playaudio(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_AudioDeviceID auddev);
+
 
 private:
-    // ffmpeg part
-    AVFormatContext* pFormatCtx;
-    int vidId = -1, audId = -1;
-    double fpsrendering = 0.0;
-    AVCodecContext* vidCtx, * audCtx;
-    AVCodec* vidCodec, * audCodec;
-    AVCodecParameters* vidpar, * audpar;
-    AVFrame* vframe, * aframe;
-    AVPacket* packet;
+    int streamIndex = -1;
+    AVFormatContext* formatContext;
+    AVCodecContext* videoCodecContext;
+    AVCodecContext* audioCodecContext;
 
-    //sdl part
-    int swidth, sheight;
-    SDL_Texture* texture;
-    SDL_Rect rect;
-    SDL_AudioDeviceID auddev;
-    SDL_AudioSpec want, have;
+    SDL_AudioDeviceID audioDevice;
+    int audioStreamIndex;
+
+    SDL_Texture* renderTexture;
+    SDL_Texture* texture1;
+    SDL_Texture* texture2;
+    SDL_Rect renderRect;
+    bool running;
+
+    std::queue<AVPacket> audioBuffer;
 
 };
 
