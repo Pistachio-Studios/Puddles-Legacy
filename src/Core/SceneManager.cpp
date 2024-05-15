@@ -257,7 +257,9 @@ void SceneManager::ChangeScene(SString sceneName)
     currentScene->Exit();
     Scene* newScene = FindScene(sceneName);
     if (newScene != nullptr){
-        currentScene = newScene;
+        if (app->physics->DestroyAllWorldBodies()) {
+            currentScene = newScene;
+        };
     }
     else{
         LOG("Scene %s not found\n", sceneName.GetString());

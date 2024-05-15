@@ -64,19 +64,23 @@ bool Physics::PreUpdate()
 
 	bool ret = true;
 
+	ZoneNamedN(RemoveBodies, "RemoveBodies", true);
+	for (int i = 0; i < bodiesToBeDeleted.Count(); i++) {
+		if (bodiesToBeDeleted[i] != nullptr && bodiesToBeDeleted[i]->body != nullptr) {
+			if (world != nullptr) {
+				world->DestroyBody(bodiesToBeDeleted[i]->body);
+			}
+			bodiesToBeDeleted[i]->body = nullptr;
+		}
+		bodiesToBeDeleted[i] = nullptr;
+	}
+	bodiesToBeDeleted.Clear();
+
 	// Step (update) the World
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
 	ZoneNamedN(WorldStep, "WorldStep", true);
 	if(!paused)world->Step(1.0f / 60.0f, 6, 2);
 
-	// Remove all bodies scheduled for deletion
-	ZoneNamedN(RemoveBodies, "RemoveBodies", true);
-	for (int i = 0; i < bodiesToBeDeleted.Count(); i++) {
-		world->DestroyBody(bodiesToBeDeleted[i]->body);
-		bodiesToBeDeleted[i]->body = nullptr;
-		bodiesToBeDeleted[i] = nullptr;
-	}
-    bodiesToBeDeleted.Clear();
 
 	// Because Box2D does not automatically broadcast collisions/contacts with sensors, 
 	// we have to manually search for collisions and "call" the equivalent to the ModulePhysics::BeginContact() ourselves...
@@ -465,6 +469,16 @@ bool Physics::DestroyBody(PhysBody* body)
 {
 	bodiesToBeDeleted.PushBack(body);
 	return false;
+}
+
+bool Physics::DestroyAllWorldBodies()
+{
+	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
+	{
+		bodiesToBeDeleted.PushBack((PhysBody*)b->GetUserData().pointer);
+	}
+	
+	return bodiesToBeDeleted.Count() > 0; //Return true if there are bodies to be deleted
 }
 
 float Physics::lookAt(b2Vec2 source, b2Vec2 target)

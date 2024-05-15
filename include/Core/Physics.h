@@ -122,6 +122,7 @@ public:
 
 	// Destroy physics objects
 	bool DestroyBody(PhysBody* body);
+	bool DestroyAllWorldBodies();
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

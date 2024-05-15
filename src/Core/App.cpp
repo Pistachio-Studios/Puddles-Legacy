@@ -41,7 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	lighting = new Lighting(false);
 	audio = new Audio(true);
-	physics = new Physics(false);
+	physics = new Physics(true);
 	sceneManager = new SceneManager(true);
 	map = new Map(false);
 	animationManager = new AnimationManager(true);

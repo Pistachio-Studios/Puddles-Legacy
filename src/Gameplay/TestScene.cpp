@@ -68,7 +68,7 @@ bool TestScene::Enter()
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
 	}
 
-	app->physics->Enable();
+	//app->physics->Enable();
 	app->map->Enable();
 	app->entityManager->Enable();
 
