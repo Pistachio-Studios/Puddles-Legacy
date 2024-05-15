@@ -6,6 +6,7 @@
 #include "Core/GuiControlButton.h"
 #include "Core/GuiControlPopUp.h"
 #include "Core/GuiControlSlider.h"
+#include "Core/GuiControlCheckbox.h"
 
 struct SDL_Texture;
 
@@ -54,6 +55,8 @@ private:
 	GuiControlPopUp* popUpOptions = nullptr;
 	GuiControlButton* crossOButton = nullptr;
 	GuiControlSlider* music = nullptr;
+	GuiControlSlider* fx = nullptr;
+	GuiControlCheckbox* vsync = nullptr;
 	
 	bool exitPressed = false;
 

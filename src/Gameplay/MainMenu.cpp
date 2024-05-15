@@ -9,6 +9,7 @@
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
+#include "Core/GuiControlCheckbox.h"
 #include "Core/GuiManager.h"
 #include <tracy/Tracy.hpp>
 
@@ -79,6 +80,8 @@ bool MainMenu::Exit()
 	app->guiManager->RemoveGuiControl(playButton);
 	app->guiManager->RemoveGuiControl(optionsButton);
 	app->guiManager->RemoveGuiControl(exitButton);
+	app->guiManager->RemoveGuiControl(fx);
+	app->guiManager->RemoveGuiControl(vsync);
 	return true;
 }
 
@@ -90,30 +93,41 @@ bool MainMenu::CleanUp()
 	app->guiManager->RemoveGuiControl(playButton);
 	app->guiManager->RemoveGuiControl(optionsButton);
 	app->guiManager->RemoveGuiControl(exitButton);
+	app->guiManager->RemoveGuiControl(fx);
+	app->guiManager->RemoveGuiControl(vsync);
 	return true;
 }
 
 bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 {
-	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
 
-	switch (control->id)
-	{
+	switch (control->id) {
 	case 1:
 		app->sceneManager->ChangeScene("tutorialscene");
-		app->guiManager->RemoveGuiControl(crossOButton);
-		crossOButton = nullptr;
-		app->guiManager->RemoveGuiControl(music);
-		music = nullptr;
-		break;
+        app->guiManager->RemoveGuiControl(crossOButton);
+        crossOButton = nullptr;
+        app->guiManager->RemoveGuiControl(music);
+        music = nullptr;
+        break;
 	case 2:
 		if (popUpOptions == nullptr) {
+			// Disable the buttons
+			playButton->state = GuiControlState::DISABLED;
+			optionsButton->state = GuiControlState::DISABLED;
+			exitButton->state = GuiControlState::DISABLED;
+
+			// Create the popUp
 			popUpOptions = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", { 0,0,0,0 }, this);
 			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 100), static_cast<int>(windowH / 2 - 25), 30, 30 };
 			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
 			SDL_Rect musicPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 30), 150, 20 };
 			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 6, "Music ", musicPos, this, 0, 128);
+			SDL_Rect fxPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 60), 150, 20 };
+			fx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "FX ", fxPos, this, 0, 128);
+			SDL_Rect vsyncPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 90), 150, 20 };
+			vsync = (GuiControlCheckbox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, "Vsync ", vsyncPos, this, 0, 1);
+
 		}
 		break;
 	case 3:
@@ -121,18 +135,44 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 5:
 		if (crossOButton != nullptr) {
-				app->guiManager->RemoveGuiControl(popUpOptions);
-				popUpOptions = nullptr;
-				app->guiManager->RemoveGuiControl(crossOButton);
-				crossOButton = nullptr;
-				app->guiManager->RemoveGuiControl(music);
-				music = nullptr;
+			// Enable the buttons
+			playButton->state = GuiControlState::NORMAL;
+			optionsButton->state = GuiControlState::NORMAL;
+			exitButton->state = GuiControlState::NORMAL;
+
+			// Remove the popUp
+			app->guiManager->RemoveGuiControl(popUpOptions);
+			popUpOptions = nullptr;
+			app->guiManager->RemoveGuiControl(crossOButton);
+			crossOButton = nullptr;
+			app->guiManager->RemoveGuiControl(music);
+			music = nullptr;
+			app->guiManager->RemoveGuiControl(fx);
+			fx = nullptr;
+			app->guiManager->RemoveGuiControl(vsync);
+			vsync = nullptr;
 		}
 		break;
 	case 6:
 		if (popUpOptions != nullptr) {
 			app->audio->SetVolume(music->currentValue, true);
-		}  
+		} 
+		break;
+	case 7:
+		if (popUpOptions != nullptr) {
+			app->audio->SetVolume(fx->currentValue, false);
+		}
+		break;
+	case 8:
+		if (popUpOptions != nullptr) {
+			if (vsync->checked) {
+				app->render->SetVsync(true);
+			}
+			else {
+				app->render->SetVsync(false);
+			}
+		}
+		break;
 	}
 	
 	return true;
