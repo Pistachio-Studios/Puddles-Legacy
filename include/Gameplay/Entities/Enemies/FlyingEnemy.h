@@ -71,7 +71,7 @@ public:
 	float maxSpeed = 2.0f;
 
 	float vida = 5.0f;
-	float daño = 1.0f;
+	float dano = 1.0f;
 
 	int angle;
 	b2Vec2 movementDirection;

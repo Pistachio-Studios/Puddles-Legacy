@@ -189,7 +189,7 @@ void FlyingEnemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::SWORD:
 			LOG("Collision ARMAPLAYER");
 		 	//if (state != EntityState::DEAD and !invencible){
-			vida -= player->daño;
+			vida -= player->daï¿½o;
 			if (vida <= 0.0f)
 			{
 				// AUDIO DONE boss death
@@ -205,7 +205,7 @@ void FlyingEnemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 
 	case ColliderType::PLAYER:
-		player->vida -= daño;
+		player->vida -= dano;
 		break;
 
 	case ColliderType::UNKNOWN:
@@ -220,10 +220,10 @@ void FlyingEnemy::EndCollision(PhysBody* physA, PhysBody* physB) {
 
 void FlyingEnemy::pathfindingMovement(float dt) {
 
-	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //añadir el tile size / 2 hace que el owl se acerque mas 
+	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //aï¿½adir el tile size / 2 hace que el owl se acerque mas 
 
 	if (timer.ReadMSec() > 250) {
-		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //añadir el tile size / 2 hace que el owl se acerque mas
+		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //aï¿½adir el tile size / 2 hace que el owl se acerque mas
 		pathfinding->CreatePath(origin, destination);
 		timer.Start();
 		currentPathPos = 0;

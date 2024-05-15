@@ -187,7 +187,7 @@ void CentipideEnemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::SWORD:
 			LOG("Collision ARMAPLAYER");
 			//if (state != EntityState::DEAD and !invencible){
-			vida -= player->daño;
+			vida -= player->dano;
 			if (vida <= 0.0f)
 			{
 				// AUDIO DONE boss death
@@ -213,10 +213,10 @@ void CentipideEnemy::EndCollision(PhysBody* physA, PhysBody* physB) {
 
 void CentipideEnemy::pathfindingMovement(float dt) {
 
-	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //añadir el tile size / 2 hace que el owl se acerque mas 
+	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //aï¿½adir el tile size / 2 hace que el owl se acerque mas 
 
 	if (timer.ReadMSec() >= 3000) {
-		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //añadir el tile size / 2 hace que el owl se acerque mas
+		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //aï¿½adir el tile size / 2 hace que el owl se acerque mas
 		pathfinding->CreatePath(origin, destination); 
 		timer.Start();
 		currentPathPos = 0;

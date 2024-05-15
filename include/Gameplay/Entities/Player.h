@@ -54,7 +54,7 @@ public:
 	SDL_Texture* texture = NULL;
 
 	float vida = 10.0f;
-	float daño = 4.0f;
+	float dano = 4.0f;
 
 	//Movement
 	float moveForce = 1.0f;
