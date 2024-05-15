@@ -189,7 +189,7 @@ void FlyingEnemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::SWORD:
 			LOG("Collision ARMAPLAYER");
 		 	//if (state != EntityState::DEAD and !invencible){
-			vida -= player->da�o;
+			vida -= player->dano;
 			if (vida <= 0.0f)
 			{
 				// AUDIO DONE boss death
