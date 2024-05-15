@@ -107,3 +107,26 @@ uint Window::GetScale() const
 {
 	return scale;
 }
+
+void Window::SetFullscreen(bool fullscreen)
+{
+	if (fullscreen) {
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+	} else {
+		SDL_SetWindowFullscreen(window, 0);
+	}
+}
+
+void Window::SetBorderless(bool borderless)
+{
+	SDL_SetWindowBordered(window, borderless ? SDL_FALSE : SDL_TRUE);
+}
+
+void Window::SetFullscreenWindow(bool fullscreen_window)
+{
+	if (fullscreen_window) {
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	} else {
+		SDL_SetWindowFullscreen(window, 0);
+	}
+}

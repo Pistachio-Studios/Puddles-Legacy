@@ -9,6 +9,7 @@
 #include "Core/GuiControlPopUp.h"
 #include "Core/GuiControlSlider.h"
 #include "Core/GuiControlCheckbox.h"
+#include "Core/GuiControlDropDownBox.h"
 #include "Core/Audio.h"
 #include <cstddef>
 
@@ -51,6 +52,9 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 		break;
 	case GuiControlType::CHECKBOX:
 		guiControl = new GuiControlCheckbox(id, text, bounds);
+		break;
+	case GuiControlType::DROPDOWNBOX:
+		guiControl = new GuiControlDropDownBox(id, text, bounds);
 		break;
 	}
 	

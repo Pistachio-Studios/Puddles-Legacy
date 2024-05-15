@@ -95,6 +95,7 @@ bool MainMenu::CleanUp()
 	app->guiManager->RemoveGuiControl(exitButton);
 	app->guiManager->RemoveGuiControl(fx);
 	app->guiManager->RemoveGuiControl(vsync);
+	app->guiManager->RemoveGuiControl(screenMode);
 	return true;
 }
 
@@ -119,14 +120,25 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 
 			// Create the popUp
 			popUpOptions = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", { 0,0,0,0 }, this);
+
 			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 100), static_cast<int>(windowH / 2 - 25), 30, 30 };
 			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
+
 			SDL_Rect musicPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 30), 150, 20 };
 			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 6, "Music ", musicPos, this, 0, 128);
+
 			SDL_Rect fxPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 60), 150, 20 };
 			fx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "FX ", fxPos, this, 0, 128);
+
 			SDL_Rect vsyncPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 90), 150, 20 };
 			vsync = (GuiControlCheckbox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, "Vsync ", vsyncPos, this, 0, 1);
+
+			SDL_Rect screenModePos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 120), 150, 20 };
+			screenMode = (GuiControlDropDownBox*)app->guiManager->CreateGuiControl(GuiControlType::DROPDOWNBOX, 9, "Screen Mode ", screenModePos, this, 0, 1);
+			screenMode->AddOption("Fullscreen");
+			screenMode->AddOption("Borderless");
+			screenMode->AddOption("Fullscreen Window");
+
 
 		}
 		break;
@@ -151,6 +163,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			fx = nullptr;
 			app->guiManager->RemoveGuiControl(vsync);
 			vsync = nullptr;
+			app->guiManager->RemoveGuiControl(screenMode);
+			screenMode = nullptr;
 		}
 		break;
 	case 6:
@@ -170,6 +184,24 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			else {
 				app->render->SetVsync(false);
+			}
+		}
+		break;
+	case 9:
+		// TODO 4: Implement the functionality to change the screen mode
+		// depending on the selected option in the dropdown box
+		// GetSelectedOption returns the index of the selected option wrong
+		if (popUpOptions != nullptr) {
+			int selectedOption = screenMode->GetSelectedOption();
+			if (selectedOption == 9) {
+				// Set the screen mode to fullscreen
+				app->win->SetFullscreen(true);
+			} else if (selectedOption == 9) {
+				// Set the screen mode to borderless
+				app->win->SetBorderless(true);
+			} else if (selectedOption == 9) {
+				// Set the screen mode to fullscreen window
+				app->win->SetFullscreenWindow(true);
 			}
 		}
 		break;

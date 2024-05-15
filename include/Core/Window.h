@@ -32,6 +32,12 @@ public:
 	// Retrieve window scale
 	uint GetScale() const;
 
+    void SetFullscreen(bool fullscreen);
+
+    void SetBorderless(bool borderless);
+
+    void SetFullscreenWindow(bool fullscreen_window);
+
 public:
 	// The window we'll be rendering to
 	SDL_Window* window;
