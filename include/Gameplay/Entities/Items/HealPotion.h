@@ -4,7 +4,7 @@
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
-#include "Gameplay/Entities/Items/Item.h"
+#include "Gameplay/Entities/Items/Potion.h"
 #include "Core/GuiControlButton.h"
 
 #include <box2d/b2_fixture.h>
@@ -13,7 +13,7 @@
 
 struct SDL_Texture;
 
-class HealPotion : public Item
+class HealPotion : public Potion
 {
 public:
 

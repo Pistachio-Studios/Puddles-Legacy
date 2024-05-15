@@ -4,6 +4,7 @@
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Entities/Enemies/FlyingEnemy.h"
 #include "Gameplay/Entities/Enemies/CentipideEnemy.h"
+#include "Gameplay/Entities/Items/Potion.h"
 #include "Gameplay/Entities/Sword.h"
 #include "Gameplay/Entities/Shield.h"
 #include "Gameplay/Entities/Staff.h"
@@ -117,6 +118,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::STAFF:
 		entity = new Staff();
+		break;
+	case EntityType::POTION:
+		entity = new Potion();
 		break;
 	default:
 		break;

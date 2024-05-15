@@ -133,28 +133,28 @@ bool TutorialScene::Enter()
 		tabernero->Start();
 	}
 
-	if (parameters.child("Items").child("EnergyPotion")) {
+	if (parameters.child("Potion").child("EnergyPotion")) {
 		EnergyPotion* energyPotion = new EnergyPotion();
 		app->entityManager->AddEntity(energyPotion);
 		energyPotion->parameters = parameters.child("Items").child("EnergyPotion");
 		energyPotion->Start();
 	}
 
-	if (parameters.child("Items").child("HealPotion")) {
+	if (parameters.child("Potion").child("HealPotion")) {
 		HealPotion* healPotion = new HealPotion();
 		app->entityManager->AddEntity(healPotion);
 		healPotion->parameters = parameters.child("Items").child("HealPotion");
 		healPotion->Start();
 	}
 
-	if (parameters.child("Items").child("VeloPotion")) {
+	if (parameters.child("Potion").child("VeloPotion")) {
 		VeloPotion* veloPotion = new VeloPotion();
 		app->entityManager->AddEntity(veloPotion);
 		veloPotion->parameters = parameters.child("Items").child("VeloPotion");
 		veloPotion->Start();
 	}
 
-	if (parameters.child("Items").child("AbilityPotion")) {
+	if (parameters.child("Potion").child("AbilityPotion")) {
 		AbilityPotion* abilityPotion = new AbilityPotion();
 		app->entityManager->AddEntity(abilityPotion);
 		abilityPotion->parameters = parameters.child("Items").child("AbilityPotion");

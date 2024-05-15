@@ -21,6 +21,7 @@ enum class EntityType
 	STAFF,
 	SHIELD,
 	ITEM,
+	POTION,
 	UNKNOWN
 };
 

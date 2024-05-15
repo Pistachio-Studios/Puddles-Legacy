@@ -1,5 +1,5 @@
 #include "Gameplay/Entities/Items/AbilityPotion.h"
-#include "Gameplay/Entities/Items/Item.h"
+#include "Gameplay/Entities/Items/Potion.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -35,7 +35,7 @@ bool AbilityPotion::Awake() {
 }
 
 bool AbilityPotion::Start() {
-	Item::Start();
+	Potion::Start();
 
 	timer = Timer();
 
@@ -44,19 +44,25 @@ bool AbilityPotion::Start() {
 
 bool AbilityPotion::Update(float dt)
 {
-	Item::Update(dt);
+	Potion::Update(dt);
 
-	//TODO: 
-	//if (isPicked) {
-
-	//}
+	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT && abilityPlantCounter >= maxToCreate) {
+		isCreated = true;
+		abilityPlantCounter -= maxToCreate;
+	}
+	if (isCreated && app->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
+		usedPotion = true;
+		//Funcion ability
+		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
+		isCreated = false;
+	}
 
 	return true;
 }
 
 
 bool AbilityPotion::CleanUp() {
-	Item::CleanUp();
+	Potion::CleanUp();
 	return true;
 }
 

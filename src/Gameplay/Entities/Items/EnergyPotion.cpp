@@ -1,5 +1,5 @@
 #include "Gameplay/Entities/Items/EnergyPotion.h"
-#include "Gameplay/Entities/Items/Item.h"
+#include "Gameplay/Entities/Items/Potion.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -35,7 +35,7 @@ bool EnergyPotion::Awake() {
 }
 
 bool EnergyPotion::Start() {
-	Item::Start();
+	Potion::Start();
 
 	timer = Timer();
 
@@ -44,18 +44,25 @@ bool EnergyPotion::Start() {
 
 bool EnergyPotion::Update(float dt)
 {
-	Item::Update(dt);
-
-	//if (isPicked)
-	//{
-	//	player->lives--; 
-	//}
+	Potion::Update(dt);
+	
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT && energyPlantCounter >= maxToCreate) {
+		isCreated = true;
+		energyPlantCounter -= maxToCreate;
+	}
+	if (isCreated && app->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN) {
+		usedPotion = true;
+		//Funcion energy
+		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
+		isCreated = false;
+	}
+	
 
 	return true;
 }
 
 
 bool EnergyPotion::CleanUp() {
-	Item::CleanUp();
+	Potion::CleanUp();
 	return true;
 }
