@@ -61,6 +61,10 @@ public:
 	//
 	bool SaveState(pugi::xml_node node);
 
+	// Set vsync on/off
+	void SetVsync(bool vsync);
+	bool vsyncEnabled;
+
 public:
 
 	struct Camera
