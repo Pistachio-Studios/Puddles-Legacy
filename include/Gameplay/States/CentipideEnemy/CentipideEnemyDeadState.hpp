@@ -22,11 +22,11 @@ public:
     {
         LOG("CentipideEnemyDeadState Update()");
 
-        if (CentipideEnemy->reviveTimer.ReadSec() >= 5)
-        {
-            StateMachineReference->ChangeState("idle");
-            //CentipideEnemy->health = 5;
-        }
+        //if (CentipideEnemy->reviveTimer.ReadSec() >= 5)
+        //{
+        //    StateMachineReference->ChangeState("idle");
+        //    //CentipideEnemy->health = 5;
+        //}
     }
     inline void Exit() override
     {

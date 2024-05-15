@@ -70,6 +70,9 @@ public:
 	float moveForce = 1.0f;
 	float maxSpeed = 2.0f;
 
+	float vida = 5.0f;
+	float daño = 1.0f;
+
 	int angle;
 	b2Vec2 movementDirection;
 
@@ -80,8 +83,6 @@ public:
 
 	iPoint spawnPosition;
 
-	int health;
-	float damage = 3;
 	bool invencible = false;
 
 	Timer reviveTimer;

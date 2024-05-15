@@ -28,7 +28,7 @@ public:
         player = app->entityManager->GetPlayerEntity();
 
         CentipideEnemy->pathfindingMovement(dt);
-        if (PIXEL_TO_METERS(player->position.DistanceTo(CentipideEnemy->position)) < 3.0f) {
+        if (PIXEL_TO_METERS(player->position.DistanceTo(CentipideEnemy->position)) < 100.0f) {
             if (CentipideEnemy->attackTimer.ReadSec() >= 2)
             {
                 StateMachineReference->ChangeState("attack");

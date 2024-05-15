@@ -53,6 +53,9 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
+	float vida = 10.0f;
+	float daño = 4.0f;
+
 	//Movement
 	float moveForce = 1.0f;
 	float maxSpeed = 10.0f;

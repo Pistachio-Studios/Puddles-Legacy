@@ -12,7 +12,6 @@ Sword::Sword() : Entity(EntityType::PLAYER)
 }
 
 Sword::~Sword() {
-
 }
 
 bool Sword::Awake() {
@@ -22,6 +21,7 @@ bool Sword::Awake() {
 
 bool Sword::Start() {
 	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 20, bodyType::KINEMATIC);
+	pbody->ctype = ColliderType::SWORD;
 	texture = app->tex->Load("Assets/Textures/sword.png");
 	return true;
 }

@@ -79,6 +79,10 @@ bool Player::Update(float dt)
 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
+	if (vida <= 0.0f) {
+		pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0);
+		vida = 10.0f;
+	}
 	
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
@@ -179,6 +183,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 		break;
 	}
+
 }
 
 void Player::EndCollision(PhysBody* physA, PhysBody* physB){

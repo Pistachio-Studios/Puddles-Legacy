@@ -44,18 +44,6 @@ bool FlyingEnemy::Awake() {
 
 bool FlyingEnemy::Start() {
 
-	particleSource1 = new ParticleGenerator();
-	particleSource1->position = { 800, 2000 };
-	particleSource1->direction = { 0, -1 };
-	particleSource1->initialVelocity = 4.0f;
-	particleSource1->spread = 8;
-
-	particleSource1->amount = 30;
-	particleSource1->spawnRadius = 1;
-	particleSource1->lifetime = 3.0f;
-	particleSource1->opacityFade = -1.0f;
-	particleSource1->color = { 230, 98, 18, 255 };
-
 	pathfinding = new PathFinding();
 
 	pathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, app->map->navigationMap);
@@ -90,33 +78,35 @@ bool FlyingEnemy::Start() {
 
 bool FlyingEnemy::Update(float dt)
 {
-	movementFSM->Update(dt);
-	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
+	if (movementFSM->GetCurrentState().name != "die") {
+		movementFSM->Update(dt);
+		pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 
-	if (debug) {
-		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-			freeCam = !freeCam;
+		//Update player position in pixels
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+
+		if (debug) {
+			if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+				freeCam = !freeCam;
+			}
 		}
+
+		app->render->DrawRectangle({ position.x - 1, position.y - 2, 36, 36 }, 0, 50, 255);
+
+		app->render->DrawCircle(position.x, position.y + 5, 1, 0, 0, 0, 0);
+		/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
+
+			currentAnimation->Update(dt); */
+
+			// Calculate the angle between the enemy and the player
+		float angleToPlayer = atan2(player->position.y - position.y, player->position.x - position.x);
 	}
 
-	app->render->DrawRectangle({ position.x - 1, position.y - 2, 36, 36 }, 0, 50, 255);
-
-	app->render->DrawCircle(position.x, position.y + 5, 1, 0, 0, 0, 0);
-	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
-
-		currentAnimation->Update(dt); */
-
-	// Calculate the angle between the enemy and the player
-	float angleToPlayer = atan2(player->position.y - position.y, player->position.x - position.x);
-
-	particleSource1->direction = { cos(angleToPlayer), sin(angleToPlayer)};
-	particleSource1->position = { position.x, position.y };
+	
 
 	return true;
 }
@@ -195,25 +185,29 @@ bool FlyingEnemy::CleanUp() {
 void FlyingEnemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype) {
+	
+		case ColliderType::SWORD:
+			LOG("Collision ARMAPLAYER");
+		 	//if (state != EntityState::DEAD and !invencible){
+			vida -= player->daño;
+			if (vida <= 0.0f)
+			{
+				// AUDIO DONE boss death
+				movementFSM->ChangeState("die");
+				app->physics->DestroyBody(pbody);
+			}
+				//else {
+				//	// AUDIO DONE boss hit
+				//	app->audio->PlayFx(bossHit);
+				//	movementStateMachine->ChangeState("hurt");
+				//	lives--;
+				//}
+			break;
 
-		//case ColliderType::ARMAPLAYER:
-		//	LOG("Collision ARMAPLAYER");
-		// 	if (state != EntityState::DEAD and !invencible){
-		//		if (lives <= 1)
-		//		{
-		//			// AUDIO DONE boss death
-		//			app->audio->PlayFx(bossDeath);
-		//			movementStateMachine->ChangeState("die");
-		//			reviveTimer.Start();
-		//		}
-		//		else {
-		//			// AUDIO DONE boss hit
-		//			app->audio->PlayFx(bossHit);
-		//			movementStateMachine->ChangeState("hurt");
-		//			lives--;
-		//		}
-		//	}
-		//	break;
+	case ColliderType::PLAYER:
+		player->vida -= daño;
+		break;
+
 	case ColliderType::UNKNOWN:
 		LOG("Colision UNKNOWN");
 		break;

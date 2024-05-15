@@ -74,6 +74,8 @@
       <enemies>
 		  <EnemyBoss x="600" y="2032" texturepath=""/>
 		  <FlyingEnemy x="600" y="2050" texturepath=""/>
+		  <FlyingEnemy x="700" y="2050" texturepath=""/>
+		  <FlyingEnemy x="800" y="2050" texturepath=""/>
 		  <CentipideEnemy x="650" y="2100" texturepath=""/>
       </enemies>
 	  <Npcs>
