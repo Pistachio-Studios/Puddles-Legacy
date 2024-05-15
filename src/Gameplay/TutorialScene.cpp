@@ -15,7 +15,10 @@
 #include "Gameplay/Entities/Items/HealPotion.h"
 #include "Gameplay/Entities/Items/VeloPotion.h"
 #include "Gameplay/Entities/Items/AbilityPotion.h"
-#include "Gameplay/Entities/Items/Item.h"
+#include "Gameplay/Entities/Items/EnergyPlant.h"
+#include "Gameplay/Entities/Items/HealPlant.h"
+#include "Gameplay/Entities/Items/VeloPlant.h"
+#include "Gameplay/Entities/Items/Plant.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -161,6 +164,26 @@ bool TutorialScene::Enter()
 		abilityPotion->Start();
 	}
 
+	if (parameters.child("Plants").child("HealPlant")) {
+		HealPlant* healPlant = new  HealPlant();
+		app->entityManager->AddEntity(healPlant);
+		healPlant->parameters = parameters.child("Plants").child("HealPlant ");
+		healPlant->Start();
+	}
+
+	if (parameters.child("Plants").child("VeloPlant")) {
+		VeloPlant* veloPlant = new  VeloPlant();
+		app->entityManager->AddEntity(veloPlant);
+		veloPlant->parameters = parameters.child("Plants").child("VeloPlant");
+		veloPlant->Start();
+	}
+
+	if (parameters.child("Plants").child("EnergyPlant")) {
+		EnergyPlant* energyPlant = new EnergyPlant();
+		app->entityManager->AddEntity(energyPlant);
+		energyPlant->parameters = parameters.child("Plants").child("EnergyPlant");
+		energyPlant->Start();
+	}
 	return true;
 }
 

@@ -1,5 +1,5 @@
-#ifndef __ITEM_H__
-#define __ITEM_H__
+#ifndef __PLANT_H__
+#define __PLANT_H__
 
 #include "Core/Animation.h"
 #include "Core/Physics.h"
@@ -14,15 +14,15 @@
 
 struct SDL_Texture;
 
-class Item : public Entity
+class Plant : public Entity
 {
 public:
 
 	bool startTimer = true;
 	Timer timer;
 
-	Item();
-	virtual ~Item();
+	Plant();
+	virtual ~Plant();
 
 	bool Awake() override;
 
@@ -39,7 +39,7 @@ public:
 public:
 
 	bool isPicked = false;
-	bool touchingItem = false;
+	bool touchingPlant = false;
 	SDL_Texture* texture1 = nullptr;
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;
@@ -48,4 +48,4 @@ private:
 	PhysBody* pbody;
 };
 
-#endif // __ITEM_H__
+#endif // __PLANT_H__

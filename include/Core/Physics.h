@@ -35,7 +35,7 @@ enum bodyType {
 
 enum class ColliderType {
 	PLAYER, 
-	ITEM,
+	PLANT,
 	POTION,
 	SCOREITEM,
 	CHECKPOINT,

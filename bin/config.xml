@@ -80,9 +80,11 @@
 		  <loco x="900" y="2500"/>
 	      <tabernero x="900" y="2800"/> 
 	  </Npcs>
-	  <Items>
-		  <EnergyPotion x="1200" y="2300" texturepath="Assets/Textures/Items/EnergyPotion.png"/>
-	  </Items>
+		<Plants>
+			<HealPlant x="1500" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png"/>
+			<VeloPlant x="1500" y="2500" texturepath="Assets/Textures/Plants/VeloPlant.png"/>
+			<EnergyPlant x="1500" y="2700" texturepath="Assets/Textures/Plants/VeloPlant.png"/>
+		</Plants>
 	    <Potion>
 			<HealPotion x="1200" y="2500" texturepath="Assets/Textures/Potions/HealPotion.png"/>
 			<VeloPotion x="1200" y="2100" texturepath="Assets/Textures/Potions/VeloPotion.png"/>
