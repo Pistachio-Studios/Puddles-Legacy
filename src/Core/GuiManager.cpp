@@ -128,5 +128,7 @@ bool GuiManager::CleanUp()
 	return false;
 }
 
-
-
+int GuiManager::GetGuiLastId() const
+{
+	return guiControlsList.Count();
+}

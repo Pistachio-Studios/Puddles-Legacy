@@ -116,12 +116,36 @@ void Window::SetFullscreen(bool fullscreen)
 	} else {
 		SDL_SetWindowFullscreen(window, 0);
 	}
+
+	// Save the new setting to the config file
+	pugi::xml_document doc;
+	if (doc.load_file("config.xml")) {
+		pugi::xml_node windowNode = doc.child("config").child("window");
+		windowNode.child("fullscreen").attribute("value").set_value(fullscreen);
+		if (fullscreen) {
+			windowNode.child("borderless").attribute("value").set_value(false);
+			windowNode.child("fullscreen_window").attribute("value").set_value(false);
+		}
+		doc.save_file("config.xml");
+	}
 }
 
 void Window::SetBorderless(bool borderless)
 {
 	LOG("Changing to borderless");
 	SDL_SetWindowBordered(window, borderless ? SDL_FALSE : SDL_TRUE);
+
+	// Save the new setting to the config file
+	pugi::xml_document doc;
+	if (doc.load_file("config.xml")) {
+		pugi::xml_node windowNode = doc.child("config").child("window");
+		windowNode.child("borderless").attribute("value").set_value(borderless);
+		if (borderless) {
+			windowNode.child("fullscreen").attribute("value").set_value(false);
+			windowNode.child("fullscreen_window").attribute("value").set_value(false);
+		}
+		doc.save_file("config.xml");
+	}
 }
 
 void Window::SetFullscreenWindow(bool fullscreen_window)
@@ -131,5 +155,32 @@ void Window::SetFullscreenWindow(bool fullscreen_window)
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	} else {
 		SDL_SetWindowFullscreen(window, 0);
+	}
+
+	// Save the new setting to the config file
+	pugi::xml_document doc;
+	if (doc.load_file("config.xml")) {
+		pugi::xml_node windowNode = doc.child("config").child("window");
+		windowNode.child("fullscreen_window").attribute("value").set_value(fullscreen_window);
+		if (fullscreen_window) {
+			windowNode.child("fullscreen").attribute("value").set_value(false);
+			windowNode.child("borderless").attribute("value").set_value(false);
+		}
+		doc.save_file("config.xml");
+	}
+}
+
+void Window::SetResolution(int width, int height)
+{
+	LOG("Changing resolution");
+	SDL_SetWindowSize(window, width, height);
+
+	// Save the new setting to the config file
+	pugi::xml_document doc;
+	if (doc.load_file("config.xml")) {
+		pugi::xml_node resolutionNode = doc.child("config").child("window").child("resolution");
+		resolutionNode.attribute("width").set_value(width);
+		resolutionNode.attribute("height").set_value(height);
+		doc.save_file("config.xml");
 	}
 }

@@ -6,11 +6,11 @@
 		<icon path="Assets/Textures/icon.png" />
 	</app>
 	<renderer>
-		<vsync value="false" />
+		<vsync value="true" />
 	</renderer>
 	<window>
 		<resolution width="1920" height="1080" scale="1" />
-		<fullscreen value="false" />
+		<fullscreen value="true" />
 		<borderless value="false" />
 		<resizable value="false" />
 		<fullscreen_window value="false" />

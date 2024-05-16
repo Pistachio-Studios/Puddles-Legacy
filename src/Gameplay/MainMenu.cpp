@@ -86,6 +86,17 @@ bool MainMenu::Exit()
 	app->guiManager->RemoveGuiControl(fullScreen);
 	app->guiManager->RemoveGuiControl(borderless);
 	app->guiManager->RemoveGuiControl(fullScreenWindow);
+	app->guiManager->RemoveGuiControl(resolution);
+	app->guiManager->RemoveGuiControl(res7680x4320);
+	app->guiManager->RemoveGuiControl(res3840x2160);
+	app->guiManager->RemoveGuiControl(res2560x1440);
+	app->guiManager->RemoveGuiControl(res1920x1200);
+	app->guiManager->RemoveGuiControl(res1920x1080);
+	app->guiManager->RemoveGuiControl(res1600x900);
+	app->guiManager->RemoveGuiControl(res1280x720);
+	app->guiManager->RemoveGuiControl(res1024x768);
+	app->guiManager->RemoveGuiControl(res800x600);
+	app->guiManager->RemoveGuiControl(res640x480);
 	return true;
 }
 
@@ -103,6 +114,17 @@ bool MainMenu::CleanUp()
 	app->guiManager->RemoveGuiControl(fullScreen);
 	app->guiManager->RemoveGuiControl(borderless);
 	app->guiManager->RemoveGuiControl(fullScreenWindow);
+	app->guiManager->RemoveGuiControl(resolution);
+	app->guiManager->RemoveGuiControl(res7680x4320);
+	app->guiManager->RemoveGuiControl(res3840x2160);
+	app->guiManager->RemoveGuiControl(res2560x1440);
+	app->guiManager->RemoveGuiControl(res1920x1200);
+	app->guiManager->RemoveGuiControl(res1920x1080);
+	app->guiManager->RemoveGuiControl(res1600x900);
+	app->guiManager->RemoveGuiControl(res1280x720);
+	app->guiManager->RemoveGuiControl(res1024x768);
+	app->guiManager->RemoveGuiControl(res800x600);
+	app->guiManager->RemoveGuiControl(res640x480);
 	return true;
 }
 
@@ -141,12 +163,27 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			vsync = (GuiControlCheckbox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, "Vsync ", vsyncPos, this, 0, 1);
 
 			SDL_Rect screenModePos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 120), 150, 20 };
-			screenMode = (GuiControlDropDownBox*)app->guiManager->CreateGuiControl(GuiControlType::DROPDOWNBOX, 9, "Screen Mode ", screenModePos, this, 0, 1);
+			// TODO make dropdownbox text change depending on the screen mode selected by config.xml
+			screenMode = (GuiControlDropDownBox*)app->guiManager->CreateGuiControl(GuiControlType::DROPDOWNBOX, 9, "Screen Mode: ", screenModePos, this, 0, 1);
 			
 			fullScreen = screenMode->AddOption("Fullscreen", this);
 			borderless = screenMode->AddOption("Borderless", this);
 			fullScreenWindow = screenMode->AddOption("Fullscreen Window", this);
 
+			SDL_Rect resolutionPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 150), 150, 20 };
+			// TODO make dropdownbox text change depending on the resolution selected by config.xml
+			resolution = (GuiControlDropDownBox*)app->guiManager->CreateGuiControl(GuiControlType::DROPDOWNBOX, 10, "Resolution: ", resolutionPos, this, 0, 1);
+
+			res7680x4320	= resolution->AddOption("7680x4320", this);
+			res3840x2160	= resolution->AddOption("3840x2160", this);
+			res2560x1440	= resolution->AddOption("2560x1440", this);
+			res1920x1200	= resolution->AddOption("1920x1200", this);
+			res1920x1080	= resolution->AddOption("1920x1080", this);
+			res1600x900		= resolution->AddOption("1600x900", this);
+			res1280x720		= resolution->AddOption("1280x720", this);
+			res1024x768		= resolution->AddOption("1024x768", this);
+			res800x600		= resolution->AddOption("800x600", this);
+			res640x480		= resolution->AddOption("640x480", this);
 
 		}
 		break;
@@ -179,6 +216,28 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			borderless = nullptr;
 			app->guiManager->RemoveGuiControl(fullScreenWindow);
 			fullScreenWindow = nullptr;
+			app->guiManager->RemoveGuiControl(resolution);
+			resolution = nullptr;
+			app->guiManager->RemoveGuiControl(res7680x4320);
+			res7680x4320 = nullptr;
+			app->guiManager->RemoveGuiControl(res3840x2160);
+			res3840x2160 = nullptr;
+			app->guiManager->RemoveGuiControl(res2560x1440);
+			res2560x1440 = nullptr;
+			app->guiManager->RemoveGuiControl(res1920x1200);
+			res1920x1200 = nullptr;
+			app->guiManager->RemoveGuiControl(res1920x1080);
+			res1920x1080 = nullptr;
+			app->guiManager->RemoveGuiControl(res1600x900);
+			res1600x900 = nullptr;
+			app->guiManager->RemoveGuiControl(res1280x720);
+			res1280x720 = nullptr;
+			app->guiManager->RemoveGuiControl(res1024x768);
+			res1024x768 = nullptr;
+			app->guiManager->RemoveGuiControl(res800x600);
+			res800x600 = nullptr;
+			app->guiManager->RemoveGuiControl(res640x480);
+			res640x480 = nullptr;
 		}
 		break;
 	case 6:
@@ -208,23 +267,94 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		if (popUpOptions != nullptr) {
 			// Set the screen mode to fullscreen
 			app->win->SetFullscreen(true);
+			screenMode->text = "Screen Mode: Fullscreen";
 		}
 		break;
 	case 11:
 		if (popUpOptions != nullptr) {
 			// Set the screen mode to borderless
 			app->win->SetBorderless(true);
+			screenMode->text = "Screen Mode: Borderless";
 		}
 		break;
 	case 12:
 		if (popUpOptions != nullptr) {
 			// Set the screen mode to fullscreen window
 			app->win->SetFullscreenWindow(true);
+			screenMode->text = "Screen Mode: Fullscreen Window";
 		}
 		break;
-		
+	case 13:
+		if (popUpOptions != nullptr) {
+			// Set the resolution to 7680x4320
+			app->win->SetResolution(7680, 4320);
+			resolution->text = "Resolution: 7680x4320";
+		}
+		break;
+	case 14:
+		if (popUpOptions != nullptr) {
+			// Set the resolution to 3840x2160
+			app->win->SetResolution(3840, 2160);
+			resolution->text = "Resolution: 3840x2160";
+		}
+		break;
+	case 15:
+		if (popUpOptions != nullptr) {
+			// Set the resolution to 2560x1440
+			app->win->SetResolution(2560, 1440);
+			resolution->text = "Resolution: 2560x1440";
+		}
+		break;
+	case 16:
+		if (popUpOptions != nullptr) {
+			// Set the resolution to 1920x1200
+			app->win->SetResolution(1920, 1200);
+			resolution->text = "Resolution: 1920x1200";
+		}
+		break;
+	case 17:
+		if (popUpOptions != nullptr) {
+			// Set the resolution to 1920x1080
+			app->win->SetResolution(1920, 1080);
+			resolution->text = "Resolution: 1920x1080";
+		}
+		break;
+	case 18:
+		if (popUpOptions != nullptr) {
+			// Set the resolution to 1600x900
+			app->win->SetResolution(1600, 900);
+			resolution->text = "Resolution: 1600x900";
+		}
+		break;
+	case 19:
+		if (popUpOptions != nullptr) {
+			// Set the resolution to 1280x720
+			app->win->SetResolution(1280, 720);
+			resolution->text = "Resolution: 1280x720";
+		}
+		break;
+	case 20:
+		if (popUpOptions != nullptr) {
+			// Set the resolution to 1024x768
+			app->win->SetResolution(1024, 768);
+			resolution->text = "Resolution: 1024x768";
+		}
+		break;
+	case 21:
+		if (popUpOptions != nullptr) {
+			// Set the resolution to 800x600
+			app->win->SetResolution(800, 600);
+			resolution->text = "Resolution: 800x600";
+		}
+		break;
+	case 22:
+		if (popUpOptions != nullptr) {
+			// Set the resolution to 640x480
+			app->win->SetResolution(640, 480);
+			resolution->text = "Resolution: 640x480";
+		}
+		break;
 	}
-	
 	return true;
 }
 

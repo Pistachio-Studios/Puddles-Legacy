@@ -62,6 +62,18 @@ private:
 	GuiControlButton* fullScreen = nullptr;
 	GuiControlButton* borderless = nullptr;
 	GuiControlButton* fullScreenWindow = nullptr;
+
+	GuiControlDropDownBox* resolution = nullptr;
+	GuiControlButton* res7680x4320 = nullptr;
+	GuiControlButton* res3840x2160 = nullptr;
+	GuiControlButton* res2560x1440 = nullptr;
+	GuiControlButton* res1920x1200 = nullptr;
+	GuiControlButton* res1920x1080 = nullptr;
+	GuiControlButton* res1600x900 = nullptr;
+	GuiControlButton* res1280x720 = nullptr;
+	GuiControlButton* res1024x768 = nullptr;
+	GuiControlButton* res800x600 = nullptr;
+	GuiControlButton* res640x480 = nullptr;
 	
 	bool exitPressed = false;
 

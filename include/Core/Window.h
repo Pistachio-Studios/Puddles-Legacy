@@ -38,6 +38,8 @@ public:
 
     void SetFullscreenWindow(bool fullscreen_window);
 
+    void SetResolution(int width, int height);
+
 public:
 	// The window we'll be rendering to
 	SDL_Window* window;
