@@ -59,6 +59,9 @@ private:
 	GuiControlSlider* fx = nullptr;
 	GuiControlCheckbox* vsync = nullptr;
 	GuiControlDropDownBox* screenMode = nullptr;
+	GuiControlButton* fullScreen = nullptr;
+	GuiControlButton* borderless = nullptr;
+	GuiControlButton* fullScreenWindow = nullptr;
 	
 	bool exitPressed = false;
 

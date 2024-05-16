@@ -4,6 +4,7 @@
 #include "Core/Window.h"
 #include "Core/GuiControlDropDownBox.h"
 #include "Core/GuiControlButton.h"
+#include "Core/GuiManager.h"
 
 GuiControlDropDownBox::GuiControlDropDownBox(uint32 id, const char* text, SDL_Rect bounds) : GuiControl(GuiControlType::DROPDOWNBOX, id)
 {
@@ -44,13 +45,21 @@ bool GuiControlDropDownBox::Update(float dt)
 		case GuiControlState::PRESSED:
 			app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
 			if (isOpen) {
+				// Draw a checkmark or some other indicator when the checkbox is checked
+				app->render->DrawRectangle({bounds.x + 5, bounds.y + 5, bounds.w - 10, bounds.h - 10}, 0, 0, 0, 255, true, false);
 				// Update and draw the buttons when the dropdown box is open
-				for (GuiControlButton& option : options) {
-					option.Update(dt);
+				for (GuiControlButton* option : options) {
+					option->Update(dt);
+					option->state = GuiControlState::NORMAL;
+				}
+			} else {
+				for (GuiControlButton* option : options) {
+					option->Update(dt);
+					option->state = GuiControlState::DISABLED;
 				}
 			}
 			break;
-			bool Draw();
+		bool Draw();
 		}
 	}
 
@@ -59,38 +68,45 @@ bool GuiControlDropDownBox::Update(float dt)
 
 bool GuiControlDropDownBox::Draw()
 {
-	// Draw the dropdown box
-	app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
-	app->render->DrawText(text.GetString(), bounds.x, bounds.y, 80, 30);
+    // Draw the dropdown box
+    app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
+    app->render->DrawText(text.GetString(), bounds.x, bounds.y, 80, 30);
 
-	if (isOpen) {
-		// Draw the options when the dropdown box is open
-		for (GuiControlButton& option : options) {
-			app->render->DrawRectangle(option.bounds, 255, 255, 255, 255, true, false);
-			app->render->DrawText(option.text.GetString(), option.bounds.x, option.bounds.y, 80, 30);
-		}
-	}
+    if (isOpen) {
+        // Draw the options only when the dropdown box is open
+        for (GuiControlButton* option : options) {
+            app->render->DrawRectangle(option->bounds, 255, 255, 255, 255, true, false);
+            app->render->DrawText(option->text.GetString(), option->bounds.x, option->bounds.y, 80, 30);
+        }
+    }
 
-	return false;
+    return false;
 }
 
-void GuiControlDropDownBox::AddOption(const std::string& optionText)
+GuiControlButton* GuiControlDropDownBox::AddOption(const std::string& optionText, Scene* observer)
 {
-    // Create a new GuiControlButton with the given text
-    GuiControlButton newOption(id + options.size(), {bounds.x, bounds.y + (options.size() + 1) * 30, bounds.w, 30}, optionText.c_str());
+	id = 7; // TODO this is bullshit, but it works for now, we need to fix this later on and make it dynamic
 
-    // Add the new option to the list
-    options.push_back(newOption);
+	// Create a new GuiControlButton with the given text
+	GuiControlButton* newOption = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, id + options.size(), optionText.c_str(), {bounds.x, bounds.y + (options.size() + 1) * 30, bounds.w, 30}, observer);
+
+	newOption->state = GuiControlState::DISABLED;
+
+	// Add the new option to the list
+	options.push_back(newOption);
+
+	// Return the pointer to the new option
+	return newOption;
 }
 
 int GuiControlDropDownBox::GetSelectedOption() const
 {
 	// Iterate the options list to find the selected option
-	for (const GuiControlButton& option : options)
+	for (const GuiControlButton* option : options)
 	{
-		if (option.state == GuiControlState::PRESSED)
+		if (option->state == GuiControlState::PRESSED)
 		{
-			return option.id;
+			return option->id;
 		}
 	}
 

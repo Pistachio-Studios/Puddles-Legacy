@@ -16,7 +16,7 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 	bool Draw();
-	void AddOption(const std::string& optionText);
+	GuiControlButton* AddOption(const std::string& optionText, Scene* observer);
 
     int GetSelectedOption() const;
 
@@ -25,7 +25,7 @@ public:
 	bool isOpen = false; // Changed from 'checked' to 'isOpen'
 
 private:
-	std::list<GuiControlButton> options;
+	std::list<GuiControlButton*> options;
 	SDL_Rect rect2;
 	int mouseX, mouseY;
 	unsigned int click;

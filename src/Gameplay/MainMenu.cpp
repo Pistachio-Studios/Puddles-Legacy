@@ -82,6 +82,10 @@ bool MainMenu::Exit()
 	app->guiManager->RemoveGuiControl(exitButton);
 	app->guiManager->RemoveGuiControl(fx);
 	app->guiManager->RemoveGuiControl(vsync);
+	app->guiManager->RemoveGuiControl(screenMode);
+	app->guiManager->RemoveGuiControl(fullScreen);
+	app->guiManager->RemoveGuiControl(borderless);
+	app->guiManager->RemoveGuiControl(fullScreenWindow);
 	return true;
 }
 
@@ -96,6 +100,9 @@ bool MainMenu::CleanUp()
 	app->guiManager->RemoveGuiControl(fx);
 	app->guiManager->RemoveGuiControl(vsync);
 	app->guiManager->RemoveGuiControl(screenMode);
+	app->guiManager->RemoveGuiControl(fullScreen);
+	app->guiManager->RemoveGuiControl(borderless);
+	app->guiManager->RemoveGuiControl(fullScreenWindow);
 	return true;
 }
 
@@ -135,9 +142,10 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 
 			SDL_Rect screenModePos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 120), 150, 20 };
 			screenMode = (GuiControlDropDownBox*)app->guiManager->CreateGuiControl(GuiControlType::DROPDOWNBOX, 9, "Screen Mode ", screenModePos, this, 0, 1);
-			screenMode->AddOption("Fullscreen");
-			screenMode->AddOption("Borderless");
-			screenMode->AddOption("Fullscreen Window");
+			
+			fullScreen = screenMode->AddOption("Fullscreen", this);
+			borderless = screenMode->AddOption("Borderless", this);
+			fullScreenWindow = screenMode->AddOption("Fullscreen Window", this);
 
 
 		}
@@ -165,6 +173,12 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			vsync = nullptr;
 			app->guiManager->RemoveGuiControl(screenMode);
 			screenMode = nullptr;
+			app->guiManager->RemoveGuiControl(fullScreen);
+			fullScreen = nullptr;
+			app->guiManager->RemoveGuiControl(borderless);
+			borderless = nullptr;
+			app->guiManager->RemoveGuiControl(fullScreenWindow);
+			fullScreenWindow = nullptr;
 		}
 		break;
 	case 6:
@@ -193,13 +207,13 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		// GetSelectedOption returns the index of the selected option wrong
 		if (popUpOptions != nullptr) {
 			int selectedOption = screenMode->GetSelectedOption();
-			if (selectedOption == 9) {
+			if (selectedOption == 10) {
 				// Set the screen mode to fullscreen
 				app->win->SetFullscreen(true);
-			} else if (selectedOption == 9) {
+			} else if (selectedOption == 11) {
 				// Set the screen mode to borderless
 				app->win->SetBorderless(true);
-			} else if (selectedOption == 9) {
+			} else if (selectedOption == 12) {
 				// Set the screen mode to fullscreen window
 				app->win->SetFullscreenWindow(true);
 			}
