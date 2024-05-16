@@ -5,6 +5,7 @@
 #include "Core/GuiControlDropDownBox.h"
 #include "Core/GuiControlButton.h"
 #include "Core/GuiManager.h"
+#include "Utils/Log.h"
 
 GuiControlDropDownBox::GuiControlDropDownBox(uint32 id, const char* text, SDL_Rect bounds) : GuiControl(GuiControlType::DROPDOWNBOX, id)
 {
@@ -85,7 +86,7 @@ bool GuiControlDropDownBox::Draw()
 
 GuiControlButton* GuiControlDropDownBox::AddOption(const std::string& optionText, Scene* observer)
 {
-	id = 7; // TODO this is bullshit, but it works for now, we need to fix this later on and make it dynamic
+	id = 10; // TODO this is bullshit, but it works for now, we need to fix this later on and make it dynamic
 
 	// Create a new GuiControlButton with the given text
 	GuiControlButton* newOption = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, id + options.size(), optionText.c_str(), {bounds.x, bounds.y + (options.size() + 1) * 30, bounds.w, 30}, observer);

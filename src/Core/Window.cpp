@@ -110,6 +110,7 @@ uint Window::GetScale() const
 
 void Window::SetFullscreen(bool fullscreen)
 {
+	LOG("Changing to fullscreen");
 	if (fullscreen) {
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 	} else {
@@ -119,11 +120,13 @@ void Window::SetFullscreen(bool fullscreen)
 
 void Window::SetBorderless(bool borderless)
 {
+	LOG("Changing to borderless");
 	SDL_SetWindowBordered(window, borderless ? SDL_FALSE : SDL_TRUE);
 }
 
 void Window::SetFullscreenWindow(bool fullscreen_window)
 {
+	LOG("Changing to fullscreen window");
 	if (fullscreen_window) {
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	} else {

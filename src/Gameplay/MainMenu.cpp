@@ -202,23 +202,27 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		}
 		break;
 	case 9:
-		// TODO 4: Implement the functionality to change the screen mode
-		// depending on the selected option in the dropdown box
-		// GetSelectedOption returns the index of the selected option wrong
+		// Dropdown box
+		break;
+	case 10:
 		if (popUpOptions != nullptr) {
-			int selectedOption = screenMode->GetSelectedOption();
-			if (selectedOption == 10) {
-				// Set the screen mode to fullscreen
-				app->win->SetFullscreen(true);
-			} else if (selectedOption == 11) {
-				// Set the screen mode to borderless
-				app->win->SetBorderless(true);
-			} else if (selectedOption == 12) {
-				// Set the screen mode to fullscreen window
-				app->win->SetFullscreenWindow(true);
-			}
+			// Set the screen mode to fullscreen
+			app->win->SetFullscreen(true);
 		}
 		break;
+	case 11:
+		if (popUpOptions != nullptr) {
+			// Set the screen mode to borderless
+			app->win->SetBorderless(true);
+		}
+		break;
+	case 12:
+		if (popUpOptions != nullptr) {
+			// Set the screen mode to fullscreen window
+			app->win->SetFullscreenWindow(true);
+		}
+		break;
+		
 	}
 	
 	return true;
