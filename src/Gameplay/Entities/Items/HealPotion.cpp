@@ -1,5 +1,7 @@
 #include "Gameplay/Entities/Items/HealPotion.h"
 #include "Gameplay/Entities/Items/Potion.h"
+#include "Gameplay/Entities/Items/HealPlant.h"
+#include "Gameplay/Entities/Items/Plant.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -39,15 +41,18 @@ bool HealPotion::Start() {
 
 	timer = Timer();
 
+	healPlant = new HealPlant; 
+
 	return true;
 }
 
 bool HealPotion::Update(float dt)
 {
-	Potion::Update(dt);
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT && healPlantCounter >= maxToCreate) {
+
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT && healPlant->healPlantCounter >= maxToCreate) {
 		isCreated = true;
-		healPlantCounter -= maxToCreate;
+		healPlant->healPlantCounter -= maxToCreate;
+		//se guarda en inventario
 	}
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN) {
 		usedPotion = true;
@@ -55,6 +60,8 @@ bool HealPotion::Update(float dt)
 		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
 		isCreated = false;
 	}
+
+	Potion::Update(dt);
 
 	return true;
 }

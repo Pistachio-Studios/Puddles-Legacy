@@ -13,6 +13,9 @@
 
 struct SDL_Texture;
 class Player;
+class VeloPlant;
+class HealPlant;
+class EnergyPlant; 
 
 class AbilityPotion : public Potion
 {
@@ -40,6 +43,11 @@ public:
 
 	PhysBody* pbody;
 	Player* player;
+
+private:
+	VeloPlant* veloPlant = nullptr;
+	HealPlant* healPlant = nullptr;
+	EnergyPlant* energyPlant = nullptr;
 };
 
 #endif // __ABILITYPOTION_H__

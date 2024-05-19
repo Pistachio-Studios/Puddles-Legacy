@@ -46,11 +46,12 @@ bool HealPlant::Update(float dt)
 {
 	Plant::Update(dt);
 
-	if (isPicked) {
-		energyPlantCounter++;
-		isPicked = false;
+	if (healPlantPicked) {
+		healPlantCounter++;
+		healPlantPicked = false;
 	}
-	LOG("healPlant: %d", &energyPlantCounter);
+
+	LOG("healPlant: %d", &healPlantCounter);
 	return true;
 }
 

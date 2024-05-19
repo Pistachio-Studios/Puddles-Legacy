@@ -1,5 +1,7 @@
 #include "Gameplay/Entities/Items/VeloPotion.h"
 #include "Gameplay/Entities/Items/Potion.h"
+#include "Gameplay/Entities/Items/VeloPlant.h"
+#include "Gameplay/Entities/Items/Plant.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -20,6 +22,7 @@
 
 #include <imgui.h>
 
+
 VeloPotion::VeloPotion()
 {
 	name.Create("VeloPotion");
@@ -39,18 +42,18 @@ bool VeloPotion::Start() {
 
 	timer = Timer();
 
+	veloPlant = new VeloPlant; 
+
 	return true;
 }
 
 bool VeloPotion::Update(float dt)
 {
-	Potion::Update(dt);
-
 	//TODO: Modify maxSpeed to go faster
-	
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT && veloPlantCounter >= maxToCreate) {
+
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT && veloPlant->veloPlantCounter >= maxToCreate) {
 		isCreated = true;
-		veloPlantCounter -= maxToCreate;
+		veloPlant->veloPlantCounter -= maxToCreate;
 	}
 	//TODO: La pocion se crea, cuando se usa, si ya no hay mas pociones, iscreated=false
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN) {
@@ -59,6 +62,8 @@ bool VeloPotion::Update(float dt)
 		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
 		isCreated = false;
 	}
+
+	Potion::Update(dt);
 
 	return true;
 }

@@ -5,6 +5,7 @@
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
+
 //#include "Point.h"
 #ifdef __linux__
 #include <SDL.h>
@@ -43,11 +44,7 @@ public:
 	int maxToCreate = 3;
 	bool isCreated = false;
 	bool usedPotion = false;
-	//TODO: Hay que borrar todos los int
-	int energyPlantCounter = 4;
-	int abilityPlantCounter = 4;
-	int healPlantCounter = 4;
-	int veloPlantCounter = 4;
+
 private:
 	PhysBody* pbody;
 };

@@ -46,9 +46,9 @@ bool EnergyPlant::Update(float dt)
 {
 	Plant::Update(dt);
 
-	if (isPicked) {
+	if (energyPlantPicked) {
 		energyPlantCounter++;
-		isPicked = false;
+		energyPlantPicked = false;
 	}
 	LOG("energyPlant: %d", &energyPlantCounter);
 	return true;

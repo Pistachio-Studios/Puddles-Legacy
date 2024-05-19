@@ -164,26 +164,35 @@ bool TutorialScene::Enter()
 		abilityPotion->Start();
 	}
 
-	if (parameters.child("Plants").child("HealPlant")) {
-		HealPlant* healPlant = new  HealPlant();
-		app->entityManager->AddEntity(healPlant);
-		healPlant->parameters = parameters.child("Plants").child("HealPlant ");
-		healPlant->Start();
+	if (parameters.child("Plants"))
+	{
+		pugi::xml_node plants = parameters.child("Plants");
+
+		for (pugi::xml_node HealPlantNode = plants.child("HealPlant"); HealPlantNode; HealPlantNode = HealPlantNode.next_sibling("HealPlant"))
+		{
+			HealPlant* healPlant = new  HealPlant();
+			app->entityManager->AddEntity(healPlant);
+			healPlant->parameters = HealPlantNode;
+			healPlant->Start();
+		}
+
+		for (pugi::xml_node VeloPlantNode = plants.child("VeloPlant"); VeloPlantNode; VeloPlantNode = VeloPlantNode.next_sibling("VeloPlant"))
+		{
+			VeloPlant* veloPlant = new  VeloPlant();
+			app->entityManager->AddEntity(veloPlant);
+			veloPlant->parameters = VeloPlantNode;
+			veloPlant->Start();
+		}
+
+		for (pugi::xml_node EnergyPlantNode = plants.child("EnergyPlant"); EnergyPlantNode; EnergyPlantNode = EnergyPlantNode.next_sibling("EnergyPlant"))
+		{
+			EnergyPlant* energyPlant = new EnergyPlant();
+			app->entityManager->AddEntity(energyPlant);
+			energyPlant->parameters = EnergyPlantNode;
+			energyPlant->Start();
+		}
 	}
 
-	if (parameters.child("Plants").child("VeloPlant")) {
-		VeloPlant* veloPlant = new  VeloPlant();
-		app->entityManager->AddEntity(veloPlant);
-		veloPlant->parameters = parameters.child("Plants").child("VeloPlant");
-		veloPlant->Start();
-	}
-
-	if (parameters.child("Plants").child("EnergyPlant")) {
-		EnergyPlant* energyPlant = new EnergyPlant();
-		app->entityManager->AddEntity(energyPlant);
-		energyPlant->parameters = parameters.child("Plants").child("EnergyPlant");
-		energyPlant->Start();
-	}
 	return true;
 }
 

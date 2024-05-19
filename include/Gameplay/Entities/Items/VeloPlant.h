@@ -37,7 +37,7 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
-	int energyPlantCounter = 0;
+	int veloPlantCounter = 0;
 
 	PhysBody* pbody;
 };

@@ -43,6 +43,10 @@ public:
 	SDL_Texture* texture1 = nullptr;
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;
+	int type; 
+	bool healPlantPicked = false;
+	bool veloPlantPicked = false;
+	bool energyPlantPicked = false;
 
 private:
 	PhysBody* pbody;

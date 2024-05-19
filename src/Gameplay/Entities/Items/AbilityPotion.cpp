@@ -1,5 +1,9 @@
 #include "Gameplay/Entities/Items/AbilityPotion.h"
 #include "Gameplay/Entities/Items/Potion.h"
+#include "Gameplay/Entities/Items/EnergyPlant.h"
+#include "Gameplay/Entities/Items/VeloPlant.h"
+#include "Gameplay/Entities/Items/HealPlant.h"
+#include "Gameplay/Entities/Items/Plant.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -39,16 +43,21 @@ bool AbilityPotion::Start() {
 
 	timer = Timer();
 
+	energyPlant = new EnergyPlant;
+	veloPlant = new VeloPlant;
+	healPlant = new HealPlant;
+
 	return true;
 }
 
 bool AbilityPotion::Update(float dt)
 {
-	Potion::Update(dt);
 
-	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT && abilityPlantCounter >= maxToCreate) {
+	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT && healPlant->healPlantCounter >= 1 && veloPlant->veloPlantCounter >= 1 && energyPlant->energyPlantCounter >= 1) {
 		isCreated = true;
-		abilityPlantCounter -= maxToCreate;
+		healPlant->healPlantCounter -= 1;
+		veloPlant->veloPlantCounter -= 1;
+		energyPlant->energyPlantCounter -= 1;
 	}
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
 		usedPotion = true;
@@ -56,6 +65,8 @@ bool AbilityPotion::Update(float dt)
 		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
 		isCreated = false;
 	}
+
+	Potion::Update(dt);
 
 	return true;
 }

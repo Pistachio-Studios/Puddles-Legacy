@@ -37,7 +37,8 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
-	int energyPlantCounter = 0;
+	int healPlantCounter = 0;
+	int healTotal = 0;
 
 	PhysBody* pbody;
 };

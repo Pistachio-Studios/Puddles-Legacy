@@ -119,9 +119,6 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::STAFF:
 		entity = new Staff();
 		break;
-	case EntityType::POTION:
-		entity = new Potion();
-		break;
 	default:
 		break;
 	}

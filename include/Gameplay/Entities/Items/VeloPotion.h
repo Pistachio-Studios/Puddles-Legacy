@@ -5,6 +5,7 @@
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
 #include "Gameplay/Entities/Items/Potion.h"
+#include "Gameplay/Entities/Items/VeloPlant.h"
 #include "Core/GuiControlButton.h"
 
 #include <box2d/b2_fixture.h>
@@ -13,6 +14,7 @@
 
 struct SDL_Texture;
 class Player;
+class VeloPlant;
 
 class VeloPotion : public Potion
 {
@@ -42,6 +44,9 @@ public:
 
 	PhysBody* pbody;
 	Player* player;
+
+private:
+	VeloPlant* veloPlant; 
 };
 
 #endif // __VELOPOTION_H__

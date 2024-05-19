@@ -46,11 +46,11 @@ bool VeloPlant::Update(float dt)
 {
 	Plant::Update(dt);
 
-	if (isPicked) {
-		energyPlantCounter++;
-		isPicked = false;
+	if (veloPlantPicked) {
+		veloPlantCounter++;
+		veloPlantPicked = false;
 	}
-	LOG("veloPlant: %d", &energyPlantCounter);
+	LOG("veloPlant: %d", &veloPlantCounter);
 	return true;
 }
 

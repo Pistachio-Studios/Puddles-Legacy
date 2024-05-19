@@ -40,11 +40,12 @@ bool Plant::Start() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	type = parameters.attribute("type").as_int(); 
 
 	texture = app->tex->Load(texturePath);
 	texture1 = app->tex->Load("Assets/Textures/pressE.png");
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 80, 100, bodyType::STATIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 100, 120, bodyType::STATIC);
 	pbody->ctype = ColliderType::PLANT;
 	pbody->listener = this;
 
@@ -63,8 +64,19 @@ bool Plant::Update(float dt)
 			//TODO: Destroy collider
 			app->tex->UnLoad(texture);
 			app->tex->UnLoad(texture1);
-			isPicked = true;
+			
+			switch (type) {
+			case 1:
+				healPlantPicked = true;
+				break;
+			case 2:
+				veloPlantPicked = true;
+				break;
+			case 3:
+				energyPlantPicked = true; 
+			}
 		}
+		
 	}
 
 	app->render->DrawTexture(texture, position.x - 30, position.y - 30);
