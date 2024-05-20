@@ -5,7 +5,6 @@
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
 #include "Gameplay/Entities/Items/Potion.h"
-#include "Gameplay/Entities/Items/EnergyPlant.h"
 #include "Core/GuiControlButton.h"
 
 
@@ -41,9 +40,6 @@ public:
 	SDL_Texture* texture = NULL;
 
 	PhysBody* pbody;
-
-private:
-	EnergyPlant* energyPlant; 
 };
 
 #endif // __ENERGYPOTION_H__

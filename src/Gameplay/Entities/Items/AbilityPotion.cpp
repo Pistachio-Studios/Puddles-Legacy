@@ -1,8 +1,5 @@
 #include "Gameplay/Entities/Items/AbilityPotion.h"
 #include "Gameplay/Entities/Items/Potion.h"
-#include "Gameplay/Entities/Items/EnergyPlant.h"
-#include "Gameplay/Entities/Items/VeloPlant.h"
-#include "Gameplay/Entities/Items/HealPlant.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
@@ -43,21 +40,19 @@ bool AbilityPotion::Start() {
 
 	timer = Timer();
 
-	energyPlant = new EnergyPlant;
-	veloPlant = new VeloPlant;
-	healPlant = new HealPlant;
-
 	return true;
 }
 
 bool AbilityPotion::Update(float dt)
 {
+	Player* player;
+	player = app->entityManager->GetPlayerEntity();
 
-	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT && healPlant->healPlantCounter >= 1 && veloPlant->veloPlantCounter >= 1 && energyPlant->energyPlantCounter >= 1) {
+	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT && player->healPlantCounter >= 1 && player->veloPlantCounter >= 1 && player->energyPlantCounter >= 1) {
 		isCreated = true;
-		healPlant->healPlantCounter -= 1;
-		veloPlant->veloPlantCounter -= 1;
-		energyPlant->energyPlantCounter -= 1;
+		player->healPlantCounter -= 1;
+		player->veloPlantCounter -= 1;
+		player->energyPlantCounter -= 1;
 	}
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
 		usedPotion = true;

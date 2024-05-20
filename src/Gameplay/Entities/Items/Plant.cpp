@@ -54,9 +54,14 @@ bool Plant::Start() {
 
 bool Plant::Update(float dt)
 {
+	Player* player;
+	player = app->entityManager->GetPlayerEntity();
+
 	// L07 DONE 4: Add a physics to an food - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 8;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 8;
+
+	app->render->DrawTexture(texture, position.x - 30, position.y - 30);
 
 	if (touchingPlant) {
 		app->render->DrawTexture(texture1, position.x - 40, position.y - 40);
@@ -64,22 +69,22 @@ bool Plant::Update(float dt)
 			//TODO: Destroy collider
 			app->tex->UnLoad(texture);
 			app->tex->UnLoad(texture1);
-			
+
 			switch (type) {
 			case 1:
-				healPlantPicked = true;
+				player->healPlantCounter++;
 				break;
 			case 2:
-				veloPlantPicked = true;
+				player->veloPlantCounter++;
 				break;
 			case 3:
-				energyPlantPicked = true; 
+				player->energyPlantCounter++;
+				break;
 			}
 		}
-		
 	}
 
-	app->render->DrawTexture(texture, position.x - 30, position.y - 30);
+
 
 	return true;
 }
@@ -91,21 +96,17 @@ bool Plant::CleanUp()
 }
 
 void Plant::OnCollision(PhysBody* physA, PhysBody* physB) {
-	ListItem<Entity*>* item;
-	Entity* pEntity = NULL;
-
+	
 	switch (physB->ctype)
 	{
 	case ColliderType::PLAYER:
-		touchingPlant = true;
-		break;
+		touchingPlant = true; 
+
 	}
 }
 
 void Plant::EndCollision(PhysBody* physA, PhysBody* physB)
 {
-	ListItem<Entity*>* item;
-	Entity* pEntity = NULL;
 
 	switch (physB->ctype)
 	{

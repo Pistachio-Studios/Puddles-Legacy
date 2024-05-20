@@ -1,5 +1,4 @@
 #include "Gameplay/Entities/Items/EnergyPotion.h"
-#include "Gameplay/Entities/Items/EnergyPlant.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Gameplay/Entities/Items/Potion.h"
 #include "Core/App.h"
@@ -41,17 +40,18 @@ bool EnergyPotion::Start() {
 
 	timer = Timer();
 
-	energyPlant = new EnergyPlant; 
-
 	return true;
 }
 
 bool EnergyPotion::Update(float dt)
 {
-	
-	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT && energyPlant->energyPlantCounter >= maxToCreate) {
+	Player* player;
+
+	player = app->entityManager->GetPlayerEntity();
+
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT && player->energyPlantCounter >= maxToCreate) {
 		isCreated = true;
-		energyPlant->energyPlantCounter -= maxToCreate;
+		player->energyPlantCounter -= maxToCreate;
 	}
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN) {
 		usedPotion = true;

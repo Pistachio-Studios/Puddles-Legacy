@@ -68,10 +68,14 @@ public:
 
 	PlayerClass currentClass = KNIGHT;
 
-	//tmp
+	//tmps
 	PhysBody* sword;
 
 	int lives = 10;
+
+	int healPlantCounter = 0;
+	int energyPlantCounter = 0;
+	int veloPlantCounter = 0;
 };
 
 #endif // __PLAYER_H__

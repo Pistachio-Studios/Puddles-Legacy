@@ -15,9 +15,6 @@
 #include "Gameplay/Entities/Items/HealPotion.h"
 #include "Gameplay/Entities/Items/VeloPotion.h"
 #include "Gameplay/Entities/Items/AbilityPotion.h"
-#include "Gameplay/Entities/Items/EnergyPlant.h"
-#include "Gameplay/Entities/Items/HealPlant.h"
-#include "Gameplay/Entities/Items/VeloPlant.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
@@ -168,29 +165,14 @@ bool TutorialScene::Enter()
 	{
 		pugi::xml_node plants = parameters.child("Plants");
 
-		for (pugi::xml_node HealPlantNode = plants.child("HealPlant"); HealPlantNode; HealPlantNode = HealPlantNode.next_sibling("HealPlant"))
+		for (pugi::xml_node PlantNode = plants.child("Plant"); PlantNode; PlantNode = PlantNode.next_sibling("Plant"))
 		{
-			HealPlant* healPlant = new  HealPlant();
-			app->entityManager->AddEntity(healPlant);
-			healPlant->parameters = HealPlantNode;
-			healPlant->Start();
+			Plant* plant = new Plant();
+			app->entityManager->AddEntity(plant);
+			plant->parameters = PlantNode;
+			plant->Start();
 		}
 
-		for (pugi::xml_node VeloPlantNode = plants.child("VeloPlant"); VeloPlantNode; VeloPlantNode = VeloPlantNode.next_sibling("VeloPlant"))
-		{
-			VeloPlant* veloPlant = new  VeloPlant();
-			app->entityManager->AddEntity(veloPlant);
-			veloPlant->parameters = VeloPlantNode;
-			veloPlant->Start();
-		}
-
-		for (pugi::xml_node EnergyPlantNode = plants.child("EnergyPlant"); EnergyPlantNode; EnergyPlantNode = EnergyPlantNode.next_sibling("EnergyPlant"))
-		{
-			EnergyPlant* energyPlant = new EnergyPlant();
-			app->entityManager->AddEntity(energyPlant);
-			energyPlant->parameters = EnergyPlantNode;
-			energyPlant->Start();
-		}
 	}
 
 	return true;

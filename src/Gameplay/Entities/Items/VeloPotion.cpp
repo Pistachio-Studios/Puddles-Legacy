@@ -1,6 +1,5 @@
 #include "Gameplay/Entities/Items/VeloPotion.h"
 #include "Gameplay/Entities/Items/Potion.h"
-#include "Gameplay/Entities/Items/VeloPlant.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
@@ -42,18 +41,18 @@ bool VeloPotion::Start() {
 
 	timer = Timer();
 
-	veloPlant = new VeloPlant; 
-
 	return true;
 }
 
 bool VeloPotion::Update(float dt)
 {
 	//TODO: Modify maxSpeed to go faster
+	Player* player;
+	player = app->entityManager->GetPlayerEntity();
 
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT && veloPlant->veloPlantCounter >= maxToCreate) {
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT && player->veloPlantCounter >= maxToCreate) {
 		isCreated = true;
-		veloPlant->veloPlantCounter -= maxToCreate;
+		player->veloPlantCounter -= maxToCreate;
 	}
 	//TODO: La pocion se crea, cuando se usa, si ya no hay mas pociones, iscreated=false
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN) {

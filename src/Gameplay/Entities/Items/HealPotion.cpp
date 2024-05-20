@@ -1,6 +1,5 @@
 #include "Gameplay/Entities/Items/HealPotion.h"
 #include "Gameplay/Entities/Items/Potion.h"
-#include "Gameplay/Entities/Items/HealPlant.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
@@ -39,19 +38,21 @@ bool HealPotion::Awake() {
 bool HealPotion::Start() {
 	Potion::Start();
 
-	timer = Timer();
-
-	healPlant = new HealPlant; 
+	timer = Timer(); 
 
 	return true;
 }
 
 bool HealPotion::Update(float dt)
-{
+{	
+	Potion::Update(dt);
+	
+	Player* player;
+	player = app->entityManager->GetPlayerEntity();
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT && healPlant->healPlantCounter >= maxToCreate) {
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && player->healPlantCounter >= maxToCreate) {
 		isCreated = true;
-		healPlant->healPlantCounter -= maxToCreate;
+		player->healPlantCounter -= maxToCreate;
 		//se guarda en inventario
 	}
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN) {
@@ -61,7 +62,7 @@ bool HealPotion::Update(float dt)
 		isCreated = false;
 	}
 
-	Potion::Update(dt);
+
 
 	return true;
 }

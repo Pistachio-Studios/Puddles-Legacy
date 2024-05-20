@@ -5,7 +5,6 @@
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
 #include "Gameplay/Entities/Items/Potion.h"
-#include "Gameplay/Entities/Items/HealPlant.h"
 #include "Core/GuiControlButton.h"
 
 #include <box2d/b2_fixture.h>
@@ -13,7 +12,6 @@
 #include <box2d/b2_math.h>
 
 struct SDL_Texture;
-class HealPlant; 
 
 class HealPotion : public Potion
 {
@@ -41,8 +39,6 @@ public:
 
 	PhysBody* pbody;
 
-private:
-	HealPlant* healPlant; 
 };
 
 #endif // __HEALPOTION_H__
