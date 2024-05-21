@@ -39,11 +39,12 @@ bool Potion::Start() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
+	type = parameters.attribute("type").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 80, 80, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 80, 80, bodyType::STATIC); 
 	pbody->ctype = ColliderType::POTION;
 	pbody->listener = this;
 
@@ -57,13 +58,9 @@ bool Potion::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 8;
 
 	//TODO: Cada pocion hace su cosa
-
 	if (isCreated) {
 		//TODO: Dibujar la textura de la pocion
 		app->render->DrawTexture(texture, position.x - 10, position.y - 10); 
-	}
-	else if (isCreated == false) {
-		app->tex->UnLoad(texture);
 	}
 
 	return true;

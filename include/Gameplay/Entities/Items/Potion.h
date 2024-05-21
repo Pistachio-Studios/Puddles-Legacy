@@ -41,6 +41,7 @@ public:
 
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;
+	int type;
 	int maxToCreate = 3;
 	bool isCreated = false;
 	bool usedPotion = false;
