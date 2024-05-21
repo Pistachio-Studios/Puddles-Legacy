@@ -14,6 +14,7 @@
 
 struct SDL_Texture;
 class EnergyPlant; 
+class Player;
 
 class EnergyPotion : public Potion
 {
@@ -40,6 +41,7 @@ public:
 	SDL_Texture* texture = NULL;
 
 	PhysBody* pbody;
+	Player* player;
 };
 
 #endif // __ENERGYPOTION_H__

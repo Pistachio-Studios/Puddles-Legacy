@@ -45,8 +45,9 @@ bool EnergyPotion::Start() {
 
 bool EnergyPotion::Update(float dt)
 {
-	Player* player;
+	Potion::Update(dt);
 
+	Player* player;
 	player = app->entityManager->GetPlayerEntity();
 
 	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT && player->energyPlantCounter >= maxToCreate) {

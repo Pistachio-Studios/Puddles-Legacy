@@ -50,7 +50,7 @@ bool HealPotion::Update(float dt)
 	Player* player;
 	player = app->entityManager->GetPlayerEntity();
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && player->healPlantCounter >= maxToCreate) {
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && player->healPlantCounter >= maxToCreate) { 
 		isCreated = true;
 		player->healPlantCounter -= maxToCreate;
 		//se guarda en inventario
@@ -61,8 +61,6 @@ bool HealPotion::Update(float dt)
 		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
 		isCreated = false;
 	}
-
-
 
 	return true;
 }

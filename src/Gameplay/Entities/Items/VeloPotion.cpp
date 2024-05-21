@@ -46,6 +46,8 @@ bool VeloPotion::Start() {
 
 bool VeloPotion::Update(float dt)
 {
+	Potion::Update(dt);
+
 	//TODO: Modify maxSpeed to go faster
 	Player* player;
 	player = app->entityManager->GetPlayerEntity();
@@ -57,7 +59,7 @@ bool VeloPotion::Update(float dt)
 	//TODO: La pocion se crea, cuando se usa, si ya no hay mas pociones, iscreated=false
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN) {
 		usedPotion = true;
-		//VelocityBuff();
+		VelocityBuff();
 		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
 		isCreated = false;
 	}
@@ -74,5 +76,5 @@ bool VeloPotion::CleanUp() {
 }
 
 void VeloPotion::VelocityBuff() {
-	player->maxSpeed *= 2.0f;
+	player->maxSpeed *= 2;
 }

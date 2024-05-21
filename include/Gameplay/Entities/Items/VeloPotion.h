@@ -18,6 +18,7 @@ class VeloPlant;
 class VeloPotion : public Potion
 {
 public:
+	Player* player;
 
 	bool startTimer = true;
 	Timer timer;
@@ -42,7 +43,7 @@ public:
 	SDL_Texture* texture = NULL;
 
 	PhysBody* pbody;
-	Player* player;
+	
 };
 
 #endif // __VELOPOTION_H__
