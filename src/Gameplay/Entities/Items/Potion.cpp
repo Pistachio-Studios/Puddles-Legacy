@@ -41,9 +41,10 @@ bool Potion::Start() {
 	position.y = parameters.attribute("y").as_int();
 	type = parameters.attribute("type").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	textureSelection = parameters.attribute("textureSelection").as_string();
 
 	texture = app->tex->Load(texturePath);
-	texture1 = app->tex->Load("Assets/Textures/Inventory");
+	texture1 = app->tex->Load("Assets/Textures/Potions/Inventory/NoPotions.png");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 80, 80, bodyType::STATIC); 
 	pbody->ctype = ColliderType::POTION;

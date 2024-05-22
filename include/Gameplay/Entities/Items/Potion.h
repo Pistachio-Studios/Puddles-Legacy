@@ -42,6 +42,7 @@ public:
 	SDL_Texture* texture1 = nullptr;
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;
+	const char* textureSelection;
 	int type;
 	int maxToCreate = 3;
 	bool isCreated = false;

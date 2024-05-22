@@ -59,7 +59,8 @@ bool VeloPotion::Update(float dt)
 	//TODO: La pocion se crea, cuando se usa, si ya no hay mas pociones, iscreated=false
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN) {
 		usedPotion = true;
-		VelocityBuff();
+		player->maxSpeed *= 2;
+		//VelocityBuff();
 		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
 		isCreated = false;
 	}
@@ -75,6 +76,6 @@ bool VeloPotion::CleanUp() {
 	return true;
 }
 
-void VeloPotion::VelocityBuff() {
-	player->maxSpeed *= 2;
-}
+//void VeloPotion::VelocityBuff() {
+//	player->maxSpeed *= 2;
+//}

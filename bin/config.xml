@@ -95,10 +95,10 @@
 			<Plant x="1900" y="2700" type="3" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
 		</Plants>
 	    <Potion>
-			<HealPotion x="1400" y="2300" texturepath="Assets/Textures/Potions/HealPotion.png"/>
-			<VeloPotion x="1200" y="2500" texturepath="Assets/Textures/Potions/VeloPotion.png"/>
-			<EnergyPotion x="1200" y="2700" texturepath="Assets/Textures/Potions/EnergyPotion.png"/>
-			<AbilityPotion x="1200" y="1900" texturepath="Assets/Textures/Potions/AbilityPotion.png"/>
+			<HealPotion x="1400" y="2300" texturepath="Assets/Textures/Potions/Inventory/HealPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/HealPotionCreated.png"/>
+			<VeloPotion x="1200" y="2500" texturepath="Assets/Textures/Potions/Inventory/VeloPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/VeloPotionCreated.png"/>
+			<EnergyPotion x="1200" y="2700" texturepath="Assets/Textures/Potions/Inventory/EnergyPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/EnergyPotionCreated.png"/>
+			<AbilityPotion x="1200" y="1900" texturepath="Assets/Textures/Potions/Inventory/AbilityPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/AbilityPotionCreated.png"/>
 		</Potion>
     </tutorialscene>
     <testscene>

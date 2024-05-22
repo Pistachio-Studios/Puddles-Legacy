@@ -12,13 +12,11 @@
 #include <box2d/b2_math.h>
 
 struct SDL_Texture;
-class Player;
 class VeloPlant;
 
 class VeloPotion : public Potion
 {
 public:
-	Player* player;
 
 	bool startTimer = true;
 	Timer timer;
