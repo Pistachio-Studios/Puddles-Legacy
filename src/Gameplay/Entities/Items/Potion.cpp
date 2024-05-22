@@ -43,6 +43,7 @@ bool Potion::Start() {
 	texturePath = parameters.attribute("texturepath").as_string();
 
 	texture = app->tex->Load(texturePath);
+	texture1 = app->tex->Load("Assets/Textures/Inventory");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 80, 80, bodyType::STATIC); 
 	pbody->ctype = ColliderType::POTION;
@@ -53,15 +54,22 @@ bool Potion::Start() {
 
 bool Potion::Update(float dt)
 {
+	Player* player;
+	player = app->entityManager->GetPlayerEntity();
+
 	// L07 DONE 4: Add a physics to an food - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 8;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 8;
 
-	//TODO: Cada pocion hace su cosa
-	if (isCreated) {
-		//TODO: Dibujar la textura de la pocion
-		app->render->DrawTexture(texture, position.x - 10, position.y - 10); 
+	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) {
+		app->render->DrawTexture(texture1, player->position.x - 30, player->position.y -30);
+		//TODO: Cada pocion hace su cosa
+		if (isCreated) {
+			//TODO: Dibujar la textura de la pocion
+			app->render->DrawTexture(texture, position.x - 10, position.y - 10);
+		}
 	}
+
 
 	return true;
 }
