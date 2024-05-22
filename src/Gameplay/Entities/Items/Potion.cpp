@@ -72,16 +72,13 @@ bool Potion::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 8;
 
 	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) {
-		app->render->DrawTexture(texture1, (int)windowW/2, (int)windowH / 2);
+		app->render->DrawTexture(texture1, (int)windowW / 2 - 350, (int)windowH / 2 - 350, 0, 0);
 		//TODO: Cada pocion hace su cosa
 		if (isCreated) {
 			//TODO: Dibujar la textura de la pocion
 			app->render->DrawTexture(texture, position.x - 10, position.y - 10);
 			if (mouseX >= position.x && mouseX <= pbody->width && mouseY >= position.y && mouseY <= pbody->height) {
 				app->render->DrawTexture(texture2, pbody->width / 2, pbody->height / 2);
-				/*if () {
-					usedPotion = true; 
-				}*/
 			}
 
 		}
