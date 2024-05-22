@@ -40,8 +40,11 @@ public:
 public:
 
 	SDL_Texture* texture1 = nullptr;
+	SDL_Texture* texture2 = nullptr;
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;
+	uint windowW, windowH;
+	int mouseX, mouseY;
 	const char* textureSelection;
 	int type;
 	int maxToCreate = 3;

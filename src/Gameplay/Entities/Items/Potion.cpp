@@ -14,6 +14,7 @@
 #include "Utils/Point.h"
 #include "Core/Physics.h"
 #include "Utils/StateMachine.h"
+#include "Core/Window.h"
 #include "Core/SceneManager.h"
 #include "Core/Map.h"
 
@@ -45,6 +46,7 @@ bool Potion::Start() {
 
 	texture = app->tex->Load(texturePath);
 	texture1 = app->tex->Load("Assets/Textures/Potions/Inventory/NoPotions.png");
+	texture2 = app->tex->Load(textureSelection);
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 80, 80, bodyType::STATIC); 
 	pbody->ctype = ColliderType::POTION;
@@ -55,6 +57,13 @@ bool Potion::Start() {
 
 bool Potion::Update(float dt)
 {
+	//Get the size of the window
+	app->win->GetWindowSize(windowW, windowH);
+
+	app->input->GetMousePosition(mouseX, mouseY);
+	mouseX *= app->win->GetScale();
+	mouseY *= app->win->GetScale();
+
 	Player* player;
 	player = app->entityManager->GetPlayerEntity();
 
@@ -63,11 +72,18 @@ bool Potion::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 8;
 
 	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) {
-		app->render->DrawTexture(texture1, player->position.x - 30, player->position.y -30);
+		app->render->DrawTexture(texture1, (int)windowW/2, (int)windowH / 2);
 		//TODO: Cada pocion hace su cosa
 		if (isCreated) {
 			//TODO: Dibujar la textura de la pocion
 			app->render->DrawTexture(texture, position.x - 10, position.y - 10);
+			if (mouseX >= position.x && mouseX <= pbody->width && mouseY >= position.y && mouseY <= pbody->height) {
+				app->render->DrawTexture(texture2, pbody->width / 2, pbody->height / 2);
+				/*if () {
+					usedPotion = true; 
+				}*/
+			}
+
 		}
 	}
 
