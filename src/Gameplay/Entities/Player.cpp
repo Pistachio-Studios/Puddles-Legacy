@@ -69,6 +69,8 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
 
+	totalLivesPlayer = livesPlayer;
+
 	return true;
 }
 
@@ -114,6 +116,7 @@ bool Player::Update(float dt)
 		}
 	}
 
+	if (livesPlayer == 0) deadPlayer;
 	return true;
 }
 
@@ -121,6 +124,7 @@ void Player::DrawImGui()
 {
 	ImGui::Begin("Player");
 	ImGui::Text("Player Position: %d, %d", position.x, position.y);
+	ImGui::Text("Player Lives: %d", livesPlayer);
 	ImGui::Text("Player Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
@@ -178,7 +182,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 
 		break;
+		//TODO: He añadido esto para probar que la pocion de curar funcione, se puede borrar :)
+	case ColliderType::ENEMY:
+		livesPlayer--; 
+		break;
 	}
+	
 }
 
 void Player::EndCollision(PhysBody* physA, PhysBody* physB){

@@ -33,15 +33,13 @@ public:
 
 	bool CleanUp() override;
 
-	void VelocityBuff(); 
-
 public:
 
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
 	PhysBody* pbody;
-	
+	const float potionDuration = 5.0f; // Duration of the potion effect in seconds
 };
 
 #endif // __VELOPOTION_H__

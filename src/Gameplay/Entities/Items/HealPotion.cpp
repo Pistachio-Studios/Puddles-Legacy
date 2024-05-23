@@ -54,18 +54,30 @@ bool HealPotion::Update(float dt)
 		player->healPlantCounter -= maxToCreate;
 	}
 
-	//if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) {
-	//	if (isCreated && pbody) {
-	//		if (mouseX >= position.x && mouseX <= pbody->width && mouseY >= position.y && mouseY <= pbody->height) {
-	//			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
-	//				usedPotion = true;
-	//			}
-	//		}
-	//	}
-	//}
+	if (isCreated && app->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN) {
+		usedPotion = true;
+		player->livesPlayer = player->totalLivesPlayer; 
+		if (player->healPlantCounter <= maxToCreate) {
+			isCreated = false;
+		}
+	}
+
+	/*if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) {
+		if (isCreated) {
+			if (mouseX >= position.x && mouseX <= pbody->width && mouseY >= position.y && mouseY <= pbody->height) {
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) { 
+					usedPotion = true;
+				}
+			}
+		}
+	}
 
 	if (usedPotion) {
 		isCreated = false;
+	}*/
+
+	if (usedPotion) {
+		usedPotion = false;
 	}
 
 	Potion::Update(dt);

@@ -71,7 +71,9 @@ public:
 	//tmps
 	PhysBody* sword;
 
-	int lives = 10;
+	int livesPlayer = 10;
+	int totalLivesPlayer;
+	bool deadPlayer = false;
 
 	int healPlantCounter = 0;
 	int energyPlantCounter = 0;

@@ -52,16 +52,40 @@ bool VeloPotion::Update(float dt)
 	player = app->entityManager->GetPlayerEntity();
 
 	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT && player->veloPlantCounter >= maxToCreate) {
+		bool counter = true;
 		isCreated = true;
 		player->veloPlantCounter -= maxToCreate;
 	}
-	//TODO: La pocion se crea, cuando se usa, si ya no hay mas pociones, iscreated=false
+	
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN) {
 		usedPotion = true;
 		player->maxSpeed *= 2;
-		//VelocityBuff();
-		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
-		isCreated = false;
+		if (player->veloPlantCounter <= maxToCreate) {
+			isCreated = false;
+		}
+		 timer.Start();
+	}
+	//TODO: Ahora la pocion se usa dandole al 5 pero se tiene que usar con el boton y lo mismo con todas las pociones
+	
+	//if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) { 
+	//	if (isCreated) {
+	//		if (mouseX >= position.x && mouseX <= pbody->width && mouseY >= position.y && mouseY <= pbody->height) {
+	//			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+	//				usedPotion = true;
+	//				player->maxSpeed *= 2;
+	//				//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
+	//				if (player->veloPlantCounter <= maxToCreate) {
+	//					isCreated = false;
+	//				}
+	//				timer.Start();
+	//			}
+	//		}
+	//	}
+	//}
+	
+	if (usedPotion && timer.ReadSec() >= potionDuration) {
+		player->maxSpeed /= 2; // Restore original speed after duration
+		usedPotion = false;
 	}
 
 	Potion::Update(dt);
@@ -74,7 +98,3 @@ bool VeloPotion::CleanUp() {
 	Potion::CleanUp();
 	return true;
 }
-
-//void VeloPotion::VelocityBuff() {
-//	player->maxSpeed *= 2;
-//}
