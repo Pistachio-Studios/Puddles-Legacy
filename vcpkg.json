@@ -37,7 +37,11 @@
       "name": "imgui",
       "version>=": "1.90.2",
       "features": [ "sdl2-binding", "sdl2-renderer-binding" ]
+    },
+    {
+      "name": "rapidcsv"
     }
+
   ],
 
   "builtin-baseline" : "fbf25ddd1119211278c257f2e19c96a9d5a6ede7"

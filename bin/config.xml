@@ -80,5 +80,7 @@
 		</testscene>
 		<particle_demo />
 		<lighting_demo />
+		<intro>
+		</intro>
 	</scene_manager>
 </config>

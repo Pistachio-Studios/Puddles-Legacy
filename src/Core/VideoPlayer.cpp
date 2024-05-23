@@ -23,7 +23,7 @@ bool VideoPlayer::Awake(pugi::xml_node& config)
 bool VideoPlayer::Start()
 {
     // File path of the video to be played
-    char* file = "Assets/Video/Intro/example.mp4";
+    const char* file =  "Assets/Video/Intro/example.mp4";
 
     // Allocate memory for the format context
     formatContext = avformat_alloc_context();
