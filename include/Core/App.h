@@ -24,6 +24,7 @@ class AnimationManager;
 class Physics;
 class ParticleManager;
 class GuiManager;
+class VideoPlayer;
 class DebugUI;
 class DialogManager;
 
@@ -112,6 +113,7 @@ public:
 	Physics* physics;
 	ParticleManager* particleManager;
 	GuiManager* guiManager;
+	VideoPlayer* videoPlayer;
 	DebugUI* debugUI;
 	DialogManager* dialogManager;
 

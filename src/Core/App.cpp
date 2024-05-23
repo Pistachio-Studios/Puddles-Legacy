@@ -14,6 +14,7 @@
 #include "Core/DebugUI.h"
 #include "Core/EntityManager.h"
 #include "Core/Lighting.h"
+#include "Core/VideoPlayer.h"
 #include "Core/DialogManager.h"
 
 #include "Utils/Defs.h"
@@ -48,6 +49,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager(false);
 	particleManager = new ParticleManager(true);
 	guiManager = new GuiManager(true);
+	videoPlayer = new VideoPlayer(true);
 	debugUI = new DebugUI(true);
 	dialogManager = new DialogManager(true);
 
@@ -66,6 +68,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(particleManager);
 	AddModule(lighting);
 	AddModule(guiManager);
+	AddModule(videoPlayer);
 	AddModule(debugUI);
 	AddModule(dialogManager);
 
