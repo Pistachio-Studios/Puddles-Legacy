@@ -48,7 +48,7 @@ enum class ColliderType {
 	LIMITS,
 	WIN,
 	NPC,
-	UNKNOWN,
+	UNKNOWN
 	// ..
 };
 
