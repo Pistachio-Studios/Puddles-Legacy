@@ -45,7 +45,6 @@ bool EnergyPotion::Start() {
 
 bool EnergyPotion::Update(float dt)
 {
-	Potion::Update(dt);
 
 	Player* player;
 	player = app->entityManager->GetPlayerEntity();

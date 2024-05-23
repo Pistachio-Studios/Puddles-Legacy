@@ -61,10 +61,10 @@ bool Plant::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 8;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 8;
 
-	app->render->DrawTexture(texture, position.x - 30, position.y - 30);
+	app->render->DrawTexture(texture, position.x - 40, position.y - 40);
 
 	if (touchingPlant) {
-		app->render->DrawTexture(texture1, position.x - 40, position.y - 40);
+		app->render->DrawTexture(texture1, position.x - 40, position.y - 50);
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 			//TODO: Destroy collider
 			app->tex->UnLoad(texture);

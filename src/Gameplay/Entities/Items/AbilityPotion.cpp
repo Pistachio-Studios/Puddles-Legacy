@@ -45,7 +45,6 @@ bool AbilityPotion::Start() {
 
 bool AbilityPotion::Update(float dt)
 {
-	Potion::Update(dt); 
 
 	Player* player;
 	player = app->entityManager->GetPlayerEntity();

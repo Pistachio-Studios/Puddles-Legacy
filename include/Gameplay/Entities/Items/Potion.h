@@ -51,6 +51,8 @@ public:
 	bool isCreated = false;
 	bool usedPotion = false;
 
+	int posX, posY;
+
 private:
 	PhysBody* pbody;
 };

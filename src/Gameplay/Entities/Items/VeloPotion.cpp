@@ -46,7 +46,6 @@ bool VeloPotion::Start() {
 
 bool VeloPotion::Update(float dt)
 {
-	Potion::Update(dt);
 
 	//TODO: Modify maxSpeed to go faster
 	Player* player;
