@@ -11,6 +11,11 @@
 #include "Gameplay/Entities/Npcs/Loco.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
+#include "Gameplay/Entities/Items/EnergyPotion.h"
+#include "Gameplay/Entities/Items/HealPotion.h"
+#include "Gameplay/Entities/Items/VeloPotion.h"
+#include "Gameplay/Entities/Items/AbilityPotion.h"
+#include "Gameplay/Entities/Items/Plant.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -128,6 +133,48 @@ bool TutorialScene::Enter()
 		tabernero->Start();
 	}
 
+	if (parameters.child("Potion").child("EnergyPotion")) {
+		EnergyPotion* energyPotion = new EnergyPotion();
+		app->entityManager->AddEntity(energyPotion);
+		energyPotion->parameters = parameters.child("Potion").child("EnergyPotion");
+		energyPotion->Start();
+	}
+
+	if (parameters.child("Potion").child("HealPotion")) {
+		HealPotion* healPotion = new HealPotion();
+		app->entityManager->AddEntity(healPotion);
+		healPotion->parameters = parameters.child("Potion").child("HealPotion");
+		healPotion->Start();
+	}
+
+	if (parameters.child("Potion").child("VeloPotion")) {
+		VeloPotion* veloPotion = new VeloPotion();
+		app->entityManager->AddEntity(veloPotion);
+		veloPotion->parameters = parameters.child("Potion").child("VeloPotion");
+		veloPotion->Start();
+	}
+
+	if (parameters.child("Potion").child("AbilityPotion")) {
+		AbilityPotion* abilityPotion = new AbilityPotion();
+		app->entityManager->AddEntity(abilityPotion);
+		abilityPotion->parameters = parameters.child("Potion").child("AbilityPotion");
+		abilityPotion->Start();
+	}
+
+	if (parameters.child("Plants"))
+	{
+		pugi::xml_node plants = parameters.child("Plants");
+
+		for (pugi::xml_node PlantNode = plants.child("Plant"); PlantNode; PlantNode = PlantNode.next_sibling("Plant"))
+		{
+			Plant* plant = new Plant();
+			app->entityManager->AddEntity(plant);
+			plant->parameters = PlantNode;
+			plant->Start();
+		}
+
+	}
+
 	return true;
 }
 
@@ -162,13 +209,6 @@ bool TutorialScene::Update(float dt)
 		if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
-
-
-
-
-
-
-
 
 	return true;
 }

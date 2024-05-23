@@ -69,8 +69,28 @@
 			</enemies>
 			<Npcs>
 				<loco x="900" y="2500" />
-				<tabernero x="900" y="2800" />
+				<tabernero x="900" y="2800" /> 
 			</Npcs>
+		<Plants>
+			<Plant x="1500" y="2300" type="1" texturepath="Assets/Textures/Plants/HealPlant.png"/>
+			<Plant x="1700" y="2300" type="1" texturepath="Assets/Textures/Plants/HealPlant.png"/>
+			<Plant x="1900" y="2300" type="1" texturepath="Assets/Textures/Plants/HealPlant.png"/>
+			<Plant x="2100" y="2300" type="1" texturepath="Assets/Textures/Plants/HealPlant.png"/>
+			<Plant x="1500" y="2600" type="2" texturepath="Assets/Textures/Plants/VeloPlant.png"/>
+			<Plant x="1700" y="2600" type="2" texturepath="Assets/Textures/Plants/VeloPlant.png"/>
+			<Plant x="1900" y="2600" type="2" texturepath="Assets/Textures/Plants/VeloPlant.png"/>
+			<Plant x="2100" y="2600" type="2" texturepath="Assets/Textures/Plants/VeloPlant.png"/>
+			<Plant x="1500" y="2900" type="3" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
+			<Plant x="1700" y="2900" type="3" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
+			<Plant x="1900" y="2900" type="3" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
+			<Plant x="2100" y="2900" type="3" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
+		</Plants>
+	    <Potion>
+			<HealPotion x="-10" y="110" texturepath="Assets/Textures/Potions/Inventory/HealPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/HealPotionSelected.png"/>
+			<VeloPotion x="478" y="105" texturepath="Assets/Textures/Potions/Inventory/VeloPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/VeloPotionSelected.png"/>
+			<EnergyPotion x="132" y="-15" texturepath="Assets/Textures/Potions/Inventory/EnergyPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/EnergyPotionSelected.png"/>
+			<AbilityPotion x="140" y="472" texturepath="Assets/Textures/Potions/Inventory/AbilityPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/AbilityPotionSelected.png"/>
+		</Potion>
 		</tutorialscene>
 		<testscene>
 			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx" />

@@ -58,7 +58,7 @@ public:
 
 	//Movement
 	float moveForce = 1.0f;
-	float maxSpeed = 10.0f;
+	float maxSpeed = 5.0f;
 
 	//State Machines
 	StateMachine<Player>* movementFSM = nullptr;
@@ -71,8 +71,16 @@ public:
 
 	PlayerClass currentClass = KNIGHT;
 
-	//tmp
+	//tmps
 	PhysBody* sword;
+
+	int livesPlayer = 10;
+	int totalLivesPlayer;
+	bool deadPlayer = false;
+
+	int healPlantCounter = 0;
+	int energyPlantCounter = 0;
+	int veloPlantCounter = 0;
 };
 
 #endif // __PLAYER_H__

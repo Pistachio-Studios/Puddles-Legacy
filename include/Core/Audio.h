@@ -2,8 +2,8 @@
 #define __AUDIO_H__
 
 #ifdef __linux__
-#include "Utils/List.h"
 #endif
+#include "Utils/List.h"
 #include "Core/Module.h"
 
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
