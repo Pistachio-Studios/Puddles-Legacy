@@ -52,6 +52,8 @@ public:
 
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
+	SDL_Texture* texture_inventory = NULL;
+	uint windowW, windowH;
 
 	//Movement
 	float moveForce = 1.0f;

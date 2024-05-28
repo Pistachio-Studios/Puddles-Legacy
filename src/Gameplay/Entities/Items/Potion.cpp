@@ -45,7 +45,6 @@ bool Potion::Start() {
 	textureSelection = parameters.attribute("textureSelection").as_string();
 
 	texture = app->tex->Load(texturePath);
-	texture1 = app->tex->Load("Assets/Textures/Potions/Inventory/NoPotions.png");
 	texture2 = app->tex->Load(textureSelection);
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 80, 80, bodyType::STATIC);
@@ -74,20 +73,17 @@ bool Potion::Update(float dt)
 	posX = (int)windowW / 2 - 350 + position.x;
 	posY = (int)windowH / 2 - 350 + position.y;
 
-	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) {
-		app->render->DrawTexture(texture1, (int)windowW / 2 - 350, (int)windowH / 2 - 350, 0, 0);
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
 		//TODO: Cada pocion hace su cosa
 		if (isCreated) {
-			LOG("mouseX: %d, mouseY: %d", mouseX, mouseY);
-			LOG("posX: %d, posY: %d", posX, posY);
+			LOG("type: %s, mouseX: %d, mouseY: %d, posX: %d, posY : %d", this->name,mouseX, mouseY, posX, posY);
 			//TODO: Dibujar la textura de la pocion
-			if (mouseX >= posX && mouseX <= posX + 100 && mouseY >= posY && mouseY <= posY + 100) {
+			if (mouseX >= posX + 50 && mouseX <= posX + 350 && mouseY >= posY + 50 && mouseY <= posY + 350) {
 				app->render->DrawTexture(texture2, posX, posY, 0, 0);
 			}
 			else {
 				app->render->DrawTexture(texture, posX, posY, 0, 0);
 			}
-
 		}
 	}
 

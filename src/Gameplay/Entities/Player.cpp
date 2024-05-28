@@ -9,6 +9,7 @@
 #include "Core/Physics.h"
 #include "Utils/StateMachine.h"
 #include "Core/SceneManager.h"
+#include "Core/Window.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -50,6 +51,7 @@ bool Player::Start() {
 	timer = Timer();
 
 	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
+	texture_inventory = app->tex->Load("Assets/Textures/Potions/Inventory/NoPotions.png");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
 	pbody->listener = this;
@@ -102,6 +104,12 @@ bool Player::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
 			freeCam = !freeCam;
 		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
+		//Get the size of the window
+		app->win->GetWindowSize(windowW, windowH);
+		app->render->DrawTexture(texture_inventory, (int)windowW / 2 - 350, (int)windowH / 2 - 350, 0, 0);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)

@@ -39,7 +39,6 @@ public:
 
 public:
 
-	SDL_Texture* texture1 = nullptr;
 	SDL_Texture* texture2 = nullptr;
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;
