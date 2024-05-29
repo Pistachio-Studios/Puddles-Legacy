@@ -52,8 +52,11 @@ private:
 	uint windowW, windowH;
 	GuiControlButton* playButton;
 	GuiControlButton* optionsButton;
+	GuiControlButton* creditsButton;
+	GuiControlButton* loadButton;
 	GuiControlButton* exitButton;
 	GuiControlPopUp* popUpOptions = nullptr;
+	GuiControlPopUp* popUpLoad = nullptr;
 	GuiControlButton* crossOButton = nullptr;
 	GuiControlSlider* music = nullptr;
 	GuiControlSlider* fx = nullptr;
@@ -74,6 +77,12 @@ private:
 	GuiControlButton* res1024x768 = nullptr;
 	GuiControlButton* res800x600 = nullptr;
 	GuiControlButton* res640x480 = nullptr;
+
+	GuiControlButton* saveSlot1 = nullptr;
+	GuiControlButton* saveSlot2 = nullptr;
+	GuiControlButton* saveSlot3 = nullptr;
+	GuiControlButton* saveSlot4 = nullptr;
+	GuiControlButton* saveSlot5 = nullptr;
 	
 	bool exitPressed = false;
 
