@@ -26,6 +26,7 @@ bool debug = false;
 bool fpsLimiter = false;
 bool freeCam = false;
 bool paused = false;
+int currentSlot = 0;
 
 int main(int argc, char* args[])
 {

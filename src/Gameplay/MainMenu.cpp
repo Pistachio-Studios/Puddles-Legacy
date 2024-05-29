@@ -393,7 +393,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 23:
 		// Saves popUp
-		if (crossOButton == nullptr) {
+		if (popUpLoad == nullptr) {
 			// Disable the buttons
 			playButton->state = GuiControlState::DISABLED;
 			optionsButton->state = GuiControlState::DISABLED;
@@ -411,8 +411,6 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			saveSlot4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 28, "Save Slot 4", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 350), 340, 75 }, this);
 			saveSlot5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 29, "Save Slot 5", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 450), 340, 75 }, this);
 
-
-
 			// Create the cross button
 			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 100), static_cast<int>(windowH / 2 - 25), 30, 30 };
 			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
@@ -420,22 +418,48 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		}
 		break;
 	case 24:
-		// Credits popUp
+		// Change to credits scene
+		app->sceneManager->ChangeScene("creditsScene");
 		break;
 	case 25:
-		// Save Slot 1
+		if (popUpLoad != nullptr) {
+			// Save Slot 1
+			// Go to the save scene
+			app->sceneManager->ChangeScene("1");
+			currentSlot = 1;
+		}
 		break;
 	case 26:
-		// Save Slot 2
+		if (popUpLoad != nullptr) {
+			// Save Slot 2
+			// Go to the save scene
+			app->sceneManager->ChangeScene("2");
+			currentSlot = 2;
+		}
 		break;
 	case 27:
-		// Save Slot 3
+		if (popUpLoad != nullptr) {
+			// Save Slot 3
+			// Go to the save scene
+			app->sceneManager->ChangeScene("3");
+			currentSlot = 3;
+		}
 		break;
 	case 28:
-		// Save Slot 4
+		if (popUpLoad != nullptr) {
+			// Save Slot 4
+			// Go to the save scene
+			app->sceneManager->ChangeScene("4");
+			currentSlot = 4;
+		}
 		break;
 	case 29:
-		// Save Slot 5
+		if (popUpLoad != nullptr) {
+			// Save Slot 5
+			// Go to the save scene
+			app->sceneManager->ChangeScene("5");
+			currentSlot = 5;
+		}
 		break;
 	}
 	return true;
