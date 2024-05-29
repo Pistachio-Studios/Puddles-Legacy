@@ -210,6 +210,27 @@ bool TutorialScene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 
+
+	//if (app->entityManager->GetPlayerEntity()->position.x <= 2000){
+
+	//	app->entityManager->GetPlayerEntity()->position.x = 2000;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.x >= 3840) {
+
+	//	app->entityManager->GetPlayerEntity()->position.x = 3840;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.y <= 0) {
+
+	//	app->entityManager->GetPlayerEntity()->position.y = 0;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.y >= 5120) {
+
+	//	app->entityManager->GetPlayerEntity()->position.y = 5120;
+	//}
+
 	return true;
 }
 

@@ -76,9 +76,9 @@ bool ForestScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
-	PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
-	changeTown->ctype = ColliderType::CHANGESCENE;
-	changeTown->listener = player;
+	//PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
+	//changeTown->ctype = ColliderType::CHANGESCENE;
+	//changeTown->listener = player;
 
 	return true;
 }
@@ -115,6 +115,33 @@ bool ForestScene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 
+	//if (app->entityManager->GetPlayerEntity()->position.x <= 0 || app->render->camera.x <= 0) {
+
+	//	app->entityManager->GetPlayerEntity()->position.x = 0;
+	//	app->render->camera.x = 0;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.x >= 5760 || app->render->camera.x >= 5760) {
+
+	//	app->entityManager->GetPlayerEntity()->position.x = 5760;
+	//	app->render->camera.x = 5760;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.y <= 0 || app->render->camera.y <= 0) {
+
+	//	app->entityManager->GetPlayerEntity()->position.y = 0;
+	//	app->render->camera.x = 0;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.y >= 5376 || app->render->camera.y >= 5376) {
+
+	//	app->entityManager->GetPlayerEntity()->position.y = 5376;
+	//	app->render->camera.x = 5376;
+	//}
+
+	if (app->entityManager->GetPlayerEntity()->position.x >= 2688 && app->entityManager->GetPlayerEntity()->position.x <= 3072 && app->entityManager->GetPlayerEntity()->position.y <= 1220) {
+		app->sceneManager->ChangeScene("townscene");
+	}
 
 	return true;
 }

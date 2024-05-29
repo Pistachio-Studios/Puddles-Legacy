@@ -41,7 +41,7 @@
 		<forestscene>
 			<map path="Assets/Maps/Forest-Level/" name="Bosque.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
+			<player x="2850" y="5000" texturepath="Assets/Textures/Player.png" />
 			<enemies />
 		</forestscene>
 		<townscene>
@@ -51,7 +51,7 @@
 			<enemies />
 		</townscene>
 		<tavernscene>
-			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx" />
+			<map path="Assets/Maps/Tavern/" name="Tavern.tmx" />
 			<camera x="-530" y="-1949" />
 			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
 			<enemies />

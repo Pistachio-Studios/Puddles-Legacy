@@ -123,6 +123,12 @@ bool TownScene::Update(float dt)
 	}
 
 
+	//Teleport Tavern
+	if (app->entityManager->GetPlayerEntity()->position.x <= 3072 && app->entityManager->GetPlayerEntity()->position.x >= 2816 && app->entityManager->GetPlayerEntity()->position.y <= 1920 && app->entityManager->GetPlayerEntity()->position.y >= 1792){
+		app->sceneManager->ChangeScene("tavernscene");
+	}
+
+
 	return true;
 }
 
