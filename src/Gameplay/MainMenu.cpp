@@ -404,17 +404,16 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			// Create the popUp
 			popUpLoad = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", { 0,0,0,0 }, this);
 
-			// Create the saves slots
-			saveSlot1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 25, "Save Slot 1", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 50), 340, 75 }, this);
-			saveSlot2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 26, "Save Slot 2", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 150), 340, 75 }, this);
-			saveSlot3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 27, "Save Slot 3", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 250), 340, 75 }, this);
-			saveSlot4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 28, "Save Slot 4", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 350), 340, 75 }, this);
-			saveSlot5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 29, "Save Slot 5", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 450), 340, 75 }, this);
-
 			// Create the cross button
 			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 100), static_cast<int>(windowH / 2 - 25), 30, 30 };
 			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
 
+			// Create the saves slots
+			saveSlot1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 25, "Save Slot 1", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 50), 150, 20 }, this);
+			saveSlot2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 26, "Save Slot 2", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 150), 150, 20 }, this);
+			saveSlot3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 27, "Save Slot 3", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 250), 150, 20 }, this);
+			saveSlot4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 28, "Save Slot 4", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 350), 150, 20 }, this);
+			saveSlot5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 29, "Save Slot 5", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 450), 150, 20 }, this);
 		}
 		break;
 	case 24:
