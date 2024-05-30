@@ -48,8 +48,8 @@ public:
     Scene* GetCurrentScene();
 
     // Load / Save
-    bool LoadState(pugi::xml_node&);
-    bool SaveState(pugi::xml_node&) const;
+    bool LoadState(pugi::xml_node node);
+    bool SaveState(pugi::xml_node node);
 
 public:
     Scene* currentScene = nullptr;

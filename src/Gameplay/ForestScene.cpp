@@ -64,15 +64,19 @@ bool ForestScene::Enter()
 	gcResume->SetObserver(this);
 	gcResume->state = GuiControlState::DISABLED;
 
-	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Save", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave->SetObserver(this);
+	gcSave->state = GuiControlState::DISABLED;
+
+	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
 	gcSettings->SetObserver(this);
 	gcSettings->state = GuiControlState::DISABLED;
 
-	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
+	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
 	gcBackToTitle->SetObserver(this);
 	gcBackToTitle->state = GuiControlState::DISABLED;
 
-	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
+	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 100, 300, 50 }, this);
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
@@ -136,6 +140,7 @@ bool ForestScene::PostUpdate()
 			gcSettings->state = GuiControlState::NORMAL;
 			gcBackToTitle->state = GuiControlState::NORMAL;
 			gcExit->state = GuiControlState::NORMAL;
+			gcSave->state = GuiControlState::NORMAL;
 		}
 		else
 		{
@@ -144,6 +149,7 @@ bool ForestScene::PostUpdate()
 			gcSettings->state = GuiControlState::DISABLED;
 			gcBackToTitle->state = GuiControlState::DISABLED;
 			gcExit->state = GuiControlState::DISABLED;
+			gcSave->state = GuiControlState::DISABLED;
 		}
 	}
 
@@ -165,6 +171,7 @@ bool ForestScene::Exit()
 	app->guiManager->RemoveGuiControl(gcSettings);
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
+	app->guiManager->RemoveGuiControl(gcSave);
 
 	return true;
 }
@@ -180,13 +187,13 @@ bool ForestScene::CleanUp()
 	app->guiManager->RemoveGuiControl(gcSettings);
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
+	app->guiManager->RemoveGuiControl(gcSave);
 
 	return true;
 }
 
 bool ForestScene::OnGuiMouseClickEvent(GuiControl* control)
 {
-	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
 
 	switch (control->id)
@@ -197,6 +204,7 @@ bool ForestScene::OnGuiMouseClickEvent(GuiControl* control)
 		gcSettings->state = GuiControlState::DISABLED;
 		gcBackToTitle->state = GuiControlState::DISABLED;
 		gcExit->state = GuiControlState::DISABLED;
+		gcSave->state = GuiControlState::DISABLED;
 		break;
 	case 7:
 		break;
@@ -205,6 +213,9 @@ bool ForestScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 9:
 		exitPressed = true;
+		break;
+	case 10:
+		app->SaveRequest();
 		break;
 	}
 

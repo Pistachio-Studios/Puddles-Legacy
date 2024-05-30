@@ -27,10 +27,16 @@ bool MainMenu::Enter()
 	SDL_Rect playPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 50), 340,75};
 	playButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "  Play  ", playPos, this);
 
-	SDL_Rect optionsPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 150), 340,75};
+	SDL_Rect loadPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 150), 340,75};
+	loadButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 23, "  Load  ", loadPos, this);
+
+	SDL_Rect optionsPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 250), 340,75};
 	optionsButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, " Options ", optionsPos, this);
 
-	SDL_Rect exitPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 250), 340,75};
+	SDL_Rect creditsPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 350), 340,75};
+	creditsButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 24, " Credits ", creditsPos, this);
+
+	SDL_Rect exitPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 450), 340,75};
 	exitButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "  Exit  ", exitPos, this);
 
 	gameTitle = app->tex->Load(parameters.child("gameTitle").attribute("texturepath").as_string());
@@ -80,6 +86,8 @@ bool MainMenu::Exit()
 	app->guiManager->RemoveGuiControl(playButton);
 	app->guiManager->RemoveGuiControl(optionsButton);
 	app->guiManager->RemoveGuiControl(exitButton);
+	app->guiManager->RemoveGuiControl(creditsButton);
+	app->guiManager->RemoveGuiControl(loadButton);
 	app->guiManager->RemoveGuiControl(fx);
 	app->guiManager->RemoveGuiControl(vsync);
 	app->guiManager->RemoveGuiControl(screenMode);
@@ -97,6 +105,11 @@ bool MainMenu::Exit()
 	app->guiManager->RemoveGuiControl(res1024x768);
 	app->guiManager->RemoveGuiControl(res800x600);
 	app->guiManager->RemoveGuiControl(res640x480);
+	app->guiManager->RemoveGuiControl(saveSlot1);
+	app->guiManager->RemoveGuiControl(saveSlot2);
+	app->guiManager->RemoveGuiControl(saveSlot3);
+	app->guiManager->RemoveGuiControl(saveSlot4);
+	app->guiManager->RemoveGuiControl(saveSlot5);
 	return true;
 }
 
@@ -108,6 +121,8 @@ bool MainMenu::CleanUp()
 	app->guiManager->RemoveGuiControl(playButton);
 	app->guiManager->RemoveGuiControl(optionsButton);
 	app->guiManager->RemoveGuiControl(exitButton);
+	app->guiManager->RemoveGuiControl(creditsButton);
+	app->guiManager->RemoveGuiControl(loadButton);
 	app->guiManager->RemoveGuiControl(fx);
 	app->guiManager->RemoveGuiControl(vsync);
 	app->guiManager->RemoveGuiControl(screenMode);
@@ -125,6 +140,11 @@ bool MainMenu::CleanUp()
 	app->guiManager->RemoveGuiControl(res1024x768);
 	app->guiManager->RemoveGuiControl(res800x600);
 	app->guiManager->RemoveGuiControl(res640x480);
+	app->guiManager->RemoveGuiControl(saveSlot1);
+	app->guiManager->RemoveGuiControl(saveSlot2);
+	app->guiManager->RemoveGuiControl(saveSlot3);
+	app->guiManager->RemoveGuiControl(saveSlot4);
+	app->guiManager->RemoveGuiControl(saveSlot5);
 	return true;
 }
 
@@ -146,6 +166,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			playButton->state = GuiControlState::DISABLED;
 			optionsButton->state = GuiControlState::DISABLED;
 			exitButton->state = GuiControlState::DISABLED;
+			creditsButton->state = GuiControlState::DISABLED;
+			loadButton->state = GuiControlState::DISABLED;
 
 			// Create the popUp
 			popUpOptions = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", { 0,0,0,0 }, this);
@@ -196,6 +218,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			playButton->state = GuiControlState::NORMAL;
 			optionsButton->state = GuiControlState::NORMAL;
 			exitButton->state = GuiControlState::NORMAL;
+			creditsButton->state = GuiControlState::NORMAL;
+			loadButton->state = GuiControlState::NORMAL;
 
 			// Remove the popUp
 			app->guiManager->RemoveGuiControl(popUpOptions);
@@ -238,6 +262,19 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			res800x600 = nullptr;
 			app->guiManager->RemoveGuiControl(res640x480);
 			res640x480 = nullptr;
+
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
+			app->guiManager->RemoveGuiControl(saveSlot1);
+			saveSlot1 = nullptr;
+			app->guiManager->RemoveGuiControl(saveSlot2);
+			saveSlot2 = nullptr;
+			app->guiManager->RemoveGuiControl(saveSlot3);
+			saveSlot3 = nullptr;
+			app->guiManager->RemoveGuiControl(saveSlot4);
+			saveSlot4 = nullptr;
+			app->guiManager->RemoveGuiControl(saveSlot5);
+			saveSlot5 = nullptr;
 		}
 		break;
 	case 6:
@@ -352,6 +389,165 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			// Set the resolution to 640x480
 			app->win->SetResolution(640, 480);
 			resolution->text = "Resolution: 640x480";
+		}
+		break;
+	case 23:
+		// Saves popUp
+		if (popUpLoad == nullptr) {
+			// Disable the buttons
+			playButton->state = GuiControlState::DISABLED;
+			optionsButton->state = GuiControlState::DISABLED;
+			exitButton->state = GuiControlState::DISABLED;
+			creditsButton->state = GuiControlState::DISABLED;
+			loadButton->state = GuiControlState::DISABLED;
+
+			// Create the popUp
+			popUpLoad = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", { 0,0,0,0 }, this);
+
+			// Create the cross button
+			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 100), static_cast<int>(windowH / 2 - 25), 30, 30 };
+			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
+
+			// Create the saves slots
+			saveSlot1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 25, "Save Slot 1", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 50), 150, 20 }, this);
+			saveSlot2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 26, "Save Slot 2", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 150), 150, 20 }, this);
+			saveSlot3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 27, "Save Slot 3", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 250), 150, 20 }, this);
+			saveSlot4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 28, "Save Slot 4", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 350), 150, 20 }, this);
+			saveSlot5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 29, "Save Slot 5", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 450), 150, 20 }, this);
+		}
+		break;
+	case 24:
+		// Change to credits scene
+		app->sceneManager->ChangeScene("creditsScene");
+		break;
+	case 25:
+		if (popUpLoad != nullptr) {
+			// Save Slot 1
+			// Go to the save scene
+			pugi::xml_document doc;
+			pugi::xml_parse_result result = doc.load_file("save_game_1.xml");
+			if (result) {
+				pugi::xml_node sceneManagerNode = doc.child("game_state").child("scene_manager");
+				pugi::xml_node currentSceneNode = sceneManagerNode.child("currentScene");
+
+				if (currentSceneNode) {
+					const char* sceneName = currentSceneNode.attribute("name").value();
+					app->sceneManager->ChangeScene(sceneName);
+					currentSlot = 1;
+				} else {
+					// Handle error: currentScene node not found
+					LOG("Error: currentScene node not found");
+				}
+			} else {
+				// XML file does not exist, create it
+				currentSlot = 1;
+				LOG("Creating save_game_1.xml file");
+				app->SaveRequest();
+			}
+		}
+		break;
+	case 26:
+		if (popUpLoad != nullptr) {
+			// Save Slot 2
+			// Go to the save scene
+			pugi::xml_document doc;
+			pugi::xml_parse_result result = doc.load_file("save_game_2.xml");
+			if (result) {
+				pugi::xml_node sceneManagerNode = doc.child("game_state").child("scene_manager");
+				pugi::xml_node currentSceneNode = sceneManagerNode.child("currentScene");
+
+				if (currentSceneNode) {
+					const char* sceneName = currentSceneNode.attribute("name").value();
+					app->sceneManager->ChangeScene(sceneName);
+					currentSlot = 2;
+				} else {
+					// Handle error: currentScene node not found
+					LOG("Error: currentScene node not found");
+				}
+			} else {
+			// XML file does not exist, create it
+				currentSlot = 2;
+				LOG("Creating save_game_2.xml file");
+				app->SaveRequest();
+			}
+		}
+		break;
+	case 27:
+		if (popUpLoad != nullptr) {
+			// Save Slot 3
+			// Go to the save scene
+			pugi::xml_document doc;
+			pugi::xml_parse_result result = doc.load_file("save_game_3.xml");
+			if (result) {
+				pugi::xml_node sceneManagerNode = doc.child("game_state").child("scene_manager");
+				pugi::xml_node currentSceneNode = sceneManagerNode.child("currentScene");
+
+				if (currentSceneNode) {
+					const char* sceneName = currentSceneNode.attribute("name").value();
+					app->sceneManager->ChangeScene(sceneName);
+					currentSlot = 3;
+				} else {
+					// Handle error: currentScene node not found
+					LOG("Error: currentScene node not found");
+				}
+			} else {
+				// XML file does not exist, create it
+				currentSlot = 3;
+				LOG("Creating save_game_3.xml file");
+				app->SaveRequest();
+			}
+		}
+		break;
+	case 28:
+		if (popUpLoad != nullptr) {
+			// Save Slot 4
+			// Go to the save scene
+			pugi::xml_document doc;
+			pugi::xml_parse_result result = doc.load_file("save_game_4.xml");
+			if (result) {
+				pugi::xml_node sceneManagerNode = doc.child("game_state").child("scene_manager");
+				pugi::xml_node currentSceneNode = sceneManagerNode.child("currentScene");
+
+				if (currentSceneNode) {
+					const char* sceneName = currentSceneNode.attribute("name").value();
+					app->sceneManager->ChangeScene(sceneName);
+					currentSlot = 4;
+				} else {
+					// Handle error: currentScene node not found
+					LOG("Error: currentScene node not found");
+				}
+			} else {
+				// XML file does not exist, create it
+				currentSlot = 4;
+				LOG("Creating save_game_4.xml file");
+				app->SaveRequest();
+			}
+		}
+		break;
+	case 29:
+		if (popUpLoad != nullptr) {
+			// Save Slot 5
+			// Go to the save scene
+			pugi::xml_document doc;
+			pugi::xml_parse_result result = doc.load_file("save_game_5.xml");
+			if (result) {
+				pugi::xml_node sceneManagerNode = doc.child("game_state").child("scene_manager");
+				pugi::xml_node currentSceneNode = sceneManagerNode.child("currentScene");
+
+				if (currentSceneNode) {
+					const char* sceneName = currentSceneNode.attribute("name").value();
+					app->sceneManager->ChangeScene(sceneName);
+					currentSlot = 5;
+				} else {
+					// Handle error: currentScene node not found
+					LOG("Error: currentScene node not found");
+				}
+			} else {
+				// XML file does not exist, create it
+				currentSlot = 5;
+				LOG("Creating save_game_5.xml file");
+				app->SaveRequest();
+			}
 		}
 		break;
 	}
