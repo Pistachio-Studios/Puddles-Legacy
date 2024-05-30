@@ -288,9 +288,17 @@ bool SceneManager::SaveState(pugi::xml_node node)
 
     // Save the current scene name
     pugi::xml_node sceneNode = node.append_child("currentScene");
-    sceneNode.append_attribute("name").set_value(currentScene->name.GetString());
 
-    LOG("Saving current scene: %s", currentScene->name.GetString());
+    // Check if the current scene is "mainmenu"
+    if (strcmp(currentScene->name.GetString(), "mainmenu") == 0) {
+        // If it is, save "tutorialscene" instead
+        sceneNode.append_attribute("name").set_value("tutorialscene");
+        LOG("Saving current scene: tutorialscene");
+    } else {
+        // If it's not, save the actual current scene name
+        sceneNode.append_attribute("name").set_value(currentScene->name.GetString());
+        LOG("Saving current scene: %s", currentScene->name.GetString());
+    }
 
     ret = currentScene->SaveState(node);
 

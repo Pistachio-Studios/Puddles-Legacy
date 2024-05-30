@@ -424,40 +424,130 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		if (popUpLoad != nullptr) {
 			// Save Slot 1
 			// Go to the save scene
-			app->sceneManager->ChangeScene("1");
-			currentSlot = 1;
+			pugi::xml_document doc;
+			pugi::xml_parse_result result = doc.load_file("save_game_1.xml");
+			if (result) {
+				pugi::xml_node sceneManagerNode = doc.child("game_state").child("scene_manager");
+				pugi::xml_node currentSceneNode = sceneManagerNode.child("currentScene");
+
+				if (currentSceneNode) {
+					const char* sceneName = currentSceneNode.attribute("name").value();
+					app->sceneManager->ChangeScene(sceneName);
+					currentSlot = 1;
+				} else {
+					// Handle error: currentScene node not found
+					LOG("Error: currentScene node not found");
+				}
+			} else {
+				// XML file does not exist, create it
+				currentSlot = 1;
+				LOG("Creating save_game_1.xml file");
+				app->SaveRequest();
+			}
 		}
 		break;
 	case 26:
 		if (popUpLoad != nullptr) {
 			// Save Slot 2
 			// Go to the save scene
-			app->sceneManager->ChangeScene("2");
-			currentSlot = 2;
+			pugi::xml_document doc;
+			pugi::xml_parse_result result = doc.load_file("save_game_2.xml");
+			if (result) {
+				pugi::xml_node sceneManagerNode = doc.child("game_state").child("scene_manager");
+				pugi::xml_node currentSceneNode = sceneManagerNode.child("currentScene");
+
+				if (currentSceneNode) {
+					const char* sceneName = currentSceneNode.attribute("name").value();
+					app->sceneManager->ChangeScene(sceneName);
+					currentSlot = 2;
+				} else {
+					// Handle error: currentScene node not found
+					LOG("Error: currentScene node not found");
+				}
+			} else {
+			// XML file does not exist, create it
+				currentSlot = 2;
+				LOG("Creating save_game_2.xml file");
+				app->SaveRequest();
+			}
 		}
 		break;
 	case 27:
 		if (popUpLoad != nullptr) {
 			// Save Slot 3
 			// Go to the save scene
-			app->sceneManager->ChangeScene("3");
-			currentSlot = 3;
+			pugi::xml_document doc;
+			pugi::xml_parse_result result = doc.load_file("save_game_3.xml");
+			if (result) {
+				pugi::xml_node sceneManagerNode = doc.child("game_state").child("scene_manager");
+				pugi::xml_node currentSceneNode = sceneManagerNode.child("currentScene");
+
+				if (currentSceneNode) {
+					const char* sceneName = currentSceneNode.attribute("name").value();
+					app->sceneManager->ChangeScene(sceneName);
+					currentSlot = 3;
+				} else {
+					// Handle error: currentScene node not found
+					LOG("Error: currentScene node not found");
+				}
+			} else {
+				// XML file does not exist, create it
+				currentSlot = 3;
+				LOG("Creating save_game_3.xml file");
+				app->SaveRequest();
+			}
 		}
 		break;
 	case 28:
 		if (popUpLoad != nullptr) {
 			// Save Slot 4
 			// Go to the save scene
-			app->sceneManager->ChangeScene("4");
-			currentSlot = 4;
+			pugi::xml_document doc;
+			pugi::xml_parse_result result = doc.load_file("save_game_4.xml");
+			if (result) {
+				pugi::xml_node sceneManagerNode = doc.child("game_state").child("scene_manager");
+				pugi::xml_node currentSceneNode = sceneManagerNode.child("currentScene");
+
+				if (currentSceneNode) {
+					const char* sceneName = currentSceneNode.attribute("name").value();
+					app->sceneManager->ChangeScene(sceneName);
+					currentSlot = 4;
+				} else {
+					// Handle error: currentScene node not found
+					LOG("Error: currentScene node not found");
+				}
+			} else {
+				// XML file does not exist, create it
+				currentSlot = 4;
+				LOG("Creating save_game_4.xml file");
+				app->SaveRequest();
+			}
 		}
 		break;
 	case 29:
 		if (popUpLoad != nullptr) {
 			// Save Slot 5
 			// Go to the save scene
-			app->sceneManager->ChangeScene("5");
-			currentSlot = 5;
+			pugi::xml_document doc;
+			pugi::xml_parse_result result = doc.load_file("save_game_5.xml");
+			if (result) {
+				pugi::xml_node sceneManagerNode = doc.child("game_state").child("scene_manager");
+				pugi::xml_node currentSceneNode = sceneManagerNode.child("currentScene");
+
+				if (currentSceneNode) {
+					const char* sceneName = currentSceneNode.attribute("name").value();
+					app->sceneManager->ChangeScene(sceneName);
+					currentSlot = 5;
+				} else {
+					// Handle error: currentScene node not found
+					LOG("Error: currentScene node not found");
+				}
+			} else {
+				// XML file does not exist, create it
+				currentSlot = 5;
+				LOG("Creating save_game_5.xml file");
+				app->SaveRequest();
+			}
 		}
 		break;
 	}
