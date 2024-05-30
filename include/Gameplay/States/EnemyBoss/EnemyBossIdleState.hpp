@@ -24,6 +24,10 @@ public:
     {
         LOG("EnemyBossIdleState Update()");
 
+        //Animation
+        app->render->DrawTexture(enemyboss->bossIdle.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossIdle.GetCurrentFrame());
+        enemyboss->bossIdle.Update(dt);
+
         player = app->entityManager->GetPlayerEntity();
 
         if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 3.0f)

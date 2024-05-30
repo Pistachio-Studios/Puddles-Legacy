@@ -1,4 +1,4 @@
-#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
+#include "Gameplay/Entities/Enemies/MiniSpider.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -11,13 +11,14 @@
 #include "Utils/StateMachine.h"
 #include "Core/SceneManager.h"
 #include "Core/Map.h"
+#include "Core/AnimationManager.h"
 
 
-#include "Gameplay/States/FlyingEnemy/FlyingEnemyIdleState.hpp"
-#include "Gameplay/States/FlyingEnemy/FlyingEnemyAttackState.hpp"
-#include "Gameplay/States/FlyingEnemy/FlyingEnemyMoveState.hpp"
-#include "Gameplay/States/FlyingEnemy/FlyingEnemyHurtState.hpp"
-#include "Gameplay/States/FlyingEnemy/FlyingEnemyDeadState.hpp"
+#include "Gameplay/States/MiniSpider/MiniSpiderIdleState.hpp"
+#include "Gameplay/States/MiniSpider/MiniSpiderAttackState.hpp"
+#include "Gameplay/States/MiniSpider/MiniSpiderMoveState.hpp"
+#include "Gameplay/States/MiniSpider/MiniSpiderHurtState.hpp"
+#include "Gameplay/States/MiniSpider/MiniSpiderDeadState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -28,21 +29,21 @@
 
 #include <imgui.h>
 
-FlyingEnemy::FlyingEnemy() : Entity(EntityType::FLYINGENEMY)
+MiniSpider::MiniSpider() : Entity(EntityType::MINISPIDER)
 {
-	name.Create("FlyingEnemy");
+	name.Create("MiniSpider");
 }
 
-FlyingEnemy::~FlyingEnemy() {
+MiniSpider::~MiniSpider() {
 
 }
 
-bool FlyingEnemy::Awake() {
+bool MiniSpider::Awake() {
 
 	return true;
 }
 
-bool FlyingEnemy::Start() {
+bool MiniSpider::Start() {
 
 	pathfinding = new PathFinding();
 
@@ -55,7 +56,7 @@ bool FlyingEnemy::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 36, 36, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 128, 128, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
@@ -66,17 +67,33 @@ bool FlyingEnemy::Start() {
 
 	player = app->entityManager->GetPlayerEntity();
 
-	movementFSM = new StateMachine<FlyingEnemy>(this);
-	movementFSM->AddState(new FlyingEnemyIdleState("idle"));
-	movementFSM->AddState(new FlyingEnemyMoveState("move"));
-	movementFSM->AddState(new FlyingEnemyHurtState("hurt"));
-	movementFSM->AddState(new FlyingEnemyAttackState("attack"));
-	movementFSM->AddState(new FlyingEnemyDeadState("die"));
+	movementFSM = new StateMachine<MiniSpider>(this);
+	movementFSM->AddState(new MiniSpiderIdleState("idle"));
+	movementFSM->AddState(new MiniSpiderMoveState("move"));
+	movementFSM->AddState(new MiniSpiderHurtState("hurt"));
+	movementFSM->AddState(new MiniSpiderAttackState("attack"));
+	movementFSM->AddState(new MiniSpiderDeadState("die"));
+
+	//Animations
+	spiderIdle = *app->animationManager->GetAnimByName("Mini_Spider_Idle");
+	spiderIdle.speed = 2.0f;
+
+	spiderAttack = *app->animationManager->GetAnimByName("Mini_Spider_Atacar");
+	spiderAttack.speed = 2.0f;
+
+	spiderMove = *app->animationManager->GetAnimByName("Mini_Spider_Volar");
+	spiderMove.speed = 2.0f;
+
+	spiderDamage = *app->animationManager->GetAnimByName("Mini_Spider_Damage");
+	spiderDamage.speed = 2.0f;
+
+	spiderDeath = *app->animationManager->GetAnimByName("Mini_Spider_Muerte");
+	spiderDeath.speed = 2.0f;
 
 	return true;
 }
 
-bool FlyingEnemy::Update(float dt)
+bool MiniSpider::Update(float dt)
 {
 
 	if (movementFSM->GetCurrentState().name != "die") {
@@ -95,7 +112,7 @@ bool FlyingEnemy::Update(float dt)
 			}
 		}
 
-		app->render->DrawRectangle({ position.x - 1, position.y - 2, 36, 36 }, 0, 50, 255);
+		//app->render->DrawRectangle({ position.x - 1, position.y - 2, 36, 36 }, 0, 50, 255);
 
 		app->render->DrawCircle(position.x, position.y + 5, 1, 0, 0, 0, 0);
 		/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
@@ -111,41 +128,41 @@ bool FlyingEnemy::Update(float dt)
 	return true;
 }
 
-void FlyingEnemy::DrawImGui()
+void MiniSpider::DrawImGui()
 {
-	ImGui::Begin("FlyingEnemy");
-	ImGui::Text("FlyingEnemy Position: %d, %d", position.x, position.y);
-	ImGui::Text("FlyingEnemy Speed: %f", pbody->body->GetLinearVelocity().Length());
+	ImGui::Begin("MiniSpider");
+	ImGui::Text("MiniSpider Position: %d, %d", position.x, position.y);
+	ImGui::Text("MiniSpider Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
 	ImGui::End();
 }
 
-void FlyingEnemy::Idle(float dt) {
+void MiniSpider::Idle(float dt) {
 
 }
 
-void FlyingEnemy::Move(float dt) {
+void MiniSpider::Move(float dt) {
 	// TODO move logic
 }
 
-void FlyingEnemy::Attack(float dt)
+void MiniSpider::Attack(float dt)
 {
 
 }
 
-bool FlyingEnemy::SaveState(pugi::xml_node& node) {
+bool MiniSpider::SaveState(pugi::xml_node& node) {
 
-	pugi::xml_node enemybossAttributes = node.append_child("enemies").append_child("FlyingEnemy");
+	pugi::xml_node enemybossAttributes = node.append_child("enemies").append_child("MiniSpider");
 	enemybossAttributes.append_attribute("x").set_value(this->position.x);
 	enemybossAttributes.append_attribute("y").set_value(this->position.y);
 
 	return true;
 }
 
-bool FlyingEnemy::LoadState(pugi::xml_node& node)
+bool MiniSpider::LoadState(pugi::xml_node& node)
 {
-	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("enemies").child("FlyingEnemy").attribute("x").as_int()), PIXEL_TO_METERS(node.child("enemies").child("FlyingEnemy").attribute("y").as_int()) }, node.child("enemies").child("FlyingEnemy").attribute("angle").as_int());
+	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("enemies").child("MiniSpider").attribute("x").as_int()), PIXEL_TO_METERS(node.child("enemies").child("MiniSpider").attribute("y").as_int()) }, node.child("enemies").child("MiniSpider").attribute("angle").as_int());
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
@@ -153,7 +170,7 @@ bool FlyingEnemy::LoadState(pugi::xml_node& node)
 	return true;
 }
 
-void FlyingEnemy::StopMoving()
+void MiniSpider::StopMoving()
 {
 	if (PIXEL_TO_METERS(player->position.DistanceTo(position)) > 5.0f) { updateSpeed == noSpeed; }
 	else { updateSpeed == moveSpeed; }
@@ -164,7 +181,7 @@ void FlyingEnemy::StopMoving()
 	pbody->body->SetAwake(true);
 }
 
-void FlyingEnemy::moveToSpawnPoint()
+void MiniSpider::moveToSpawnPoint()
 {
 	position = spawnPosition;
 
@@ -174,7 +191,7 @@ void FlyingEnemy::moveToSpawnPoint()
 	pbody->body->SetAwake(true);
 }
 
-bool FlyingEnemy::CleanUp() {
+bool MiniSpider::CleanUp() {
 
 	app->tex->UnLoad(texture);
 	app->physics->DestroyBody(pbody);
@@ -182,7 +199,7 @@ bool FlyingEnemy::CleanUp() {
 	return true;
 }
 
-void FlyingEnemy::OnCollision(PhysBody* physA, PhysBody* physB) {
+void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype) {
 	
@@ -214,11 +231,11 @@ void FlyingEnemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-void FlyingEnemy::EndCollision(PhysBody* physA, PhysBody* physB) {
+void MiniSpider::EndCollision(PhysBody* physA, PhysBody* physB) {
 
 }
 
-void FlyingEnemy::pathfindingMovement(float dt) {
+void MiniSpider::pathfindingMovement(float dt) {
 
 	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //a�adir el tile size / 2 hace que el owl se acerque mas 
 
@@ -267,6 +284,6 @@ void FlyingEnemy::pathfindingMovement(float dt) {
 	}
 }
 
-void FlyingEnemy::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
+void MiniSpider::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
 
 }

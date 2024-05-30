@@ -25,13 +25,22 @@ public:
     {
         LOG("EnemyBossAttackState Update()");
 
+        //Animation
+        app->render->DrawTexture(enemyboss->bossBodyAttack.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossBodyAttack.GetCurrentFrame());
+        enemyboss->bossBodyAttack.Update(dt);
+
+        //Animation para cuando dispare
+        //app->render->DrawTexture(enemyboss->bossDistanceAttack.texture, enemyboss->position.x - 100, enemyboss->position.y - 150, &enemyboss->bossDistanceAttack.GetCurrentFrame());
+        //enemyboss->bossDistanceAttack.Update(dt);
+
+
         /*b2Vec2 attackDirection = { (float32)player->position.x - enemyboss->position.x, (float32)player->position.y - enemyboss->position.y };
         attackDirection.Normalize(); 
 
         b2Vec2 attackImpulse = { attackDirection.x, attackDirection.y }; 
 
         enemyboss->pbody->body->ApplyLinearImpulse(attackImpulse, enemyboss->pbody->body->GetWorldCenter(), true);*/
-        app->render->DrawRectangle({ enemyboss->position.x - 5, enemyboss->position.y - 2, 36, 36 }, 0, 50, 255);
+        //app->render->DrawRectangle({ enemyboss->position.x - 5, enemyboss->position.y - 2, 36, 36 }, 0, 50, 255);
 
         enemyboss->attackTimer.Start(); 
         StateMachineReference->ChangeState("move"); 

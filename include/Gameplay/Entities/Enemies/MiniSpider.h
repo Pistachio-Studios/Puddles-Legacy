@@ -1,9 +1,10 @@
-#ifndef __FLYINGENEMY_H__
-#define __FLYINGENEMY_H__
+#ifndef __MINISPIDER_H__
+#define __MINISPIDER_H__
 
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
+#include "Core/Animation.h"
 
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
@@ -16,7 +17,7 @@ class Player;
 
 class ParticleGenerator;
 
-class FlyingEnemy : public Entity
+class MiniSpider : public Entity
 {
 public:
 
@@ -27,9 +28,9 @@ public:
 	void Move(float dt) override;
 	void Attack(float dt) override;
 
-	FlyingEnemy();
+	MiniSpider();
 
-	virtual ~FlyingEnemy();
+	virtual ~MiniSpider();
 
 	bool Awake() override;
 
@@ -58,6 +59,8 @@ public:
 
 public:
 
+	Animation spiderIdle, spiderAttack, spiderMove, spiderDamage, spiderDeath;
+
 	Timer movementDelay;
 
 	const char* texturePath;
@@ -77,7 +80,7 @@ public:
 	b2Vec2 movementDirection;
 
 	//State Machines
-	StateMachine<FlyingEnemy>* movementFSM = nullptr;
+	StateMachine<MiniSpider>* movementFSM = nullptr;
 
 	PhysBody* pbody;
 
@@ -98,4 +101,4 @@ public:
 
 };
 
-#endif // __FLYINGENEMY_H__
+#endif // __MINISPIDER_H__

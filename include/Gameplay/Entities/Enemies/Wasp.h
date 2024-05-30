@@ -5,7 +5,6 @@
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
 #include "Core/Animation.h"
-#include "Gameplay/Entities/Entity.h"
 
 #include <box2d/b2_fixture.h>
 #include <SDL.h>

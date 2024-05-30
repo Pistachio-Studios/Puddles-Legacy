@@ -25,6 +25,10 @@ public:
     {
         LOG("EnemyBossMoveState Update()");
 
+        //Animation
+        app->render->DrawTexture(enemyboss->bossMove.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossMove.GetCurrentFrame());
+        enemyboss->bossMove.Update(dt);
+
         player = app->entityManager->GetPlayerEntity();
 
         enemyboss->pathfindingMovement(dt);

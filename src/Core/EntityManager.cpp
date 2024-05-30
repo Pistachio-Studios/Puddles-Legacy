@@ -2,7 +2,7 @@
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
-#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
+#include "Gameplay/Entities/Enemies/MiniSpider.h"
 #include "Gameplay/Entities/Enemies/Wasp.h"
 #include "Gameplay/Entities/Sword.h"
 #include "Gameplay/Entities/Shield.h"
@@ -103,8 +103,8 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ENEMYBOSS:
 		entity = new EnemyBoss();
 		break;
-	case EntityType::FLYINGENEMY:
-		entity = new FlyingEnemy();
+	case EntityType::MINISPIDER:
+		entity = new MiniSpider();
 		break;
 	case EntityType::WASP:
 		entity = new Wasp();

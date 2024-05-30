@@ -61,10 +61,10 @@
 			<camera x="-530" y="-1949" />
 			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
 			<enemies>
-				<EnemyBoss x="600" y="2032" texturepath="" />
-				<FlyingEnemy x="600" y="2050" texturepath="" />
-				<FlyingEnemy x="700" y="2050" texturepath="" />
-				<FlyingEnemy x="800" y="2050" texturepath="" />
+				<EnemyBoss x="600" y="2032"/>
+				<MiniSpider x="600" y="2050"/>
+				<MiniSpider x="700" y="2050"/>
+				<MiniSpider x="800" y="2050"/>
 				<Wasp x="650" y="2100"/>
 			</enemies>
 			<Npcs>

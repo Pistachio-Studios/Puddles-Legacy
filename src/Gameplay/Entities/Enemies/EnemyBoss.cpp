@@ -11,6 +11,7 @@
 #include "Utils/StateMachine.h"
 #include "Core/SceneManager.h"
 #include "Core/Map.h"
+#include "Core/AnimationManager.h"
 
 
 #include "Gameplay/States/EnemyBoss/EnemyBossIdleState.hpp"
@@ -56,7 +57,7 @@ bool EnemyBoss::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 36, 36, bodyType::DYNAMIC); 
+	pbody = app->physics->CreateRectangle(position.x, position.y, 192, 192, bodyType::DYNAMIC); 
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY; 
 
@@ -73,6 +74,25 @@ bool EnemyBoss::Start() {
 	movementFSM->AddState(new EnemyBossHurtState("hurt"));
 	movementFSM->AddState(new EnemyBossAttackState("attack"));
 	movementFSM->AddState(new EnemyBossDeadState("die"));
+
+	//Animations
+	bossIdle = *app->animationManager->GetAnimByName("Boss_Spider_Idle");
+	bossIdle.speed = 2.0f;
+
+	bossDistanceAttack = *app->animationManager->GetAnimByName("Boss_Spider_Ataque_distancia");
+	bossDistanceAttack.speed = 2.0f;
+
+	bossBodyAttack = *app->animationManager->GetAnimByName("Boss_Spider_Ataque_cuerpo");
+	bossBodyAttack.speed = 2.0f;
+
+	bossMove = *app->animationManager->GetAnimByName("Boss_Spider_Caminar");
+	bossMove.speed = 2.0f;
+
+	bossDamage = *app->animationManager->GetAnimByName("Boss_Spider_Damage");
+	bossDamage.speed = 2.0f;
+
+	bossDeath = *app->animationManager->GetAnimByName("Boss_Spider_Muerte");
+	bossDeath.speed = 2.0f;
 
 	return true;
 }

@@ -55,7 +55,7 @@ bool Wasp::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 36, 18, bodyType::DYNAMIC); 
+	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 64, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY; 
 

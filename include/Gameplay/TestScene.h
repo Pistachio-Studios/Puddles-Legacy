@@ -5,7 +5,7 @@
 #include "Core/Module.h"
 #include "Gameplay/Entities/Player.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
-#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
+#include "Gameplay/Entities/Enemies/MiniSpider.h"
 #include "Gameplay/Entities/Enemies/Wasp.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
@@ -49,7 +49,7 @@ public:
 	bool winCondition = false;
 	Player* player;
 	EnemyBoss* enemyboss;
-	FlyingEnemy* flyingenemy;
+	MiniSpider* minispider;
 	Wasp* wasp;
 
 private:

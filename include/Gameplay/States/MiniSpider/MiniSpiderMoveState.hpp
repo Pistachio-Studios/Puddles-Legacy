@@ -1,0 +1,52 @@
+#ifndef __MINISPIDERMOVESTATE_H__
+#define __MINISPIDERMOVESTATE_H__
+
+#include "Gameplay/Entities/Enemies/MiniSpider.h"
+#include "Utils/State.h"
+#include "Utils/SString.h"
+#include "Utils/Defs.h"
+#include "Gameplay/Entities/Player.h"
+
+class Player;
+class MiniSpiderMoveState : public State<MiniSpider> {
+private:
+    MiniSpider* minispider;
+    Player* player;
+
+public:
+    MiniSpiderMoveState(SString name) : State(name) {}
+    inline void Enter() override
+    {
+        LOG("MiniSpiderMoveState Enter()");
+
+        minispider = StateMachineReference->owner;
+    }
+    inline void Update(float dt) override
+    {
+        LOG("MiniSpiderMoveState Update()");
+
+        //Animation
+        app->render->DrawTexture(minispider->spiderMove.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderMove.GetCurrentFrame());
+        minispider->spiderMove.Update(dt);
+
+        player = app->entityManager->GetPlayerEntity();
+
+        minispider->pathfindingMovement(dt);
+        if (PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 3.0f) {
+            if (minispider->attackTimer.ReadSec() >= 2)
+            {
+                StateMachineReference->ChangeState("attack");
+            }
+        }
+        else if ((PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) > 10.0f)) {
+            //minispider->moveToSpawnPoint();
+            minispider->StopMoving();
+            StateMachineReference->ChangeState("idle");
+        }
+    }
+    inline void Exit() override
+    {
+        LOG("MiniSpiderMoveState Exit()");
+    }
+};
+#endif // __MINISPIDERMOVESTATE_H__

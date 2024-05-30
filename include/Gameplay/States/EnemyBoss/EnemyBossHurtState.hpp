@@ -22,6 +22,10 @@ public:
     {
         LOG("EnemyBossHurtState Update()");
 
+        //Animation
+        app->render->DrawTexture(enemyboss->bossDamage.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossDamage.GetCurrentFrame());
+        enemyboss->bossDamage.Update(dt);
+
         //enemyboss->invencible = true;
         //if (enemyboss->currentAnimation->HasFinished()) {
         //    enemyboss->hurtAnim.Reset();

@@ -28,7 +28,7 @@ public:
         player = app->entityManager->GetPlayerEntity();
 
         //Animation
-        app->render->DrawTexture(wasp->waspMove.texture, wasp->position.x, wasp->position.y, &wasp->waspMove.GetCurrentFrame());
+        app->render->DrawTexture(wasp->waspMove.texture, wasp->position.x - 120, wasp->position.y - 130, &wasp->waspMove.GetCurrentFrame());
         wasp->waspMove.Update(dt);
 
         wasp->pathfindingMovement(dt);

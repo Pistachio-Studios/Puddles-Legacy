@@ -176,6 +176,179 @@
    </animation>
   </tile>
  </tileset>
+ <tileset firstgid="123" name="Mini_Spider_Idle" tilewidth="256" tileheight="256" tilecount="6" columns="6">
+  <image source="MiniAraña/Mini_Spider_Idle.png" width="1536" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="129" name="Mini_Spider_Caminar" tilewidth="256" tileheight="256" tilecount="13" columns="13">
+  <image source="MiniAraña/Mini_Spider_Caminar.png" width="3328" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+    <frame tileid="9" duration="100"/>
+    <frame tileid="10" duration="100"/>
+    <frame tileid="11" duration="100"/>
+    <frame tileid="12" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="142" name="Mini_Spider_Ataque" tilewidth="256" tileheight="256" tilecount="10" columns="10">
+  <image source="MiniAraña/Mini_Spider_Ataque.png" width="2560" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+    <frame tileid="9" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="152" name="Mini_Spider_Damage" tilewidth="256" tileheight="256" tilecount="8" columns="8">
+  <image source="MiniAraña/Mini_Spider_Damage.png" width="2048" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="160" name="Mini_Spider_Muerte" tilewidth="256" tileheight="256" tilecount="13" columns="13">
+  <image source="MiniAraña/Mini_Spider_Muerte.png" width="3328" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+    <frame tileid="9" duration="100"/>
+    <frame tileid="10" duration="100"/>
+    <frame tileid="11" duration="100"/>
+    <frame tileid="12" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="173" name="Boss_Spider_Ataque_cuerpo" tilewidth="384" tileheight="384" tilecount="9" columns="9">
+  <image source="Boss/Boss_Spider_Ataque_cuerpo.png" width="3456" height="384"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="182" name="Boss_Spider_Ataque_distancia" tilewidth="384" tileheight="384" tilecount="5" columns="5">
+  <image source="Boss/Boss_Spider_Ataque_distancia.png" width="1920" height="384"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="187" name="Boss_Spider_Caminar" tilewidth="384" tileheight="384" tilecount="5" columns="5">
+  <image source="Boss/Boss_Spider_Caminar.png" width="1920" height="384"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="192" name="Boss_Spider_Damage" tilewidth="384" tileheight="384" tilecount="7" columns="7">
+  <image source="Boss/Boss_Spider_Damage.png" width="2688" height="384"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="199" name="Boss_Spider_Idle" tilewidth="384" tileheight="384" tilecount="8" columns="8">
+  <image source="Boss/Boss_Spider_Idle.png" width="3072" height="384"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="207" name="Boss_Spider_Muerte" tilewidth="384" tileheight="384" tilecount="14" columns="14">
+  <image source="Boss/Boss_Spider_Muerte.png" width="5376" height="384"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+    <frame tileid="9" duration="100"/>
+    <frame tileid="10" duration="100"/>
+    <frame tileid="11" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
  <layer id="1" name="Capa de patrones 1" width="30" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
