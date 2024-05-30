@@ -14,13 +14,11 @@ public:
     EnemyBossHurtState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("EnemyBossHurtState Enter()");
 
         enemyboss = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("EnemyBossHurtState Update()");
 
         //enemyboss->invencible = true;
         //if (enemyboss->currentAnimation->HasFinished()) {
@@ -32,7 +30,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("EnemyBossHurtState Exit()");
     }
 };
 #endif // __ENEMYBOSSHURTSTATE_H__

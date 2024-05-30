@@ -17,13 +17,11 @@ public:
     EnemyBossAttackState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("EnemyBossAttackState Enter()");
 
         enemyboss = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("EnemyBossAttackState Update()");
 
         /*b2Vec2 attackDirection = { (float32)player->position.x - enemyboss->position.x, (float32)player->position.y - enemyboss->position.y };
         attackDirection.Normalize(); 
@@ -38,7 +36,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("EnemyBossAttackState Exit()");
     }
 };
 #endif // __ENEMYBOSSATTACKSTATE_H__

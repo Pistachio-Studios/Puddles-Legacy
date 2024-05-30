@@ -16,13 +16,11 @@ public:
     EnemyBossIdleState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("EnemyBossIdleState Enter()");
 
         enemyboss = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("EnemyBossIdleState Update()");
 
         player = app->entityManager->GetPlayerEntity();
 
@@ -35,7 +33,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("EnemyBossIdleState Exit()");
     }
 };
 #endif // __ENEMYBOSSIDLESTATE_H__

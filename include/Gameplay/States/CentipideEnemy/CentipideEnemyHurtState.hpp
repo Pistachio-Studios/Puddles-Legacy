@@ -14,14 +14,10 @@ public:
     CentipideEnemyHurtState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("CentipideEnemyHurtState Enter()");
-
         CentipideEnemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("CentipideEnemyHurtState Update()");
-
         //CentipideEnemy->invencible = true;
         //if (CentipideEnemy->currentAnimation->HasFinished()) {
         //    CentipideEnemy->hurtAnim.Reset();
@@ -32,7 +28,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("CentipideEnemyHurtState Exit()");
     }
 };
 #endif // __ECENTIPIDEENEMYHURTSTATE_H__
