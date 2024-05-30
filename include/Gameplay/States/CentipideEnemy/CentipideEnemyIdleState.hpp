@@ -16,13 +16,11 @@ public:
     CentipideEnemyIdleState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("CentipideEnemyIdleState Enter()");
 
         CentipideEnemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("CentipideEnemyIdleState Update()");
 
         player = app->entityManager->GetPlayerEntity();
 
@@ -35,7 +33,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("CentipideEnemyIdleState Exit()");
     }
 };
 #endif // __CENTIPIDEENEMYIDLESTATE_H__

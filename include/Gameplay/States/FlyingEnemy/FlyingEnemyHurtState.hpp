@@ -14,13 +14,13 @@ public:
     FlyingEnemyHurtState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("FlingEnemyHurtState Enter()");
+
 
         flyingenemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("FlyingEnemyHurtState Update()");
+
 
         //enemyboss->invencible = true;
         //if (enemyboss->currentAnimation->HasFinished()) {
@@ -32,7 +32,7 @@ public:
     }
     inline void Exit() override
     {
-        LOG("FlyingEnemyHurtState Exit()");
+
     }
 };
 #endif // __FLYINGENEMYHURTSTATE_H__

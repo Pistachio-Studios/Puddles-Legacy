@@ -14,13 +14,13 @@ public:
     FlyingEnemyDeadState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("FlyingEnemyDeadState Enter()");
+
 
         flyingenemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("FlyingEnemyDeadState Update()");
+
 
         //if (flyingenemy->reviveTimer.ReadSec() >= 5)
         //{
@@ -30,7 +30,7 @@ public:
     }
     inline void Exit() override
     {
-        LOG("FlyingEnemyDeadState Exit()");
+
     }
 };
 #endif // __FLYINGENEMYDEADSTATE_H__

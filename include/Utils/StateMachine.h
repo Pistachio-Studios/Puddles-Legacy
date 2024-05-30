@@ -13,30 +13,24 @@ template <typename T>
 class StateMachine {
 public:
     StateMachine(T* owner) : owner(owner){
-    LOG("StateMachine::StateMachine(owner)\n");
     }
 
     ~StateMachine(){
-        LOG("StateMachine::~StateMachine()\n");
     }
 
     void PreUpdate(){
-        LOG("StateMachine::PreUpdate()\n");
         currentState->PreUpdate();
     }
 
     void Update(float dt){
-        LOG("StateMachine::Update()\n");
         currentState->Update(dt);
     }
 
     void PostUpdate(){
-        LOG("StateMachine::PostUpdate()\n");
         currentState->PostUpdate();
     }
 
     void CleanUp(){
-        LOG("StateMachine::CleanUp()\n");
         for (int i = 0; i < states.Count(); i++){
             states[i]->Exit();
             delete states[i];

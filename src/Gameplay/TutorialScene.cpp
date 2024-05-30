@@ -21,6 +21,7 @@
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
+#include "Core/QuestManager.h"
   
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
@@ -174,6 +175,29 @@ bool TutorialScene::Enter()
 		}
 
 	}
+	
+	//Quests
+	Quest* movementQuest = app->questManager->GetQuestById(0);
+	movementQuest->SetCompletionAction([this]() -> bool {
+		static bool W,S,A,D;
+		if(app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+			W = true;
+		if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+			S = true;
+		if(app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+			A = true;
+		if(app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+			D = true;
+
+		if(W and S and A and D)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(0)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+
+	movementQuest->SetActive(true);
 
 	return true;
 }

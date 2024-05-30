@@ -17,13 +17,13 @@ public:
     FlyingEnemyAttackState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("FlyingEnemyAttackState Enter()");
+
 
         flyingenemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("FlyingEnemyAttackState Update()");
+
 
         /*b2Vec2 attackDirection = { (float32)player->position.x - enemyboss->position.x, (float32)player->position.y - enemyboss->position.y };
         attackDirection.Normalize();
@@ -38,7 +38,7 @@ public:
     }
     inline void Exit() override
     {
-        LOG("FlyingEnemyAttackState Exit()");
+
     }
 };
 #endif // __FLYINGENEMYATTACKSTATE_H__

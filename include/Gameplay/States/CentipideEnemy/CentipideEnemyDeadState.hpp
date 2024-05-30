@@ -14,13 +14,13 @@ public:
     CentipideEnemyDeadState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("CentipideEnemyHurtState Enter()");
+
 
         CentipideEnemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("CentipideEnemyDeadState Update()");
+
 
         //if (CentipideEnemy->reviveTimer.ReadSec() >= 5)
         //{
@@ -30,7 +30,7 @@ public:
     }
     inline void Exit() override
     {
-        LOG("CentipideEnemyDeadState Exit()");
+
     }
 };
 #endif // __CENTIPIDEENEMYDEADSTATE_H__

@@ -17,13 +17,13 @@ public:
     FlyingEnemyMoveState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("FlyingEnemyMoveState Enter()");
+
 
         flyingenemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("FlyingEnemyMoveState Update()");
+
 
         player = app->entityManager->GetPlayerEntity();
 
@@ -42,7 +42,7 @@ public:
     }
     inline void Exit() override
     {
-        LOG("FlyingEnemyMoveState Exit()");
+
     }
 };
 #endif // __FLYINGENEMYMOVESTATE_H__

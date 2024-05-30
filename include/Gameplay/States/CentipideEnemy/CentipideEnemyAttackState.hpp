@@ -17,13 +17,13 @@ public:
     CentipideEnemyAttackState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("CentipideEnemyAttackState Enter()");
+
 
         CentipideEnemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("CentipideEnemyAttackState Update()");
+
 
         /*b2Vec2 attackDirection = { (float32)player->position.x - CentipideEnemy->position.x, (float32)player->position.y - CentipideEnemy->position.y };
         attackDirection.Normalize(); 
@@ -38,7 +38,7 @@ public:
     }
     inline void Exit() override
     {
-        LOG("CentipideEnemyAttackState Exit()");
+
     }
 };
 #endif // __CENTIPIDEENEMYATTACKSTATE_H__

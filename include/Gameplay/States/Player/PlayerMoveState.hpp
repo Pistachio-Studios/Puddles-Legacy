@@ -14,13 +14,13 @@ public:
     PlayerMoveState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("PlayerMoveState Enter()");
+
 
         player = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("PlayerMoveState Update()");
+
 
         PhysBody* pbody = player->pbody;
 
@@ -50,7 +50,7 @@ public:
     }
     inline void Exit() override
     {
-        LOG("PlayerMoveState Exit()");
+
     }
 };
 #endif // __PLAYERMOVESTATE_H__

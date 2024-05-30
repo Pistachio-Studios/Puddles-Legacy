@@ -28,7 +28,7 @@ public:
     PlayerCombatAttackState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("PlayerCombatAttackState Enter()");
+
 
         player = StateMachineReference->owner;
 
