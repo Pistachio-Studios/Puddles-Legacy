@@ -70,7 +70,6 @@ bool QuestManager::Update(float dt)
 	// OPTICK PROFILIN
 	ZoneScoped;
 
-
 	int activeQuests = 0;
 	//Draw the active quests
 	for (auto& quest : quests) {
@@ -113,7 +112,10 @@ bool QuestManager::SaveState(pugi::xml_node node)
 void QuestManager::DrawQuest(Quest *quest, int x, int y)
 {
 	// Draw the quest background
-	app->render->DrawRectangle({x - 5, y - 5, 500, 45},25, 50, 50, 255);
+	app->render->DrawRectangle({x - 5, y - 5, 500, 45},25, 50, 50, 255, true, false);
+
+	//Draw the quest completion status
+	app->render->DrawRectangle({x - 5, y - 5, quest->GetCompletionValue() * 5, 45},128, 128, 50, 255, true, false);
 
 	// Draw the quest title
 	app->render->DrawText(quest->GetTitle().GetString(), x, y, 20, 20, { 255, 0, 0, 255 });

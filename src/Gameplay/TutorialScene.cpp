@@ -178,16 +178,28 @@ bool TutorialScene::Enter()
 	
 	//Quests
 	Quest* movementQuest = app->questManager->GetQuestById(0);
-	movementQuest->SetCompletionAction([this]() -> bool {
+	movementQuest->SetCompletionAction([=, this]() -> bool {
 		static bool W,S,A,D;
 		if(app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+		{
 			W = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
 		if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		{
 			S = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
 		if(app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		{
 			A = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
 		if(app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		{
 			D = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
 
 		if(W and S and A and D)
 		{

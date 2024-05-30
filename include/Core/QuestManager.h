@@ -24,17 +24,20 @@ public:
 
 	SString GetTitle() const { return title; }
 	SString GetDescription() const { return description; }
+	int GetCompletionValue() const { return completionValue; }
 	bool IsCompleted() const { return completed; }
 	bool IsActive() const { return active; }
 	void SetActive(bool active) { if(!completed)this->active = active; }
 	void SetCompleted(bool completed) { this->completed = completed; this->active = false;}
 	void SetCompletionAction(std::function<bool()> action) { completionAction = action; }
+	void AddCompletionValue(int value) { completionValue += value; }
 
 private:
 	SString title;
 	SString description;
 	bool completed;
 	bool active;
+	int completionValue = 0;
 
 	std::function<bool()> completionAction;
 };
