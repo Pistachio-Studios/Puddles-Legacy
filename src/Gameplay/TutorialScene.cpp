@@ -88,11 +88,11 @@ bool TutorialScene::Enter()
 	gcExit->state = GuiControlState::DISABLED;
 
 /// TODO change scene collider
-/*
+
 	PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
 	changeTown->ctype = ColliderType::CHANGESCENE;
 	changeTown->listener = player;
-*/
+
 
 	if (parameters.child("enemies").child("EnemyBoss")) {
 		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);

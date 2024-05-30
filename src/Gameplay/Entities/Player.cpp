@@ -71,6 +71,8 @@ bool Player::Start() {
 
 	totalLivesPlayer = livesPlayer;
 
+	sceneChange = false;
+
 	return true;
 }
 
@@ -121,6 +123,25 @@ bool Player::Update(float dt)
 	}
 
 	if (livesPlayer == 0) deadPlayer;
+
+
+	//----Scene Change Management----
+	if(sceneChange)
+	{
+		if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")
+		{
+			app->sceneManager->ChangeScene("townscene");
+		}
+		if (app->sceneManager->GetCurrentScene()->name == "townscene")
+		{
+			app->sceneManager->ChangeScene("forestscene");
+		}
+		if (app->sceneManager->GetCurrentScene()->name == "forestscene")
+		{
+			app->sceneManager->ChangeScene("townscene");
+		}
+	}
+
 	return true;
 }
 
@@ -172,19 +193,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::CHANGESCENE:
-		if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")
-		{
-			app->sceneManager->ChangeScene("townscene");
-		}
-		if (app->sceneManager->GetCurrentScene()->name == "townscene")
-		{
-			app->sceneManager->ChangeScene("forestscene");
-		}
-		if (app->sceneManager->GetCurrentScene()->name == "forestscene")
-		{
-			app->sceneManager->ChangeScene("townscene");
-		}
-
+		sceneChange = true;
 		break;
 		//TODO: He a�adido esto para probar que la pocion de curar funcione, se puede borrar :)
 	case ColliderType::ENEMY:

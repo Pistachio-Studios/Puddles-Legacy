@@ -81,6 +81,8 @@ public:
 	int healPlantCounter = 0;
 	int energyPlantCounter = 0;
 	int veloPlantCounter = 0;
+
+	bool sceneChange = false;
 };
 
 #endif // __PLAYER_H__
