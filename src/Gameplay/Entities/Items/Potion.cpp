@@ -104,3 +104,27 @@ void Potion::EndCollision(PhysBody* physA, PhysBody* physB)
 {
 	
 }
+
+bool Potion::SaveState(pugi::xml_node& node) {
+	Player* player; 
+	player = app->entityManager->GetPlayerEntity(); 
+
+	pugi::xml_node potionAttributes = node.append_child("potion");
+	potionAttributes.append_attribute("healCounter").set_value(player->healPlantCounter);
+	potionAttributes.append_attribute("veloCounter").set_value(player->veloPlantCounter);
+	potionAttributes.append_attribute("energyCounter").set_value(player->energyPlantCounter);
+
+	return true;
+}
+
+bool Potion::LoadState(pugi::xml_node& node)
+{
+	Player* player;
+	player = app->entityManager->GetPlayerEntity();
+
+	player->healPlantCounter = node.child("potion").attribute("healCounter").as_int(); 
+	player->veloPlantCounter = node.child("potion").attribute("veloCounter").as_int();
+	player->energyPlantCounter = node.child("potion").attribute("energyCounter").as_int();
+
+	return true;
+}

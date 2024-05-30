@@ -151,7 +151,6 @@ bool Player::SaveState(pugi::xml_node& node) {
 	playerAttributes.append_attribute("y").set_value(this->position.y);
 
 	return true;
-
 }
 
 bool Player::LoadState(pugi::xml_node& node)
