@@ -49,10 +49,10 @@ bool TestScene::Enter()
 			flyingenemy->parameters = FlyingEnemyNode;
 		}
 
-		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
+		for (pugi::xml_node WaspNode = enemies.child("Wasp"); WaspNode; WaspNode = WaspNode.next_sibling("Wasp"))
 		{
-			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
-			centipidenemy->parameters = CentipideEnemyNode;
+			Wasp* wasp = (Wasp*)app->entityManager->CreateEntity(EntityType::WASP);
+			wasp->parameters = WaspNode;
 		}
 	}
 

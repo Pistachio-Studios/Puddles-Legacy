@@ -1,4 +1,4 @@
-#include "Gameplay/Entities/Enemies/CentipideEnemy.h"
+#include "Gameplay/Entities/Enemies/Wasp.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -11,13 +11,14 @@
 #include "Utils/StateMachine.h"
 #include "Core/SceneManager.h"
 #include "Core/Map.h"
+#include "Core/AnimationManager.h"
 
 
-#include "Gameplay/States/CentipideEnemy/CentipideEnemyIdleState.hpp"
-#include "Gameplay/States/CentipideEnemy/CentipideEnemyAttackState.hpp"
-#include "Gameplay/States/CentipideEnemy/CentipideEnemyMoveState.hpp"
-#include "Gameplay/States/CentipideEnemy/CentipideEnemyHurtState.hpp"
-#include "Gameplay/States/CentipideEnemy/CentipideEnemyDeadState.hpp"
+#include "Gameplay/States/Wasp/WaspIdleState.hpp"
+#include "Gameplay/States/Wasp/WaspAttackState.hpp"
+#include "Gameplay/States/Wasp/WaspMoveState.hpp"
+#include "Gameplay/States/Wasp/WaspHurtState.hpp"
+#include "Gameplay/States/Wasp/WaspDeadState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -28,20 +29,20 @@
 
 #include <imgui.h>
 
-CentipideEnemy::CentipideEnemy() : Entity(EntityType::CENTIPIDEENEMY)
+Wasp::Wasp() : Entity(EntityType::WASP)
 {
-	name.Create("CentipideEnemy");
+	name.Create("Wasp");
 }
 
-CentipideEnemy::~CentipideEnemy() {
+Wasp::~Wasp() {
 
 }
 
-bool CentipideEnemy::Awake() {
+bool Wasp::Awake() {
 	return true;
 }
 
-bool CentipideEnemy::Start() {
+bool Wasp::Start() {
 
 	pathfinding = new PathFinding();
 
@@ -65,17 +66,34 @@ bool CentipideEnemy::Start() {
 
 	player = app->entityManager->GetPlayerEntity();
 
-	movementFSM = new StateMachine<CentipideEnemy>(this);
-	movementFSM->AddState(new CentipideEnemyIdleState("idle"));
-	movementFSM->AddState(new CentipideEnemyMoveState("move"));
-	movementFSM->AddState(new CentipideEnemyHurtState("hurt"));
-	movementFSM->AddState(new CentipideEnemyAttackState("attack"));
-	movementFSM->AddState(new CentipideEnemyDeadState("die"));
+	movementFSM = new StateMachine<Wasp>(this);
+	movementFSM->AddState(new WaspIdleState("idle"));
+	movementFSM->AddState(new WaspMoveState("move"));
+	movementFSM->AddState(new WaspHurtState("hurt"));
+	movementFSM->AddState(new WaspAttackState("attack"));
+	movementFSM->AddState(new WaspDeadState("die"));
+
+	//Animations
+	waspIdle = *app->animationManager->GetAnimByName("Avispa_Idle");
+	waspIdle.speed = 2.0f;
+
+	waspAttack = *app->animationManager->GetAnimByName("Avispa_Atacar");
+	waspAttack.speed = 2.0f;
+
+	waspMove = *app->animationManager->GetAnimByName("Avispa_Volar");
+	waspMove.speed = 2.0f;	
+	
+	waspDamage = *app->animationManager->GetAnimByName("Avispa_Damage");
+	waspDamage.speed = 2.0f;
+
+	waspDeath = *app->animationManager->GetAnimByName("Avispa_Muerte");
+	waspDeath.speed = 2.0f;
+
 
 	return true;
 }
 
-bool CentipideEnemy::Update(float dt)
+bool Wasp::Update(float dt)
 {
 	if (movementFSM->GetCurrentState().name != "die") {
 		movementFSM->Update(dt);
@@ -91,7 +109,7 @@ bool CentipideEnemy::Update(float dt)
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-		app->render->DrawRectangle({ position.x - 1, position.y + 8, 36, 18 }, 255, 0, 0);
+		//app->render->DrawRectangle({ position.x - 1, position.y + 8, 36, 18 }, 255, 0, 0);
 
 		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 
@@ -109,7 +127,7 @@ bool CentipideEnemy::Update(float dt)
 	return true;
 }
 
-void CentipideEnemy::DrawImGui()
+void Wasp::DrawImGui()
 {
 	ImGui::Begin("Enemy");
 	ImGui::Text("Enemy Position: %d, %d", position.x, position.y);
@@ -119,31 +137,31 @@ void CentipideEnemy::DrawImGui()
 	ImGui::End();
 }
 
-void CentipideEnemy::Idle(float dt) {
+void Wasp::Idle(float dt) {
 
 }
 
-void CentipideEnemy::Move(float dt) {
+void Wasp::Move(float dt) {
 	// TODO move logic
 }
 
-void CentipideEnemy::Attack(float dt)
+void Wasp::Attack(float dt)
 {
 
 }
 
-bool CentipideEnemy::SaveState(pugi::xml_node& node) {
+bool Wasp::SaveState(pugi::xml_node& node) {
 
-	pugi::xml_node CentipideEnemyAttributes = node.append_child("enemies").append_child("CentipideEnemy");
-	CentipideEnemyAttributes.append_attribute("x").set_value(this->position.x);
-	CentipideEnemyAttributes.append_attribute("y").set_value(this->position.y);
+	pugi::xml_node WaspAttributes = node.append_child("enemies").append_child("Wasp");
+	WaspAttributes.append_attribute("x").set_value(this->position.x);
+	WaspAttributes.append_attribute("y").set_value(this->position.y);
 
 	return true;
 }
 
-bool CentipideEnemy::LoadState(pugi::xml_node& node)
+bool Wasp::LoadState(pugi::xml_node& node)
 {
-	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("enemies").child("CentipideEnemy").attribute("x").as_int()), PIXEL_TO_METERS(node.child("enemies").child("CentipideEnemy").attribute("y").as_int())}, node.child("enemies").child("CentipideEnemy").attribute("angle").as_int());
+	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("enemies").child("Wasp").attribute("x").as_int()), PIXEL_TO_METERS(node.child("enemies").child("Wasp").attribute("y").as_int())}, node.child("enemies").child("Wasp").attribute("angle").as_int());
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
@@ -151,7 +169,7 @@ bool CentipideEnemy::LoadState(pugi::xml_node& node)
 	return true;
 }
 
-void CentipideEnemy::StopMoving() 
+void Wasp::StopMoving() 
 {
 	if (PIXEL_TO_METERS(player->position.DistanceTo(position)) > 5.0f) { updateSpeed == noSpeed; }
 	else { updateSpeed == moveSpeed; }
@@ -162,7 +180,7 @@ void CentipideEnemy::StopMoving()
 	pbody->body->SetAwake(true);
 }
 
-void CentipideEnemy::moveToSpawnPoint()
+void Wasp::moveToSpawnPoint()
 {
 	position = spawnPosition;
 
@@ -172,7 +190,7 @@ void CentipideEnemy::moveToSpawnPoint()
 	pbody->body->SetAwake(true);
 }
 
-bool CentipideEnemy::CleanUp() {
+bool Wasp::CleanUp() {
 
 	app->tex->UnLoad(texture);
 	app->physics->DestroyBody(pbody);
@@ -180,12 +198,12 @@ bool CentipideEnemy::CleanUp() {
 	return true;
 }
 
-void CentipideEnemy::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype) {
 
 		case ColliderType::SWORD:
-			LOG("Collision ARMAPLAYER");
+			LOG("Collision SWORD");
 			//if (state != EntityState::DEAD and !invencible){
 			vida -= player->dano;
 			if (vida <= 0.0f)
@@ -207,11 +225,11 @@ void CentipideEnemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-void CentipideEnemy::EndCollision(PhysBody* physA, PhysBody* physB) {
+void Wasp::EndCollision(PhysBody* physA, PhysBody* physB) {
 
 }
 
-void CentipideEnemy::pathfindingMovement(float dt) {
+void Wasp::pathfindingMovement(float dt) {
 
 	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //a�adir el tile size / 2 hace que el owl se acerque mas 
 
@@ -260,6 +278,6 @@ void CentipideEnemy::pathfindingMovement(float dt) {
 	}
 }
 
-void CentipideEnemy::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
+void Wasp::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
 
 }

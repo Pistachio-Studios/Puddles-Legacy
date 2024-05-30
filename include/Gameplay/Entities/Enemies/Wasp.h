@@ -1,9 +1,11 @@
-#ifndef __CENTIPIDEENEMY_H__
-#define __CENTIPIDEENEMY_H__
+#ifndef __WASP_H__
+#define __WASP_H__
 
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
+#include "Core/Animation.h"
+#include "Gameplay/Entities/Entity.h"
 
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
@@ -13,7 +15,7 @@
 struct SDL_Texture;
 class Player;
 
-class CentipideEnemy : public Entity
+class Wasp : public Entity
 {
 public:
 
@@ -24,9 +26,9 @@ public:
 	void Move(float dt) override;
 	void Attack(float dt) override;
 
-	CentipideEnemy();
+	Wasp();
 
-	virtual ~CentipideEnemy();
+	virtual ~Wasp();
 
 	bool Awake() override;
 
@@ -55,6 +57,8 @@ public:
 
 public:
 
+	Animation waspIdle, waspAttack, waspMove, waspDamage,waspDeath;
+
 	Timer movementDelay;
 
 	const char* texturePath;
@@ -71,7 +75,7 @@ public:
 	b2Vec2 movementDirection;
 
 	//State Machines
-	StateMachine<CentipideEnemy>* movementFSM = nullptr;
+	StateMachine<Wasp>* movementFSM = nullptr;
 
 	PhysBody* pbody;
 
@@ -91,4 +95,4 @@ public:
 
 };
 
-#endif // __CENTIPIDEENEMY_H__
+#endif // __WASP_H__
