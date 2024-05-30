@@ -67,16 +67,13 @@ bool Plant::Update(float dt)
 
 			switch (type) {
 			case 1:
-				player->healPlantCounter++;
-				player->inventory.AddItem(ItemType::HEALING_PLANT);
+				player->inventory.AddItem(ItemType::ARNICA_PLANT);
 				break;
 			case 2:
-				player->veloPlantCounter++;
-				player->inventory.AddItem(ItemType::VELO_PLANT);
+				player->inventory.AddItem(ItemType::HAWTHORN_PLANT);
 				break;
 			case 3:
-				player->energyPlantCounter++;
-				player->inventory.AddItem(ItemType::ENERGY_PLANT);
+				player->inventory.AddItem(ItemType::COMFREY_PLANT);
 				break;
 			}
 		}

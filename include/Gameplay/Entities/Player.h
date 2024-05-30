@@ -21,9 +21,18 @@ enum PlayerClass
 
 enum ItemType
 {
-	HEALING_PLANT,
-	VELO_PLANT,
-	ENERGY_PLANT,
+	// Plants
+	ARNICA_PLANT,
+	HAWTHORN_PLANT,
+	HEPATICA_PLANT,
+	WITCH_HAZEL_PLANT,
+	COMFREY_PLANT,
+	// Potions
+	VITA_POTION,
+	CELERITA_POTION,
+	ETHER_POTION,
+	PUDICITIA_POTION,
+	OBLITIUS_POTION,
 };
 
 class Item {
@@ -40,9 +49,19 @@ public:
     std::vector<Item> items;
 
 	Inventory() {
-		items.push_back(Item(HEALING_PLANT, 0, "Healing Plant Description..."));
-		items.push_back(Item(VELO_PLANT, 0, "Velo Plant Description..."));
-		items.push_back(Item(ENERGY_PLANT, 0, "Energy Plant Description..."));
+		// Plants
+		items.push_back(Item(ARNICA_PLANT, 0, "Permite craftear la poción de cura"));
+		items.push_back(Item(HAWTHORN_PLANT, 0, "Permite craftear la poción de aumento de velocidad"));
+		items.push_back(Item(HEPATICA_PLANT, 0, "Permite craftear la poción de recuperación de energía"));
+		items.push_back(Item(WITCH_HAZEL_PLANT, 0, "Permite craftear la poción de quitar efectos negativos"));
+		items.push_back(Item(COMFREY_PLANT, 0, "Permite craftear la poción de resetear árbol de habilidades"));
+
+		// Potions
+		items.push_back(Item(VITA_POTION, 0, "Cura vida"));
+		items.push_back(Item(CELERITA_POTION, 0, "Aumenta velocidad"));
+		items.push_back(Item(ETHER_POTION, 0, "Recupera energia"));
+		items.push_back(Item(PUDICITIA_POTION, 0, "Quita efectos negativos"));
+		items.push_back(Item(OBLITIUS_POTION, 0, "Resetea arbol de habilidades"));
 	}
 
     void AddItem(ItemType itemType) {
@@ -84,20 +103,46 @@ public:
 	}
 
 	void DrawImGui() {
-		ImGui::Begin("Inventory", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::Begin("Inventory");
 		for (auto& item : items) {
-			ImGui::Text(item.name == HEALING_PLANT ? "Healing Plant" : item.name == VELO_PLANT ? "Velo Plant" : "Energy Plant");
+			ImGui::Text(item.name == ARNICA_PLANT ? "Arnica Plant" :
+				item.name == HAWTHORN_PLANT ? "Hawthorn Plant" :
+				item.name == HEPATICA_PLANT ? "Hepatica Plant" :
+				item.name == WITCH_HAZEL_PLANT ? "Witch Hazel Plant" :
+				item.name == COMFREY_PLANT ? "Comfrey Plant" :
+				item.name == VITA_POTION ? "Vita Potion" :
+				item.name == CELERITA_POTION ? "Celerita Potion" :
+				item.name == ETHER_POTION ? "Ether Potion" :
+				item.name == PUDICITIA_POTION ? "Pudicitia Potion" :
+				item.name == OBLITIUS_POTION ? "Oblitius Potion" : "");
+			ImGui::Text(("Quantity: " + std::to_string(item.quantity)).c_str());
 			ImGui::Text(item.description.c_str());
-			ImGui::Text(std::to_string(item.quantity).c_str());
-			
-			if (ImGui::Button(("Add " + std::string(item.name == HEALING_PLANT ? "Healing Plant" : item.name == VELO_PLANT ? "Velo Plant" : "Energy Plant")).c_str())) {
-            	AddItem(item.name);
+
+			if (ImGui::Button(("Add " + std::string(item.name == ARNICA_PLANT ? "Arnica Plant" :
+				item.name == HAWTHORN_PLANT ? "Hawthorn Plant" :
+				item.name == HEPATICA_PLANT ? "Hepatica Plant" :
+				item.name == WITCH_HAZEL_PLANT ? "Witch Hazel Plant" :
+				item.name == COMFREY_PLANT ? "Comfrey Plant" :
+				item.name == VITA_POTION ? "Vita Potion" :
+				item.name == CELERITA_POTION ? "Celerita Potion" :
+				item.name == ETHER_POTION ? "Ether Potion" :
+				item.name == PUDICITIA_POTION ? "Pudicitia Potion" :
+				item.name == OBLITIUS_POTION ? "Oblitius Potion" : "")).c_str())) {
+				AddItem(item.name);
 			}
 			ImGui::SameLine();
-			if (ImGui::Button(("Remove " + std::string(item.name == HEALING_PLANT ? "Healing Plant" : item.name == VELO_PLANT ? "Velo Plant" : "Energy Plant")).c_str())) {
+			if (ImGui::Button(("Remove " + std::string(item.name == ARNICA_PLANT ? "Arnica Plant" :
+				item.name == HAWTHORN_PLANT ? "Hawthorn Plant" :
+				item.name == HEPATICA_PLANT ? "Hepatica Plant" :
+				item.name == WITCH_HAZEL_PLANT ? "Witch Hazel Plant" :
+				item.name == COMFREY_PLANT ? "Comfrey Plant" :
+				item.name == VITA_POTION ? "Vita Potion" :
+				item.name == CELERITA_POTION ? "Celerita Potion" :
+				item.name == ETHER_POTION ? "Ether Potion" :
+				item.name == PUDICITIA_POTION ? "Pudicitia Potion" :
+				item.name == OBLITIUS_POTION ? "Oblitius Potion" : "")).c_str())) {
 				RemoveItem(item.name);
 			}
-
 			ImGui::Text(" ");
 		}
 		ImGui::End();
@@ -167,10 +212,6 @@ public:
 	int livesPlayer = 10;
 	int totalLivesPlayer;
 	bool deadPlayer = false;
-
-	int healPlantCounter = 0;
-	int energyPlantCounter = 0;
-	int veloPlantCounter = 0;
 
 	bool sceneChange = false;
 };

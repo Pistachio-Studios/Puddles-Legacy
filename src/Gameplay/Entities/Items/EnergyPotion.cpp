@@ -49,17 +49,6 @@ bool EnergyPotion::Update(float dt)
 	Player* player;
 	player = app->entityManager->GetPlayerEntity();
 
-	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT && player->energyPlantCounter >= maxToCreate) {
-		isCreated = true;
-		player->energyPlantCounter -= maxToCreate;
-	}
-	if (isCreated && app->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN) {
-		usedPotion = true;
-		//Funcion energy
-		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
-		isCreated = false;
-	}
-
 	Potion::Update(dt);
 
 	return true;

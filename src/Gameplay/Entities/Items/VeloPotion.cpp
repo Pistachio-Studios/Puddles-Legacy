@@ -51,20 +51,6 @@ bool VeloPotion::Update(float dt)
 	Player* player;
 	player = app->entityManager->GetPlayerEntity();
 
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT && player->veloPlantCounter >= maxToCreate) {
-		bool counter = true;
-		isCreated = true;
-		player->veloPlantCounter -= maxToCreate;
-	}
-	
-	if (isCreated && app->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN) {
-		usedPotion = true;
-		player->maxSpeed *= 2;
-		if (player->veloPlantCounter <= maxToCreate) {
-			isCreated = false;
-		}
-		 timer.Start();
-	}
 	//TODO: Ahora la pocion se usa dandole al 5 pero se tiene que usar con el boton y lo mismo con todas las pociones
 	
 	//if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) { 

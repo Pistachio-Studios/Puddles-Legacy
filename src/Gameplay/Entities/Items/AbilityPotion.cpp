@@ -49,12 +49,6 @@ bool AbilityPotion::Update(float dt)
 	Player* player;
 	player = app->entityManager->GetPlayerEntity();
 
-	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT && player->healPlantCounter >= 1 && player->veloPlantCounter >= 1 && player->energyPlantCounter >= 1) {
-		isCreated = true;
-		player->healPlantCounter -= 1;
-		player->veloPlantCounter -= 1;
-		player->energyPlantCounter -= 1;
-	}
 	if (isCreated && app->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
 		usedPotion = true;
 		//Funcion ability

@@ -49,18 +49,6 @@ bool HealPotion::Update(float dt)
 	Player* player;
 	player = app->entityManager->GetPlayerEntity();
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && player->healPlantCounter >= maxToCreate) { 
-		isCreated = true;
-		player->healPlantCounter -= maxToCreate;
-	}
-
-	if (isCreated && app->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN) {
-		usedPotion = true;
-		player->livesPlayer = player->totalLivesPlayer; 
-		if (player->healPlantCounter <= maxToCreate) {
-			isCreated = false;
-		}
-	}
 
 	/*if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) {
 		if (isCreated) {
