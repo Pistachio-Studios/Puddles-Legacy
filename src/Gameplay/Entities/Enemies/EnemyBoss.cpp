@@ -99,29 +99,29 @@ bool EnemyBoss::Start() {
 
 bool EnemyBoss::Update(float dt)
 {
-	movementFSM->Update(dt); 
-	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
+	if (movementFSM->GetCurrentState().name != "die") {
+		movementFSM->Update(dt);
+		pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
+		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 
 
-	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+		//Update player position in pixels
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	if (debug) {
-		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-			freeCam = !freeCam;
+		if (debug) {
+			if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+				freeCam = !freeCam;
+			}
 		}
+
+
+		/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
+
+			currentAnimation->Update(dt); */
+
 	}
-	//Dibujar un circulo - sombra
-	app->render->DrawRectangle({position.x - 1, position.y - 2, 36, 36}, 255, 255, 255); 
-
-	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
-
-		currentAnimation->Update(dt); */
-
-
 	return true;
 }
 
@@ -199,7 +199,24 @@ bool EnemyBoss::CleanUp() {
 void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype) {
-
+	
+	case ColliderType::SWORD:
+		LOG("Collision ARMAPLAYER");
+		//if (state != EntityState::DEAD and !invencible){
+		vida -= player->dano;
+		if (vida <= 0.0f)
+		{
+			// AUDIO DONE boss death
+			movementFSM->ChangeState("die");
+			app->physics->DestroyBody(pbody);
+		}
+		//else {
+		//	// AUDIO DONE boss hit
+		//	app->audio->PlayFx(bossHit);
+		//	movementStateMachine->ChangeState("hurt");
+		//	lives--;
+		//}
+		break;
 	//case ColliderType::ARMAPLAYER:
 	//	LOG("Collision ARMAPLAYER");
 	// 	if (state != EntityState::DEAD and !invencible){

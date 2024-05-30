@@ -26,7 +26,7 @@ public:
         LOG("MiniSpiderAttackState Update()");
 
         //Animation
-        app->render->DrawTexture(minispider->spiderAttack.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderAttack.GetCurrentFrame());
+        app->render->DrawTexture(minispider->spiderAttack.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderAttack.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, minispider->flip);
         minispider->spiderAttack.Update(dt);
 
         /*b2Vec2 attackDirection = { (float32)player->position.x - enemyboss->position.x, (float32)player->position.y - enemyboss->position.y };
@@ -36,9 +36,11 @@ public:
 
         enemyboss->pbody->body->ApplyLinearImpulse(attackImpulse, enemyboss->pbody->body->GetWorldCenter(), true);*/
         //app->render->DrawRectangle({ minispider->position.x - 5, minispider->position.y - 2, 36, 36 }, 0, 50, 255);
+        if (minispider->spiderAttack.GetCurrentFrameCount()>=9) {
+            minispider->attackTimer.Start();
+            StateMachineReference->ChangeState("idle");
+        }
 
-        minispider->attackTimer.Start();
-        StateMachineReference->ChangeState("move");
     }
     inline void Exit() override
     {

@@ -78,10 +78,10 @@ bool MiniSpider::Start() {
 	spiderIdle = *app->animationManager->GetAnimByName("Mini_Spider_Idle");
 	spiderIdle.speed = 2.0f;
 
-	spiderAttack = *app->animationManager->GetAnimByName("Mini_Spider_Atacar");
+	spiderAttack = *app->animationManager->GetAnimByName("Mini_Spider_Ataque");
 	spiderAttack.speed = 2.0f;
 
-	spiderMove = *app->animationManager->GetAnimByName("Mini_Spider_Volar");
+	spiderMove = *app->animationManager->GetAnimByName("Mini_Spider_Caminar");
 	spiderMove.speed = 2.0f;
 
 	spiderDamage = *app->animationManager->GetAnimByName("Mini_Spider_Damage");
@@ -121,6 +121,15 @@ bool MiniSpider::Update(float dt)
 
 			// Calculate the angle between the enemy and the player
 		float angleToPlayer = atan2(player->position.y - position.y, player->position.x - position.x);
+
+		// Determine if the player is to the left or right of the enemy
+		if (player->position.x < position.x) {
+			flip = SDL_FLIP_HORIZONTAL;
+		}
+		else {
+			flip = SDL_FLIP_NONE;
+		}
+
 	}
 
 	
@@ -218,7 +227,7 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 				//	app->audio->PlayFx(bossHit);
 				//	movementStateMachine->ChangeState("hurt");
 				//	lives--;
-				//}
+				//}a
 			break;
 
 	case ColliderType::PLAYER:

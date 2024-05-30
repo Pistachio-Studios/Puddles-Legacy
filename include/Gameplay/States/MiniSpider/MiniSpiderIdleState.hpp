@@ -24,13 +24,22 @@ public:
     {
         LOG("EnemyBossIdleState Update()");
 
-        //Animation
-        app->render->DrawTexture(minispider->spiderIdle.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderIdle.GetCurrentFrame());
-        minispider->spiderIdle.Update(dt);
 
         player = app->entityManager->GetPlayerEntity();
 
-        if (PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 3.0f)
+        //Animation
+        app->render->DrawTexture(minispider->spiderIdle.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderIdle.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, minispider->flip);
+        minispider->spiderIdle.Update(dt);
+
+        if (PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 2.0f) {
+            if (minispider->attackTimer.ReadSec() >= 1)
+            {
+                minispider->spiderAttack.Reset();
+                StateMachineReference->ChangeState("attack");
+            }
+        }
+
+        if (PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 7.0f && PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) > 2.0f)
         {
             StateMachineReference->ChangeState("move");
             // AUDIO DONE dog idle

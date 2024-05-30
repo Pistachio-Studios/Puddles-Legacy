@@ -81,8 +81,9 @@ public:
 
 	iPoint spawnPosition;
 
-	int health;
-	float damage = 3;
+	float vida = 20.0f;
+	float dano = 2.0f;
+
 	bool invencible = false;
 
 	Timer reviveTimer;

@@ -26,11 +26,11 @@ public:
         app->render->DrawTexture(enemyboss->bossDeath.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossDeath.GetCurrentFrame());
         enemyboss->bossDeath.Update(dt);
 
-        if (enemyboss->reviveTimer.ReadSec() >= 5)
-        {
-            StateMachineReference->ChangeState("idle");
-            //enemyboss->health = 5;
-        }
+        //if (enemyboss->reviveTimer.ReadSec() >= 5)
+        //{
+        //    StateMachineReference->ChangeState("idle");
+        //    //enemyboss->health = 5;
+        //}
     }
     inline void Exit() override
     {

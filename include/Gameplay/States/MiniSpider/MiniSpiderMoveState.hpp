@@ -25,20 +25,23 @@ public:
     {
         LOG("MiniSpiderMoveState Update()");
 
-        //Animation
-        app->render->DrawTexture(minispider->spiderMove.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderMove.GetCurrentFrame());
-        minispider->spiderMove.Update(dt);
-
         player = app->entityManager->GetPlayerEntity();
 
+        //Animation
+        app->render->DrawTexture(minispider->spiderMove.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderMove.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, minispider->flip);
+        minispider->spiderMove.Update(dt);
+
         minispider->pathfindingMovement(dt);
-        if (PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 3.0f) {
-            if (minispider->attackTimer.ReadSec() >= 2)
+
+        if (PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 2.0f) {
+            if (minispider->attackTimer.ReadSec() >= 1)
             {
+                minispider->spiderAttack.Reset();
                 StateMachineReference->ChangeState("attack");
             }
         }
-        else if ((PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) > 10.0f)) {
+
+        if (PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) > 7.0f) {
             //minispider->moveToSpawnPoint();
             minispider->StopMoving();
             StateMachineReference->ChangeState("idle");
