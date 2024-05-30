@@ -73,6 +73,7 @@ public:
 	//tmps
 	PhysBody* sword;
 
+	int mana = 100;
 	int livesPlayer = 10;
 	int totalLivesPlayer;
 	bool deadPlayer = false;

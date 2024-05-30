@@ -133,6 +133,7 @@ void Player::DrawImGui()
 	ImGui::Begin("Player");
 	ImGui::Text("Player Position: %d, %d", position.x, position.y);
 	ImGui::Text("Player Lives: %d", livesPlayer);
+	ImGui::Text("Player Mana: %d", mana);
 	ImGui::Text("Player Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);

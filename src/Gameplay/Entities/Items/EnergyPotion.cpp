@@ -53,11 +53,18 @@ bool EnergyPotion::Update(float dt)
 		isCreated = true;
 		player->energyPlantCounter -= maxToCreate;
 	}
-	if (isCreated && app->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN) {
-		usedPotion = true;
-		//Funcion energy
-		//TODO: Si se puede tener mas de una pocion creada hay que arreglarlo
-		isCreated = false;
+
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT && isCreated) {
+		if (mouseX >= posX + 50 && mouseX <= posX + 350 && mouseY >= posY + 50 && mouseY <= posY + 350) {
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+				usedPotion = true;
+				player->mana = 100; //TODO: Revisar
+				if (player->energyPlantCounter <= maxToCreate) {
+					isCreated = false;
+				}
+				timer.Start();
+			}
+		}
 	}
 
 	Potion::Update(dt);
