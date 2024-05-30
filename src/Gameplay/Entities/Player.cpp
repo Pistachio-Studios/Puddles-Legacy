@@ -157,6 +157,8 @@ void Player::DrawImGui()
 	ImGui::Text("Looking Dir: (%f, %f)", lookingDir.x, lookingDir.y);
 	ImGui::Text("Looking Angle: %f", lookingAngle);
 
+	inventory.DrawImGui();
+
 	ImGui::End();
 }
 

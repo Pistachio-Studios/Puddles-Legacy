@@ -17,8 +17,6 @@
 #include "Core/SceneManager.h"
 #include "Core/Map.h"
 
-#include <cstdlib>
-
 
 Plant::Plant() : Entity(EntityType::PLANT)
 {
@@ -51,10 +49,8 @@ bool Plant::Start() {
 
 bool Plant::Update(float dt)
 {
-	Player* player;
-	player = app->entityManager->GetPlayerEntity();
+	Player* player = app->entityManager->GetPlayerEntity();
 
-	// L07 DONE 4: Add a physics to an food - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 8;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 8;
 
@@ -64,18 +60,23 @@ bool Plant::Update(float dt)
 		app->render->DrawTexture(texture1, position.x - 40, position.y - 50);
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 			//TODO: Destroy collider
+			app->entityManager->DestroyEntity(this);
+
 			app->tex->UnLoad(texture);
 			app->tex->UnLoad(texture1);
 
 			switch (type) {
 			case 1:
 				player->healPlantCounter++;
+				player->inventory.AddItem(ItemType::HEALING_PLANT);
 				break;
 			case 2:
 				player->veloPlantCounter++;
+				player->inventory.AddItem(ItemType::VELO_PLANT);
 				break;
 			case 3:
 				player->energyPlantCounter++;
+				player->inventory.AddItem(ItemType::ENERGY_PLANT);
 				break;
 			}
 		}
