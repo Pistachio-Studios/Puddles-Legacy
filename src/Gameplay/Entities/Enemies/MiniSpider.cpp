@@ -8,6 +8,7 @@
 #include "Gameplay/Scene.h"
 #include "Utils/Point.h"
 #include "Core/Physics.h"
+#include "Core/Audio.h"
 #include "Utils/StateMachine.h"
 #include "Core/SceneManager.h"
 #include "Core/Map.h"
@@ -216,6 +217,10 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 				// AUDIO DONE boss death
 				movementFSM->ChangeState("die");
 			}
+			else if (vida > 0.0f) {
+				spiderDamage.Reset();
+				movementFSM->ChangeState("hurt");
+			}
 				//else {
 				//	// AUDIO DONE boss hit
 				//	app->audio->PlayFx(bossHit);
@@ -225,7 +230,6 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 
 	case ColliderType::PLAYER:
-		player->vida -= dano;
 		break;
 
 	case ColliderType::UNKNOWN:
@@ -235,7 +239,11 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 }
 
 void MiniSpider::EndCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype) {
 
+	case ColliderType::PLAYER:
+		break;
+	}
 }
 
 void MiniSpider::pathfindingMovement(float dt) {

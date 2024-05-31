@@ -25,17 +25,16 @@ public:
     {
         LOG("MiniSpiderAttackState Update()");
 
+        player = app->entityManager->GetPlayerEntity();
+
         //Animation
         app->render->DrawTexture(minispider->spiderAttack.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderAttack.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, minispider->flip);
         minispider->spiderAttack.Update(dt);
 
-        /*b2Vec2 attackDirection = { (float32)player->position.x - enemyboss->position.x, (float32)player->position.y - enemyboss->position.y };
-        attackDirection.Normalize();
+        if (minispider->spiderAttack.GetCurrentFrameCount() == 5 && PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 2.0f) {
+            player->vida -= minispider->dano;
+        }
 
-        b2Vec2 attackImpulse = { attackDirection.x, attackDirection.y };
-
-        enemyboss->pbody->body->ApplyLinearImpulse(attackImpulse, enemyboss->pbody->body->GetWorldCenter(), true);*/
-        //app->render->DrawRectangle({ minispider->position.x - 5, minispider->position.y - 2, 36, 36 }, 0, 50, 255);
         if (minispider->spiderAttack.GetCurrentFrameCount()>=9) {
             minispider->attackTimer.Start();
             StateMachineReference->ChangeState("idle");

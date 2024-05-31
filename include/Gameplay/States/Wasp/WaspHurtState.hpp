@@ -23,16 +23,12 @@ public:
         LOG("WaspHurtState Update()");
 
         //Animation
-        app->render->DrawTexture(wasp->waspDamage.texture, wasp->position.x, wasp->position.y, &wasp->waspDamage.GetCurrentFrame());
+        app->render->DrawTexture(wasp->waspDamage.texture, wasp->position.x-120, wasp->position.y-130, &wasp->waspDamage.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, wasp->flip);
         wasp->waspDamage.Update(dt);
 
-        //Wasp->invencible = true;
-        //if (Wasp->currentAnimation->HasFinished()) {
-        //    Wasp->hurtAnim.Reset();
-        //    Wasp->hurtAnim.ResetLoopCount();
-        //    Wasp->invencible = false;
-        //    StateMachineReference->ChangeState("idle");
-        //}
+        if (wasp->waspDamage.GetCurrentFrameCount() >= 13) {
+            StateMachineReference->ChangeState("idle");
+        }
     }
     inline void Exit() override
     {

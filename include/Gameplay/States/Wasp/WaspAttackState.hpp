@@ -25,13 +25,7 @@ public:
     {
         LOG("WaspAttackState Update()");
 
-        /*b2Vec2 attackDirection = { (float32)player->position.x - Wasp->position.x, (float32)player->position.y - Wasp->position.y };
-        attackDirection.Normalize(); 
-
-        b2Vec2 attackImpulse = { attackDirection.x, attackDirection.y }; 
-
-        Wasp->pbody->body->ApplyLinearImpulse(attackImpulse, Wasp->pbody->body->GetWorldCenter(), true);*/
-        //app->render->DrawRectangle({ wasp->position.x - 5, wasp->position.y - 2, 36, 36 }, 0, 50, 255);
+        player = app->entityManager->GetPlayerEntity();
 
         //Animation
         app->render->DrawTexture(wasp->waspAttack.texture, wasp->position.x-120, wasp->position.y-130, &wasp->waspAttack.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, wasp->flip);
@@ -39,6 +33,10 @@ public:
 
         if (wasp->waspAttack.GetCurrentFrameCount() >= 14 && wasp->waspAttack.GetCurrentFrameCount() <= 17) {
             wasp->attackMovement();
+            if (PIXEL_TO_METERS(player->position.DistanceTo(wasp->position)) < 2.0f) {
+                player->vida -= wasp->dano;
+                wasp->vida += wasp->dano;
+            }
         }
 
         if (wasp->waspAttack.GetCurrentFrameCount() >= 24) {

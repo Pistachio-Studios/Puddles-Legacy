@@ -23,16 +23,12 @@ public:
         LOG("MiniSpiderHurtState Update()");
 
         //Animation
-        app->render->DrawTexture(minispider->spiderDamage.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderDamage.GetCurrentFrame());
+        app->render->DrawTexture(minispider->spiderDamage.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderDamage.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, minispider->flip);
         minispider->spiderDamage.Update(dt);
 
-        //enemyboss->invencible = true;
-        //if (enemyboss->currentAnimation->HasFinished()) {
-        //    enemyboss->hurtAnim.Reset();
-        //    enemyboss->hurtAnim.ResetLoopCount();
-        //    enemyboss->invencible = false;
-        //    StateMachineReference->ChangeState("idle");
-        //}
+        if (minispider->spiderDamage.GetCurrentFrameCount() >= 7) {
+            StateMachineReference->ChangeState("idle");
+        }
     }
     inline void Exit() override
     {

@@ -8,6 +8,7 @@
 #include "Gameplay/Scene.h"
 #include "Utils/Point.h"
 #include "Core/Physics.h"
+#include "Core/Audio.h"
 #include "Utils/StateMachine.h"
 #include "Core/SceneManager.h"
 #include "Core/Map.h"
@@ -213,6 +214,10 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 			{
 				// AUDIO DONE boss death
 				movementFSM->ChangeState("die");
+			}
+			else if (vida > 0.0f) {
+				waspDamage.Reset();
+				movementFSM->ChangeState("hurt");
 			}
 			//else {
 			//	// AUDIO DONE boss hit
