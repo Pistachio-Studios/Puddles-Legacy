@@ -20,11 +20,6 @@ elseif (MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  /wd4101 /wd4267 /wd4267 /wd4244")
     # Additional compiler warnings and options for MSVC
-    # Disable optimizations
-    target_compile_options(${PROJECT_NAME} PRIVATE /Od)
-    
-    # Set other warning and security options
-    target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX /permissive- /analyze /RTC1 /GS /sdl)
 endif()
 
 file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.cpp" "${INCLUDE_DIR}/*.h")
@@ -47,7 +42,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS} ${SDL2_M
 
 target_link_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARY_DIRS})
 
-add_compile_options(-Winconsistent-missing-override)
+add_compile_options(-Winconsistent-missing-override /Od /W4 /WX /permissive- /analyze /RTC1 /GS /sdl)
 target_link_libraries(${PROJECT_NAME} PRIVATE $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> 
                                               $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static> 
                                               $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
