@@ -7,7 +7,11 @@ class Item : public Entity {
 public:
     // Constructor
     Item(EntityType type, std::string name, int quantity, std::string description) 
-        : Entity(type), name(name), quantity(quantity), description(description) {}
+        : Entity(type), name(name), quantity(quantity), description(description) {
+
+            Entity::name = name.c_str();
+
+        }
 
     // Destructor
     ~Item() {}

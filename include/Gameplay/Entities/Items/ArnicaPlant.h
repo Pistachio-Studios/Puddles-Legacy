@@ -14,6 +14,13 @@ public:
 
     // Use the arnica plant
     void Use() override;
+
+    bool Update(float dt) override;
+
+    void OnCollision(PhysBody* physA, PhysBody* physB) override;
+
+	void EndCollision(PhysBody* physA, PhysBody* physB) override;
+
 };
 
 #endif // ARNICAPLANT_H

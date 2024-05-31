@@ -14,6 +14,12 @@ public:
 
     // Use the Comfrey plant
     void Use() override;
+
+    bool Update(float dt) override;
+
+    void OnCollision(PhysBody* physA, PhysBody* physB) override;
+
+	void EndCollision(PhysBody* physA, PhysBody* physB) override;
 };
 
 #endif // COMFREYPLANT_H
