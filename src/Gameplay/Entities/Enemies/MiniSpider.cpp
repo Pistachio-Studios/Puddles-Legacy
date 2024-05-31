@@ -88,7 +88,7 @@ bool MiniSpider::Start() {
 	spiderDamage.speed = 2.0f;
 
 	spiderDeath = *app->animationManager->GetAnimByName("Mini_Spider_Muerte");
-	spiderDeath.speed = 2.0f;
+	spiderDeath.speed = 1.0f;
 
 	return true;
 }
@@ -96,43 +96,38 @@ bool MiniSpider::Start() {
 bool MiniSpider::Update(float dt)
 {
 
-	if (movementFSM->GetCurrentState().name != "die") {
-		movementFSM->Update(dt);
-		pbody->body->SetTransform(pbody->body->GetPosition(), 0);
+	movementFSM->Update(dt);
+	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
+	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 
-		//Update player position in pixels
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	//Update player position in pixels
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-		if (debug) {
-			if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-				freeCam = !freeCam;
-			}
+	if (debug) {
+		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+			freeCam = !freeCam;
 		}
-
-		//app->render->DrawRectangle({ position.x - 1, position.y - 2, 36, 36 }, 0, 50, 255);
-
-		app->render->DrawCircle(position.x, position.y + 5, 1, 0, 0, 0, 0);
-		/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
-
-			currentAnimation->Update(dt); */
-
-			// Calculate the angle between the enemy and the player
-		float angleToPlayer = atan2(player->position.y - position.y, player->position.x - position.x);
-
-		// Determine if the player is to the left or right of the enemy
-		if (player->position.x < position.x) {
-			flip = SDL_FLIP_HORIZONTAL;
-		}
-		else {
-			flip = SDL_FLIP_NONE;
-		}
-
 	}
 
-	
+	//app->render->DrawRectangle({ position.x - 1, position.y - 2, 36, 36 }, 0, 50, 255);
+
+	app->render->DrawCircle(position.x, position.y + 5, 1, 0, 0, 0, 0);
+	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
+
+		currentAnimation->Update(dt); */
+
+		// Calculate the angle between the enemy and the player
+	float angleToPlayer = atan2(player->position.y - position.y, player->position.x - position.x);
+
+	// Determine if the player is to the left or right of the enemy
+	if (player->position.x < position.x) {
+		flip = SDL_FLIP_HORIZONTAL;
+	}
+	else {
+		flip = SDL_FLIP_NONE;
+	}
 
 	return true;
 }
@@ -220,7 +215,6 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 			{
 				// AUDIO DONE boss death
 				movementFSM->ChangeState("die");
-				app->physics->DestroyBody(pbody);
 			}
 				//else {
 				//	// AUDIO DONE boss hit

@@ -10,7 +10,7 @@
 	</renderer>
 	<window>
 		<resolution width="1920" height="1080" scale="1" />
-		<fullscreen value="true" />
+		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="false" />
 		<fullscreen_window value="false" />
@@ -61,9 +61,6 @@
 			<camera x="-530" y="-1949" />
 			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
 			<enemies>
-				<EnemyBoss x="600" y="2032"/>
-				<MiniSpider x="600" y="2050"/>
-				<MiniSpider x="700" y="2050"/>
 				<MiniSpider x="800" y="2050"/>
 				<Wasp x="650" y="2100"/>
 			</enemies>

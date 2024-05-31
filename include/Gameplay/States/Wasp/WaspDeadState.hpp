@@ -23,14 +23,14 @@ public:
         LOG("WaspDeadState Update()");
 
         //Animation
-        app->render->DrawTexture(wasp->waspDeath.texture, wasp->position.x, wasp->position.y, &wasp->waspDeath.GetCurrentFrame());
+        app->render->DrawTexture(wasp->waspDeath.texture, wasp->position.x-120, wasp->position.y-130, &wasp->waspDeath.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, wasp->flip);
         wasp->waspDeath.Update(dt);
 
-        //if (Wasp->reviveTimer.ReadSec() >= 5)
-        //{
-        //    StateMachineReference->ChangeState("idle");
-        //    //Wasp->health = 5;
-        //}
+        if (wasp->waspDeath.GetCurrentFrameCount() >= 15) {
+            app->physics->DestroyBody(wasp->pbody);
+            wasp->Disable();
+        }
+
     }
     inline void Exit() override
     {

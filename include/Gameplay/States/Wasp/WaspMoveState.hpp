@@ -28,13 +28,15 @@ public:
         player = app->entityManager->GetPlayerEntity();
 
         //Animation
-        app->render->DrawTexture(wasp->waspMove.texture, wasp->position.x - 120, wasp->position.y - 130, &wasp->waspMove.GetCurrentFrame());
+        app->render->DrawTexture(wasp->waspMove.texture, wasp->position.x - 120, wasp->position.y - 130, &wasp->waspMove.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, wasp->flip);
         wasp->waspMove.Update(dt);
-
+        
         wasp->pathfindingMovement(dt);
-        if (PIXEL_TO_METERS(player->position.DistanceTo(wasp->position)) < 100.0f) {
+
+        if (PIXEL_TO_METERS(player->position.DistanceTo(wasp->position)) < 7.0f) {
             if (wasp->attackTimer.ReadSec() >= 2)
             {
+                wasp->waspAttack.Reset();
                 StateMachineReference->ChangeState("attack");
             }
         }

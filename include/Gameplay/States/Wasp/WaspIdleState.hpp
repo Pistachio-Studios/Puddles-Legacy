@@ -26,12 +26,20 @@ public:
         LOG("WaspIdleState Update()");
 
         //Animation
-        app->render->DrawTexture(wasp->waspIdle.texture, wasp->position.x, wasp->position.y, &wasp->waspIdle.GetCurrentFrame());
+        app->render->DrawTexture(wasp->waspIdle.texture, wasp->position.x-120, wasp->position.y-130, &wasp->waspIdle.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, wasp->flip);
         wasp->waspIdle.Update(dt);
 
         player = app->entityManager->GetPlayerEntity();
 
-        if (PIXEL_TO_METERS(player->position.DistanceTo(wasp->position)) < 10.0f)
+        if (PIXEL_TO_METERS(player->position.DistanceTo(wasp->position)) < 2.0f) {
+            if (wasp->attackTimer.ReadSec() >= 1)
+            {
+                wasp->waspAttack.Reset();
+                StateMachineReference->ChangeState("attack");
+            }
+        }
+
+        if (PIXEL_TO_METERS(player->position.DistanceTo(wasp->position)) < 7.0f && PIXEL_TO_METERS(player->position.DistanceTo(wasp->position)) > 2.0f)
         {
             StateMachineReference->ChangeState("move");
             // AUDIO DONE dog idle

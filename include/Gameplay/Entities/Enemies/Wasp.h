@@ -43,6 +43,8 @@ public:
 
 	void EndCollision(PhysBody* physA, PhysBody* physB) override;
 
+	void attackMovement();
+
 	void pathfindingMovement(float dt);
 
 	void OnRaycastHit(b2Fixture* fixture, const b2Vec2& point,
@@ -91,6 +93,8 @@ public:
 	int currentPathPos;
 
 	PathFinding* pathfinding;
+
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 };
 

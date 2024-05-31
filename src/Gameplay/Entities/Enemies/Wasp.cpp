@@ -50,7 +50,7 @@ bool Wasp::Start() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string(); 
+	texturePath = parameters.attribute("texturepath").as_string();
 	newPosition = spawnPosition = position;
 
 	timer = Timer();
@@ -89,41 +89,44 @@ bool Wasp::Start() {
 	waspDeath = *app->animationManager->GetAnimByName("Avispa_Muerte");
 	waspDeath.speed = 2.0f;
 
-
 	return true;
 }
 
 bool Wasp::Update(float dt)
 {
-	if (movementFSM->GetCurrentState().name != "die") {
-		movementFSM->Update(dt);
-		pbody->body->SetTransform(pbody->body->GetPosition(), 0);
+	movementFSM->Update(dt);
+	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-		// Calculate the angle between the enemy and the player
-		float angleToPlayer = atan2(player->position.y - position.y, player->position.x - position.x);
+	//Update player position in pixels
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-		// Set the rotation of the enemy's body to face the player
-		pbody->body->SetTransform(pbody->body->GetPosition(), angleToPlayer);
+	//app->render->DrawRectangle({ position.x - 1, position.y + 8, 36, 18 }, 255, 0, 0);
 
-		//Update player position in pixels
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 
-		//app->render->DrawRectangle({ position.x - 1, position.y + 8, 36, 18 }, 255, 0, 0);
-
-		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
-
-		if (debug) {
-			if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-				freeCam = !freeCam;
-			}
+	if (debug) {
+		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+			freeCam = !freeCam;
 		}
-
-		/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
-
-			currentAnimation->Update(dt); */
-
 	}
+
+	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
+
+		currentAnimation->Update(dt); */
+
+	// Calculate the angle between the enemy and the player
+	
+	float angleToPlayer = atan2(player->position.y - position.y, player->position.x - position.x);
+
+	// Determine if the player is to the left or right of the enemy
+	if (player->position.x < position.x) {
+		flip = SDL_FLIP_NONE;
+	}
+	else {
+		flip = SDL_FLIP_HORIZONTAL;
+	}
+
 	return true;
 }
 
@@ -210,7 +213,6 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 			{
 				// AUDIO DONE boss death
 				movementFSM->ChangeState("die");
-				app->physics->DestroyBody(pbody);
 			}
 			//else {
 			//	// AUDIO DONE boss hit
@@ -229,33 +231,53 @@ void Wasp::EndCollision(PhysBody* physA, PhysBody* physB) {
 
 }
 
+void Wasp::attackMovement() {
+	// Calculate the direction vector from the enemy to the player
+	float dirX = player->position.x - position.x;
+	float dirY = player->position.y - position.y;
+
+	// Normalize the direction vector
+	float length = sqrt(dirX * dirX + dirY * dirY);
+	if (length != 0) {
+		dirX /= length;
+		dirY /= length;
+	}
+
+	// Define the attack force or speed
+	float attackForce = 10.0f; // Adjust this value as needed
+
+	// Apply the impulse/force towards the player
+	b2Vec2 force(dirX * attackForce, dirY * attackForce);
+	pbody->body->ApplyLinearImpulse(force, pbody->body->GetWorldCenter(), true);
+}
+
 void Wasp::pathfindingMovement(float dt) {
 
 	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //a�adir el tile size / 2 hace que el owl se acerque mas 
 
-	if (timer.ReadMSec() >= 3000) {
+	if (timer.ReadMSec() > 250) {
 		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //a�adir el tile size / 2 hace que el owl se acerque mas
-		pathfinding->CreatePath(origin, destination); 
+		pathfinding->CreatePath(origin, destination);
 		timer.Start();
 		currentPathPos = 0;
 	}
 
 	const DynArray<iPoint>* path = pathfinding->GetLastPath();
 
-	if (movementDelay.ReadMSec() > 3000) {
+	if (movementDelay.ReadMSec() > 100) {
 		if (currentPathPos < path->Count())
 		{
 			newPosition = app->map->MapToWorld(path->At(currentPathPos)->x, path->At(currentPathPos)->y);
 			currentPathPos++;
 			//LOG("%d", currentPathPos);
-			//movementDelay.Start();
+			movementDelay.Start();
 		}
 	}
 
-	pbody->body->SetTransform( 
+	pbody->body->SetTransform(
 		{
-			std::lerp(pbody->body->GetPosition().x, PIXEL_TO_METERS(newPosition.x), dt * moveSpeed / 1000), 
-			std::lerp(pbody->body->GetPosition().y, PIXEL_TO_METERS(newPosition.y), dt * moveSpeed / 1000) 
+			std::lerp(pbody->body->GetPosition().x, PIXEL_TO_METERS(newPosition.x), dt * moveSpeed / 1000),
+			std::lerp(pbody->body->GetPosition().y, PIXEL_TO_METERS(newPosition.y), dt * moveSpeed / 1000)
 
 		},
 

@@ -23,14 +23,13 @@ public:
         LOG("MiniSpiderDeadState Update()");
 
         //Animation
-        app->render->DrawTexture(minispider->spiderDeath.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderDeath.GetCurrentFrame());
+        app->render->DrawTexture(minispider->spiderDeath.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderDeath.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, minispider->flip);
         minispider->spiderDeath.Update(dt);
 
-        //if (minispider->reviveTimer.ReadSec() >= 5)
-        //{
-        //    StateMachineReference->ChangeState("idle");
-        //    //enemyboss->health = 5;
-        //}
+        if (minispider->spiderDeath.GetCurrentFrameCount() >= 12) {
+            app->physics->DestroyBody(minispider->pbody);
+            minispider->Disable();
+        }
     }
     inline void Exit() override
     {

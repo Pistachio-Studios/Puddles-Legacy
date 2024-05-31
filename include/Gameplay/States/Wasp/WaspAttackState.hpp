@@ -34,11 +34,18 @@ public:
         //app->render->DrawRectangle({ wasp->position.x - 5, wasp->position.y - 2, 36, 36 }, 0, 50, 255);
 
         //Animation
-        app->render->DrawTexture(wasp->waspAttack.texture, wasp->position.x, wasp->position.y, &wasp->waspAttack.GetCurrentFrame());
+        app->render->DrawTexture(wasp->waspAttack.texture, wasp->position.x-120, wasp->position.y-130, &wasp->waspAttack.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, wasp->flip);
         wasp->waspAttack.Update(dt);
 
-        wasp->attackTimer.Start(); 
-        StateMachineReference->ChangeState("move"); 
+        if (wasp->waspAttack.GetCurrentFrameCount() >= 14 && wasp->waspAttack.GetCurrentFrameCount() <= 17) {
+            wasp->attackMovement();
+        }
+
+        if (wasp->waspAttack.GetCurrentFrameCount() >= 24) {
+            wasp->attackTimer.Start();
+            StateMachineReference->ChangeState("idle");
+        }
+
     }
     inline void Exit() override
     {
