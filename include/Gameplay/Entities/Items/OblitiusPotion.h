@@ -6,18 +6,13 @@
 class OblitiusPotion : public Potion {
 public:
     // Constructor
-    OblitiusPotion(std::string name, int quantity, std::string description) 
-        : Potion(name, quantity, description) {}
+    OblitiusPotion(std::string name, int quantity, std::string description);
 
     // Destructor
-    ~OblitiusPotion() {}
+    ~OblitiusPotion();
 
     // Use the Oblitius potion
-    void Use() override {
-        // Implement the logic for using the Oblitius potion
-        LOG("Using ", name, ". ", description);
-        quantity--;
-    }
+    void Use() override;
 };
 
 #endif // OBLITIUSPOTION_H

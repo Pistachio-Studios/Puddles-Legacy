@@ -3,7 +3,7 @@
 
 // Constructor
 ArnicaPlant::ArnicaPlant(std::string name, int quantity, std::string description) 
-    : Potion(name, quantity, description) {}
+    : Plant(name, quantity, description) {}
 
 // Destructor
 ArnicaPlant::~ArnicaPlant() {}

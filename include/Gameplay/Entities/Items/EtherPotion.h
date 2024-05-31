@@ -6,18 +6,13 @@
 class EtherPotion : public Potion {
 public:
     // Constructor
-    EtherPotion(std::string name, int quantity, std::string description) 
-        : Potion(name, quantity, description) {}
+    EtherPotion(std::string name, int quantity, std::string description);
 
     // Destructor
-    ~EtherPotion() {}
+    ~EtherPotion();
 
     // Use the ether potion
-    void Use() override {
-        // Implement the logic for using the ether potion
-        LOG("Using ", name, ". ", description);
-        quantity--;
-    }
+    void Use() override;
 };
 
 #endif // ETHERPOTION_H

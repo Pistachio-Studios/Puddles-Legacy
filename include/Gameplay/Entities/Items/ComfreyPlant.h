@@ -2,22 +2,18 @@
 #define COMFREYPLANT_H
 
 #include "Gameplay/Entities/Items/Plant.h"
+#include "Utils/Log.h"
 
 class ComfreyPlant : public Plant {
 public:
     // Constructor
-    ComfreyPlant(std::string name, int quantity, std::string description) 
-        : Plant(name, quantity, description) {}
+    ComfreyPlant(std::string name, int quantity, std::string description);
 
     // Destructor
-    ~ComfreyPlant() {}
+    ~ComfreyPlant();
 
     // Use the Comfrey plant
-    void Use() override {
-        // Implement the logic for using the Comfrey plant
-        LOG("Using ", name, ". ", description);
-        quantity--;
-    }
+    void Use() override;
 };
 
 #endif // COMFREYPLANT_H

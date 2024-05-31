@@ -6,18 +6,13 @@
 class CeleritaPotion : public Potion {
 public:
     // Constructor
-    CeleritaPotion(std::string name, int quantity, std::string description) 
-        : Potion(name, quantity, description) {}
+    CeleritaPotion(std::string name, int quantity, std::string description);
 
     // Destructor
-    ~CeleritaPotion() {}
+    ~CeleritaPotion();
 
     // Use the celerita potion
-    void Use() override {
-        // Implement the logic for using the celerita potion
-        LOG("Using ", name, ". ", description);
-        quantity--;
-    }
+    void Use() override;
 };
 
 #endif // CELERITAPOTION_H
