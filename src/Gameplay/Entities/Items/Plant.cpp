@@ -19,10 +19,6 @@
 
 #include <cstdlib>
 
-#ifdef __linux__
-#include <Box2D/Dynamics/b2Body.h>
-#endif
-
 Plant::Plant() : Entity(EntityType::PLANT)
 {
 	name.Create("plant");

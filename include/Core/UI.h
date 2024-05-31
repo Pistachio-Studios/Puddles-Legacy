@@ -30,6 +30,12 @@ public:
 public:
 
 	SDL_Texture* texture_inventory = NULL;
+
+	SDL_Texture* MenuPequeño;
+	SDL_Texture* VidaBestiario;
+	SDL_Texture* Espada;
+	SDL_Texture* Cetro;
+
 	uint windowW, windowH;
 };
 

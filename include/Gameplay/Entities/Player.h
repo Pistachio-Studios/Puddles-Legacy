@@ -71,14 +71,16 @@ public:
 	//tmps
 	PhysBody* sword;
 
-	int mana = 100;
-	int livesPlayer = 10;
+	uint mana = 100;
+	uint livesPlayer = 10;
 	int totalLivesPlayer;
 	bool deadPlayer = false;
 
 	int healPlantCounter = 0;
 	int energyPlantCounter = 0;
 	int veloPlantCounter = 0;
+
+	Timer playerHurtCultdown;
 };
 
 #endif // __PLAYER_H__

@@ -6,6 +6,7 @@
 #include "Gameplay/Scene.h"
 #include "Gameplay/Entities/Items/Potion.h"
 #include "Core/EntityManager.h"
+#include "Gameplay/Entities/Player.h"
 #include "Utils/Point.h"
 #include "Core/Physics.h"
 #include "Core/Window.h"
@@ -33,7 +34,13 @@ bool UI::Awake() {
 
 bool UI::Start() {
 
-	texture_inventory = app->tex->Load("Assets/Textures/Potions/Inventory/NoPotions.png");
+	texture_inventory = app->tex->Load("Assets/Textures/Potions/Inventory/noPotions.png");
+
+	//Player UIGUI/
+	MenuPequeño = app->tex->Load("Assets/UI/GUI/MenuPequeño.PNG");
+	VidaBestiario = app->tex->Load("Assets/UI/GUI/VidaBestiario.PNG");
+	Espada = app->tex->Load("Assets/UI/GUI/Armas/Espada.PNG");
+	Cetro = app->tex->Load("Assets/UI/GUI/Armas/Cetro.PNG");
 
 	return true;
 }
@@ -47,6 +54,34 @@ bool UI::Update(float dt)
 		app->render->DrawTexture(texture_inventory, (int)windowW / 2 - 350, (int)windowH / 2 - 350, 0, 0);
 
 		app->entityManager->PotionUpdate(dt); 
+	}
+
+	//Player UI
+	Player* player = app->entityManager->GetPlayerEntity();
+
+	if(player != nullptr){
+		app->render->DrawTexture(MenuPequeño, 275, 650, 0, 0);
+
+
+		//Health Bar
+		int health = player->livesPlayer;
+		app->render->DrawRectangle({ 200, 80, 295 * health / 10, 20 }, 33, 187, 129, 255, true, false);
+		//Mana Bar
+		int mana = player->mana;
+		app->render->DrawRectangle({ 200, 105, 295 * mana / 100, 20 }, 62, 94, 170, 255, true, false);
+
+		app->render->DrawTexture(VidaBestiario, 50, 25, 0, 0);
+
+		//Weapons
+		switch(player->currentClass)
+		{
+		case PlayerClass::KNIGHT:
+			app->render->DrawTexture(Espada, 150, 600, 0, 0);
+			break;
+		case PlayerClass::WIZARD:
+			app->render->DrawTexture(Cetro, 150, 600, 0, 0);
+			break;
+		}
 	}
 
 	return true;

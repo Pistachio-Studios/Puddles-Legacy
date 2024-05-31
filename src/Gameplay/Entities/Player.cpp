@@ -50,6 +50,8 @@ bool Player::Start() {
 
 	timer = Timer();
 
+	playerHurtCultdown = Timer();
+
 	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
@@ -134,6 +136,10 @@ void Player::DrawImGui()
 	ImGui::Text("Looking Dir: (%f, %f)", lookingDir.x, lookingDir.y);
 	ImGui::Text("Looking Angle: %f", lookingAngle);
 
+	ImGui::Text("Player Class: %s", currentClass == PlayerClass::KNIGHT ? "KNIGHT" : "WIZARD");
+
+	ImGui::Text("player hurt cooldown: %f", playerHurtCultdown.ReadMSec());
+
 	ImGui::End();
 }
 
@@ -183,9 +189,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 
 		break;
-		//TODO: He añadido esto para probar que la pocion de curar funcione, se puede borrar :)
+		//TODO: He aï¿½adido esto para probar que la pocion de curar funcione, se puede borrar :)
 	case ColliderType::ENEMY:
-		livesPlayer--; 
+		if(playerHurtCultdown.ReadMSec() > 1000.0f)
+			{
+				livesPlayer--; 
+				playerHurtCultdown.Start();
+			}
 		break;
 	}
 	

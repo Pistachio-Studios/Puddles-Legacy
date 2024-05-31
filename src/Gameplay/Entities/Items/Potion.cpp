@@ -20,10 +20,6 @@
 
 #include <cstdlib>
 
-#ifdef __linux__
-#include <Box2D/Dynamics/b2Body.h>
-#endif
-
 Potion::Potion() : Entity(EntityType::POTION)
 {
 	name.Create("potion");
