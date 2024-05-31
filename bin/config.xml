@@ -48,6 +48,14 @@
 			<map path="Assets/Maps/Town-Scene/" name="Town.tmx" />
 			<camera x="-530" y="-1949" />
 			<player x="1000" y="2200" texturepath="Assets/Textures/Player.png" />
+			<npcs>
+				<npc x="1000" y="2600" type="2" texturepath="Assets/Textures/NoDialogNpcs/blackCat.png" />
+				<npc x="1000" y="1800" type="2" texturepath="Assets/Textures/NoDialogNpcs/bunny.png" />
+				<npc x="1400" y="2200" type="2" texturepath="Assets/Textures/NoDialogNpcs/chamaleon.png" />
+				<npc x="1800" y="2200" type="2" texturepath="Assets/Textures/NoDialogNpcs/chick.png" />
+				<npc x="1400" y="2600" type="2" texturepath="Assets/Textures/NoDialogNpcs/panda.png" />
+				<npc x="1400" y="1800" type="2" texturepath="Assets/Textures/NoDialogNpcs/squirrel.png" />
+			</npcs>
 			<enemies />
 		</townscene>
 		<tavernscene>
@@ -68,8 +76,8 @@
 				<CentipideEnemy x="650" y="2100" texturepath="" />
 			</enemies>
 			<Npcs>
-				<loco x="900" y="2500" />
-				<tabernero x="900" y="2800" /> 
+				<loco x="900" y="2500" type="1"/>
+				<tabernero x="900" y="2800" type="1"/> 
 			</Npcs>
 		<Plants>
 			<Plant x="1500" y="2300" type="1" texturepath="Assets/Textures/Plants/HealPlant.png"/>

@@ -1,42 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
- <tileset firstgid="1" name="testerAnim" tilewidth="32" tileheight="32" tilecount="11" columns="11">
-  <image source="Virtual-Guy/Idle.png" width="352" height="32"/>
-  <tile id="0">
-   <animation>
-    <frame tileid="0" duration="150"/>
-    <frame tileid="1" duration="150"/>
-    <frame tileid="2" duration="150"/>
-    <frame tileid="3" duration="150"/>
-    <frame tileid="4" duration="150"/>
-    <frame tileid="5" duration="150"/>
-    <frame tileid="6" duration="150"/>
-    <frame tileid="7" duration="150"/>
-    <frame tileid="8" duration="150"/>
-    <frame tileid="9" duration="150"/>
-    <frame tileid="10" duration="150"/>
-   </animation>
-  </tile>
- </tileset>
- <tileset firstgid="12" name="testerAnim2" tilewidth="32" tileheight="32" tilecount="11" columns="11">
-  <image source="Mask-Dude/Idle.png" width="352" height="32"/>
-  <tile id="0">
-   <animation>
-    <frame tileid="0" duration="150"/>
-    <frame tileid="1" duration="150"/>
-    <frame tileid="2" duration="150"/>
-    <frame tileid="3" duration="150"/>
-    <frame tileid="4" duration="150"/>
-    <frame tileid="5" duration="150"/>
-    <frame tileid="6" duration="150"/>
-    <frame tileid="7" duration="150"/>
-    <frame tileid="8" duration="150"/>
-    <frame tileid="9" duration="150"/>
-    <frame tileid="10" duration="150"/>
-   </animation>
-  </tile>
- </tileset>
- <tileset firstgid="23" name="smoke_scaled" tilewidth="114" tileheight="114" tilecount="24" columns="6">
+ <tileset firstgid="1" name="smoke_scaled" tilewidth="114" tileheight="114" tilecount="24" columns="6">
   <image source="Particles/smoke_scaled.png" width="685" height="473"/>
   <tile id="0">
    <animation>
@@ -64,6 +28,90 @@
     <frame tileid="21" duration="200"/>
     <frame tileid="22" duration="200"/>
     <frame tileid="23" duration="200"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="25" name="klaus_idle_1" tilewidth="128" tileheight="256" tilecount="5" columns="5">
+  <image source="NPC-Klaus/klaus_idle_1.png" width="640" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="200"/>
+    <frame tileid="1" duration="200"/>
+    <frame tileid="2" duration="200"/>
+    <frame tileid="3" duration="200"/>
+    <frame tileid="4" duration="200"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="30" name="klaus_idle_2" tilewidth="128" tileheight="256" tilecount="13" columns="13">
+  <image source="NPC-Klaus/klaus_idle_2.png" width="1664" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="200"/>
+    <frame tileid="1" duration="200"/>
+    <frame tileid="2" duration="200"/>
+    <frame tileid="3" duration="200"/>
+    <frame tileid="4" duration="200"/>
+    <frame tileid="5" duration="400"/>
+    <frame tileid="6" duration="400"/>
+    <frame tileid="7" duration="400"/>
+    <frame tileid="8" duration="200"/>
+    <frame tileid="9" duration="200"/>
+    <frame tileid="10" duration="200"/>
+    <frame tileid="11" duration="200"/>
+    <frame tileid="12" duration="200"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="43" name="mono_idle_2_izquierda" tilewidth="256" tileheight="256" tilecount="23" columns="23">
+  <image source="NPC-Mono/mono_idle_2_izquierda.png" width="5888" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="150"/>
+    <frame tileid="1" duration="150"/>
+    <frame tileid="2" duration="150"/>
+    <frame tileid="3" duration="150"/>
+    <frame tileid="4" duration="150"/>
+    <frame tileid="5" duration="150"/>
+    <frame tileid="6" duration="150"/>
+    <frame tileid="7" duration="150"/>
+    <frame tileid="8" duration="150"/>
+    <frame tileid="9" duration="150"/>
+    <frame tileid="10" duration="150"/>
+    <frame tileid="11" duration="150"/>
+    <frame tileid="12" duration="150"/>
+    <frame tileid="13" duration="150"/>
+    <frame tileid="14" duration="150"/>
+    <frame tileid="15" duration="150"/>
+    <frame tileid="16" duration="150"/>
+    <frame tileid="17" duration="150"/>
+    <frame tileid="18" duration="150"/>
+    <frame tileid="19" duration="150"/>
+    <frame tileid="20" duration="150"/>
+    <frame tileid="21" duration="150"/>
+    <frame tileid="22" duration="150"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="66" name="mono_idle_1_izquierda" tilewidth="256" tileheight="256" tilecount="16" columns="16">
+  <image source="NPC-Mono/mono_idle_1_izquierda.png" width="4096" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="150"/>
+    <frame tileid="1" duration="150"/>
+    <frame tileid="2" duration="150"/>
+    <frame tileid="3" duration="150"/>
+    <frame tileid="4" duration="150"/>
+    <frame tileid="5" duration="150"/>
+    <frame tileid="6" duration="150"/>
+    <frame tileid="7" duration="150"/>
+    <frame tileid="8" duration="150"/>
+    <frame tileid="10" duration="150"/>
+    <frame tileid="11" duration="150"/>
+    <frame tileid="12" duration="150"/>
+    <frame tileid="13" duration="150"/>
+    <frame tileid="14" duration="150"/>
+    <frame tileid="15" duration="150"/>
    </animation>
   </tile>
  </tileset>
