@@ -41,6 +41,7 @@ bool UI::Start() {
 	VidaBestiario = app->tex->Load("Assets/UI/GUI/VidaBestiario.PNG");
 	Espada = app->tex->Load("Assets/UI/GUI/Armas/Espada.PNG");
 	Cetro = app->tex->Load("Assets/UI/GUI/Armas/Cetro.PNG");
+	Seleccion = app->tex->Load("Assets/UI/GUI/Seleccion.PNG");
 
 	return true;
 }
@@ -60,8 +61,13 @@ bool UI::Update(float dt)
 	Player* player = app->entityManager->GetPlayerEntity();
 
 	if(player != nullptr){
+
+		//Menu Pequeño
 		app->render->DrawTexture(MenuPequeño, 275, 650, 0, 0);
 
+		app->render->DrawTexture(Seleccion, 260, 615, 0, 0);
+		app->render->DrawTexture(Seleccion, 280, 695, 0, 0);
+		app->render->DrawTexture(Seleccion, 235, 770, 0, 0);
 
 		//Health Bar
 		int health = player->livesPlayer;

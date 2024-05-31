@@ -35,6 +35,7 @@ public:
 	SDL_Texture* VidaBestiario;
 	SDL_Texture* Espada;
 	SDL_Texture* Cetro;
+	SDL_Texture* Seleccion;
 
 	uint windowW, windowH;
 };
