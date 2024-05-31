@@ -79,6 +79,7 @@ bool Potion::Update(float dt)
 			LOG("type: %s, mouseX: %d, mouseY: %d, posX: %d, posY : %d", this->name,mouseX, mouseY, posX, posY);
 			//TODO: Dibujar la textura de la pocion
 			if (mouseX >= posX + 50 && mouseX <= posX + 350 && mouseY >= posY + 50 && mouseY <= posY + 350) {
+				//selected = true;
 				app->render->DrawTexture(texture2, posX, posY, 0, 0);
 			}
 			else {

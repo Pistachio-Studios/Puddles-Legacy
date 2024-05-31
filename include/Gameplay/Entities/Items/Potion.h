@@ -52,6 +52,7 @@ public:
 	int maxToCreate = 3;
 	bool isCreated = false;
 	bool usedPotion = false;
+	bool selected = false;
 
 	int posX, posY;
 

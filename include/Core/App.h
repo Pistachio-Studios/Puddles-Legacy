@@ -26,6 +26,7 @@ class ParticleManager;
 class GuiManager;
 class DebugUI;
 class DialogManager;
+class UI;
 
 class App
 {
@@ -114,6 +115,7 @@ public:
 	GuiManager* guiManager;
 	DebugUI* debugUI;
 	DialogManager* dialogManager;
+	UI* ui;
 
 
 private:

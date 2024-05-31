@@ -15,6 +15,7 @@
 #include "Core/EntityManager.h"
 #include "Core/Lighting.h"
 #include "Core/DialogManager.h"
+#include "Core/UI.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -50,6 +51,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	guiManager = new GuiManager(true);
 	debugUI = new DebugUI(true);
 	dialogManager = new DialogManager(true);
+	ui = new UI(true);
 
 
 	// Ordered for awake / Start / Update
@@ -68,6 +70,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 	AddModule(debugUI);
 	AddModule(dialogManager);
+	AddModule(ui);
 
 	// Render last to swap buffer
 	AddModule(render);
