@@ -6,6 +6,7 @@
 #include "Gameplay/TeamLogo.h"
 #include "Core/Textures.h"
 #include "Core/Render.h"
+#include "Core/VideoPlayer.h"
 
 #include "Utils/Log.h"
 #include <tracy/Tracy.hpp>
@@ -23,7 +24,10 @@ bool TeamLogo::Enter()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	texture = app->tex->Load(parameters.attribute("texturepath").as_string());
+	//texture = app->tex->Load(parameters.attribute("texturepath").as_string());
+
+	// Load the intro video
+	app->videoPlayer->Start();
 
 	return true;
 }
@@ -43,11 +47,16 @@ bool TeamLogo::Update(float dt)
 	// OPTICK PROFILIN
 	ZoneScoped;
 
-	app->render->DrawTexture(texture, 0, 0);
+	/*app->render->DrawTexture(texture, 0, 0);
 
 	if (timer->ReadSec() >= 3)
 	{
 		LOG("timer teamlogo %d", timer->ReadSec());
+		app->sceneManager->ChangeScene("mainmenu");
+	}*/
+
+	//Check if video ended revisar
+	if (app->videoPlayer->ConvertPixels(0, 1)) {
 		app->sceneManager->ChangeScene("mainmenu");
 	}
 
@@ -74,6 +83,12 @@ bool TeamLogo::Exit()
 bool TeamLogo::CleanUp()
 {
 	LOG("Freeing teamlogo");
-	app->tex->UnLoad(texture);
+	//app->tex->UnLoad(texture);
+
+	//cleaning videoPlayer
+	if (app->videoPlayer) {
+		app->videoPlayer->CleanUp();
+	}
+
 	return true;
 }

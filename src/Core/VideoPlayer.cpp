@@ -23,7 +23,8 @@ bool VideoPlayer::Awake(pugi::xml_node& config)
 bool VideoPlayer::Start()
 {
     // File path of the video to be played
-    const char* file =  "Assets/Video/Intro/example.mp4";
+    const char* file =  "Assets/Video/Logo/Logo-pistachio.mp4";
+    //const char* file1 = "Assets/Video/Intro/example.mp4";
 
     // Allocate memory for the format context
     formatContext = avformat_alloc_context();
@@ -281,9 +282,13 @@ bool VideoPlayer::ConvertPixels(int videoIndex, int audioIndex)
         videoCodecContext->width, videoCodecContext->height, AV_PIX_FMT_YUV420P,
         SWS_BILINEAR, NULL, NULL, NULL);
 
+    bool videoFinished = true;  // Assuming the video has finished unless we find more packets to process -added
+
     // Loop through each packet in the video stream
     while (av_read_frame(formatContext, &packet) >= 0 && running) 
     {
+        videoFinished = false;  // Found a packet, so the video is not finished - added
+
         if (packet.stream_index == videoIndex) 
         {
             // Send packet to video decoder
@@ -327,7 +332,8 @@ bool VideoPlayer::ConvertPixels(int videoIndex, int audioIndex)
     av_frame_free(&srcFrame);
     av_frame_free(&dstFrame);
 
-    return false;
+    //return false;
+    return videoFinished;  // Return true if the video has finished - added
 }
 
 bool VideoPlayer::AllocImage(AVFrame* image)
