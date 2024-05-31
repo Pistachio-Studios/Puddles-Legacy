@@ -1,55 +1,19 @@
-#ifndef __PLANT_H__
-#define __PLANT_H__
+#ifndef PLANT_H
+#define PLANT_H
 
-#include "Core/Animation.h"
-#include "Core/Physics.h"
-#include "Utils/Timer.h"
-#include "Utils/StateMachine.h"
-//#include "Point.h"
-#ifdef __linux__
-#include <SDL.h>
-#elif _MSC_VER
-#include "SDL.h"
-#endif
+#include "Gameplay/Entities/Items/Item.h"
 
-struct SDL_Texture;
-
-class Plant : public Entity
-{
+class Plant : public Item {
 public:
+    // Constructor
+    Plant(std::string name, int quantity, std::string description) 
+        : Item(EntityType::PLANT, name, quantity, description) {}
 
-	bool startTimer = true;
-	Timer timer;
+    // Destructor
+    virtual ~Plant() {}
 
-	Plant();
-	virtual ~Plant();
-
-	bool Awake() override;
-
-	bool Start() override;
-
-	bool Update(float dt) override;
-
-	bool CleanUp() override;
-
-	void OnCollision(PhysBody* physA, PhysBody* physB) override;
-
-	void EndCollision(PhysBody* physA, PhysBody* physB);
-
-public:
-
-	bool isPicked = false;
-	bool touchingPlant = false;
-	SDL_Texture* texture1 = nullptr;
-	SDL_Texture* texture = nullptr;
-	const char* texturePath;
-	int type; 
-	bool healPlantPicked = false;
-	bool veloPlantPicked = false;
-	bool energyPlantPicked = false;
-
-private:
-	PhysBody* pbody;
+    // Use the plant
+    virtual void Use() = 0; // Declare Use as pure virtual
 };
 
-#endif // __PLANT_H__
+#endif // PLANT_H

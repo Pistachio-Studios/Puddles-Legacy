@@ -11,10 +11,6 @@
 #include "Gameplay/Entities/Npcs/Loco.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
-#include "Gameplay/Entities/Items/EnergyPotion.h"
-#include "Gameplay/Entities/Items/HealPotion.h"
-#include "Gameplay/Entities/Items/VeloPotion.h"
-#include "Gameplay/Entities/Items/AbilityPotion.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
@@ -137,6 +133,9 @@ bool TutorialScene::Enter()
 		tabernero->Start();
 	}
 
+	// TODO change the config file to add the items, and the code below to create the items
+
+	/*
 	if (parameters.child("Potion").child("EnergyPotion")) {
 		EnergyPotion* energyPotion = new EnergyPotion();
 		app->entityManager->AddEntity(energyPotion);
@@ -178,6 +177,7 @@ bool TutorialScene::Enter()
 		}
 
 	}
+	*/
 
 	return true;
 }

@@ -1,60 +1,20 @@
-#ifndef __POTION_H__
-#define __POTION_H__
+#ifndef POTION_H
+#define POTION_H
 
-#include "Core/Animation.h"
-#include "Core/Physics.h"
-#include "Utils/Timer.h"
-#include "Utils/StateMachine.h"
+#include "Gameplay/Entities/Items/Item.h"
+#include "Utils/Log.h"
 
-//#include "Point.h"
-#ifdef __linux__
-#include <SDL.h>
-#elif _MSC_VER
-#include "SDL.h"
-#endif
-
-struct SDL_Texture;
-
-class Potion : public Entity
-{
+class Potion : public Item {
 public:
+    // Constructor
+    Potion(std::string name, int quantity, std::string description) 
+        : Item(EntityType::POTION, name, quantity, description) {}
 
-	bool startTimer = true;
-	Timer timer;
+    // Destructor
+    virtual ~Potion() {}
 
-	Potion();
-	virtual ~Potion();
-
-	bool Awake() override;
-
-	bool Start() override;
-
-	bool Update(float dt) override;
-
-	bool CleanUp() override;
-
-	void OnCollision(PhysBody* physA, PhysBody* physB) override;
-
-	void EndCollision(PhysBody* physA, PhysBody* physB);
-
-public:
-
-	SDL_Texture* texture1 = nullptr;
-	SDL_Texture* texture2 = nullptr;
-	SDL_Texture* texture = nullptr;
-	const char* texturePath;
-	uint windowW, windowH;
-	int mouseX, mouseY;
-	const char* textureSelection;
-	int type;
-	int maxToCreate = 3;
-	bool isCreated = false;
-	bool usedPotion = false;
-
-	int posX, posY;
-
-private:
-	PhysBody* pbody;
+    // Use the potion
+    virtual void Use() = 0; // Declare Use as pure virtual
 };
 
-#endif // __POTION_H__
+#endif // POTION_H
