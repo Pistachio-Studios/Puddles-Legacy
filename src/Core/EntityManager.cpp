@@ -84,7 +84,9 @@ bool EntityManager::CleanUp()
 	while (item != NULL && ret == true)
 	{
 		ret = item->data->CleanUp();
+		ListItem<Entity*>* toDelete = item;
 		item = item->prev;
+		entities.Del(toDelete);
 	}
 
 	entities.Clear();
