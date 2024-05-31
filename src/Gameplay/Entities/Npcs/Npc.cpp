@@ -50,7 +50,7 @@ bool Npc::Start() {
 	texture2 = app->tex->Load("Assets/Textures/pressE.png");
 	texture3 = app->tex->Load("Assets/Textures/click.png");
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 128, 128, bodyType::KINEMATIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 128, 128, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
@@ -69,16 +69,12 @@ bool Npc::Update(float dt)
 	int width, height;
 	SDL_QueryTexture(anim.texture, NULL, NULL, &width, &height);
 
-	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2;
-
 	if (type == 1) {
 		if (app->sceneManager->GetCurrentScene()->name == "tutorialscene") { // TODO change this if
 			int mouseX = METERS_TO_PIXELS(mouseWorldPosition.x);
 			int mouseY = METERS_TO_PIXELS(mouseWorldPosition.y);
 			if (mouseX > position.x && mouseX < position.x + width && mouseY > position.y && mouseY < position.y + height) {
-				app->render->DrawTexture(texture3, position.x + 200, position.y - 50);
+				app->render->DrawTexture(texture3, position.x, position.y - 100);
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 					npcClick = true;
 					//sale dialogo
@@ -88,14 +84,14 @@ bool Npc::Update(float dt)
 		}
 		else {
 			if (touchingNpc)
-				app->render->DrawTexture(texture2, position.x + 200, position.y - 20);
+				app->render->DrawTexture(texture2, position.x, position.y - 100);
 		}
 
-		app->render->DrawTexture(anim.texture, position.x + 260, position.y - 30, &anim.GetCurrentFrame());
+		app->render->DrawTexture(anim.texture, position.x - 100, position.y - 150, &anim.GetCurrentFrame());
 		anim.Update(dt);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x, position.y);
+		app->render->DrawTexture(texture, position.x - 128, position.y - 128);
 	}
 
 	return true;
