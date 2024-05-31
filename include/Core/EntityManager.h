@@ -41,6 +41,8 @@ public:
 
 	Player* GetPlayerEntity();
 
+	bool PotionUpdate(float dt);
+
 	// Called when we want to load data from XML
 	bool LoadState(pugi::xml_node node);
 

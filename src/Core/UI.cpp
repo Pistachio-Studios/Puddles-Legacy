@@ -5,6 +5,7 @@
 #include "Core/Render.h"
 #include "Gameplay/Scene.h"
 #include "Gameplay/Entities/Items/Potion.h"
+#include "Core/EntityManager.h"
 #include "Utils/Point.h"
 #include "Core/Physics.h"
 #include "Core/Window.h"
@@ -39,16 +40,13 @@ bool UI::Start() {
 
 bool UI::Update(float dt)
 {
-	//Potion* potion = new Potion(); 
-
 	//Potions Inventory
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
 		//Get the size of the window
 		app->win->GetWindowSize(windowW, windowH);
 		app->render->DrawTexture(texture_inventory, (int)windowW / 2 - 350, (int)windowH / 2 - 350, 0, 0);
 
-	/*	if (potion->isCreated) app->render->DrawTexture(potion->texture, potion->posX, potion->posY, 0, 0);
-		if (potion->selected) app->render->DrawTexture(potion->texture2, potion->posX, potion->posY, 0, 0);*/
+		app->entityManager->PotionUpdate(dt); 
 	}
 
 	return true;
