@@ -434,6 +434,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 					const char* sceneName = currentSceneNode.attribute("name").value();
 					app->sceneManager->ChangeScene(sceneName);
 					currentSlot = 1;
+					app->LoadRequest();
 				} else {
 					// Handle error: currentScene node not found
 					LOG("Error: currentScene node not found");
@@ -460,6 +461,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 					const char* sceneName = currentSceneNode.attribute("name").value();
 					app->sceneManager->ChangeScene(sceneName);
 					currentSlot = 2;
+					app->LoadRequest();
 				} else {
 					// Handle error: currentScene node not found
 					LOG("Error: currentScene node not found");
@@ -486,6 +488,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 					const char* sceneName = currentSceneNode.attribute("name").value();
 					app->sceneManager->ChangeScene(sceneName);
 					currentSlot = 3;
+					app->LoadRequest();
 				} else {
 					// Handle error: currentScene node not found
 					LOG("Error: currentScene node not found");
@@ -512,6 +515,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 					const char* sceneName = currentSceneNode.attribute("name").value();
 					app->sceneManager->ChangeScene(sceneName);
 					currentSlot = 4;
+					app->LoadRequest();
 				} else {
 					// Handle error: currentScene node not found
 					LOG("Error: currentScene node not found");
@@ -538,6 +542,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 					const char* sceneName = currentSceneNode.attribute("name").value();
 					app->sceneManager->ChangeScene(sceneName);
 					currentSlot = 5;
+					app->LoadRequest(); 
 				} else {
 					// Handle error: currentScene node not found
 					LOG("Error: currentScene node not found");

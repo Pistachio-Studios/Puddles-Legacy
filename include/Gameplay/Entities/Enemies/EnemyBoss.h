@@ -78,7 +78,7 @@ public:
 
 	iPoint spawnPosition;
 
-	int health;
+	int vida;
 	float damage = 3;
 	bool invencible = false;
 

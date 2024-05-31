@@ -91,7 +91,6 @@ public:
 
 	int currentPathPos;
 
-
 	PathFinding* pathfinding;
 
 	ParticleGenerator* particleSource1;

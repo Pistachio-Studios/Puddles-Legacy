@@ -137,6 +137,7 @@ bool CentipideEnemy::SaveState(pugi::xml_node& node) {
 	pugi::xml_node CentipideEnemyAttributes = node.append_child("enemies").append_child("CentipideEnemy");
 	CentipideEnemyAttributes.append_attribute("x").set_value(this->position.x);
 	CentipideEnemyAttributes.append_attribute("y").set_value(this->position.y);
+	CentipideEnemyAttributes.append_attribute("lives").set_value(this->vida);
 
 	return true;
 }
@@ -147,6 +148,8 @@ bool CentipideEnemy::LoadState(pugi::xml_node& node)
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
+
+	this->vida = node.child("enemies").child("CentipideEnemy").attribute("lives").as_int();
 
 	return true;
 }

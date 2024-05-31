@@ -144,6 +144,7 @@ bool Player::SaveState(pugi::xml_node& node) {
 	pugi::xml_node playerAttributes = node.append_child("player");
 	playerAttributes.append_attribute("x").set_value(this->position.x);
 	playerAttributes.append_attribute("y").set_value(this->position.y);
+	playerAttributes.append_attribute("lives").set_value(this->livesPlayer);
 
 	return true;
 
@@ -155,6 +156,8 @@ bool Player::LoadState(pugi::xml_node& node)
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
+
+	this->livesPlayer = node.child("player").attribute("lives").as_int();
 
 	return true;
 }
