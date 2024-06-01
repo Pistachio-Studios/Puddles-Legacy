@@ -20,10 +20,10 @@ bool VideoPlayer::Awake(pugi::xml_node& config)
     return ret;
 }
 
-bool VideoPlayer::Start()
+bool VideoPlayer::Start(const char* file)
 {
     // File path of the video to be played
-    const char* file =  "Assets/Video/Logo/Logo-pistachio.mp4";
+    //const char* file =  "Assets/Video/Logo/Logo-pistachio.mp4";
     //const char* file1 = "Assets/Video/Intro/example.mp4";
 
     // Allocate memory for the format context
@@ -34,7 +34,7 @@ bool VideoPlayer::Start()
         printf("Failed to open input file");
         avformat_close_input(&formatContext);
         avformat_free_context(formatContext);
-        return true;
+        return false;
     }
 
     // Find input stream information
@@ -42,7 +42,7 @@ bool VideoPlayer::Start()
         printf("Failed to find input stream information");
         avformat_close_input(&formatContext);
         avformat_free_context(formatContext);
-        return true;
+        return false;
     }
 
     // Dump format information
@@ -56,7 +56,7 @@ bool VideoPlayer::Start()
         SDL_TEXTUREACCESS_STREAMING, videoCodecContext->width, videoCodecContext->height);
     if (!renderTexture) {
         printf("Failed to create texture - %s\n", SDL_GetError());
-        return true;
+        return false;
     }
 
     // Set up SDL rectangle for video rendering
@@ -65,6 +65,17 @@ bool VideoPlayer::Start()
     // Set the module state to running
     running = true;
     return true;
+}
+
+bool VideoPlayer::ChangeVideo(const char* newFile)
+{
+    LOG("Changing video to %s", newFile);
+    //Detener reproduccion actual y limpar recursos
+    running = false;
+    CleanUp();
+
+    //Iniciar el nuevo video
+    return Start(newFile);
 }
 
 bool VideoPlayer::OpenCodecContext(int* index)
@@ -370,17 +381,32 @@ bool VideoPlayer::CleanUp()
 
 	// Close the vide and audio codec contexts
     avcodec_close(videoCodecContext);
+    avcodec_free_context(&videoCodecContext);
+    videoCodecContext = nullptr;
+
     avcodec_close(audioCodecContext);
+    avcodec_free_context(&audioCodecContext);
+    audioCodecContext = nullptr;
 
 	// Close and free the format contexts
     avformat_close_input(&formatContext);
 	avformat_free_context(formatContext);
+    formatContext = nullptr;
 
 	// Close audio device
     SDL_CloseAudioDevice(audioDevice);
+    audioDevice = 0;
 
     // Destroy textures
 	SDL_DestroyTexture(renderTexture);
+    renderTexture = nullptr;
+    
+    //Clean cola de audio
+    while (!audioBuffer.empty()) {
+        AVPacket packet = audioBuffer.front();
+        av_packet_unref(&packet);
+        audioBuffer.pop();
+    }
 
     return true;
 }
