@@ -35,12 +35,18 @@ public:
             wasp->force = wasp->calculateForce();
         }
 
+        //Attack
         if (wasp->waspAttack.GetCurrentFrameCount() >= 14 && wasp->waspAttack.GetCurrentFrameCount() <= 17) {
             wasp->attackMovement(wasp->force);
             if (PIXEL_TO_METERS(player->position.DistanceTo(wasp->position)) < 2.0f) {
                 player->vida -= wasp->dano;
                 wasp->vida += wasp->dano;
             }
+        }
+
+        //Sound
+        if (wasp->waspAttack.GetCurrentFrameCount() == 9) {
+            app->audio->PlayFx(wasp->attackFx);
         }
 
         if (wasp->waspAttack.GetCurrentFrameCount() >= 24) {

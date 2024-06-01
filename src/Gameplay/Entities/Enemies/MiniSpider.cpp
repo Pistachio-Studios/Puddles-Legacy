@@ -91,6 +91,8 @@ bool MiniSpider::Start() {
 	spiderDeath = *app->animationManager->GetAnimByName("Mini_Spider_Muerte");
 	spiderDeath.speed = 1.0f;
 
+	damageFx = app->audio->LoadFx(parameters.attribute("damageFxPath").as_string());
+
 	return true;
 }
 
@@ -218,6 +220,7 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 				movementFSM->ChangeState("die");
 			}
 			else if (vida > 0.0f) {
+				app->audio->PlayFx(damageFx);
 				spiderDamage.Reset();
 				movementFSM->ChangeState("hurt");
 			}

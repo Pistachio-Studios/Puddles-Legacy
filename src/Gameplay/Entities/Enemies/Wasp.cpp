@@ -90,6 +90,10 @@ bool Wasp::Start() {
 	waspDeath = *app->animationManager->GetAnimByName("Avispa_Muerte");
 	waspDeath.speed = 2.0f;
 
+	damageFx = app->audio->LoadFx(parameters.attribute("damageFxPath").as_string());
+	attackFx = app->audio->LoadFx(parameters.attribute("attackFxPath").as_string());
+	dieFx = app->audio->LoadFx(parameters.attribute("dieFxPath").as_string());
+
 	return true;
 }
 
@@ -213,9 +217,11 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (vida <= 0.0f)
 			{
 				// AUDIO DONE boss death
+				app->audio->PlayFx(dieFx);
 				movementFSM->ChangeState("die");
 			}
 			else if (vida > 0.0f) {
+				app->audio->PlayFx(damageFx);
 				waspDamage.Reset();
 				movementFSM->ChangeState("hurt");
 			}

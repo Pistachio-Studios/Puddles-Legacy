@@ -79,6 +79,10 @@ private:
 
 	const char* texturePath;
 	SDL_Texture* gameTitle = NULL;
+
+	//Audio fx
+	int FxId;
+
 };
 
 #endif // __MainMenu_H__

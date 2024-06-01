@@ -94,6 +94,9 @@ public:
 
 	int currentPathPos;
 
+	//soundFX
+	int damageFx,attackFx,dieFx;
+
 	PathFinding* pathfinding;
 
 	b2Vec2 force;

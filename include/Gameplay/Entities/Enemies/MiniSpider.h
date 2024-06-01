@@ -94,6 +94,9 @@ public:
 
 	int currentPathPos;
 
+	//soundFX
+	int damageFx;
+
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 	PathFinding* pathfinding;
