@@ -61,8 +61,7 @@
 			<camera x="-530" y="-1949" />
 			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
 			<enemies>
-				<MiniSpider x="800" y="2050"/>
-				<Wasp x="650" y="2100"/>
+				<EnemyBoss x="600" y="2032"/>
 			</enemies>
 			<Npcs>
 				<loco x="900" y="2500" />

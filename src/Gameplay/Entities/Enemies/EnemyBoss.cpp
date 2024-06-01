@@ -15,7 +15,8 @@
 
 
 #include "Gameplay/States/EnemyBoss/EnemyBossIdleState.hpp"
-#include "Gameplay/States/EnemyBoss/EnemyBossAttackState.hpp"
+#include "Gameplay/States/EnemyBoss/EnemyBossBodyAttackState.hpp"
+#include "Gameplay/States/EnemyBoss/EnemyBossDistanceAttackState.hpp"
 #include "Gameplay/States/EnemyBoss/EnemyBossMoveState.hpp"
 #include "Gameplay/States/EnemyBoss/EnemyBossHurtState.hpp"
 #include "Gameplay/States/EnemyBoss/EnemyBossDeadState.hpp"
@@ -72,7 +73,8 @@ bool EnemyBoss::Start() {
 	movementFSM->AddState(new EnemyBossIdleState("idle"));
 	movementFSM->AddState(new EnemyBossMoveState("move"));
 	movementFSM->AddState(new EnemyBossHurtState("hurt"));
-	movementFSM->AddState(new EnemyBossAttackState("attack"));
+	movementFSM->AddState(new EnemyBossBodyAttackState("bodyAttack"));
+	movementFSM->AddState(new EnemyBossDistanceAttackState("distanceAttack"));
 	movementFSM->AddState(new EnemyBossDeadState("die"));
 
 	//Animations
@@ -99,29 +101,35 @@ bool EnemyBoss::Start() {
 
 bool EnemyBoss::Update(float dt)
 {
-	if (movementFSM->GetCurrentState().name != "die") {
-		movementFSM->Update(dt);
-		pbody->body->SetTransform(pbody->body->GetPosition(), 0);
+	
+	movementFSM->Update(dt);
+	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
+	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 
 
-		//Update player position in pixels
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	//Update player position in pixels
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-		if (debug) {
-			if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-				freeCam = !freeCam;
-			}
+	if (debug) {
+		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+			freeCam = !freeCam;
 		}
-
-
-		/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
-
-			currentAnimation->Update(dt); */
-
 	}
+
+	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
+
+		currentAnimation->Update(dt); */
+
+	// Determine if the player is to the left or right of the enemy
+	if (player->position.x < position.x) {
+		flip = SDL_FLIP_HORIZONTAL;
+	}
+	else {
+		flip = SDL_FLIP_NONE;
+	}
+
 	return true;
 }
 
@@ -208,7 +216,11 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			// AUDIO DONE boss death
 			movementFSM->ChangeState("die");
-			app->physics->DestroyBody(pbody);
+		}
+		else if(vida > 0.0f)
+		{
+			bossDamage.Reset();
+			movementFSM->ChangeState("hurt");
 		}
 		//else {
 		//	// AUDIO DONE boss hit
@@ -217,24 +229,7 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//	lives--;
 		//}
 		break;
-	//case ColliderType::ARMAPLAYER:
-	//	LOG("Collision ARMAPLAYER");
-	// 	if (state != EntityState::DEAD and !invencible){
-	//		if (lives <= 1)
-	//		{
-	//			// AUDIO DONE boss death
-	//			app->audio->PlayFx(bossDeath);
-	//			movementStateMachine->ChangeState("die");
-	//			reviveTimer.Start();
-	//		}
-	//		else {
-	//			// AUDIO DONE boss hit
-	//			app->audio->PlayFx(bossHit);
-	//			movementStateMachine->ChangeState("hurt");
-	//			lives--;
-	//		}
-	//	}
-	//	break;
+
 	case ColliderType::UNKNOWN:
 		LOG("Colision UNKNOWN");
 		break;
@@ -247,10 +242,10 @@ void EnemyBoss::EndCollision(PhysBody* physA, PhysBody* physB) {
 
 void EnemyBoss::pathfindingMovement(float dt) {
 
-	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //añadir el tile size / 2 hace que el owl se acerque mas 
+	iPoint origin = app->map->WorldToMap(newPosition.x, newPosition.y); //aï¿½adir el tile size / 2 hace que el owl se acerque mas 
 
 	if (timer.ReadMSec() > 250) {
-		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //añadir el tile size / 2 hace que el owl se acerque mas
+		iPoint destination = app->map->WorldToMap(player->position.x, player->position.y);  //aï¿½adir el tile size / 2 hace que el owl se acerque mas
 		pathfinding->CreatePath(origin, destination); 
 		timer.Start();
 		currentPathPos = 0;

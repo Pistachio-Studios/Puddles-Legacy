@@ -26,7 +26,7 @@ public:
         LOG("EnemyBossMoveState Update()");
 
         //Animation
-        app->render->DrawTexture(enemyboss->bossMove.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossMove.GetCurrentFrame());
+        app->render->DrawTexture(enemyboss->bossMove.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossMove.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, enemyboss->flip);
         enemyboss->bossMove.Update(dt);
 
         player = app->entityManager->GetPlayerEntity();
@@ -35,10 +35,18 @@ public:
         if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 3.0f) {
             if (enemyboss->attackTimer.ReadSec() >= 2)
             {
-                StateMachineReference->ChangeState("attack");
+                enemyboss->bossBodyAttack.Reset();
+                StateMachineReference->ChangeState("bodyAttack");
             }
         }
-        else if ((PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 10.0f)) {
+        //if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 7.0f && PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 13.0f) {
+        //    if (enemyboss->attackTimer.ReadSec() >= 2)
+        //    {
+        //        enemyboss->bossDistanceAttack.Reset();
+        //        StateMachineReference->ChangeState("distanceAttack");
+        //    }
+        //}
+        if ((PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 13.0f)) {
             //enemyboss->moveToSpawnPoint();
             enemyboss->StopMoving();
             StateMachineReference->ChangeState("idle");

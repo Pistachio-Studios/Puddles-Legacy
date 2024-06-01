@@ -88,11 +88,13 @@ public:
 
 	Timer reviveTimer;
 	Timer attackTimer;
+	Timer hurtTimer;
 	Player* player;
 
 	int currentPathPos;
 
 	PathFinding* pathfinding;
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 };
 

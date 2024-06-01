@@ -23,14 +23,13 @@ public:
         LOG("EnemyBossDeadState Update()");
 
         //Animation
-        app->render->DrawTexture(enemyboss->bossDeath.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossDeath.GetCurrentFrame());
+        app->render->DrawTexture(enemyboss->bossDeath.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossDeath.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, enemyboss->flip);
         enemyboss->bossDeath.Update(dt);
 
-        //if (enemyboss->reviveTimer.ReadSec() >= 5)
-        //{
-        //    StateMachineReference->ChangeState("idle");
-        //    //enemyboss->health = 5;
-        //}
+        if (enemyboss->bossDeath.GetCurrentFrameCount() >= 13) {
+            app->physics->DestroyBody(enemyboss->pbody);
+            enemyboss->Disable();
+        }
     }
     inline void Exit() override
     {
