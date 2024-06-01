@@ -30,7 +30,7 @@ public:
         app->render->DrawTexture(enemyboss->bossBodyAttack.texture, enemyboss->position.x - 100, enemyboss->position.y - 150, &enemyboss->bossBodyAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, enemyboss->flip);
         enemyboss->bossBodyAttack.Update(dt);
 
-        if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 2.0f) {
+        if (enemyboss->bossBodyAttack.GetCurrentFrameCount() == 5 && PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 3.0f) {
             player->vida -= enemyboss->dano;
         }
 
