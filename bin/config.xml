@@ -61,6 +61,7 @@
 			<camera x="-530" y="-1949" />
 			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
 			<enemies>
+				<EnemyBoss x="300" y="1800"/>
 				<MiniSpider x="800" y="2050" damageFxPath="Assets/Audio/Fx/Enemies/Small/Damage.ogg"/>
 				<Wasp x="650" y="2100" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg"
 					  attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg"
