@@ -39,13 +39,13 @@ public:
                 StateMachineReference->ChangeState("bodyAttack");
             }
         }
-        //if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 7.0f && PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 13.0f) {
-        //    if (enemyboss->attackTimer.ReadSec() >= 2)
-        //    {
-        //        enemyboss->bossDistanceAttack.Reset();
-        //        StateMachineReference->ChangeState("distanceAttack");
-        //    }
-        //}
+        if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 7.0f && PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 13.0f) {
+            if (enemyboss->attackTimer.ReadSec() >= 2)
+            {
+                enemyboss->bossDistanceAttack.Reset();
+                StateMachineReference->ChangeState("distanceAttack");
+            }
+        }
         if ((PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 13.0f)) {
             //enemyboss->moveToSpawnPoint();
             enemyboss->StopMoving();

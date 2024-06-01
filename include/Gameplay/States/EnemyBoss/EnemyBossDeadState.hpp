@@ -26,7 +26,7 @@ public:
         app->render->DrawTexture(enemyboss->bossDeath.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossDeath.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, enemyboss->flip);
         enemyboss->bossDeath.Update(dt);
 
-        if (enemyboss->bossDeath.GetCurrentFrameCount() >= 13) {
+        if (enemyboss->bossDeath.GetCurrentFrameCount() >= 11) {
             app->physics->DestroyBody(enemyboss->pbody);
             enemyboss->Disable();
         }

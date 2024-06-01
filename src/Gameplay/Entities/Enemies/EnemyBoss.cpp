@@ -82,7 +82,7 @@ bool EnemyBoss::Start() {
 	bossIdle.speed = 2.0f;
 
 	bossDistanceAttack = *app->animationManager->GetAnimByName("Boss_Spider_Ataque_distancia");
-	bossDistanceAttack.speed = 2.0f;
+	bossDistanceAttack.speed = 1.0f;
 
 	bossBodyAttack = *app->animationManager->GetAnimByName("Boss_Spider_Ataque_cuerpo");
 	bossBodyAttack.speed = 2.0f;
@@ -94,7 +94,7 @@ bool EnemyBoss::Start() {
 	bossDamage.speed = 2.0f;
 
 	bossDeath = *app->animationManager->GetAnimByName("Boss_Spider_Muerte");
-	bossDeath.speed = 2.0f;
+	bossDeath.speed = 1.0f;
 
 	return true;
 }
