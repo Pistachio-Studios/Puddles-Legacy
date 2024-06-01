@@ -28,7 +28,7 @@ public:
         player = app->entityManager->GetPlayerEntity();
 
         //Animation
-        app->render->DrawTexture(minispider->spiderMove.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderMove.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, 0.5f, minispider->flip);
+        app->render->DrawTexture(minispider->spiderMove.texture, minispider->position.x - 50, minispider->position.y - 75, &minispider->spiderMove.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, 0.5f, minispider->flip);
         minispider->spiderMove.Update(dt);
 
         minispider->pathfindingMovement(dt);

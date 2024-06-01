@@ -23,7 +23,7 @@ public:
         LOG("MiniSpiderDeadState Update()");
 
         //Animation
-        app->render->DrawTexture(minispider->spiderDeath.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderDeath.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, 0.5f, minispider->flip);
+        app->render->DrawTexture(minispider->spiderDeath.texture, minispider->position.x - 50, minispider->position.y - 75, &minispider->spiderDeath.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, 0.5f, minispider->flip);
         minispider->spiderDeath.Update(dt);
 
         if (minispider->spiderDeath.GetCurrentFrameCount() >= 12) {

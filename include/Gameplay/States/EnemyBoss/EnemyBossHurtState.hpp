@@ -23,7 +23,7 @@ public:
         LOG("EnemyBossHurtState Update()");
 
         //Animation
-        app->render->DrawTexture(enemyboss->bossDamage.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossDamage.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, enemyboss->flip);
+        app->render->DrawTexture(enemyboss->bossDamage.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossDamage.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
         enemyboss->bossDamage.Update(dt);
 
         if (enemyboss->bossDamage.GetCurrentFrameCount() >= 6) {

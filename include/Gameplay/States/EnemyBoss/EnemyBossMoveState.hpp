@@ -26,7 +26,7 @@ public:
         LOG("EnemyBossMoveState Update()");
 
         //Animation
-        app->render->DrawTexture(enemyboss->bossMove.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossMove.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, enemyboss->flip);
+        app->render->DrawTexture(enemyboss->bossMove.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossMove.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
         enemyboss->bossMove.Update(dt);
 
         player = app->entityManager->GetPlayerEntity();

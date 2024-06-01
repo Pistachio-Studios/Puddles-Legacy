@@ -25,7 +25,7 @@ public:
     {
         LOG("EnemyBossDistanceAttackState Update()");
 
-        app->render->DrawTexture(enemyboss->bossDistanceAttack.texture, enemyboss->position.x - 100, enemyboss->position.y - 150, &enemyboss->bossDistanceAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, enemyboss->flip);
+        app->render->DrawTexture(enemyboss->bossDistanceAttack.texture, enemyboss->position.x - 100, enemyboss->position.y - 150, &enemyboss->bossDistanceAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
         enemyboss->bossDistanceAttack.Update(dt);
 
         if (enemyboss->bossDistanceAttack.GetCurrentFrameCount() >= 4) {
