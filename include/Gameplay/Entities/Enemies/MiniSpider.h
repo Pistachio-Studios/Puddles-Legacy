@@ -95,7 +95,7 @@ public:
 	int currentPathPos;
 
 	//soundFX
-	int damageFx;
+	int damageFx,attackFx,dieFx;
 
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
 

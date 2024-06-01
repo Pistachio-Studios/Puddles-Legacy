@@ -31,8 +31,14 @@ public:
         app->render->DrawTexture(minispider->spiderAttack.texture, minispider->position.x - 100, minispider->position.y - 150, &minispider->spiderAttack.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, minispider->flip);
         minispider->spiderAttack.Update(dt);
 
+        //Attack
         if (minispider->spiderAttack.GetCurrentFrameCount() == 5 && PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 2.0f) {
             player->vida -= minispider->dano;
+        }
+
+        //Sound
+        if (minispider->spiderAttack.GetCurrentFrameCount() == 4) {
+            app->audio->PlayFx(minispider->attackFx);
         }
 
         if (minispider->spiderAttack.GetCurrentFrameCount()>=9) {

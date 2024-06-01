@@ -92,6 +92,8 @@ bool MiniSpider::Start() {
 	spiderDeath.speed = 1.0f;
 
 	damageFx = app->audio->LoadFx(parameters.attribute("damageFxPath").as_string());
+	attackFx = app->audio->LoadFx(parameters.attribute("attackFxPath").as_string());
+	dieFx = app->audio->LoadFx(parameters.attribute("dieFxPath").as_string());
 
 	return true;
 }
@@ -217,6 +219,7 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (vida <= 0.0f)
 			{
 				// AUDIO DONE boss death
+				app->audio->PlayFx(dieFx);
 				movementFSM->ChangeState("die");
 			}
 			else if (vida > 0.0f) {
