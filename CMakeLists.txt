@@ -32,7 +32,7 @@ find_package(box2d CONFIG REQUIRED)
 find_package(Tracy CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 
-add_executable(${PROJECT_NAME} ${SOURCES} "src/Gameplay/Entities/Enemies/Wasp.cpp")
+add_executable(${PROJECT_NAME} ${SOURCES} "src/Gameplay/Entities/Enemies/Wasp.cpp" "include/Gameplay/Entities/Bullet.h" "src/Gameplay/Entities/Bullet.cpp")
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
 

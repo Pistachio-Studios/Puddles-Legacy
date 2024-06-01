@@ -28,6 +28,8 @@ public:
         app->render->DrawTexture(enemyboss->bossDistanceAttack.texture, enemyboss->position.x - 100, enemyboss->position.y - 150, &enemyboss->bossDistanceAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
         enemyboss->bossDistanceAttack.Update(dt);
 
+        enemyboss->shootBullet();
+
         if (enemyboss->bossDistanceAttack.GetCurrentFrameCount() >= 4) {
             enemyboss->attackTimer.Start();
             StateMachineReference->ChangeState("move");
