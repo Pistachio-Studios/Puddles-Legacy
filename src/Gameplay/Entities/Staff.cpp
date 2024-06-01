@@ -54,7 +54,7 @@ Staff::Staff() : Entity(EntityType::PLAYER)
 {
 	name.Create("Staff");
 
-	texture = app->tex->Load("Assets/Textures/sword.png");
+	texture = app->tex->Load("Assets/Textures/cetro.png");
 	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 20, bodyType::KINEMATIC);
 }
 
@@ -67,7 +67,7 @@ bool Staff::Update(float dt)
 	if(active)
 	{
 		pbody->GetPosition(position.x, position.y);
-		app->render->DrawTexture(texture, position.x + 35, position.y - 35, 0, 1.0f, pbody->body->GetAngle()*RADTODEG+90);
+		app->render->DrawTexture(texture, position.x + 35*2, position.y - 35*2, 0, 1.0f, pbody->body->GetAngle()*RADTODEG+90);
 		for (int i = 0; i < 10; i++) {
 			magicArray[i]->Update();
 		}
