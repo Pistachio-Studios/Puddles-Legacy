@@ -1,18 +1,18 @@
-#include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Core/App.h"
-#include "Gameplay/Entities/Entity.h"
-#include "Gameplay/Entities/Player.h"
 #include "Core/Textures.h"
 #include "Core/Input.h"
 #include "Core/Render.h"
-#include "Gameplay/Scene.h"
-#include "Utils/Point.h"
 #include "Core/Physics.h"
-#include "Utils/StateMachine.h"
-#include "Core/SceneManager.h"
 #include "Core/Map.h"
 #include "Core/AnimationManager.h"
-
+#include "Core/SceneManager.h"
+#include "Gameplay/Entities/Enemies/EnemyBoss.h"
+#include "Gameplay/Entities/Entity.h"
+#include "Gameplay/Entities/Player.h"
+#include "Gameplay/Scene.h"
+#include "Gameplay/Entities/Bullet.h"
+#include "Utils/Point.h"
+#include "Utils/StateMachine.h"
 
 #include "Gameplay/States/EnemyBoss/EnemyBossIdleState.hpp"
 #include "Gameplay/States/EnemyBoss/EnemyBossBodyAttackState.hpp"
@@ -96,6 +96,12 @@ bool EnemyBoss::Start() {
 	bossDeath = *app->animationManager->GetAnimByName("Boss_Spider_Muerte");
 	bossDeath.speed = 1.0f;
 
+	//Attack
+	for (int i = 0; i < 10; i++) {
+		bulletArray[i] = new Bullet();
+	}
+
+
 	return true;
 }
 
@@ -131,6 +137,15 @@ bool EnemyBoss::Update(float dt)
 		flip = SDL_FLIP_NONE;
 	}
 
+	if (active)
+	{
+		pbody->GetPosition(position.x, position.y);
+		app->render->DrawTexture(texture, position.x + 35, position.y - 35, 0, 1.0f, pbody->body->GetAngle() * RADTODEG + 90);
+		for (int i = 0; i < 10; i++) {
+			bulletArray[i]->Update(dt);
+		}
+	}
+
 	return true;
 }
 
@@ -141,6 +156,14 @@ void EnemyBoss::DrawImGui()
 	ImGui::Text("Enemy Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
+	for (int i = 0; i < 10; i++) {
+		ImGui::Text("Magic %d", i);
+		ImGui::Text("Active: %s", bulletArray[i]->active ? "true" : "false");
+		ImGui::Text("Position: %d, %d", bulletArray[i]->position.x, bulletArray[i]->position.y);
+
+		ImGui::Separator();
+	}
+
 	ImGui::End();
 }
 
@@ -288,6 +311,39 @@ void EnemyBoss::pathfindingMovement(float dt) {
 
 		}
 	}
+}
+
+void EnemyBoss::shootBullet()
+{
+	for (int i = 0; i < 10; i++) {
+		if (!bulletArray[i]->active) {
+			bulletArray[i]->position = position;
+			bulletArray[i]->Shoot();
+			break;
+		}
+	}
+}
+
+b2Vec2 EnemyBoss::calculateForce()
+{
+	// Calculate the direction vector from the enemy to the player
+	float dirX = player->position.x - position.x;
+	float dirY = player->position.y - position.y;
+
+	// Normalize the direction vector
+	float length = sqrt(dirX * dirX + dirY * dirY);
+	if (length != 0) {
+		dirX /= length;
+		dirY /= length;
+	}
+
+	// Define the attack force or speed
+	float attackForce = 10.0f; // Adjust this value as needed
+
+	// Apply the impulse/force towards the player
+	b2Vec2 force(dirX * attackForce, dirY * attackForce);
+
+	return force;
 }
 
 void EnemyBoss::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {

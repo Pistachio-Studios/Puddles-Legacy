@@ -14,6 +14,7 @@
 
 struct SDL_Texture;
 class Player;
+class Bullet;
 
 class EnemyBoss : public Entity
 {
@@ -45,6 +46,10 @@ public:
 	void EndCollision(PhysBody* physA, PhysBody* physB) override;
 
 	void pathfindingMovement(float dt);
+
+	void shootBullet();
+
+	b2Vec2 calculateForce();
 
 	void OnRaycastHit(b2Fixture* fixture, const b2Vec2& point,
 		const b2Vec2& normal, float32 fraction) override;
@@ -95,6 +100,10 @@ public:
 
 	PathFinding* pathfinding;
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
+
+	//Disparos
+	Bullet* bulletArray[10];
+	bool active = false;
 
 };
 
