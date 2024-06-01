@@ -134,9 +134,10 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Press Gui Control: %d", control->id);
 
+	app->audio->PlayFx(FxId);
+
 	switch (control->id) {
 	case 1:
-		app->audio->PlayFx(FxId);
 		app->sceneManager->ChangeScene("tutorialscene");
         app->guiManager->RemoveGuiControl(crossOButton);
         crossOButton = nullptr;
