@@ -17,8 +17,11 @@ Magic::Magic() {
 void Magic::Throw() {
 	active = true;
 	timer->Start();
+
+	//resets the inertia of the body
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
+	
 	pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
@@ -78,6 +81,7 @@ void Staff::Equip()
 	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 20, bodyType::KINEMATIC);
 	pbody->body->GetFixtureList()->SetSensor(true);
 	
+	//fill the magic pool
 	for (int i = 0; i < 10; i++) {
 		magicArray[i] = new Magic();
 	}

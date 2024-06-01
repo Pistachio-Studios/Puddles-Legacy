@@ -52,6 +52,8 @@ bool Player::Start() {
 
 	playerHurtCultdown = Timer();
 
+	dashTimer = Timer();
+
 	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);

@@ -84,6 +84,8 @@ public:
 	int veloPlantCounter = 0;
 
 	Timer playerHurtCultdown;
+	Timer dashTimer;
+	float dashCultdown = 5.0f;
 };
 
 #endif // __PLAYER_H__

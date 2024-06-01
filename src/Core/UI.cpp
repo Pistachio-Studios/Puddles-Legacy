@@ -66,7 +66,13 @@ bool UI::Update(float dt)
 		app->render->DrawTexture(MenuPequeño, 275, 650, 0, 0);
 
 		app->render->DrawTexture(Seleccion, 260, 615, 0, 0);
+
+		//Dash
+		float dashSelectionValue = SDL_min(player->dashTimer.ReadMSec() / 1000 / player->dashCultdown * 255, 255);
+		SDL_SetTextureAlphaMod(Seleccion, dashSelectionValue);
 		app->render->DrawTexture(Seleccion, 280, 695, 0, 0);
+		SDL_SetTextureAlphaMod(Seleccion, 0);
+
 		app->render->DrawTexture(Seleccion, 235, 770, 0, 0);
 
 		//Health Bar
