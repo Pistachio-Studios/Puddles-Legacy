@@ -70,6 +70,8 @@ private:
 	bool paused = false;
 	bool exitPressed = false;
 
+	int UIFx;
+
 	Timer* playingTime;
 };
 

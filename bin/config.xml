@@ -57,6 +57,7 @@
 			<enemies />
 		</tavernscene>
 		<tutorialscene>
+			<menu FxPath="Assets/Audio/Fx/UI/UIButton.ogg" />
 			<map path="Assets/Maps/Tutorial-Level/" name="Playa_tutorial.tmx" />
 			<camera x="-530" y="-1949" />
 			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />

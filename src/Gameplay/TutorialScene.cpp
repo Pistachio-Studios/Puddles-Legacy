@@ -4,6 +4,7 @@
 #include "Core/Render.h"
 #include "Utils/Timer.h"
 #include "Core/Window.h"
+#include "Core/Audio.h"
 #include "Gameplay/TutorialScene.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Entities/Enemies/Wasp.h"
@@ -128,6 +129,9 @@ bool TutorialScene::Enter()
 		tabernero->Start();
 	}
 
+
+	UIFx = app->audio->LoadFx(parameters.child("menu").attribute("FxPath").as_string());
+
 	return true;
 }
 
@@ -242,7 +246,7 @@ bool TutorialScene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
-
+	app->audio->PlayFx(UIFx);
 	switch (control->id)
 	{
 	case 6:
