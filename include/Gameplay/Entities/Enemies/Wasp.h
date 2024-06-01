@@ -43,7 +43,9 @@ public:
 
 	void EndCollision(PhysBody* physA, PhysBody* physB) override;
 
-	void attackMovement();
+	void attackMovement(b2Vec2 force);
+
+	b2Vec2 calculateForce();
 
 	void pathfindingMovement(float dt);
 
@@ -93,6 +95,8 @@ public:
 	int currentPathPos;
 
 	PathFinding* pathfinding;
+
+	b2Vec2 force;
 
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
 

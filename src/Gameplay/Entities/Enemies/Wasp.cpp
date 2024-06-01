@@ -236,7 +236,7 @@ void Wasp::EndCollision(PhysBody* physA, PhysBody* physB) {
 
 }
 
-void Wasp::attackMovement() {
+b2Vec2 Wasp::calculateForce() {
 	// Calculate the direction vector from the enemy to the player
 	float dirX = player->position.x - position.x;
 	float dirY = player->position.y - position.y;
@@ -253,6 +253,12 @@ void Wasp::attackMovement() {
 
 	// Apply the impulse/force towards the player
 	b2Vec2 force(dirX * attackForce, dirY * attackForce);
+
+	return force;
+}
+
+void Wasp::attackMovement(b2Vec2 force) {
+	
 	pbody->body->ApplyLinearImpulse(force, pbody->body->GetWorldCenter(), true);
 }
 

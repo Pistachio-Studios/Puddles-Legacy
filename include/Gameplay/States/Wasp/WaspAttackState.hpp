@@ -31,8 +31,12 @@ public:
         app->render->DrawTexture(wasp->waspAttack.texture, wasp->position.x-120, wasp->position.y-130, &wasp->waspAttack.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, wasp->flip);
         wasp->waspAttack.Update(dt);
 
+        if (wasp->waspAttack.GetCurrentFrameCount() == 0) {
+            wasp->force = wasp->calculateForce();
+        }
+
         if (wasp->waspAttack.GetCurrentFrameCount() >= 14 && wasp->waspAttack.GetCurrentFrameCount() <= 17) {
-            wasp->attackMovement();
+            wasp->attackMovement(wasp->force);
             if (PIXEL_TO_METERS(player->position.DistanceTo(wasp->position)) < 2.0f) {
                 player->vida -= wasp->dano;
                 wasp->vida += wasp->dano;
