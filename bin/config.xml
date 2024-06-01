@@ -30,7 +30,7 @@
 	<scene_manager startScene="teamlogo">
 		<teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG" />
 		<mainmenu>
-			<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png" />
+			<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png" FxPath="Assets/Audio/Fx/UI/UIButton.ogg"/>
 		</mainmenu>
 		<level1scene>
 			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx" />
@@ -61,7 +61,10 @@
 			<camera x="-530" y="-1949" />
 			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
 			<enemies>
-				<EnemyBoss x="600" y="2032"/>
+				<MiniSpider x="800" y="2050" damageFxPath="Assets/Audio/Fx/Enemies/Small/Damage.ogg"/>
+				<Wasp x="650" y="2100" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg"
+					  attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg"
+					  dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg"/>
 			</enemies>
 			<Npcs>
 				<loco x="900" y="2500" />
