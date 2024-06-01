@@ -76,6 +76,7 @@ void Staff::Equip()
 {
 	active = true;
 	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 20, bodyType::KINEMATIC);
+	pbody->body->GetFixtureList()->SetSensor(true);
 	
 	for (int i = 0; i < 10; i++) {
 		magicArray[i] = new Magic();
