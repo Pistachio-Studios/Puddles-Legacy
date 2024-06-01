@@ -10,6 +10,8 @@
 #include <box2d/b2_math.h>
 
 struct SDL_Texture;
+class Sword;
+class Staff;
 
 enum PlayerClass
 {
@@ -68,8 +70,9 @@ public:
 
 	PlayerClass currentClass = KNIGHT;
 
-	//tmps
-	PhysBody* sword;
+	Sword* swordEntity = nullptr;
+    Staff* staffEntity = nullptr;
+
 
 	uint mana = 100;
 	uint livesPlayer = 10;

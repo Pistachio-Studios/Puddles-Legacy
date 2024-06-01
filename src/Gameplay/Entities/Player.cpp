@@ -63,6 +63,9 @@ bool Player::Start() {
 	//pbody->body->GetFixtureList()->SetFriction(25.0f);
 	pbody->body->SetLinearDamping(10.0f);
 
+	swordEntity = (Sword*)app->entityManager->CreateEntity(EntityType::SWORD);
+	staffEntity = (Staff*)app->entityManager->CreateEntity(EntityType::STAFF);
+
 	movementFSM = new StateMachine<Player>(this);
 	movementFSM->AddState(new PlayerIdleState("idle")); 
 	movementFSM->AddState(new PlayerMoveState("move"));
@@ -126,6 +129,7 @@ bool Player::Update(float dt)
 void Player::DrawImGui()
 {
 	ImGui::Begin("Player");
+
 	ImGui::Text("Player Position: %d, %d", position.x, position.y);
 	ImGui::Text("Player Lives: %d", livesPlayer);
 	ImGui::Text("Player Mana: %d", mana);
