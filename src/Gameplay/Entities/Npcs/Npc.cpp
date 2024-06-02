@@ -70,10 +70,10 @@ bool Npc::Update(float dt)
 	SDL_QueryTexture(anim.texture, NULL, NULL, &width, &height);
 
 	if (type == 1) {
-		if (app->sceneManager->GetCurrentScene()->name == "tutorialscene") { // TODO change this if
+		if (app->sceneManager->GetCurrentScene()->name == "tavernscene") { 
 			int mouseX = METERS_TO_PIXELS(mouseWorldPosition.x);
 			int mouseY = METERS_TO_PIXELS(mouseWorldPosition.y);
-			if (mouseX > position.x && mouseX < position.x + width && mouseY > position.y && mouseY < position.y + height) {
+			if (mouseX > position.x - 100 && mouseX < position.x - 100 + width && mouseY > position.y - 150 && mouseY < position.y -150 + height) {
 				app->render->DrawTexture(texture3, position.x, position.y - 100);
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 					npcClick = true;
@@ -83,10 +83,14 @@ bool Npc::Update(float dt)
 			}
 		}
 		else {
-			if (touchingNpc)
+			if (touchingNpc) {
 				app->render->DrawTexture(texture2, position.x, position.y - 100);
+				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+					//sale dialogo
+					app->dialogManager->StartDialog(1);
+				}
+			}
 		}
-
 		app->render->DrawTexture(anim.texture, position.x - 100, position.y - 150, &anim.GetCurrentFrame());
 		anim.Update(dt);
 	}

@@ -6,6 +6,7 @@
 #include "Core/Window.h"
 #include "Gameplay/TownScene.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
+#include "Gameplay/Entities/Npcs/Loco.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -54,6 +55,13 @@ bool TownScene::Enter()
 			npcs->parameters = npcsNode;
 			npcs->Start();
 		}
+	}
+
+	if (parameters.child("loco")) {
+		Loco* loco = new Loco();
+		app->entityManager->AddEntity(loco);
+		loco->parameters = parameters.child("loco");
+		loco->Start();
 	}
 
 	//app->physics->Enable();

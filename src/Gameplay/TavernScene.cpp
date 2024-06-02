@@ -5,6 +5,7 @@
 #include "Utils/Timer.h"
 #include "Core/Window.h"
 #include "Gameplay/TavernScene.h"
+#include "Gameplay/Entities/Npcs/Tabernero.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -40,6 +41,13 @@ bool TavernScene::Enter()
 		//Get the map name from the config file and assigns the value in the module
 		app->render->camera.x = parameters.child("camera").attribute("x").as_int();
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
+	}
+
+	if (parameters.child("tabernero")) {
+		Tabernero* tabernero = new Tabernero();
+		app->entityManager->AddEntity(tabernero);
+		tabernero->parameters = parameters.child("tabernero");
+		tabernero->Start();
 	}
 
 	//app->physics->Enable();

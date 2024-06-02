@@ -56,12 +56,14 @@
 				<npc x="1400" y="2600" type="2" texturepath="Assets/Textures/NoDialogNpcs/panda.png" />
 				<npc x="1400" y="1800" type="2" texturepath="Assets/Textures/NoDialogNpcs/squirrel.png" />
 			</npcs>
+			<loco x="900" y="2200" type="1"/>
 			<enemies />
 		</townscene>
 		<tavernscene>
 			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx" />
 			<camera x="-530" y="-1949" />
 			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
+			<tabernero x="930" y="1970" type="1"/> 
 			<enemies />
 		</tavernscene>
 		<tutorialscene>
@@ -75,10 +77,6 @@
 				<FlyingEnemy x="800" y="2050" texturepath="" />
 				<CentipideEnemy x="650" y="2100" texturepath="" />
 			</enemies>
-			<Npcs>
-				<loco x="900" y="2500" type="1"/>
-				<tabernero x="900" y="2800" type="1"/> 
-			</Npcs>
 		<Plants>
 			<Plant x="1500" y="2300" type="1" texturepath="Assets/Textures/Plants/HealPlant.png"/>
 			<Plant x="1700" y="2300" type="1" texturepath="Assets/Textures/Plants/HealPlant.png"/>
