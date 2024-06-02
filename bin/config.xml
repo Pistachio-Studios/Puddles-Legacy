@@ -10,7 +10,7 @@
 	</renderer>
 	<window>
 		<resolution width="1920" height="1080" scale="1" />
-		<fullscreen value="true" />
+		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="false" />
 		<fullscreen_window value="false" />
@@ -41,19 +41,19 @@
 		<forestscene>
 			<map path="Assets/Maps/Forest-Level/" name="Bosque.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="2850" y="5000" texturepath="Assets/Textures/Player.png" />
+			<player x="2850" y="4710" texturepath="Assets/Textures/Player.png" />
 			<enemies />
 		</forestscene>
 		<townscene>
 			<map path="Assets/Maps/Town-Scene/" name="Town.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="1000" y="2200" texturepath="Assets/Textures/Player.png" />
+			<player x="335" y="2700" texturepath="Assets/Textures/Player.png" />
 			<enemies />
 		</townscene>
 		<tavernscene>
 			<map path="Assets/Maps/Tavern/" name="Tavern.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
+			<player x="1220" y="2916" texturepath="Assets/Textures/Player.png" />
 			<enemies />
 		</tavernscene>
 		<tutorialscene>
