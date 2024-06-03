@@ -49,21 +49,25 @@
 			<camera x="-530" y="-1949" />
 			<player x="335" y="2700" texturepath="Assets/Textures/Player.png" />
 			<npcs>
-				<npc x="1000" y="2600" type="2" texturepath="Assets/Textures/NoDialogNpcs/blackCat.PNG" />
-				<npc x="1000" y="1800" type="2" texturepath="Assets/Textures/NoDialogNpcs/bunny.PNG" />
-				<npc x="1400" y="2200" type="2" texturepath="Assets/Textures/NoDialogNpcs/chamaleon.PNG" />
-				<npc x="1800" y="2200" type="2" texturepath="Assets/Textures/NoDialogNpcs/chick.PNG" />
-				<npc x="1400" y="2600" type="2" texturepath="Assets/Textures/NoDialogNpcs/panda.PNG" />
-				<npc x="1400" y="1800" type="2" texturepath="Assets/Textures/NoDialogNpcs/squirrel.PNG" />
+				<npc x="2100" y="2350" type="2" texturepath="Assets/Textures/NoDialogNpcs/blackCat.PNG" />
+				<npc x="2250" y="1250" type="2" texturepath="Assets/Textures/NoDialogNpcs/bunny.PNG" />
+				<npc x="1050" y="1500" type="2" texturepath="Assets/Textures/NoDialogNpcs/chamaleon.PNG" />
+				<npc x="4000" y="1600" type="2" texturepath="Assets/Textures/NoDialogNpcs/chick.PNG" />
+				<npc x="4400" y="2100" type="2" texturepath="Assets/Textures/NoDialogNpcs/panda.PNG" />
+				<npc x="3550" y="650" type="2" texturepath="Assets/Textures/NoDialogNpcs/squirrel.PNG" />
 			</npcs>
-			<loco x="900" y="2200" type="1"/>
+			<loco x="3200" y="2900" type="1"/>
 			<enemies />
 		</townscene>
 		<tavernscene>
 			<map path="Assets/Maps/Tavern/" name="Tavern.tmx" />
 			<camera x="-530" y="-1949" />
 			<player x="1260" y="3535" texturepath="Assets/Textures/Player.png" />
-			<tabernero x="930" y="1970" type="1"/> 
+			<npcs>
+				<npc x="1620" y="2300" type="2" texturepath="Assets/Textures/NoDialogNpcs/whiteCat.PNG" />
+				<npc x="1360" y="2700" type="2" texturepath="Assets/Textures/NoDialogNpcs/redPanda.PNG" />
+			</npcs>
+			<tabernero x="1300" y="2050" type="1"/> 
 			<enemies />
 		</tavernscene>
 		<tutorialscene>

@@ -6,6 +6,7 @@
 #include "Core/Window.h"
 #include "Gameplay/TavernScene.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
+#include "Gameplay/Entities/Npcs/Npc.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -41,6 +42,19 @@ bool TavernScene::Enter()
 		//Get the map name from the config file and assigns the value in the module
 		app->render->camera.x = parameters.child("camera").attribute("x").as_int();
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
+	}
+
+	if (parameters.child("npcs"))
+	{
+		pugi::xml_node npcs = parameters.child("npcs");
+
+		for (pugi::xml_node npcsNode = npcs.child("npc"); npcsNode; npcsNode = npcsNode.next_sibling("npc"))
+		{
+			Npc* npcs = new Npc();
+			app->entityManager->AddEntity(npcs);
+			npcs->parameters = npcsNode;
+			npcs->Start();
+		}
 	}
 
 	if (parameters.child("tabernero")) {
