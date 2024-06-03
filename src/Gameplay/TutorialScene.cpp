@@ -4,10 +4,11 @@
 #include "Core/Render.h"
 #include "Utils/Timer.h"
 #include "Core/Window.h"
+#include "Core/Audio.h"
 #include "Gameplay/TutorialScene.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
-#include "Gameplay/Entities/Enemies/CentipideEnemy.h"
-#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
+#include "Gameplay/Entities/Enemies/Wasp.h"
+#include "Gameplay/Entities/Enemies/MiniSpider.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Gameplay/Entities/Items/ArnicaPlant.h"
 #include "Gameplay/Entities/Items/ComfreyPlant.h"
@@ -108,18 +109,18 @@ bool TutorialScene::Enter()
 	{
 		pugi::xml_node enemies = parameters.child("enemies");
 
-		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
+		for (pugi::xml_node MiniSpiderNode = enemies.child("MiniSpider"); MiniSpiderNode; MiniSpiderNode = MiniSpiderNode.next_sibling("MiniSpider"))
 		{
-			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
-			flyingenemy->parameters = FlyingEnemyNode;
-			flyingenemy->Start();
+			MiniSpider* minispider = (MiniSpider*)app->entityManager->CreateEntity(EntityType::MINISPIDER);
+			minispider->parameters = MiniSpiderNode;
+			minispider->Start();
 		}
 
-		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
+		for (pugi::xml_node WaspNode = enemies.child("Wasp"); WaspNode; WaspNode = WaspNode.next_sibling("Wasp"))
 		{
-			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
-			centipidenemy->parameters = CentipideEnemyNode;
-			centipidenemy->Start();
+			Wasp* wasp = (Wasp*)app->entityManager->CreateEntity(EntityType::WASP);
+			wasp->parameters = WaspNode;
+			wasp->Start();
 		}
 	}
 
@@ -216,6 +217,12 @@ bool TutorialScene::Enter()
 	});
 
 	movementQuest->SetActive(true);
+
+
+	UIFx = app->audio->LoadFx(parameters.child("menu").attribute("FxPath").as_string());
+
+
+	UIFx = app->audio->LoadFx(parameters.child("menu").attribute("FxPath").as_string());
 
 	return true;
 }
@@ -331,7 +338,7 @@ bool TutorialScene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
-
+	app->audio->PlayFx(UIFx);
 	switch (control->id)
 	{
 	case 6:

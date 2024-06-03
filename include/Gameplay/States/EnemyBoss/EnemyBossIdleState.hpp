@@ -21,9 +21,14 @@ public:
     inline void Update(float dt) override
     {
 
+        //Animation
+        app->render->DrawTexture(enemyboss->bossIdle.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossIdle.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
+        enemyboss->bossIdle.Update(dt);
+
+
         player = app->entityManager->GetPlayerEntity();
 
-        if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 3.0f)
+        if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 3.0f && PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 13.0f)
         {
             StateMachineReference->ChangeState("move");
             // AUDIO DONE dog idle

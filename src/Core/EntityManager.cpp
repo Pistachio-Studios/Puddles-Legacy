@@ -2,8 +2,8 @@
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
-#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
-#include "Gameplay/Entities/Enemies/CentipideEnemy.h"
+#include "Gameplay/Entities/Enemies/MiniSpider.h"
+#include "Gameplay/Entities/Enemies/Wasp.h"
 #include "Gameplay/Entities/Items/Potion.h"
 #include "Gameplay/Entities/Sword.h"
 #include "Gameplay/Entities/Shield.h"
@@ -106,11 +106,11 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ENEMYBOSS:
 		entity = new EnemyBoss();
 		break;
-	case EntityType::FLYINGENEMY:
-		entity = new FlyingEnemy();
+	case EntityType::MINISPIDER:
+		entity = new MiniSpider();
 		break;
-	case EntityType::CENTIPIDEENEMY:
-		entity = new CentipideEnemy();
+	case EntityType::WASP:
+		entity = new Wasp();
 		break;
 	case EntityType::SWORD:
 		entity = new Sword();
@@ -225,7 +225,7 @@ void EntityManager::DrawImGui()
 		
 		static EntityType selectedEntityType = EntityType::PLAYER;
 		
-		const char* entityTypes[] = { "PLAYER", "ENEMYBOSS", "FYLINGENEMY", "CENTIPIDEENEMY"};
+		const char* entityTypes[] = { "PLAYER", "ENEMYBOSS", "FYLINGENEMY", "WASP"};
 
 		ImGui::Combo("Entity Type", (int*)&selectedEntityType, entityTypes, IM_ARRAYSIZE(entityTypes));
 		if (ImGui::Button("Spawn Entity"))

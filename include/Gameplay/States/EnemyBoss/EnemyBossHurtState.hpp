@@ -19,13 +19,14 @@ public:
     inline void Update(float dt) override
     {
 
-        //enemyboss->invencible = true;
-        //if (enemyboss->currentAnimation->HasFinished()) {
-        //    enemyboss->hurtAnim.Reset();
-        //    enemyboss->hurtAnim.ResetLoopCount();
-        //    enemyboss->invencible = false;
-        //    StateMachineReference->ChangeState("idle");
-        //}
+        //Animation
+        app->render->DrawTexture(enemyboss->bossDamage.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossDamage.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
+        enemyboss->bossDamage.Update(dt);
+
+        if (enemyboss->bossDamage.GetCurrentFrameCount() >= 6) {
+            enemyboss->hurtTimer.Start();
+            StateMachineReference->ChangeState("move");
+        }
     }
     inline void Exit() override
     {
