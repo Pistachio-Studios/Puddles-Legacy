@@ -27,6 +27,8 @@ public:
 
 	bool CleanUp();
 
+	double easeInOutSine(double t);
+
 public:
 
 	SDL_Texture* texture_inventory = NULL;
