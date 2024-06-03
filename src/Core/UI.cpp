@@ -37,7 +37,7 @@ bool UI::Start() {
 	texture_inventory = app->tex->Load("Assets/Textures/Potions/Inventory/noPotions.png");
 
 	//Player UIGUI/
-	MenuPequeño = app->tex->Load("Assets/UI/GUI/MenuPequeño.PNG");
+	MenuPequeno = app->tex->Load("Assets/UI/GUI/MenuPequeno.PNG");
 	VidaBestiario = app->tex->Load("Assets/UI/GUI/VidaBestiario.PNG");
 	Espada = app->tex->Load("Assets/UI/GUI/Armas/Espada.PNG");
 	Cetro = app->tex->Load("Assets/UI/GUI/Armas/Cetro.PNG");
@@ -61,7 +61,7 @@ bool UI::Update(float dt)
 	if(player != nullptr){
 
 		//Menu Pequeño
-		app->render->DrawTexture(MenuPequeño, 275, 650, 0, 0);
+		app->render->DrawTexture(MenuPequeno, 275, 650, 0, 0);
 
 		app->render->DrawTexture(Seleccion, 260, 615, 0, 0);
 

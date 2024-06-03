@@ -48,12 +48,26 @@
 			<map path="Assets/Maps/Town-Scene/" name="Town.tmx" />
 			<camera x="-530" y="-1949" />
 			<player x="335" y="2700" texturepath="Assets/Textures/Player.png" />
+			<npcs>
+				<npc x="2100" y="2350" type="2" texturepath="Assets/Textures/NoDialogNpcs/blackCat.PNG" />
+				<npc x="2250" y="1250" type="2" texturepath="Assets/Textures/NoDialogNpcs/bunny.PNG" />
+				<npc x="1050" y="1500" type="2" texturepath="Assets/Textures/NoDialogNpcs/chamaleon.PNG" />
+				<npc x="4000" y="1600" type="2" texturepath="Assets/Textures/NoDialogNpcs/chick.PNG" />
+				<npc x="4400" y="2100" type="2" texturepath="Assets/Textures/NoDialogNpcs/panda.PNG" />
+				<npc x="3550" y="650" type="2" texturepath="Assets/Textures/NoDialogNpcs/squirrel.PNG" />
+			</npcs>
+			<loco x="3200" y="2900" type="1"/>
 			<enemies />
 		</townscene>
 		<tavernscene>
 			<map path="Assets/Maps/Tavern/" name="Tavern.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="1220" y="2916" texturepath="Assets/Textures/Player.png" />
+			<player x="1260" y="3535" texturepath="Assets/Textures/Player.png" />
+			<npcs>
+				<npc x="1620" y="2300" type="2" texturepath="Assets/Textures/NoDialogNpcs/whiteCat.PNG" />
+				<npc x="1360" y="2700" type="2" texturepath="Assets/Textures/NoDialogNpcs/redPanda.PNG" />
+			</npcs>
+			<tabernero x="1300" y="2050" type="1"/> 
 			<enemies />
 		</tavernscene>
 		<tutorialscene>
@@ -70,10 +84,6 @@
 					  attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg"
 					  dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg"/>
 			</enemies>
-			<Npcs>
-				<loco x="900" y="2500" />
-				<tabernero x="900" y="2800" /> 
-			</Npcs>
 			<Plants>
 				<ArnicaPlant x="1500" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png"/>
 				<ArnicaPlant x="1700" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png"/>

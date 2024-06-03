@@ -50,11 +50,11 @@ bool Npc::Start() {
 	texture2 = app->tex->Load("Assets/Textures/pressE.png");
 	texture3 = app->tex->Load("Assets/Textures/click.png");
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 128, 128, bodyType::STATIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 256, 256, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
-	npcSensor = app->physics->CreateRectangleSensor(position.x, position.y, 256, 256, bodyType::STATIC);
+	npcSensor = app->physics->CreateRectangleSensor(position.x, position.y, 456, 456, bodyType::STATIC);
 	npcSensor->listener = this;
 	npcSensor->ctype = ColliderType::NPC;
 
@@ -74,7 +74,7 @@ bool Npc::Update(float dt)
 			int mouseX = METERS_TO_PIXELS(mouseWorldPosition.x);
 			int mouseY = METERS_TO_PIXELS(mouseWorldPosition.y);
 			if (mouseX > position.x - 100 && mouseX < position.x - 100 + width && mouseY > position.y - 150 && mouseY < position.y -150 + height) {
-				app->render->DrawTexture(texture3, position.x, position.y - 100);
+				app->render->DrawTexture(texture3, position.x, position.y -200);
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 					npcClick = true;
 					//sale dialogo
@@ -84,14 +84,14 @@ bool Npc::Update(float dt)
 		}
 		else {
 			if (touchingNpc) {
-				app->render->DrawTexture(texture2, position.x, position.y - 100);
+				app->render->DrawTexture(texture2, position.x, position.y - 150);
 				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 					//sale dialogo
 					app->dialogManager->StartDialog(1);
 				}
 			}
 		}
-		app->render->DrawTexture(anim.texture, position.x - 100, position.y - 150, &anim.GetCurrentFrame());
+		app->render->DrawTexture(anim.texture, position.x - 100, position.y - 200, &anim.GetCurrentFrame());
 		anim.Update(dt);
 	}
 	else {
