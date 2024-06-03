@@ -31,19 +31,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="25" name="klaus_idle_1" tilewidth="128" tileheight="256" tilecount="5" columns="5">
-  <image source="NPC-Klaus/klaus_idle_1.png" width="640" height="256"/>
-  <tile id="0">
-   <animation>
-    <frame tileid="0" duration="200"/>
-    <frame tileid="1" duration="200"/>
-    <frame tileid="2" duration="200"/>
-    <frame tileid="3" duration="200"/>
-    <frame tileid="4" duration="200"/>
-   </animation>
-  </tile>
- </tileset>
- <tileset firstgid="30" name="klaus_idle_2" tilewidth="128" tileheight="256" tilecount="13" columns="13">
+ <tileset firstgid="25" name="klaus_idle_2" tilewidth="128" tileheight="256" tilecount="13" columns="13">
   <image source="NPC-Klaus/klaus_idle_2.png" width="1664" height="256"/>
   <tile id="0">
    <animation>
@@ -63,7 +51,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="43" name="mono_idle_2_izquierda" tilewidth="256" tileheight="256" tilecount="23" columns="23">
+ <tileset firstgid="38" name="mono_idle_2_izquierda" tilewidth="256" tileheight="256" tilecount="23" columns="23">
   <image source="NPC-Mono/mono_idle_2_izquierda.png" width="5888" height="256"/>
   <tile id="0">
    <animation>
@@ -93,7 +81,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="66" name="mono_idle_1_izquierda" tilewidth="256" tileheight="256" tilecount="16" columns="16">
+ <tileset firstgid="61" name="mono_idle_1_izquierda" tilewidth="256" tileheight="256" tilecount="16" columns="16">
   <image source="NPC-Mono/mono_idle_1_izquierda.png" width="4096" height="256"/>
   <tile id="0">
    <animation>
@@ -115,7 +103,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="47" name="Avispa_Atacar" tilewidth="256" tileheight="256" tilecount="27" columns="27">
+ <tileset firstgid="77" name="Avispa_Atacar" tilewidth="256" tileheight="256" tilecount="27" columns="27">
   <image source="Avispa/Avispa_Atacar.png" width="6912" height="256"/>
   <tile id="0">
    <animation>
@@ -147,7 +135,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="74" name="Avispa_Idle" tilewidth="256" tileheight="256" tilecount="15" columns="15">
+ <tileset firstgid="104" name="Avispa_Idle" tilewidth="256" tileheight="256" tilecount="15" columns="15">
   <image source="Avispa/Avispa_Idle.png" width="3840" height="256"/>
   <tile id="0">
    <animation>
@@ -169,7 +157,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="89" name="Avispa_Volar" tilewidth="256" tileheight="256" tilecount="4" columns="4">
+ <tileset firstgid="119" name="Avispa_Volar" tilewidth="256" tileheight="256" tilecount="4" columns="4">
   <image source="Avispa/Avispa_Volar.png" width="1024" height="256"/>
   <tile id="0">
    <animation>
@@ -180,7 +168,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="93" name="Avispa_Damage" tilewidth="256" tileheight="256" tilecount="14" columns="14">
+ <tileset firstgid="123" name="Avispa_Damage" tilewidth="256" tileheight="256" tilecount="14" columns="14">
   <image source="Avispa/Avispa_Damage.png" width="3584" height="256"/>
   <tile id="0">
    <animation>
@@ -201,7 +189,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="107" name="Avispa_Muerte" tilewidth="256" tileheight="256" tilecount="16" columns="16">
+ <tileset firstgid="137" name="Avispa_Muerte" tilewidth="256" tileheight="256" tilecount="16" columns="16">
   <image source="Avispa/Avispa_Muerte.png" width="4096" height="256"/>
   <tile id="0">
    <animation>
@@ -224,7 +212,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="123" name="Mini_Spider_Idle" tilewidth="256" tileheight="256" tilecount="6" columns="6">
+ <tileset firstgid="153" name="Mini_Spider_Idle" tilewidth="256" tileheight="256" tilecount="6" columns="6">
   <image source="MiniAraña/Mini_Spider_Idle.png" width="1536" height="256"/>
   <tile id="0">
    <animation>
@@ -237,7 +225,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="129" name="Mini_Spider_Caminar" tilewidth="256" tileheight="256" tilecount="13" columns="13">
+ <tileset firstgid="159" name="Mini_Spider_Caminar" tilewidth="256" tileheight="256" tilecount="13" columns="13">
   <image source="MiniAraña/Mini_Spider_Caminar.png" width="3328" height="256"/>
   <tile id="0">
    <animation>
@@ -257,7 +245,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="142" name="Mini_Spider_Ataque" tilewidth="256" tileheight="256" tilecount="10" columns="10">
+ <tileset firstgid="172" name="Mini_Spider_Ataque" tilewidth="256" tileheight="256" tilecount="10" columns="10">
   <image source="MiniAraña/Mini_Spider_Ataque.png" width="2560" height="256"/>
   <tile id="0">
    <animation>
@@ -274,7 +262,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="152" name="Mini_Spider_Damage" tilewidth="256" tileheight="256" tilecount="8" columns="8">
+ <tileset firstgid="182" name="Mini_Spider_Damage" tilewidth="256" tileheight="256" tilecount="8" columns="8">
   <image source="MiniAraña/Mini_Spider_Damage.png" width="2048" height="256"/>
   <tile id="0">
    <animation>
@@ -289,7 +277,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="160" name="Mini_Spider_Muerte" tilewidth="256" tileheight="256" tilecount="13" columns="13">
+ <tileset firstgid="190" name="Mini_Spider_Muerte" tilewidth="256" tileheight="256" tilecount="13" columns="13">
   <image source="MiniAraña/Mini_Spider_Muerte.png" width="3328" height="256"/>
   <tile id="0">
    <animation>
@@ -309,7 +297,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="173" name="Boss_Spider_Ataque_cuerpo" tilewidth="384" tileheight="384" tilecount="9" columns="9">
+ <tileset firstgid="203" name="Boss_Spider_Ataque_cuerpo" tilewidth="384" tileheight="384" tilecount="9" columns="9">
   <image source="Boss/Boss_Spider_Ataque_cuerpo.png" width="3456" height="384"/>
   <tile id="0">
    <animation>
@@ -325,7 +313,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="182" name="Boss_Spider_Ataque_distancia" tilewidth="384" tileheight="384" tilecount="5" columns="5">
+ <tileset firstgid="212" name="Boss_Spider_Ataque_distancia" tilewidth="384" tileheight="384" tilecount="5" columns="5">
   <image source="Boss/Boss_Spider_Ataque_distancia.png" width="1920" height="384"/>
   <tile id="0">
    <animation>
@@ -337,7 +325,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="187" name="Boss_Spider_Caminar" tilewidth="384" tileheight="384" tilecount="5" columns="5">
+ <tileset firstgid="217" name="Boss_Spider_Caminar" tilewidth="384" tileheight="384" tilecount="5" columns="5">
   <image source="Boss/Boss_Spider_Caminar.png" width="1920" height="384"/>
   <tile id="0">
    <animation>
@@ -349,7 +337,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="192" name="Boss_Spider_Damage" tilewidth="384" tileheight="384" tilecount="7" columns="7">
+ <tileset firstgid="222" name="Boss_Spider_Damage" tilewidth="384" tileheight="384" tilecount="7" columns="7">
   <image source="Boss/Boss_Spider_Damage.png" width="2688" height="384"/>
   <tile id="0">
    <animation>
@@ -363,7 +351,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="199" name="Boss_Spider_Idle" tilewidth="384" tileheight="384" tilecount="8" columns="8">
+ <tileset firstgid="229" name="Boss_Spider_Idle" tilewidth="384" tileheight="384" tilecount="8" columns="8">
   <image source="Boss/Boss_Spider_Idle.png" width="3072" height="384"/>
   <tile id="0">
    <animation>
@@ -378,7 +366,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="207" name="Boss_Spider_Muerte" tilewidth="384" tileheight="384" tilecount="14" columns="14">
+ <tileset firstgid="237" name="Boss_Spider_Muerte" tilewidth="384" tileheight="384" tilecount="14" columns="14">
   <image source="Boss/Boss_Spider_Muerte.png" width="5376" height="384"/>
   <tile id="0">
    <animation>
@@ -394,6 +382,18 @@
     <frame tileid="9" duration="100"/>
     <frame tileid="10" duration="100"/>
     <frame tileid="11" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="251" name="klaus_idle_1" tilewidth="180" tileheight="360" tilecount="5" columns="5">
+  <image source="NPC-Klaus/klaus_idle_1.png" width="900" height="360"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="150"/>
+    <frame tileid="1" duration="150"/>
+    <frame tileid="2" duration="150"/>
+    <frame tileid="3" duration="150"/>
+    <frame tileid="4" duration="150"/>
    </animation>
   </tile>
  </tileset>
