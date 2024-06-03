@@ -22,7 +22,7 @@ bool Intro::Enter()
 	app->win->GetWindowSize(windowW, windowH);
 
 	// Load the intro video
-	app->videoPlayer->ConvertPixels(0, 1);
+	app->videoPlayer->ChangeVideo("Assets/Video/Intro/example.mp4");
 
 	return true;
 }
