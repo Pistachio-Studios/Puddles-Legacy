@@ -5,6 +5,8 @@
 #include "Utils/Timer.h"
 #include "Core/Window.h"
 #include "Gameplay/TownScene.h"
+#include "Gameplay/Entities/Npcs/Npc.h"
+#include "Gameplay/Entities/Npcs/Loco.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -40,6 +42,26 @@ bool TownScene::Enter()
 		//Get the map name from the config file and assigns the value in the module
 		app->render->camera.x = parameters.child("camera").attribute("x").as_int();
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
+	}
+
+	if (parameters.child("npcs"))
+	{
+		pugi::xml_node npcs = parameters.child("npcs");
+
+		for (pugi::xml_node npcsNode = npcs.child("npc"); npcsNode; npcsNode = npcsNode.next_sibling("npc"))
+		{
+			Npc* npcs = new Npc();
+			app->entityManager->AddEntity(npcs);
+			npcs->parameters = npcsNode;
+			npcs->Start();
+		}
+	}
+
+	if (parameters.child("loco")) {
+		Loco* loco = new Loco();
+		app->entityManager->AddEntity(loco);
+		loco->parameters = parameters.child("loco");
+		loco->Start();
 	}
 
 	//app->physics->Enable();
@@ -127,6 +149,16 @@ bool TownScene::Update(float dt)
 	}
 
 
+	//Cambios de escena sin collider
+	if (app->entityManager->GetPlayerEntity()->position.x <= 3030 && app->entityManager->GetPlayerEntity()->position.x >= 2870 && app->entityManager->GetPlayerEntity()->position.y <= 1920 && app->entityManager->GetPlayerEntity()->position.y >= 1785){
+		app->sceneManager->ChangeScene("tavernscene");
+	}
+
+	if (app->entityManager->GetPlayerEntity()->position.x <= 3090 && app->entityManager->GetPlayerEntity()->position.x >= 2755 && app->entityManager->GetPlayerEntity()->position.y <= 90){
+		app->sceneManager->ChangeScene("forestscene");
+	}
+
+
 	return true;
 }
 
@@ -186,7 +218,7 @@ bool TownScene::Exit()
 // Called before quitting
 bool TownScene::CleanUp()
 {
-	LOG("Freeing testscene");
+	LOG("Freeing TownScene");
 
 	app->guiManager->RemoveGuiControl(gcScore);
 	app->guiManager->RemoveGuiControl(gcLives);

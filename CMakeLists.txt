@@ -19,6 +19,7 @@ if (UNIX)
 elseif (MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  /wd4101 /wd4267 /wd4267 /wd4244")
+    # Additional compiler warnings and options for MSVC
 endif()
 
 file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.cpp" "${INCLUDE_DIR}/*.h")
@@ -33,7 +34,7 @@ find_package(Tracy CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(FFMPEG REQUIRED)
 
-add_executable(${PROJECT_NAME} ${SOURCES} "src/Gameplay/Entities/Enemies/CentipideEnemy.cpp")
+add_executable(${PROJECT_NAME} ${SOURCES} "src/Gameplay/Entities/Enemies/Wasp.cpp" "include/Gameplay/Entities/Bullet.h" "src/Gameplay/Entities/Bullet.cpp")
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
 
@@ -41,7 +42,9 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS} ${SDL2_M
 
 target_link_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARY_DIRS})
 
-add_compile_options(-Winconsistent-missing-override)
+#TEMPORAL, IF IT GENERATE PROBLEMS REMOVE IT
+add_compile_options(-Winconsistent-missing-override /Od /W4 /WX /permissive- /analyze /RTC1 /GS /sdl)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> 
                                               $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static> 
                                               $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>

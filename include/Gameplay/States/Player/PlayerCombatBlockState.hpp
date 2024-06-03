@@ -22,6 +22,7 @@ public:
     inline void Enter() override
     {
 
+
         player = StateMachineReference->owner;
         shieldEntity = (Shield*)app->entityManager->CreateEntity(EntityType::SHIELD);
         shieldEntity->Start();

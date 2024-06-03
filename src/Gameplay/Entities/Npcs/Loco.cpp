@@ -36,8 +36,8 @@ bool Loco::Awake() {
 bool Loco::Start() {
 	Npc::Start();
 
-	anim = *app->animationManager->GetAnimByName("testerAnim");
-	anim.speed = 2.0f;
+	anim = *app->animationManager->GetAnimByName("mono_idle_2_izquierda");
+	anim.speed = 1.5f;
 
 	timer = Timer();
 

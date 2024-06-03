@@ -38,11 +38,7 @@ public:
 	Staff();
 
 	virtual ~Staff();
-
-	bool Awake() override;
-
-	bool Start() override;
-
+	
 	bool Update(float dt) override;
 
 	bool CleanUp() override;
@@ -55,14 +51,18 @@ public:
 
 	void ThrowSpell();
 
+	void Equip();
+
+	void Store();
+
 public:
 	PhysBody* pbody;
 
 	SDL_Texture* texture = nullptr;
 
-	Magic magic[10];
+	Magic* magicArray[10];
 
-	int magicIndex = 0;
+	bool active = false;
 };
 
 #endif // __PLAYER_H__

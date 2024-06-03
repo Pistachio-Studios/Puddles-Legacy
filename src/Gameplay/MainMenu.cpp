@@ -41,6 +41,8 @@ bool MainMenu::Enter()
 
 	gameTitle = app->tex->Load(parameters.child("gameTitle").attribute("texturepath").as_string());
 
+	FxId = app->audio->LoadFx(parameters.child("gameTitle").attribute("FxPath").as_string());
+
 	return true;
 }
 
@@ -151,6 +153,8 @@ bool MainMenu::CleanUp()
 bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Press Gui Control: %d", control->id);
+
+	app->audio->PlayFx(FxId);
 
 	switch (control->id) {
 	case 1:

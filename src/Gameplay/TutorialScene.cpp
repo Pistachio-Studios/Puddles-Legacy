@@ -4,23 +4,24 @@
 #include "Core/Render.h"
 #include "Utils/Timer.h"
 #include "Core/Window.h"
+#include "Core/Audio.h"
 #include "Gameplay/TutorialScene.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
-#include "Gameplay/Entities/Enemies/CentipideEnemy.h"
-#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
+#include "Gameplay/Entities/Enemies/Wasp.h"
+#include "Gameplay/Entities/Enemies/MiniSpider.h"
+#include "Gameplay/Entities/Items/Plant.h"
+#include "Gameplay/Entities/Items/ArnicaPlant.h"
+#include "Gameplay/Entities/Items/ComfreyPlant.h"
+#include "Gameplay/Entities/Items/HepaticaPlant.h"
 #include "Gameplay/Entities/Npcs/Loco.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
-#include "Gameplay/Entities/Items/EnergyPotion.h"
-#include "Gameplay/Entities/Items/HealPotion.h"
-#include "Gameplay/Entities/Items/VeloPotion.h"
-#include "Gameplay/Entities/Items/AbilityPotion.h"
-#include "Gameplay/Entities/Items/Plant.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
+#include "Core/QuestManager.h"
   
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
@@ -92,11 +93,11 @@ bool TutorialScene::Enter()
 	gcExit->state = GuiControlState::DISABLED;
 
 /// TODO change scene collider
-/*
+
 	PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
 	changeTown->ctype = ColliderType::CHANGESCENE;
 	changeTown->listener = player;
-*/
+
 
 	if (parameters.child("enemies").child("EnemyBoss")) {
 		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
@@ -108,18 +109,18 @@ bool TutorialScene::Enter()
 	{
 		pugi::xml_node enemies = parameters.child("enemies");
 
-		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
+		for (pugi::xml_node MiniSpiderNode = enemies.child("MiniSpider"); MiniSpiderNode; MiniSpiderNode = MiniSpiderNode.next_sibling("MiniSpider"))
 		{
-			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
-			flyingenemy->parameters = FlyingEnemyNode;
-			flyingenemy->Start();
+			MiniSpider* minispider = (MiniSpider*)app->entityManager->CreateEntity(EntityType::MINISPIDER);
+			minispider->parameters = MiniSpiderNode;
+			minispider->Start();
 		}
 
-		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
+		for (pugi::xml_node WaspNode = enemies.child("Wasp"); WaspNode; WaspNode = WaspNode.next_sibling("Wasp"))
 		{
-			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
-			centipidenemy->parameters = CentipideEnemyNode;
-			centipidenemy->Start();
+			Wasp* wasp = (Wasp*)app->entityManager->CreateEntity(EntityType::WASP);
+			wasp->parameters = WaspNode;
+			wasp->Start();
 		}
 	}
 
@@ -137,47 +138,91 @@ bool TutorialScene::Enter()
 		tabernero->Start();
 	}
 
-	if (parameters.child("Potion").child("EnergyPotion")) {
-		EnergyPotion* energyPotion = new EnergyPotion();
-		app->entityManager->AddEntity(energyPotion);
-		energyPotion->parameters = parameters.child("Potion").child("EnergyPotion");
-		energyPotion->Start();
-	}
-
-	if (parameters.child("Potion").child("HealPotion")) {
-		HealPotion* healPotion = new HealPotion();
-		app->entityManager->AddEntity(healPotion);
-		healPotion->parameters = parameters.child("Potion").child("HealPotion");
-		healPotion->Start();
-	}
-
-	if (parameters.child("Potion").child("VeloPotion")) {
-		VeloPotion* veloPotion = new VeloPotion();
-		app->entityManager->AddEntity(veloPotion);
-		veloPotion->parameters = parameters.child("Potion").child("VeloPotion");
-		veloPotion->Start();
-	}
-
-	if (parameters.child("Potion").child("AbilityPotion")) {
-		AbilityPotion* abilityPotion = new AbilityPotion();
-		app->entityManager->AddEntity(abilityPotion);
-		abilityPotion->parameters = parameters.child("Potion").child("AbilityPotion");
-		abilityPotion->Start();
-	}
-
-	if (parameters.child("Plants"))
+	for (pugi::xml_node potionNode = parameters.child("Potion").first_child(); potionNode; potionNode = potionNode.next_sibling())
 	{
-		pugi::xml_node plants = parameters.child("Plants");
+		std::string potionType = potionNode.name();
+	
+		if (potionType == "VitaPotion")
+			player->inventory.AddItem("Vita Potion");
+		
+		if (potionType == "CeleritaPotion") 
+			player->inventory.AddItem("Celerita Potion");
 
-		for (pugi::xml_node PlantNode = plants.child("Plant"); PlantNode; PlantNode = PlantNode.next_sibling("Plant"))
-		{
-			Plant* plant = new Plant();
+		if (potionType == "EtherPotion")
+			player->inventory.AddItem("Ether Potion");
+
+		if (potionType == "OblitiusPotion")
+			player->inventory.AddItem("Oblitius Potion");
+	}
+
+	
+	for (pugi::xml_node plantNode = parameters.child("Plants").first_child(); plantNode; plantNode = plantNode.next_sibling())
+	{
+		std::string plantType = plantNode.name();
+
+		if (plantType == "ArnicaPlant") {
+			Plant* plant = new ArnicaPlant("Arnica Plant", 1, "Permite craftear la poción de cura");
 			app->entityManager->AddEntity(plant);
-			plant->parameters = PlantNode;
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+		if (plantType == "HepaticaPlant") {
+			Plant* plant = new HepaticaPlant("Hepatica Plant", 1, "Permite craftear la poción de recuperación de energía");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+		if (plantType == "ComfreyPlant") {
+			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 	}
+	
+	//Quests
+	Quest* movementQuest = app->questManager->GetQuestById(0);
+	movementQuest->SetCompletionAction([=, this]() -> bool {
+		static bool W,S,A,D;
+		if(app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+		{
+			W = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
+		if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		{
+			S = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
+		if(app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		{
+			A = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
+		if(app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		{
+			D = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
+
+		if(W and S and A and D)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(0)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+
+	movementQuest->SetActive(true);
+
+
+	UIFx = app->audio->LoadFx(parameters.child("menu").attribute("FxPath").as_string());
+
+
+	UIFx = app->audio->LoadFx(parameters.child("menu").attribute("FxPath").as_string());
 
 	return true;
 }
@@ -213,6 +258,9 @@ bool TutorialScene::Update(float dt)
 		if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 
 	return true;
 }
@@ -290,7 +338,7 @@ bool TutorialScene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
-
+	app->audio->PlayFx(UIFx);
 	switch (control->id)
 	{
 	case 6:

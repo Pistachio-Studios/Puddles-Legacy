@@ -15,10 +15,12 @@ public:
     inline void Enter() override
     {
 
+
         player = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
+
 
         PhysBody* pbody = player->pbody;
 
@@ -38,7 +40,22 @@ public:
             if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
                 impulse.y = pbody->body->GetMass() * player->moveForce;
             }
+
             pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
+        }
+
+        if(app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN and player->dashTimer.ReadSec() > player->dashCultdown)
+        {
+            b2Vec2 dir = pbody->body->GetLinearVelocity();
+            dir.Normalize();
+
+            float dashForce = 100.0f;
+
+            b2Vec2 impulse = { dir.x * pbody->body->GetMass() * player->moveForce * dashForce, dir.y * pbody->body->GetMass() * player->moveForce * dashForce};
+
+            pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
+
+            player->dashTimer.Start();
         }
 
         if (pbody->body->GetLinearVelocity().Length() < 1.0f)
@@ -48,6 +65,7 @@ public:
     }
     inline void Exit() override
     {
+
     }
 };
 #endif // __PLAYERMOVESTATE_H__

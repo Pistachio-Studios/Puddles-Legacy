@@ -45,6 +45,12 @@ bld/
 # ...except for bin/Assets/
 ![Bb]in/Assets/
 ![Bb]in/dialogs.csv
+![Bb]in/quests.csv
+![Bb]in/save_game_1.xml
+![Bb]in/save_game_2.xml
+![Bb]in/save_game_3.xml
+![Bb]in/save_game_4.xml
+![Bb]in/save_game_5.xml
 [Oo]bj/
 [Ll]og/
 # Ignore the executable

@@ -38,10 +38,11 @@ public:
 
 	Animation anim; 
 
+	int type;	
 	const char* path;
-	SDL_Texture* texture2 = NULL;
+	SDL_Texture* texture = NULL; 
 
-	const char* path2;
+	SDL_Texture* texture2 = NULL;
 	SDL_Texture* texture3 = NULL;
 
 	bool touchingNpc = false; 

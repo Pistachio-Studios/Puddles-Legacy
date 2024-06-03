@@ -3,9 +3,9 @@
 
 #include "Core/GuiControlLabel.h"
 #include "Core/Module.h"
-#include "Gameplay/Entities/Player.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
+#include "Gameplay/Entities/Player.h"
 #include "Gameplay/Scene.h"
 
 struct SDL_Texture;

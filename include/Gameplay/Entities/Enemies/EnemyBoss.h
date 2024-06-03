@@ -4,6 +4,7 @@
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
+#include "Core/Animation.h"
 
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
@@ -13,6 +14,7 @@
 
 struct SDL_Texture;
 class Player;
+class Bullet;
 
 class EnemyBoss : public Entity
 {
@@ -45,6 +47,10 @@ public:
 
 	void pathfindingMovement(float dt);
 
+	void shootBullet();
+
+	b2Vec2 calculateForce();
+
 	void OnRaycastHit(b2Fixture* fixture, const b2Vec2& point,
 		const b2Vec2& normal, float32 fraction) override;
 
@@ -55,6 +61,8 @@ public:
 	void StopMoving();
 
 public:
+
+	Animation bossIdle, bossBodyAttack, bossDistanceAttack, bossMove, bossDamage, bossDeath;
 
 	Timer movementDelay;
 
@@ -78,17 +86,24 @@ public:
 
 	iPoint spawnPosition;
 
-	int vida;
-	float damage = 3;
+	float vida = 20.0f;
+	float dano = 2.0f;
+
 	bool invencible = false;
 
 	Timer reviveTimer;
 	Timer attackTimer;
+	Timer hurtTimer;
 	Player* player;
 
 	int currentPathPos;
 
 	PathFinding* pathfinding;
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+
+	//Disparos
+	Bullet* bulletArray[10];
+	bool active = false;
 
 };
 

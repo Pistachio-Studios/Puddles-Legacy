@@ -1,5 +1,7 @@
-#ifndef __PLANT_H__
-#define __PLANT_H__
+#ifndef PLANT_H
+#define PLANT_H
+
+#include "Gameplay/Entities/Items/Item.h"
 
 #include "Core/Animation.h"
 #include "Core/Physics.h"
@@ -12,44 +14,37 @@
 #include "SDL.h"
 #endif
 
-struct SDL_Texture;
-
-class Plant : public Entity
-{
+class Plant : public Item {
 public:
+    // Constructor
+    Plant(std::string name, int quantity, std::string description) 
+        : Item(EntityType::PLANT, name, quantity, description) {}
 
-	bool startTimer = true;
-	Timer timer;
+    // Destructor
+    virtual ~Plant() {}
 
-	Plant();
-	virtual ~Plant();
-
-	bool Awake() override;
-
-	bool Start() override;
+    bool Start() override;
 
 	bool Update(float dt) override;
-
+	
 	bool CleanUp() override;
 
-	void OnCollision(PhysBody* physA, PhysBody* physB) override;
+    // Use the plant
+    virtual void Use() = 0; // Declare Use as pure virtual
 
-	void EndCollision(PhysBody* physA, PhysBody* physB);
+    void OnCollision(PhysBody* physA, PhysBody* physB) override;
+
+    void EndCollision(PhysBody* physA, PhysBody* physB) override;
 
 public:
-
-	bool isPicked = false;
-	bool touchingPlant = false;
-	SDL_Texture* texture1 = nullptr;
+    SDL_Texture* texture1 = nullptr;
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;
-	int type; 
-	bool healPlantPicked = false;
-	bool veloPlantPicked = false;
-	bool energyPlantPicked = false;
 
-private:
-	PhysBody* pbody;
+    bool isColliding = false;
+
+    PhysBody* pbody;
+	
 };
 
-#endif // __PLANT_H__
+#endif // PLANT_H

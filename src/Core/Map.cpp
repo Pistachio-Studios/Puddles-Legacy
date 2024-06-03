@@ -239,15 +239,6 @@ bool Map::Load(SString mapFileName)
     {
         ret = LoadColliders(mapFileXML);
     }
-
-    //PhysBody* c1 = app->physics->CreateRectangle(238, 632, 480 * 50, 16, STATIC);
-    //c1->ctype = ColliderType::PLATFORM;
-
-   /* PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
-    c2->ctype = ColliderType::PLATFORM;
-
-    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
-    c3->ctype = ColliderType::PLATFORM;*/
     
     if(ret == true)
     {
@@ -433,8 +424,8 @@ bool Map::LoadColliders(pugi::xml_node mapFile)
 
                     PhysBody* c1 = app->physics->CreateRectangle(c->x + c->width / 2, c->y + c->height / 2, c->width, c->height, STATIC);
 
-                    if (SString(objectGroup.attribute("class").as_string()) == "platforms") {
-                        c1->ctype = ColliderType::PLATFORM;
+                    if (SString(objectGroup.attribute("class").as_string()) == "obstacle") {
+                        c1->ctype = ColliderType::OBSTACLE;
                     }
                     else if (SString(objectGroup.attribute("class").as_string()) == "death")
                     {
