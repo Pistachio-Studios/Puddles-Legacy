@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<game_state>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<:anonymous />
+	<scene_manager>
+		<currentScene name="tutorialscene" />
+	</scene_manager>
+	<:anonymous />
+	<animation_manager />
+	<entitymanager>
+		<player x="2391" y="2747" lives="5" />
+		<enemies>
+			<EnemyBoss x="1724" y="2111" lives="16" />
+		</enemies>
+		<enemies>
+			<MiniSpider x="1563" y="2159" lives="1" />
+		</enemies>
+		<enemies>
+			<Wasp x="1417" y="2470" lives="27" />
+		</enemies>
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+		<Plant quantity="0" />
+	</entitymanager>
+	<particleManager />
+	<lighting />
+	<guiManager />
+	<VideoPlayer />
+	<debugUI />
+	<dialog_manager />
+	<questmanager />
+	<UI />
+	<renderer>
+		<camera x="-1434" y="-2210" />
+	</renderer>
+</game_state>

@@ -177,7 +177,7 @@ bool MiniSpider::LoadState(pugi::xml_node& node)
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
 
-	this->vida = node.child("enemies").child("MiniSpider").attribute("lives").as_int();
+	this->vida = node.child("enemies").child("MiniSpider").attribute("lives").as_float(); 
 
 	return true;
 }

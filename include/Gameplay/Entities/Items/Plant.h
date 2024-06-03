@@ -36,13 +36,16 @@ public:
 
     void EndCollision(PhysBody* physA, PhysBody* physB) override;
 
+    bool SaveState(pugi::xml_node& node) override;
+    bool LoadState(pugi::xml_node& node) override;
+
 public:
     SDL_Texture* texture1 = nullptr;
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;
 
     bool isColliding = false;
-
+    int counter = 0;
     PhysBody* pbody;
 	
 };

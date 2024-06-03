@@ -17,6 +17,7 @@ void ArnicaPlant::Use() {
     // Implement the logic for using the ArnicaPlant
     LOG("Using ", name, ". ", description);
     quantity--;
+    counter--;
 }
 
 bool ArnicaPlant::Update(float dt)
@@ -30,6 +31,7 @@ bool ArnicaPlant::Update(float dt)
     if (isColliding) {
         app->render->DrawTexture(texture1, position.x - 40, position.y - 50);
         if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+            counter++;
             app->entityManager->GetPlayerEntity()->inventory.AddItem("Arnica Plant");
             app->entityManager->DestroyEntity(this);
             isColliding = false;

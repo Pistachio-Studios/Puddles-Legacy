@@ -75,8 +75,9 @@ State<T> GetCurrentState(){
 
 public:
     T* owner;
-private:
     State<T>* currentState = nullptr;
+private:
+
     DynArray<State<T>*> states; //ver si tienen que ser punteros o no
 };
 #endif // __STATEMACHINE_H__

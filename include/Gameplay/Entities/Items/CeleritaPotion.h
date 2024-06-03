@@ -13,6 +13,8 @@ public:
 
     // Use the celerita potion
     void Use() override;
+
+
 };
 
 #endif // CELERITAPOTION_H
