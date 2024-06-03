@@ -142,7 +142,7 @@ bool EnemyBoss::Update(float dt)
 		pbody->GetPosition(position.x, position.y);
 		app->render->DrawTexture(texture, position.x + 35, position.y - 35, 0, 1.0f, pbody->body->GetAngle() * RADTODEG + 90);
 		for (int i = 0; i < 10; i++) {
-			bulletArray[i]->Update(dt);
+			bulletArray[i]->Update();
 		}
 	}
 
@@ -318,7 +318,7 @@ void EnemyBoss::shootBullet()
 	for (int i = 0; i < 10; i++) {
 		if (!bulletArray[i]->active) {
 			bulletArray[i]->position = position;
-			bulletArray[i]->Shoot();
+			bulletArray[i]->Shoot(calculateForce());
 			break;
 		}
 	}
@@ -338,7 +338,7 @@ b2Vec2 EnemyBoss::calculateForce()
 	}
 
 	// Define the attack force or speed
-	float attackForce = 10.0f; // Adjust this value as needed
+	float attackForce = 1.2f; // Adjust this value as needed
 
 	// Apply the impulse/force towards the player
 	b2Vec2 force(dirX * attackForce, dirY * attackForce);

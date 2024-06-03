@@ -103,7 +103,6 @@ public:
 
 	//Disparos
 	Bullet* bulletArray[10];
-	bool active = false;
 
 };
 
