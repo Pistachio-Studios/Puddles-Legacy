@@ -13,10 +13,6 @@
 #include "Gameplay/Entities/Npcs/Loco.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
-#include "Gameplay/Entities/Items/EnergyPotion.h"
-#include "Gameplay/Entities/Items/HealPotion.h"
-#include "Gameplay/Entities/Items/VeloPotion.h"
-#include "Gameplay/Entities/Items/AbilityPotion.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Utils/SString.h"
 #include "Utils/Timer.h"
@@ -94,43 +90,47 @@ bool ForestScene::Enter()
 		tabernero->Start();
 	}
 
-	if (parameters.child("Potion").child("EnergyPotion")) {
-		EnergyPotion* energyPotion = new EnergyPotion();
-		app->entityManager->AddEntity(energyPotion);
-		energyPotion->parameters = parameters.child("Potion").child("EnergyPotion");
-		energyPotion->Start();
-	}
-
-	if (parameters.child("Potion").child("HealPotion")) {
-		HealPotion* healPotion = new HealPotion();
-		app->entityManager->AddEntity(healPotion);
-		healPotion->parameters = parameters.child("Potion").child("HealPotion");
-		healPotion->Start();
-	}
-
-	if (parameters.child("Potion").child("VeloPotion")) {
-		VeloPotion* veloPotion = new VeloPotion();
-		app->entityManager->AddEntity(veloPotion);
-		veloPotion->parameters = parameters.child("Potion").child("VeloPotion");
-		veloPotion->Start();
-	}
-
-	if (parameters.child("Potion").child("AbilityPotion")) {
-		AbilityPotion* abilityPotion = new AbilityPotion();
-		app->entityManager->AddEntity(abilityPotion);
-		abilityPotion->parameters = parameters.child("Potion").child("AbilityPotion");
-		abilityPotion->Start();
-	}
-
-	if (parameters.child("Plants"))
+	// Items
+	for (pugi::xml_node potionNode = parameters.child("Potion").first_child(); potionNode; potionNode = potionNode.next_sibling())
 	{
-		pugi::xml_node plants = parameters.child("Plants");
+		std::string potionType = potionNode.name();
+	
+		if (potionType == "VitaPotion")
+			player->inventory.AddItem("Vita Potion");
+		
+		if (potionType == "CeleritaPotion") 
+			player->inventory.AddItem("Celerita Potion");
 
-		for (pugi::xml_node PlantNode = plants.child("Plant"); PlantNode; PlantNode = PlantNode.next_sibling("Plant"))
-		{
-			Plant* plant = new Plant();
+		if (potionType == "EtherPotion")
+			player->inventory.AddItem("Ether Potion");
+
+		if (potionType == "OblitiusPotion")
+			player->inventory.AddItem("Oblitius Potion");
+	}
+
+	
+	for (pugi::xml_node plantNode = parameters.child("Plants").first_child(); plantNode; plantNode = plantNode.next_sibling())
+	{
+		std::string plantType = plantNode.name();
+
+		if (plantType == "ArnicaPlant") {
+			Plant* plant = new ArnicaPlant("Arnica Plant", 1, "Permite craftear la poción de cura");
 			app->entityManager->AddEntity(plant);
-			plant->parameters = PlantNode;
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+		if (plantType == "HepaticaPlant") {
+			Plant* plant = new HepaticaPlant("Hepatica Plant", 1, "Permite craftear la poción de recuperación de energía");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+		if (plantType == "ComfreyPlant") {
+			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
 			plant->Start();
 		}
 
