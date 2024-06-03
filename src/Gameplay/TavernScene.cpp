@@ -2,6 +2,7 @@
 #include "Core/Input.h"
 #include "Utils/SString.h"
 #include "Core/Render.h"
+#include "Core/Textures.h"
 #include "Utils/Timer.h"
 #include "Core/Window.h"
 #include "Gameplay/TavernScene.h"
@@ -76,6 +77,9 @@ bool TavernScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
+	cauldronTex = app->tex->Load("Assets/Textures/Potions/Cauldron/Cauldron.png");
+	cauldronSelectTex = app->tex->Load("Assets/Textures/Potions/Cauldron/CauldronSelect.png");
+
 	return true;
 }
 
@@ -111,6 +115,34 @@ bool TavernScene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && cauldron == nullptr) {
+		cauldron = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronTex);
+		cauldronExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
+		cauldronCreate = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Create", { (int)windowW / 2 + 320, (int)windowH / 2 + 350, 200, 50 }, this);
+	}
+
+	if (cauldron != nullptr) {
+		if (cauldronExitPressed) {
+			app->guiManager->RemoveGuiControl(cauldronCreate);
+			app->guiManager->RemoveGuiControl(cauldronExit);
+			app->guiManager->RemoveGuiControl(cauldron);
+			cauldronExitPressed = false;
+			cauldron = nullptr;
+		}
+		if (cauldronCreatePressed && cauldronSelect == nullptr) {
+			cauldronSelect = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronSelectTex);
+			cauldronSelectExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
+			
+			cauldronCreatePressed = false;
+		}
+		if (selectExitPressed && cauldronSelect != nullptr) {
+			app->guiManager->RemoveGuiControl(cauldronSelectExit);
+			app->guiManager->RemoveGuiControl(cauldronSelect);
+			cauldronSelect = nullptr;
+			selectExitPressed = false;
+		}
+	}
+	
 
 	return true;
 }
@@ -202,6 +234,15 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 9:
 		exitPressed = true;
 	break;
+	case 10:
+		if(cauldronSelect == nullptr) cauldronExitPressed = true;
+		break;
+	case 11:
+		cauldronCreatePressed = true;
+		break;
+	case 12:
+		selectExitPressed = true;
+		break;
 	}
 
 	return true;

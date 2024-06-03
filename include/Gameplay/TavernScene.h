@@ -6,6 +6,7 @@
 #include "Gameplay/Entities/Player.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
+#include "Core/GuiControlPopUp.h"
 #include "Gameplay/Scene.h"
 
 struct SDL_Texture;
@@ -48,6 +49,9 @@ public:
 
 private:
 	SDL_Texture* img;
+	SDL_Texture* cauldronTex;
+	SDL_Texture* cauldronSelectTex;
+	SDL_Texture* prueba;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
@@ -61,8 +65,17 @@ private:
 	GuiControlButton* gcBackToTitle;
 	GuiControlButton* gcExit;
 
+	GuiControlButton* cauldronSelectExit;
+	GuiControlButton* cauldronExit;
+	GuiControlButton* cauldronCreate;
+	GuiControlPopUp* cauldron = nullptr;
+	GuiControlPopUp* cauldronSelect = nullptr;
+
 	bool paused = false;
 	bool exitPressed = false;
+	bool selectExitPressed = false;
+	bool cauldronExitPressed = false;
+	bool cauldronCreatePressed = false;
 
 	Timer* playingTime;
 };
