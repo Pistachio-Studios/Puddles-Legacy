@@ -53,8 +53,6 @@ bool UI::Update(float dt)
 		//Get the size of the window
 		app->win->GetWindowSize(windowW, windowH);
 		app->render->DrawTexture(texture_inventory, (int)windowW / 2 - 350, (int)windowH / 2 - 350, 0, 0);
-
-		app->entityManager->PotionUpdate(dt); 
 	}
 
 	//Player UI
