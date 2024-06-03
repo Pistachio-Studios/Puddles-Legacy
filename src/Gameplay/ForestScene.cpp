@@ -7,9 +7,6 @@
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Gameplay/ForestScene.h"
-#include "Gameplay/Entities/Enemies/EnemyBoss.h"
-#include "Gameplay/Entities/Enemies/CentipideEnemy.h"
-#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
 #include "Gameplay/Entities/Npcs/Loco.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
@@ -50,7 +47,9 @@ bool ForestScene::Enter()
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
 	}
 
-
+	// Enemies
+	// TODO Load the enemies from the config file
+	/*
 	if (parameters.child("enemies").child("EnemyBoss")) {
 		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
 		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
@@ -75,6 +74,7 @@ bool ForestScene::Enter()
 			centipidenemy->Start();
 		}
 	}
+	*/
 
 	if (parameters.child("Npcs").child("loco")) {
 		Loco* loco = new Loco();
