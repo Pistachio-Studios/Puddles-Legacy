@@ -27,6 +27,7 @@ class GuiManager;
 class VideoPlayer;
 class DebugUI;
 class DialogManager;
+class QuestManager;
 
 class App
 {
@@ -116,7 +117,7 @@ public:
 	VideoPlayer* videoPlayer;
 	DebugUI* debugUI;
 	DialogManager* dialogManager;
-
+	QuestManager* questManager;
 
 private:
 

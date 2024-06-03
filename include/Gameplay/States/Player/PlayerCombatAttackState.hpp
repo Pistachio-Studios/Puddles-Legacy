@@ -29,6 +29,7 @@ public:
     inline void Enter() override
     {
 
+
         player = StateMachineReference->owner;
 
         if(player->currentClass == PlayerClass::KNIGHT)

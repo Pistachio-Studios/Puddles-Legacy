@@ -15,10 +15,12 @@ public:
     inline void Enter() override
     {
 
+
         enemyboss = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
+
 
         if (enemyboss->reviveTimer.ReadSec() >= 5)
         {
@@ -28,6 +30,7 @@ public:
     }
     inline void Exit() override
     {
+
     }
 };
 #endif // __ENEMYBOSSDEADSTATE_H__

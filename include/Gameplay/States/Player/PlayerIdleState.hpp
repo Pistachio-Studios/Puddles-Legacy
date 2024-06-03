@@ -15,10 +15,12 @@ public:
     inline void Enter() override
     {
 
+
         player = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
+
 
         if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT or
             app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT or
@@ -30,6 +32,7 @@ public:
     }
     inline void Exit() override
     {
+
     }
 };
 #endif // __PLAYERIDLESTATE_H__

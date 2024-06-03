@@ -15,10 +15,12 @@ public:
     inline void Enter() override
     {
 
+
         flyingenemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
+
 
         //enemyboss->invencible = true;
         //if (enemyboss->currentAnimation->HasFinished()) {
@@ -30,6 +32,7 @@ public:
     }
     inline void Exit() override
     {
+
     }
 };
 #endif // __FLYINGENEMYHURTSTATE_H__

@@ -17,10 +17,14 @@ public:
     CentipideEnemyMoveState(SString name) : State(name) {}
     inline void Enter() override
     {
+
+
         CentipideEnemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
+
+
         player = app->entityManager->GetPlayerEntity();
 
         CentipideEnemy->pathfindingMovement(dt);
@@ -38,6 +42,7 @@ public:
     }
     inline void Exit() override
     {
+
     }
 };
 #endif // __CENTIPIDEENEMYMOVESTATE_H__

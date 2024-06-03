@@ -16,6 +16,7 @@
 #include "Core/Lighting.h"
 #include "Core/VideoPlayer.h"
 #include "Core/DialogManager.h"
+#include "Core/QuestManager.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
@@ -52,6 +53,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	videoPlayer = new VideoPlayer(true);
 	debugUI = new DebugUI(true);
 	dialogManager = new DialogManager(true);
+	questManager = new QuestManager(true);
 
 
 	// Ordered for awake / Start / Update
@@ -71,6 +73,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(videoPlayer);
 	AddModule(debugUI);
 	AddModule(dialogManager);
+	AddModule(questManager);
 
 	// Render last to swap buffer
 	AddModule(render);

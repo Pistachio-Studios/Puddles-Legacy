@@ -17,10 +17,14 @@ public:
     CentipideEnemyAttackState(SString name) : State(name) {}
     inline void Enter() override
     {
+
+
         CentipideEnemy = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
+
+
         /*b2Vec2 attackDirection = { (float32)player->position.x - CentipideEnemy->position.x, (float32)player->position.y - CentipideEnemy->position.y };
         attackDirection.Normalize(); 
 
@@ -34,6 +38,7 @@ public:
     }
     inline void Exit() override
     {
+
     }
 };
 #endif // __CENTIPIDEENEMYATTACKSTATE_H__

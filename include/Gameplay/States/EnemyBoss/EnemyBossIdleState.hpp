@@ -16,7 +16,6 @@ public:
     EnemyBossIdleState(SString name) : State(name) {}
     inline void Enter() override
     {
-
         enemyboss = StateMachineReference->owner;
     }
     inline void Update(float dt) override

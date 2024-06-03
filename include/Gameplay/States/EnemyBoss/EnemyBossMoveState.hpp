@@ -18,10 +18,12 @@ public:
     inline void Enter() override
     {
 
+
         enemyboss = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
+
 
         player = app->entityManager->GetPlayerEntity();
 
@@ -40,6 +42,7 @@ public:
     }
     inline void Exit() override
     {
+
     }
 };
 #endif // __ENEMYBOSSMOVESTATE_H__

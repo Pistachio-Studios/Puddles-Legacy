@@ -103,4 +103,7 @@
 		<intro>
 		</intro>
 	</scene_manager>
+	<questmanager>
+		<quests path="quests.csv"/>
+	</questmanager>
 </config>

@@ -18,10 +18,12 @@ public:
     inline void Enter() override
     {
 
+
         enemyboss = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
+
 
         /*b2Vec2 attackDirection = { (float32)player->position.x - enemyboss->position.x, (float32)player->position.y - enemyboss->position.y };
         attackDirection.Normalize(); 
@@ -36,6 +38,7 @@ public:
     }
     inline void Exit() override
     {
+
     }
 };
 #endif // __ENEMYBOSSATTACKSTATE_H__

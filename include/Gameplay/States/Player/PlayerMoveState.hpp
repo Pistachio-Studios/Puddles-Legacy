@@ -15,10 +15,12 @@ public:
     inline void Enter() override
     {
 
+
         player = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
+
 
         PhysBody* pbody = player->pbody;
 
@@ -48,6 +50,7 @@ public:
     }
     inline void Exit() override
     {
+
     }
 };
 #endif // __PLAYERMOVESTATE_H__
