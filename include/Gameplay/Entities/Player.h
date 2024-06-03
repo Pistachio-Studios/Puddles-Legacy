@@ -20,6 +20,8 @@
 #include <imgui.h>
 
 struct SDL_Texture;
+class Sword;
+class Staff;
 
 enum PlayerClass
 {
@@ -174,11 +176,16 @@ public:
 	//tmps
 	PhysBody* sword;
 
-	int livesPlayer = 10;
+	uint mana = 100;
+	uint livesPlayer = 10;
 	int totalLivesPlayer;
 	bool deadPlayer = false;
 
 	bool sceneChange = false;
+
+	Timer playerHurtCultdown;
+	Timer dashTimer;
+	float dashCultdown = 5.0f;
 };
 
 #endif // __PLAYER_H__

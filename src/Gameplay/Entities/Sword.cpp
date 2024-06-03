@@ -9,28 +9,36 @@
 Sword::Sword() : Entity(EntityType::PLAYER)
 {
 	name.Create("Sword");
+
+	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 20, bodyType::KINEMATIC);
+	texture = app->tex->Load("Assets/Textures/sword.png");
 }
 
 Sword::~Sword() {
 }
 
-bool Sword::Awake() {
-
-	return true;
-}
-
-bool Sword::Start() {
-	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 20, bodyType::KINEMATIC);
-	pbody->ctype = ColliderType::SWORD;
-	texture = app->tex->Load("Assets/Textures/sword.png");
-	return true;
-}
-
 bool Sword::Update(float dt)
 {
-	pbody->GetPosition(position.x, position.y);
-	app->render->DrawTexture(texture, position.x + 35, position.y - 35, 0, 1.0f, pbody->body->GetAngle()*RADTODEG+90);
+	if(active)
+	{
+		pbody->GetPosition(position.x, position.y);
+		app->render->DrawTexture(texture, position.x + 35, position.y - 35, 0, 1.0f, pbody->body->GetAngle()*RADTODEG+90);
+	}
 	return true;
+}
+
+void Sword::Equip()
+{
+	active = true;
+	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 20, bodyType::KINEMATIC);
+	pbody->ctype = ColliderType::SWORD;
+}
+
+void Sword::Store()
+{
+	active = false;
+	app->physics->DestroyBody(pbody);
+	position = { 0,0 };
 }
 
 void Sword::DrawImGui()
@@ -39,6 +47,7 @@ void Sword::DrawImGui()
 
 bool Sword::CleanUp() {
 	app->physics->DestroyBody(pbody);
+	app->tex->UnLoad(texture);
 	return true;
 }
 
