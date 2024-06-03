@@ -1,15 +1,27 @@
 #include "Core/App.h"
 #include "Core/Input.h"
-#include "Utils/SString.h"
 #include "Core/Render.h"
-#include "Utils/Timer.h"
 #include "Core/Window.h"
-#include "Gameplay/ForestScene.h"
-#include "Core/Map.h"
-#include "Core/SceneManager.h"
-#include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
+#include "Core/Map.h"
+#include "Core/SceneManager.h"
+#include "Gameplay/ForestScene.h"
+#include "Gameplay/Entities/Enemies/EnemyBoss.h"
+#include "Gameplay/Entities/Enemies/CentipideEnemy.h"
+#include "Gameplay/Entities/Enemies/FlyingEnemy.h"
+#include "Gameplay/Entities/Npcs/Loco.h"
+#include "Gameplay/Entities/Npcs/Npc.h"
+#include "Gameplay/Entities/Npcs/Tabernero.h"
+#include "Gameplay/Entities/Items/EnergyPotion.h"
+#include "Gameplay/Entities/Items/HealPotion.h"
+#include "Gameplay/Entities/Items/VeloPotion.h"
+#include "Gameplay/Entities/Items/AbilityPotion.h"
+#include "Gameplay/Entities/Items/Plant.h"
+#include "Utils/SString.h"
+#include "Utils/Timer.h"
+#include "Utils/Log.h"
+
 
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
@@ -40,6 +52,88 @@ bool ForestScene::Enter()
 		//Get the map name from the config file and assigns the value in the module
 		app->render->camera.x = parameters.child("camera").attribute("x").as_int();
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
+	}
+
+
+	if (parameters.child("enemies").child("EnemyBoss")) {
+		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
+		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
+		enemyboss->Start();
+	}
+
+	if (parameters.child("enemies"))
+	{
+		pugi::xml_node enemies = parameters.child("enemies");
+
+		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
+		{
+			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
+			flyingenemy->parameters = FlyingEnemyNode;
+			flyingenemy->Start();
+		}
+
+		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
+		{
+			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
+			centipidenemy->parameters = CentipideEnemyNode;
+			centipidenemy->Start();
+		}
+	}
+
+	if (parameters.child("Npcs").child("loco")) {
+		Loco* loco = new Loco();
+		app->entityManager->AddEntity(loco);
+		loco->parameters = parameters.child("Npcs").child("loco");
+		loco->Start();
+	}
+
+	if (parameters.child("Npcs").child("tabernero")) {
+		Tabernero* tabernero = new Tabernero();
+		app->entityManager->AddEntity(tabernero);
+		tabernero->parameters = parameters.child("Npcs").child("tabernero");
+		tabernero->Start();
+	}
+
+	if (parameters.child("Potion").child("EnergyPotion")) {
+		EnergyPotion* energyPotion = new EnergyPotion();
+		app->entityManager->AddEntity(energyPotion);
+		energyPotion->parameters = parameters.child("Potion").child("EnergyPotion");
+		energyPotion->Start();
+	}
+
+	if (parameters.child("Potion").child("HealPotion")) {
+		HealPotion* healPotion = new HealPotion();
+		app->entityManager->AddEntity(healPotion);
+		healPotion->parameters = parameters.child("Potion").child("HealPotion");
+		healPotion->Start();
+	}
+
+	if (parameters.child("Potion").child("VeloPotion")) {
+		VeloPotion* veloPotion = new VeloPotion();
+		app->entityManager->AddEntity(veloPotion);
+		veloPotion->parameters = parameters.child("Potion").child("VeloPotion");
+		veloPotion->Start();
+	}
+
+	if (parameters.child("Potion").child("AbilityPotion")) {
+		AbilityPotion* abilityPotion = new AbilityPotion();
+		app->entityManager->AddEntity(abilityPotion);
+		abilityPotion->parameters = parameters.child("Potion").child("AbilityPotion");
+		abilityPotion->Start();
+	}
+
+	if (parameters.child("Plants"))
+	{
+		pugi::xml_node plants = parameters.child("Plants");
+
+		for (pugi::xml_node PlantNode = plants.child("Plant"); PlantNode; PlantNode = PlantNode.next_sibling("Plant"))
+		{
+			Plant* plant = new Plant();
+			app->entityManager->AddEntity(plant);
+			plant->parameters = PlantNode;
+			plant->Start();
+		}
+
 	}
 
 	//app->physics->Enable();
@@ -80,9 +174,9 @@ bool ForestScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
-	PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
-	changeTown->ctype = ColliderType::CHANGESCENE;
-	changeTown->listener = player;
+	//PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
+	//changeTown->ctype = ColliderType::CHANGESCENE;
+	//changeTown->listener = player;
 
 	return true;
 }
@@ -119,6 +213,34 @@ bool ForestScene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 
+	//if (app->entityManager->GetPlayerEntity()->position.x <= 0 || app->render->camera.x <= 0) {
+
+	//	app->entityManager->GetPlayerEntity()->position.x = 0;
+	//	app->render->camera.x = 0;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.x >= 5760 || app->render->camera.x >= 5760) {
+
+	//	app->entityManager->GetPlayerEntity()->position.x = 5760;
+	//	app->render->camera.x = 5760;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.y <= 0 || app->render->camera.y <= 0) {
+
+	//	app->entityManager->GetPlayerEntity()->position.y = 0;
+	//	app->render->camera.x = 0;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.y >= 5376 || app->render->camera.y >= 5376) {
+
+	//	app->entityManager->GetPlayerEntity()->position.y = 5376;
+	//	app->render->camera.x = 5376;
+	//}
+
+	//Cambios de escena sin collider
+	if (app->entityManager->GetPlayerEntity()->position.x <= 3060 && app->entityManager->GetPlayerEntity()->position.x >= 2620 && app->entityManager->GetPlayerEntity()->position.y >= 5190) {
+		app->sceneManager->ChangeScene("townscene");
+	}
 
 	return true;
 }

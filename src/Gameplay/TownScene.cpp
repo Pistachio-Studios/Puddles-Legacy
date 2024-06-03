@@ -149,6 +149,16 @@ bool TownScene::Update(float dt)
 	}
 
 
+	//Cambios de escena sin collider
+	if (app->entityManager->GetPlayerEntity()->position.x <= 3030 && app->entityManager->GetPlayerEntity()->position.x >= 2870 && app->entityManager->GetPlayerEntity()->position.y <= 1920 && app->entityManager->GetPlayerEntity()->position.y >= 1785){
+		app->sceneManager->ChangeScene("tavernscene");
+	}
+
+	if (app->entityManager->GetPlayerEntity()->position.x <= 3090 && app->entityManager->GetPlayerEntity()->position.x >= 2755 && app->entityManager->GetPlayerEntity()->position.y <= 90){
+		app->sceneManager->ChangeScene("forestscene");
+	}
+
+
 	return true;
 }
 
@@ -208,7 +218,7 @@ bool TownScene::Exit()
 // Called before quitting
 bool TownScene::CleanUp()
 {
-	LOG("Freeing testscene");
+	LOG("Freeing TownScene");
 
 	app->guiManager->RemoveGuiControl(gcScore);
 	app->guiManager->RemoveGuiControl(gcLives);
