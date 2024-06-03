@@ -32,12 +32,11 @@ bool TownScene::Enter()
 
 		player->Enable();
 
-
 		// No se porque no va pero deberi de ir ;-;
 		if(app->sceneManager->GetPrevScene()->name == "forestscene")
-			player->position = { 2900, 100 };
+			player->position = { 2900, 260 };
 		if(app->sceneManager->GetPrevScene()->name == "tavernscene")
-			player->position = { 2900, 1900 };
+			player->position = { 2900, 2080 };
 	}
 
 	if (parameters.child("map")) {

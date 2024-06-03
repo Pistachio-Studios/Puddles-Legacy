@@ -62,7 +62,7 @@
 		<tavernscene>
 			<map path="Assets/Maps/Tavern/" name="Tavern.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="1220" y="2916" texturepath="Assets/Textures/Player.png" />
+			<player x="1260" y="3535" texturepath="Assets/Textures/Player.png" />
 			<tabernero x="930" y="1970" type="1"/> 
 			<enemies />
 		</tavernscene>
