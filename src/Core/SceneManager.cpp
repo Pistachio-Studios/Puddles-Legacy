@@ -241,6 +241,11 @@ Scene* SceneManager::GetCurrentScene()
     return currentScene;
 }
 
+Scene* SceneManager::GetPrevScene()
+{
+    return prevScene;
+}
+
 Scene* SceneManager::FindScene(SString sceneName) const
 {
     Scene* scene = nullptr;
@@ -263,6 +268,7 @@ void SceneManager::ChangeScene(SString sceneName)
     Scene* newScene = FindScene(sceneName);
     if (newScene != nullptr){
         if (app->physics->DestroyAllWorldBodies()) {
+            prevScene = currentScene;
             currentScene = newScene;
         };
     }

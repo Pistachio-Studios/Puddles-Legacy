@@ -49,12 +49,12 @@
 			<camera x="-530" y="-1949" />
 			<player x="335" y="2700" texturepath="Assets/Textures/Player.png" />
 			<npcs>
-				<npc x="1000" y="2600" type="2" texturepath="Assets/Textures/NoDialogNpcs/blackCat.png" />
-				<npc x="1000" y="1800" type="2" texturepath="Assets/Textures/NoDialogNpcs/bunny.png" />
-				<npc x="1400" y="2200" type="2" texturepath="Assets/Textures/NoDialogNpcs/chamaleon.png" />
-				<npc x="1800" y="2200" type="2" texturepath="Assets/Textures/NoDialogNpcs/chick.png" />
-				<npc x="1400" y="2600" type="2" texturepath="Assets/Textures/NoDialogNpcs/panda.png" />
-				<npc x="1400" y="1800" type="2" texturepath="Assets/Textures/NoDialogNpcs/squirrel.png" />
+				<npc x="1000" y="2600" type="2" texturepath="Assets/Textures/NoDialogNpcs/blackCat.PNG" />
+				<npc x="1000" y="1800" type="2" texturepath="Assets/Textures/NoDialogNpcs/bunny.PNG" />
+				<npc x="1400" y="2200" type="2" texturepath="Assets/Textures/NoDialogNpcs/chamaleon.PNG" />
+				<npc x="1800" y="2200" type="2" texturepath="Assets/Textures/NoDialogNpcs/chick.PNG" />
+				<npc x="1400" y="2600" type="2" texturepath="Assets/Textures/NoDialogNpcs/panda.PNG" />
+				<npc x="1400" y="1800" type="2" texturepath="Assets/Textures/NoDialogNpcs/squirrel.PNG" />
 			</npcs>
 			<loco x="900" y="2200" type="1"/>
 			<enemies />

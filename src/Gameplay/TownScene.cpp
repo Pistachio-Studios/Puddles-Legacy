@@ -29,7 +29,15 @@ bool TownScene::Enter()
 	if (parameters.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = parameters.child("player");
+
 		player->Enable();
+
+
+		// No se porque no va pero deberi de ir ;-;
+		if(app->sceneManager->GetPrevScene()->name == "forestscene")
+			player->position = { 2900, 100 };
+		if(app->sceneManager->GetPrevScene()->name == "tavernscene")
+			player->position = { 2900, 1900 };
 	}
 
 	if (parameters.child("map")) {
