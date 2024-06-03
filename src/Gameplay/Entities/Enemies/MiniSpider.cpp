@@ -162,9 +162,10 @@ void MiniSpider::Attack(float dt)
 
 bool MiniSpider::SaveState(pugi::xml_node& node) {
 
-	pugi::xml_node enemybossAttributes = node.append_child("enemies").append_child("MiniSpider");
-	enemybossAttributes.append_attribute("x").set_value(this->position.x);
-	enemybossAttributes.append_attribute("y").set_value(this->position.y);
+	pugi::xml_node minispiderAttributes = node.append_child("enemies").append_child("MiniSpider");
+	minispiderAttributes.append_attribute("x").set_value(this->position.x);
+	minispiderAttributes.append_attribute("y").set_value(this->position.y);
+	minispiderAttributes.append_attribute("lives").set_value(this->vida);
 
 	return true;
 }
@@ -175,6 +176,8 @@ bool MiniSpider::LoadState(pugi::xml_node& node)
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
+
+	this->vida = node.child("enemies").child("MiniSpider").attribute("lives").as_int();
 
 	return true;
 }
