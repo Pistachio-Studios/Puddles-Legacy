@@ -150,6 +150,9 @@ public:
 
 public:
 
+	Sword* swordEntity = nullptr;
+	Staff* staffEntity = nullptr;
+
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
