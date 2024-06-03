@@ -4,10 +4,20 @@
 #include "Core/Physics.h"
 #include "Utils/Timer.h"
 #include "Utils/StateMachine.h"
+#include "Gameplay/Entities/Items/Item.h"
+#include "Gameplay/Entities/Items/ArnicaPlant.h"
+#include "Gameplay/Entities/Items/HepaticaPlant.h"
+#include "Gameplay/Entities/Items/ComfreyPlant.h"
+#include "Gameplay/Entities/Items/VitaPotion.h"
+#include "Gameplay/Entities/Items/CeleritaPotion.h"
+#include "Gameplay/Entities/Items/EtherPotion.h"
+#include "Gameplay/Entities/Items/OblitiusPotion.h"
 
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
 #include <box2d/b2_math.h>
+
+#include <imgui.h>
 
 struct SDL_Texture;
 
@@ -16,6 +26,94 @@ enum PlayerClass
 	KNIGHT,
 	WIZARD
 };
+
+class Inventory {
+public:
+	std::vector<Item*> items;
+
+	Inventory() {
+		// Plants
+		// TODO revisar descripciones 
+		items.push_back(new ArnicaPlant("Arnica Plant", 0, "Permite craftear la poción de cura"));
+		items.push_back(new HepaticaPlant("Hepatica Plant", 0, "Permite craftear la poción de recuperación de energía"));
+		items.push_back(new ComfreyPlant("Comfrey Plant", 0, "Permite craftear la poción de resetear árbol de habilidades"));
+
+		// Potions
+		// TODO revisar descripciones 
+		items.push_back(new VitaPotion("Vita Potion", 0, "Cura vida"));
+		items.push_back(new CeleritaPotion("Celerita Potion", 0, "Aumenta velocidad"));
+		items.push_back(new EtherPotion("Ether Potion", 0, "Recupera energia"));
+		items.push_back(new OblitiusPotion("Oblitius Potion", 0, "Resetea arbol de habilidades"));
+	}
+
+	~Inventory() {
+		for (auto& item : items) {
+			delete item;
+		}
+	}
+
+	void AddItem(std::string itemName) {
+		for (auto& item : items) {
+			if (item->name == itemName) {
+				item->quantity++;
+				break;
+			}
+		}
+	}
+
+	void RemoveItem(std::string itemName) {
+		for (auto& item : items) {
+			if (item->name == itemName) {
+				if (item->quantity > 0) {
+					item->quantity--;
+				}
+				break;
+			}
+		}
+	}
+
+	Item* GetItem(std::string itemName) {
+		for (auto& item : items) {
+			if (item->name == itemName) {
+				return item;
+			}
+		}
+		return nullptr;
+	}
+
+	bool HasItem(std::string itemName) {
+		for (auto& item : items) {
+			if (item->name == itemName) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void DrawImGui() {
+		ImGui::Begin("Inventory");
+		for (auto& item : items) {
+			ImGui::Text(item->name.c_str());
+			ImGui::Text(("Quantity: " + std::to_string(item->quantity)).c_str());
+			ImGui::Text(item->description.c_str());
+
+			if (ImGui::Button(("Add " + item->name).c_str())) {
+				AddItem(item->name);
+			};
+			
+			ImGui::SameLine();
+			
+			if (ImGui::Button(("Remove " + item->name).c_str())) {
+				RemoveItem(item->name);
+			};
+
+			ImGui::Text(" ");
+		}
+		ImGui::End();
+	}
+
+};
+
 
 class Player : public Entity
 {
@@ -71,16 +169,14 @@ public:
 
 	PlayerClass currentClass = KNIGHT;
 
+	Inventory inventory;
+
 	//tmps
 	PhysBody* sword;
 
 	int livesPlayer = 10;
 	int totalLivesPlayer;
 	bool deadPlayer = false;
-
-	int healPlantCounter = 0;
-	int energyPlantCounter = 0;
-	int veloPlantCounter = 0;
 
 	bool sceneChange = false;
 };
