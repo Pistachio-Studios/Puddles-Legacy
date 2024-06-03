@@ -39,9 +39,6 @@ public:
     // Called before quitting
     bool CleanUp();
 
-    //New method to change file
-    bool ChangeVideo(const char* newFile);
-
     bool OpenCodecContext(int* index);
     bool OpenVideoCodecContext(int index);
     bool OpenAudioCodecContext(int index);
