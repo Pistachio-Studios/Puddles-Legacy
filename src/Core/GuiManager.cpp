@@ -120,6 +120,10 @@ bool GuiManager::CleanUp()
 
 	while (control != nullptr)
 	{
+		// TODO unload all gui textures
+		app->tex->UnLoad(control->data->texture);
+		app->tex->UnLoad(control->data->textureSelectedLeft);
+		app->tex->UnLoad(control->data->textureSelectedRight);
 		RELEASE(control);
 	}
 
