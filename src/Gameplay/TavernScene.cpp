@@ -132,13 +132,23 @@ bool TavernScene::Update(float dt)
 		if (cauldronCreatePressed && cauldronSelect == nullptr) {
 			cauldronSelect = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronSelectTex);
 			cauldronSelectExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
+			potionCreateButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Accept", { (int)windowW / 2 - 100, (int)windowH / 2 + 300, 200, 50 }, this);
 			
 			cauldronCreatePressed = false;
+			
+			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+
+			}
+		}
+		if (potionCreatePressed) {
+			app->guiManager->RemoveGuiControl(potionCreateButton);
+			potionCreatePressed = false;
+			cauldronSelect = nullptr;
 		}
 		if (selectExitPressed && cauldronSelect != nullptr) {
 			app->guiManager->RemoveGuiControl(cauldronSelectExit);
 			app->guiManager->RemoveGuiControl(cauldronSelect);
-			cauldronSelect = nullptr;
+			//cauldronSelect = nullptr;
 			selectExitPressed = false;
 		}
 	}
@@ -242,6 +252,9 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 12:
 		selectExitPressed = true;
+		break;
+	case 13:
+		potionCreatePressed = true;
 		break;
 	}
 

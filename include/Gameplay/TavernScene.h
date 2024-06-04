@@ -68,6 +68,7 @@ private:
 	GuiControlButton* cauldronSelectExit;
 	GuiControlButton* cauldronExit;
 	GuiControlButton* cauldronCreate;
+	GuiControlButton* potionCreateButton;
 	GuiControlPopUp* cauldron = nullptr;
 	GuiControlPopUp* cauldronSelect = nullptr;
 
@@ -76,6 +77,7 @@ private:
 	bool selectExitPressed = false;
 	bool cauldronExitPressed = false;
 	bool cauldronCreatePressed = false;
+	bool potionCreatePressed = false;
 
 	Timer* playingTime;
 };
