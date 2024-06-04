@@ -13,15 +13,17 @@ typedef float float32;
 enum class EntityType
 {
 	PLAYER,
-	FLYINGENEMY,
+	MINISPIDER,
 	ENEMYBOSS,
-	CENTIPIDEENEMY,
+	WASP,
 	NPC,
 	SWORD,
 	STAFF,
 	SHIELD,
 	PLANT,
 	POTION,
+	ITEM,
+	BULLET,
 	UNKNOWN
 };
 

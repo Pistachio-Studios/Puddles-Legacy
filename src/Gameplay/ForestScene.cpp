@@ -1,15 +1,20 @@
 #include "Core/App.h"
 #include "Core/Input.h"
-#include "Utils/SString.h"
 #include "Core/Render.h"
-#include "Utils/Timer.h"
 #include "Core/Window.h"
-#include "Gameplay/ForestScene.h"
-#include "Core/Map.h"
-#include "Core/SceneManager.h"
-#include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
+#include "Core/Map.h"
+#include "Core/SceneManager.h"
+#include "Gameplay/ForestScene.h"
+#include "Gameplay/Entities/Npcs/Loco.h"
+#include "Gameplay/Entities/Npcs/Npc.h"
+#include "Gameplay/Entities/Npcs/Tabernero.h"
+#include "Gameplay/Entities/Items/Plant.h"
+#include "Utils/SString.h"
+#include "Utils/Timer.h"
+#include "Utils/Log.h"
+
 
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
@@ -42,7 +47,96 @@ bool ForestScene::Enter()
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
 	}
 
-	app->physics->Enable();
+	// Enemies
+	// TODO Load the enemies from the config file
+	/*
+	if (parameters.child("enemies").child("EnemyBoss")) {
+		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
+		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
+		enemyboss->Start();
+	}
+
+	if (parameters.child("enemies"))
+	{
+		pugi::xml_node enemies = parameters.child("enemies");
+
+		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
+		{
+			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
+			flyingenemy->parameters = FlyingEnemyNode;
+			flyingenemy->Start();
+		}
+
+		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
+		{
+			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
+			centipidenemy->parameters = CentipideEnemyNode;
+			centipidenemy->Start();
+		}
+	}
+	*/
+
+	if (parameters.child("Npcs").child("loco")) {
+		Loco* loco = new Loco();
+		app->entityManager->AddEntity(loco);
+		loco->parameters = parameters.child("Npcs").child("loco");
+		loco->Start();
+	}
+
+	if (parameters.child("Npcs").child("tabernero")) {
+		Tabernero* tabernero = new Tabernero();
+		app->entityManager->AddEntity(tabernero);
+		tabernero->parameters = parameters.child("Npcs").child("tabernero");
+		tabernero->Start();
+	}
+
+	// Items
+	for (pugi::xml_node potionNode = parameters.child("Potion").first_child(); potionNode; potionNode = potionNode.next_sibling())
+	{
+		std::string potionType = potionNode.name();
+	
+		if (potionType == "VitaPotion")
+			player->inventory.AddItem("Vita Potion");
+		
+		if (potionType == "CeleritaPotion") 
+			player->inventory.AddItem("Celerita Potion");
+
+		if (potionType == "EtherPotion")
+			player->inventory.AddItem("Ether Potion");
+
+		if (potionType == "OblitiusPotion")
+			player->inventory.AddItem("Oblitius Potion");
+	}
+
+	
+	for (pugi::xml_node plantNode = parameters.child("Plants").first_child(); plantNode; plantNode = plantNode.next_sibling())
+	{
+		std::string plantType = plantNode.name();
+
+		if (plantType == "ArnicaPlant") {
+			Plant* plant = new ArnicaPlant("Arnica Plant", 1, "Permite craftear la poción de cura");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+		if (plantType == "HepaticaPlant") {
+			Plant* plant = new HepaticaPlant("Hepatica Plant", 1, "Permite craftear la poción de recuperación de energía");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+		if (plantType == "ComfreyPlant") {
+			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+	}
+
+	//app->physics->Enable();
 	app->map->Enable();
 	app->entityManager->Enable();
 
@@ -64,21 +158,25 @@ bool ForestScene::Enter()
 	gcResume->SetObserver(this);
 	gcResume->state = GuiControlState::DISABLED;
 
-	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Save", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave->SetObserver(this);
+	gcSave->state = GuiControlState::DISABLED;
+
+	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
 	gcSettings->SetObserver(this);
 	gcSettings->state = GuiControlState::DISABLED;
 
-	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
+	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
 	gcBackToTitle->SetObserver(this);
 	gcBackToTitle->state = GuiControlState::DISABLED;
 
-	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
+	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 100, 300, 50 }, this);
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
-	PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
-	changeTown->ctype = ColliderType::CHANGESCENE;
-	changeTown->listener = player;
+	//PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
+	//changeTown->ctype = ColliderType::CHANGESCENE;
+	//changeTown->listener = player;
 
 	return true;
 }
@@ -115,6 +213,34 @@ bool ForestScene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 
+	//if (app->entityManager->GetPlayerEntity()->position.x <= 0 || app->render->camera.x <= 0) {
+
+	//	app->entityManager->GetPlayerEntity()->position.x = 0;
+	//	app->render->camera.x = 0;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.x >= 5760 || app->render->camera.x >= 5760) {
+
+	//	app->entityManager->GetPlayerEntity()->position.x = 5760;
+	//	app->render->camera.x = 5760;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.y <= 0 || app->render->camera.y <= 0) {
+
+	//	app->entityManager->GetPlayerEntity()->position.y = 0;
+	//	app->render->camera.x = 0;
+	//}
+
+	//if (app->entityManager->GetPlayerEntity()->position.y >= 5376 || app->render->camera.y >= 5376) {
+
+	//	app->entityManager->GetPlayerEntity()->position.y = 5376;
+	//	app->render->camera.x = 5376;
+	//}
+
+	//Cambios de escena sin collider
+	if (app->entityManager->GetPlayerEntity()->position.x <= 3060 && app->entityManager->GetPlayerEntity()->position.x >= 2620 && app->entityManager->GetPlayerEntity()->position.y >= 5190) {
+		app->sceneManager->ChangeScene("townscene");
+	}
 
 	return true;
 }
@@ -136,6 +262,7 @@ bool ForestScene::PostUpdate()
 			gcSettings->state = GuiControlState::NORMAL;
 			gcBackToTitle->state = GuiControlState::NORMAL;
 			gcExit->state = GuiControlState::NORMAL;
+			gcSave->state = GuiControlState::NORMAL;
 		}
 		else
 		{
@@ -144,6 +271,7 @@ bool ForestScene::PostUpdate()
 			gcSettings->state = GuiControlState::DISABLED;
 			gcBackToTitle->state = GuiControlState::DISABLED;
 			gcExit->state = GuiControlState::DISABLED;
+			gcSave->state = GuiControlState::DISABLED;
 		}
 	}
 
@@ -165,6 +293,7 @@ bool ForestScene::Exit()
 	app->guiManager->RemoveGuiControl(gcSettings);
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
+	app->guiManager->RemoveGuiControl(gcSave);
 
 	return true;
 }
@@ -180,13 +309,13 @@ bool ForestScene::CleanUp()
 	app->guiManager->RemoveGuiControl(gcSettings);
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
+	app->guiManager->RemoveGuiControl(gcSave);
 
 	return true;
 }
 
 bool ForestScene::OnGuiMouseClickEvent(GuiControl* control)
 {
-	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
 
 	switch (control->id)
@@ -197,6 +326,7 @@ bool ForestScene::OnGuiMouseClickEvent(GuiControl* control)
 		gcSettings->state = GuiControlState::DISABLED;
 		gcBackToTitle->state = GuiControlState::DISABLED;
 		gcExit->state = GuiControlState::DISABLED;
+		gcSave->state = GuiControlState::DISABLED;
 		break;
 	case 7:
 		break;
@@ -205,6 +335,9 @@ bool ForestScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 9:
 		exitPressed = true;
+		break;
+	case 10:
+		app->SaveRequest();
 		break;
 	}
 

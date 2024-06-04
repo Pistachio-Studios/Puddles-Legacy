@@ -8,6 +8,8 @@
 #include "Core/GuiControlLabel.h"
 #include "Core/GuiControlPopUp.h"
 #include "Core/GuiControlSlider.h"
+#include "Core/GuiControlCheckbox.h"
+#include "Core/GuiControlDropDownBox.h"
 #include "Core/Audio.h"
 #include <cstddef>
 
@@ -47,6 +49,12 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 		break;
 	case GuiControlType::SLIDER:
 		guiControl = new GuiControlSlider(id, text, bounds, minV, maxV);
+		break;
+	case GuiControlType::CHECKBOX:
+		guiControl = new GuiControlCheckbox(id, text, bounds);
+		break;
+	case GuiControlType::DROPDOWNBOX:
+		guiControl = new GuiControlDropDownBox(id, text, bounds);
 		break;
 	}
 	
@@ -120,5 +128,7 @@ bool GuiManager::CleanUp()
 	return false;
 }
 
-
-
+int GuiManager::GetGuiLastId() const
+{
+	return guiControlsList.Count();
+}

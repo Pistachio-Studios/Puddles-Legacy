@@ -34,20 +34,22 @@ enum bodyType {
 };
 
 enum class ColliderType {
-	PLAYER, 
+	PLAYER,
+	SWORD,
 	PLANT,
 	POTION,
 	SCOREITEM,
 	CHECKPOINT,
 	ENEMY,
 	BULLET,
-	PLATFORM,
+	MAGIC,
+	OBSTACLE,
 	CHANGESCENE,
 	DEATH,
 	LIMITS,
 	WIN,
 	NPC,
-	UNKNOWN,
+	UNKNOWN
 	// ..
 };
 
@@ -122,6 +124,7 @@ public:
 
 	// Destroy physics objects
 	bool DestroyBody(PhysBody* body);
+	bool DestroyAllWorldBodies();
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

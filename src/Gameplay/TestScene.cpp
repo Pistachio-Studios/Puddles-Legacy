@@ -43,16 +43,16 @@ bool TestScene::Enter()
 	{
 		pugi::xml_node enemies = parameters.child("enemies");
 
-		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
+		for (pugi::xml_node MiniSpiderNode = enemies.child("MiniSpider"); MiniSpiderNode; MiniSpiderNode = MiniSpiderNode.next_sibling("MiniSpider"))
 		{
-			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
-			flyingenemy->parameters = FlyingEnemyNode;
+			MiniSpider* minispider = (MiniSpider*)app->entityManager->CreateEntity(EntityType::MINISPIDER);
+			minispider->parameters = MiniSpiderNode;
 		}
 
-		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
+		for (pugi::xml_node WaspNode = enemies.child("Wasp"); WaspNode; WaspNode = WaspNode.next_sibling("Wasp"))
 		{
-			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
-			centipidenemy->parameters = CentipideEnemyNode;
+			Wasp* wasp = (Wasp*)app->entityManager->CreateEntity(EntityType::WASP);
+			wasp->parameters = WaspNode;
 		}
 	}
 
@@ -68,7 +68,7 @@ bool TestScene::Enter()
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
 	}
 
-	app->physics->Enable();
+	//app->physics->Enable();
 	app->map->Enable();
 	app->entityManager->Enable();
 
@@ -90,15 +90,19 @@ bool TestScene::Enter()
 	gcResume->SetObserver(this);
 	gcResume->state = GuiControlState::DISABLED;
 
-	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Save", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave->SetObserver(this);
+	gcSave->state = GuiControlState::DISABLED;
+
+	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
 	gcSettings->SetObserver(this);
 	gcSettings->state = GuiControlState::DISABLED;
 
-	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
+	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
 	gcBackToTitle->SetObserver(this);
 	gcBackToTitle->state = GuiControlState::DISABLED;
 
-	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
+	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 100, 300, 50 }, this);
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
@@ -157,6 +161,7 @@ bool TestScene::PostUpdate()
 			gcSettings->state = GuiControlState::DISABLED;
 			gcBackToTitle->state = GuiControlState::DISABLED;
 			gcExit->state = GuiControlState::DISABLED;
+			gcSave->state = GuiControlState::DISABLED;
 		}
 		else
 		{
@@ -165,6 +170,7 @@ bool TestScene::PostUpdate()
 			gcSettings->state = GuiControlState::NORMAL;
 			gcBackToTitle->state = GuiControlState::NORMAL;
 			gcExit->state = GuiControlState::NORMAL;
+			gcSave->state = GuiControlState::NORMAL;
 		}
 	}
 
@@ -186,6 +192,7 @@ bool TestScene::Exit()
 	app->guiManager->RemoveGuiControl(gcSettings);
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
+	app->guiManager->RemoveGuiControl(gcSave);
 
 	return true;
 }
@@ -201,6 +208,7 @@ bool TestScene::CleanUp()
 	app->guiManager->RemoveGuiControl(gcSettings);
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
+	app->guiManager->RemoveGuiControl(gcSave);
 
 	return true;
 }
@@ -218,16 +226,20 @@ bool TestScene::OnGuiMouseClickEvent(GuiControl* control)
 		gcSettings->state = GuiControlState::DISABLED;
 		gcBackToTitle->state = GuiControlState::DISABLED;
 		gcExit->state = GuiControlState::DISABLED;
-	break;
+		gcSave->state = GuiControlState::DISABLED;
+		break;
 	case 7:
 		break;
 	case 8:
 		paused = false;
 		app->sceneManager->ChangeScene("mainmenu");
-	break;
+		break;
 	case 9:
 		exitPressed = true;
-	break;
+		break;
+	case 10:
+		app->SaveRequest();
+		break;
 	}
 
 	return true;

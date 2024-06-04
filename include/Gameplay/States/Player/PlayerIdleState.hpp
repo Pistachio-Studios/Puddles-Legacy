@@ -14,13 +14,13 @@ public:
     PlayerIdleState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("PlayerIdleState Enter()");
+
 
         player = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("PlayerIdleState Update()");
+
 
         if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT or
             app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT or
@@ -32,7 +32,7 @@ public:
     }
     inline void Exit() override
     {
-        LOG("PlayerIdleState Exit()");
+
     }
 };
 #endif // __PLAYERIDLESTATE_H__

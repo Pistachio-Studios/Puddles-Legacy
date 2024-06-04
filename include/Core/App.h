@@ -24,8 +24,10 @@ class AnimationManager;
 class Physics;
 class ParticleManager;
 class GuiManager;
+class VideoPlayer;
 class DebugUI;
 class DialogManager;
+class QuestManager;
 class UI;
 
 class App
@@ -113,8 +115,10 @@ public:
 	Physics* physics;
 	ParticleManager* particleManager;
 	GuiManager* guiManager;
+	VideoPlayer* videoPlayer;
 	DebugUI* debugUI;
 	DialogManager* dialogManager;
+	QuestManager* questManager;	
 	UI* ui;
 
 
@@ -162,5 +166,6 @@ extern bool debug;
 extern bool fpsLimiter;
 extern bool freeCam;
 extern bool paused;
+extern int currentSlot;
 
 #endif	// __APP_H__

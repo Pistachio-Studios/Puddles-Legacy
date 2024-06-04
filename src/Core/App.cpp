@@ -14,7 +14,9 @@
 #include "Core/DebugUI.h"
 #include "Core/EntityManager.h"
 #include "Core/Lighting.h"
+#include "Core/VideoPlayer.h"
 #include "Core/DialogManager.h"
+#include "Core/QuestManager.h"
 #include "Core/UI.h"
 
 #include "Utils/Defs.h"
@@ -42,15 +44,17 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	lighting = new Lighting(false);
 	audio = new Audio(true);
-	physics = new Physics(false);
+	physics = new Physics(true);
 	sceneManager = new SceneManager(true);
 	map = new Map(false);
 	animationManager = new AnimationManager(true);
 	entityManager = new EntityManager(false);
 	particleManager = new ParticleManager(true);
 	guiManager = new GuiManager(true);
+	videoPlayer = new VideoPlayer(true);
 	debugUI = new DebugUI(true);
 	dialogManager = new DialogManager(true);
+	questManager = new QuestManager(true);
 	ui = new UI(true);
 
 
@@ -68,8 +72,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(particleManager);
 	AddModule(lighting);
 	AddModule(guiManager);
+	AddModule(videoPlayer);
 	AddModule(debugUI);
 	AddModule(dialogManager);
+	AddModule(questManager);
 	AddModule(ui);
 
 	// Render last to swap buffer
@@ -384,57 +390,74 @@ bool App::CleanUp()
 	return ret;
 }
 
+
+/**
+ * Loads the game state from a file.
+ *
+ * This function loads the game state from an XML file specified by the given slot number.
+ * It parses the XML file and retrieves the game state data for each module in the application.
+ * The game state data is then passed to the corresponding module's LoadState function.
+ *
+ * @param slot The slot number indicating the save file to load from.
+ * @return True if the game state was successfully loaded, false otherwise.
+ */
 bool App::LoadFromFile() {
+    bool ret = true;
+	
+    pugi::xml_document saveFile;
+    std::string filename = "save_game_" + std::to_string(currentSlot) + ".xml";
+    pugi::xml_parse_result result = saveFile.load_file(filename.c_str());
 
-	bool ret = true;
+    if (result) {
+        LOG("%s parsed without errors", filename.c_str());
 
-	pugi::xml_document saveFile;
-	pugi::xml_parse_result result = saveFile.load_file("save_game.xml");
+        ListItem<Module*>* item;
+        item = modules.start;
 
-	if (result) {
-		LOG("save_game.xml parsed without errors");
+        while (item != NULL && ret == true) {
+            ret = item->data->LoadState(saveFile.child("game_state").child(item->data->name.GetString()));
+            item = item->next;
+        }
 
-		// Iterates all modules and call the load of each with the part of the XML node that corresponds to the module
-		ListItem<Module*>* item;
-		item = modules.start;
+    } else {
+        LOG("Error loading %s: %s", filename.c_str(), result.description());
+        ret = false;
+    }
 
-		while (item != NULL && ret == true) {
-			ret = item->data->LoadState(saveFile.child("game_state").child(item->data->name.GetString()));
-			item = item->next;
-		}
-
-	} else {
-		LOG("Error loading save_game.xml: %s", result.description());
-		ret = false;
-	}
-
-	return ret;
-
+    return ret;
 }
 
+
+/**
+ * Saves the game state to a file.
+ *
+ * @param slot The slot number to save the game to.
+ * @return True if the game state was successfully saved, false otherwise.
+ */
 bool App::SaveFromFile() {
-	bool ret = true;
+    bool ret = true;
 
-	pugi::xml_document saveFile;
-	pugi::xml_node gameState = saveFile.append_child("game_state");
+	
+    pugi::xml_document saveFile;
+    pugi::xml_node gameState = saveFile.append_child("game_state");
 
-	// Iterates all modules and call the save of each with the part of the XML node that corresponds to the module
-	ListItem<Module*>* item;
-	item = modules.start;
+    ListItem<Module*>* item;
+    item = modules.start;
 
-	while (item != NULL && ret == true)
-	{
-		pugi::xml_node module = gameState.append_child(item->data->name.GetString());
-		ret = item->data->SaveState(module);
-		item = item->next;
-	}
+    while (item != NULL && ret == true)
+    {
+        pugi::xml_node module = gameState.append_child(item->data->name.GetString());
+        ret = item->data->SaveState(module);
+        item = item->next;
+    }
 
-	ret = saveFile.save_file("save_game.xml");
+    std::string filename = "save_game_" + std::to_string(currentSlot) + ".xml";
+    ret = saveFile.save_file(filename.c_str());
 
-	if (ret) LOG("Saved");
-	else LOG("Error saving game state");
+    if (ret) LOG("Saved to %s", filename.c_str());
+    else LOG("Error saving game state");
 
-	return ret;
+    return ret;
 }
 
 // ---------------------------------------

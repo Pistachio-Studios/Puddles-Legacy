@@ -50,6 +50,10 @@ bool Player::Start() {
 
 	timer = Timer();
 
+	playerHurtCultdown = Timer();
+
+	dashTimer = Timer();
+
 	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
@@ -60,6 +64,9 @@ bool Player::Start() {
 	pbody->body->SetFixedRotation(true);
 	//pbody->body->GetFixtureList()->SetFriction(25.0f);
 	pbody->body->SetLinearDamping(10.0f);
+
+	swordEntity = (Sword*)app->entityManager->CreateEntity(EntityType::SWORD);
+	staffEntity = (Staff*)app->entityManager->CreateEntity(EntityType::STAFF);
 
 	movementFSM = new StateMachine<Player>(this);
 	movementFSM->AddState(new PlayerIdleState("idle")); 
@@ -72,6 +79,8 @@ bool Player::Start() {
 
 	totalLivesPlayer = livesPlayer;
 
+	sceneChange = false;
+
 	return true;
 }
 
@@ -82,6 +91,10 @@ bool Player::Update(float dt)
 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
+	if (vida <= 0.0f) {
+		pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0);
+		vida = 10.0f;
+	}
 	
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
@@ -118,12 +131,32 @@ bool Player::Update(float dt)
 	}
 
 	if (livesPlayer == 0) deadPlayer;
+
+
+	//----Scene Change Management----
+	if(sceneChange)
+	{
+		if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")
+		{
+			app->sceneManager->ChangeScene("townscene");
+		}
+		if (app->sceneManager->GetCurrentScene()->name == "townscene")
+		{
+			app->sceneManager->ChangeScene("forestscene");
+		}
+		if (app->sceneManager->GetCurrentScene()->name == "forestscene")
+		{
+			app->sceneManager->ChangeScene("townscene");
+		}
+	}
+
 	return true;
 }
 
 void Player::DrawImGui()
 {
 	ImGui::Begin("Player");
+
 	ImGui::Text("Player Position: %d, %d", position.x, position.y);
 	ImGui::Text("Player Lives: %d", livesPlayer);
 	ImGui::Text("Player Mana: %d", mana);
@@ -133,6 +166,12 @@ void Player::DrawImGui()
 
 	ImGui::Text("Looking Dir: (%f, %f)", lookingDir.x, lookingDir.y);
 	ImGui::Text("Looking Angle: %f", lookingAngle);
+
+	inventory.DrawImGui();
+
+	ImGui::Text("Player Class: %s", currentClass == PlayerClass::KNIGHT ? "KNIGHT" : "WIZARD");
+
+	ImGui::Text("player hurt cooldown: %f", playerHurtCultdown.ReadMSec());
 
 	ImGui::End();
 }
@@ -169,25 +208,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::CHANGESCENE:
-		if (app->sceneManager->GetCurrentScene()->name == "tutorialscene")
-		{
-			app->sceneManager->ChangeScene("townscene");
-		}
-		if (app->sceneManager->GetCurrentScene()->name == "townscene")
-		{
-			app->sceneManager->ChangeScene("forestscene");
-		}
-		if (app->sceneManager->GetCurrentScene()->name == "forestscene")
-		{
-			app->sceneManager->ChangeScene("townscene");
-		}
-
+		sceneChange = true;
 		break;
-		//TODO: He añadido esto para probar que la pocion de curar funcione, se puede borrar :)
+		//TODO: He aï¿½adido esto para probar que la pocion de curar funcione, se puede borrar :)
 	case ColliderType::ENEMY:
-		livesPlayer--; 
+		if(playerHurtCultdown.ReadMSec() > 1000.0f)
+			{
+				livesPlayer--; 
+				playerHurtCultdown.Start();
+			}
 		break;
 	}
+
 	
 }
 

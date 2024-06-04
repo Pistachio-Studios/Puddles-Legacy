@@ -61,6 +61,7 @@ private:
 	GuiControlLabel* gcTime;
 
 	GuiControlButton* gcResume;
+	GuiControlButton* gcSave;
 	GuiControlButton* gcSettings;
 	GuiControlButton* gcBackToTitle;
 	GuiControlButton* gcExit;

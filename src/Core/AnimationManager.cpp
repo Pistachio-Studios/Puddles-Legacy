@@ -197,11 +197,11 @@ bool AnimationManager::LoadAnimation(pugi::xml_node node, TileSet* tileset)
     for (pugi::xml_node frameNode = node.child("animation").child("frame"); frameNode && ret; frameNode = frameNode.next_sibling("frame"))
     {
         int id = frameNode.attribute("tileid").as_int();
-     /*   int duration = frameNode.attribute("duration").as_int();*/
+        int duration = frameNode.attribute("duration").as_int();
         int tilesPerRow = tileset->columns;
         int x = (id % tilesPerRow) * tileset->tileWidth;
         int y = (id / tilesPerRow) * tileset->tileHeight;
-        anim->PushBack({x, y, tileset->tileWidth, tileset->tileHeight});
+        anim->PushBack({x, y, tileset->tileWidth, tileset->tileHeight}, duration);
     }
 
     animData.animations.Add(anim);

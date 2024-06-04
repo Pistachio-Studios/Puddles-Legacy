@@ -21,7 +21,7 @@ public:
     PlayerCombatBlockState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("PlayerCombatBlockState Enter()");
+
 
         player = StateMachineReference->owner;
         shieldEntity = (Shield*)app->entityManager->CreateEntity(EntityType::SHIELD);

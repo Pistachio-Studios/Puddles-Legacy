@@ -26,6 +26,7 @@ bool debug = false;
 bool fpsLimiter = false;
 bool freeCam = false;
 bool paused = false;
+int currentSlot = 1; // TODO revisar como hacer para que se guarde el ultimo slot seleccionado
 
 int main(int argc, char* args[])
 {

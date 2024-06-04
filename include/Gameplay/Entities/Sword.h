@@ -21,10 +21,6 @@ public:
 
 	virtual ~Sword();
 
-	bool Awake() override;
-
-	bool Start() override;
-
 	bool Update(float dt) override;
 
 	bool CleanUp() override;
@@ -35,10 +31,16 @@ public:
 
 	void EndCollision(PhysBody* physA, PhysBody* physB) override;
 
+	void Equip();
+
+	void Store();
+
 public:
 	PhysBody* pbody;
 
 	SDL_Texture* texture = nullptr;
+
+	bool active = false;
 };
 
 #endif // __PLAYER_H__

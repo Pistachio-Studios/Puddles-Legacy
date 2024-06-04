@@ -124,6 +124,7 @@ void Render::DrawImGui()
 		ImGui::Text("camera lerp speed: %f", camera.lerpSpeed);
 		ImGui::SliderFloat("Camera Lerp Speed", &camera.lerpSpeed, 0.0f, 16.0f);
 		ImGui::Text("camera target: %s", camera.target != nullptr ? camera.target->name.GetString() : "null");
+		ImGui::Text("Vsync: %s", vsyncEnabled ? "Enabled" : "Disabled");
 		
 		ImGui::End();
 	}
@@ -208,7 +209,7 @@ void Render::cameraInterpolation(Entity* target, float lerpSpeed, float dt, iPoi
 }
 
 // Blit to screen
-bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, SDL_RendererFlip flip, int pivotX, int pivotY) const
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, float size, SDL_RendererFlip flip, int pivotX, int pivotY) const
 {
 	bool ret = true;
 	uint scale = app->win->GetScale();
@@ -226,6 +227,9 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 	}
+
+	rect.w *= size;
+	rect.h *= size;
 
 	rect.w *= scale;
 	rect.h *= scale;
@@ -381,4 +385,23 @@ bool Render::SaveState(pugi::xml_node node) {
 	camNode.append_attribute("y").set_value(camera.y);
 
 	return true;
+}
+
+void Render::SetVsync(bool vsync)
+{
+	pugi::xml_document configFile;
+	pugi::xml_parse_result result = configFile.load_file("config.xml");
+
+	if (result) {
+		pugi::xml_node rendererNode = configFile.child("config").child("renderer");
+		pugi::xml_node vsyncNode = rendererNode.child("vsync");
+
+		vsyncNode.attribute("value").set_value(vsync ? "true" : "false");
+		vsyncEnabled = vsync;
+
+		configFile.save_file("config.xml");
+	} else {
+		// TODO Handle error
+		LOG("Error loading config.xml");
+	}
 }

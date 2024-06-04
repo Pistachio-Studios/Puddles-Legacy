@@ -6,6 +6,8 @@
 #include "Core/GuiControlButton.h"
 #include "Core/GuiControlPopUp.h"
 #include "Core/GuiControlSlider.h"
+#include "Core/GuiControlCheckbox.h"
+#include "Core/GuiControlDropDownBox.h"
 
 struct SDL_Texture;
 
@@ -50,15 +52,46 @@ private:
 	uint windowW, windowH;
 	GuiControlButton* playButton;
 	GuiControlButton* optionsButton;
+	GuiControlButton* creditsButton;
+	GuiControlButton* loadButton;
 	GuiControlButton* exitButton;
 	GuiControlPopUp* popUpOptions = nullptr;
+	GuiControlPopUp* popUpLoad = nullptr;
 	GuiControlButton* crossOButton = nullptr;
 	GuiControlSlider* music = nullptr;
+	GuiControlSlider* fx = nullptr;
+	GuiControlCheckbox* vsync = nullptr;
+	GuiControlDropDownBox* screenMode = nullptr;
+	GuiControlButton* fullScreen = nullptr;
+	GuiControlButton* borderless = nullptr;
+	GuiControlButton* fullScreenWindow = nullptr;
+
+	GuiControlDropDownBox* resolution = nullptr;
+	GuiControlButton* res7680x4320 = nullptr;
+	GuiControlButton* res3840x2160 = nullptr;
+	GuiControlButton* res2560x1440 = nullptr;
+	GuiControlButton* res1920x1200 = nullptr;
+	GuiControlButton* res1920x1080 = nullptr;
+	GuiControlButton* res1600x900 = nullptr;
+	GuiControlButton* res1280x720 = nullptr;
+	GuiControlButton* res1024x768 = nullptr;
+	GuiControlButton* res800x600 = nullptr;
+	GuiControlButton* res640x480 = nullptr;
+
+	GuiControlButton* saveSlot1 = nullptr;
+	GuiControlButton* saveSlot2 = nullptr;
+	GuiControlButton* saveSlot3 = nullptr;
+	GuiControlButton* saveSlot4 = nullptr;
+	GuiControlButton* saveSlot5 = nullptr;
 	
 	bool exitPressed = false;
 
 	const char* texturePath;
 	SDL_Texture* gameTitle = NULL;
+
+	//Audio fx
+	int FxId;
+
 };
 
 #endif // __MainMenu_H__

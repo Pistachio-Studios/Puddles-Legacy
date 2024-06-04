@@ -20,34 +20,33 @@ private:
     float attackSpeed;
     float radius;
 
-    Sword* swordEntity = nullptr;
+    bool firstSpell;
 
-    Staff* staffEntity = nullptr;
+    Timer spellTimer;
 
 public:
     PlayerCombatAttackState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("PlayerCombatAttackState Enter()");
+
 
         player = StateMachineReference->owner;
 
+        attackRange = 150;
+        attackValue = -attackRange / 2;
+        playerLookingAngle = player->lookingAngle;
+        attackSpeed = 500;
+        radius = 2.5;
+
         if(player->currentClass == PlayerClass::KNIGHT)
         {
-            swordEntity = (Sword*)app->entityManager->CreateEntity(EntityType::SWORD);
-            swordEntity->Start();
-
-            attackRange = 150;
-            attackValue = -attackRange / 2;
-            playerLookingAngle = player->lookingAngle;
-            attackSpeed = 500;
-            radius = 2.5;
+            player->swordEntity->Equip();
         }
         else if(player->currentClass == PlayerClass::WIZARD)
         {
-            staffEntity = (Staff*)app->entityManager->CreateEntity(EntityType::STAFF);
-            staffEntity->Start();
-            staffEntity->ThrowSpell();
+            spellTimer.Start();
+            player->staffEntity->Equip();
+            firstSpell = true;
         }
     }
     inline void Update(float dt) override
@@ -58,7 +57,7 @@ public:
             {
                 b2Vec2 playerPos = player->pbody->body->GetPosition();
                 b2Vec2 swordPos = { playerPos.x + (float)cos(playerLookingAngle + attackValue * DEGTORAD) * radius, playerPos.y + (float)sin(playerLookingAngle + attackValue * DEGTORAD) * radius };
-                swordEntity->pbody->body->SetTransform(swordPos, playerLookingAngle + attackValue * DEGTORAD);
+                player->swordEntity->pbody->body->SetTransform(swordPos, playerLookingAngle + attackValue * DEGTORAD);
                 attackValue += dt / 1000 * attackSpeed;
             }
             else
@@ -69,13 +68,35 @@ public:
         else if(player->currentClass == PlayerClass::WIZARD)
         {
             b2Vec2 playerPos = player->pbody->body->GetPosition();
-            b2Vec2 staffPos = { playerPos.x + (float)cos(player->lookingAngle) * 2, playerPos.y + (float)sin(player->lookingAngle) * 2 };
-            staffEntity->pbody->body->SetTransform(staffPos, player->lookingAngle);
+            b2Vec2 staffPos = { playerPos.x + (float)cos(player->lookingAngle) * radius, playerPos.y + (float)sin(player->lookingAngle) * radius };
+            player->staffEntity->pbody->body->SetTransform(staffPos, player->lookingAngle);
+            player->staffEntity->pbody->GetPosition(player->staffEntity->position.x, player->staffEntity->position.y);
+
+            if (app->input->GetMouseButtonDown(1))
+            {
+                if(spellTimer.ReadMSec() > 500 or firstSpell)
+                {
+                    player->staffEntity->ThrowSpell();
+                    spellTimer.Start();
+                    firstSpell = false;
+                }
+            }
+            else if(spellTimer.ReadSec() > 5)
+            {
+                StateMachineReference->ChangeState("idle");
+            }
         }
     }
     inline void Exit() override
     {
-        app->entityManager->DestroyEntity(swordEntity);
+        if(player->currentClass == PlayerClass::KNIGHT)
+        {
+            player->swordEntity->Store();
+        }
+        else if(player->currentClass == PlayerClass::WIZARD)
+        {
+            player->staffEntity->Store();
+        }
     }
 };
 #endif // __PlayerCombatAttackState_H__

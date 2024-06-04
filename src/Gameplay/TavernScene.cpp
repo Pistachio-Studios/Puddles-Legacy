@@ -6,6 +6,8 @@
 #include "Utils/Timer.h"
 #include "Core/Window.h"
 #include "Gameplay/TavernScene.h"
+#include "Gameplay/Entities/Npcs/Tabernero.h"
+#include "Gameplay/Entities/Npcs/Npc.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -43,7 +45,27 @@ bool TavernScene::Enter()
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
 	}
 
-	app->physics->Enable();
+	if (parameters.child("npcs"))
+	{
+		pugi::xml_node npcs = parameters.child("npcs");
+
+		for (pugi::xml_node npcsNode = npcs.child("npc"); npcsNode; npcsNode = npcsNode.next_sibling("npc"))
+		{
+			Npc* npcs = new Npc();
+			app->entityManager->AddEntity(npcs);
+			npcs->parameters = npcsNode;
+			npcs->Start();
+		}
+	}
+
+	if (parameters.child("tabernero")) {
+		Tabernero* tabernero = new Tabernero();
+		app->entityManager->AddEntity(tabernero);
+		tabernero->parameters = parameters.child("tabernero");
+		tabernero->Start();
+	}
+
+	//app->physics->Enable();
 	app->map->Enable();
 	app->entityManager->Enable();
 
@@ -65,15 +87,19 @@ bool TavernScene::Enter()
 	gcResume->SetObserver(this);
 	gcResume->state = GuiControlState::DISABLED;
 
-	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Save", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave->SetObserver(this);
+	gcSave->state = GuiControlState::DISABLED;
+
+	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
 	gcSettings->SetObserver(this);
 	gcSettings->state = GuiControlState::DISABLED;
 
-	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
+	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
 	gcBackToTitle->SetObserver(this);
 	gcBackToTitle->state = GuiControlState::DISABLED;
 
-	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
+	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 100, 300, 50 }, this);
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
@@ -117,7 +143,7 @@ bool TavernScene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && cauldron == nullptr) {
 		cauldron = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronTex);
-		cauldronExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
+		cauldronExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
 		cauldronCreate = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Create", { (int)windowW / 2 + 320, (int)windowH / 2 + 350, 200, 50 }, this);
 	}
 
@@ -154,6 +180,12 @@ bool TavernScene::Update(float dt)
 	}
 	
 
+	//Cambios de escena sin collider
+	if (app->entityManager->GetPlayerEntity()->position.x <= 1390 && app->entityManager->GetPlayerEntity()->position.x >= 1150 && app->entityManager->GetPlayerEntity()->position.y <= 3835 && app->entityManager->GetPlayerEntity()->position.y >= 3670) {
+		app->sceneManager->ChangeScene("townscene");
+	}
+
+
 	return true;
 }
 
@@ -174,6 +206,7 @@ bool TavernScene::PostUpdate()
 			gcSettings->state = GuiControlState::NORMAL;
 			gcBackToTitle->state = GuiControlState::NORMAL;
 			gcExit->state = GuiControlState::NORMAL;
+			gcSave->state = GuiControlState::NORMAL;
 		}
 		else
 		{
@@ -182,6 +215,7 @@ bool TavernScene::PostUpdate()
 			gcSettings->state = GuiControlState::DISABLED;
 			gcBackToTitle->state = GuiControlState::DISABLED;
 			gcExit->state = GuiControlState::DISABLED;
+			gcSave->state = GuiControlState::DISABLED;
 		}
 	}
 
@@ -203,6 +237,7 @@ bool TavernScene::Exit()
 	app->guiManager->RemoveGuiControl(gcSettings);
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
+	app->guiManager->RemoveGuiControl(gcSave);
 
 	return true;
 }
@@ -218,6 +253,7 @@ bool TavernScene::CleanUp()
 	app->guiManager->RemoveGuiControl(gcSettings);
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
+	app->guiManager->RemoveGuiControl(gcSave);
 
 	return true;
 }
@@ -235,16 +271,17 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 		gcSettings->state = GuiControlState::DISABLED;
 		gcBackToTitle->state = GuiControlState::DISABLED;
 		gcExit->state = GuiControlState::DISABLED;
-	break;
+		gcSave->state = GuiControlState::DISABLED;
+		break;
 	case 7:
 		break;
 	case 8:
 		app->sceneManager->ChangeScene("mainmenu");
-	break;
+		break;
 	case 9:
 		exitPressed = true;
 	break;
-	case 10:
+	case 14:
 		if(cauldronSelect == nullptr) cauldronExitPressed = true;
 		break;
 	case 11:
@@ -256,6 +293,10 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 13:
 		potionCreatePressed = true;
 		break;
+	case 10:
+		app->SaveRequest();
+		break;
+
 	}
 
 	return true;

@@ -57,12 +57,15 @@ private:
 	GuiControlLabel* gcTime;
 
 	GuiControlButton* gcResume;
+	GuiControlButton* gcSave;
 	GuiControlButton* gcSettings;
 	GuiControlButton* gcBackToTitle;
 	GuiControlButton* gcExit;
 
 	bool paused = false;
 	bool exitPressed = false;
+	bool comesFromForest = false;
+	bool comesFromTavern = false;
 
 	Timer* playingTime;
 };

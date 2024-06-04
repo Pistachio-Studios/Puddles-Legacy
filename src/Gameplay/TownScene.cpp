@@ -5,6 +5,8 @@
 #include "Utils/Timer.h"
 #include "Core/Window.h"
 #include "Gameplay/TownScene.h"
+#include "Gameplay/Entities/Npcs/Npc.h"
+#include "Gameplay/Entities/Npcs/Loco.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -27,7 +29,17 @@ bool TownScene::Enter()
 	if (parameters.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = parameters.child("player");
+
 		player->Enable();
+
+		// No se porque no va pero deberi de ir ;-;
+		if (app->sceneManager->GetPrevScene()->name == "forestscene"){
+			comesFromForest = true;
+		}
+
+		if (app->sceneManager->GetPrevScene()->name == "tavernscene"){
+			comesFromTavern = true;
+		}
 	}
 
 	if (parameters.child("map")) {
@@ -42,7 +54,27 @@ bool TownScene::Enter()
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
 	}
 
-	app->physics->Enable();
+	if (parameters.child("npcs"))
+	{
+		pugi::xml_node npcs = parameters.child("npcs");
+
+		for (pugi::xml_node npcsNode = npcs.child("npc"); npcsNode; npcsNode = npcsNode.next_sibling("npc"))
+		{
+			Npc* npcs = new Npc();
+			app->entityManager->AddEntity(npcs);
+			npcs->parameters = npcsNode;
+			npcs->Start();
+		}
+	}
+
+	if (parameters.child("loco")) {
+		Loco* loco = new Loco();
+		app->entityManager->AddEntity(loco);
+		loco->parameters = parameters.child("loco");
+		loco->Start();
+	}
+
+	//app->physics->Enable();
 	app->map->Enable();
 	app->entityManager->Enable();
 
@@ -64,15 +96,19 @@ bool TownScene::Enter()
 	gcResume->SetObserver(this);
 	gcResume->state = GuiControlState::DISABLED;
 
-	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Save", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave->SetObserver(this);
+	gcSave->state = GuiControlState::DISABLED;
+
+	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
 	gcSettings->SetObserver(this);
 	gcSettings->state = GuiControlState::DISABLED;
 
-	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
+	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
 	gcBackToTitle->SetObserver(this);
 	gcBackToTitle->state = GuiControlState::DISABLED;
 
-	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
+	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 100, 300, 50 }, this);
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
@@ -88,6 +124,17 @@ bool TownScene::PreUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	// No se porque no va pero deberi de ir ;-;
+	if (comesFromForest)
+		//player->position = { 2900, 260 };
+		player->pbody->body->SetTransform({ PIXEL_TO_METERS(2900),PIXEL_TO_METERS(260) }, 0);
+		comesFromForest = false;
+
+	if (comesFromTavern)
+		//player->position = { 2900, 2080 };
+		player->pbody->body->SetTransform({ PIXEL_TO_METERS(2900),PIXEL_TO_METERS(2080) }, 0);
+		comesFromTavern = false;
 
 	return true;
 }
@@ -123,6 +170,16 @@ bool TownScene::Update(float dt)
 	}
 
 
+	//Cambios de escena sin collider
+	if (app->entityManager->GetPlayerEntity()->position.x <= 3030 && app->entityManager->GetPlayerEntity()->position.x >= 2870 && app->entityManager->GetPlayerEntity()->position.y <= 1920 && app->entityManager->GetPlayerEntity()->position.y >= 1785){
+		app->sceneManager->ChangeScene("tavernscene");
+	}
+
+	if (app->entityManager->GetPlayerEntity()->position.x <= 3090 && app->entityManager->GetPlayerEntity()->position.x >= 2755 && app->entityManager->GetPlayerEntity()->position.y <= 90){
+		app->sceneManager->ChangeScene("forestscene");
+	}
+
+
 	return true;
 }
 
@@ -143,6 +200,7 @@ bool TownScene::PostUpdate()
 			gcSettings->state = GuiControlState::NORMAL;
 			gcBackToTitle->state = GuiControlState::NORMAL;
 			gcExit->state = GuiControlState::NORMAL;
+			gcSave->state = GuiControlState::NORMAL;
 		}
 		else
 		{
@@ -151,6 +209,7 @@ bool TownScene::PostUpdate()
 			gcSettings->state = GuiControlState::DISABLED;
 			gcBackToTitle->state = GuiControlState::DISABLED;
 			gcExit->state = GuiControlState::DISABLED;
+			gcSave->state = GuiControlState::DISABLED;
 		}
 	}
 
@@ -172,6 +231,7 @@ bool TownScene::Exit()
 	app->guiManager->RemoveGuiControl(gcSettings);
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
+	app->guiManager->RemoveGuiControl(gcSave);
 
 	return true;
 }
@@ -179,7 +239,7 @@ bool TownScene::Exit()
 // Called before quitting
 bool TownScene::CleanUp()
 {
-	LOG("Freeing testscene");
+	LOG("Freeing TownScene");
 
 	app->guiManager->RemoveGuiControl(gcScore);
 	app->guiManager->RemoveGuiControl(gcLives);
@@ -187,6 +247,7 @@ bool TownScene::CleanUp()
 	app->guiManager->RemoveGuiControl(gcSettings);
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
+	app->guiManager->RemoveGuiControl(gcSave);
 
 	return true;
 }
@@ -204,15 +265,19 @@ bool TownScene::OnGuiMouseClickEvent(GuiControl* control)
 		gcSettings->state = GuiControlState::DISABLED;
 		gcBackToTitle->state = GuiControlState::DISABLED;
 		gcExit->state = GuiControlState::DISABLED;
-	break;
+		gcSave->state = GuiControlState::DISABLED;
+		break;
 	case 7:
 		break;
 	case 8:
 		app->sceneManager->ChangeScene("mainmenu");
-	break;
+		break;
 	case 9:
 		exitPressed = true;
-	break;
+		break;
+	case 10:
+		app->SaveRequest();
+		break;
 	}
 
 	return true;

@@ -12,6 +12,7 @@
 #include "Gameplay/TownScene.h"
 #include "Gameplay/TutorialScene.h"
 #include "Gameplay/TavernScene.h"
+#include "Gameplay/Intro.h"
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
 #include <cassert>
@@ -225,6 +226,10 @@ Scene* SceneManager::CreateScene(SString sceneName)
     {
         return new LightingDemo(sceneName);
     }
+    else if (sceneName == "intro")
+    {
+        return new Intro(sceneName);
+    }
     else
     {
         LOG_ERROR("Scene %s not found\n", sceneName.GetString());
@@ -234,6 +239,11 @@ Scene* SceneManager::CreateScene(SString sceneName)
 Scene* SceneManager::GetCurrentScene()
 {
     return currentScene;
+}
+
+Scene* SceneManager::GetPrevScene()
+{
+    return prevScene;
 }
 
 Scene* SceneManager::FindScene(SString sceneName) const
@@ -257,7 +267,10 @@ void SceneManager::ChangeScene(SString sceneName)
     currentScene->Exit();
     Scene* newScene = FindScene(sceneName);
     if (newScene != nullptr){
-        currentScene = newScene;
+        if (app->physics->DestroyAllWorldBodies()) {
+            prevScene = currentScene;
+            currentScene = newScene;
+        };
     }
     else{
         LOG("Scene %s not found\n", sceneName.GetString());
@@ -266,7 +279,7 @@ void SceneManager::ChangeScene(SString sceneName)
 }
 
 // Load / Save
-bool SceneManager::LoadState(pugi::xml_node& node)
+bool SceneManager::LoadState(pugi::xml_node node)
 {
     bool ret = true;
 
@@ -275,9 +288,23 @@ bool SceneManager::LoadState(pugi::xml_node& node)
     return ret;
 }
 
-bool SceneManager::SaveState(pugi::xml_node& node) const
+bool SceneManager::SaveState(pugi::xml_node node)
 {
     bool ret = true;
+
+    // Save the current scene name
+    pugi::xml_node sceneNode = node.append_child("currentScene");
+
+    // Check if the current scene is "mainmenu"
+    if (strcmp(currentScene->name.GetString(), "mainmenu") == 0) {
+        // If it is, save "tutorialscene" instead
+        sceneNode.append_attribute("name").set_value("tutorialscene");
+        LOG("Saving current scene: tutorialscene");
+    } else {
+        // If it's not, save the actual current scene name
+        sceneNode.append_attribute("name").set_value(currentScene->name.GetString());
+        LOG("Saving current scene: %s", currentScene->name.GetString());
+    }
 
     ret = currentScene->SaveState(node);
 
