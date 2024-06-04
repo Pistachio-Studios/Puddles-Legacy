@@ -108,33 +108,6 @@ bool Render::Update(float dt)
 
 	cameraInterpolation(camera.target, camera.lerpSpeed, dt, camera.offset);
 
-	return true;
-}
-
-void Render::DrawImGui()
-{
-	if(app->debugUI->renderInfo)
-	{
-		ImGui::Begin("Render", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-		ImGui::Text("Camera Position:"); ImGui::SameLine();
-		ImGui::DragInt2("##Camera Position", &camera.x, 1.0f);
-
-		ImGui::Checkbox("Camera Interpolation", &camera.useInterpolation);
-
-		ImGui::Text("camera lerp speed: %f", camera.lerpSpeed);
-		ImGui::SliderFloat("Camera Lerp Speed", &camera.lerpSpeed, 0.0f, 16.0f);
-		ImGui::Text("camera target: %s", camera.target != nullptr ? camera.target->name.GetString() : "null");
-		ImGui::Text("Vsync: %s", vsyncEnabled ? "Enabled" : "Disabled");
-		
-		ImGui::End();
-	}
-}
-
-bool Render::PostUpdate()
-{
-	// OPTICK PROFILIN
-	ZoneScoped;
-
 	// Sort and draw all sprites
 	std::sort(sprites.begin(), sprites.end(),
 	[](Sprite a, Sprite b)
@@ -161,6 +134,33 @@ bool Render::PostUpdate()
 	}
 
 	sprites.clear();
+
+	return true;
+}
+
+void Render::DrawImGui()
+{
+	if(app->debugUI->renderInfo)
+	{
+		ImGui::Begin("Render", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::Text("Camera Position:"); ImGui::SameLine();
+		ImGui::DragInt2("##Camera Position", &camera.x, 1.0f);
+
+		ImGui::Checkbox("Camera Interpolation", &camera.useInterpolation);
+
+		ImGui::Text("camera lerp speed: %f", camera.lerpSpeed);
+		ImGui::SliderFloat("Camera Lerp Speed", &camera.lerpSpeed, 0.0f, 16.0f);
+		ImGui::Text("camera target: %s", camera.target != nullptr ? camera.target->name.GetString() : "null");
+		ImGui::Text("Vsync: %s", vsyncEnabled ? "Enabled" : "Disabled");
+		
+		ImGui::End();
+	}
+}
+
+bool Render::PostUpdate()
+{
+	// OPTICK PROFILIN
+	ZoneScoped;
 
 	SetViewPort({
 		0,
