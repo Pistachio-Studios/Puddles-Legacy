@@ -135,6 +135,33 @@ bool Render::PostUpdate()
 	// OPTICK PROFILIN
 	ZoneScoped;
 
+	// Sort and draw all sprites
+	std::sort(sprites.begin(), sprites.end(),
+	[](Sprite a, Sprite b)
+	{
+		if(a.layer <= b.layer)
+		{
+			if(a.pivot.y <= b.pivot.y)
+			{
+				return true;
+			} else
+			{
+				return false;
+			}
+		}else
+		{
+			return false;
+		}
+	}
+	);
+	
+	for(Sprite s : sprites)
+	{
+		DrawSprite(s);
+	}
+
+	sprites.clear();
+
 	SetViewPort({
 		0,
 		0,
@@ -209,46 +236,13 @@ void Render::cameraInterpolation(Entity* target, float lerpSpeed, float dt, iPoi
 }
 
 // Blit to screen
-bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, float size, SDL_RendererFlip flip, int pivotX, int pivotY) const
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, float size, uint layer, SDL_RendererFlip flip, int pivotX, int pivotY)
 {
 	bool ret = true;
-	uint scale = app->win->GetScale();
 
-	SDL_Rect rect;
-	rect.x = ((int)(camera.x * speed) + x) * scale;
-	rect.y = ((int)(camera.y * speed) + y) * scale;
+	Sprite sprite = Sprite(texture, x, y, (SDL_Rect*)section, speed, angle, size, layer, flip, pivotX, pivotY);
 
-	if(section != NULL)
-	{
-		rect.w = section->w;
-		rect.h = section->h;
-	}
-	else
-	{
-		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-	}
-
-	rect.w *= size;
-	rect.h *= size;
-
-	rect.w *= scale;
-	rect.h *= scale;
-
-	SDL_Point* p = NULL;
-	SDL_Point pivot;
-
-	if(pivotX != INT_MAX && pivotY != INT_MAX)
-	{
-		pivot.x = pivotX;
-		pivot.y = pivotY;
-		p = &pivot;
-	}
-
-	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
-	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
-		ret = false;
-	}
+	sprites.push_back(sprite);
 
 	return ret;
 }
@@ -404,4 +398,58 @@ void Render::SetVsync(bool vsync)
 		// TODO Handle error
 		LOG("Error loading config.xml");
 	}
+}
+bool Render::DrawSprite(Sprite &sprite) const
+{
+	SDL_Texture* texture = sprite.texture;
+	int x = sprite.position.x;
+	int y = sprite.position.y;
+	const SDL_Rect* section = sprite.section;
+	float speed = sprite.speed;
+	double angle = sprite.angle;
+	float size = sprite.size;
+	SDL_RendererFlip flip = sprite.flip;
+	int pivotX = sprite.pivotX;
+	int pivotY = sprite.pivotY;
+
+	bool ret = true;
+	uint scale = app->win->GetScale();
+
+	SDL_Rect rect;
+	rect.x = ((int)(camera.x * speed) + x) * scale;
+	rect.y = ((int)(camera.y * speed) + y) * scale;
+
+	if(section != NULL)
+	{
+		rect.w = section->w;
+		rect.h = section->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	}
+
+	rect.w *= size;
+	rect.h *= size;
+
+	rect.w *= scale;
+	rect.h *= scale;
+
+	SDL_Point* p = NULL;
+	SDL_Point pivot;
+
+	if(pivotX != INT_MAX && pivotY != INT_MAX)
+	{
+		pivot.x = pivotX;
+		pivot.y = pivotY;
+		p = &pivot;
+	}
+
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
+	{
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
 }
