@@ -2,9 +2,9 @@
 #include "Gameplay/TeamLogo.h"
 #include "Core/SceneManager.h"
 #include "Core/Window.h"
-#include "Core/Audio.h"
 #include "Gameplay/TeamLogo.h"
 #include "Core/Textures.h"
+#include "Core/Audio.h"
 #include "Core/Render.h"
 #include "Core/VideoPlayer.h"
 
@@ -27,7 +27,9 @@ bool TeamLogo::Enter()
 	//texture = app->tex->Load(parameters.attribute("texturepath").as_string());
 
 	// Load the intro video
-	app->videoPlayer->ChangeVideo("Assets/Video/Logo/Logo-pistachio.mp4");
+	app->videoPlayer->Start("Assets/Video/Logo/Logo-pistachio.mp4");
+
+	logoFx = app->audio->LoadFx(parameters.attribute("logoFxPath").as_string());
 
 	return true;
 }
@@ -54,6 +56,11 @@ bool TeamLogo::Update(float dt)
 		LOG("timer teamlogo %d", timer->ReadSec());
 		app->sceneManager->ChangeScene("mainmenu");
 	}*/
+
+	if (hasStarted) {
+		app->audio->PlayFx(logoFx);
+		hasStarted = false;
+	}
 
 	//Check if video ended revisar
 	if (app->videoPlayer->ConvertPixels(0, 1)) {

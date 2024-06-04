@@ -28,7 +28,7 @@
 	</dialog_manager>
 	<animation_manager path="Assets/Animations/" name2="Animations.tmx" />
 	<scene_manager startScene="teamlogo">
-		<teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG" />
+		<teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG" logoFxPath="Assets/Audio/Others/logoFx.ogg"/>
 		<mainmenu>
 			<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png" FxPath="Assets/Audio/Fx/UI/UIButton.ogg"/>
 		</mainmenu>

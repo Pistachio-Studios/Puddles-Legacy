@@ -64,6 +64,8 @@ private:
 
 	bool paused = false;
 	bool exitPressed = false;
+	bool comesFromForest = false;
+	bool comesFromTavern = false;
 
 	Timer* playingTime;
 };

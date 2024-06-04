@@ -22,9 +22,6 @@ bool VideoPlayer::Awake(pugi::xml_node& config)
 
 bool VideoPlayer::Start(const char* file)
 {
-    // File path of the video to be played
-    //const char* file =  "Assets/Video/Logo/Logo-pistachio.mp4";
-    //const char* file1 = "Assets/Video/Intro/example.mp4";
 
     // Allocate memory for the format context
     formatContext = avformat_alloc_context();
@@ -65,17 +62,6 @@ bool VideoPlayer::Start(const char* file)
     // Set the module state to running
     running = true;
     return true;
-}
-
-bool VideoPlayer::ChangeVideo(const char* newFile)
-{
-    LOG("Changing video to %s", newFile);
-    //Detener reproduccion actual y limpar recursos
-    running = false;
-    CleanUp();
-
-    //Iniciar el nuevo video
-    return Start(newFile);
 }
 
 bool VideoPlayer::OpenCodecContext(int* index)
