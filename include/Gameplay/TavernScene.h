@@ -51,6 +51,16 @@ private:
 	SDL_Texture* img;
 	SDL_Texture* cauldronTex;
 	SDL_Texture* cauldronSelectTex;
+	SDL_Texture* CeleritaPotionTex;
+	SDL_Texture* VitaPotionTex;
+	SDL_Texture* EtherPotionTex;
+	SDL_Texture* OblitiusPotionTex;
+
+	SDL_Texture* NotCeleritaPotionTex;
+	SDL_Texture* NotVitaPotionTex;
+	SDL_Texture* NotEtherPotionTex;
+	SDL_Texture* NotOblitiusPotionTex;
+
 	SDL_Texture* prueba;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
@@ -73,12 +83,24 @@ private:
 	GuiControlPopUp* cauldron = nullptr;
 	GuiControlPopUp* cauldronSelect = nullptr;
 
+	GuiControlPopUp* CrafteableCeleritaPotion = nullptr;
+	GuiControlPopUp* CrafteableVitaPotion = nullptr;
+	GuiControlPopUp* CrafteableEtherPotion = nullptr;
+	GuiControlPopUp* CrafteableOblitiusPotion = nullptr;
+
+	GuiControlPopUp* NotCrafteableCeleritaPotion = nullptr;
+	GuiControlPopUp* NotCrafteableVitaPotion = nullptr;
+	GuiControlPopUp* NotCrafteableEtherPotion = nullptr;
+	GuiControlPopUp* NotCrafteableOblitiusPotion = nullptr;
+
 	bool paused = false;
 	bool exitPressed = false;
 	bool selectExitPressed = false;
 	bool cauldronExitPressed = false;
 	bool cauldronCreatePressed = false;
 	bool potionCreatePressed = false;
+
+	int type = 1;
 
 	Timer* playingTime;
 };

@@ -106,6 +106,18 @@ bool TavernScene::Enter()
 	cauldronTex = app->tex->Load("Assets/Textures/Potions/Cauldron/Cauldron.png");
 	cauldronSelectTex = app->tex->Load("Assets/Textures/Potions/Cauldron/CauldronSelect.png");
 
+	CeleritaPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/CrafteableCeleritaPotion.png");
+	NotCeleritaPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/NotCrafteableCeleritaPotion.png");
+
+	EtherPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/CrafteableEtherPotion.png");
+	NotEtherPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/NotCrafteableEtherPotion.png");
+
+	VitaPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/CrafteableVitaPotion.png");
+	NotVitaPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/NotCrafteableVitaPotion.png");
+
+	OblitiusPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/CrafteableOblitiusPotion.png");
+	NotOblitiusPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/NotCrafteableOblitiusPotion.png");
+
 	return true;
 }
 
@@ -161,19 +173,40 @@ bool TavernScene::Update(float dt)
 			potionCreateButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Accept", { (int)windowW / 2 - 100, (int)windowH / 2 + 300, 200, 50 }, this);
 			
 			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
-
+				//TODO: NO ENTRA EN ESTE IF POR LA CARA
+				if (type >= 1 && type <= 4) {
+					type++;
+				}
 			}
+			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && cauldronSelect != nullptr) {
+				if (type >= 1 && type <= 4) {
+					type--;
+				}
+			}
+
+			switch (type) {
+			case 1:
+				CrafteableCeleritaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, CeleritaPotionTex);
+				app->guiManager->RemoveGuiControl(NotCrafteableCeleritaPotion);
+				break;
+			case 2:
+				app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion);
+				NotCrafteableCeleritaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, NotCeleritaPotionTex);
+				break;
+			
+			}
+
 			cauldronCreatePressed = false;
 		}
+		
 		if (potionCreatePressed && cauldronSelect != nullptr) {
-			
 			potionCreatePressed = false;
-			
 		}
 		if (selectExitPressed && cauldronSelect != nullptr) {
 			app->guiManager->RemoveGuiControl(cauldronSelectExit);
 			app->guiManager->RemoveGuiControl(cauldronSelect);
 			app->guiManager->RemoveGuiControl(potionCreateButton);
+			app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion);
 			cauldronSelect = nullptr;
 			selectExitPressed = false;
 		}
@@ -183,7 +216,6 @@ bool TavernScene::Update(float dt)
 	if (app->entityManager->GetPlayerEntity()->position.x <= 1390 && app->entityManager->GetPlayerEntity()->position.x >= 1150 && app->entityManager->GetPlayerEntity()->position.y <= 3835 && app->entityManager->GetPlayerEntity()->position.y >= 3670) {
 		app->sceneManager->ChangeScene("townscene");
 	}
-
 
 	return true;
 }
