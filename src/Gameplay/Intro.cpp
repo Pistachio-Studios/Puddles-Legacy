@@ -42,6 +42,11 @@ bool Intro::Update(float dt)
 	// OPTICK PROFILIN
 	ZoneScoped;
 
+	//Check if video ended revisar
+	if (app->videoPlayer->ConvertPixels(0, 1)) {
+		app->sceneManager->ChangeScene("mainmenu");
+	}
+
 	return true;
 }
 
