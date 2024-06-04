@@ -27,7 +27,7 @@ bool TeamLogo::Enter()
 	//texture = app->tex->Load(parameters.attribute("texturepath").as_string());
 
 	// Load the intro video
-	app->videoPlayer->ChangeVideo("Assets/Video/Logo/Logo-pistachio.mp4");
+	app->videoPlayer->Start("Assets/Video/Logo/Logo-pistachio.mp4");
 
 	logoFx = app->audio->LoadFx(parameters.attribute("logoFxPath").as_string());
 
