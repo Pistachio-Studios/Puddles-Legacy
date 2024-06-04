@@ -158,27 +158,26 @@ bool TavernScene::Update(float dt)
 		if (cauldronCreatePressed && cauldronSelect == nullptr) {
 			cauldronSelect = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronSelectTex);
 			cauldronSelectExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
-			potionCreateButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Accept", { (int)windowW / 2 - 100, (int)windowH / 2 + 300, 200, 50 }, this);
-			
-			cauldronCreatePressed = false;
+			potionCreateButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Accept", { (int)windowW / 2 - 100, (int)windowH / 2 + 300, 200, 50 }, this);
 			
 			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
 
 			}
+			cauldronCreatePressed = false;
 		}
-		if (potionCreatePressed) {
-			app->guiManager->RemoveGuiControl(potionCreateButton);
+		if (potionCreatePressed && cauldronSelect != nullptr) {
+			
 			potionCreatePressed = false;
-			cauldronSelect = nullptr;
+			
 		}
 		if (selectExitPressed && cauldronSelect != nullptr) {
 			app->guiManager->RemoveGuiControl(cauldronSelectExit);
 			app->guiManager->RemoveGuiControl(cauldronSelect);
-			//cauldronSelect = nullptr;
+			app->guiManager->RemoveGuiControl(potionCreateButton);
+			cauldronSelect = nullptr;
 			selectExitPressed = false;
 		}
 	}
-	
 
 	//Cambios de escena sin collider
 	if (app->entityManager->GetPlayerEntity()->position.x <= 1390 && app->entityManager->GetPlayerEntity()->position.x >= 1150 && app->entityManager->GetPlayerEntity()->position.y <= 3835 && app->entityManager->GetPlayerEntity()->position.y >= 3670) {
@@ -290,7 +289,7 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 12:
 		selectExitPressed = true;
 		break;
-	case 13:
+	case 15:
 		potionCreatePressed = true;
 		break;
 	case 10:
