@@ -218,6 +218,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				playerHurtCultdown.Start();
 			}
 		break;
+	case ColliderType::BULLET:
+		vida -= 2.0f;
+		break;
 	}
 
 	

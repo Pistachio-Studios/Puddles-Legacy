@@ -28,11 +28,11 @@ public:
         player = app->entityManager->GetPlayerEntity();
 
         //Animation
-        app->render->DrawTexture(minispider->spiderAttack.texture, minispider->position.x - 50, minispider->position.y - 75, &minispider->spiderAttack.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, 0.5f, minispider->flip);
+        app->render->DrawTexture(minispider->spiderAttack.texture, minispider->position.x - 60, minispider->position.y - 60, &minispider->spiderAttack.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, 0.5f, minispider->flip);
         minispider->spiderAttack.Update(dt);
 
         //Attack
-        if (minispider->spiderAttack.GetCurrentFrameCount() == 5 && PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 2.0f) {
+        if (minispider->spiderAttack.GetCurrentFrameCount() == 5 && minispider->isTouchingPlayer) {
             player->vida -= minispider->dano;
         }
 

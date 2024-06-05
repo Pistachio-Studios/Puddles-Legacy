@@ -57,7 +57,7 @@ bool MiniSpider::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 128, 128, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 90, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
@@ -201,7 +201,6 @@ void MiniSpider::moveToSpawnPoint()
 }
 
 bool MiniSpider::CleanUp() {
-
 	app->tex->UnLoad(texture);
 	app->physics->DestroyBody(pbody);
 
@@ -236,6 +235,22 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 
 	case ColliderType::PLAYER:
+		isTouchingPlayer = true;
+		break;
+
+	case ColliderType::MAGIC:
+		vida -= player->dano;
+		if (vida <= 0.0f)
+		{
+			// AUDIO DONE boss death
+			app->audio->PlayFx(dieFx);
+			movementFSM->ChangeState("die");
+		}
+		else if (vida > 0.0f) {
+			app->audio->PlayFx(damageFx);
+			spiderDamage.Reset();
+			movementFSM->ChangeState("hurt");
+		}
 		break;
 
 	case ColliderType::UNKNOWN:
@@ -246,8 +261,8 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 void MiniSpider::EndCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype) {
-
 	case ColliderType::PLAYER:
+		isTouchingPlayer = false;
 		break;
 	}
 }
