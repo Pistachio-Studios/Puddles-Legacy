@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background: linear-gradient(135deg, #141A41, #2E4980, #643C99); /* Fondo gradiente de azul oscuro a azul claro a morado */
-    color: #EDEDED; /* Color de texto gris claro */
+    color: black; /* Color de texto gris claro */
 }
 
 header {
