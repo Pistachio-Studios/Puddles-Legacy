@@ -59,7 +59,7 @@ bool EnemyBoss::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 192, 192, bodyType::DYNAMIC); 
+	pbody = app->physics->CreateRectangle(position.x, position.y, 230, 192, bodyType::DYNAMIC); 
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY; 
 
@@ -92,7 +92,7 @@ bool EnemyBoss::Start() {
 	bossMove.speed = 1.4f;
 
 	bossDamage = *app->animationManager->GetAnimByName("Boss_Spider_Damage");
-	bossDamage.speed = 2.0f;
+	bossDamage.speed = 1.0f;
 
 	bossDeath = *app->animationManager->GetAnimByName("Boss_Spider_Muerte");
 	bossDeath.speed = 1.0f;
@@ -252,12 +252,6 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 			bossDamage.Reset();
 			movementFSM->ChangeState("hurt");
 		}
-		//else {
-		//	// AUDIO DONE boss hit
-		//	app->audio->PlayFx(bossHit);
-		//	movementStateMachine->ChangeState("hurt");
-		//	lives--;
-		//}
 		break;
 
 	case ColliderType::PLAYER:
