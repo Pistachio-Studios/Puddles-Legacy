@@ -25,7 +25,12 @@ GuiControlCheckbox::~GuiControlCheckbox()
 
 bool GuiControlCheckbox::Update(float dt)
 {
-	app->render->DrawText(text.GetString(), bounds.x - 90, bounds.y - 10, 80, 30);
+	int textureWidth, textureHeight;
+	SDL_QueryTexture(texture, NULL, NULL, &textureWidth, &textureHeight);
+	int textureSelectedWidth, textureSelectedHeight;
+	SDL_QueryTexture(textureSelected, NULL, NULL, &textureSelectedWidth, &textureSelectedHeight);
+
+	app->render->DrawText(text.GetString(), bounds.x - 90, bounds.y - 10, 80, 30); // Keep text at original position
 	if (state != GuiControlState::DISABLED)
 	{
 		app->input->GetMousePosition(mouseX, mouseY);
@@ -40,17 +45,13 @@ bool GuiControlCheckbox::Update(float dt)
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
-			//app->render->DrawRectangle({bounds.x + 550, bounds.y, bounds.w, bounds.h}, 255, 255, 255, 255, true, false);
-			app->render->DrawTexture(texture, bounds.x + 550, bounds.y);
+			app->render->DrawTexture(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
 			break;
 		case GuiControlState::NORMAL:
 		case GuiControlState::PRESSED:
-			//app->render->DrawRectangle({bounds.x + 550, bounds.y, bounds.w, bounds.h}, 255, 255, 255, 255, true, false);
-			app->render->DrawTexture(texture, bounds.x + 550, bounds.y);
+			app->render->DrawTexture(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
 			if (checked) {
-				// Draw a checkmark or some other indicator when the checkbox is checked
-				//app->render->DrawRectangle({bounds.x + 555, bounds.y + 5, bounds.w - 10, bounds.h - 10}, 0, 0, 0, 255, true, false);
-				app->render->DrawTexture(textureSelected, bounds.x + 550, bounds.y);
+				app->render->DrawTexture(textureSelected, bounds.x + bounds.w / 2 - textureSelectedWidth / 2 + 550, bounds.y + bounds.h / 2 - textureSelectedHeight / 2);
 			}
 			break;
 		}

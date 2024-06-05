@@ -3,6 +3,7 @@
 #include "Core/Audio.h"
 #include "Core/Window.h"
 #include "Core/GuiControlSlider.h"
+#include "Core/Textures.h"
 
 GuiControlSlider::GuiControlSlider(uint32 id, const char* text, SDL_Rect bounds, int minValue, int maxValue) : GuiControl(GuiControlType::SLIDER, id), minValue(minValue), maxValue(maxValue)
 {
@@ -14,6 +15,9 @@ GuiControlSlider::GuiControlSlider(uint32 id, const char* text, SDL_Rect bounds,
 
 	currentPos = bounds.x;
 	currentValue = minValue;
+
+	texture = app->tex->Load("Assets/UI/Slider/slider.png");		// Line from the slider
+	textureSelected = app->tex->Load("Assets/UI/Slider/slide.png");	// Slider object that moves
 }
 
 GuiControlSlider::~GuiControlSlider()
@@ -23,20 +27,24 @@ GuiControlSlider::~GuiControlSlider()
 
 bool GuiControlSlider::Update(float dt)
 {
-	app->render->DrawText(text.GetString(), bounds.x - 90, bounds.y - 10, 80, 30);
+	int textureWidth, textureHeight;
+	SDL_QueryTexture(texture, NULL, NULL, &textureWidth, &textureHeight);
+	int textureSelectedWidth, textureSelectedHeight;
+	SDL_QueryTexture(textureSelected, NULL, NULL, &textureSelectedWidth, &textureSelectedHeight);
+
+	app->render->DrawText(text.GetString(), bounds.x - 90, bounds.y - 10, 80, 30); // Add offset to text
 	if (state != GuiControlState::DISABLED)
 	{
-		// L15: DONE 3: Update the state of the GUiButton according to the mouse position
 		app->input->GetMousePosition(mouseX, mouseY);
-		rect2 = { currentPos, bounds.y - 5, bounds.w - 100, bounds.h + 10 };
-		//If the position of the mouse is inside the bounds of the button 
-		if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
+		rect2 = { currentPos - textureSelectedWidth / 2 + 550, bounds.y + bounds.h / 2 - textureSelectedHeight / 2 };
+
+		if (mouseX > bounds.x + 550 && mouseX < bounds.x + bounds.w + 550 && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
 
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
 				isPressed = true;
-				currentValue = int(((maxValue - minValue) * ((mouseX - bounds.x) / float(bounds.w))) + minValue);
-				currentPos = mouseX;
-				rect2 = { mouseX, bounds.y - 5, bounds.w - 100, bounds.h + 10 };
+				currentValue = int(((maxValue - minValue) * ((mouseX - (bounds.x + 550)) / float(bounds.w))) + minValue);
+				currentPos = mouseX - 550; // Subtract the offset when updating currentPos
+				rect2 = { currentPos - textureSelectedWidth / 2 + 550, bounds.y + bounds.h / 2 - textureSelectedHeight / 2 };
 				state = GuiControlState::PRESSED;
 			}
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
@@ -47,30 +55,25 @@ bool GuiControlSlider::Update(float dt)
 		else {
 			isPressed = false;
 			state = GuiControlState::NORMAL;
-
 		}
 
-		//L15: DONE 4: Draw the button according the GuiControl State
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
-			app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
-			app->render->DrawRectangle(rect2, 200, 200, 200, 255, true, false);
+			app->render->DrawTexture(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
+			app->render->DrawTexture(textureSelected, rect2.x, rect2.y);
 			break;
 		case GuiControlState::NORMAL:
-			app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
-			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60, bounds.y, bounds.w, bounds.h);
-			app->render->DrawRectangle(rect2, 0, 0, 0, 255, true, false);
+			app->render->DrawTexture(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
+			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60 + 550, bounds.y, bounds.w, bounds.h); // Add offset to text
+			app->render->DrawTexture(textureSelected, rect2.x, rect2.y);
 			break;
 		case GuiControlState::PRESSED:
-			app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
-			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60, bounds.y, bounds.w, bounds.h);
-			app->render->DrawRectangle(rect2, 255, 128, 0, 255, true, false);
+			app->render->DrawTexture(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
+			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60 + 550, bounds.y, bounds.w, bounds.h); // Add offset to text
+			app->render->DrawTexture(textureSelected, rect2.x, rect2.y);
 			break;
 		}
-
-		//app->render->DrawText(text.GetString(), bounds.x + 5, bounds.y + 2, bounds.w - 10, bounds.h - 3);
-
 	}
 
 	return false;
