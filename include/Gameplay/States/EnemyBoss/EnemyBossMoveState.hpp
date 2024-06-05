@@ -32,7 +32,7 @@ public:
         player = app->entityManager->GetPlayerEntity();
 
         enemyboss->pathfindingMovement(dt);
-        if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 3.0f) {
+        if (enemyboss->isTouchingPlayer) {
             if (enemyboss->attackTimer.ReadSec() >= 2)
             {
                 enemyboss->bossBodyAttack.Reset();

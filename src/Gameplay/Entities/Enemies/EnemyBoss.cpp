@@ -329,7 +329,7 @@ void EnemyBoss::shootBullet()
 	for (int i = 0; i < 10; i++) {
 		if (!bulletArray[i]->active) {
 			bulletArray[i]->position = position;
-			bulletArray[i]->Shoot(calculateForce());
+			bulletArray[i]->Shoot(calculateForce(),flip);
 			break;
 		}
 	}

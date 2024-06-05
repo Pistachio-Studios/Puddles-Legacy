@@ -14,7 +14,7 @@ Bullet::Bullet() {
 	timer = new Timer();
 }
 
-void Bullet::Shoot(b2Vec2 force) {
+void Bullet::Shoot(b2Vec2 force, SDL_RendererFlip flip) {
 	active = true;
 	timer->Start();
 
@@ -22,7 +22,12 @@ void Bullet::Shoot(b2Vec2 force) {
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
 	pbody->body->GetFixtureList()->SetSensor(true);
-	pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
+	if (flip == SDL_FLIP_NONE) {
+		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x+5) , PIXEL_TO_METERS(position.y+2) ), 0);
+	}
+	else {
+		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y+2)), 0);
+	}
 
 	pbody->body->ApplyForceToCenter(b2Vec2(force.x * 100, force.y * 100), true);
 }
