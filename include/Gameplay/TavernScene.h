@@ -77,6 +77,7 @@ private:
 	GuiControlButton* gcSettings;
 	GuiControlButton* gcBackToTitle;
 	GuiControlButton* gcExit;
+	GuiControlButton* cauldronOpen;
 
 	GuiControlButton* cauldronSelectExit;
 	GuiControlButton* cauldronExit;
@@ -101,6 +102,7 @@ private:
 	bool cauldronExitPressed = false;
 	bool cauldronCreatePressed = false;
 	bool potionCreatePressed = false;
+	bool cauldronIsOpened = false;
 
 	int type = 1;
 

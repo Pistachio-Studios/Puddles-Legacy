@@ -103,6 +103,10 @@ bool TavernScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
+	cauldronOpen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "Open", { 500, 600, 150, 50 }, this);
+	cauldronOpen->SetObserver(this);
+	cauldronOpen->state = GuiControlState::DISABLED; 
+
 	cauldronTex = app->tex->Load("Assets/Textures/Potions/Cauldron/Cauldron.png");
 	cauldronSelectTex = app->tex->Load("Assets/Textures/Potions/Cauldron/CauldronSelect.png");
 
@@ -155,7 +159,7 @@ bool TavernScene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && cauldron == nullptr) {
+	if (cauldronIsOpened && cauldron == nullptr) {
 		cauldron = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronTex);
 		cauldronExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
 		cauldronCreate = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Create", { (int)windowW / 2 + 320, (int)windowH / 2 + 350, 200, 50 }, this);
@@ -178,6 +182,7 @@ bool TavernScene::Update(float dt)
 			app->guiManager->RemoveGuiControl(cauldronExit);
 			app->guiManager->RemoveGuiControl(cauldron);
 			cauldronExitPressed = false;
+			cauldronIsOpened = false;
 			cauldron = nullptr;
 		}
 
@@ -291,9 +296,10 @@ bool TavernScene::Update(float dt)
 			app->guiManager->RemoveGuiControl(CrafteableOblitiusPotion);
 			CrafteableOblitiusPotion = nullptr;
 				
-
+			cauldronIsOpened = false;
 			cauldronSelect = nullptr; 
 			selectExitPressed = false; 
+			
 		}
 
 		
@@ -336,7 +342,7 @@ bool TavernScene::PostUpdate()
 			gcSave->state = GuiControlState::DISABLED;
 		}
 	}
-
+	cauldronOpen->state = GuiControlState::NORMAL;  
 	if(exitPressed)
 		ret = false;
 
@@ -399,6 +405,9 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 9:
 		exitPressed = true;
 	break;
+	case 16:
+		cauldronIsOpened = true;
+		break;
 	case 14:
 		if(cauldronSelect == nullptr) cauldronExitPressed = true;
 		break;

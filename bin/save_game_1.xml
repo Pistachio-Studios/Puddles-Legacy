@@ -11,7 +11,7 @@
 	<:anonymous />
 	<animation_manager />
 	<entitymanager>
-		<player x="1214" y="3470" />
+		<player x="635" y="718" />
 	</entitymanager>
 	<particleManager />
 	<lighting />
@@ -22,6 +22,6 @@
 	<questmanager />
 	<UI />
 	<renderer>
-		<camera x="-257" y="-2946" />
+		<camera x="309" y="-180" />
 	</renderer>
 </game_state>
