@@ -15,7 +15,7 @@ Cositas
 
 ### Development
 
-- [@LadyRacoonDev](https://github.com/LazyRacoonDev) (Hugo Castaño Cuéllar)
+- [@LazyRacoonDev](https://github.com/LazyRacoonDev) (Hugo Castaño Cuéllar)
 - [@mdoradom](https://www.github.com/mdoradom) (Mario Dorado Martínez)
 - [@Becca203](https://github.com/Becca203) (Rebeca Fernández López)
 - [@martagnarta](https://www.github.com/martagnarta) (Marta Jover Valero)
