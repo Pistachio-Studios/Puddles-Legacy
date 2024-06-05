@@ -25,6 +25,9 @@
   <image source="ArbolSagrado_ZonaFinal.png" width="4320" height="5760"/>
  </tileset>
  <layer id="1" name="Base_Hierba" width="285" height="130">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile gid="2200"/>
    <tile gid="2200"/>
@@ -37079,6 +37082,9 @@
   </data>
  </layer>
  <layer id="9" name="Hierbajos" width="285" height="130">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -74133,6 +74139,9 @@
   </data>
  </layer>
  <layer id="8" name="plantitas" width="285" height="130">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -111187,6 +111196,9 @@
   </data>
  </layer>
  <layer id="5" name="Assets" width="285" height="130">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -148241,6 +148253,9 @@
   </data>
  </layer>
  <layer id="6" name="Caminos" width="285" height="130">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -185295,6 +185310,9 @@
   </data>
  </layer>
  <layer id="4" name="Bordes_Mapa" width="285" height="130">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile gid="2765"/>
    <tile gid="2765"/>
@@ -222349,6 +222367,9 @@
   </data>
  </layer>
  <layer id="11" name="Colliders" width="285" height="130">
+  <properties>
+   <property name="Draw" type="bool" value="false"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
