@@ -42,6 +42,14 @@
 			<map path="Assets/Maps/Mapa_Nivel/" name="bosque.tmx" />
 			<camera x="-32545" y="-4610" />
 			<player x="33536" y="5248" texturepath="Assets/Textures/Player.png" />
+			<assets>
+				<button x=" 3840" y ="5632"/>
+				<button x=" 3840" y ="4992"/>
+				<button x=" 4864" y ="4480"/>
+				<button x=" 5504" y ="5504"/>
+				<button x=" 4352" y ="6016"/>
+				<button x=" 5376" y ="4736"/>
+			</assets>
 			<enemies />
 		</forestscene>
 		<townscene>

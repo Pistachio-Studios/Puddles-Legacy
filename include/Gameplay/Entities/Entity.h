@@ -24,6 +24,7 @@ enum class EntityType
 	POTION,
 	ITEM,
 	BULLET,
+	BUTTON,
 	UNKNOWN
 };
 

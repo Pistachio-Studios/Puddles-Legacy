@@ -9,6 +9,7 @@
 #include "Gameplay/Scene.h"
 
 struct SDL_Texture;
+class Button;
 
 class ForestScene : public Scene
 {
@@ -47,7 +48,6 @@ public:
 	Player* player;
 
 private:
-	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
@@ -66,6 +66,14 @@ private:
 	bool exitPressed = false;
 
 	Timer* playingTime;
+
+	Button* buttonList[6];
+
+	PhysBody* bushPbody;
+	SDL_Texture* bush = nullptr;
+	bool door1Closed = false;
+	bool puzzle1 = false;
+
 };
 
 #endif // __FORESTSCENE_H__

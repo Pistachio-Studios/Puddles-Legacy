@@ -1,6 +1,7 @@
 #include "Core/App.h"
 #include "Core/Input.h"
 #include "Core/Render.h"
+#include "Core/Textures.h"
 #include "Core/Window.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
@@ -10,6 +11,7 @@
 #include "Gameplay/Entities/Npcs/Loco.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
+#include "Gameplay/Entities/Items/Button.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Utils/SString.h"
 #include "Utils/Timer.h"
@@ -108,7 +110,19 @@ bool ForestScene::Enter()
 			player->inventory.AddItem("Oblitius Potion");
 	}
 
-	
+	pugi::xml_node assetsNode = parameters.child("assets");
+
+	pugi::xml_node buttonNode = assetsNode.child("button");
+
+	for (int i = 0; buttonNode && i < 6; ++i) {
+		buttonList[i] = new Button();
+		app->entityManager->AddEntity(buttonList[i]);
+		buttonList[i]->parameters = buttonNode;
+		buttonList[i]->Enable();
+		buttonNode = buttonNode.next_sibling("button");
+
+	}
+
 	for (pugi::xml_node plantNode = parameters.child("Plants").first_child(); plantNode; plantNode = plantNode.next_sibling())
 	{
 		std::string plantType = plantNode.name();
@@ -177,6 +191,8 @@ bool ForestScene::Enter()
 	//PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
 	//changeTown->ctype = ColliderType::CHANGESCENE;
 	//changeTown->listener = player;
+
+	bush = app->tex->Load("Assets/Maps/Mapa_Nivel/bush.PNG");
 
 	return true;
 }
@@ -267,6 +283,42 @@ bool ForestScene::Update(float dt)
 		player->pbody->body->SetTransform({ 673,295 }, 0);
 	}
 
+	//puzzle1
+	if (player->position.y > 4350 && player->position.x > 3776 && player->position.x < 4297 && !door1Closed && !puzzle1) {
+		door1Closed = true;
+		bushPbody = app->physics->CreateRectangle(3860, 3968, 1022, 645, bodyType::STATIC);
+		bushPbody->ctype = ColliderType::LIMITS;
+		int i= 4297;	
+		/*if(i > 3776)
+		{
+			app->render->DrawTexture(bush, i-1, 4000, 0, 1.0f);
+		}*/
+	}
+
+	//LOG("x: %i   y: %i", player->position.x, player->position.y);
+
+	if (door1Closed) {
+		app->render->DrawTexture(bush, player->position.x, 4000, 0, 1.0f);
+	}
+
+	if (buttonList[0]->pisada && buttonList[1]->pisada && buttonList[2]->pisada && buttonList[3]->pisada && door1Closed && !puzzle1) {
+		puzzle1 = true;
+		door1Closed = false;
+		int i = 3776;
+		/*if (i < 4297)
+		{
+			app->render->DrawTexture(bush, i + 1, 4000, 0, 1.0f);
+		}*/
+		app->physics->DestroyBody(bushPbody);
+	}
+
+	if ((buttonList[4]->pisada || buttonList[5]->pisada)&&!puzzle1) {
+		for (int i = 0; i < 6; i++)
+		{
+			buttonList[i]->pisada = false;
+		}
+	}
+
 	return true;
 }
 
@@ -335,6 +387,7 @@ bool ForestScene::CleanUp()
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
 	app->guiManager->RemoveGuiControl(gcSave);
+	app->tex->UnLoad(bush);
 
 	return true;
 }
