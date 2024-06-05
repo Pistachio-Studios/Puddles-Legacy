@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #FAD6A5; /* Color del cielo */
+    background: linear-gradient(135deg, #1E2759, #4B7FF4, #8054FF); /* Fondo gradiente de azul oscuro a azul claro a morado */
     color: #333;
 }
 
@@ -30,7 +30,7 @@ h1 {
 
 .btn {
     background: white;
-    color: #645180; /* Color del personaje */
+    color: #8054FF; /* Color morado */
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
@@ -43,7 +43,7 @@ main {
 }
 
 .intro, .project, .authors {
-    background: white;
+    background: #F5F5F5; /* Fondo gris claro */
     padding: 20px;
     margin: 20px 0;
     border-radius: 5px;
@@ -51,7 +51,7 @@ main {
 }
 
 h2, h3 {
-    color: #645180; /* Color del personaje */
+    color: #8054FF; /* Color morado */
 }
 
 ul {
@@ -64,7 +64,7 @@ li {
 }
 
 a {
-    color: #645180; /* Color del personaje */
+    color: #8054FF; /* Color morado */
 }
 
 a:hover {
@@ -78,7 +78,7 @@ a:hover {
 }
 
 .author-card {
-    background: #EBA96E; /* Fondo del cuadro */
+    background: #B196FF; /* Fondo morado claro */
     color: #333; /* Color del texto */
     width: 250px; /* Ancho fijo */
     padding: 20px 20px 40px; /* Ajuste del padding para dar espacio al avatar */
@@ -94,7 +94,7 @@ a:hover {
     top: -40px;
     left: 50%;
     transform: translateX(-50%);
-    background: #FAD6A5; /* Fondo del avatar */
+    background: #F5F5F5; /* Fondo gris claro */
     border-radius: 50%;
     padding: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
