@@ -78,7 +78,7 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
 
-	//TODO fix caminardelanteCetro anim & parpadeos movimiento & overlay idle con ataque
+	//TODO parpadeos movimiento & overlay idle con ataque
 	//Anims
 	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");
 	SabrinaEspadaIdle.speed = 2.0f;
