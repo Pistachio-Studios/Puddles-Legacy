@@ -87,6 +87,7 @@ public:
 	SDL_Color color;        // Tint color
 
 	SDL_Texture* texture = nullptr;   // Texture atlas reference
+	SDL_Texture* textureSelected = nullptr;   // Texture atlas reference
 	SDL_Texture* textureSelectedLeft = nullptr; 
 	SDL_Texture* textureSelectedRight = nullptr;
 	SDL_Rect section;       // Texture atlas base section
