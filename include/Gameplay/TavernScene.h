@@ -61,6 +61,8 @@ private:
 	SDL_Texture* NotEtherPotionTex;
 	SDL_Texture* NotOblitiusPotionTex;
 
+	SDL_Texture* currentPotion;
+
 	SDL_Texture* prueba;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
