@@ -135,7 +135,7 @@ bool TavernScene::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
-
+	
 	if(freeCam)
 	{
 		float camSpeed = 1;
@@ -159,6 +159,19 @@ bool TavernScene::Update(float dt)
 		cauldronCreate = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Create", { (int)windowW / 2 + 320, (int)windowH / 2 + 350, 200, 50 }, this);
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && cauldronSelect != nullptr) {
+		LOG("RIGHT PRESSED");
+		if (type >= 1 && type < 4) {
+			type++;
+		}
+		LOG("TYPE = %d", type);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && cauldronSelect != nullptr) {
+		if (type > 1 && type <= 4) {
+			type--;
+		}
+	}
+
 	if (cauldron != nullptr) {
 		if (cauldronExitPressed) {
 			app->guiManager->RemoveGuiControl(cauldronCreate);
@@ -167,34 +180,11 @@ bool TavernScene::Update(float dt)
 			cauldronExitPressed = false;
 			cauldron = nullptr;
 		}
+
 		if (cauldronCreatePressed && cauldronSelect == nullptr) {
 			cauldronSelect = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronSelectTex);
 			cauldronSelectExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
 			potionCreateButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Accept", { (int)windowW / 2 - 100, (int)windowH / 2 + 300, 200, 50 }, this);
-			
-			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
-				//TODO: NO ENTRA EN ESTE IF POR LA CARA
-				if (type >= 1 && type <= 4) {
-					type++;
-				}
-			}
-			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && cauldronSelect != nullptr) {
-				if (type >= 1 && type <= 4) {
-					type--;
-				}
-			}
-
-			switch (type) {
-			case 1:
-				CrafteableCeleritaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, CeleritaPotionTex);
-				app->guiManager->RemoveGuiControl(NotCrafteableCeleritaPotion);
-				break;
-			case 2:
-				app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion);
-				NotCrafteableCeleritaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, NotCeleritaPotionTex);
-				break;
-			
-			}
 
 			cauldronCreatePressed = false;
 		}
@@ -202,13 +192,75 @@ bool TavernScene::Update(float dt)
 		if (potionCreatePressed && cauldronSelect != nullptr) {
 			potionCreatePressed = false;
 		}
+
+		if (cauldronSelect != nullptr) {
+			switch (type) {
+			case 1:
+				app->guiManager->RemoveGuiControl(CrafteableEtherPotion);
+				app->guiManager->RemoveGuiControl(NotCrafteableEtherPotion);
+				CrafteableCeleritaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, CeleritaPotionTex);
+				/*	if (plantas >= 3) {
+						CrafteableCeleritaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, CeleritaPotionTex);
+					}
+					else {
+						NotCrafteableCeleritaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, NotCeleritaPotionTex);
+					}*/
+				break;
+			case 2:
+				app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion);
+				app->guiManager->RemoveGuiControl(NotCrafteableCeleritaPotion);
+				app->guiManager->RemoveGuiControl(CrafteableVitaPotion);
+				app->guiManager->RemoveGuiControl(NotCrafteableVitaPotion);
+				CrafteableEtherPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, EtherPotionTex);
+				/*if (plantas >= 3) {
+					CrafteableEtherPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, EtherPotionTex);
+				}
+				else {
+					NotCrafteableEtherPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, NotEtherPotionTex);
+				}*/
+				break;
+			case 3:
+				app->guiManager->RemoveGuiControl(CrafteableEtherPotion);
+				app->guiManager->RemoveGuiControl(NotCrafteableEtherPotion);
+				app->guiManager->RemoveGuiControl(CrafteableOblitiusPotion);
+				app->guiManager->RemoveGuiControl(NotCrafteableOblitiusPotion);
+				CrafteableVitaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, VitaPotionTex);
+
+				/*if (plantas >= 3) {
+					CrafteableVitaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, VitaPotionTex);
+				}
+				else {
+					NotCrafteableVitaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, NotVitaPotionTex);
+				}*/
+				break;
+			case 4:
+				app->guiManager->RemoveGuiControl(CrafteableVitaPotion);
+				app->guiManager->RemoveGuiControl(NotCrafteableVitaPotion);
+				CrafteableOblitiusPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, OblitiusPotionTex);
+
+				/*	if (plantas >= 1 && plant >= 1 && plant >= 1) {
+						CrafteableOblitiusPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, OblitiusPotionTex);
+					}
+					else {
+						NotCrafteableOblitiusPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, NotOblitiusPotionTex);
+					}*/
+				break;
+			}
+		}
+
 		if (selectExitPressed && cauldronSelect != nullptr) {
 			app->guiManager->RemoveGuiControl(cauldronSelectExit);
 			app->guiManager->RemoveGuiControl(cauldronSelect);
 			app->guiManager->RemoveGuiControl(potionCreateButton);
-			app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion);
-			cauldronSelect = nullptr;
-			selectExitPressed = false;
+			app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion); 
+			app->guiManager->RemoveGuiControl(CrafteableEtherPotion);
+			app->guiManager->RemoveGuiControl(NotCrafteableEtherPotion);
+			app->guiManager->RemoveGuiControl(CrafteableVitaPotion);
+			app->guiManager->RemoveGuiControl(NotCrafteableVitaPotion);
+			app->guiManager->RemoveGuiControl(CrafteableOblitiusPotion);
+			app->guiManager->RemoveGuiControl(NotCrafteableOblitiusPotion);
+			cauldronSelect = nullptr; 
+			selectExitPressed = false; 
 		}
 	}
 

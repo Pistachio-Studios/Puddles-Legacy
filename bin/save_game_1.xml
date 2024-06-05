@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<game_state>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<:anonymous />
+	<scene_manager>
+		<currentScene name="tavernscene" />
+	</scene_manager>
+	<:anonymous />
+	<animation_manager />
+	<entitymanager>
+		<player x="1214" y="3470" />
+	</entitymanager>
+	<particleManager />
+	<lighting />
+	<guiManager />
+	<VideoPlayer />
+	<debugUI />
+	<dialog_manager />
+	<questmanager />
+	<UI />
+	<renderer>
+		<camera x="-257" y="-2946" />
+	</renderer>
+</game_state>
