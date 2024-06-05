@@ -1,17 +1,24 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0; /* Establece margen cero en la parte superior e inferior */
+    margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #141A41, #2E4980, #643C99); /* Fondo gradiente de azul oscuro a azul claro a morado */
-    color: black; /* Color de texto gris claro */
+    background: linear-gradient(135deg, #141A41, #2E4980, #643C99);
+    color: black;
 }
 
 main {
-    margin-left: 500px; /* Aumenta el margen izquierdo */
-    margin-right: 500px; /* Aumenta el margen derecho */
+    margin-left: 500px;
+    margin-right: 500px;
     padding: 0;
 }
 
+/* Media query para dispositivos con un ancho máximo de 768px */
+@media (max-width: 768px) {
+    main {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
 
 header {
     background-image: url('GameTitle.png');
