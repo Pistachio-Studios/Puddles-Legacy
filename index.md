@@ -13,6 +13,8 @@ Cositas
 
 ## Authors
 
+### Development
+
 - [@LadyRacoonDev](https://github.com/LazyRacoonDev) (Hugo Castaño Cuéllar)
 - [@mdoradom](https://www.github.com/mdoradom) (Mario Dorado Martínez)
 - [@Becca203](https://github.com/Becca203) (Rebeca Fernández López)
@@ -24,6 +26,16 @@ Cositas
 - [@cpugaper](https://github.com/cpugaper) (Carla Puga Pérez)
 - [@nsortsauquillo](https://www.github.com/nsortsauquillo) (Nicolás Sort Sauquillo)
 
+### Artist
+
+- Daria Tuvasheva
+- Teresa Llisó
+- Laia Guinart
+- Camila Pineda
+- Ivet Clofen
+- Patricia Aragón
+- Claudia Polo
+- Carla Yu
 
 ## Puddle's Legacy Trailer
 
