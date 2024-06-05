@@ -222366,7 +222366,7 @@
    <tile gid="2765"/>
   </data>
  </layer>
- <objectgroup color="#55557f" id="12" name="Collisions">
+ <objectgroup color="#55557f" id="12" name="Collisions" class="collisions">
   <properties>
    <property name="objectType" value="collider"/>
   </properties>
@@ -222575,7 +222575,7 @@
   <object id="468" type="rectangle" x="11556.2" y="2712.82" width="183.697" height="229.03"/>
   <object id="470" type="rectangle" x="12432.2" y="1935.49" width="235.697" height="105.03"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="13" name="Limits">
+ <objectgroup color="#aa0000" id="13" name="Limits" class="limits">
   <properties>
    <property name="objectType" value="collider"/>
   </properties>
