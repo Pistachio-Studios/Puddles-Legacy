@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background: linear-gradient(to right, #0f9b0f, #00b4db);
+    background: linear-gradient(to right, #9b0f9b, #db00db);
     color: white;
     text-align: center;
     padding: 50px 0;
@@ -24,7 +24,7 @@ h1 {
 
 .btn {
     background: white;
-    color: #00b4db;
+    color: #db00db;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
@@ -45,7 +45,7 @@ main {
 }
 
 h2, h3 {
-    color: #0f9b0f;
+    color: #9b0f9b;
 }
 
 ul {
@@ -58,7 +58,7 @@ li {
 }
 
 a {
-    color: #00b4db;
+    color: #db00db;
 }
 
 a:hover {
