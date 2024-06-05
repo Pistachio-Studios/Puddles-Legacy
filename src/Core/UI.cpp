@@ -11,6 +11,7 @@
 #include "Core/Physics.h"
 #include "Core/Window.h"
 #include "Core/UI.h"
+#include "Utils/Easings.h"
 
 
 UI::UI()
@@ -66,7 +67,9 @@ bool UI::Update(float dt)
 		app->render->DrawTexture(Seleccion, 260, 615, 0, 0);
 
 		//Dash
-		float dashSelectionValue = SDL_min(player->dashTimer.ReadMSec() / 1000 / player->dashCultdown * 255, 255);
+		float test = easeInQuad(player->dashTimer.ReadMSec() / 1000);
+		LOG("%f", test);
+		float dashSelectionValue = SDL_min(test / player->dashCultdown * 255, 255);
 		SDL_SetTextureAlphaMod(Seleccion, dashSelectionValue);
 		app->render->DrawTexture(Seleccion, 280, 695, 0, 0);
 		SDL_SetTextureAlphaMod(Seleccion, 0);
@@ -101,8 +104,4 @@ bool UI::Update(float dt)
 bool UI::CleanUp() {
 
 	return true;
-}
-
-float easeInOutSine(float dt) {
-	return 0.5 * (1+sin(3.1415926 * (dt - 0.5)));
 }
