@@ -89,7 +89,7 @@ bool EnemyBoss::Start() {
 	bossBodyAttack.speed = 2.0f;
 
 	bossMove = *app->animationManager->GetAnimByName("Boss_Spider_Caminar");
-	bossMove.speed = 2.0f;
+	bossMove.speed = 1.4f;
 
 	bossDamage = *app->animationManager->GetAnimByName("Boss_Spider_Damage");
 	bossDamage.speed = 2.0f;
@@ -146,7 +146,7 @@ bool EnemyBoss::Update(float dt)
 		pbody->GetPosition(position.x, position.y);
 		app->render->DrawTexture(texture, position.x + 35, position.y - 35, 0, 1.0f, pbody->body->GetAngle() * RADTODEG + 90);
 		for (int i = 0; i < 10; i++) {
-			bulletArray[i]->Update();
+			bulletArray[i]->Update(CalculateAngleToPlayer());
 		}
 	}
 
@@ -339,6 +339,25 @@ void EnemyBoss::shootBullet()
 			break;
 		}
 	}
+}
+
+float EnemyBoss::CalculateAngleToPlayer()
+{
+	if (justShot) {
+
+		// Calculate the difference in positions
+		float dx = player->position.x - position.x;
+		float dy = player->position.y - position.y;
+
+		// Use atan2 to get the angle in radians
+		float angle = atan2(dy, dx);
+
+		// Optionally convert the angle to degrees
+		angleDegrees = angle * (180.0f / M_PI);
+		justShot = false;
+	}
+
+	return angleDegrees;
 }
 
 b2Vec2 EnemyBoss::calculateForce()

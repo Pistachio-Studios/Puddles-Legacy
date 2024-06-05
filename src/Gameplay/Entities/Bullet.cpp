@@ -27,15 +27,15 @@ void Bullet::Shoot(b2Vec2 force) {
 	pbody->body->ApplyForceToCenter(b2Vec2(force.x * 100, force.y * 100), true);
 }
 
-void Bullet::Draw() {
+void Bullet::Draw(float angleToPlayer) {
 	if (active) {
 		pbody->GetPosition(position.x, position.y);
-		app->render->DrawTexture(texture, position.x, position.y, 0, 1.0f, pbody->body->GetAngle() * RADTODEG,0.06f);
+		app->render->DrawTexture(texture, position.x-40, position.y+10, 0, 1.0f, angleToPlayer,0.06f);
 	}
 }
 
-void Bullet::Update() {
-	Draw();
+void Bullet::Update(float angleToPlayer) {
+	Draw(angleToPlayer);
 	if (timer->ReadSec() > 1) {
 		active = false;
 	}

@@ -30,6 +30,7 @@ public:
         enemyboss->bossDistanceAttack.Update(dt);
 
         if (enemyboss->bossDistanceAttack.GetCurrentFrameCount() == 2 && attackTimer.ReadMSec()>500) {
+            enemyboss->justShot = true;
             enemyboss->shootBullet();
             attackTimer.Start();
         }

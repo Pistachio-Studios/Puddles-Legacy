@@ -28,7 +28,7 @@ public:
         player = app->entityManager->GetPlayerEntity();
 
         //Animation
-        app->render->DrawTexture(wasp->waspAttack.texture, wasp->position.x-60, wasp->position.y-65, &wasp->waspAttack.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, 0.5f, wasp->flip);
+        app->render->DrawTexture(wasp->waspAttack.texture, wasp->position.x - 88, wasp->position.y - 104, &wasp->waspAttack.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, 0.8f, wasp->flip);
         wasp->waspAttack.Update(dt);
 
         if (wasp->waspAttack.GetCurrentFrameCount() == 0) {

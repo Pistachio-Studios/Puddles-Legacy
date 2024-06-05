@@ -65,6 +65,8 @@ bool Wasp::Start() {
 	//pbody->body->GetFixtureList()->SetFriction(25.0f);
 	pbody->body->SetLinearDamping(10.0f);
 
+	pbody->body->GetFixtureList()->SetSensor(true);
+
 	player = app->entityManager->GetPlayerEntity();
 
 	movementFSM = new StateMachine<Wasp>(this);

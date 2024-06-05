@@ -22,8 +22,8 @@ public:
 	Bullet();
 
 	void Shoot(b2Vec2 force);
-	void Draw();
-	void Update();
+	void Draw(float angleToPlayer);
+	void Update(float angleToPlayer);
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void CleanUp();
 };
