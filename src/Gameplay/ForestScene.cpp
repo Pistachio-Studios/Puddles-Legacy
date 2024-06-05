@@ -238,8 +238,33 @@ bool ForestScene::Update(float dt)
 	//}
 
 	//Cambios de escena sin collider
-	if (app->entityManager->GetPlayerEntity()->position.x <= 3060 && app->entityManager->GetPlayerEntity()->position.x >= 2620 && app->entityManager->GetPlayerEntity()->position.y >= 5190) {
-		app->sceneManager->ChangeScene("townscene");
+	//Inicio a lvl1
+	if (app->entityManager->GetPlayerEntity()->position.x <= 33408 && app->entityManager->GetPlayerEntity()->position.x >= 33792 && app->entityManager->GetPlayerEntity()->position.y <= 896 && app->entityManager->GetPlayerEntity()->position.y >= 1024) {
+		//añadir tp del player 1730, 6080
+	}
+	//lvl1 a lvl2
+	if (app->entityManager->GetPlayerEntity()->position.x <= 6333 && app->entityManager->GetPlayerEntity()->position.x >= 6400 && app->entityManager->GetPlayerEntity()->position.y <= 2560 && app->entityManager->GetPlayerEntity()->position.y >= 3072) {
+		//añadir tp del player 9270, 1310
+	}
+	//lvl2 a lvl3
+	if (app->entityManager->GetPlayerEntity()->position.x <= 9600 && app->entityManager->GetPlayerEntity()->position.x >= 9666 && app->entityManager->GetPlayerEntity()->position.y <= 4224 && app->entityManager->GetPlayerEntity()->position.y >= 4736) {
+		//añadir tp del player 3386, 8646
+	}
+	//lvl3 a lvl4
+	if (app->entityManager->GetPlayerEntity()->position.x <= 6200 && app->entityManager->GetPlayerEntity()->position.x >= 6272 && app->entityManager->GetPlayerEntity()->position.y <= 15360 && app->entityManager->GetPlayerEntity()->position.y >= 15872) {
+		//añadir tp del player 8628, 11810
+	}
+	//lvl4 a lvl5
+	if (app->entityManager->GetPlayerEntity()->position.x <= 17210 && app->entityManager->GetPlayerEntity()->position.x >= 17280 && app->entityManager->GetPlayerEntity()->position.y <= 9216 && app->entityManager->GetPlayerEntity()->position.y >= 9728) {
+		//añadir tp del player 27376, 1206
+	}
+	//lvl5 a lvl6
+	if (app->entityManager->GetPlayerEntity()->position.x <= 20992 && app->entityManager->GetPlayerEntity()->position.x >= 21504 && app->entityManager->GetPlayerEntity()->position.y <= 384 && app->entityManager->GetPlayerEntity()->position.y >= 460) {
+		//añadir tp del player 18880, 14000
+	}
+	//lvl6 a final
+	if (app->entityManager->GetPlayerEntity()->position.x <= 29111 && app->entityManager->GetPlayerEntity()->position.x >= 29184 && app->entityManager->GetPlayerEntity()->position.y <= 13696 && app->entityManager->GetPlayerEntity()->position.y >= 14208) {
+		//añadir tp del player 33536, 14848
 	}
 
 	return true;
