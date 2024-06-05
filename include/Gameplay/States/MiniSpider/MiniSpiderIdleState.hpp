@@ -31,7 +31,7 @@ public:
         app->render->DrawTexture(minispider->spiderIdle.texture, minispider->position.x - 60, minispider->position.y - 60, &minispider->spiderIdle.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, 0.5f, minispider->flip);
         minispider->spiderIdle.Update(dt);
 
-        if (PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 2.0f) {
+        if (minispider->isTouchingPlayer) {
             if (minispider->attackTimer.ReadSec() >= 1)
             {
                 minispider->spiderAttack.Reset();

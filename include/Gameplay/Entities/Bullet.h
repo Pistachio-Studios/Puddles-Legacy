@@ -21,7 +21,7 @@ public:
 
 	Bullet();
 
-	void Shoot(b2Vec2 force);
+	void Shoot(b2Vec2 force, SDL_RendererFlip flip);
 	void Draw(float angleToPlayer);
 	void Update(float angleToPlayer);
 	void OnCollision(PhysBody* physA, PhysBody* physB);
