@@ -240,14 +240,29 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision ARMAPLAYER");
 		//if (state != EntityState::DEAD and !invencible){
 		vida -= player->dano;
-		if (vida <= 0.0f)
+		if (vida <= 0.0f && !dead)
 		{
-			// AUDIO DONE boss death
+			dead = true;
 			app->audio->PlayFx(bossDieFx);
 			movementFSM->ChangeState("die");
 		}
 		else if(vida > 0.0f)
 		{
+			app->audio->PlayFx(bossDamageFx);
+			bossDamage.Reset();
+			movementFSM->ChangeState("hurt");
+		}
+		break;
+
+	case ColliderType::MAGIC:
+		vida -= player->dano;
+		if (vida <= 0.0f && !dead)
+		{
+			dead = true;
+			app->audio->PlayFx(bossDieFx);
+			movementFSM->ChangeState("die");
+		}
+		else if (vida > 0.0f) {
 			app->audio->PlayFx(bossDamageFx);
 			bossDamage.Reset();
 			movementFSM->ChangeState("hurt");

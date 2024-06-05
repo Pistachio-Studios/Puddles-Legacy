@@ -41,6 +41,7 @@ public:
             if (wasp->isTouchingPlayer && wasp->waspAttack.GetCurrentFrameCount() == 15) {
                 player->vida -= wasp->dano;
                 wasp->vida += wasp->dano;
+                if (wasp->vida > 15.0f) wasp->vida = 15;
             }
         }
 

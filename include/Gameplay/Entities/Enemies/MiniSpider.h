@@ -103,6 +103,8 @@ public:
 
 	bool isTouchingPlayer = false;
 
+	bool dead = false;
+
 	ParticleGenerator* particleSource1;
 
 };

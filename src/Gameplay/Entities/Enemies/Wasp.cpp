@@ -216,9 +216,9 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision SWORD");
 		//if (state != EntityState::DEAD and !invencible){
 		vida -= player->dano;
-		if (vida <= 0.0f)
+		if (vida <= 0.0f && !dead)
 		{
-			// AUDIO DONE boss death
+			dead = true;
 			app->audio->PlayFx(dieFx);
 			movementFSM->ChangeState("die");
 		}

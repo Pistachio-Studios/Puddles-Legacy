@@ -99,7 +99,9 @@ public:
 
 	PathFinding* pathfinding;
 
-	bool isTouchingPlayer = false;;
+	bool isTouchingPlayer = false;
+
+	bool dead = false;
 
 	b2Vec2 force;
 
