@@ -21,7 +21,6 @@ public:
     inline void Update(float dt) override
     {
 
-
         //Animation
         app->render->DrawTexture(enemyboss->bossDeath.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossDeath.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
         enemyboss->bossDeath.Update(dt);

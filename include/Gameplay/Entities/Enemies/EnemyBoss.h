@@ -104,6 +104,11 @@ public:
 	//Disparos
 	Bullet* bulletArray[10];
 
+	bool isTouchingPlayer = false;
+
+	//soundFX
+	int bossDamageFx, bossAttackFx, bossDieFx;
+
 };
 
 #endif // __ENEMYBOSS_H__

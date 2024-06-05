@@ -30,7 +30,8 @@ public:
         app->render->DrawTexture(enemyboss->bossBodyAttack.texture, enemyboss->position.x - 100, enemyboss->position.y - 150, &enemyboss->bossBodyAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
         enemyboss->bossBodyAttack.Update(dt);
 
-        if (enemyboss->bossBodyAttack.GetCurrentFrameCount() == 5 && PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 3.0f) {
+        if (enemyboss->bossBodyAttack.GetCurrentFrameCount() == 5 && enemyboss->isTouchingPlayer) {
+            app->audio->PlayFx(enemyboss->bossAttackFx);
             player->vida -= enemyboss->dano;
         }
 

@@ -6,6 +6,7 @@
 #include "Core/Map.h"
 #include "Core/AnimationManager.h"
 #include "Core/SceneManager.h"
+#include "Core/Audio.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -101,6 +102,9 @@ bool EnemyBoss::Start() {
 		bulletArray[i] = new Bullet();
 	}
 
+	bossDamageFx = app->audio->LoadFx(parameters.attribute("BossDamagePath").as_string());
+	bossAttackFx = app->audio->LoadFx(parameters.attribute("BossAttackPath").as_string());
+	bossDieFx = app->audio->LoadFx(parameters.attribute("BossDiePath").as_string());
 
 	return true;
 }
@@ -239,10 +243,12 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (vida <= 0.0f)
 		{
 			// AUDIO DONE boss death
+			app->audio->PlayFx(bossDieFx);
 			movementFSM->ChangeState("die");
 		}
 		else if(vida > 0.0f)
 		{
+			app->audio->PlayFx(bossDamageFx);
 			bossDamage.Reset();
 			movementFSM->ChangeState("hurt");
 		}
@@ -254,6 +260,10 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//}
 		break;
 
+	case ColliderType::PLAYER:
+		isTouchingPlayer = true;
+		break;
+
 	case ColliderType::UNKNOWN:
 		LOG("Colision UNKNOWN");
 		break;
@@ -261,7 +271,14 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 }
 
 void EnemyBoss::EndCollision(PhysBody* physA, PhysBody* physB) {
-
+	switch (physB->ctype) {
+	case ColliderType::PLAYER:
+		isTouchingPlayer = false;
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Colision UNKNOWN");
+		break;
+	}
 }
 
 void EnemyBoss::pathfindingMovement(float dt) {
