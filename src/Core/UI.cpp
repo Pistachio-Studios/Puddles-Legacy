@@ -103,6 +103,6 @@ bool UI::CleanUp() {
 	return true;
 }
 
-double easeInOutSine(double t) {
-	return 0.5 * (1+sin(3.1415926 * (t - 0.5)));
+float easeInOutSine(float dt) {
+	return 0.5 * (1+sin(3.1415926 * (dt - 0.5)));
 }

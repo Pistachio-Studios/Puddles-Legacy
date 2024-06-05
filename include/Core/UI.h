@@ -27,7 +27,7 @@ public:
 
 	bool CleanUp();
 
-	double easeInOutSine(double t);
+	float easeInOutSine(float dt);
 
 public:
 
