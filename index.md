@@ -6,7 +6,7 @@ layout: default
 
 Puddle’s Legacy is a single-player real-time action role-playing game (RPG) set in a fantasy world. Sabrina must follow the footsteps of her missing father to fill a magical book of beasts by exploring very dangerous terrain. Will Sabrina manage to find her father in this adventure?
 
-[](img/GameTitle.png)
+![](img/GameTitle.png)
 
 
 ## Our Project
