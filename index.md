@@ -2,63 +2,42 @@
 layout: default
 ---
 
-# Project1 Shock Troopers
+# Puddle's Legacy
 
-Shock Troopers is a run-and-gun arcade game developed by Saurus and originally released in 1997. With a top-down perspective, it offers exciting gameplay for up to two players who get to control one of eight skilled mercenaries hired by the government to eliminate a notorious terrorist organization.
+Puddle’s Legacy is a single-player real-time action role-playing game (RPG) set in a fantasy world. Sabrina must follow the footsteps of her missing father to fill a magical book of beasts by exploring very dangerous terrain. Will Sabrina manage to find her father in this adventure?
 
-The game comprises eight challenging missions, with each level having a distinct objective and culminating in a boss battle. To progress through the missions, players must combat waves of enemies, including soldiers and vehicles, using an arsenal of weapons ranging from guns to grenades. Additionally, each character possesses unique special attacks that enhance the gameplay experience.
-
-![](img/shock_troopers.jpg)
 
 ## Our Project
 
-We are recreating the 1997 Shock Troopers Game Arcade version as a tribute to the game. Made by UPC CITM Terrassa students.
+Cositas
 
 ## Authors
 
+- [@LadyRacoonDev](https://github.com/LazyRacoonDev) (Hugo Castaño Cuéllar)
+- [@mdoradom](https://www.github.com/mdoradom) (Mario Dorado Martínez)
+- [@Becca203](https://github.com/Becca203) (Rebeca Fernández López)
+- [@martagnarta](https://www.github.com/martagnarta) (Marta Jover Valero)
+- [@apb8](https://www.github.com/apb8) (Alexia Palacín Bargalló)
+- [@MariaPerarnau](https://github.com/MariaPerarnau) (María Perarnau Sangüesa)
+- [@didacpema](https://github.com/didacpema) (Dídac Pérez Marquez)
+- [@HugoPlacer](https://github.com/HugoPlacer) (Hugo Planell Moreno)
+- [@cpugaper](https://github.com/cpugaper) (Carla Puga Pérez)
 - [@nsortsauquillo](https://www.github.com/nsortsauquillo) (Nicolás Sort Sauquillo)
-- [@MiquelAr-GD](https://www.github.com/MiquelAr-GD)       (Miquel Andrés Rodríguez)
-- [@martagnarta](https://www.github.com/martagnarta)       (Marta Jover Valero)
-- [@mdoradom](https://www.github.com/mdoradom)             (Mario Dorado Martínez)
-- [@apb8](https://www.github.com/apb8)                     (Alexia Palacín Bargalló)
-
-Besides the current responsibility, each team member has worked on the game's code and helped/assisted each other on different ambits.
-
-## Nicolás Sort 
-
-Nico has contributed in a diverse and wide assortment of our project's features. His main highlights are the implementation of the gamepad as the primary input method and the implementation of multiple objects and enemies on the map. He has also contributed in other areas such as sprite extraction, management of colliders, bug fixing within others.
-
-## Miquel Andrés
-
-Miquel has contributed in a varied selection of our project's features. His main highlights are the set up and display of the game camera and the implementation of all the necessary colisions to our game's map. He has also contributed in other ambits as in bug fixing in general,  particles, UI, within others.
-
-## Marta Jover
-
-Marta has contributed in a large and diverse selection of our project's features. Her main highlights are all the relatives with our player and main character, Milky, such as the pertinent spritesheet and player logic. She has also contributed in other ambits as UI, Pick-up items, audio effects, and others.
-
-## Mario Dorado
-
-Mario has contributed in a wide range of our project's features. It's main highlights are the implementation of multiple entities's logic, such as the enemies: infantry soldiers, the small tanks, the first boss ( flying battleship), the final boss (Big tank). He has also contributed with a lot of bug fixing, the creation and implementation of several characters's state machine, and others. 
-
-## Alexia Palacín
-
-Alexia has contributed in a varied range of our project's features. Her main highlights are the implementation of multiple animations and adjustments of multiple entities shooting mechanics. She has also contributed in some additions to the UI, sprite extraction, and enemies bug fixing, within others.
 
 
-## Shock Troopers Gameplay
+## Puddle's Legacy Trailer
 
-<iframe width="860" height="615" src="https://www.youtube.com/embed/DSSk5Oo9IO0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+Insertar vídeo cuando se tenga.
 
 ## Controls
 
 ```
-    W, A, S, D To move the player
-    SPACE to shot
-    SHIFT to roll
-    Debug Tools F1
-    Debug Menu Info F2
+    W, A, S, D to move
+    Right click to cover with a shield
+    Left click to attack
+    F1 Debug menu
+    F4 Move the camera
+    1 and 2 to change weapons sword and staff
 ```
 
-## Team Photo
 
-![](img/teamphoto.jpeg)
