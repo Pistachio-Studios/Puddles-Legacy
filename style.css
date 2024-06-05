@@ -80,7 +80,7 @@ a:hover {
 .author-card {
     background: #EBA96E; /* Fondo del cuadro */
     color: #333; /* Color del texto */
-    width: 250px;
+    width: 250px; /* Ancho fijo */
     padding: 20px 20px 40px; /* Ajuste del padding para dar espacio al avatar */
     margin: 10px;
     border-radius: 10px;
@@ -108,6 +108,7 @@ a:hover {
 
 .author-info {
     margin-top: 60px; /* Espacio para el avatar */
+    min-width: 200px; /* Ancho mínimo para evitar que se encimen */
 }
 
 .author-info h4 {
