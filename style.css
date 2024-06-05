@@ -10,7 +10,14 @@ header {
     background: linear-gradient(to right, #645180, #FDB272); /* Degradado usando colores del personaje y las nubes */
     color: white;
     text-align: center;
-    padding: 50px 0;
+    padding: 20px 0; /* Reducido el padding para que la imagen sea más prominente */
+}
+
+.title-image {
+    width: 100%;
+    max-width: 800px; /* Ajusta este valor según el tamaño deseado */
+    height: auto;
+    margin-bottom: 20px;
 }
 
 h1 {
