@@ -12,6 +12,7 @@ class EnemyBossDistanceAttackState : public State<EnemyBoss> {
 private:
     EnemyBoss* enemyboss;
     Player* player;
+    Timer attackTimer;
 
 public:
     EnemyBossDistanceAttackState(SString name) : State(name) {}
@@ -25,10 +26,14 @@ public:
     {
         LOG("EnemyBossDistanceAttackState Update()");
 
-        app->render->DrawTexture(enemyboss->bossDistanceAttack.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossDistanceAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
+        app->render->DrawTexture(enemyboss->bossDistanceAttack.texture, enemyboss->position.x - 60, enemyboss->position.y - 150, &enemyboss->bossDistanceAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
         enemyboss->bossDistanceAttack.Update(dt);
 
-        enemyboss->shootBullet();
+        if (enemyboss->bossDistanceAttack.GetCurrentFrameCount() == 2 && attackTimer.ReadMSec()>500) {
+            enemyboss->justShot = true;
+            enemyboss->shootBullet();
+            attackTimer.Start();
+        }
 
         if (enemyboss->bossDistanceAttack.GetCurrentFrameCount() >= 4) {
             enemyboss->attackTimer.Start();

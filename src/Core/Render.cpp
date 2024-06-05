@@ -72,7 +72,7 @@ bool Render::Awake(pugi::xml_node& config)
 	TTF_Init();
 
 	//load a font into memory
-	font = TTF_OpenFont("Assets/Fonts/VecnaBold.ttf", 25);
+	font = TTF_OpenFont("Assets/Fonts/GFSDidot.ttf", 25);
 	//TTF_SetFontStyle(font, TTF_STYLE_NORMAL);
 	//TTF_SetFontOutline(font, 0);
 	//TTF_SetFontKerning(font, 0);

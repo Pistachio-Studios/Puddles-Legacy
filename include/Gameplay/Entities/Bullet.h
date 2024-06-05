@@ -11,39 +11,21 @@ struct SDL_Texture;
 
 class Timer;
 
-class Bullet : public Entity
-{
+class Bullet {
 public:
-
-	bool startTimer = true;
-	Timer timer;
+	PhysBody* pbody = nullptr;
+	SDL_Texture* texture = nullptr;
+	Timer* timer = nullptr;
+	bool active = false;
+	iPoint position;
 
 	Bullet();
 
-	virtual ~Bullet();
-
-	bool Awake() override;
-
-	bool Start() override;
-
-	bool Update(float dt) override;
-
-	bool CleanUp() override;
-
-	void DrawImGui() override;
-
-	void Shoot();
-
-	void OnCollision(PhysBody* physA, PhysBody* physB) override;
-
-	void EndCollision(PhysBody* physA, PhysBody* physB) override;
-
-public:
-	PhysBody* pbody;
-
-	float bulletSpeed = 2.0f;
-
-	SDL_Texture* texture = nullptr;
+	void Shoot(b2Vec2 force, SDL_RendererFlip flip);
+	void Draw(float angleToPlayer);
+	void Update(float angleToPlayer);
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+	void CleanUp();
 };
 
 #endif // __BULLET_H__

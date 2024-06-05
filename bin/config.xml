@@ -39,9 +39,9 @@
 			<enemies />
 		</level1scene>
 		<forestscene>
-			<map path="Assets/Maps/Forest-Level/" name="Bosque.tmx" />
-			<camera x="-530" y="-1949" />
-			<player x="2850" y="4710" texturepath="Assets/Textures/Player.png" />
+			<map path="Assets/Maps/Mapa_Nivel/" name="bosque.tmx" />
+			<camera x="-32545" y="-4610" />
+			<player x="33536" y="5248" texturepath="Assets/Textures/Player.png" />
 			<enemies />
 		</forestscene>
 		<townscene>
@@ -76,10 +76,12 @@
 			<camera x="-530" y="-1949" />
 			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
 			<enemies>
-				<EnemyBoss x="300" y="1800"/>
+				<EnemyBoss x="300" y="1800" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg"
+					  BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg"
+					  BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg"/>
 				<MiniSpider x="800" y="2050" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg"
 					  attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg"
-					  dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg"/>/>
+					  dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg"/>
 				<Wasp x="650" y="2100" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg"
 					  attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg"
 					  dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg"/>
