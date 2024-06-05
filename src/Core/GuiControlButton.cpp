@@ -3,6 +3,7 @@
 #include "Core/App.h"
 #include "Core/Audio.h"
 #include "Core/Window.h"
+#include "Core/Textures.h"
 
 GuiControlButton::GuiControlButton(uint32_t id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -11,6 +12,9 @@ GuiControlButton::GuiControlButton(uint32_t id, SDL_Rect bounds, const char* tex
 
 	canClick = true;
 	drawBasic = false;
+
+	textureSelectedLeft = app->tex->Load("Assets/UI/Buttons/selectedLeft.png");
+	textureSelectedRight = app->tex->Load("Assets/UI/Buttons/selectedRight.png");
 }
 
 GuiControlButton::~GuiControlButton()
@@ -51,10 +55,12 @@ bool GuiControlButton::Update(float dt)
 			app->render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
 			break;
 		case GuiControlState::NORMAL:
-			app->render->DrawRectangle(bounds, 160, 160, 160, 255, true, false);
+			// app->render->DrawRectangle(bounds, 160, 160, 160, 255, true, false);
 			break;
 		case GuiControlState::FOCUSED:
-			app->render->DrawRectangle(bounds, 0, 0, 20, 255, true, false);
+			// TODO fix bounds positions to fit the text size
+			app->render->DrawTexture(textureSelectedLeft, bounds.x - 10, bounds.y);
+			app->render->DrawTexture(textureSelectedRight, bounds.x + bounds.w - 10, bounds.y);
 			break;
 		case GuiControlState::PRESSED:
 			app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);

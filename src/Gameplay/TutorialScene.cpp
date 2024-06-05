@@ -94,9 +94,9 @@ bool TutorialScene::Enter()
 
 /// TODO change scene collider
 
-	PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
-	changeTown->ctype = ColliderType::CHANGESCENE;
-	changeTown->listener = player;
+	//PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
+	//changeTown->ctype = ColliderType::CHANGESCENE;
+	//changeTown->listener = player;
 
 
 	if (parameters.child("enemies").child("EnemyBoss")) {
