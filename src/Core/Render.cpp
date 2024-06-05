@@ -109,32 +109,25 @@ bool Render::Update(float dt)
 	cameraInterpolation(camera.target, camera.lerpSpeed, dt, camera.offset);
 
 	// Sort and draw all sprites
-	std::sort(sprites.begin(), sprites.end(),
-	[](Sprite a, Sprite b)
+	std::stable_sort(sprites.begin(), sprites.end(),
+	[](const Sprite& a, const Sprite& b)
 	{
-		if(a.layer <= b.layer)
+		if(a.layer != b.layer)
 		{
-			if(a.pivot.y <= b.pivot.y)
-			{
-				return true;
-			} else
-			{
-				return false;
-			}
-		}else
+			return a.layer < b.layer;
+		}
+		else
 		{
-			return false;
+			return a.pivot.y < b.pivot.y;
 		}
 	}
 	);
 	
-	for(Sprite s : sprites)
+	for(Sprite& s : sprites)
 	{
 		DrawSprite(s);
 		
 	}
-
-	sprites.clear();
 
 	return true;
 }
@@ -162,6 +155,14 @@ bool Render::PostUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	//Render all pivot points
+	for(Sprite& s : sprites)
+	{
+		DrawRectangle({ s.center.x - 5, s.center.y - 5, 10, 10 }, 255, 0, 0, 255, true);
+	}
+
+	sprites.clear();
 
 	SetViewPort({
 		0,
@@ -409,7 +410,7 @@ void Render::SetVsync(bool vsync)
 }
 bool Render::DrawSprite(Sprite &sprite) const
 {
-	SDL_Texture* texture = sprite.texture;
+	SDL_Texture* texture = sprite.texture; //TODO: Check if texture is nullptr
 	int x = sprite.position.x;
 	int y = sprite.position.y;
 	SDL_Rect* section = &sprite.section;
@@ -455,6 +456,12 @@ bool Render::DrawSprite(Sprite &sprite) const
 		pivot.x = pivotX;
 		pivot.y = pivotY;
 		p = &pivot;
+	}
+
+	if(texture == NULL)
+	{
+		LOG("Cannot blit to screen. Texture is nullptr");
+		return true;
 	}
 
 	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)

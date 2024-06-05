@@ -5,6 +5,7 @@
 #include "Utils/Timer.h"
 #include "Core/Window.h"
 #include "Core/Audio.h"
+#include "Core/Textures.h"
 #include "Gameplay/TutorialScene.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Entities/Enemies/Wasp.h"
@@ -91,6 +92,8 @@ bool TutorialScene::Enter()
 	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 100, 300, 50 }, this);
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
+
+	test = app->tex->Load("Assets/Textures/lighting-demo-wall.png");
 
 /// TODO change scene collider
 
@@ -261,6 +264,8 @@ bool TutorialScene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
+
+	app->render->DrawTexture(test, 670, 2030);
 
 	return true;
 }

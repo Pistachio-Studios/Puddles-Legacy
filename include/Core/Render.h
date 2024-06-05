@@ -21,8 +21,12 @@ class Sprite {
 		Sprite(SDL_Texture* texture, int x, int y, SDL_Rect section, float speed, double angle, float size, uint layer, SDL_RendererFlip flip, int pivotX, int pivotY) : texture(texture), position({x,y}), section(section), speed(speed), angle(angle), size(size), layer(layer), flip(flip), pivotX(pivotX), pivotY(pivotY) {
 			
 			int w, h;
-			SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-			center = {position.x + w / 2, position.y + h / 2};
+			if(section.w == 0 && section.h == 0)
+				SDL_QueryTexture(texture, NULL, NULL, &w, &h);
+			else
+				w = section.w, h = section.h;
+
+			center = {x + (w * size) / 2, y + (h * size) / 2};
 			pivot = center;
 		}
 
@@ -80,7 +84,7 @@ public:
 	void cameraInterpolation(Entity* target, float lerpSpeed, float dt, iPoint offset = { 0,0 });
 
 	// Drawing
-	bool DrawTexture(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, float size = 1.0f, uint layer = 0, SDL_RendererFlip flip = SDL_FLIP_NONE, int pivotX = INT_MAX, int pivotY = INT_MAX);
+	bool DrawTexture(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, float size = 1.0f, uint layer = 1, SDL_RendererFlip flip = SDL_FLIP_NONE, int pivotX = INT_MAX, int pivotY = INT_MAX);
 	bool DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool filled = true, bool useCamera = true) const;
 	bool DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 	bool DrawCircle(int x1, int y1, int redius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
