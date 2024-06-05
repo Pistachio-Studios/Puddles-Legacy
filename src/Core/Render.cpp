@@ -412,7 +412,11 @@ bool Render::DrawSprite(Sprite &sprite) const
 	SDL_Texture* texture = sprite.texture;
 	int x = sprite.position.x;
 	int y = sprite.position.y;
-	SDL_Rect section = sprite.section;
+	SDL_Rect* section = &sprite.section;
+	if(section->w == 0 && section->h == 0)
+	{
+		section = NULL;
+	}
 	float speed = sprite.speed;
 	double angle = sprite.angle;
 	float size = sprite.size;
@@ -427,10 +431,10 @@ bool Render::DrawSprite(Sprite &sprite) const
 	rect.x = ((int)(camera.x * speed) + x) * scale;
 	rect.y = ((int)(camera.y * speed) + y) * scale;
 
-	if(section.w != NULL and section.h != NULL)
+	if(section != NULL)
 	{
-		rect.w = section.w;
-		rect.h = section.h;
+		rect.w = section->w;
+		rect.h = section->h;
 	}
 	else
 	{
@@ -453,7 +457,7 @@ bool Render::DrawSprite(Sprite &sprite) const
 		p = &pivot;
 	}
 
-	if(SDL_RenderCopyEx(renderer, texture, &section, &rect, angle, p, flip) != 0)
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
