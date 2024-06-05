@@ -1,36 +1,71 @@
 id,character,ES,EN,CAT,type,choices
 
 #Sabrina
-1
-2
-3
-4
-5
-6
-7
+1, Sabrina, Ho-Hola soy Sabrina. ¿Podrias decirme donde poder descansar un poco?, Hi-Hi I'm Sabrina. Could you tell me where I can rest for a little bit?, Ho-Hola sóc la Sabrina. Podries dir-me on poder descansar una mica?, D, "21"
+2, Sabrina, Muchas gracias., Thank you very much., Moltes gràcies., D,
+3, Sabrina, Buenas. Me llamo Sabrina. Podrias dejarme algun sitio
+4, 
+5, 
+6, 
+7, 
+8, 
+9, 
+10, 
+11, 
+12, 
+13, 
+14, 
+15, 
+16, 
+17, 
+18, 
+19, 
+20, 
 
 #Loco del Pueblo
-8
-9
-10
-11
-12
-13
-14
-15
-16
- 
-#Barista
-17
-18
-19
-20
-21
-22
-23
-24
-25
+20, Loco, Bienvenida al pueblo hahahaha. Soy Bounty Pistache., Welcome to the village hahahaha, Benvinguda al poble hahahaha, D, "1"
+21, Loco, El edificio que esta en el centro del pueblo es la taverna. Ves ahí para poder descansar., The building in the center of the village is the tavern. Go there to rest., L'edifici que està al centre del poble és la taverna. Ves-hi per poder descansar., D, "2"
+22, 
+23, 
+24, 
+25, 
+26, 
+27, 
+28, 
+29, 
+30, 
+31, 
+32, 
+33, 
+34, 
+35, 
+36, 
+37, 
+38, 
+39, 
+40,  
 
+#Tavernero
+41, Tavernero, Soy Klaus. El dueño de la taverna. ¿En que puedo ayudarte?, I'm Klaus. The owner of the tavern. How can I help you?, Sóc en Klaus. El propietari de la taverna. Com puc ajudar-te?, D, "3"
+42, 
+43,  
+44, 
+45, 
+46, 
+47, 
+48,  
+49, 
+50, 
+51, 
+52, 
+53, 
+54, 
+55, 
+56, 
+57, 
+58, 
+59, 
+60,  
 
 #Blackcat
 
