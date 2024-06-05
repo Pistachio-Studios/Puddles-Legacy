@@ -2,12 +2,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f0f0f0;
+    background: #FAD6A5; /* Color del cielo */
     color: #333;
 }
 
 header {
-    background: linear-gradient(to right, #645180, #9b89b3);
+    background: linear-gradient(to right, #645180, #FDB272); /* Degradado usando colores del personaje y las nubes */
     color: white;
     text-align: center;
     padding: 50px 0;
@@ -24,7 +24,7 @@ h1 {
 
 .btn {
     background: white;
-    color: #645180;
+    color: #645180; /* Color del personaje */
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
@@ -45,7 +45,7 @@ main {
 }
 
 h2, h3 {
-    color: #645180;
+    color: #645180; /* Color del personaje */
 }
 
 ul {
@@ -58,7 +58,7 @@ li {
 }
 
 a {
-    color: #645180;
+    color: #645180; /* Color del personaje */
 }
 
 a:hover {
