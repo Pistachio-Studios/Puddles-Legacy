@@ -59,12 +59,12 @@ bool GuiControlSlider::Update(float dt)
 			break;
 		case GuiControlState::NORMAL:
 			app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
-			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60, bounds.y, 20, 15);
+			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60, bounds.y, bounds.w, bounds.h);
 			app->render->DrawRectangle(rect2, 0, 0, 0, 255, true, false);
 			break;
 		case GuiControlState::PRESSED:
 			app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
-			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60, bounds.y, 20, 15);
+			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60, bounds.y, bounds.w, bounds.h);
 			app->render->DrawRectangle(rect2, 255, 128, 0, 255, true, false);
 			break;
 		}
