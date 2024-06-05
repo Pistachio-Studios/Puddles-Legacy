@@ -3,25 +3,36 @@ body {
     margin: 0;
     padding: 0;
     background: linear-gradient(135deg, #141A41, #2E4980, #643C99); /* Fondo gradiente de azul oscuro a azul claro a morado */
-    color: black; /* Color de texto gris claro */
+    color: #EDEDED; /* Color de texto gris claro */
 }
 
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que el encabezado esté encima del contenido */
     background-image: url('GameTitle.png');
     background-size: cover;
     background-position: center;
     color: white;
     text-align: center;
-    padding: 100px 0; /* Ajusta el padding según sea necesario */
+    padding: 10px 0; /* Ajusta el padding según sea necesario */
+    transition: padding 0.3s, font-size 0.3s; /* Agrega una transición suave para el padding y el tamaño de fuente */
+}
+
+header.shrink {
+    padding: 5px 0; /* Ajusta el padding más pequeño al desplazarse hacia abajo */
 }
 
 h1 {
     margin: 0;
-    font-size: 3em;
+    font-size: 2.5em; /* Reduce ligeramente el tamaño de la fuente */
     background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejorar la legibilidad */
     display: inline-block;
     padding: 10px 20px;
     border-radius: 10px;
+    transition: font-size 0.3s; /* Agrega una transición suave para el tamaño de fuente */
 }
 
 .buttons {
@@ -39,7 +50,7 @@ h1 {
 }
 
 main {
-    padding: 20px;
+    padding-top: 100px; /* Ajusta el padding superior para que el contenido no se oculte detrás del encabezado */
 }
 
 .intro, .project, .authors {
