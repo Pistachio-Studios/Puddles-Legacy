@@ -238,8 +238,33 @@ bool ForestScene::Update(float dt)
 	//}
 
 	//Cambios de escena sin collider
-	if (app->entityManager->GetPlayerEntity()->position.x <= 3060 && app->entityManager->GetPlayerEntity()->position.x >= 2620 && app->entityManager->GetPlayerEntity()->position.y >= 5190) {
-		app->sceneManager->ChangeScene("townscene");
+	//Inicio a lvl1
+	if (app->entityManager->GetPlayerEntity()->position.x >= 33408 && app->entityManager->GetPlayerEntity()->position.x <= 33792 && app->entityManager->GetPlayerEntity()->position.y >= 896 && app->entityManager->GetPlayerEntity()->position.y <= 1024) {
+		player->pbody->body->SetTransform({ 36,125 }, 0);
+	}
+	//lvl1 a lvl2
+	if (app->entityManager->GetPlayerEntity()->position.x >= 6333 && app->entityManager->GetPlayerEntity()->position.x <= 6400 && app->entityManager->GetPlayerEntity()->position.y >= 2560 && app->entityManager->GetPlayerEntity()->position.y <= 3072) {
+		player->pbody->body->SetTransform({ 187,30 }, 0);
+	}
+	//lvl2 a lvl3
+	if (app->entityManager->GetPlayerEntity()->position.x >= 9600 && app->entityManager->GetPlayerEntity()->position.x <= 9666 && app->entityManager->GetPlayerEntity()->position.y >= 4224 && app->entityManager->GetPlayerEntity()->position.y <= 4736) {
+		player->pbody->body->SetTransform({ 70,175 }, 0);
+	}
+	//lvl3 a lvl4
+	if (app->entityManager->GetPlayerEntity()->position.x >= 6200 && app->entityManager->GetPlayerEntity()->position.x <= 6272 && app->entityManager->GetPlayerEntity()->position.y >= 15360 && app->entityManager->GetPlayerEntity()->position.y <= 15872) {
+		player->pbody->body->SetTransform({ 344,190 }, 0);
+	}
+	//lvl4 a lvl5
+	if (app->entityManager->GetPlayerEntity()->position.x >= 8576 && app->entityManager->GetPlayerEntity()->position.x <= 8665 && app->entityManager->GetPlayerEntity()->position.y >= 11647 && app->entityManager->GetPlayerEntity()->position.y <= 12161) {
+		player->pbody->body->SetTransform({ 548,27 }, 0);
+	}
+	//lvl5 a lvl6
+	if (app->entityManager->GetPlayerEntity()->position.x >= 20992 && app->entityManager->GetPlayerEntity()->position.x <= 21504 && app->entityManager->GetPlayerEntity()->position.y >= 384 && app->entityManager->GetPlayerEntity()->position.y <= 460) {
+		player->pbody->body->SetTransform({ 380,283 }, 0);
+	}
+	//lvl6 a final
+	if (app->entityManager->GetPlayerEntity()->position.x >= 29111 && app->entityManager->GetPlayerEntity()->position.x <= 29184 && app->entityManager->GetPlayerEntity()->position.y >= 13696 && app->entityManager->GetPlayerEntity()->position.y <= 14208) {
+		player->pbody->body->SetTransform({ 673,295 }, 0);
 	}
 
 	return true;
