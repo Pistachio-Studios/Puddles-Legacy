@@ -93,7 +93,7 @@ bool TutorialScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
-	test = app->tex->Load("Assets/Textures/lighting-demo-wall.png");
+	test = app->tex->Load("Assets/Animations/MiniAraña/Mini_Spider_Idle.png");
 
 /// TODO change scene collider
 
