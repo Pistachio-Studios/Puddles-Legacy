@@ -131,6 +131,7 @@ bool Render::Update(float dt)
 	for(Sprite s : sprites)
 	{
 		DrawSprite(s);
+		
 	}
 
 	sprites.clear();
@@ -236,13 +237,20 @@ void Render::cameraInterpolation(Entity* target, float lerpSpeed, float dt, iPoi
 }
 
 // Blit to screen
-bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, float size, uint layer, SDL_RendererFlip flip, int pivotX, int pivotY)
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, double angle, float size, uint layer, SDL_RendererFlip flip, int pivotX, int pivotY)
 {
 	bool ret = true;
 
-	Sprite sprite = Sprite(texture, x, y, (SDL_Rect*)section, speed, angle, size, layer, flip, pivotX, pivotY);
-
-	sprites.push_back(sprite);
+	if(section != NULL)
+	{
+		Sprite sprite = Sprite(texture, x, y, *section, speed, angle, size, layer, flip, pivotX, pivotY);
+		sprites.push_back(sprite);
+	}
+	else
+	{
+		Sprite sprite = Sprite(texture, x, y, {0,0,0,0}, speed, angle, size, layer, flip, pivotX, pivotY);
+		sprites.push_back(sprite);
+	}
 
 	return ret;
 }
@@ -404,7 +412,7 @@ bool Render::DrawSprite(Sprite &sprite) const
 	SDL_Texture* texture = sprite.texture;
 	int x = sprite.position.x;
 	int y = sprite.position.y;
-	const SDL_Rect* section = sprite.section;
+	SDL_Rect section = sprite.section;
 	float speed = sprite.speed;
 	double angle = sprite.angle;
 	float size = sprite.size;
@@ -419,10 +427,10 @@ bool Render::DrawSprite(Sprite &sprite) const
 	rect.x = ((int)(camera.x * speed) + x) * scale;
 	rect.y = ((int)(camera.y * speed) + y) * scale;
 
-	if(section != NULL)
+	if(section.w != NULL and section.h != NULL)
 	{
-		rect.w = section->w;
-		rect.h = section->h;
+		rect.w = section.w;
+		rect.h = section.h;
 	}
 	else
 	{
@@ -445,7 +453,7 @@ bool Render::DrawSprite(Sprite &sprite) const
 		p = &pivot;
 	}
 
-	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
+	if(SDL_RenderCopyEx(renderer, texture, &section, &rect, angle, p, flip) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
