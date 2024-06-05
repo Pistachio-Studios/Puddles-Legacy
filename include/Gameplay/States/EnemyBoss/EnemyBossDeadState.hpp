@@ -26,8 +26,13 @@ public:
         enemyboss->bossDeath.Update(dt);
 
         if (enemyboss->bossDeath.GetCurrentFrameCount() >= 11) {
-            app->physics->DestroyBody(enemyboss->pbody);
             enemyboss->Disable();
+            enemyboss->CleanUp();
+
+            for (int i = 0; i < 10; ++i) {
+                app->physics->DestroyBody(enemyboss->bulletArray[i]->pbody);
+                app->tex->UnLoad(enemyboss->bulletArray[i]->texture);
+            }
         }
     }
     inline void Exit() override

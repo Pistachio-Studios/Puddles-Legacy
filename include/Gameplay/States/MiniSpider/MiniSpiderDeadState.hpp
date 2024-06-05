@@ -27,8 +27,8 @@ public:
         minispider->spiderDeath.Update(dt);
 
         if (minispider->spiderDeath.GetCurrentFrameCount() >= 12) {
-            app->physics->DestroyBody(minispider->pbody);
             minispider->Disable();
+            minispider->CleanUp();
         }
     }
     inline void Exit() override

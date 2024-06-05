@@ -99,6 +99,8 @@ public:
 
 	PathFinding* pathfinding;
 
+	bool isTouchingPlayer = false;;
+
 	b2Vec2 force;
 
 	SDL_RendererFlip flip = SDL_FLIP_NONE;

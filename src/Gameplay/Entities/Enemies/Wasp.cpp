@@ -210,28 +210,48 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype) {
 
-		case ColliderType::SWORD:
-			LOG("Collision SWORD");
-			//if (state != EntityState::DEAD and !invencible){
-			vida -= player->dano;
-			if (vida <= 0.0f)
-			{
-				// AUDIO DONE boss death
-				app->audio->PlayFx(dieFx);
-				movementFSM->ChangeState("die");
-			}
-			else if (vida > 0.0f) {
-				app->audio->PlayFx(damageFx);
-				waspDamage.Reset();
-				movementFSM->ChangeState("hurt");
-			}
-			//else {
-			//	// AUDIO DONE boss hit
-			//	app->audio->PlayFx(bossHit);
-			//	movementStateMachine->ChangeState("hurt");
-			//	lives--;
-			//}
-			break;
+	case ColliderType::SWORD:
+		LOG("Collision SWORD");
+		//if (state != EntityState::DEAD and !invencible){
+		vida -= player->dano;
+		if (vida <= 0.0f)
+		{
+			// AUDIO DONE boss death
+			app->audio->PlayFx(dieFx);
+			movementFSM->ChangeState("die");
+		}
+		else if (vida > 0.0f) {
+			app->audio->PlayFx(damageFx);
+			waspDamage.Reset();
+			movementFSM->ChangeState("hurt");
+		}
+		//else {
+		//	// AUDIO DONE boss hit
+		//	app->audio->PlayFx(bossHit);
+		//	movementStateMachine->ChangeState("hurt");
+		//	lives--;
+		//}
+		break;
+
+	case ColliderType::PLAYER:
+		isTouchingPlayer = true;
+		break;
+
+	case ColliderType::MAGIC:
+		vida -= player->dano;
+		if (vida <= 0.0f)
+		{
+			// AUDIO DONE boss death
+			app->audio->PlayFx(dieFx);
+			movementFSM->ChangeState("die");
+		}
+		else if (vida > 0.0f) {
+			app->audio->PlayFx(damageFx);
+			waspDamage.Reset();
+			movementFSM->ChangeState("hurt");
+		}
+		break;
+
 	case ColliderType::UNKNOWN:
 		LOG("Colision UNKNOWN");
 		break;
@@ -239,7 +259,11 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 }
 
 void Wasp::EndCollision(PhysBody* physA, PhysBody* physB) {
-
+	switch (physB->ctype) {
+	case ColliderType::PLAYER:
+		isTouchingPlayer = false;
+		break;
+	}
 }
 
 b2Vec2 Wasp::calculateForce() {

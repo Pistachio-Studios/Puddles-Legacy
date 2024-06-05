@@ -32,7 +32,7 @@ public:
         minispider->spiderAttack.Update(dt);
 
         //Attack
-        if (minispider->spiderAttack.GetCurrentFrameCount() == 5 && PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 2.0f) {
+        if (minispider->spiderAttack.GetCurrentFrameCount() == 5 && minispider->isTouchingPlayer) {
             player->vida -= minispider->dano;
         }
 

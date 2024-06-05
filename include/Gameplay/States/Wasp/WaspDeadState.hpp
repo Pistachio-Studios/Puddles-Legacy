@@ -27,8 +27,8 @@ public:
         wasp->waspDeath.Update(dt);
 
         if (wasp->waspDeath.GetCurrentFrameCount() >= 15) {
-            app->physics->DestroyBody(wasp->pbody);
             wasp->Disable();
+            wasp->CleanUp();
         }
 
     }
