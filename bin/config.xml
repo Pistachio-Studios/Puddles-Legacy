@@ -80,7 +80,7 @@
               staffFx="Assets/Audio/Fx/Player/FireStaff.ogg"
               deathFx="Assets/Audio/Fx/Player/Death.ogg"
               damageFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg"
-              blockFx="Assets/Audio/Fx/Player/Block.ogg"/>
+              blockFx="Assets/Audio/Fx/Player/Block.ogg"/>/>
 			<enemies>
 				<EnemyBoss x="300" y="1800"/>
 				<MiniSpider x="800" y="2050" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg"
