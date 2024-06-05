@@ -189,6 +189,11 @@ public:
 	Timer playerHurtCultdown;
 	Timer dashTimer;
 	float dashCultdown = 5.0f;
+
+	Animation SabrinaEspadaIdle, SabrinaEspadaMovDelante, SabrinaEspadaMovDerecha, SabrinaEspadaMovDetras,
+		SabrinaEspadaDano, SabrinaEspadaDash, SabrinaEspadaMuerte, SabrinaEspadaRecolectar,
+		SabrinaAtaque, SabrinaCetroIdle, SabrinaCetroMovDelante, SabrinaCetroMovDerecha,
+		SabrinaCetroMovDetras, SabrinaCetroDano, SabrinaCetroDash, SabrinaCetroMuerte, SabrinaCetroRecolectar;
 };
 
 #endif // __PLAYER_H__

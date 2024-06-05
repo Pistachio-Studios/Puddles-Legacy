@@ -20,7 +20,16 @@ public:
     }
     inline void Update(float dt) override
     {
-
+        //Animation
+        if (player->currentClass == KNIGHT) {            
+            app->render->DrawTexture(player->SabrinaEspadaIdle.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaEspadaIdle.GetCurrentFrame());
+            player->SabrinaEspadaIdle.Update(dt);
+        }
+        if (player->currentClass == WIZARD) {
+            app->render->DrawTexture(player->SabrinaCetroIdle.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaCetroIdle.GetCurrentFrame());
+            player->SabrinaCetroIdle.Update(dt);
+        }
+        
 
         if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT or
             app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT or

@@ -10,6 +10,7 @@
 #include "Utils/StateMachine.h"
 #include "Core/SceneManager.h"
 #include "Core/Window.h"
+#include "Core/AnimationManager.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -54,7 +55,7 @@ bool Player::Start() {
 
 	dashTimer = Timer();
 
-	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
+	//texture = app->tex->Load("Assets/Textures/playerx128-test.png");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
 	pbody->listener = this;
@@ -76,6 +77,59 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatIdleState("idle"));
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
+
+	//TODO fix caminardelanteCetro anim & parpadeos movimiento & overlay idle con ataque
+	//Anims
+	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");
+	SabrinaEspadaIdle.speed = 2.0f;
+
+	SabrinaCetroIdle = *app->animationManager->GetAnimByName("SabrinaCetroIdle");
+	SabrinaCetroIdle.speed = 2.0f;
+
+	SabrinaEspadaMovDelante = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_delante");
+	SabrinaEspadaMovDelante.speed = 2.0f;
+
+	SabrinaCetroMovDelante = *app->animationManager->GetAnimByName("SabrinaCetroCaminar_delante");
+	SabrinaCetroMovDelante.speed = 2.0f;
+
+	SabrinaEspadaMovDerecha = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_derecha");
+	SabrinaEspadaMovDerecha.speed = 2.0f;
+
+	SabrinaCetroMovDerecha = *app->animationManager->GetAnimByName("SabrinaCetroCaminar_derecha");
+	SabrinaCetroMovDerecha.speed = 2.0f;
+
+	SabrinaEspadaMovDetras = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_detras");
+	SabrinaEspadaMovDetras.speed = 2.0f;
+
+	SabrinaCetroMovDetras = *app->animationManager->GetAnimByName("SabrinaCetroCaminar_detras");
+	SabrinaCetroMovDetras.speed = 2.0f;
+
+	SabrinaEspadaDano = *app->animationManager->GetAnimByName("SabrinaEspadaDano");
+	SabrinaEspadaDano.speed = 2.0f;
+
+	SabrinaCetroDano = *app->animationManager->GetAnimByName("SabrinaCetroDano");
+	SabrinaCetroDano.speed = 2.0f;
+
+	SabrinaEspadaDash = *app->animationManager->GetAnimByName("SabrinaEspadaDash");
+	SabrinaEspadaDash.speed = 2.0f;
+
+	SabrinaCetroDash = *app->animationManager->GetAnimByName("SabrinaCetroDash");
+	SabrinaCetroDash.speed = 2.0f;
+
+	SabrinaEspadaMuerte = *app->animationManager->GetAnimByName("SabrinaEspadaMuerte");
+	SabrinaEspadaMuerte.speed = 2.0f;
+
+	SabrinaCetroMuerte = *app->animationManager->GetAnimByName("SabrinaCetroMuerte");
+	SabrinaCetroMuerte.speed = 2.0f;
+
+	SabrinaEspadaRecolectar = *app->animationManager->GetAnimByName("SabrinaEspadaRecolectar");
+	SabrinaEspadaRecolectar.speed = 2.0f;
+
+	SabrinaCetroRecolectar = *app->animationManager->GetAnimByName("SabrinaCetroRecolectar");
+	SabrinaCetroRecolectar.speed = 2.0f;
+
+	SabrinaAtaque = *app->animationManager->GetAnimByName("SabrinaAtaque");
+	SabrinaAtaque.speed = 2.0f;
 
 	totalLivesPlayer = livesPlayer;
 
@@ -149,6 +203,8 @@ bool Player::Update(float dt)
 			app->sceneManager->ChangeScene("townscene");
 		}
 	}
+
+
 
 	return true;
 }

@@ -21,7 +21,7 @@ public:
     inline void Update(float dt) override
     {
 
-
+        
         PhysBody* pbody = player->pbody;
 
         b2Vec2 impulse = { 0, 0 };
@@ -30,15 +30,52 @@ public:
         {
             if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
                 impulse.x = -pbody->body->GetMass() * player->moveForce;
+                if (player->currentClass == KNIGHT) {
+                    //Animation
+                    app->render->DrawTexture(player->SabrinaEspadaMovDerecha.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaEspadaMovDerecha.GetCurrentFrame());
+                    player->SabrinaEspadaMovDerecha.Update(dt);
+                }
+                if (player->currentClass == WIZARD) {
+                    //Animation
+                    app->render->DrawTexture(player->SabrinaCetroMovDerecha.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaCetroMovDerecha.GetCurrentFrame());
+                    player->SabrinaCetroMovDerecha.Update(dt);
+                }
             }
             if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
                 impulse.x = pbody->body->GetMass() * player->moveForce;
+                //Animation
+                if (player->currentClass == KNIGHT) {
+                    app->render->DrawTexture(player->SabrinaEspadaMovDerecha.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaEspadaMovDerecha.GetCurrentFrame());
+                    player->SabrinaEspadaMovDerecha.Update(dt);
+                }
+                if (player->currentClass == WIZARD) {
+                    app->render->DrawTexture(player->SabrinaCetroMovDerecha.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaCetroMovDerecha.GetCurrentFrame());
+                    player->SabrinaCetroMovDerecha.Update(dt);
+                }                
             }
             if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
                impulse.y = -pbody->body->GetMass() * player->moveForce;
+               //Animation
+               if (player->currentClass == KNIGHT) {
+                   app->render->DrawTexture(player->SabrinaEspadaMovDetras.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaEspadaMovDetras.GetCurrentFrame());
+                   player->SabrinaEspadaMovDetras.Update(dt);
+               }
+               if (player->currentClass == WIZARD) {
+                   app->render->DrawTexture(player->SabrinaCetroMovDetras.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaCetroMovDetras.GetCurrentFrame());
+                   player->SabrinaCetroMovDetras.Update(dt);
+               }
             }
             if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-                impulse.y = pbody->body->GetMass() * player->moveForce;
+                impulse.y = pbody->body->GetMass() * player->moveForce;                
+                //Animation
+                if (player->currentClass == KNIGHT) {
+                    app->render->DrawTexture(player->SabrinaEspadaMovDelante.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaEspadaMovDelante.GetCurrentFrame());
+                    player->SabrinaEspadaMovDelante.Update(dt);
+                }
+                if (player->currentClass == WIZARD) {
+                    app->render->DrawTexture(player->SabrinaCetroMovDelante.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaCetroMovDelante.GetCurrentFrame());
+                    player->SabrinaCetroMovDelante.Update(dt);
+                }
             }
 
             pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
@@ -56,6 +93,16 @@ public:
             pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
 
             player->dashTimer.Start();
+
+            //Animation
+            if (player->currentClass == KNIGHT) {
+                app->render->DrawTexture(player->SabrinaEspadaDash.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaEspadaDash.GetCurrentFrame());
+                player->SabrinaEspadaDash.Update(dt);
+            }
+            if (player->currentClass == WIZARD) {
+                app->render->DrawTexture(player->SabrinaCetroDash.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaCetroDash.GetCurrentFrame());
+                player->SabrinaCetroDash.Update(dt);
+            }
         }
 
         if (pbody->body->GetLinearVelocity().Length() < 1.0f)

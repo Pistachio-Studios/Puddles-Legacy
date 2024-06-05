@@ -59,6 +59,9 @@ public:
                 b2Vec2 swordPos = { playerPos.x + (float)cos(playerLookingAngle + attackValue * DEGTORAD) * radius, playerPos.y + (float)sin(playerLookingAngle + attackValue * DEGTORAD) * radius };
                 player->swordEntity->pbody->body->SetTransform(swordPos, playerLookingAngle + attackValue * DEGTORAD);
                 attackValue += dt / 1000 * attackSpeed;
+                //Animation
+                app->render->DrawTexture(player->SabrinaAtaque.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaAtaque.GetCurrentFrame());
+                player->SabrinaAtaque.Update(dt);
             }
             else
             {
@@ -74,11 +77,15 @@ public:
 
             if (app->input->GetMouseButtonDown(1))
             {
+                //Animation
+                app->render->DrawTexture(player->SabrinaAtaque.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaAtaque.GetCurrentFrame());
+                player->SabrinaAtaque.Update(dt);
+
                 if(spellTimer.ReadMSec() > 500 or firstSpell)
                 {
                     player->staffEntity->ThrowSpell();
                     spellTimer.Start();
-                    firstSpell = false;
+                    firstSpell = false;                    
                 }
             }
             else if(spellTimer.ReadSec() > 5)
