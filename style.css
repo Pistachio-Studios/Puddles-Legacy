@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background: linear-gradient(135deg, #141A41, #2E4980, #643C99);
-    color: black;
+    color: black; /* Cambiado a blanco para mejorar la legibilidad */
 }
 
 main {
@@ -21,12 +21,30 @@ main {
 }
 
 header {
-    background-image: url('GameTitle.png');
-    background-size: cover;
-    background-position: center;
+    background-color: #1F3A7F;
     color: white;
     text-align: center;
-    padding: 100px 0; /* Ajusta el padding según sea necesario */
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: padding 0.2s, height 0.3s; /* Agregamos transición para un cambio suave en el padding y la altura */
+}
+
+header.shrink {
+    padding: 0px 0; /* Ajusta el padding para el menú encogido */
+    height: 160px; /* Ajusta la altura para el menú encogido */
+}
+
+header.shrink img {
+    max-width: calc(300px * 0.8); /* Reducimos el tamaño máximo de la imagen en un 20% */
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 60%;
 }
 
 h1 {
@@ -44,13 +62,12 @@ h1 {
 
 .btn {
     background: white;
-    color: #643C99; /* Color morado */
-    padding: 10px 20px;
+    color: #643C99;
+    padding: 8px 16px;
     text-decoration: none;
-    border-radius: 20px; /* Hace los botones más redondeados */
+    border-radius: 5px;
     margin: 5px;
     display: inline-block;
-    transition: background-color 0.3s, color 0.3s; /* Agrega una transición suave para el cambio de color de fondo y texto */
 }
 
 .btn:hover {
