@@ -175,6 +175,7 @@ public:
 	PlayerClass currentClass = KNIGHT;
 
 	Inventory inventory;
+	Potion* currentPotion = nullptr;
 
 	//tmps
 	PhysBody* sword;

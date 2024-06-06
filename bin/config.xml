@@ -100,12 +100,6 @@
 				<HepaticaPlant x="1900" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
 				<HepaticaPlant x="2100" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
 			</Plants>
-			<Potion>
-				<VitaPotion x="-10" y="110" texturepath="Assets/Textures/Potions/Inventory/HealPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/HealPotionSelected.png"/>
-				<CeleritaPotion x="478" y="105" texturepath="Assets/Textures/Potions/Inventory/VeloPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/VeloPotionSelected.png"/>
-				<EtherPotion x="132" y="-15" texturepath="Assets/Textures/Potions/Inventory/EnergyPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/EnergyPotionSelected.png"/>
-				<OblitiusPotion x="140" y="472" texturepath="Assets/Textures/Potions/Inventory/AbilityPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/AbilityPotionSelected.png"/>
-			</Potion>
 		</tutorialscene>
 		<testscene>
 			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx" />
@@ -121,4 +115,12 @@
 	<questmanager>
 		<quests path="quests.csv"/>
 	</questmanager>
+	<ui>
+		<Potion>
+			<VitaPotion x="-10" y="110" texturepath="Assets/Textures/Potions/Inventory/HealPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/HealPotionSelected.png"/>
+			<CeleritaPotion x="478" y="105" texturepath="Assets/Textures/Potions/Inventory/VeloPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/VeloPotionSelected.png"/>
+			<EtherPotion x="132" y="-15" texturepath="Assets/Textures/Potions/Inventory/EnergyPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/EnergyPotionSelected.png"/>
+			<OblitiusPotion x="140" y="472" texturepath="Assets/Textures/Potions/Inventory/AbilityPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/AbilityPotionSelected.png"/>
+		</Potion>
+	</ui>
 </config>
