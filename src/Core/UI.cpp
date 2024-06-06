@@ -76,14 +76,14 @@ bool UI::Update(float dt)
 			Item* potion = playerInventory->items[i];
 			if(potion->quantity > 0)
 			{
-				int potionX = (int)windowW / 2 - 250;
-				int potionY = (int)windowH / 2 - 450;
+				int potionX = (int)windowW / 2 - 252;
+				int potionY = (int)windowH / 2 - 446;
 				int potionWidth = 250;
 				int potionHeight = 250;
 
 				if(potion->name == "Celerita Potion")
 				{
-					if(app->input->GetMouseX() > potionX && app->input->GetMouseX() < potionX + potionWidth && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight)
+					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight)
 					{
 						app->render->DrawTexture(celeritaPotionSelected, potionX, potionY, 0, 0);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
@@ -92,12 +92,13 @@ bool UI::Update(float dt)
 					{
 						app->render->DrawTexture(celeritaPotionCreated, potionX, potionY, 0, 0);
 					}
-					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 - 0, (int)windowH / 2 - 250, 50, 50, { 0, 0, 0, 255 });
+					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 + 40, (int)windowH / 2 - 250, 50, 50, { 0, 0, 0, 255 });
 				}
 				else if(potion->name == "Ether Potion")
 				{
-					potionY = (int)windowH / 2 - 0;
-					if(app->input->GetMouseX() > potionX && app->input->GetMouseX() < potionX + potionWidth && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight)
+					int potionX = (int)windowW / 2 - 259;
+					potionY = (int)windowH / 2 - 12;
+					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight)
 					{
 						app->render->DrawTexture(etherPotionSelected, potionX, potionY, 0, 0);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
@@ -106,37 +107,37 @@ bool UI::Update(float dt)
 					{
 						app->render->DrawTexture(etherPotionCreated, potionX, potionY, 0, 0);
 					}
-					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 - 250, (int)windowH / 2 - 0, 50, 50, { 0, 0, 0, 255 });
+					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 + 40, (int)windowH / 2 + 170, 50, 50, { 0, 0, 0, 255 });
 				}
 				else if(potion->name == "Oblitius Potion")
 				{
-					potionX = (int)windowW / 2 - 0;
-					potionY = (int)windowH / 2 - 250;
-					if(app->input->GetMouseX() > potionX && app->input->GetMouseX() < potionX + potionWidth && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight)
+					potionX = (int)windowW / 2 - 50;
+					potionY = (int)windowH / 2 - 259;
+					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight + 30)
 					{
-						app->render->DrawTexture(oblitiusPotionSelected, potionX, potionY, 0, 0);
+						app->render->DrawTexture(oblitiusPotionSelected, potionX, potionY - 2, 0, 0);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
 					}
 					else
 					{
 						app->render->DrawTexture(oblitiusPotionCreated, potionX, potionY, 0, 0);
 					}
-					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 - 250, (int)windowH / 2 - 250, 50, 50, { 0, 0, 0, 255 });
+					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 + 230, (int)windowH / 2 - 100, 50, 50, { 0, 0, 0, 255 });
 				}
 				else if(potion->name == "Vita Potion")
 				{
-					potionX = (int)windowW / 2 - 450;
-					potionY = (int)windowH / 2 - 250;
-					if(app->input->GetMouseX() > potionX && app->input->GetMouseX() < potionX + potionWidth && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight)
+					potionX = (int)windowW / 2 - 481;
+					potionY = (int)windowH / 2 - 255;
+					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight + 30)
 					{
-						app->render->DrawTexture(VitaPotionSelected, potionX, potionY, 0, 0);
+						app->render->DrawTexture(VitaPotionSelected, potionX - 2, potionY, 0, 0);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
 					}
 					else
 					{
 						app->render->DrawTexture(VitaPotionCreated, potionX, potionY, 0, 0);
 					}
-					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 - 0, (int)windowH / 2 - 0, 50, 50, { 0, 0, 0, 255 });
+					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 - 230, (int)windowH / 2 - 100, 50, 50, { 0, 0, 0, 255 });
 				}
 			}
 		}
