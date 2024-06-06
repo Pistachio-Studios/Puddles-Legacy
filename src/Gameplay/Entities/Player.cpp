@@ -77,6 +77,9 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
 
+	//Player Audios
+	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
+
 	totalLivesPlayer = livesPlayer;
 
 	sceneChange = false;

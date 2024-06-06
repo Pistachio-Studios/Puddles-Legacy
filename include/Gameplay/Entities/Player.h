@@ -189,6 +189,9 @@ public:
 	Timer playerHurtCultdown;
 	Timer dashTimer;
 	float dashCultdown = 5.0f;
+
+	//soundFX
+	int stepsFx, swordFx, staffFx, deathFx, damageFx, blockFx;
 };
 
 #endif // __PLAYER_H__
