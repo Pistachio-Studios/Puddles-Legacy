@@ -4,88 +4,104 @@ id,character,ES,EN,CAT,type,choices
 1, Sabrina, Ho-Hola soy Sabrina. ¿Podrias decirme donde poder descansar un poco?, Hi-Hi I'm Sabrina. Could you tell me where I can rest for a little bit?, Ho-Hola sóc la Sabrina. Podries dir-me on poder descansar una mica?, D, "21"
 2, Sabrina, Muchas gracias., Thank you very much., Moltes gràcies., D,
 3, Sabrina, Buenas. Me llamo Sabrina. Podrias dejarme algun sitio
-4, 
-5, 
-6, 
-7, 
-8, 
-9, 
-10, 
-11, 
-12, 
-13, 
-14, 
-15, 
-16, 
-17, 
-18, 
-19, 
-20, 
+4, Sabrina,
+5, Sabrina,
+6, Sabrina,
+7, Sabrina,
+8, Sabrina,
+9, Sabrina,
+10, Sabrina,
+11, Sabrina,
+12, Sabrina,
+13, Sabrina,
+14, Sabrina,
+15, Sabrina,
+16, Sabrina,
+17, Sabrina,
+18, Sabrina,
+19, Sabrina,
 
 #Loco del Pueblo
 20, Loco, Bienvenida al pueblo hahahaha. Soy Bounty Pistache., Welcome to the village hahahaha, Benvinguda al poble hahahaha, D, "1"
 21, Loco, El edificio que esta en el centro del pueblo es la taverna. Ves ahí para poder descansar., The building in the center of the village is the tavern. Go there to rest., L'edifici que està al centre del poble és la taverna. Ves-hi per poder descansar., D, "2"
-22, 
-23, 
-24, 
-25, 
-26, 
-27, 
-28, 
-29, 
-30, 
-31, 
-32, 
-33, 
-34, 
-35, 
-36, 
-37, 
-38, 
-39, 
-40,  
+22, Loco,
+23, Loco,
+24, Loco,
+25, Loco,
+26, Loco,
+27, Loco,
+28, Loco,
+29, Loco,
+30, Loco,
+31, Loco,
+32, Loco,
+33, Loco,
+34, Loco,
+35, Loco,
+36, Loco,
+37, Loco,
+38, Loco,
+39, Loco,
+40, Loco,
 
 #Tavernero
 41, Tavernero, Soy Klaus. El dueño de la taverna. ¿En que puedo ayudarte?, I'm Klaus. The owner of the tavern. How can I help you?, Sóc en Klaus. El propietari de la taverna. Com puc ajudar-te?, D, "3"
-42, 
-43,  
-44, 
-45, 
-46, 
-47, 
-48,  
-49, 
-50, 
-51, 
-52, 
-53, 
-54, 
-55, 
-56, 
-57, 
-58, 
-59, 
-60,  
+42, Tavernero,
+43, Tavernero,
+44, Tavernero,
+45, Tavernero,
+46, Tavernero,
+47, Tavernero,
+48, Tavernero,
+49, Tavernero,
+50, Tavernero,
+51, Tavernero,
+52, Tavernero,
+53, Tavernero,
+54, Tavernero,
+55, Tavernero,
+56, Tavernero,
+57, Tavernero,
+58, Tavernero,
+59, Tavernero,
+60,  Tavernero,
 
 #Blackcat
-
+61, Blackcat, 
+62, Blackcat, 
+63, Blackcat, 
 
 #Bunny
-
+64, Bunny, 
+65, Bunny,
+66, Bunny,
 
 #Chameleon
-
-
+67, Chameleon,
+68, Chameleon,
+69, Chameleon,
+ 
 #Chicken
-
+70, Chicken, 
+71, Chicken, 
+72, Chicken, 
 
 #Panda
-
+73, Panda, 
+74, Panda, 
+75, Panda, 
 
 #Xavier
-
+76, Xavier,
+77, Xavier,
+78, Xavier,
 
 #Squirrel
-
+79, Squirrel,
+80, Squirrel,
+81, Squirrel,
 
 #WhiteCat
+82, WhiteCat,
+83, WhiteCat,
+84, WhiteCat,
