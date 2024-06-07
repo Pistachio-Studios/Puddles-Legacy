@@ -68,7 +68,7 @@ public:
 	SDL_Texture* texture = NULL;
 
 	//Movement
-	int moveSpeed = 3;
+	int moveSpeed = 1;
 	int noSpeed = 0;
 	int updateSpeed;
 	float moveForce = 1.0f;
@@ -98,6 +98,10 @@ public:
 	int damageFx,attackFx,dieFx;
 
 	PathFinding* pathfinding;
+
+	bool isTouchingPlayer = false;
+
+	bool dead = false;
 
 	b2Vec2 force;
 

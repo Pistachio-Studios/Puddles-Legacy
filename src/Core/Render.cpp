@@ -72,7 +72,7 @@ bool Render::Awake(pugi::xml_node& config)
 	TTF_Init();
 
 	//load a font into memory
-	font = TTF_OpenFont("Assets/Fonts/VecnaBold.ttf", 25);
+	font = TTF_OpenFont("Assets/Fonts/GFSDidot.ttf", 25);
 	//TTF_SetFontStyle(font, TTF_STYLE_NORMAL);
 	//TTF_SetFontOutline(font, 0);
 	//TTF_SetFontKerning(font, 0);
@@ -124,6 +124,7 @@ void Render::DrawImGui()
 		ImGui::Text("camera lerp speed: %f", camera.lerpSpeed);
 		ImGui::SliderFloat("Camera Lerp Speed", &camera.lerpSpeed, 0.0f, 16.0f);
 		ImGui::Text("camera target: %s", camera.target != nullptr ? camera.target->name.GetString() : "null");
+		ImGui::Checkbox("Free Cam", &freeCam);
 		ImGui::Text("Vsync: %s", vsyncEnabled ? "Enabled" : "Disabled");
 		
 		ImGui::End();

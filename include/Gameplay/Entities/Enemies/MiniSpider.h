@@ -101,6 +101,10 @@ public:
 
 	PathFinding* pathfinding;
 
+	bool isTouchingPlayer = false;
+
+	bool dead = false;
+
 	ParticleGenerator* particleSource1;
 
 };

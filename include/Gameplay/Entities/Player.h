@@ -175,6 +175,7 @@ public:
 	PlayerClass currentClass = KNIGHT;
 
 	Inventory inventory;
+	Potion* currentPotion = nullptr;
 
 	//tmps
 	PhysBody* sword;
@@ -194,6 +195,9 @@ public:
 		SabrinaEspadaDano, SabrinaEspadaDash, SabrinaEspadaMuerte, SabrinaEspadaRecolectar,
 		SabrinaAtaque, SabrinaCetroIdle, SabrinaCetroMovDelante, SabrinaCetroMovDerecha,
 		SabrinaCetroMovDetras, SabrinaCetroDano, SabrinaCetroDash, SabrinaCetroMuerte, SabrinaCetroRecolectar;
+	//Cheats
+	bool godMode = false;
+	bool ghostMode = false;
 };
 
 #endif // __PLAYER_H__

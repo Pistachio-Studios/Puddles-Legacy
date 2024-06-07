@@ -140,13 +140,26 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	//CHEATS
+	if (godMode) {
+		vida = 10.0f;
+		livesPlayer = 10;
+	}
+	if (ghostMode) {
+		pbody->body->GetFixtureList()->SetSensor(ghostMode);
+		SDL_SetTextureAlphaMod(texture, 100);
+	}
+	else {
+		SDL_SetTextureAlphaMod(texture, 255);
+	}
+
 	movementFSM->Update(dt);
 	combatFSM->Update(dt);
 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
 	if (vida <= 0.0f) {
-		pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0); //TODO: QUITAR ESTO!!! TIENE QUE SER EL SPAWNPOINT DEL PLAYER EN ESE MAPA
 		vida = 10.0f;
 	}
 	
@@ -229,6 +242,13 @@ void Player::DrawImGui()
 
 	ImGui::Text("player hurt cooldown: %f", playerHurtCultdown.ReadMSec());
 
+	ImGui::Text("dash timer: %f", dashTimer.ReadMSec());
+
+	ImGui::Separator();
+	ImGui::Text("Player Cheats");
+	ImGui::Checkbox("God Mode", &godMode);
+	ImGui::Checkbox("Ghost Mode", &ghostMode);
+
 	ImGui::End();
 }
 
@@ -273,6 +293,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				livesPlayer--; 
 				playerHurtCultdown.Start();
 			}
+		break;
+	case ColliderType::BULLET:
+		vida -= 2.0f;
 		break;
 	}
 
