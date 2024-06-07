@@ -21,7 +21,7 @@ double easeInOutSine(double t) {
 }
 
 double easeInQuad(double t) {
-    return t * t;
+    return SDL_min(t * t, 1.0);
 }
 
 double easeOutQuad(double t) {

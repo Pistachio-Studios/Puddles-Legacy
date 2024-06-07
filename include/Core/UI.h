@@ -54,6 +54,8 @@ public:
 
 
 	uint windowW, windowH;
+
+	Timer potionEaseTimer;
 };
 
 #endif // __UI_H__
