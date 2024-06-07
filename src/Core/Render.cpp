@@ -124,6 +124,7 @@ void Render::DrawImGui()
 		ImGui::Text("camera lerp speed: %f", camera.lerpSpeed);
 		ImGui::SliderFloat("Camera Lerp Speed", &camera.lerpSpeed, 0.0f, 16.0f);
 		ImGui::Text("camera target: %s", camera.target != nullptr ? camera.target->name.GetString() : "null");
+		ImGui::Checkbox("Free Cam", &freeCam);
 		ImGui::Text("Vsync: %s", vsyncEnabled ? "Enabled" : "Disabled");
 		
 		ImGui::End();

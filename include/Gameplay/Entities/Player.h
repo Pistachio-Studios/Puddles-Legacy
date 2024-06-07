@@ -190,6 +190,10 @@ public:
 	Timer playerHurtCultdown;
 	Timer dashTimer;
 	float dashCultdown = 5.0f;
+
+	//Cheats
+	bool godMode = false;
+	bool ghostMode = false;
 };
 
 #endif // __PLAYER_H__
