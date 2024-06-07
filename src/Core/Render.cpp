@@ -146,6 +146,33 @@ void Render::DrawImGui()
 		ImGui::SliderFloat("Camera Lerp Speed", &camera.lerpSpeed, 0.0f, 16.0f);
 		ImGui::Text("camera target: %s", camera.target != nullptr ? camera.target->name.GetString() : "null");
 		ImGui::Text("Vsync: %s", vsyncEnabled ? "Enabled" : "Disabled");
+
+		ImGui::Separator();
+		//Sprite info
+		ImGui::Text("Sprites: %d", sprites.size());
+
+		// Create a child region of fixed width and enable horizontal scrollbar
+		if (ImGui::BeginChild("Sprite List", ImVec2(0, 200), true))
+		{
+			for (Sprite& s : sprites)
+			{
+				// Display sprite information
+				if (ImGui::TreeNode(&s, "Sprite %d", &s - &sprites[0]))
+				{
+					ImGui::Text("Position: %d, %d", s.position.x, s.position.y);
+					ImGui::Text("Speed: %f", s.speed);
+					ImGui::Text("Angle: %f", s.angle);
+					ImGui::Text("Size: %f", s.size);
+					ImGui::Text("Layer: %d", s.layer);
+					ImGui::Text("Flip: %d", s.flip);
+					ImGui::Text("Pivot: %d, %d", s.pivot.x, s.pivot.y);
+					// Add more sprite properties here...
+
+					ImGui::TreePop();
+				}
+			}
+			ImGui::EndChild();
+		}
 		
 		ImGui::End();
 	}
@@ -159,7 +186,7 @@ bool Render::PostUpdate()
 	//Render all pivot points
 	for(Sprite& s : sprites)
 	{
-		DrawRectangle({ s.center.x - 5, s.center.y - 5, 10, 10 }, 255, 0, 0, 255, true);
+		DrawRectangle({ s.pivot.x - 5, s.pivot.y - 5, 10, 10 }, 255, 0, 0, 255, true);
 	}
 
 	sprites.clear();
@@ -448,23 +475,13 @@ bool Render::DrawSprite(Sprite &sprite) const
 	rect.w *= scale;
 	rect.h *= scale;
 
-	SDL_Point* p = NULL;
-	SDL_Point pivot;
-
-	if(pivotX != INT_MAX && pivotY != INT_MAX)
-	{
-		pivot.x = pivotX;
-		pivot.y = pivotY;
-		p = &pivot;
-	}
-
 	if(texture == NULL)
 	{
 		LOG("Cannot blit to screen. Texture is nullptr");
 		return true;
 	}
 
-	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, NULL, flip) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;

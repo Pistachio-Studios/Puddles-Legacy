@@ -28,6 +28,11 @@ class Sprite {
 
 			center = {x + (w * size) / 2, y + (h * size) / 2};
 			pivot = center;
+
+			if(pivotX != INT_MAX)
+				pivot.x = pivotX;
+			if(pivotY != INT_MAX)
+				pivot.y = pivotY;
 		}
 
 		//Setters / Getters

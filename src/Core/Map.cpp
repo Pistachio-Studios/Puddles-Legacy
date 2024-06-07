@@ -70,7 +70,7 @@ bool Map::Update(float dt)
 
     while (mapLayerItem != NULL) {
 
-        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && std::get<bool>(mapLayerItem->data->properties.GetProperty("Draw")->value)) {
 
             iPoint cameraPosMap = WorldToMap((int)(-app->render->camera.x), (int)(-app->render->camera.y));
             //cameraPosMap = { 20,40 };
@@ -91,7 +91,12 @@ bool Map::Update(float dt)
             bottomClipping = mapLayerItem->data->height;
             */
             
-
+           int layer = 0;
+           if(mapLayerItem->data->properties.GetProperty("layer") != NULL){
+                auto valueVariant = mapLayerItem->data->properties.GetProperty("layer")->value;
+                layer = std::get<int>(valueVariant);
+           }
+           
 
             for (int x = leftClipping; x < rightClipping; x++)
             {
@@ -103,6 +108,13 @@ bool Map::Update(float dt)
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
+                    int pivotY = INT_MAX;
+                    if(tileset->tilePivotY[gid] != NULL)
+                    {
+                        pivotY = tileset->tilePivotY[gid];
+                    }
+
+
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
                         pos.y,
@@ -110,7 +122,10 @@ bool Map::Update(float dt)
                         1.0f,
                         0.0f,
                         1.0f,
-                        0);
+                        layer,
+                        SDL_FLIP_NONE,
+                        INT_MAX,
+                        pivotY);
                       
                         
                 }
@@ -280,7 +295,7 @@ bool Map::Load(SString mapFileName)
 
         //Search the layer in the map that contains information for navigation
         while (mapLayerItem != NULL) {
-            if (mapLayerItem->data->properties.GetProperty("Navigation") != NULL && mapLayerItem->data->properties.GetProperty("Navigation")->value) {
+            if (mapLayerItem->data->properties.GetProperty("Navigation") != NULL && std::get<bool>(mapLayerItem->data->properties.GetProperty("Navigation")->value)) {
                 navigationLayer = mapLayerItem->data;
                 break;
             }
@@ -341,6 +356,21 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
 
         {
             mapData.tilesets.Add(set);
+        }
+        pugi::xml_node tile;
+        for (tile = tileset.child("tile"); tile && ret; tile = tile.next_sibling("tile"))
+        {
+            pugi::xml_node properties = tile.child("properties");
+            if(properties)
+            {
+                pugi::xml_node property = properties.child("property");
+                SString name = property.attribute("name").as_string();
+                if(name == "pivotY")
+                {
+                    //set->tilePivotY.insert(std::pair<int, int>(set->firstgid + tile.attribute("id").as_int(), property.attribute("value").as_int()));
+                    set->tilePivotY[set->firstgid + tile.attribute("id").as_int()] = property.attribute("value").as_int();
+                }
+            }
         }
     }
 
@@ -543,7 +573,15 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
     {
         Properties::Property* p = new Properties::Property();
         p->name = propertieNode.attribute("name").as_string();
-        p->value = propertieNode.attribute("value").as_bool(); // (!!) I'm assuming that all values are bool !!
+        SString type = propertieNode.attribute("type").as_string();
+        if(type == "bool")
+        {
+            p->value = propertieNode.attribute("value").as_bool();
+        }
+        else if(type == "int")
+        {
+            p->value = propertieNode.attribute("value").as_int();
+        }
 
         properties.list.Add(p);
     }
