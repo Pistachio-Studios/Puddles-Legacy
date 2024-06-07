@@ -154,19 +154,19 @@ bool UI::Update(float dt)
 		{
 			if(player->currentPotion->name == "Celerita Potion")
 			{
-				app->render->DrawTexture(celeritaPotion, 280, 615, 0, 0);
+				app->render->DrawTexture(celeritaPotion, 280, 820, 0, 0, 0, 0.75f);
 			}
 			else if(player->currentPotion->name == "Ether Potion")
 			{
-				app->render->DrawTexture(etherPotion, 280, 615, 0, 0);
+				app->render->DrawTexture(etherPotion, 280, 820, 0, 0, 0, 0.75f);
 			}
 			else if(player->currentPotion->name == "Oblitius Potion")
 			{
-				app->render->DrawTexture(oblitiusPotion, 280, 615, 0, 0);
+				app->render->DrawTexture(oblitiusPotion, 280, 820, 0, 0, 0, 0.75f);
 			}
 			else if(player->currentPotion->name == "Vita Potion")
 			{
-				app->render->DrawTexture(VitaPotion, 280, 615, 0, 0);
+				app->render->DrawTexture(VitaPotion, 280, 820, 0, 0, 0, 0.75f);
 			}
 		}
 
