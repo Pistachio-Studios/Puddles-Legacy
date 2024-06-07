@@ -71,7 +71,7 @@ bool UI::Update(float dt)
 	//Potions Inventory
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
 
-		float sizeEase = easeInQuad(potionEaseTimer.ReadMSec() / 500);
+		float sizeEase = easeInQuad(potionEaseTimer.ReadMSec() / 500); //hint: from 0 to 1
 		LOG("sizeEase %f", sizeEase);
 
 		//Get the size of the window
