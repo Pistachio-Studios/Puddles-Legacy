@@ -60,45 +60,45 @@ bool UI::Start() {
 	Seleccion = app->tex->Load("Assets/UI/GUI/Seleccion.PNG");
 
 	// Textures for the bestiary
-	bestiaryPage1Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/pag1.png");
-	bestiaryPage2Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag2/pag2.png");
-	bestiaryPage3Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/pag3.png");
-	bestiaryPage4Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag4/pag4.png");
-	bestiaryPage5Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag5/pag5.png");
+	bestiaryPage1Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/pag1.png");
+	bestiaryPage2Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag2/pag2.png");
+	bestiaryPage3Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag3/pag3.png");
+	bestiaryPage4Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag4/pag4.png");
+	bestiaryPage5Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag5/pag5.png");
 
 	// Textures for sword abilities
-	swordAbility100Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/sword/sword1-0-0.png");
-	swordAbility110Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/sword/sword1-1-0.png");
-	swordAbility111Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/sword/sword1-1-1.png");
-	swordAbility112Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/sword/sword1-1-2.png");
-	swordAbility120Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/sword/sword1-2-0.png");
-	swordAbility122Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/sword/sword1-2-2.png");
-	swordAbility123Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/sword/sword1-2-3.png");
+	swordAbility100Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/sword/sword1-0-0.png");
+	swordAbility110Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/sword/sword1-1-0.png");
+	swordAbility111Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/sword/sword1-1-1.png");
+	swordAbility112Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/sword/sword1-1-2.png");
+	swordAbility120Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/sword/sword1-2-0.png");
+	swordAbility122Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/sword/sword1-2-2.png");
+	swordAbility123Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/sword/sword1-2-3.png");
 
 	// Textures for staff abilities
-	staffAbility100Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/staff/staff1-0-0.png");
-	staffAbility110Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/staff/staff1-1-0.png");
-	staffAbility111Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/staff/staff1-1-1.png");
-	staffAbility112Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/staff/staff1-1-2.png");
-	staffAbility120Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/staff/staff1-2-0.png");
-	staffAbility122Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/staff/staff1-2-2.png");
-	staffAbility123Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/staff/staff1-2-3.png");
+	staffAbility100Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/staff/staff1-0-0.png");
+	staffAbility110Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/staff/staff1-1-0.png");
+	staffAbility111Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/staff/staff1-1-1.png");
+	staffAbility112Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/staff/staff1-1-2.png");
+	staffAbility120Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/staff/staff1-2-0.png");
+	staffAbility122Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/staff/staff1-2-2.png");
+	staffAbility123Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/staff/staff1-2-3.png");
 
 	// Textures for the enemies
-	enemy1KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag2/1_avispa.png");
-	enemy2KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag2/2_spider.png");
-	enemy3KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag2/3_spider.png");
+	enemy1KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag2/1_avispa.png");
+	enemy2KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag2/2_spider.png");
+	enemy3KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag2/3_spider.png");
 
 	// Textures for the plants
-	hepaticaPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/1_hepatica.png");
-	comfreyPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/2_comfrey.png");
-	hawthornPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/3_witchhazel.png");
-	witchhazelPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/4_hawthorn.png");
-	arnicaPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/5_arnica.png");
+	hepaticaPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag3/1_hepatica.png");
+	comfreyPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag3/2_comfrey.png");
+	hawthornPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag3/3_witchhazel.png");
+	witchhazelPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag3/4_hawthorn.png");
+	arnicaPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag3/5_arnica.png");
 
 	// Textures for the known npcs
-	klausUnlockedTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag4/1_klaus.png");
-	bountyUnlockedTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag4/2_bounty.png");
+	klausUnlockedTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag4/1_klaus.png");
+	bountyUnlockedTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag4/2_bounty.png");
 
 	return true;
 }
