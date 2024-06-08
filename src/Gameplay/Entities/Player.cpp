@@ -161,6 +161,18 @@ bool Player::Update(float dt)
 		}
 	}
 
+	if(app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	{
+		if(currentPotion != nullptr)
+		{
+			currentPotion->Use();
+		}
+		else
+		{
+			LOG("No potion selected!!");
+		}
+	}
+
 	if (livesPlayer == 0) deadPlayer;
 
 
@@ -201,6 +213,9 @@ void Player::DrawImGui()
 	inventory.DrawImGui();
 
 	ImGui::Text("Player Class: %s", currentClass == PlayerClass::KNIGHT ? "KNIGHT" : "WIZARD");
+
+	ImGui::Text("Player Movement State: %s", movementFSM->GetCurrentState().name.GetString());
+	ImGui::Text("Player Combat State: %s", combatFSM->GetCurrentState().name.GetString());
 
 	ImGui::Text("player hurt cooldown: %f", playerHurtCultdown.ReadMSec());
 

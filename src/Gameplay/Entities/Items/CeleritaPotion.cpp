@@ -12,5 +12,5 @@ CeleritaPotion::~CeleritaPotion() {}
 void CeleritaPotion::Use() {
     // Implement the logic for using the CeleritaPotion
     LOG("Using ", name, ". ", description);
-    quantity--;
+    if(quantity > 0)quantity--;
 }

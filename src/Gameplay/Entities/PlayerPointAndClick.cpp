@@ -38,8 +38,8 @@ bool PlayerPointAndClick::Start()
     effects->emiting = true;
     app->particleManager->AddGenerator(effects);
 
-    //mouseNoSelection = app->tex->Load("Assets/Textures/cursors/kenney_cursor-pack/Vector/Basic/gauntlet_open.svg");
-    //mouseSelection = app->tex->Load("Assets/Textures/cursors/kenney_cursor-pack/Vector/Basic/gauntlet_default.svg");
+    mouseNoSelection = app->tex->Load("Assets/Textures/cursors/kenney_cursor-pack/Vector/Basic/gauntlet_open.svg");
+    mouseSelection = app->tex->Load("Assets/Textures/cursors/kenney_cursor-pack/Vector/Basic/gauntlet_default.svg");
 
     return true;
 }
@@ -52,10 +52,10 @@ bool PlayerPointAndClick::Update(float dt)
     pbody->body->SetTransform(mouseWorldPosition, 0.0f);
     effects->position = { position.x, position.y };
 
-   /* if(hovering)
+   if(hovering)
         app->render->DrawTextureLegacy(mouseSelection, app->input->GetMouseX(), app->input->GetMouseY(), NULL, 0.0f);
     else
-        app->render->DrawTextureLegacy(mouseNoSelection, app->input->GetMouseX(), app->input->GetMouseY(), NULL, 0.0f);*/
+        app->render->DrawTextureLegacy(mouseNoSelection, app->input->GetMouseX(), app->input->GetMouseY(), NULL, 0.0f);
 
     int leftCorner = ((app->render->camera.w / 2) + margin);
     int rightCorner = ((app->render->camera.w / 2) - margin);

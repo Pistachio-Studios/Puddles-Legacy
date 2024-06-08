@@ -69,7 +69,7 @@ bool UI::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
 		//Get the size of the window
 		app->win->GetWindowSize(windowW, windowH);
-		app->render->DrawTexture(texture_inventory, (int)windowW / 2 - 350, (int)windowH / 2 - 350, 0, 0);
+		app->render->DrawTextureLegacy(texture_inventory, (int)windowW / 2 - 350, (int)windowH / 2 - 350, 0, 0);
 		Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
 		for(int i = 0; i < playerInventory->items.size(); i++)
 		{
@@ -85,12 +85,12 @@ bool UI::Update(float dt)
 				{
 					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight)
 					{
-						app->render->DrawTexture(celeritaPotionSelected, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(celeritaPotionSelected, potionX, potionY, 0, 0);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
 					}
 					else
 					{
-						app->render->DrawTexture(celeritaPotionCreated, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(celeritaPotionCreated, potionX, potionY, 0, 0);
 					}
 					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 + 40, (int)windowH / 2 - 250, 50, 50, { 0, 0, 0, 255 });
 				}
@@ -100,12 +100,12 @@ bool UI::Update(float dt)
 					potionY = (int)windowH / 2 - 12;
 					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight)
 					{
-						app->render->DrawTexture(etherPotionSelected, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(etherPotionSelected, potionX, potionY, 0, 0);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
 					}
 					else
 					{
-						app->render->DrawTexture(etherPotionCreated, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(etherPotionCreated, potionX, potionY, 0, 0);
 					}
 					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 + 40, (int)windowH / 2 + 170, 50, 50, { 0, 0, 0, 255 });
 				}
@@ -115,12 +115,12 @@ bool UI::Update(float dt)
 					potionY = (int)windowH / 2 - 259;
 					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight + 30)
 					{
-						app->render->DrawTexture(oblitiusPotionSelected, potionX, potionY - 2, 0, 0);
+						app->render->DrawTextureLegacy(oblitiusPotionSelected, potionX, potionY - 2, 0, 0);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
 					}
 					else
 					{
-						app->render->DrawTexture(oblitiusPotionCreated, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(oblitiusPotionCreated, potionX, potionY, 0, 0);
 					}
 					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 + 230, (int)windowH / 2 - 100, 50, 50, { 0, 0, 0, 255 });
 				}
@@ -130,12 +130,12 @@ bool UI::Update(float dt)
 					potionY = (int)windowH / 2 - 255;
 					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight + 30)
 					{
-						app->render->DrawTexture(VitaPotionSelected, potionX - 2, potionY, 0, 0);
+						app->render->DrawTextureLegacy(VitaPotionSelected, potionX - 2, potionY, 0, 0);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
 					}
 					else
 					{
-						app->render->DrawTexture(VitaPotionCreated, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(VitaPotionCreated, potionX, potionY, 0, 0);
 					}
 					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 - 230, (int)windowH / 2 - 100, 50, 50, { 0, 0, 0, 255 });
 				}
@@ -149,36 +149,36 @@ bool UI::Update(float dt)
 	if(player != nullptr){
 
 		//Menu Pequeño
-		app->render->DrawTexture(MenuPequeno, 275, 650, 0, 0);
+		app->render->DrawTextureLegacy(MenuPequeno, 275, 650, 0, 0);
 		if(player->currentPotion != nullptr)
 		{
 			if(player->currentPotion->name == "Celerita Potion")
 			{
-				app->render->DrawTexture(celeritaPotion, 280, 820, 0, 0, 0, 0.75f);
+				app->render->DrawTextureLegacy(celeritaPotion, 280, 820, 0, 0, 0, 0.75f);
 			}
 			else if(player->currentPotion->name == "Ether Potion")
 			{
-				app->render->DrawTexture(etherPotion, 280, 820, 0, 0, 0, 0.75f);
+				app->render->DrawTextureLegacy(etherPotion, 280, 820, 0, 0, 0, 0.75f);
 			}
 			else if(player->currentPotion->name == "Oblitius Potion")
 			{
-				app->render->DrawTexture(oblitiusPotion, 280, 820, 0, 0, 0, 0.75f);
+				app->render->DrawTextureLegacy(oblitiusPotion, 280, 820, 0, 0, 0, 0.75f);
 			}
 			else if(player->currentPotion->name == "Vita Potion")
 			{
-				app->render->DrawTexture(VitaPotion, 280, 820, 0, 0, 0, 0.75f);
+				app->render->DrawTextureLegacy(VitaPotion, 280, 820, 0, 0, 0, 0.75f);
 			}
 		}
 
-		app->render->DrawTexture(Seleccion, 260, 615, 0, 0);
+		app->render->DrawTextureLegacy(Seleccion, 260, 615, 0, 0);
 
 		//Dash
 		float dashSelectionValue = SDL_min(player->dashTimer.ReadMSec() / 1000 / player->dashCultdown * 255, 255);
 		SDL_SetTextureAlphaMod(Seleccion, dashSelectionValue);
-		app->render->DrawTexture(Seleccion, 280, 695, 0, 0);
+		app->render->DrawTextureLegacy(Seleccion, 280, 695, 0, 0);
 		SDL_SetTextureAlphaMod(Seleccion, 0);
 
-		app->render->DrawTexture(Seleccion, 235, 770, 0, 0);
+		app->render->DrawTextureLegacy(Seleccion, 235, 770, 0, 0);
 
 		//Health Bar
 		int health = player->livesPlayer;
@@ -193,10 +193,10 @@ bool UI::Update(float dt)
 		switch(player->currentClass)
 		{
 		case PlayerClass::KNIGHT:
-			app->render->DrawTexture(Espada, 150, 600, 0, 0);
+			app->render->DrawTextureLegacy(Espada, 150, 600, 0, 0);
 			break;
 		case PlayerClass::WIZARD:
-			app->render->DrawTexture(Cetro, 150, 600, 0, 0);
+			app->render->DrawTextureLegacy(Cetro, 150, 600, 0, 0);
 			break;
 		}
 	}

@@ -183,7 +183,7 @@ public:
 
 	ParticleGenerator* damage = nullptr;
 
-	uint mana = 100;
+	float mana = 100.0f;
 	uint livesPlayer = 10;
 	int totalLivesPlayer;
 	bool deadPlayer = false;
