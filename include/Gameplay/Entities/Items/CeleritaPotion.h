@@ -16,6 +16,8 @@ public:
     // Use the celerita potion
     void Use() override;
 
+    bool Update(float dt) override;
+
 public:
     bool startTimer = true;
     Timer timer;

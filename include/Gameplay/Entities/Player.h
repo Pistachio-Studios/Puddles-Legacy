@@ -164,6 +164,15 @@ public:
 		return false;
 	}
 
+	void Update(float dt) {
+		for (auto& item : items) {
+			if(item->GetType() == EntityType::POTION) {
+				Potion* potion = static_cast<Potion*>(item);
+				potion->Update(dt);
+			}
+		}
+	}
+
 	void DrawImGui() {
 		ImGui::Begin("Inventory");
 		for (auto& item : items) {
