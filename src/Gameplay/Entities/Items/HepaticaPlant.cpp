@@ -30,6 +30,7 @@ bool HepaticaPlant::Update(float dt)
         app->render->DrawTexture(texture1, position.x - 40, position.y - 50);
         if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
             app->entityManager->GetPlayerEntity()->inventory.AddItem("Hepatica Plant");
+            app->entityManager->GetPlayerEntity()->bestiary->hepaticaPlantCollected = true;
             app->entityManager->DestroyEntity(this);
             isColliding = false;
         }
