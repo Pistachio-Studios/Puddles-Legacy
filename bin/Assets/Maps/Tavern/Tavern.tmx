@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="30" tilewidth="128" tileheight="128" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="30" tilewidth="128" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="7">
  <tileset firstgid="1" name="taberna" tilewidth="128" tileheight="128" tilecount="600" columns="20">
   <image source="taberna.png" width="2560" height="3840"/>
  </tileset>
@@ -610,4 +610,13 @@
    <tile gid="600"/>
   </data>
  </layer>
+ <objectgroup id="2" name="Limits" class="limits">
+  <properties>
+   <property name="objectType" value="collider"/>
+  </properties>
+  <object id="2" type="rectangle" x="-160" y="-8" width="160" height="3880"/>
+  <object id="3" type="rectangle" x="-248" y="3856" width="2936" height="240"/>
+  <object id="4" type="rectangle" x="2568" y="-40" width="424" height="3936"/>
+  <object id="5" type="rectangle" x="-1032" y="-720" width="4152" height="736"/>
+ </objectgroup>
 </map>
