@@ -4,6 +4,7 @@
 #include "Core/GuiControlLabel.h"
 #include "Core/Module.h"
 #include "Gameplay/Entities/Player.h"
+#include "Gameplay/Entities/PlayerPointAndClick.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
 #include "Core/GuiControlPopUp.h"
@@ -46,6 +47,8 @@ public:
 public:
 	bool winCondition = false;
 	Player* player;
+
+	PlayerPointAndClick* playerPointAndClick;
 
 private:
 	SDL_Texture* img;
