@@ -99,6 +99,15 @@ bool Player::Update(float dt)
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
+	if (currentClass == PlayerClass::KNIGHT)
+	{
+		def = 15.0f;
+	}
+	else
+	{
+		def = 3.0f;
+	}
+
 	movementFSM->Update(dt);
 	combatFSM->Update(dt);
 
@@ -231,15 +240,29 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		sceneChange = true;
 		break;
 		//TODO: He a�adido esto para probar que la pocion de curar funcione, se puede borrar :)
-	case ColliderType::ENEMY:
+	case ColliderType::ENEMYWASP:
 		if(playerHurtCultdown.ReadMSec() > 1000.0f)
-			{
-				livesPlayer--; 
-				playerHurtCultdown.Start();
-			}
+		{
+			vida -= 5.0f;
+			playerHurtCultdown.Start();
+		}
+		break;
+	case ColliderType::ENEMYSPIDER:
+		if (playerHurtCultdown.ReadMSec() > 1000.0f)
+		{
+			vida -= 5.0f;
+			playerHurtCultdown.Start();
+		}
+		break;
+	case ColliderType::ENEMYBOSS:
+		if (playerHurtCultdown.ReadMSec() > 1000.0f)
+		{
+			vida -= 13.0f;
+			playerHurtCultdown.Start();
+		}
 		break;
 	case ColliderType::BULLET:
-		vida -= 2.0f;
+		vida -= 7.0f;
 		break;
 	}
 

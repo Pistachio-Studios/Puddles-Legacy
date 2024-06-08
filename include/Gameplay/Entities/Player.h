@@ -156,8 +156,10 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
-	float vida = 10.0f;
-	float dano = 4.0f;
+	float vida = 15.0f;
+	float str = 10.0f;
+	float inte = 14.0f;
+	float def;
 
 	//Movement
 	float moveForce = 1.0f;
