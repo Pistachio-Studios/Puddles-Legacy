@@ -73,6 +73,8 @@ public:
 	float moveForce = 1.0f;
 	float maxSpeed = 2.0f;
 
+	ParticleGenerator* damage = nullptr;
+
 	float vida = 5.0f;
 	float dano = 1.0f;
 

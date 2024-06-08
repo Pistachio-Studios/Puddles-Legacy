@@ -10,6 +10,7 @@
 #include "Utils/StateMachine.h"
 #include "Core/SceneManager.h"
 #include "Core/Window.h"
+#include "Core/ParticleManager.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -81,6 +82,21 @@ bool Player::Start() {
 
 	sceneChange = false;
 
+	damage = new ParticleGenerator();
+	damage->emiting = false;
+	damage->oneShoot = true;
+	damage->lifetime = 0.25f;
+	damage->explosiveness = 1.0f;
+	damage->spawnRadius = 50;
+	damage->size = 30;
+	damage->initialVelocity = 0;
+	damage->Damping = 0.0f;
+	damage->spread = 180;
+	damage->sizeFade = -1.0f;
+	damage->opacityFade = 0.5f;
+	damage->color = { 255, 0, 0, 128 };
+	app->particleManager->AddGenerator(damage);
+
 	return true;
 }
 
@@ -112,6 +128,8 @@ bool Player::Update(float dt)
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
+
+	damage->position = { position.x + 46, position.y + 64};
 
 	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 
@@ -235,11 +253,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if(playerHurtCultdown.ReadMSec() > 1000.0f)
 			{
 				livesPlayer--; 
+				damage->emiting = true;
 				playerHurtCultdown.Start();
 			}
 		break;
 	case ColliderType::BULLET:
 		vida -= 2.0f;
+		damage->emiting = true;
 		break;
 	}
 

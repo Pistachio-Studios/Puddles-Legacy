@@ -96,6 +96,21 @@ bool Wasp::Start() {
 	attackFx = app->audio->LoadFx(parameters.attribute("attackFxPath").as_string());
 	dieFx = app->audio->LoadFx(parameters.attribute("dieFxPath").as_string());
 
+	damage = new ParticleGenerator();
+	damage->emiting = false;
+	damage->oneShoot = true;
+	damage->lifetime = 0.25f;
+	damage->explosiveness = 1.0f;
+	damage->spawnRadius = 50;
+	damage->size = 30;
+	damage->initialVelocity = 0;
+	damage->Damping = 0.0f;
+	damage->spread = 180;
+	damage->sizeFade = -1.0f;
+	damage->opacityFade = 0.5f;
+	damage->color = { 128, 128, 0, 128 };
+	app->particleManager->AddGenerator(damage);
+
 	return true;
 }
 
@@ -108,15 +123,12 @@ bool Wasp::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+	damage->position = { position.x + 16, position.y + 16 };
+
 	//app->render->DrawRectangle({ position.x - 1, position.y + 8, 36, 18 }, 255, 0, 0);
 
 	app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x * 10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + +pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 
-	if (debug) {
-		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-			freeCam = !freeCam;
-		}
-	}
 
 	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
@@ -216,6 +228,7 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision SWORD");
 		//if (state != EntityState::DEAD and !invencible){
 		vida -= player->dano;
+		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{
 			dead = true;
@@ -241,6 +254,7 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	case ColliderType::MAGIC:
 		vida -= player->dano;
+		damage->emiting = true;
 		if (vida <= 0.0f)
 		{
 			// AUDIO DONE boss death
