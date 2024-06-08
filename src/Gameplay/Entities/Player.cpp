@@ -241,6 +241,8 @@ bool Player::SaveState(pugi::xml_node& node) {
 	playerAttributes.append_attribute("x").set_value(this->position.x);
 	playerAttributes.append_attribute("y").set_value(this->position.y);
 
+	// TODO save inventory and bestiary
+
 	return true;
 }
 
