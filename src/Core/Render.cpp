@@ -87,6 +87,15 @@ bool Render::Start()
 	LOG("render start");
 	// back background
 	SDL_RenderGetViewport(renderer, &viewport);
+
+	overlayTarget = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, camera.w, camera.h);
+	SDL_SetTextureBlendMode(overlayTarget, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderTarget(renderer, overlayTarget);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_RenderFillRect(renderer, NULL);
+
+	SDL_SetRenderTarget(renderer, NULL);
+
 	return true;
 }
 
@@ -96,8 +105,12 @@ bool Render::PreUpdate()
 	// OPTICK PROFILIN
 	ZoneScoped;
 
+	SDL_SetRenderTarget(renderer, overlayTarget);
 	SDL_RenderClear(renderer);
 
+	SDL_SetRenderTarget(renderer, NULL);
+	SDL_RenderClear(renderer);
+	
 	return true;
 }
 
@@ -128,6 +141,10 @@ bool Render::Update(float dt)
 		DrawSprite(s);
 		
 	}
+
+	// Draw overlay
+	SDL_RenderCopy(renderer, overlayTarget, NULL, NULL);
+	
 
 	return true;
 }
@@ -286,6 +303,9 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_Rect* section, 
 bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
 {
 	bool ret = true;
+
+	SDL_SetRenderTarget(renderer, overlayTarget);
+
 	uint scale = app->win->GetScale();
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -308,12 +328,17 @@ bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint
 		ret = false;
 	}
 
+	SDL_SetRenderTarget(renderer, NULL);
+
 	return ret;
 }
 
 bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
 {
 	bool ret = true;
+
+	SDL_SetRenderTarget(renderer, overlayTarget);
+
 	uint scale = app->win->GetScale();
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -332,12 +357,17 @@ bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b,
 		ret = false;
 	}
 
+	SDL_SetRenderTarget(renderer, NULL);
+
 	return ret;
 }
 
 bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
 {
 	bool ret = true;
+
+	SDL_SetRenderTarget(renderer, overlayTarget);
+
 	uint scale = app->win->GetScale();
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -362,10 +392,14 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 		ret = false;
 	}
 
+	SDL_SetRenderTarget(renderer, NULL);
+
 	return ret;
 }
 
 bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Color color) {
+
+	SDL_SetRenderTarget(renderer, overlayTarget);
 
 	TTF_SetFontSize(app->render->font, h * 0.75);
 
@@ -390,10 +424,10 @@ bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Co
 
 	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
-	//DrawTexture(texture, posx, posy, 0, 0);
-
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);
+
+	SDL_SetRenderTarget(renderer, NULL);
 
 	return true;
 }

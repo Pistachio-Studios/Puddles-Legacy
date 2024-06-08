@@ -133,6 +133,8 @@ public:
 	TTF_Font* font;
 
 	std::vector <Sprite> sprites;
+
+	SDL_Texture* overlayTarget;
 };
 
 #endif // __RENDER_H__
