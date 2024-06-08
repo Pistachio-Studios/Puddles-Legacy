@@ -141,9 +141,6 @@ bool Render::Update(float dt)
 		DrawSprite(s);
 		
 	}
-
-	// Draw overlay
-	SDL_RenderCopy(renderer, overlayTarget, NULL, NULL);
 	
 
 	return true;
@@ -205,6 +202,9 @@ bool Render::PostUpdate()
 	{
 		DrawRectangle({ s.pivot.x - 5, s.pivot.y - 5, 10, 10 }, 255, 0, 0, 255, true);
 	}
+
+	// Draw overlay
+	SDL_RenderCopy(renderer, overlayTarget, NULL, NULL);
 
 	sprites.clear();
 
@@ -295,6 +295,47 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_Rect* section, 
 	{
 		Sprite sprite = Sprite(texture, x, y, {0,0,0,0}, speed, angle, size, layer, flip, pivotX, pivotY);
 		sprites.push_back(sprite);
+	}
+
+	return ret;
+}
+
+bool Render::DrawTextureLegacy(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, double angle, float size, SDL_RendererFlip flip, int pivotX, int pivotY)
+{
+	bool ret = true;
+
+	uint scale = app->win->GetScale();
+
+	SDL_Rect rect;
+	rect.x = ((int)(camera.x * speed) + x) * scale;
+	rect.y = ((int)(camera.y * speed) + y) * scale;
+
+	if(section != NULL)
+	{
+		rect.w = section->w;
+		rect.h = section->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	}
+
+	rect.w *= size;
+	rect.h *= size;
+
+	rect.w *= scale;
+	rect.h *= scale;
+
+	if(texture == NULL)
+	{
+		LOG("Cannot blit to screen. Texture is nullptr");
+		return true;
+	}
+
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, NULL, flip) != 0)
+	{
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
 	}
 
 	return ret;
