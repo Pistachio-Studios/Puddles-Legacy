@@ -33,7 +33,7 @@ public:
     int GetGuiLastId() const;
 
     // Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, std::variant<Scene*, Module*> observer, int minV = 0, int maxV = 0, SDL_Rect sliderBounds = { 0,0,0,0 });
+	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, std::variant<Scene*, Module*> observer, SDL_Texture* texture = nullptr, int minV = 0, int maxV = 0, SDL_Rect sliderBounds = { 0,0,0,0 });
 
 	void RemoveGuiControl(GuiControl* entity);
 

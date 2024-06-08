@@ -17,6 +17,7 @@ void ArnicaPlant::Use() {
     // Implement the logic for using the ArnicaPlant
     LOG("Using ", name, ". ", description);
     quantity--;
+    //TODO: Si se le da al boton de accept en la tavernscene hay que restar 3 plantas del inventario (si se le da a la oblitius potion se le resta solo 1 planta de cada)
 }
 
 bool ArnicaPlant::Update(float dt)

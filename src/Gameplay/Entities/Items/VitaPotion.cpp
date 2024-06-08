@@ -1,4 +1,5 @@
 #include "Gameplay/Entities/Items/VitaPotion.h"
+#include "Gameplay/Entities/Player.h"
 #include "Utils/Log.h"
 #include "Core/App.h"
 #include "Core/EntityManager.h"
@@ -14,6 +15,7 @@ VitaPotion::~VitaPotion() {}
 // Use the vita potion
 void VitaPotion::Use() {
     // Implement the logic for using the vita potion
+    Player* player;
     LOG("Using ", name, ". ", description);
     if(quantity > 0)
     {
