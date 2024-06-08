@@ -1,51 +1,42 @@
 id,character,ES,EN,CAT,type,choices
-1,Sabrina,,Hello?,,D,"""2"""
-2,Klaus,,Huh? Anyone there?,,D,"""3"""
-3,Sabrina,,Down here-,,D,"""4"""
-4,Klaus,,"Oh, hey there, name’s Klaus. What’s a tiny thing like ya doin’ on this darn island?",,D,"""5"""
-5,Sabrina,,"Hello, I’m Sabrina. I was looking for my father, have you seen him by any chance?",,D,"""6"""
-6,Klaus,,Hmmm…,,D,"""7"""
-7,Sabrina,,He was determined to come here about ten years ago.,,D,"""8"""
-8,Klaus,,Aha! Must’ve been ‘im!,,D,"""9"""
-9,Sabrina,,Who?,,D,"""10"""
-10,Klaus,,"Years ago, a weird fella about ye tall came here looking for some “extraordinary thing”. Now that ya mention it, he did look like ya",,D,"""11"""
-11,Sabrina,,Yes! That’s my father! He must be! – different speech bubbles – Where is he now?,,D,"""12"""
-12,Klaus,,"I don’t know, kid. He left a long time ago. It’s been ages since I’ve seen ‘im.",,D,"""13"""
-13,Sabrina,,Oh.,,D,"""14"""
-14,Klaus,,"There, there, little one. It’s better if ya go back home, there’s nothin’ in this island that could be of your interest.",,D,"""15"""
-15,Sabrina,,"No, I’m not leaving this island until I find my father.",,D,"""16"""
-16,Klaus,,"Agh, ya stubborn little thing! Better not roam these lands, nothin’ good will come out of it.",,D,"""17"""
-17,Sabrina,,"Well then, if you’re not going to be of any help, I must go.",,D,"""18"""
-18,Klaus,,Go? Where do you think you’ll find a place to stay on this piece of dirt?,,D,"""19"""
-19,Sabrina,,I- I don’t know. Do you happen to know any nice place near where I could get a nice sleep?,,D,"""20"""
-20,Klaus,,Nice? Ain’t ya fancy?,,D,"""21"""
-21,Sabrina,,"Fine, just a room with a bed will do.",,D,"""22"""
-22,Klaus,,Let me think… Guess I could rent ya a room in the back of the tavern…,,D,"""23"""
-23,Sabrina,,Rent?,,D,"""24"
+1,Sabrina,,Hello?,,D,
+2,Klaus,,Huh? Anyone there?,,D,
+3,Sabrina,,Down here-,,D,
+4,Klaus,,"Oh, hey there, name’s Klaus. What’s a tiny thing like ya doin’ on this darn island?",,D,
+5,Sabrina,,"Hello, I’m Sabrina. I was looking for my father, have you seen him by any chance?",,D,
+6,Klaus,,Hmmm…,,D,
+7,Sabrina,,He was determined to come here about ten years ago.,,D,
+8,Klaus,,Aha! Must’ve been ‘im!,,D,
+9,Sabrina,,Who?,,D,
+10,Klaus,,"Years ago, a weird fella about ye tall came here looking for some “extraordinary thing”. Now that ya mention it, he did look like ya",,D,
+11,Sabrina,,Yes! That’s my father! He must be! – different speech bubbles – Where is he now?,,D,
+12,Klaus,,"I don’t know, kid. He left a long time ago. It’s been ages since I’ve seen ‘im.",,D,
+13,Sabrina,,Oh.,,D,
+14,Klaus,,"There, there, little one. It’s better if ya go back home, there’s nothin’ in this island that could be of your interest.",,D,
+15,Sabrina,,"No, I’m not leaving this island until I find my father.",,D,
+16,Klaus,,"Agh, ya stubborn little thing! Better not roam these lands, nothin’ good will come out of it.",,D,
+17,Sabrina,,"Well then, if you’re not going to be of any help, I must go.",,D,
+18,Klaus,,Go? Where do you think you’ll find a place to stay on this piece of dirt?,,D,
+19,Sabrina,,I- I don’t know. Do you happen to know any nice place near where I could get a nice sleep?,,D,
+20,Klaus,,Nice? Ain’t ya fancy?,,D,
+21,Sabrina,,"Fine, just a room with a bed will do.",,D,
+22,Klaus,,Let me think… Guess I could rent ya a room in the back of the tavern…,,D,
+23,Sabrina,,Rent?,,D,
 24,Klaus,,"Oh, come on now, ya mustn’t’ve thought I’d just give it to you for my big heart. Hahaha!",,D,
-25,Klaus,,Hey there. See you’re up for exploring.,,D,"""26"""
-26,Sabrina,,"Yes, I am.",,D,"""27"""
+25,Klaus,,Hey there. See you’re up for exploring.,,D,
+26,Sabrina,,"Yes, I am.",,D,
 27,Klaus,,Good then. Just don’t deviate from the path and you’ll be fine.,,D,
-28,Klaus,,Lost something?,,D,"""29"""
-29,Sabrina,,...,,D,"""30"""
+28,Klaus,,Lost something?,,D,
+29,Sabrina,,...,,D,
 30,Klaus,,"Well, if ya need anything, ya know where to find me.",,D,
 31,Klaus,,"I’m busy right now, we’ll talk later.",,D,
-32,Bounty,,HAHAHA,,D,"""33"""
-33,Sabrina,,Excuse me sir,,D,"""34"""
-34,Bounty,,HAHAHA,,D,"""35"""
-35,Sabrina,,Sir?,,D,"""36"""
-36,Bounty,,What’s that? A fur ball talking? Hahaha!,,D,"""37"""
-37,Sabrina,,"Sir, I’d like to ask you something.",,D,"""38"""
-38,Bounty,,Where is it? I thought I put you there.,,D,"""39"""
-39,Sabrina,,Have you seen my father?,,D,"""40"""
-40,Bounty,,Hide!! She’s here! Save yourselves!!,,D,"""41"""
+32,Bounty,,HAHAHA,,D,
+33,Sabrina,,Excuse me sir,,D,
+34,Bounty,,HAHAHA,,D,
+35,Sabrina,,Sir?,,D,
+36,Bounty,,What’s that? A fur ball talking? Hahaha!,,D,
+37,Sabrina,,"Sir, I’d like to ask you something.",,D,
+38,Bounty,,Where is it? I thought I put you there.,,D,
+39,Sabrina,,Have you seen my father?,,D,
+40,Bounty,,Hide!! She’s here! Save yourselves!!,,D,
 41,Sabrina,,*Sigh* What a strange man.,,D,
-42,,,,,,
-43,,,,,,
-44,,,,,,
-45,,,,,,
-46,,,,,,
-47,,,,,,
-48,,,,,,
-49,,,,,,
-50,,,,,,
