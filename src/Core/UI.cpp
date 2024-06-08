@@ -84,6 +84,10 @@ bool UI::Start() {
 	staffAbility122Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/staff/staff1-2-2.png");
 	staffAbility123Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/staff/staff1-2-3.png");
 
+	// Textures for the enemies
+	enemy1KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag2/1_avispa.png");
+	enemy2KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag2/2_spider.png");
+	enemy3KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag2/3_spider.png");
 
 	return true;
 }
@@ -339,6 +343,20 @@ bool UI::Update(float dt)
 					break;
 				case 2:
 					app->render->DrawTextureLegacy(bestiaryPage2Texture, 0, 0, NULL, 0);
+
+					#pragma region KnownEnemies
+
+					if (player->bestiary->enemy1Killed)
+						app->render->DrawTextureLegacy(enemy1KilledTexture, 0, 0, NULL, 0);
+
+					if (player->bestiary->enemy2Killed)
+						app->render->DrawTextureLegacy(enemy2KilledTexture, 0, 0, NULL, 0);
+
+					if (player->bestiary->enemy3Killed)
+						app->render->DrawTextureLegacy(enemy3KilledTexture, 0, 0, NULL, 0);
+
+					#pragma endregion KnownEnemies
+
 					break;
 				case 3:
 					app->render->DrawTextureLegacy(bestiaryPage3Texture, 0, 0, NULL, 0);
@@ -444,6 +462,10 @@ bool UI::CleanUp() {
 	buttonStaffAbility120 = nullptr;
 	buttonStaffAbility122 = nullptr;
 	buttonStaffAbility123 = nullptr;
+
+	app->tex->UnLoad(enemy1KilledTexture);
+	app->tex->UnLoad(enemy2KilledTexture);
+	app->tex->UnLoad(enemy3KilledTexture);
 	#pragma endregion CleanUp
 
 	return true;

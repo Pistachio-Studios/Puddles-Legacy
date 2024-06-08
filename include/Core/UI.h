@@ -104,6 +104,11 @@ public:
 	GuiControlButton* buttonStaffAbility122 = nullptr;
 	GuiControlButton* buttonStaffAbility123 = nullptr;
 
+	// Textures for the enemies
+	SDL_Texture* enemy1KilledTexture = nullptr;
+	SDL_Texture* enemy2KilledTexture = nullptr;
+	SDL_Texture* enemy3KilledTexture = nullptr;
+
 	uint windowW, windowH;
 
 	bool openBestiary = false;
