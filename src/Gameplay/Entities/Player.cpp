@@ -262,6 +262,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if(playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 5.0f;
+			livesPlayer -= 3;
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
@@ -270,6 +271,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 5.0f;
+			livesPlayer -= 3;
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
@@ -278,12 +280,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 13.0f;
+			livesPlayer -= 8;
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
 		break;
 	case ColliderType::BULLET:
 		vida -= 7.0f;
+		livesPlayer -= 4;
 		damage->emiting = true;
 		break;
 	}
