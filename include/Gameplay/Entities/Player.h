@@ -44,19 +44,21 @@ public:
 	bool mission1Completed = false;
 	bool mission2Completed = false;
 
-	bool swordAbility1Unlocked = false;		// row 1
-	bool swordAbility21Unlocked = false;	// row 2
-	bool swordAbility22Unlocked = false;	// row 2
-	bool swordAbility31Unlocked = false;	// row 3
-	bool swordAbility32Unlocked = false;	// row 3
-	bool swordAbility33Unlocked = false;	// row 3
+	bool swordAbility100Unlocked = false;
+	bool swordAbility110Unlocked = false;
+	bool swordAbility111Unlocked = false;
+	bool swordAbility112Unlocked = false;
+	bool swordAbility120Unlocked = false;
+	bool swordAbility122Unlocked = false;
+	bool swordAbility123Unlocked = false;
 
-	bool staffAbility1Unlocked = false;		// row 1
-	bool staffAbility21Unlocked = false;	// row 2
-	bool staffAbility22Unlocked = false;	// row 2
-	bool staffAbility31Unlocked = false;	// row 3
-	bool staffAbility32Unlocked = false;	// row 3
-	bool staffAbility33Unlocked = false;	// row 3
+	bool staffAbility100Unlocked = false;
+	bool staffAbility110Unlocked = false;
+	bool staffAbility111Unlocked = false;
+	bool staffAbility112Unlocked = false;
+	bool staffAbility120Unlocked = false;
+	bool staffAbility122Unlocked = false;
+	bool staffAbility123Unlocked = false;
 
 	// Pag 2 attributes
 	bool enemy1Killed = false;
@@ -227,6 +229,10 @@ public:
 
 	float vida = 10.0f;
 	float dano = 4.0f;
+
+	// TODO add final stats
+	int level = 1;
+	int abylityPoints = 0;
 
 	//Movement
 	float moveForce = 1.0f;

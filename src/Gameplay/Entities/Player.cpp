@@ -190,6 +190,25 @@ void Player::DrawImGui()
 
 	ImGui::Text("dash timer: %f", dashTimer.ReadMSec());
 
+	ImGui::Text("Player level: %d", level);
+	
+	if (ImGui::Button("Add Level"))
+		level++;
+	ImGui::SameLine();
+	if (ImGui::Button("Remove Level")) {
+		if (level > 0)
+			level--;
+	}
+
+	ImGui::Text("Player abylity points: %d", abylityPoints);
+	
+	if (ImGui::Button("Add ability Point"))
+		abylityPoints++;
+	ImGui::SameLine();
+	if (ImGui::Button("Remove ability Point")) {
+		if (abylityPoints > 0)
+			abylityPoints--;
+	}
 	ImGui::Separator();
 	ImGui::Text("Player Cheats");
 	ImGui::Checkbox("God Mode", &godMode);
