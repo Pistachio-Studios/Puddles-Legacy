@@ -141,6 +141,18 @@ bool Render::Update(float dt)
 		DrawSprite(s);
 		
 	}
+
+	//Render all pivot points
+	if(showPivots)
+	{
+		for(Sprite& s : sprites)
+		{
+			DrawRectangle({ s.pivot.x - 5, s.pivot.y - 5, 10, 10 }, 255, 0, 0, 255, true);
+		}
+	}
+
+	// Draw overlay
+	SDL_RenderCopy(renderer, overlayTarget, NULL, NULL);
 	
 
 	return true;
@@ -160,6 +172,8 @@ void Render::DrawImGui()
 		ImGui::SliderFloat("Camera Lerp Speed", &camera.lerpSpeed, 0.0f, 16.0f);
 		ImGui::Text("camera target: %s", camera.target != nullptr ? camera.target->name.GetString() : "null");
 		ImGui::Text("Vsync: %s", vsyncEnabled ? "Enabled" : "Disabled");
+
+		ImGui::Checkbox("Show Pivots", &showPivots);
 
 		ImGui::Separator();
 		//Sprite info
@@ -196,15 +210,6 @@ bool Render::PostUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
-
-	//Render all pivot points
-	for(Sprite& s : sprites)
-	{
-		DrawRectangle({ s.pivot.x - 5, s.pivot.y - 5, 10, 10 }, 255, 0, 0, 255, true);
-	}
-
-	// Draw overlay
-	SDL_RenderCopy(renderer, overlayTarget, NULL, NULL);
 
 	sprites.clear();
 

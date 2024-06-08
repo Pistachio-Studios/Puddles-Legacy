@@ -136,6 +136,8 @@ public:
 	std::vector <Sprite> sprites;
 
 	SDL_Texture* overlayTarget;
+
+	bool showPivots = false;
 };
 
 #endif // __RENDER_H__
