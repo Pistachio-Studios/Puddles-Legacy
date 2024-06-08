@@ -10,6 +10,7 @@
 #include "Utils/StateMachine.h"
 #include "Core/SceneManager.h"
 #include "Core/Window.h"
+#include "Core/Audio.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
