@@ -26,7 +26,7 @@ public:
 
 
         //Animation
-        app->render->DrawTexture(enemyboss->bossMove.texture, enemyboss->position.x - 60, enemyboss->position.y - 150, &enemyboss->bossMove.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
+        app->render->DrawTexture(enemyboss->bossMove.texture, enemyboss->position.x - 60, enemyboss->position.y - 150, &enemyboss->bossMove.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, 1.0f, enemyboss->flip);
         enemyboss->bossMove.Update(dt);
 
         player = app->entityManager->GetPlayerEntity();

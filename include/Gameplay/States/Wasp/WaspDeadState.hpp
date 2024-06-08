@@ -23,7 +23,7 @@ public:
         LOG("WaspDeadState Update()");
 
         //Animation
-        app->render->DrawTexture(wasp->waspDeath.texture, wasp->position.x - 88, wasp->position.y - 104, &wasp->waspDeath.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, 0.8f, wasp->flip);
+        app->render->DrawTexture(wasp->waspDeath.texture, wasp->position.x - 88, wasp->position.y - 104, &wasp->waspDeath.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, 0.8f, 1.0f, wasp->flip);
         wasp->waspDeath.Update(dt);
 
         if (wasp->waspDeath.GetCurrentFrameCount() >= 15) {

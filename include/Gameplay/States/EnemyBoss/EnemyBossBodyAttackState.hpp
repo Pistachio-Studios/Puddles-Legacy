@@ -27,7 +27,7 @@ public:
 
         player = app->entityManager->GetPlayerEntity();
 
-        app->render->DrawTexture(enemyboss->bossBodyAttack.texture, enemyboss->position.x - 60, enemyboss->position.y - 150, &enemyboss->bossBodyAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
+        app->render->DrawTexture(enemyboss->bossBodyAttack.texture, enemyboss->position.x - 60, enemyboss->position.y - 150, &enemyboss->bossBodyAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, 1.0f, enemyboss->flip);
         enemyboss->bossBodyAttack.Update(dt);
 
         if (enemyboss->bossBodyAttack.GetCurrentFrameCount() == 5 && enemyboss->isTouchingPlayer) {

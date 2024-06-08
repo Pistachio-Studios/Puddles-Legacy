@@ -310,6 +310,8 @@ bool Render::DrawTextureLegacy(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 {
 	bool ret = true;
 
+	SDL_SetRenderTarget(app->render->renderer, app->render->overlayTarget);
+
 	uint scale = app->win->GetScale();
 
 	SDL_Rect rect;
@@ -343,6 +345,8 @@ bool Render::DrawTextureLegacy(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
 	}
+
+	SDL_SetRenderTarget(app->render->renderer, NULL);
 
 	return ret;
 }
