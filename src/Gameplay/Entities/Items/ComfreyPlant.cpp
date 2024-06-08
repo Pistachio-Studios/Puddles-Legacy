@@ -16,7 +16,6 @@ void ComfreyPlant::Use() {
     // Implement the logic for using the ComfreyPlant
     LOG("Using ", name, ". ", description);
     quantity--;
-    counter--;
 }
 
 bool ComfreyPlant::Update(float dt)
@@ -30,7 +29,6 @@ bool ComfreyPlant::Update(float dt)
     if (isColliding) {
         app->render->DrawTexture(texture1, position.x - 40, position.y - 50);
         if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
-            counter++;
             app->entityManager->GetPlayerEntity()->inventory.AddItem("Comfrey Plant");
             app->entityManager->DestroyEntity(this);
             isColliding = false;

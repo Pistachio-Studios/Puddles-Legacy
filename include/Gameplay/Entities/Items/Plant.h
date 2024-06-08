@@ -45,9 +45,9 @@ public:
 	const char* texturePath;
 
     bool isColliding = false;
-    int counter = 0;
     PhysBody* pbody;
 	
+    Item* item; 
 };
 
 #endif // PLANT_H

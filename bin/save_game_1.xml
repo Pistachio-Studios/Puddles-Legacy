@@ -4,11 +4,11 @@
 	<input />
 	<textures />
 	<audio />
-	<:anonymous />
+
 	<scene_manager>
 		<currentScene name="tutorialscene" />
 	</scene_manager>
-	<:anonymous />
+
 	<animation_manager />
 	<entitymanager>
 		<player x="2391" y="2747" lives="5" />

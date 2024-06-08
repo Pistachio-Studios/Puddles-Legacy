@@ -16,7 +16,6 @@ void HepaticaPlant::Use() {
     // Implement the logic for using the HepaticaPlant
     LOG("Using ", name, ". ", description);
     quantity--;
-    counter--;
 }
 
 bool HepaticaPlant::Update(float dt)
@@ -30,7 +29,6 @@ bool HepaticaPlant::Update(float dt)
     if (isColliding) {
         app->render->DrawTexture(texture1, position.x - 40, position.y - 50);
         if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
-            counter++;
             app->entityManager->GetPlayerEntity()->inventory.AddItem("Hepatica Plant");
             app->entityManager->DestroyEntity(this);
             isColliding = false;
