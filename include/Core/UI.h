@@ -6,6 +6,7 @@
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
 #include <box2d/b2_math.h>
+#include "Core/GuiControlButton.h"
 
 struct SDL_Texture;
 class GuiControlButton;
@@ -27,6 +28,9 @@ public:
 	bool Update(float dt);
 
 	bool CleanUp();
+
+	// OnGuiMouseClickEvent
+	bool OnGuiMouseClickEvent(GuiControl* control) override;
 
 public:
 
@@ -52,8 +56,22 @@ public:
 	SDL_Texture* Cetro;
 	SDL_Texture* Seleccion;
 
+	// Textures for the bestiary
+	SDL_Texture* bestiaryPage1Texture = nullptr; // texture for page 1
+	SDL_Texture* bestiaryPage2Texture = nullptr; // texture for page 2
+	SDL_Texture* bestiaryPage3Texture = nullptr; // texture for page 3
+	SDL_Texture* bestiaryPage4Texture = nullptr; // texture for page 4
+	SDL_Texture* bestiaryPage5Texture = nullptr; // texture for page 5
+
+	GuiControlButton* buttonPag1 = nullptr;
+	GuiControlButton* buttonPag2 = nullptr;
+	GuiControlButton* buttonPag3 = nullptr;
+	GuiControlButton* buttonPag4 = nullptr;
+	GuiControlButton* buttonPag5 = nullptr;
 
 	uint windowW, windowH;
+
+	bool openBestiary = false;
 };
 
 #endif // __UI_H__

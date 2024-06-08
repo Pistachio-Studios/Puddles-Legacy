@@ -12,6 +12,11 @@
 #include "Gameplay/Entities/Items/CeleritaPotion.h"
 #include "Gameplay/Entities/Items/EtherPotion.h"
 #include "Gameplay/Entities/Items/OblitiusPotion.h"
+#include "Core/UI.h"
+#include "Core/GuiControlPopUp.h"
+#include "Core/GuiManager.h"
+#include "Core/GuiControl.h"
+#include "Core/App.h"
 
 #include <box2d/b2_fixture.h>
 #include <SDL.h>
@@ -27,6 +32,70 @@ enum PlayerClass
 {
 	KNIGHT,
 	WIZARD
+};
+
+class Bestiary : public Scene{
+public:
+
+	int currentPage = 1; // The current page number
+	const int totalPages = 5; // The total number of pages
+
+	// Pag 1 attributes
+	bool mission1Completed = false;
+	bool mission2Completed = false;
+
+	bool swordAbility1Unlocked = false;		// row 1
+	bool swordAbility21Unlocked = false;	// row 2
+	bool swordAbility22Unlocked = false;	// row 2
+	bool swordAbility31Unlocked = false;	// row 3
+	bool swordAbility32Unlocked = false;	// row 3
+	bool swordAbility33Unlocked = false;	// row 3
+
+	bool staffAbility1Unlocked = false;		// row 1
+	bool staffAbility21Unlocked = false;	// row 2
+	bool staffAbility22Unlocked = false;	// row 2
+	bool staffAbility31Unlocked = false;	// row 3
+	bool staffAbility32Unlocked = false;	// row 3
+	bool staffAbility33Unlocked = false;	// row 3
+
+	// Pag 2 attributes
+	bool enemy1Killed = false;
+	bool enemy2Killed = false;
+	bool enemy3Killed = false;
+
+	// Pag 3 attributes
+	bool hepaticaPlantCollected = false;
+	bool comfreyPlantCollected = false;
+	bool hawthornPlantCollected = false;
+	bool witchhazelPlantCollected = false;
+	bool arnicaPlantCollected = false;
+
+	// Pag 4 attributes
+	bool klausUnlocked = false;
+	bool bountyUnlocked = false;
+
+	// Pag 5 attributes
+	// Nothing cause there are no draws 💀
+
+public:
+
+	void nextPage() {
+		if (currentPage < totalPages) {
+			currentPage++;
+		}
+	};
+
+	void previousPage() {
+		if (currentPage > 1) {
+			currentPage--;
+		}
+	};
+
+	void setPage(int page) {
+		if (page >= 1 && page <= totalPages) {
+			currentPage = page;
+		}
+	};
 };
 
 class Inventory {
@@ -143,7 +212,7 @@ public:
 	void EndCollision(PhysBody* physA, PhysBody* physB) override;
 
 	void OnRaycastHit(b2Fixture* fixture, const b2Vec2& point,
-                       const b2Vec2& normal, float32 fraction) override;
+					   const b2Vec2& normal, float32 fraction) override;
 
 	bool SaveState(pugi::xml_node& node) override;
 	bool LoadState(pugi::xml_node& node) override;
@@ -175,6 +244,7 @@ public:
 	PlayerClass currentClass = KNIGHT;
 
 	Inventory inventory;
+	Bestiary* bestiary = nullptr;
 	Potion* currentPotion = nullptr;
 
 	//tmps

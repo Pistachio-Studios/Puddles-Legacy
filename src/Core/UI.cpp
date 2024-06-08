@@ -60,6 +60,14 @@ bool UI::Start() {
 	Cetro = app->tex->Load("Assets/UI/GUI/Armas/Cetro.PNG");
 	Seleccion = app->tex->Load("Assets/UI/GUI/Seleccion.PNG");
 
+	// Textures for the bestiary
+	bestiaryPage1Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag1/pag1.png");
+	bestiaryPage2Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag2/pag2.png");
+	bestiaryPage3Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/pag3.png");
+	bestiaryPage4Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag4/pag4.png");
+	bestiaryPage5Texture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag5/pag5.png");
+
+
 	return true;
 }
 
@@ -199,6 +207,40 @@ bool UI::Update(float dt)
 			app->render->DrawTexture(Cetro, 150, 600, 0, 0);
 			break;
 		}
+
+		if (buttonPag1 == nullptr)
+			buttonPag1 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "", { 332,267, 60, 60 }, (Module*)this);
+		if (buttonPag2 == nullptr)
+			buttonPag2 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "", { 332,350, 60, 60 }, (Module*)this);
+		if (buttonPag3 == nullptr)
+			buttonPag3 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "", { 332,436, 60, 60 }, (Module*)this);
+		if (buttonPag4 == nullptr)
+			buttonPag4 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "", { 332,519, 60, 60 }, (Module*)this);
+		if (buttonPag5 == nullptr)
+			buttonPag5 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "", { 332,602, 60, 60 }, (Module*)this);
+
+		if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN) 
+			openBestiary = !openBestiary;
+
+		if (openBestiary) {
+			switch (player->bestiary->currentPage) {
+				case 1:
+					app->render->DrawTextureLegacy(bestiaryPage1Texture, 0, 0, NULL, 0);
+					break;
+				case 2:
+					app->render->DrawTextureLegacy(bestiaryPage2Texture, 0, 0, NULL, 0);
+					break;
+				case 3:
+					app->render->DrawTextureLegacy(bestiaryPage3Texture, 0, 0, NULL, 0);
+					break;
+				case 4:
+					app->render->DrawTextureLegacy(bestiaryPage4Texture, 0, 0, NULL, 0);
+					break;
+				case 5:
+					app->render->DrawTextureLegacy(bestiaryPage5Texture, 0, 0, NULL, 0);
+					break;
+				}
+		};
 	}
 
 	return true;
@@ -207,5 +249,31 @@ bool UI::Update(float dt)
 
 bool UI::CleanUp() {
 
+	return true;
+}
+
+bool UI::OnGuiMouseClickEvent(GuiControl* control)
+{
+	if (control->type == GuiControlType::BUTTON)
+	{
+		switch (control->id)
+		{
+		case 1:
+			app->entityManager->GetPlayerEntity()->bestiary->setPage(1);
+			break;
+		case 2:
+			app->entityManager->GetPlayerEntity()->bestiary->setPage(2);
+			break;
+		case 3:
+			app->entityManager->GetPlayerEntity()->bestiary->setPage(3);
+			break;
+		case 4:
+			app->entityManager->GetPlayerEntity()->bestiary->setPage(4);
+			break;
+		case 5:
+			app->entityManager->GetPlayerEntity()->bestiary->setPage(5);
+			break;
+		}
+	}
 	return true;
 }
