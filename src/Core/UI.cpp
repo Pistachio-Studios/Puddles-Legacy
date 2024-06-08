@@ -360,6 +360,90 @@ bool UI::Update(float dt)
 
 bool UI::CleanUp() {
 
+	app->tex->UnLoad(texture_inventory);
+	app->tex->UnLoad(celeritaPotionCreated);
+	app->tex->UnLoad(celeritaPotionSelected);
+	app->tex->UnLoad(etherPotionCreated);
+	app->tex->UnLoad(etherPotionSelected);
+	app->tex->UnLoad(oblitiusPotionCreated);
+	app->tex->UnLoad(oblitiusPotionSelected);
+	app->tex->UnLoad(VitaPotionCreated);
+	app->tex->UnLoad(VitaPotionSelected);
+
+	app->tex->UnLoad(MenuPequeno);
+	app->tex->UnLoad(celeritaPotion);
+	app->tex->UnLoad(etherPotion);
+	app->tex->UnLoad(oblitiusPotion);
+	app->tex->UnLoad(VitaPotion);
+
+	app->tex->UnLoad(VidaBestiario);
+	app->tex->UnLoad(Espada);
+	app->tex->UnLoad(Cetro);
+	app->tex->UnLoad(Seleccion);
+
+	app->tex->UnLoad(bestiaryPage1Texture);
+	app->tex->UnLoad(bestiaryPage2Texture);
+	app->tex->UnLoad(bestiaryPage3Texture);
+	app->tex->UnLoad(bestiaryPage4Texture);
+	app->tex->UnLoad(bestiaryPage5Texture);
+
+	app->guiManager->RemoveGuiControl(buttonPag1);
+	app->guiManager->RemoveGuiControl(buttonPag2);
+	app->guiManager->RemoveGuiControl(buttonPag3);
+	app->guiManager->RemoveGuiControl(buttonPag4);
+	app->guiManager->RemoveGuiControl(buttonPag5);
+	buttonPag1 = nullptr;
+	buttonPag2 = nullptr;
+	buttonPag3 = nullptr;
+	buttonPag4 = nullptr;
+	buttonPag5 = nullptr;
+
+	app->tex->UnLoad(swordAbility100Texture);
+	app->tex->UnLoad(swordAbility110Texture);
+	app->tex->UnLoad(swordAbility111Texture);
+	app->tex->UnLoad(swordAbility112Texture);
+	app->tex->UnLoad(swordAbility120Texture);
+	app->tex->UnLoad(swordAbility122Texture);
+	app->tex->UnLoad(swordAbility123Texture);
+
+	app->tex->UnLoad(staffAbility100Texture);
+	app->tex->UnLoad(staffAbility110Texture);
+	app->tex->UnLoad(staffAbility111Texture);
+	app->tex->UnLoad(staffAbility112Texture);
+	app->tex->UnLoad(staffAbility120Texture);
+	app->tex->UnLoad(staffAbility122Texture);
+	app->tex->UnLoad(staffAbility123Texture);
+
+	app->guiManager->RemoveGuiControl(buttonSwordAbility100);
+	app->guiManager->RemoveGuiControl(buttonSwordAbility110);
+	app->guiManager->RemoveGuiControl(buttonSwordAbility111);
+	app->guiManager->RemoveGuiControl(buttonSwordAbility112);
+	app->guiManager->RemoveGuiControl(buttonSwordAbility120);
+	app->guiManager->RemoveGuiControl(buttonSwordAbility122);
+	app->guiManager->RemoveGuiControl(buttonSwordAbility123);
+	buttonSwordAbility100 = nullptr;
+	buttonSwordAbility110 = nullptr;
+	buttonSwordAbility111 = nullptr;
+	buttonSwordAbility112 = nullptr;
+	buttonSwordAbility120 = nullptr;
+	buttonSwordAbility122 = nullptr;
+	buttonSwordAbility123 = nullptr;
+
+	app->guiManager->RemoveGuiControl(buttonStaffAbility100);
+	app->guiManager->RemoveGuiControl(buttonStaffAbility110);
+	app->guiManager->RemoveGuiControl(buttonStaffAbility111);
+	app->guiManager->RemoveGuiControl(buttonStaffAbility112);
+	app->guiManager->RemoveGuiControl(buttonStaffAbility120);
+	app->guiManager->RemoveGuiControl(buttonStaffAbility122);
+	app->guiManager->RemoveGuiControl(buttonStaffAbility123);
+	buttonStaffAbility100 = nullptr;
+	buttonStaffAbility110 = nullptr;
+	buttonStaffAbility111 = nullptr;
+	buttonStaffAbility112 = nullptr;
+	buttonStaffAbility120 = nullptr;
+	buttonStaffAbility122 = nullptr;
+	buttonStaffAbility123 = nullptr;
+
 	return true;
 }
 
