@@ -67,14 +67,16 @@ bool PlayerPointAndClick::Update(float dt)
         app->render->DrawLine(leftCorner, bottomCorner, rightCorner, bottomCorner, 255, 0, 0, 255, false);
         app->render->DrawLine(leftCorner, topCorner, leftCorner, bottomCorner, 255, 0, 0, 255, false);
         app->render->DrawLine(rightCorner, topCorner, rightCorner, bottomCorner, 255, 0, 0, 255, false);
-    }
-    if( app->input->GetMouseX() > leftCorner or
+    }else
+    {
+        if( app->input->GetMouseX() > leftCorner or
         app->input->GetMouseX() < rightCorner or
         app->input->GetMouseY() > topCorner or
         app->input->GetMouseY() < bottomCorner)
     {
         position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x);
 	    position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y);
+    }
     }
 
     return true;
