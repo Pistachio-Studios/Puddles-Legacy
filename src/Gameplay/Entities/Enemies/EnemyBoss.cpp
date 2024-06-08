@@ -14,6 +14,7 @@
 #include "Gameplay/Entities/Bullet.h"
 #include "Utils/Point.h"
 #include "Utils/StateMachine.h"
+#include "Core/ParticleManager.h"
 
 #include "Gameplay/States/EnemyBoss/EnemyBossIdleState.hpp"
 #include "Gameplay/States/EnemyBoss/EnemyBossBodyAttackState.hpp"
@@ -106,6 +107,21 @@ bool EnemyBoss::Start() {
 	bossAttackFx = app->audio->LoadFx(parameters.attribute("BossAttackPath").as_string());
 	bossDieFx = app->audio->LoadFx(parameters.attribute("BossDiePath").as_string());
 
+	damage = new ParticleGenerator();
+	damage->emiting = false;
+	damage->oneShoot = true;
+	damage->lifetime = 0.25f;
+	damage->explosiveness = 1.0f;
+	damage->spawnRadius = 90;
+	damage->size = 30;
+	damage->initialVelocity = 0;
+	damage->Damping = 0.0f;
+	damage->spread = 180;
+	damage->sizeFade = -1.0f;
+	damage->opacityFade = 0.5f;
+	damage->color = { 0, 200, 100, 128 };
+	app->particleManager->AddGenerator(damage);
+
 	return true;
 }
 
@@ -121,11 +137,7 @@ bool EnemyBoss::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	if (debug) {
-		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-			freeCam = !freeCam;
-		}
-	}
+	damage->position = { position.x + 16, position.y + 16 };
 
 	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
@@ -240,6 +252,7 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision ARMAPLAYER");
 		//if (state != EntityState::DEAD and !invencible){
 		vida -= player->dano;
+		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{
 			dead = true;
@@ -256,6 +269,7 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	case ColliderType::MAGIC:
 		vida -= player->dano;
+		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{
 			dead = true;

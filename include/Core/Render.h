@@ -26,7 +26,7 @@ class Sprite {
 			else
 				w = section.w, h = section.h;
 
-			center = {x + (w * size) / 2, y + (h * size) / 2};
+			center = { (int)(x + (w * size) / 2),(int)(y + (h * size) / 2) };
 			pivot = center;
 
 			if(pivotX != INT_MAX)
