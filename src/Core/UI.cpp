@@ -96,6 +96,10 @@ bool UI::Start() {
 	witchhazelPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/4_hawthorn.png");
 	arnicaPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/5_arnica.png");
 
+	// Textures for the known npcs
+	klausUnlockedTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag4/1_klaus.png");
+	bountyUnlockedTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag4/2_bounty.png");
+
 	return true;
 }
 
@@ -390,6 +394,17 @@ bool UI::Update(float dt)
 					break;
 				case 4:
 					app->render->DrawTextureLegacy(bestiaryPage4Texture, 0, 0, NULL, 0);
+
+					#pragma region KnownNPCs
+
+					if (player->bestiary->klausUnlocked)
+						app->render->DrawTextureLegacy(klausUnlockedTexture, 0, 0, NULL, 0);
+
+					if (player->bestiary->bountyUnlocked)
+						app->render->DrawTextureLegacy(bountyUnlockedTexture, 0, 0, NULL, 0);
+
+					#pragma endregion KnownNPCs
+
 					break;
 				case 5:
 					app->render->DrawTextureLegacy(bestiaryPage5Texture, 0, 0, NULL, 0);
@@ -499,7 +514,10 @@ bool UI::CleanUp() {
 	app->tex->UnLoad(hawthornPlantTexture);
 	app->tex->UnLoad(witchhazelPlantTexture);
 	app->tex->UnLoad(arnicaPlantTexture);
-	
+
+	app->tex->UnLoad(klausUnlockedTexture);
+	app->tex->UnLoad(bountyUnlockedTexture);
+
 	#pragma endregion CleanUp
 
 	return true;

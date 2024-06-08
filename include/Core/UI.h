@@ -116,6 +116,10 @@ public:
 	SDL_Texture* witchhazelPlantTexture = nullptr;
 	SDL_Texture* arnicaPlantTexture = nullptr;
 
+	// Textures for the npcs
+	SDL_Texture* klausUnlockedTexture = nullptr;
+	SDL_Texture* bountyUnlockedTexture = nullptr;
+
 	uint windowW, windowH;
 
 	bool openBestiary = false;
