@@ -87,6 +87,15 @@ bool Render::Start()
 	LOG("render start");
 	// back background
 	SDL_RenderGetViewport(renderer, &viewport);
+
+	overlayTarget = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, camera.w, camera.h);
+	SDL_SetTextureBlendMode(overlayTarget, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderTarget(renderer, overlayTarget);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_RenderFillRect(renderer, NULL);
+
+	SDL_SetRenderTarget(renderer, NULL);
+
 	return true;
 }
 
@@ -96,8 +105,12 @@ bool Render::PreUpdate()
 	// OPTICK PROFILIN
 	ZoneScoped;
 
+	SDL_SetRenderTarget(renderer, overlayTarget);
 	SDL_RenderClear(renderer);
 
+	SDL_SetRenderTarget(renderer, NULL);
+	SDL_RenderClear(renderer);
+	
 	return true;
 }
 
@@ -107,6 +120,40 @@ bool Render::Update(float dt)
 	ZoneScoped;
 
 	cameraInterpolation(camera.target, camera.lerpSpeed, dt, camera.offset);
+
+	// Sort and draw all sprites
+	std::stable_sort(sprites.begin(), sprites.end(),
+	[](const Sprite& a, const Sprite& b)
+	{
+		if(a.layer != b.layer)
+		{
+			return a.layer < b.layer;
+		}
+		else
+		{
+			return a.pivot.y < b.pivot.y;
+		}
+	}
+	);
+	
+	for(Sprite& s : sprites)
+	{
+		DrawSprite(s);
+		
+	}
+
+	//Render all pivot points
+	if(showPivots)
+	{
+		for(Sprite& s : sprites)
+		{
+			DrawRectangle({ s.pivot.x - 5, s.pivot.y - 5, 10, 10 }, 255, 0, 0, 255, true);
+		}
+	}
+
+	// Draw overlay
+	SDL_RenderCopy(renderer, overlayTarget, NULL, NULL);
+	
 
 	return true;
 }
@@ -126,6 +173,35 @@ void Render::DrawImGui()
 		ImGui::Text("camera target: %s", camera.target != nullptr ? camera.target->name.GetString() : "null");
 		ImGui::Checkbox("Free Cam", &freeCam);
 		ImGui::Text("Vsync: %s", vsyncEnabled ? "Enabled" : "Disabled");
+
+		ImGui::Checkbox("Show Pivots", &showPivots);
+
+		ImGui::Separator();
+		//Sprite info
+		ImGui::Text("Sprites: %d", sprites.size());
+
+		// Create a child region of fixed width and enable horizontal scrollbar
+		if (ImGui::BeginChild("Sprite List", ImVec2(0, 200), true))
+		{
+			for (Sprite& s : sprites)
+			{
+				// Display sprite information
+				if (ImGui::TreeNode(&s, "Sprite %d", &s - &sprites[0]))
+				{
+					ImGui::Text("Position: %d, %d", s.position.x, s.position.y);
+					ImGui::Text("Speed: %f", s.speed);
+					ImGui::Text("Angle: %f", s.angle);
+					ImGui::Text("Size: %f", s.size);
+					ImGui::Text("Layer: %d", s.layer);
+					ImGui::Text("Flip: %d", s.flip);
+					ImGui::Text("Pivot: %d, %d", s.pivot.x, s.pivot.y);
+					// Add more sprite properties here...
+
+					ImGui::TreePop();
+				}
+			}
+			ImGui::EndChild();
+		}
 		
 		ImGui::End();
 	}
@@ -135,6 +211,8 @@ bool Render::PostUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	sprites.clear();
 
 	SetViewPort({
 		0,
@@ -210,9 +288,28 @@ void Render::cameraInterpolation(Entity* target, float lerpSpeed, float dt, iPoi
 }
 
 // Blit to screen
-bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, float size, SDL_RendererFlip flip, int pivotX, int pivotY) const
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, double angle, float size, uint layer, SDL_RendererFlip flip, int pivotX, int pivotY)
 {
 	bool ret = true;
+
+	if(section != NULL)
+	{
+		Sprite sprite = Sprite(texture, x, y, *section, speed, angle, size, layer, flip, pivotX, pivotY);
+		sprites.push_back(sprite);
+	}
+	else
+	{
+		Sprite sprite = Sprite(texture, x, y, {0,0,0,0}, speed, angle, size, layer, flip, pivotX, pivotY);
+		sprites.push_back(sprite);
+	}
+
+	return ret;
+}
+
+bool Render::DrawTextureLegacy(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, double angle, float size, SDL_RendererFlip flip, int pivotX, int pivotY)
+{
+	bool ret = true;
+
 	uint scale = app->win->GetScale();
 
 	SDL_Rect rect;
@@ -235,17 +332,13 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	rect.w *= scale;
 	rect.h *= scale;
 
-	SDL_Point* p = NULL;
-	SDL_Point pivot;
-
-	if(pivotX != INT_MAX && pivotY != INT_MAX)
+	if(texture == NULL)
 	{
-		pivot.x = pivotX;
-		pivot.y = pivotY;
-		p = &pivot;
+		LOG("Cannot blit to screen. Texture is nullptr");
+		return true;
 	}
 
-	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, NULL, flip) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
@@ -257,6 +350,9 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
 {
 	bool ret = true;
+
+	SDL_SetRenderTarget(renderer, overlayTarget);
+
 	uint scale = app->win->GetScale();
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -279,12 +375,17 @@ bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint
 		ret = false;
 	}
 
+	SDL_SetRenderTarget(renderer, NULL);
+
 	return ret;
 }
 
 bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
 {
 	bool ret = true;
+
+	SDL_SetRenderTarget(renderer, overlayTarget);
+
 	uint scale = app->win->GetScale();
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -303,12 +404,17 @@ bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b,
 		ret = false;
 	}
 
+	SDL_SetRenderTarget(renderer, NULL);
+
 	return ret;
 }
 
 bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
 {
 	bool ret = true;
+
+	SDL_SetRenderTarget(renderer, overlayTarget);
+
 	uint scale = app->win->GetScale();
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -333,10 +439,14 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 		ret = false;
 	}
 
+	SDL_SetRenderTarget(renderer, NULL);
+
 	return ret;
 }
 
 bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Color color) {
+
+	SDL_SetRenderTarget(renderer, overlayTarget);
 
 	TTF_SetFontSize(app->render->font, h * 0.75);
 
@@ -361,10 +471,10 @@ bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Co
 
 	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
-	//DrawTexture(texture, posx, posy, 0, 0);
-
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);
+
+	SDL_SetRenderTarget(renderer, NULL);
 
 	return true;
 }
@@ -405,4 +515,58 @@ void Render::SetVsync(bool vsync)
 		// TODO Handle error
 		LOG("Error loading config.xml");
 	}
+}
+bool Render::DrawSprite(Sprite &sprite) const
+{
+	SDL_Texture* texture = sprite.texture; //TODO: Check if texture is nullptr
+	int x = sprite.position.x;
+	int y = sprite.position.y;
+	SDL_Rect* section = &sprite.section;
+	if(section->w == 0 && section->h == 0)
+	{
+		section = NULL;
+	}
+	float speed = sprite.speed;
+	double angle = sprite.angle;
+	float size = sprite.size;
+	SDL_RendererFlip flip = sprite.flip;
+	int pivotX = sprite.pivotX;
+	int pivotY = sprite.pivotY;
+
+	bool ret = true;
+	uint scale = app->win->GetScale();
+
+	SDL_Rect rect;
+	rect.x = ((int)(camera.x * speed) + x) * scale;
+	rect.y = ((int)(camera.y * speed) + y) * scale;
+
+	if(section != NULL)
+	{
+		rect.w = section->w;
+		rect.h = section->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	}
+
+	rect.w *= size;
+	rect.h *= size;
+
+	rect.w *= scale;
+	rect.h *= scale;
+
+	if(texture == NULL)
+	{
+		LOG("Cannot blit to screen. Texture is nullptr");
+		return true;
+	}
+
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, NULL, flip) != 0)
+	{
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
 }

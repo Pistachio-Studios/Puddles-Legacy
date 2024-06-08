@@ -187,7 +187,9 @@ bool UI::Update(float dt)
 		int mana = player->mana;
 		app->render->DrawRectangle({ 200, 105, 295 * mana / 100, 20 }, 62, 94, 170, 255, true, false);
 
-		app->render->DrawTexture(VidaBestiario, 50, 25, 0, 0);
+		SDL_SetRenderTarget(app->render->renderer, app->render->overlayTarget);
+		app->render->DrawTextureLegacy(VidaBestiario, 50, 25, 0, 0);
+		SDL_SetRenderTarget(app->render->renderer, NULL);
 
 		//Weapons
 		switch(player->currentClass)

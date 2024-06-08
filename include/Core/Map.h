@@ -11,6 +11,8 @@
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
+#include <unordered_map>
+#include <variant>
 
 enum MapOrientation
 {
@@ -31,6 +33,8 @@ struct TileSet
 	int	tileHeight;
 	int columns;
 	int tilecount;
+
+	std::unordered_map<int, int> tilePivotY;
 
 	SDL_Texture* texture;
 	SDL_Rect GetTileRect(int gid) const;
@@ -59,7 +63,7 @@ struct Properties
 	struct Property
 	{
 		SString name;
-		bool value;
+		std::variant<bool, int> value; // We can add more types if needed
 	};
 
 	~Properties()

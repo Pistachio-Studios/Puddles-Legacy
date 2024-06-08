@@ -73,10 +73,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(lighting);
 	AddModule(guiManager);
 	AddModule(videoPlayer);
-	AddModule(debugUI);
 	AddModule(dialogManager);
 	AddModule(questManager);
 	AddModule(ui);
+	AddModule(debugUI);
 
 	// Render last to swap buffer
 	AddModule(render);
