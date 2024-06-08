@@ -360,6 +360,7 @@ bool UI::Update(float dt)
 
 bool UI::CleanUp() {
 
+	#pragma region CleanUp
 	app->tex->UnLoad(texture_inventory);
 	app->tex->UnLoad(celeritaPotionCreated);
 	app->tex->UnLoad(celeritaPotionSelected);
@@ -443,6 +444,7 @@ bool UI::CleanUp() {
 	buttonStaffAbility120 = nullptr;
 	buttonStaffAbility122 = nullptr;
 	buttonStaffAbility123 = nullptr;
+	#pragma endregion CleanUp
 
 	return true;
 }
