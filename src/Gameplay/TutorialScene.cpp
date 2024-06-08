@@ -5,6 +5,7 @@
 #include "Utils/Timer.h"
 #include "Core/Window.h"
 #include "Core/Audio.h"
+#include "Core/Textures.h"
 #include "Gameplay/TutorialScene.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Entities/Enemies/Wasp.h"
@@ -22,7 +23,7 @@
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
 #include "Core/QuestManager.h"
-  
+
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
 
