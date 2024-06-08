@@ -15,6 +15,7 @@
 struct SDL_Texture;
 class Player;
 class Bullet;
+class ParticleGenerator;
 
 class EnemyBoss : public Entity
 {
@@ -88,6 +89,8 @@ public:
 
 	iPoint spawnPosition;
 
+	ParticleGenerator* damage = nullptr;
+	
 	float vida = 75.0f;
 	float str = 13.0f;
 	float inte = 17.0f;

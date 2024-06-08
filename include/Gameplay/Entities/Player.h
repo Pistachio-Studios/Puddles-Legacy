@@ -22,6 +22,7 @@
 struct SDL_Texture;
 class Sword;
 class Staff;
+class ParticleGenerator;
 
 enum PlayerClass
 {
@@ -181,6 +182,8 @@ public:
 
 	//tmps
 	PhysBody* sword;
+
+	ParticleGenerator* damage = nullptr;
 
 	uint mana = 100;
 	uint livesPlayer = 10;

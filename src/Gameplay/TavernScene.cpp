@@ -7,6 +7,7 @@
 #include "Gameplay/TavernScene.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
+#include "Gameplay/Entities/PlayerPointAndClick.h"
 #include "Core/Map.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
@@ -31,6 +32,11 @@ bool TavernScene::Enter()
 		player->parameters = parameters.child("player");
 		player->Enable();
 	}
+
+	playerPointAndClick = new PlayerPointAndClick();
+	playerPointAndClick->parameters = parameters.child("player");
+	app->entityManager->AddEntity((Entity*)playerPointAndClick);
+	playerPointAndClick->Enable();
 
 	if (parameters.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
@@ -68,7 +74,7 @@ bool TavernScene::Enter()
 	app->map->Enable();
 	app->entityManager->Enable();
 
-	app->render->camera.target = player;
+	app->render->camera.target = playerPointAndClick;
 	app->render->camera.useInterpolation = true;
 	app->render->camera.lerpSpeed = 4.0f;
 	app->render->camera.offset = { 0,0 };
@@ -195,6 +201,8 @@ bool TavernScene::Exit()
 	app->guiManager->RemoveGuiControl(gcBackToTitle);
 	app->guiManager->RemoveGuiControl(gcExit);
 	app->guiManager->RemoveGuiControl(gcSave);
+
+	SDL_ShowCursor(SDL_ENABLE);
 
 	return true;
 }

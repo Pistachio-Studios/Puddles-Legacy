@@ -10,14 +10,17 @@
 #include <box2d/b2_math.h>
 
 struct SDL_Texture;
+class Staff;
 
-class Magic {
+class Magic : public Entity{
 	public:
 	PhysBody* pbody = nullptr;
 	SDL_Texture* texture = nullptr;
 	Timer* timer = nullptr;
 	bool active = false;
 	iPoint position;
+	Staff* staff = nullptr;
+	ParticleGenerator* explosion = nullptr;
 
 	Magic();
 
@@ -25,7 +28,7 @@ class Magic {
 	void Draw();
 	void Update();
 	void OnCollision(PhysBody* physA, PhysBody* physB);
-	void CleanUp();
+	void Delete();
 };
 
 class Staff : public Entity

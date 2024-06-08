@@ -7,11 +7,27 @@
 
 #include <imgui.h>
 
-Magic::Magic() {
+Magic::Magic() : Entity(EntityType::MAGIC) {
 	texture = app->tex->Load("Assets/Textures/magic.png");
 	pbody = app->physics->CreateCircle(0, 0, 10, bodyType::DYNAMIC);
 	pbody->ctype = ColliderType::MAGIC;
+	pbody->listener = this;
 	timer = new Timer();
+	explosion = new ParticleGenerator();
+	explosion->emiting = false;
+	explosion->explosiveness = 0.9f;
+	explosion->direction = { 0, 0 };
+	explosion->spread = 360;
+	explosion->size = 25;
+	explosion->angleRandomness = 180;
+	explosion->sizeFade = -1.0f;
+	explosion->opacityFade = -1.0f;
+	explosion->color = { 200, 0, 200, 255 };
+	explosion->initialVelocity = 5;
+	explosion->lifetime = 1.0f;
+	explosion->amount = 25;
+	explosion->oneShoot = true;
+	app->particleManager->AddGenerator(explosion);
 }
 
 void Magic::Throw() {
@@ -45,9 +61,15 @@ void Magic::Update() {
 	}
 }
 
-void Magic::CleanUp() {
+void Magic::Delete() {
 	app->physics->DestroyBody(pbody);
 	app->tex->UnLoad(texture);
+}
+
+void Magic::OnCollision(PhysBody* physA, PhysBody* physB) {
+	active = false;
+	explosion->position = { position.x, position.y };
+	explosion->emiting = true;
 }
 
 Staff::Staff() : Entity(EntityType::PLAYER)
@@ -84,6 +106,7 @@ void Staff::Equip()
 	//fill the magic pool
 	for (int i = 0; i < 10; i++) {
 		magicArray[i] = new Magic();
+		magicArray[i]->staff = this;
 	}
 }
 
@@ -92,7 +115,7 @@ void Staff::Store()
 	active = false;
 	app->physics->DestroyBody(pbody);
 	for (int i = 0; i < 10; i++) {
-		magicArray[i]->CleanUp();
+		magicArray[i]->Delete();
 	}
 	position = { 0,0 };
 }
@@ -116,7 +139,6 @@ bool Staff::CleanUp() {
 }
 
 void Staff::OnCollision(PhysBody* physA, PhysBody* physB) {
-
 }
 
 void Staff::EndCollision(PhysBody* physA, PhysBody* physB) {

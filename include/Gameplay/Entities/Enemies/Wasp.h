@@ -13,6 +13,7 @@
 
 struct SDL_Texture;
 class Player;
+class ParticleGenerator;
 
 class Wasp : public Entity
 {
@@ -84,6 +85,8 @@ public:
 
 	iPoint spawnPosition;
 
+	ParticleGenerator* damage = nullptr;
+	
 	float vida=12.0f;
 	float dano = 5.0f;
 	float def = 2.0f;
