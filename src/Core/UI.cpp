@@ -71,12 +71,12 @@ bool UI::Update(float dt)
 	//Potions Inventory
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
 
-		float sizeEase = easeInQuad(potionEaseTimer.ReadMSec() / 500); //hint: from 0 to 1
+		float sizeEase = easeInQuad(potionEaseTimer.ReadMSec() / 200); //hint: from 0 to 1
 		LOG("sizeEase %f", sizeEase);
 
 		//Get the size of the window
 		app->win->GetWindowSize(windowW, windowH);
-		app->render->DrawTexture(texture_inventory, (int)windowW / 2 - 350, (int)windowH / 2 - 350, 0, 0, 0, sizeEase);
+		app->render->DrawTexture(texture_inventory, (int)windowW / 2 - 300, (int)windowH / 2 - 300, 0, 0, 0, sizeEase);
 		//FixThis- SDL_SetTextureAlphaMod(texture_inventory, easeInQuad(dt));
 		Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
 		for(int i = 0; i < playerInventory->items.size(); i++)
@@ -186,7 +186,7 @@ bool UI::Update(float dt)
 
 		//Dash
 		float test = easeInQuad(player->dashTimer.ReadMSec() / 1000);
-		float dashSelectionValue = SDL_min(test / player->dashCultdown * 255, 255);
+		float dashSelectionValue = SDL_min(test * 255, 255);
 		SDL_SetTextureAlphaMod(Seleccion, dashSelectionValue);
 		app->render->DrawTexture(Seleccion, 280, 695, 0, 0);
 		SDL_SetTextureAlphaMod(Seleccion, 0);

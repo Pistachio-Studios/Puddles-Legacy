@@ -24,6 +24,9 @@ GuiControlButton::~GuiControlButton()
 
 bool GuiControlButton::Update(float dt)
 {
+	//easing
+	//float controlEase = easeInQuad(controlEaseTimer.ReadMSec() / 200);
+
 	if (state != GuiControlState::DISABLED)
 	{
 		// L15: DONE 3: Update the state of the GUiButton according to the mouse position

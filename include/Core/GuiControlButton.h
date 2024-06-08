@@ -17,6 +17,9 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	//easings
+	//Timer controlEaseTimer;
+
 private:
 
 	int mouseX, mouseY;
