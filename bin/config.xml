@@ -6,7 +6,7 @@
 		<icon path="Assets/Textures/icon.png" />
 	</app>
 	<renderer>
-		<vsync value="true" />
+		<vsync value="false" />
 	</renderer>
 	<window>
 		<resolution width="1920" height="1080" scale="1" />
@@ -28,9 +28,9 @@
 	</dialog_manager>
 	<animation_manager path="Assets/Animations/" name2="Animations.tmx" />
 	<scene_manager startScene="teamlogo">
-		<teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG" logoFxPath="Assets/Audio/Others/logoFx.ogg"/>
+		<teamlogo x="0" y="0" texturepath="Assets/Textures/TeamLogo.PNG" logoFxPath="Assets/Audio/Others/logoFx.ogg" />
 		<mainmenu>
-			<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png" FxPath="Assets/Audio/Fx/UI/UIButton.ogg"/>
+			<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png" FxPath="Assets/Audio/Fx/UI/UIButton.ogg" />
 		</mainmenu>
 		<level1scene>
 			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx" />
@@ -56,7 +56,7 @@
 				<npc x="4400" y="2100" type="2" texturepath="Assets/Textures/NoDialogNpcs/panda.PNG" />
 				<npc x="3550" y="650" type="2" texturepath="Assets/Textures/NoDialogNpcs/squirrel.PNG" />
 			</npcs>
-			<loco x="3200" y="2900" type="1"/>
+			<loco x="3200" y="2900" type="1" />
 			<enemies />
 		</townscene>
 		<tavernscene>
@@ -67,7 +67,7 @@
 				<npc x="1620" y="2300" type="2" texturepath="Assets/Textures/NoDialogNpcs/whiteCat.PNG" />
 				<npc x="1360" y="2700" type="2" texturepath="Assets/Textures/NoDialogNpcs/redPanda.PNG" />
 			</npcs>
-			<tabernero x="1300" y="2050" type="1"/> 
+			<tabernero x="1300" y="2050" type="1" />
 			<enemies />
 		</tavernscene>
 		<tutorialscene>
@@ -76,36 +76,24 @@
 			<camera x="-530" y="-1949" />
 			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
 			<enemies>
-				<EnemyBoss x="300" y="1800" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg"
-					  BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg"
-					  BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg"/>
-				<MiniSpider x="800" y="2050" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg"
-					  attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg"
-					  dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg"/>
-				<Wasp x="650" y="2100" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg"
-					  attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg"
-					  dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg"/>
+				<EnemyBoss x="300" y="1800" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
+				<MiniSpider x="800" y="2050" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<Wasp x="650" y="2100" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
 			</enemies>
 			<Plants>
-				<ArnicaPlant x="1500" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png"/>
-				<ArnicaPlant x="1700" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png"/>
-				<ArnicaPlant x="1900" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png"/>
-				<ArnicaPlant x="2100" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png"/>
-				<ComfreyPlant x="1500" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png"/>
-				<ComfreyPlant x="1700" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png"/>
-				<ComfreyPlant x="1900" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png"/>
-				<ComfreyPlant x="2100" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png"/>
-				<HepaticaPlant x="1500" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
-				<HepaticaPlant x="1700" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
-				<HepaticaPlant x="1900" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
-				<HepaticaPlant x="2100" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png"/>
+				<ArnicaPlant x="1500" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png" />
+				<ArnicaPlant x="1700" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png" />
+				<ArnicaPlant x="1900" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png" />
+				<ArnicaPlant x="2100" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png" />
+				<ComfreyPlant x="1500" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png" />
+				<ComfreyPlant x="1700" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png" />
+				<ComfreyPlant x="1900" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png" />
+				<ComfreyPlant x="2100" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png" />
+				<HepaticaPlant x="1500" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png" />
+				<HepaticaPlant x="1700" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png" />
+				<HepaticaPlant x="1900" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png" />
+				<HepaticaPlant x="2100" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png" />
 			</Plants>
-			<Potion>
-				<VitaPotion x="-10" y="110" texturepath="Assets/Textures/Potions/Inventory/HealPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/HealPotionSelected.png"/>
-				<CeleritaPotion x="478" y="105" texturepath="Assets/Textures/Potions/Inventory/VeloPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/VeloPotionSelected.png"/>
-				<EtherPotion x="132" y="-15" texturepath="Assets/Textures/Potions/Inventory/EnergyPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/EnergyPotionSelected.png"/>
-				<OblitiusPotion x="140" y="472" texturepath="Assets/Textures/Potions/Inventory/AbilityPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/AbilityPotionSelected.png"/>
-			</Potion>
 		</tutorialscene>
 		<testscene>
 			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx" />
@@ -115,10 +103,17 @@
 		</testscene>
 		<particle_demo />
 		<lighting_demo />
-		<intro>
-		</intro>
+		<intro />
 	</scene_manager>
 	<questmanager>
-		<quests path="quests.csv"/>
+		<quests path="quests.csv" />
 	</questmanager>
+	<ui>
+		<Potion>
+			<VitaPotion x="-10" y="110" texturepath="Assets/Textures/Potions/Inventory/HealPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/HealPotionSelected.png" />
+			<CeleritaPotion x="478" y="105" texturepath="Assets/Textures/Potions/Inventory/VeloPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/VeloPotionSelected.png" />
+			<EtherPotion x="132" y="-15" texturepath="Assets/Textures/Potions/Inventory/EnergyPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/EnergyPotionSelected.png" />
+			<OblitiusPotion x="140" y="472" texturepath="Assets/Textures/Potions/Inventory/AbilityPotionCreated.png" textureSelection="Assets/Textures/Potions/Inventory/AbilityPotionSelected.png" />
+		</Potion>
+	</ui>
 </config>

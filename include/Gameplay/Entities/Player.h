@@ -175,6 +175,7 @@ public:
 	PlayerClass currentClass = KNIGHT;
 
 	Inventory inventory;
+	Potion* currentPotion = nullptr;
 
 	//tmps
 	PhysBody* sword;
@@ -189,6 +190,10 @@ public:
 	Timer playerHurtCultdown;
 	Timer dashTimer;
 	float dashCultdown = 5.0f;
+
+	//Cheats
+	bool godMode = false;
+	bool ghostMode = false;
 };
 
 #endif // __PLAYER_H__

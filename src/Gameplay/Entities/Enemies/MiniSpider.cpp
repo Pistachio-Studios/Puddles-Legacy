@@ -240,9 +240,9 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	case ColliderType::MAGIC:
 		vida -= player->dano;
-		if (vida <= 0.0f)
+		if (vida <= 0.0f && !dead)
 		{
-			// AUDIO DONE boss death
+			dead = true;
 			app->audio->PlayFx(dieFx);
 			movementFSM->ChangeState("die");
 		}
