@@ -76,7 +76,7 @@ bool UI::Update(float dt)
 
 		//Get the size of the window
 		app->win->GetWindowSize(windowW, windowH);
-		app->render->DrawTexture(texture_inventory, (int)windowW / 2 - 300, (int)windowH / 2 - 300, 0, 0, 0, sizeEase);
+		app->render->DrawTexture(texture_inventory, (int)windowW / 2 - 350 * sizeEase, (int)windowH / 2 - 350 * sizeEase, 0, 0, 0, sizeEase);
 		//FixThis- SDL_SetTextureAlphaMod(texture_inventory, easeInQuad(dt));
 		Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
 		for(int i = 0; i < playerInventory->items.size(); i++)
@@ -84,8 +84,8 @@ bool UI::Update(float dt)
 			Item* potion = playerInventory->items[i];
 			if(potion->quantity > 0)
 			{
-				int potionX = (int)windowW / 2 - 252;
-				int potionY = (int)windowH / 2 - 446;
+				int potionX = (int)windowW / 2 - 252 * sizeEase;
+				int potionY = (int)windowH / 2 - 446 * sizeEase;
 				int potionWidth = 250;
 				int potionHeight = 250;
 
