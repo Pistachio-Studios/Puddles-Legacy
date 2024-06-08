@@ -286,9 +286,9 @@ bool ForestScene::Update(float dt)
 	//puzzle1
 	if (player->position.y > 4350 && player->position.x > 3776 && player->position.x < 4297 && !door1Closed && !puzzle1) {
 		door1Closed = true;
-		bushPbody = app->physics->CreateRectangle(3860, 3968, 1022, 645, bodyType::STATIC);
+		bushPbody = app->physics->CreateRectangle(4096, 4096, 512, 384, bodyType::STATIC);
 		bushPbody->ctype = ColliderType::LIMITS;
-		int i= 4297;	
+		int i= 4297;
 		/*if(i > 3776)
 		{
 			app->render->DrawTexture(bush, i-1, 4000, 0, 1.0f);
@@ -298,7 +298,7 @@ bool ForestScene::Update(float dt)
 	//LOG("x: %i   y: %i", player->position.x, player->position.y);
 
 	if (door1Closed) {
-		app->render->DrawTexture(bush, player->position.x, 4000, 0, 1.0f);
+		app->render->DrawTexture(bush, 3776, 3953, 0, 1.0f, 0.0f, 0.6f);
 	}
 
 	if (buttonList[0]->pisada && buttonList[1]->pisada && buttonList[2]->pisada && buttonList[3]->pisada && door1Closed && !puzzle1) {
@@ -317,6 +317,10 @@ bool ForestScene::Update(float dt)
 		{
 			buttonList[i]->pisada = false;
 		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT){
+		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3840), PIXEL_TO_METERS(4352)), 0);
 	}
 
 	return true;

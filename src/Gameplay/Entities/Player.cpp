@@ -113,7 +113,7 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
 
-	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
+	app->render->DrawTexture(texture, position.x - 15, position.y - 25, 0, 1.0f, 0.0, 1.0f, 2U);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 
