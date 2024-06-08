@@ -9,6 +9,7 @@
 #include "Gameplay/Scene.h"
 #include "Utils/Point.h"
 #include "Core/Physics.h"
+#include "Gameplay/Entities/Player.h"
 
 #include <cmath>
 #include <iostream>
@@ -47,6 +48,10 @@ bool Loco::Start() {
 bool Loco::Update(float dt)
 {
 	Npc::Update(dt);
+
+	// TODO add to bestiary when player interacts with tabernero for the first time
+	// app->entityManager->GetPlayerEntity()->bestiary->bountyUnlocked = true;
+
 	return true;
 }
 

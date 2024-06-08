@@ -53,6 +53,8 @@ bool Player::Start() {
 
 	playerHurtCultdown = Timer();
 
+	bestiary = new Bestiary();
+
 	dashTimer = Timer();
 
 	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
@@ -221,6 +223,25 @@ void Player::DrawImGui()
 
 	ImGui::Text("dash timer: %f", dashTimer.ReadMSec());
 
+	ImGui::Text("Player level: %d", level);
+	
+	if (ImGui::Button("Add Level"))
+		level++;
+	ImGui::SameLine();
+	if (ImGui::Button("Remove Level")) {
+		if (level > 0)
+			level--;
+	}
+
+	ImGui::Text("Player abylity points: %d", abylityPoints);
+	
+	if (ImGui::Button("Add ability Point"))
+		abylityPoints++;
+	ImGui::SameLine();
+	if (ImGui::Button("Remove ability Point")) {
+		if (abylityPoints > 0)
+			abylityPoints--;
+	}
 	ImGui::Separator();
 	ImGui::Text("Player Cheats");
 	ImGui::Checkbox("God Mode", &godMode);
@@ -234,6 +255,8 @@ bool Player::SaveState(pugi::xml_node& node) {
 	pugi::xml_node playerAttributes = node.append_child("player");
 	playerAttributes.append_attribute("x").set_value(this->position.x);
 	playerAttributes.append_attribute("y").set_value(this->position.y);
+
+	// TODO save inventory and bestiary
 
 	return true;
 }
