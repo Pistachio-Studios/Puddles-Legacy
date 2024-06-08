@@ -60,18 +60,18 @@ bool GuiControlSlider::Update(float dt)
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
-			app->render->DrawTexture(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
-			app->render->DrawTexture(textureSelected, rect2.x, rect2.y);
+			app->render->DrawTextureLegacy(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
+			app->render->DrawTextureLegacy(textureSelected, rect2.x, rect2.y);
 			break;
 		case GuiControlState::NORMAL:
-			app->render->DrawTexture(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
+			app->render->DrawTextureLegacy(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
 			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60 + 550, bounds.y, bounds.w, bounds.h); // Add offset to text
-			app->render->DrawTexture(textureSelected, rect2.x, rect2.y);
+			app->render->DrawTextureLegacy(textureSelected, rect2.x, rect2.y);
 			break;
 		case GuiControlState::PRESSED:
-			app->render->DrawTexture(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
+			app->render->DrawTextureLegacy(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
 			app->render->DrawText(std::to_string(currentValue).c_str(), bounds.x + bounds.w + 60 + 550, bounds.y, bounds.w, bounds.h); // Add offset to text
-			app->render->DrawTexture(textureSelected, rect2.x, rect2.y);
+			app->render->DrawTextureLegacy(textureSelected, rect2.x, rect2.y);
 			break;
 		}
 	}

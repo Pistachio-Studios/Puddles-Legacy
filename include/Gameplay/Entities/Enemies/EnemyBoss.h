@@ -75,8 +75,8 @@ public:
 	int moveSpeed = 1;
 	int noSpeed = 0;
 	int updateSpeed;
-	float moveForce = 1.0f;
-	float maxSpeed = 1.0f;
+	float moveForce = 3.0f;
+	float maxSpeed = 3.0f;
 
 	int angle;
 	b2Vec2 movementDirection;
@@ -109,7 +109,8 @@ public:
 	bool isTouchingPlayer = false;
 
 	float angleDegrees;
-	bool justShot;
+	bool justShot = false;
+	bool dead = false;
 
 	//soundFX
 	int bossDamageFx, bossAttackFx, bossDieFx;
