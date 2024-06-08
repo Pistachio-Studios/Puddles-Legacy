@@ -89,6 +89,13 @@ bool UI::Start() {
 	enemy2KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag2/2_spider.png");
 	enemy3KilledTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag2/3_spider.png");
 
+	// Textures for the plants
+	hepaticaPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/1_hepatica.png");
+	comfreyPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/2_comfrey.png");
+	hawthornPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/3_witchhazel.png");
+	witchhazelPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/4_hawthorn.png");
+	arnicaPlantTexture = app->tex->Load("Assets/UI/GUI/Bestiario/Pag3/5_arnica.png");
+
 	return true;
 }
 
@@ -360,6 +367,26 @@ bool UI::Update(float dt)
 					break;
 				case 3:
 					app->render->DrawTextureLegacy(bestiaryPage3Texture, 0, 0, NULL, 0);
+
+					#pragma region KnownPlants
+
+					if (player->bestiary->hepaticaPlantCollected)
+						app->render->DrawTextureLegacy(hepaticaPlantTexture, 0, 0, NULL, 0);
+
+					if (player->bestiary->comfreyPlantCollected)
+						app->render->DrawTextureLegacy(comfreyPlantTexture, 0, 0, NULL, 0);
+					
+					if (player->bestiary->hawthornPlantCollected)
+						app->render->DrawTextureLegacy(hawthornPlantTexture, 0, 0, NULL, 0);
+
+					if (player->bestiary->witchhazelPlantCollected)
+						app->render->DrawTextureLegacy(witchhazelPlantTexture, 0, 0, NULL, 0);
+					
+					if (player->bestiary->arnicaPlantCollected)
+						app->render->DrawTextureLegacy(arnicaPlantTexture, 0, 0, NULL, 0);
+
+					#pragma endregion KnownPlants
+
 					break;
 				case 4:
 					app->render->DrawTextureLegacy(bestiaryPage4Texture, 0, 0, NULL, 0);
@@ -466,6 +493,13 @@ bool UI::CleanUp() {
 	app->tex->UnLoad(enemy1KilledTexture);
 	app->tex->UnLoad(enemy2KilledTexture);
 	app->tex->UnLoad(enemy3KilledTexture);
+
+	app->tex->UnLoad(hepaticaPlantTexture);
+	app->tex->UnLoad(comfreyPlantTexture);
+	app->tex->UnLoad(hawthornPlantTexture);
+	app->tex->UnLoad(witchhazelPlantTexture);
+	app->tex->UnLoad(arnicaPlantTexture);
+	
 	#pragma endregion CleanUp
 
 	return true;

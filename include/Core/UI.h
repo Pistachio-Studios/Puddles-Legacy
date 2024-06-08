@@ -109,6 +109,13 @@ public:
 	SDL_Texture* enemy2KilledTexture = nullptr;
 	SDL_Texture* enemy3KilledTexture = nullptr;
 
+	// Textures for the plants
+	SDL_Texture* hepaticaPlantTexture = nullptr;
+	SDL_Texture* comfreyPlantTexture = nullptr;
+	SDL_Texture* hawthornPlantTexture = nullptr;
+	SDL_Texture* witchhazelPlantTexture = nullptr;
+	SDL_Texture* arnicaPlantTexture = nullptr;
+
 	uint windowW, windowH;
 
 	bool openBestiary = false;
