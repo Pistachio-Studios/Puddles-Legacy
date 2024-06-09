@@ -26,7 +26,10 @@ GuiControlButton::~GuiControlButton()
 bool GuiControlButton::Update(float dt)
 {
 	//easing
-	float controlEase = easeInQuad(controlEaseTimer.ReadMSec() / 200);
+	//float controlEase = easeInQuad(controlEaseTimer.ReadMSec() / 200);
+
+	Easings easings = Easings();
+	float controlEase = easings.easeInQuad(controlEaseTimer.ReadSec() / 0.2);
 
 	if (state != GuiControlState::DISABLED)
 	{
