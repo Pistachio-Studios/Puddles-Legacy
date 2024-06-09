@@ -19,7 +19,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive -std=c++2a")
 
 if (MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  /wd4101 /wd4267 /wd4267 /wd4244")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4101 /wd4267 /wd4267 /wd4244 /permissive-")
     # Additional compiler warnings and options for MSVC
 endif()
 
