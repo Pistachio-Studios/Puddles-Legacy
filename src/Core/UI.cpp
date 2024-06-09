@@ -545,6 +545,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 6:
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilitySword100();
 
 			// disable other sword abilities
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked = false;
@@ -556,6 +557,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 7:
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilitySword110();
 
 			// disable other sword abilities
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -568,6 +570,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 8:
 			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility111Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword111();
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -582,6 +585,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 9:
 			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility112Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword112();
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -596,6 +600,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			
 		case 10:
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilitySword120();
 
 			// disable other sword abilities
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -608,6 +613,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 11:
 			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility122Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword122();
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -622,6 +628,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 12:
 			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility123Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword123();
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -635,6 +642,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 13:
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilityStaff100();
 
 			// disable other staff abilities
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked = false;
@@ -646,6 +654,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 14:
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilityStaff110();
 
 			// disable other staff abilities
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -658,6 +667,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 15:
 			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility111Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff111();
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -672,6 +682,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 16:
 			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility112Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff112();
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -685,6 +696,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 17:
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilityStaff120();
 
 			// disable other staff abilities
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -697,6 +709,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 18:
 			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility122Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff122();
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -711,6 +724,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 19:
 			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility123Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff123();
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
