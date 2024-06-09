@@ -52,6 +52,8 @@ bool Player::Start() {
 
 	playerHurtCultdown = Timer();
 
+	bestiary = new Bestiary();
+
 	dashTimer = Timer();
 
 	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
