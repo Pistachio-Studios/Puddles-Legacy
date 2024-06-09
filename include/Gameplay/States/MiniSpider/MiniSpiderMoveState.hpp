@@ -17,13 +17,11 @@ public:
     MiniSpiderMoveState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("MiniSpiderMoveState Enter()");
 
         minispider = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("MiniSpiderMoveState Update()");
 
         player = app->entityManager->GetPlayerEntity();
 
@@ -49,7 +47,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("MiniSpiderMoveState Exit()");
     }
 };
 #endif // __MINISPIDERMOVESTATE_H__

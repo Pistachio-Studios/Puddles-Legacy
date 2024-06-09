@@ -17,13 +17,11 @@ public:
     WaspMoveState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("WaspMoveState Enter()");
 
         wasp = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("WaspMoveState Update()");
 
         player = app->entityManager->GetPlayerEntity();
 
@@ -48,7 +46,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("WaspMoveState Exit()");
     }
 };
 #endif // __WASPMOVESTATE_H__

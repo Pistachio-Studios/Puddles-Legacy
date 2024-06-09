@@ -16,13 +16,11 @@ public:
     MiniSpiderIdleState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("MiniSpiderIdleState Enter()");
 
         minispider = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("EnemyBossIdleState Update()");
 
 
         player = app->entityManager->GetPlayerEntity();
@@ -48,7 +46,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("MiniSpiderIdleState Exit()");
     }
 };
 #endif // __MINISPIDERIDLESTATE_H__

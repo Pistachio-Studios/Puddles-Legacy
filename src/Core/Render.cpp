@@ -562,7 +562,7 @@ bool Render::DrawSprite(Sprite &sprite) const
 
 	if(texture == NULL)
 	{
-		LOG("Cannot blit to screen. Texture is nullptr");
+		//LOG("Cannot blit to screen. Texture is nullptr");
 		return true;
 	}
 
