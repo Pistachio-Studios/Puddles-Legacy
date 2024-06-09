@@ -71,7 +71,8 @@ bool UI::Update(float dt)
 	//Potions Inventory
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
 
-		float sizeEase = easeInQuad(potionEaseTimer.ReadMSec() / 200); //hint: from 0 to 1
+		Easings easings = Easings();		
+		float sizeEase = easings.easeInQuad(potionEaseTimer.ReadMSec() / 200); //hint: from 0 to 1
 		LOG("sizeEase %f", sizeEase);
 
 		//Get the size of the window
@@ -185,7 +186,8 @@ bool UI::Update(float dt)
 		app->render->DrawTexture(Seleccion, 260, 615, 0, 0);
 
 		//Dash
-		float test = easeInQuad(player->dashTimer.ReadMSec() / 1000);
+		Easings easings1 = Easings();
+		float test = easings1.easeInQuad(player->dashTimer.ReadMSec() / 1000);
 		float dashSelectionValue = SDL_min(test * 255, 255);
 		SDL_SetTextureAlphaMod(Seleccion, dashSelectionValue);
 		app->render->DrawTexture(Seleccion, 280, 695, 0, 0);
