@@ -77,7 +77,7 @@ bool TavernScene::Enter()
 
 	app->render->camera.target = playerPointAndClick;
 	app->render->camera.useInterpolation = true;
-	app->render->camera.lerpSpeed = 4.0f;
+	app->render->camera.lerpSpeed = 2.0f;
 	app->render->camera.offset = { 0,0 };
 
 	playingTime = new Timer();
@@ -109,9 +109,8 @@ bool TavernScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
-	cauldronOpen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "Open", { 500, 600, 150, 50 }, this);
-	cauldronOpen->SetObserver(this);
-	cauldronOpen->state = GuiControlState::DISABLED; 
+	cauldronTrigger = app->physics->CreateRectangle(500, 700, 100, 100, bodyType::STATIC);
+	cauldronTrigger->ctype = ColliderType::CAULDRON;
 
 	cauldronTex = app->tex->Load("Assets/Textures/Potions/Cauldron/Cauldron.png");
 	cauldronSelectTex = app->tex->Load("Assets/Textures/Potions/Cauldron/CauldronSelect.png");
@@ -165,7 +164,10 @@ bool TavernScene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 
-	if (cauldronIsOpened && cauldron == nullptr) {
+	if(playerPointAndClick->cauldronIsOpen) app->render->camera.lerpSpeed = 0.0f;
+	else app->render->camera.lerpSpeed = 2.0f;
+
+	if (playerPointAndClick->cauldronIsOpen && cauldron == nullptr) {
 		cauldron = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronTex);
 		cauldronExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
 		cauldronCreate = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Create", { (int)windowW / 2 + 320, (int)windowH / 2 + 350, 200, 50 }, this);
@@ -188,7 +190,7 @@ bool TavernScene::Update(float dt)
 			app->guiManager->RemoveGuiControl(cauldronExit);
 			app->guiManager->RemoveGuiControl(cauldron);
 			cauldronExitPressed = false;
-			cauldronIsOpened = false;
+			playerPointAndClick->cauldronIsOpen = false;
 			cauldron = nullptr;
 		}
 
@@ -347,7 +349,6 @@ bool TavernScene::Update(float dt)
 			app->guiManager->RemoveGuiControl(NotCrafteableCeleritaPotion);
 			NotCrafteableCeleritaPotion = nullptr;
 				
-			cauldronIsOpened = false;
 			cauldronSelect = nullptr; 
 			selectExitPressed = false; 
 			
@@ -393,7 +394,6 @@ bool TavernScene::PostUpdate()
 			gcSave->state = GuiControlState::DISABLED;
 		}
 	}
-	cauldronOpen->state = GuiControlState::NORMAL;  
 	if(exitPressed)
 		ret = false;
 
@@ -458,9 +458,6 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 9:
 		exitPressed = true;
 	break;
-	case 16:
-		cauldronIsOpened = true;
-		break;
 	case 14:
 		if(cauldronSelect == nullptr) cauldronExitPressed = true;
 		break;

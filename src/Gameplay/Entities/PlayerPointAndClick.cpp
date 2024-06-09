@@ -122,13 +122,20 @@ void PlayerPointAndClick::OnCollision(PhysBody* physA, PhysBody* physB)
 {
     /* switch (physB->ctype)
     {
-    case ColliderType::NPC;
-        break;
+     case ColliderType::CAULDRON:
+         cauldronIsOpen = true;
+         break;
     } */
 
     if(physB)
     {
+        LOG("Hovering true");
         hovering = true;
+
+        if (physB->ctype == ColliderType::CAULDRON) {
+            LOG("Cauldron open true");
+            cauldronIsOpen = true; 
+        }
     }
 }
 
@@ -136,6 +143,7 @@ void PlayerPointAndClick::EndCollision(PhysBody* physA, PhysBody* physB)
 {
     if(physB)
     {
+        LOG("Hovering false");
         hovering = false;
     }
 }
