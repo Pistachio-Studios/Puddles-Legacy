@@ -4,8 +4,10 @@
 #include "Core/GuiControlLabel.h"
 #include "Core/Module.h"
 #include "Gameplay/Entities/Player.h"
+#include "Gameplay/Entities/PlayerPointAndClick.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
+#include "Core/GuiControlPopUp.h"
 #include "Gameplay/Scene.h"
 
 struct SDL_Texture;
@@ -46,8 +48,25 @@ public:
 	bool winCondition = false;
 	Player* player;
 
+	PlayerPointAndClick* playerPointAndClick;
+
 private:
 	SDL_Texture* img;
+	SDL_Texture* cauldronTex;
+	SDL_Texture* cauldronSelectTex;
+	SDL_Texture* CeleritaPotionTex;
+	SDL_Texture* VitaPotionTex;
+	SDL_Texture* EtherPotionTex;
+	SDL_Texture* OblitiusPotionTex;
+
+	SDL_Texture* NotCeleritaPotionTex;
+	SDL_Texture* NotVitaPotionTex;
+	SDL_Texture* NotEtherPotionTex;
+	SDL_Texture* NotOblitiusPotionTex;
+
+	SDL_Texture* currentPotion;
+
+	SDL_Texture* prueba;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
@@ -61,9 +80,34 @@ private:
 	GuiControlButton* gcSettings;
 	GuiControlButton* gcBackToTitle;
 	GuiControlButton* gcExit;
+	GuiControlButton* cauldronOpen;
+
+	GuiControlButton* cauldronSelectExit;
+	GuiControlButton* cauldronExit;
+	GuiControlButton* cauldronCreate;
+	GuiControlButton* potionCreateButton;
+	GuiControlPopUp* cauldron = nullptr;
+	GuiControlPopUp* cauldronSelect = nullptr;
+
+	GuiControlPopUp* CrafteableCeleritaPotion = nullptr;
+	GuiControlPopUp* CrafteableVitaPotion = nullptr;
+	GuiControlPopUp* CrafteableEtherPotion = nullptr;
+	GuiControlPopUp* CrafteableOblitiusPotion = nullptr;
+
+	GuiControlPopUp* NotCrafteableCeleritaPotion = nullptr;
+	GuiControlPopUp* NotCrafteableVitaPotion = nullptr;
+	GuiControlPopUp* NotCrafteableEtherPotion = nullptr;
+	GuiControlPopUp* NotCrafteableOblitiusPotion = nullptr;
 
 	bool paused = false;
 	bool exitPressed = false;
+	bool selectExitPressed = false;
+	bool cauldronExitPressed = false;
+	bool cauldronCreatePressed = false;
+	bool potionCreatePressed = false;
+	bool cauldronIsOpened = false;
+
+	int type = 1;
 
 	Timer* playingTime;
 };

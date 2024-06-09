@@ -5,13 +5,14 @@
 
 #include "Utils/Point.h"
 #include "Utils/SString.h"
+#include "Core/Textures.h"
 
 class GuiControlPopUp : public GuiControl
 {
 
 public:
 
-	GuiControlPopUp(uint32_t id);
+	GuiControlPopUp(uint32_t id, SDL_Rect bounds, SDL_Texture* texture);
 	virtual ~GuiControlPopUp();
 
 	// Called each loop iteration
@@ -19,11 +20,10 @@ public:
 
 private:
 
-	int mouseX, mouseY;
-	unsigned int click;
+	int posX, posY;
+	SDL_Texture* texture1;
 	uint windowW, windowH;
-	bool canClick = true;
-	bool drawBasic = false;
+
 };
 
 #endif // __GUICONTROLPOPUP_H__

@@ -22,6 +22,7 @@ enum class EntityType
 	SHIELD,
 	PLANT,
 	POTION,
+	MAGIC,
 	ITEM,
 	BULLET,
 	BUTTON,

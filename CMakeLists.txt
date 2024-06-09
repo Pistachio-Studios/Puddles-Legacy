@@ -19,8 +19,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive -std=c++2a")
 
 if (MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  /wd4101 /wd4267 /wd4267 /wd4244")
-    # Additional compiler warnings and options for MSVC
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4101 /wd4267 /wd4244 /permissive-")    # Additional compiler warnings and options for MSVC
 endif()
 
 file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.cpp" "${INCLUDE_DIR}/*.h")
