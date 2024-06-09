@@ -2,9 +2,8 @@
 #define __PLAYERPOINTANDCLICK_H__
 
 #include "Gameplay/Entities/Entity.h"
-
-class ParticleGenerator;
-class SDL_Texture;
+#include "Core/Textures.h"
+#include "Core/ParticleManager.h"
 
 class PlayerPointAndClick : public Entity
 {
