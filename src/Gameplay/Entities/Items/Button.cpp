@@ -40,6 +40,20 @@ bool Button::Start() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
+	buttonType = parameters.attribute("type").as_int();
+	if (buttonType == 1) {
+		buttonTex = app->tex->Load(parameters.attribute("buttonTexPath").as_string());
+		buttonPisadoTex = app->tex->Load(parameters.attribute("buttonPisadoTexPath").as_string());
+	}
+	else if (buttonType == 2) {
+		buttonVerde = app->tex->Load(parameters.attribute("buttonVerdeTexPath").as_string());
+		buttonAzul = app->tex->Load(parameters.attribute("buttonAzulTexPath").as_string());
+		buttonLila = app->tex->Load(parameters.attribute("buttonLilaTexPath").as_string());
+		buttonRojo = app->tex->Load(parameters.attribute("buttonRojoTexPath").as_string());
+		buttonNaranja = app->tex->Load(parameters.attribute("buttonNaranjaTexPath").as_string());
+		colour = 1 + rand() % 5;
+	}
+
 	newPosition = spawnPosition = position;
 
 	timer = Timer();
@@ -57,8 +71,6 @@ bool Button::Start() {
 
 	player = app->entityManager->GetPlayerEntity();
 
-	buttonTex = app->tex->Load("Assets/Textures/baldosa.png");
-	buttonPisadoTex = app->tex->Load("Assets/Textures/baldosa_pisada.png");
 
 	return true;
 }
@@ -73,11 +85,35 @@ bool Button::Update(float dt)
 
 	//app->render->DrawRectangle({ position.x - 1, position.y + 8, 36, 18 }, 255, 0, 0);
 
-	SDL_Texture* texturaActiva;
-
-	if (!pisada) texturaActiva = buttonTex;
-	else texturaActiva = buttonPisadoTex;
-
+	SDL_Texture* texturaActiva=nullptr;
+	if (buttonType == 1) {
+		if (!pisada) texturaActiva = buttonTex;
+		else texturaActiva = buttonPisadoTex;
+	}
+	else if (buttonType == 2) {
+		if (pisada) {
+			pisada = false;
+			colour = 1 + rand() % 5; // Generate a random number between 1 and 5
+		}
+		switch (colour)
+		{
+		case 1:
+			texturaActiva = buttonVerde;
+			break;
+		case 2:
+			texturaActiva = buttonAzul;
+			break;
+		case 3:
+			texturaActiva = buttonLila;
+			break;
+		case 4:
+			texturaActiva = buttonRojo;
+			break;
+		case 5:
+			texturaActiva = buttonNaranja;
+			break;
+		}
+	}
 	app->render->DrawTexture(texturaActiva, position.x-44, position.y-50, 0, 1.0f);
 
 	return true;

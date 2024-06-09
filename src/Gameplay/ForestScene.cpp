@@ -1,6 +1,7 @@
 #include "Core/App.h"
 #include "Core/Input.h"
 #include "Core/Render.h"
+#include "Core/Audio.h"
 #include "Core/Textures.h"
 #include "Core/Window.h"
 #include "Core/GuiControl.h"
@@ -114,13 +115,20 @@ bool ForestScene::Enter()
 
 	pugi::xml_node buttonNode = assetsNode.child("button");
 
-	for (int i = 0; buttonNode && i < 6; ++i) {
+	for (int i = 0; buttonNode.attribute("type").as_int() == 1; ++i) {
 		buttonList[i] = new Button();
 		app->entityManager->AddEntity(buttonList[i]);
 		buttonList[i]->parameters = buttonNode;
 		buttonList[i]->Enable();
 		buttonNode = buttonNode.next_sibling("button");
+	}
 
+	for (int i = 0; buttonNode.attribute("type").as_int() == 2; ++i) {
+		buttonColourList[i] = new Button();
+		app->entityManager->AddEntity(buttonColourList[i]);
+		buttonColourList[i]->parameters = buttonNode;
+		buttonColourList[i]->Enable();
+		buttonNode = buttonNode.next_sibling("button");
 	}
 
 	for (pugi::xml_node plantNode = parameters.child("Plants").first_child(); plantNode; plantNode = plantNode.next_sibling())
@@ -193,6 +201,13 @@ bool ForestScene::Enter()
 	//changeTown->listener = player;
 
 	bush = app->tex->Load("Assets/Maps/Mapa_Nivel/bush.PNG");
+
+	puzzleFx = app->audio->LoadFx(parameters.child("map").attribute("puzzleFxPath").as_string());
+
+	door1Closed = false;
+	door3Closed = false;
+	puzzle1 = false;
+	puzzle3 = false;
 
 	return true;
 }
@@ -295,22 +310,13 @@ bool ForestScene::Update(float dt)
 		}*/
 	}
 
-
-	//puzzle 2
-
-
-
-
-
-
-	//LOG("x: %i   y: %i", player->position.x, player->position.y);
-
 	if (door1Closed) {
 		app->render->DrawTexture(bush, 3776, 3953, 0, 1.0f, 0.0f, 0.6f);
 	}
 
 	if (buttonList[0]->pisada && buttonList[1]->pisada && buttonList[2]->pisada && buttonList[3]->pisada && door1Closed && !puzzle1) {
 		puzzle1 = true;
+		app->audio->PlayFx(puzzleFx);
 		door1Closed = false;
 		int i = 3776;
 		/*if (i < 4297)
@@ -320,16 +326,59 @@ bool ForestScene::Update(float dt)
 		app->physics->DestroyBody(bushPbody);
 	}
 
-	if ((buttonList[4]->pisada || buttonList[5]->pisada)&&!puzzle1) {
+	if ((buttonList[4]->pisada || buttonList[5]->pisada) && !puzzle1) {
 		for (int i = 0; i < 6; i++)
 		{
 			buttonList[i]->pisada = false;
 		}
 	}
 
+	//puzzle 2
+
+
+
+
+
+
+	LOG("x: %i   y: %i", player->position.x, player->position.y);
+
+	//puzzle 3
+
+	if (player->position.x > 26900 && player->position.y > 14066 && player->position.y < 144475 && !door3Closed && !puzzle3) {
+		door3Closed = true;
+		bushPbody = app->physics->CreateRectangle(26668, 14311, 384, 512, bodyType::STATIC);
+		bushPbody->ctype = ColliderType::LIMITS;
+		int i = 4297;
+		/*if(i > 3776)
+		{
+			app->render->DrawTexture(bush, i-1, 4000, 0, 1.0f);
+		}*/
+	}
+
+	if (door3Closed) {
+		app->render->DrawTexture(bush, 26386, 14166, 0, 1.0f, 90.0f, 0.6f);
+	}
+
+	if (buttonColourList[0]->colour == 2 && buttonColourList[1]->colour == 5 && buttonColourList[2]->colour == 1 && buttonColourList[3]->colour == 4 && buttonColourList[4]->colour == 3 && door3Closed && !puzzle3) {
+		puzzle3 = true;
+		app->audio->PlayFx(puzzleFx);
+		door3Closed = false;
+		int i = 3776;
+		/*if (i < 4297)
+		{
+			app->render->DrawTexture(bush, i + 1, 4000, 0, 1.0f);
+		}*/
+		app->physics->DestroyBody(bushPbody);
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT){
+		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(25600), PIXEL_TO_METERS(14336)), 0);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
 		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3840), PIXEL_TO_METERS(4352)), 0);
 	}
+	
 
 	return true;
 }

@@ -112,6 +112,7 @@ public:
 	// want our Entity class, maybe it's not renderable...
 	iPoint position; 
 	iPoint newPosition;
+
 	bool renderable = true;
 
 	bool entityDebugDraw = false;

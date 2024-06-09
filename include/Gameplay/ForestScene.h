@@ -69,10 +69,16 @@ private:
 
 	Button* buttonList[6];
 
+	Button* buttonColourList[5];
+
+	int puzzleFx;
+
 	PhysBody* bushPbody;
 	SDL_Texture* bush = nullptr;
 	bool door1Closed = false;
+	bool door3Closed = false;
 	bool puzzle1 = false;
+	bool puzzle3 = false;
 
 };
 
