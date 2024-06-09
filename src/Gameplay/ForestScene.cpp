@@ -295,6 +295,14 @@ bool ForestScene::Update(float dt)
 		}*/
 	}
 
+
+	//puzzle 2
+
+
+
+
+
+
 	//LOG("x: %i   y: %i", player->position.x, player->position.y);
 
 	if (door1Closed) {
