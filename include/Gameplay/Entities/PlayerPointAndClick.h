@@ -5,6 +5,8 @@
 #include "Core/Textures.h"
 #include "Core/ParticleManager.h"
 
+class b2MouseJoint;
+
 class PlayerPointAndClick : public Entity
 {
 public:
@@ -37,6 +39,9 @@ public:
 
 	PhysBody* pbody;
 	int margin = 50;
+
+	b2MouseJoint* mouseJoint;
+	PhysBody* ground;
 
 	ParticleGenerator* effects = nullptr;
 
