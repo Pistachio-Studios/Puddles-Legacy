@@ -14,13 +14,11 @@ public:
     MiniSpiderHurtState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("FlingEnemyHurtState Enter()");
 
         minispider = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("MiniSpiderHurtState Update()");
 
         //Animation
         app->render->DrawTexture(minispider->spiderDamage.texture, minispider->position.x - 60, minispider->position.y - 60, &minispider->spiderDamage.GetCurrentFrame(), 1.0f, minispider->pbody->body->GetAngle() * RADTODEG, 0.5f, 1.0f, minispider->flip);
@@ -32,7 +30,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("MiniSpiderHurtState Exit()");
     }
 };
 #endif // __MINISPIDERHURTSTATE_H__

@@ -18,13 +18,11 @@ public:
     EnemyBossDistanceAttackState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("EnemyBossDistanceAttackState Enter()");
 
         enemyboss = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("EnemyBossDistanceAttackState Update()");
 
         app->render->DrawTexture(enemyboss->bossDistanceAttack.texture, enemyboss->position.x - 60, enemyboss->position.y - 150, &enemyboss->bossDistanceAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, 1.0f, enemyboss->flip);
         enemyboss->bossDistanceAttack.Update(dt);
@@ -42,7 +40,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("EnemyBossDistanceAttackState Exit()");
     }
 };
 #endif // __ENEMYBOSSDISTANCEATTACKSTATE_H__
