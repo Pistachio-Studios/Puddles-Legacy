@@ -253,9 +253,8 @@ PhysBody* Physics::CreateChain(int x, int y, int* points, int size, bodyType typ
 	// Return our PhysBody class
 	return pbody;
 }
-
 // 
-bool Physics::PostUpdate()
+bool Physics::Update(float dt)
 {
 
 	// OPTICK PROFILIN

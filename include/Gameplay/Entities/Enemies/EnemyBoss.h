@@ -15,6 +15,7 @@
 struct SDL_Texture;
 class Player;
 class Bullet;
+class ParticleGenerator;
 
 class EnemyBoss : public Entity
 {
@@ -47,6 +48,8 @@ public:
 
 	void pathfindingMovement(float dt);
 
+	float CalculateAngleToPlayer();
+
 	void shootBullet();
 
 	b2Vec2 calculateForce();
@@ -70,11 +73,11 @@ public:
 	SDL_Texture* texture = NULL;
 
 	//Movement
-	int moveSpeed = 2;
+	int moveSpeed = 1;
 	int noSpeed = 0;
 	int updateSpeed;
-	float moveForce = 1.0f;
-	float maxSpeed = 2.0f;
+	float moveForce = 3.0f;
+	float maxSpeed = 3.0f;
 
 	int angle;
 	b2Vec2 movementDirection;
@@ -86,7 +89,9 @@ public:
 
 	iPoint spawnPosition;
 
-	float vida = 20.0f;
+	ParticleGenerator* damage = nullptr;
+
+	float vida = 100.0f;
 	float dano = 2.0f;
 
 	bool invencible = false;
@@ -103,7 +108,15 @@ public:
 
 	//Disparos
 	Bullet* bulletArray[10];
-	bool active = false;
+
+	bool isTouchingPlayer = false;
+
+	float angleDegrees;
+	bool justShot = false;
+	bool dead = false;
+
+	//soundFX
+	int bossDamageFx, bossAttackFx, bossDieFx;
 
 };
 

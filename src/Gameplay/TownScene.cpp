@@ -29,7 +29,17 @@ bool TownScene::Enter()
 	if (parameters.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = parameters.child("player");
+
 		player->Enable();
+
+		// No se porque no va pero deberi de ir ;-;
+		if (app->sceneManager->GetPrevScene()->name == "forestscene"){
+			comesFromForest = true;
+		}
+
+		if (app->sceneManager->GetPrevScene()->name == "tavernscene"){
+			comesFromTavern = true;
+		}
 	}
 
 	if (parameters.child("map")) {
@@ -114,6 +124,17 @@ bool TownScene::PreUpdate()
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	// No se porque no va pero deberi de ir ;-;
+	if (comesFromForest)
+		//player->position = { 2900, 260 };
+		player->pbody->body->SetTransform({ PIXEL_TO_METERS(2900),PIXEL_TO_METERS(260) }, 0);
+		comesFromForest = false;
+
+	if (comesFromTavern)
+		//player->position = { 2900, 2080 };
+		player->pbody->body->SetTransform({ PIXEL_TO_METERS(2900),PIXEL_TO_METERS(2080) }, 0);
+		comesFromTavern = false;
 
 	return true;
 }

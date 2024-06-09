@@ -42,6 +42,10 @@ private:
 
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
+	
+	int logoFx;
+
+	bool hasStarted = true;
 
 	Timer* timer = nullptr;
 };

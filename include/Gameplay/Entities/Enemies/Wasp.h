@@ -13,6 +13,7 @@
 
 struct SDL_Texture;
 class Player;
+class ParticleGenerator;
 
 class Wasp : public Entity
 {
@@ -68,7 +69,7 @@ public:
 	SDL_Texture* texture = NULL;
 
 	//Movement
-	int moveSpeed = 3;
+	int moveSpeed = 1;
 	int noSpeed = 0;
 	int updateSpeed;
 	float moveForce = 1.0f;
@@ -84,6 +85,8 @@ public:
 
 	iPoint spawnPosition;
 
+	ParticleGenerator* damage = nullptr;
+
 	float vida=15.0f;
 	float dano = 3.0f;
 	bool invencible = false;
@@ -98,6 +101,10 @@ public:
 	int damageFx,attackFx,dieFx;
 
 	PathFinding* pathfinding;
+
+	bool isTouchingPlayer = false;
+
+	bool dead = false;
 
 	b2Vec2 force;
 

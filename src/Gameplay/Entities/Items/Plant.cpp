@@ -1,5 +1,5 @@
-#include "GamePlay/Entities/Items/Plant.h"
-#include "GamePlay/Entities/Player.h"
+#include "Gameplay/Entities/Items/Plant.h"
+#include "Gameplay/Entities/Player.h"
 #include "Utils/Log.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"

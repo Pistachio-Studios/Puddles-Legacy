@@ -5,6 +5,7 @@
 #include "Utils/Timer.h"
 #include "Core/Window.h"
 #include "Core/Audio.h"
+#include "Core/Textures.h"
 #include "Gameplay/TutorialScene.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Entities/Enemies/Wasp.h"
@@ -22,7 +23,7 @@
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
 #include "Core/QuestManager.h"
-  
+
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
 
@@ -94,9 +95,9 @@ bool TutorialScene::Enter()
 
 /// TODO change scene collider
 
-	PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
-	changeTown->ctype = ColliderType::CHANGESCENE;
-	changeTown->listener = player;
+	//PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
+	//changeTown->ctype = ColliderType::CHANGESCENE;
+	//changeTown->listener = player;
 
 
 	if (parameters.child("enemies").child("EnemyBoss")) {
@@ -187,22 +188,22 @@ bool TutorialScene::Enter()
 	Quest* movementQuest = app->questManager->GetQuestById(0);
 	movementQuest->SetCompletionAction([=, this]() -> bool {
 		static bool W,S,A,D;
-		if(app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+		if(app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN and !W)
 		{
 			W = true;
 			movementQuest->AddCompletionValue(100/4);
 		}
-		if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN and !S)
 		{
 			S = true;
 			movementQuest->AddCompletionValue(100/4);
 		}
-		if(app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		if(app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN and !A)
 		{
 			A = true;
 			movementQuest->AddCompletionValue(100/4);
 		}
-		if(app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		if(app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN and !D)
 		{
 			D = true;
 			movementQuest->AddCompletionValue(100/4);

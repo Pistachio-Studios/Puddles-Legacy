@@ -30,6 +30,7 @@ bool ComfreyPlant::Update(float dt)
         app->render->DrawTexture(texture1, position.x - 40, position.y - 50);
         if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
             app->entityManager->GetPlayerEntity()->inventory.AddItem("Comfrey Plant");
+            app->entityManager->GetPlayerEntity()->bestiary->comfreyPlantCollected = true;
             app->entityManager->DestroyEntity(this);
             isColliding = false;
         }

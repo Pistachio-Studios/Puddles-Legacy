@@ -31,7 +31,7 @@ public:
     bool Awake(pugi::xml_node& conf);
 
     // Called after Awake
-    bool Start();
+    bool Start(const char* file); //modified to accept video file
 
     // Called every frame
     bool Update(float dt);
@@ -51,18 +51,18 @@ public:
 
 private:
     int streamIndex = -1;
-    AVFormatContext* formatContext;
-    AVCodecContext* videoCodecContext;
-    AVCodecContext* audioCodecContext;
+    AVFormatContext* formatContext = nullptr;
+    AVCodecContext* videoCodecContext = nullptr;
+    AVCodecContext* audioCodecContext = nullptr;
 
     SDL_AudioDeviceID audioDevice;
     int audioStreamIndex;
 
-    SDL_Texture* renderTexture;
+    SDL_Texture* renderTexture = nullptr;
     SDL_Texture* texture1;
     SDL_Texture* texture2;
     SDL_Rect renderRect;
-    bool running;
+    bool running = false;
 
     std::queue<AVPacket> audioBuffer;
 

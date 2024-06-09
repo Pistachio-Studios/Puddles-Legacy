@@ -10,6 +10,7 @@
 #include "Utils/StateMachine.h"
 #include "Core/SceneManager.h"
 #include "Core/Window.h"
+#include "Core/ParticleManager.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -52,6 +53,8 @@ bool Player::Start() {
 
 	playerHurtCultdown = Timer();
 
+	bestiary = new Bestiary();
+
 	dashTimer = Timer();
 
 	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
@@ -81,24 +84,56 @@ bool Player::Start() {
 
 	sceneChange = false;
 
+	damage = new ParticleGenerator();
+	damage->emiting = false;
+	damage->oneShoot = true;
+	damage->lifetime = 0.25f;
+	damage->explosiveness = 1.0f;
+	damage->spawnRadius = 50;
+	damage->size = 30;
+	damage->initialVelocity = 0;
+	damage->Damping = 0.0f;
+	damage->spread = 180;
+	damage->sizeFade = -1.0f;
+	damage->opacityFade = 0.5f;
+	damage->color = { 255, 0, 0, 128 };
+	app->particleManager->AddGenerator(damage);
+
 	return true;
 }
 
 bool Player::Update(float dt)
 {
+	//CHEATS
+	if (godMode) {
+		vida = 10.0f;
+		livesPlayer = 10;
+	}
+	if (ghostMode) {
+		pbody->body->GetFixtureList()->SetSensor(ghostMode);
+		SDL_SetTextureAlphaMod(texture, 100);
+	}
+	else {
+		SDL_SetTextureAlphaMod(texture, 255);
+	}
+
 	movementFSM->Update(dt);
 	combatFSM->Update(dt);
+
+	inventory.Update(dt);
 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
 	if (vida <= 0.0f) {
-		pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0); //TODO: QUITAR ESTO!!! TIENE QUE SER EL SPAWNPOINT DEL PLAYER EN ESE MAPA
 		vida = 10.0f;
 	}
 	
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
+
+	damage->position = { position.x + 46, position.y + 64};
 
 	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 
@@ -127,6 +162,18 @@ bool Player::Update(float dt)
 		else
 		{
 			currentClass = PlayerClass::KNIGHT;
+		}
+	}
+
+	if(app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	{
+		if(currentPotion != nullptr)
+		{
+			currentPotion->Use();
+		}
+		else
+		{
+			LOG("No potion selected!!");
 		}
 	}
 
@@ -171,7 +218,36 @@ void Player::DrawImGui()
 
 	ImGui::Text("Player Class: %s", currentClass == PlayerClass::KNIGHT ? "KNIGHT" : "WIZARD");
 
+	ImGui::Text("Player Movement State: %s", movementFSM->GetCurrentState().name.GetString());
+	ImGui::Text("Player Combat State: %s", combatFSM->GetCurrentState().name.GetString());
+
 	ImGui::Text("player hurt cooldown: %f", playerHurtCultdown.ReadMSec());
+
+	ImGui::Text("dash timer: %f", dashTimer.ReadMSec());
+
+	ImGui::Text("Player level: %d", level);
+	
+	if (ImGui::Button("Add Level"))
+		level++;
+	ImGui::SameLine();
+	if (ImGui::Button("Remove Level")) {
+		if (level > 0)
+			level--;
+	}
+
+	ImGui::Text("Player abylity points: %d", abylityPoints);
+	
+	if (ImGui::Button("Add ability Point"))
+		abylityPoints++;
+	ImGui::SameLine();
+	if (ImGui::Button("Remove ability Point")) {
+		if (abylityPoints > 0)
+			abylityPoints--;
+	}
+	ImGui::Separator();
+	ImGui::Text("Player Cheats");
+	ImGui::Checkbox("God Mode", &godMode);
+	ImGui::Checkbox("Ghost Mode", &ghostMode);
 
 	ImGui::End();
 }
@@ -183,6 +259,8 @@ bool Player::SaveState(pugi::xml_node& node) {
 	playerAttributes.append_attribute("y").set_value(this->position.y);
 	playerAttributes.append_attribute("lives").set_value(this->livesPlayer);
 	playerAttributes.append_attribute("mana").set_value(this->mana);
+
+	// TODO save inventory and bestiary
 
 	return true;
 }
@@ -220,8 +298,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if(playerHurtCultdown.ReadMSec() > 1000.0f)
 			{
 				livesPlayer--; 
+				damage->emiting = true;
 				playerHurtCultdown.Start();
 			}
+		break;
+	case ColliderType::BULLET:
+		vida -= 2.0f;
+		damage->emiting = true;
 		break;
 	}
 

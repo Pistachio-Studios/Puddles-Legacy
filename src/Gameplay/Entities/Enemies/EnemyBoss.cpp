@@ -6,6 +6,7 @@
 #include "Core/Map.h"
 #include "Core/AnimationManager.h"
 #include "Core/SceneManager.h"
+#include "Core/Audio.h"
 #include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -13,6 +14,7 @@
 #include "Gameplay/Entities/Bullet.h"
 #include "Utils/Point.h"
 #include "Utils/StateMachine.h"
+#include "Core/ParticleManager.h"
 
 #include "Gameplay/States/EnemyBoss/EnemyBossIdleState.hpp"
 #include "Gameplay/States/EnemyBoss/EnemyBossBodyAttackState.hpp"
@@ -58,7 +60,7 @@ bool EnemyBoss::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 192, 192, bodyType::DYNAMIC); 
+	pbody = app->physics->CreateRectangle(position.x, position.y, 230, 192, bodyType::DYNAMIC); 
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY; 
 
@@ -88,10 +90,10 @@ bool EnemyBoss::Start() {
 	bossBodyAttack.speed = 2.0f;
 
 	bossMove = *app->animationManager->GetAnimByName("Boss_Spider_Caminar");
-	bossMove.speed = 2.0f;
+	bossMove.speed = 1.4f;
 
 	bossDamage = *app->animationManager->GetAnimByName("Boss_Spider_Damage");
-	bossDamage.speed = 2.0f;
+	bossDamage.speed = 1.0f;
 
 	bossDeath = *app->animationManager->GetAnimByName("Boss_Spider_Muerte");
 	bossDeath.speed = 1.0f;
@@ -101,6 +103,24 @@ bool EnemyBoss::Start() {
 		bulletArray[i] = new Bullet();
 	}
 
+	bossDamageFx = app->audio->LoadFx(parameters.attribute("BossDamagePath").as_string());
+	bossAttackFx = app->audio->LoadFx(parameters.attribute("BossAttackPath").as_string());
+	bossDieFx = app->audio->LoadFx(parameters.attribute("BossDiePath").as_string());
+
+	damage = new ParticleGenerator();
+	damage->emiting = false;
+	damage->oneShoot = true;
+	damage->lifetime = 0.25f;
+	damage->explosiveness = 1.0f;
+	damage->spawnRadius = 90;
+	damage->size = 30;
+	damage->initialVelocity = 0;
+	damage->Damping = 0.0f;
+	damage->spread = 180;
+	damage->sizeFade = -1.0f;
+	damage->opacityFade = 0.5f;
+	damage->color = { 0, 200, 100, 128 };
+	app->particleManager->AddGenerator(damage);
 
 	return true;
 }
@@ -116,11 +136,7 @@ bool EnemyBoss::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	if (debug) {
-		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-			freeCam = !freeCam;
-		}
-	}
+	damage->position = { position.x + 16, position.y + 16 };
 
 	/* 	app->render->DrawTexture(currentAnimation->texture, position.x - 9, position.y - 9, &currentAnimation->GetCurrentFrame(), 1.0f, pbody->body->GetAngle()*RADTODEG, flip);
 
@@ -141,7 +157,7 @@ bool EnemyBoss::Update(float dt)
 		pbody->GetPosition(position.x, position.y);
 		app->render->DrawTexture(texture, position.x + 35, position.y - 35, 0, 1.0f, pbody->body->GetAngle() * RADTODEG + 90);
 		for (int i = 0; i < 10; i++) {
-			bulletArray[i]->Update(dt);
+			bulletArray[i]->Update(CalculateAngleToPlayer());
 		}
 	}
 
@@ -239,22 +255,41 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision ARMAPLAYER");
 		//if (state != EntityState::DEAD and !invencible){
 		vida -= player->dano;
-		if (vida <= 0.0f)
+		damage->emiting = true;
+		if (vida <= 0.0f && !dead)
 		{
-			// AUDIO DONE boss death
+			dead = true;
+			app->audio->PlayFx(bossDieFx);
+			player->bestiary->enemy3Killed = true;
 			movementFSM->ChangeState("die");
 		}
 		else if(vida > 0.0f)
 		{
+			app->audio->PlayFx(bossDamageFx);
 			bossDamage.Reset();
 			movementFSM->ChangeState("hurt");
 		}
-		//else {
-		//	// AUDIO DONE boss hit
-		//	app->audio->PlayFx(bossHit);
-		//	movementStateMachine->ChangeState("hurt");
-		//	lives--;
-		//}
+		break;
+
+	case ColliderType::MAGIC:
+		vida -= player->dano;
+		damage->emiting = true;
+		if (vida <= 0.0f && !dead)
+		{
+			dead = true;
+			app->audio->PlayFx(bossDieFx);
+			player->bestiary->enemy3Killed = true;
+			movementFSM->ChangeState("die");
+		}
+		else if (vida > 0.0f) {
+			app->audio->PlayFx(bossDamageFx);
+			bossDamage.Reset();
+			movementFSM->ChangeState("hurt");
+		}
+		break;
+
+	case ColliderType::PLAYER:
+		isTouchingPlayer = true;
 		break;
 
 	case ColliderType::UNKNOWN:
@@ -264,7 +299,14 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 }
 
 void EnemyBoss::EndCollision(PhysBody* physA, PhysBody* physB) {
-
+	switch (physB->ctype) {
+	case ColliderType::PLAYER:
+		isTouchingPlayer = false;
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Colision UNKNOWN");
+		break;
+	}
 }
 
 void EnemyBoss::pathfindingMovement(float dt) {
@@ -321,10 +363,29 @@ void EnemyBoss::shootBullet()
 	for (int i = 0; i < 10; i++) {
 		if (!bulletArray[i]->active) {
 			bulletArray[i]->position = position;
-			bulletArray[i]->Shoot();
+			bulletArray[i]->Shoot(calculateForce(),flip);
 			break;
 		}
 	}
+}
+
+float EnemyBoss::CalculateAngleToPlayer()
+{
+	if (justShot) {
+
+		// Calculate the difference in positions
+		float dx = player->position.x - position.x;
+		float dy = player->position.y - position.y;
+
+		// Use atan2 to get the angle in radians
+		float angle = atan2(dy, dx);
+
+		// Optionally convert the angle to degrees
+		angleDegrees = angle * (180.0f / M_PI);
+		justShot = false;
+	}
+
+	return angleDegrees;
 }
 
 b2Vec2 EnemyBoss::calculateForce()
@@ -341,7 +402,7 @@ b2Vec2 EnemyBoss::calculateForce()
 	}
 
 	// Define the attack force or speed
-	float attackForce = 10.0f; // Adjust this value as needed
+	float attackForce = 1.2f; // Adjust this value as needed
 
 	// Apply the impulse/force towards the player
 	b2Vec2 force(dirX * attackForce, dirY * attackForce);

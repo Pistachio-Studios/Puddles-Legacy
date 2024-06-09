@@ -5,6 +5,7 @@
 
 #include "Gameplay/Scene.h"
 #include "Utils/SString.h"
+#include <variant>
 
 #include <SDL.h>
 
@@ -71,9 +72,24 @@ public:
 	}
 
 	// 
+	void SetObserver(Module* module)
+	{
+		observer = module;
+	}
+
+	// 
 	void NotifyObserver()
 	{
-		observer->OnGuiMouseClickEvent(this);
+		if (std::holds_alternative<Scene*>(observer))
+		{
+			Scene* scene = std::get<Scene*>(observer);
+			scene->OnGuiMouseClickEvent(this);
+		}
+		else if (std::holds_alternative<Module*>(observer))
+		{
+			Module* module = std::get<Module*>(observer);
+			module->OnGuiMouseClickEvent(this);
+		}
 	}
 
 public:
@@ -87,9 +103,13 @@ public:
 	SDL_Color color;        // Tint color
 
 	SDL_Texture* texture = nullptr;   // Texture atlas reference
+	SDL_Texture* textureSelected = nullptr;   // Texture atlas reference
+	SDL_Texture* textureSelectedLeft = nullptr; 
+	SDL_Texture* textureSelectedRight = nullptr;
 	SDL_Rect section;       // Texture atlas base section
 
-	Scene* observer;        // Observer 
+	//Scene* observer;        // Observer 
+	std::variant<Scene*, Module*> observer; // Observer
 
 	bool markedToDelete = false;
 };

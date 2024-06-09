@@ -6,6 +6,7 @@
 #include "Core/GuiControlButton.h"
 #include "Core/GuiManager.h"
 #include "Utils/Log.h"
+#include "Core/Textures.h"
 
 GuiControlDropDownBox::GuiControlDropDownBox(uint32 id, const char* text, SDL_Rect bounds) : GuiControl(GuiControlType::DROPDOWNBOX, id)
 {
@@ -15,6 +16,8 @@ GuiControlDropDownBox::GuiControlDropDownBox(uint32 id, const char* text, SDL_Re
 	canClick = true;
 	drawBasic = false;
 	isOpen = false;
+
+	texture = app->tex->Load("Assets/UI/Dropdown/dropdown.png");
 	
 }
 
@@ -30,7 +33,7 @@ bool GuiControlDropDownBox::Update(float dt)
 	{
 		app->input->GetMousePosition(mouseX, mouseY);
 
-		if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
+		if (mouseX > (bounds.x + 550) && mouseX < (bounds.x + 550) + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
 				isOpen = !isOpen; // Toggle the open state when the dropdown box is clicked
 				NotifyObserver();
@@ -40,14 +43,16 @@ bool GuiControlDropDownBox::Update(float dt)
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
-			app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
+			//app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
+			app->render->DrawTexture(texture, bounds.x + 550, bounds.y);
 			break;
 		case GuiControlState::NORMAL:
 		case GuiControlState::PRESSED:
-			app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
+			//app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
+			app->render->DrawTexture(texture, bounds.x + 550, bounds.y);
 			if (isOpen) {
 				// Draw a checkmark or some other indicator when the checkbox is checked
-				app->render->DrawRectangle({bounds.x + 5, bounds.y + 5, bounds.w - 10, bounds.h - 10}, 0, 0, 0, 255, true, false);
+				//app->render->DrawRectangle({bounds.x + 5, bounds.y + 5, bounds.w - 10, bounds.h - 10}, 0, 0, 0, 255, true, false);
 				// Update and draw the buttons when the dropdown box is open
 				for (GuiControlButton* option : options) {
 					option->Update(dt);
@@ -76,7 +81,7 @@ bool GuiControlDropDownBox::Draw()
     if (isOpen) {
         // Draw the options only when the dropdown box is open
         for (GuiControlButton* option : options) {
-            app->render->DrawRectangle(option->bounds, 255, 255, 255, 255, true, false);
+            app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
             app->render->DrawText(option->text.GetString(), option->bounds.x, option->bounds.y, 80, 30);
         }
     }
@@ -90,7 +95,7 @@ GuiControlButton* GuiControlDropDownBox::AddOption(const std::string& optionText
 	int id = app->guiManager->GetGuiLastId() + 1;
 
 	// Create a new GuiControlButton with the given text
-	GuiControlButton* newOption = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, id, optionText.c_str(), {bounds.x, static_cast<int>(bounds.y + (options.size() + 1) * 30), bounds.w, 30}, observer);
+	GuiControlButton* newOption = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, id, optionText.c_str(), {bounds.x + 550, static_cast<int>(bounds.y + (options.size() + 1) * 30), bounds.w, 30}, observer);
 
 	newOption->state = GuiControlState::DISABLED;
 

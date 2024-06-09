@@ -22,7 +22,7 @@ public:
     {
 
         //Animation
-        app->render->DrawTexture(enemyboss->bossIdle.texture, enemyboss->position.x - 120, enemyboss->position.y - 230, &enemyboss->bossIdle.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, enemyboss->flip);
+        app->render->DrawTexture(enemyboss->bossIdle.texture, enemyboss->position.x - 60, enemyboss->position.y - 150, &enemyboss->bossIdle.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, 1.0f, enemyboss->flip);
         enemyboss->bossIdle.Update(dt);
 
 

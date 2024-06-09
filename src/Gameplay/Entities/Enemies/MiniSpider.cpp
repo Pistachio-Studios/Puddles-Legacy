@@ -13,6 +13,7 @@
 #include "Core/SceneManager.h"
 #include "Core/Map.h"
 #include "Core/AnimationManager.h"
+#include "Core/ParticleManager.h"
 
 
 #include "Gameplay/States/MiniSpider/MiniSpiderIdleState.hpp"
@@ -57,7 +58,7 @@ bool MiniSpider::Start() {
 
 	timer = Timer();
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 128, 128, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 90, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
@@ -95,6 +96,21 @@ bool MiniSpider::Start() {
 	attackFx = app->audio->LoadFx(parameters.attribute("attackFxPath").as_string());
 	dieFx = app->audio->LoadFx(parameters.attribute("dieFxPath").as_string());
 
+	damage = new ParticleGenerator();
+	damage->emiting = false;
+	damage->oneShoot = true;
+	damage->lifetime = 0.25f;
+	damage->explosiveness = 1.0f;
+	damage->spawnRadius = 50;
+	damage->size = 30;
+	damage->initialVelocity = 0;
+	damage->Damping = 0.0f;
+	damage->spread = 180;
+	damage->sizeFade = -1.0f;
+	damage->opacityFade = 0.5f;
+	damage->color = { 50, 128, 128, 255 };
+	app->particleManager->AddGenerator(damage);
+
 	return true;
 }
 
@@ -109,6 +125,8 @@ bool MiniSpider::Update(float dt)
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+
+	damage->position = { position.x + 16, position.y + 16 };
 
 	if (debug) {
 		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
@@ -204,7 +222,6 @@ void MiniSpider::moveToSpawnPoint()
 }
 
 bool MiniSpider::CleanUp() {
-
 	app->tex->UnLoad(texture);
 	app->physics->DestroyBody(pbody);
 
@@ -219,10 +236,12 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 			LOG("Collision ARMAPLAYER");
 		 	//if (state != EntityState::DEAD and !invencible){
 			vida -= player->dano;
+			damage->emiting = true;
 			if (vida <= 0.0f)
 			{
 				// AUDIO DONE boss death
 				app->audio->PlayFx(dieFx);
+				player->bestiary->enemy2Killed = true;
 				movementFSM->ChangeState("die");
 			}
 			else if (vida > 0.0f) {
@@ -239,6 +258,24 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 
 	case ColliderType::PLAYER:
+		isTouchingPlayer = true;
+		break;
+
+	case ColliderType::MAGIC:
+		vida -= player->dano;
+		damage->emiting = true;
+		if (vida <= 0.0f && !dead)
+		{
+			dead = true;
+			app->audio->PlayFx(dieFx);
+			player->bestiary->enemy2Killed = true;
+			movementFSM->ChangeState("die");
+		}
+		else if (vida > 0.0f) {
+			app->audio->PlayFx(damageFx);
+			spiderDamage.Reset();
+			movementFSM->ChangeState("hurt");
+		}
 		break;
 
 	case ColliderType::UNKNOWN:
@@ -249,8 +286,8 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 void MiniSpider::EndCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype) {
-
 	case ColliderType::PLAYER:
+		isTouchingPlayer = false;
 		break;
 	}
 }

@@ -176,19 +176,19 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			// Create the popUp
 			popUpOptions = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", { 0,0,0,0 }, this);
 
-			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 100), static_cast<int>(windowH / 2 - 25), 30, 30 };
+			SDL_Rect crossOButtonPos = { static_cast<int>(popUpOptions->bounds.w), static_cast<int>(popUpOptions->bounds.h), 30, 30 };
 			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
 
-			SDL_Rect musicPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 30), 150, 20 };
+			SDL_Rect musicPos = { static_cast<int>(windowW / 2 - 300), static_cast<int>(windowH / 2 - 200), 150, 20 };
 			music = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 6, "Music ", musicPos, this, 0, 128);
 
-			SDL_Rect fxPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 60), 150, 20 };
+			SDL_Rect fxPos = { static_cast<int>(windowW / 2 - 300), static_cast<int>(windowH / 2 - 100), 150, 20 };
 			fx = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 7, "FX ", fxPos, this, 0, 128);
 
-			SDL_Rect vsyncPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 90), 150, 20 };
+			SDL_Rect vsyncPos = { static_cast<int>(windowW / 2 - 300), static_cast<int>(windowH / 2), 42, 42 };
 			vsync = (GuiControlCheckbox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, "Vsync ", vsyncPos, this, 0, 1);
 
-			SDL_Rect screenModePos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 120), 150, 20 };
+			SDL_Rect screenModePos = { static_cast<int>(windowW / 2 - 300), static_cast<int>(windowH / 2 + 100), 246, 59 };
 			// TODO make dropdownbox text change depending on the screen mode selected by config.xml
 			screenMode = (GuiControlDropDownBox*)app->guiManager->CreateGuiControl(GuiControlType::DROPDOWNBOX, 9, "Screen Mode: ", screenModePos, this, 0, 1);
 			
@@ -196,7 +196,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			borderless = screenMode->AddOption("Borderless", this);
 			fullScreenWindow = screenMode->AddOption("Fullscreen Window", this);
 
-			SDL_Rect resolutionPos = { static_cast<int>(windowW / 2 - 90), static_cast<int>(windowH / 2 + 150), 150, 20 };
+			SDL_Rect resolutionPos = { static_cast<int>(windowW / 2 - 300), static_cast<int>(windowH / 2 + 200), 246, 59 };
 			// TODO make dropdownbox text change depending on the resolution selected by config.xml
 			resolution = (GuiControlDropDownBox*)app->guiManager->CreateGuiControl(GuiControlType::DROPDOWNBOX, 10, "Resolution: ", resolutionPos, this, 0, 1);
 
