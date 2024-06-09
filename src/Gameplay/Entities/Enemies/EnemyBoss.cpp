@@ -169,6 +169,7 @@ void EnemyBoss::DrawImGui()
 {
 	ImGui::Begin("Enemy");
 	ImGui::Text("Enemy Position: %d, %d", position.x, position.y);
+	ImGui::Text("Enemy Health: %f", vida);
 	ImGui::Text("Enemy Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
@@ -264,6 +265,19 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			app->audio->PlayFx(bossDamageFx);
 			bossDamage.Reset();
+
+			// TODO review this
+			bool bleedDamageDealt = false;
+			if (app->entityManager->GetPlayerEntity()->bleed) {
+				// 15% change to bleed
+				if (rand() % 100 < 15 && !bleedDamageDealt) {
+					// TODO add bleed effect
+					vida -= 1.0f;
+					bleedDamageDealt = true;
+					LOG("EnemyBoss Bleed! %f", vida);
+				}
+			}
+
 			movementFSM->ChangeState("hurt");
 		}
 		break;

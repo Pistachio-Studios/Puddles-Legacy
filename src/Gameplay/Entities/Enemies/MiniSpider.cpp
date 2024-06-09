@@ -244,6 +244,16 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 			else if (vida > 0.0f) {
 				app->audio->PlayFx(damageFx);
 				spiderDamage.Reset();
+
+				if (app->entityManager->GetPlayerEntity()->bleed) {
+					// 15% change to bleed
+					if (rand() % 100 < 15) {
+						// TODO add bleed effect
+						vida -= 1.0f;
+						LOG("MiniSpider Bleed! %f", vida);
+					}
+				}
+
 				movementFSM->ChangeState("hurt");
 			}
 				//else {
