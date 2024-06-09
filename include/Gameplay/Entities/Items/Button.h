@@ -51,6 +51,11 @@ public:
 
     SDL_Texture* buttonTex = nullptr;
     SDL_Texture* buttonPisadoTex = nullptr;
+	SDL_Texture* buttonVerde = nullptr;
+	SDL_Texture* buttonAzul = nullptr;
+	SDL_Texture* buttonLila = nullptr;
+	SDL_Texture* buttonRojo = nullptr;
+	SDL_Texture* buttonNaranja = nullptr;
     const char* texturePath;
 
     bool isColliding = false;
@@ -60,6 +65,12 @@ public:
 	iPoint spawnPosition;
 
 	Player* player;
+
+	int buttonType;
+
+	//bool changeColor;
+
+	int colour;
 
 	bool pisada = false;
 

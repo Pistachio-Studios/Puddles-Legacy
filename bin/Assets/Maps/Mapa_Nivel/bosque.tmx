@@ -24,6 +24,9 @@
  <tileset firstgid="4839" name="ArbolSagrado_ZonaFinal" tilewidth="128" tileheight="128" tilecount="1485" columns="33">
   <image source="ArbolSagrado_ZonaFinal.png" width="4320" height="5760"/>
  </tileset>
+ <tileset firstgid="6324" name="flechas" tilewidth="128" tileheight="128" tilecount="10" columns="5">
+  <image source="flechas.png" width="640" height="256"/>
+ </tileset>
  <layer id="1" name="Base_Hierba" width="285" height="130">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -122068,7 +122071,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="6325"/>
    <tile/>
    <tile/>
    <tile/>
@@ -122351,6 +122354,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="6326"/>
    <tile/>
    <tile/>
    <tile/>
@@ -122639,8 +122643,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="6327"/>
    <tile/>
    <tile/>
    <tile/>
@@ -122923,7 +122926,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="6324"/>
    <tile/>
    <tile/>
    <tile/>
@@ -140203,7 +140206,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="6331"/>
    <tile/>
    <tile/>
    <tile/>
@@ -140486,7 +140489,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="6333"/>
    <tile/>
    <tile/>
    <tile/>
@@ -141057,11 +141060,11 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="6330"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="6329"/>
    <tile/>
    <tile/>
    <tile/>
@@ -141908,7 +141911,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="6332"/>
    <tile/>
    <tile/>
    <tile/>
