@@ -253,47 +253,47 @@ bool UI::Update(float dt)
 		//Bestiary
 		#pragma region Bestiary
 		if (buttonPag1 == nullptr)
-			buttonPag1 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "", { 332,267, 60, 60 }, (Module*)this);
+			buttonPag1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "", { 332,267, 60, 60 }, (Module*)this);
 		if (buttonPag2 == nullptr)
-			buttonPag2 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "", { 332,350, 60, 60 }, (Module*)this);
+			buttonPag2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "", { 332,350, 60, 60 }, (Module*)this);
 		if (buttonPag3 == nullptr)
-			buttonPag3 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "", { 332,436, 60, 60 }, (Module*)this);
+			buttonPag3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "", { 332,436, 60, 60 }, (Module*)this);
 		if (buttonPag4 == nullptr)
-			buttonPag4 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "", { 332,519, 60, 60 }, (Module*)this);
+			buttonPag4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "", { 332,519, 60, 60 }, (Module*)this);
 		if (buttonPag5 == nullptr)
-			buttonPag5 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "", { 332,602, 60, 60 }, (Module*)this);
+			buttonPag5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "", { 332,602, 60, 60 }, (Module*)this);
 
 		// Abilitie buttons
 		#pragma region AbilitiesButtons
 		if (buttonSwordAbility100 == nullptr)
-			buttonSwordAbility100 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "",  { 600, 700, 50, 50 }, (Module*)this);
+			buttonSwordAbility100 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "",  { 600, 700, 50, 50 }, (Module*)this);
 		if (buttonSwordAbility110 == nullptr)
-			buttonSwordAbility110 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "",  { 523, 658, 50, 50 }, (Module*)this);
+			buttonSwordAbility110 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "",  { 523, 658, 50, 50 }, (Module*)this);
 		if (buttonSwordAbility111 == nullptr)
-			buttonSwordAbility111 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "",  { 440, 617, 50, 50 }, (Module*)this);
+			buttonSwordAbility111 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "",  { 440, 617, 50, 50 }, (Module*)this);
 		if (buttonSwordAbility112 == nullptr)
-			buttonSwordAbility112 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "",  { 440, 698, 50, 50 }, (Module*)this);
+			buttonSwordAbility112 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "",  { 440, 698, 50, 50 }, (Module*)this);
 		if (buttonSwordAbility120 == nullptr)
-			buttonSwordAbility120 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "", { 527, 761, 50, 50 }, (Module*)this);
+			buttonSwordAbility120 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "", { 527, 761, 50, 50 }, (Module*)this);
 		if (buttonSwordAbility122 == nullptr)
-			buttonSwordAbility122 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "", { 440, 698, 50, 50 }, (Module*)this);
+			buttonSwordAbility122 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "", { 440, 698, 50, 50 }, (Module*)this);
 		if (buttonSwordAbility123 == nullptr)
-			buttonSwordAbility123 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "", { 437, 780, 50, 50 }, (Module*)this);
+			buttonSwordAbility123 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "", { 437, 780, 50, 50 }, (Module*)this);
 		
 		if (buttonStaffAbility100 == nullptr)
-			buttonStaffAbility100 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "", { 698, 700, 50, 50 }, (Module*)this);
+			buttonStaffAbility100 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "", { 698, 700, 50, 50 }, (Module*)this);
 		if (buttonStaffAbility110 == nullptr)
-			buttonStaffAbility110 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "", { 778, 664, 50, 50 }, (Module*)this);
+			buttonStaffAbility110 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "", { 778, 664, 50, 50 }, (Module*)this);
 		if (buttonStaffAbility111 == nullptr)
-			buttonStaffAbility111 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "", { 861, 623, 50, 50 }, (Module*)this);
+			buttonStaffAbility111 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "", { 861, 623, 50, 50 }, (Module*)this);
 		if (buttonStaffAbility112 == nullptr)
-			buttonStaffAbility112 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "", { 857, 702, 50, 50 }, (Module*)this);
+			buttonStaffAbility112 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "", { 857, 702, 50, 50 }, (Module*)this);
 		if (buttonStaffAbility120 == nullptr)
-			buttonStaffAbility120 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "", { 774, 759, 50, 50 }, (Module*)this);
+			buttonStaffAbility120 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "", { 774, 759, 50, 50 }, (Module*)this);
 		if (buttonStaffAbility122 == nullptr)
-			buttonStaffAbility122 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 18, "", { 857, 702, 50, 50 }, (Module*)this);
+			buttonStaffAbility122 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 18, "", { 857, 702, 50, 50 }, (Module*)this);
 		if (buttonStaffAbility123 == nullptr)
-			buttonStaffAbility123 = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 19, "", { 857, 783, 50, 50 }, (Module*)this);
+			buttonStaffAbility123 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 19, "", { 857, 783, 50, 50 }, (Module*)this);
 
 		#pragma endregion AbilitiesButtons
 
