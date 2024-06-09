@@ -58,7 +58,7 @@ bool Wasp::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 64, bodyType::DYNAMIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY; 
+	pbody->ctype = ColliderType::ENEMYWASP; 
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
@@ -227,7 +227,7 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::SWORD:
 		LOG("Collision SWORD");
 		//if (state != EntityState::DEAD and !invencible){
-		vida -= player->dano;
+		vida -= player->str - (def / 2);
 		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{
@@ -254,7 +254,7 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 
 	case ColliderType::MAGIC:
-		vida -= player->dano;
+		vida -= player->inte - (def / 2);
 		damage->emiting = true;
 		if (vida <= 0.0f)
 		{

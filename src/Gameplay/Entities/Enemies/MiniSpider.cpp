@@ -60,7 +60,7 @@ bool MiniSpider::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 90, bodyType::DYNAMIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY;
+	pbody->ctype = ColliderType::ENEMYSPIDER;
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
@@ -232,7 +232,7 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::SWORD:
 			LOG("Collision ARMAPLAYER");
 		 	//if (state != EntityState::DEAD and !invencible){
-			vida -= player->dano;
+			vida -= player->str - (def / 2);
 			damage->emiting = true;
 			if (vida <= 0.0f)
 			{
@@ -259,7 +259,7 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 
 	case ColliderType::MAGIC:
-		vida -= player->dano;
+		vida -= player->inte - (def/2);
 		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{

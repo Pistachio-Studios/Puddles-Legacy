@@ -74,9 +74,10 @@ public:
 	float maxSpeed = 2.0f;
 
 	ParticleGenerator* damage = nullptr;
-
-	float vida = 5.0f;
-	float dano = 1.0f;
+	
+	float vida = 21.0f;
+	float dano = 7.0f;
+	float def = 10.0f;
 
 	int angle;
 	b2Vec2 movementDirection;
