@@ -50,18 +50,3 @@ void Plant::OnCollision(PhysBody *physA, PhysBody *physB) {
 
 void Plant::EndCollision(PhysBody *physA, PhysBody *physB) {
 }
-
-bool Plant::SaveState(pugi::xml_node& node) {
-
-    pugi::xml_node plantAttributes = node.append_child("Plant");
-    plantAttributes.append_attribute("quantity").set_value(item->quantity);
-
-    return true;
-}
-
-bool Plant::LoadState(pugi::xml_node& node)
-{
-    item->quantity = node.child("Plant").attribute("quantity").as_int();
-
-    return true;
-}

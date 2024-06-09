@@ -259,8 +259,15 @@ bool Player::SaveState(pugi::xml_node& node) {
 	playerAttributes.append_attribute("y").set_value(this->position.y);
 	playerAttributes.append_attribute("lives").set_value(this->livesPlayer);
 	playerAttributes.append_attribute("mana").set_value(this->mana);
+	playerAttributes.append_attribute("Level").set_value(this->level);
 
 	// TODO save inventory and bestiary
+	Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
+	for (int i = 0; i < playerInventory->items.size(); i++)
+	{
+		Item* potion = playerInventory->items[i];
+		playerAttributes.append_child("items").append_attribute("quantity").set_value(playerInventory->items[i]->quantity); 
+	}
 
 	return true;
 }
@@ -274,7 +281,14 @@ bool Player::LoadState(pugi::xml_node& node)
 
 	this->livesPlayer = node.child("player").attribute("lives").as_int();
 	this->mana = node.child("player").attribute("mana").as_int();
+	this->level = node.child("player").attribute("Level").as_int();
 
+	Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
+	for (int i = 0; i < playerInventory->items.size(); i++)
+	{
+		Item* potion = playerInventory->items[i];
+		playerInventory->items[i]->quantity = node.child("player").child("items").attribute("quantity").as_int(); 
+	}
 	return true;
 }
 
