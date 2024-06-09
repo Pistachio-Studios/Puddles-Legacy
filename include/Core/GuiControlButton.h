@@ -5,6 +5,7 @@
 
 #include "Utils/Point.h"
 #include "Utils/SString.h"
+#include "Utils/Timer.h"
 
 class GuiControlButton : public GuiControl
 {
@@ -18,7 +19,7 @@ public:
 	bool Update(float dt);
 
 	//easings
-	//Timer controlEaseTimer;
+	Timer controlEaseTimer;
 
 private:
 
