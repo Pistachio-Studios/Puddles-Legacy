@@ -235,6 +235,9 @@ void Player::DrawImGui()
 	ImGui::Text("dash timer: %f", dashTimer.ReadMSec());
 
 	ImGui::Text("Player level: %d", level);
+
+	ImGui::Text("Player Strength: %f", str);
+	ImGui::Text("Player Intelligence: %f", inte);
 	
 	if (ImGui::Button("Add Level"))
 		level++;
@@ -281,6 +284,67 @@ bool Player::LoadState(pugi::xml_node& node)
 
 	return true;
 }
+
+#pragma region AbilitiesUnlock
+void Player::AbilitySword100() {
+	// Increase player strength +3
+	str += 13.0f;
+}
+
+void Player::AbilitySword110() {
+	// 15% chance of bleed effect
+	bleed = true;
+}
+
+void Player::AbilitySword111() {
+	// When parry, stack armor 3 times
+}
+
+void Player::AbilitySword112() {
+	// Double attack
+}
+
+void Player::AbilitySword120() {
+	// +20% life regeneration
+}
+
+void Player::AbilitySword122() {
+	// Double attack
+}
+
+void Player::AbilitySword123() {
+	// Area sword attack 100% chance of bleed
+}
+
+void Player::AbilityStaff100() {
+	// Increase player intelligence +3
+	inte = 17.0f;
+}
+
+void Player::AbilityStaff110() {
+	// +10% chance of paralysis effect
+}
+
+void Player::AbilityStaff111() {
+	// Tornado area that slows enemies
+}
+
+void Player::AbilityStaff112() {
+	// Double projectile
+}
+
+void Player::AbilityStaff120() {
+	// +15% energy regeneration
+}
+
+void Player::AbilityStaff122() {
+	// Double projectile
+}
+
+void Player::AbilityStaff123() {
+	// Fireball that can pass through enemies and have a 70% chance of burn
+}
+#pragma endregion AbilitiesUnlock
 
 bool Player::CleanUp() {
 

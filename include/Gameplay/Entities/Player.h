@@ -229,6 +229,22 @@ public:
 	bool SaveState(pugi::xml_node& node) override;
 	bool LoadState(pugi::xml_node& node) override;
 
+	void AbilitySword100();
+	void AbilitySword110();
+	void AbilitySword111();
+	void AbilitySword112();
+	void AbilitySword120();
+	void AbilitySword122();
+	void AbilitySword123();
+
+	void AbilityStaff100();
+	void AbilityStaff110();
+	void AbilityStaff111();
+	void AbilityStaff112();
+	void AbilityStaff120();
+	void AbilityStaff122();
+	void AbilityStaff123();
+
 public:
 
 	Sword* swordEntity = nullptr;
@@ -241,6 +257,8 @@ public:
 	float str = 10.0f;
 	float inte = 14.0f;
 	float def;
+
+	bool bleed = false;
 
 	// TODO add final stats
 	int level = 1;
