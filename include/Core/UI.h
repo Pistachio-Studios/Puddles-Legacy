@@ -32,6 +32,8 @@ public:
 	// OnGuiMouseClickEvent
 	bool OnGuiMouseClickEvent(GuiControl* control) override;
 
+	void PauseMenuVisibility(bool visible);
+
 public:
 
 	// Potions Inventory
@@ -130,6 +132,7 @@ public:
 
 	bool openBestiary = false;
 	bool exitPressed = false;
+	bool mainMenuPressed = false;
 };
 
 #endif // __UI_H__

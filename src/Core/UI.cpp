@@ -444,26 +444,27 @@ bool UI::Update(float dt)
 	{
 		if(paused)
 		{
+			PauseMenuVisibility(paused);
 			paused = false;
-			gcResume->state = GuiControlState::DISABLED;
-			gcSettings->state = GuiControlState::DISABLED;
-			gcBackToTitle->state = GuiControlState::DISABLED;
-			gcExit->state = GuiControlState::DISABLED;
-			gcSave->state = GuiControlState::DISABLED;
 		}
 		else
 		{
+			PauseMenuVisibility(paused);
 			paused = true;
-			gcResume->state = GuiControlState::NORMAL;
-			gcSettings->state = GuiControlState::NORMAL;
-			gcBackToTitle->state = GuiControlState::NORMAL;
-			gcExit->state = GuiControlState::NORMAL;
-			gcSave->state = GuiControlState::NORMAL;
 		}
 	}
 
 	if(exitPressed)
 		return false;
+	
+	if(mainMenuPressed)
+	{
+		app->sceneManager->ChangeScene("mainmenu");
+		mainMenuPressed = false;
+		paused = false;
+		PauseMenuVisibility(!paused);
+		
+	}
 
 	return true;
 }
@@ -775,7 +776,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			break;
 		case 20:
-			paused = true;
+			paused = false;
 			gcResume->state = GuiControlState::DISABLED;
 			gcSettings->state = GuiControlState::DISABLED;
 			gcBackToTitle->state = GuiControlState::DISABLED;
@@ -783,18 +784,38 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			gcSave->state = GuiControlState::DISABLED;
 			break;
 		case 21:
-
+			app->SaveRequest();
 			break;
 		case 22:
-			app->sceneManager->ChangeScene("mainmenu");
+			
 			break;
 		case 23:
-			exitPressed = true;
+			mainMenuPressed = true;
 		break;
 		case 24:
-		app->SaveRequest();
+		exitPressed = true;
 		break;
 		}
 	}
 	return true;
+}
+
+void UI::PauseMenuVisibility(bool visible)
+{
+	if(visible)
+		{
+			gcResume->state = GuiControlState::DISABLED;
+			gcSettings->state = GuiControlState::DISABLED;
+			gcBackToTitle->state = GuiControlState::DISABLED;
+			gcExit->state = GuiControlState::DISABLED;
+			gcSave->state = GuiControlState::DISABLED;
+		}
+		else
+		{
+			gcResume->state = GuiControlState::NORMAL;
+			gcSettings->state = GuiControlState::NORMAL;
+			gcBackToTitle->state = GuiControlState::NORMAL;
+			gcExit->state = GuiControlState::NORMAL;
+			gcSave->state = GuiControlState::NORMAL;
+		}
 }
