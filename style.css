@@ -127,6 +127,13 @@ h2 {
     max-height: 80%; /* Ajusta este valor según sea necesario */
 }
 
+@media (max-width: 768px) {
+    .left-image,
+    .right-image {
+        max-height: 50%; /* Ajusta este valor según sea necesario */
+    }
+}
+
 
 .authors {
     padding: 20px;
