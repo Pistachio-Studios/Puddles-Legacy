@@ -17,13 +17,12 @@ public:
     WaspIdleState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("WaspIdleState Enter()");
 
         wasp = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("WaspIdleState Update()");
+
 
         //Animation
         app->render->DrawTexture(wasp->waspIdle.texture, wasp->position.x - 88, wasp->position.y - 104, &wasp->waspIdle.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, 0.8f, 1.0f, wasp->flip);
@@ -48,7 +47,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("WaspIdleState Exit()");
     }
 };
 #endif // __WASPIDLESTATE_H__

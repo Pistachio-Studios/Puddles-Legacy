@@ -39,7 +39,7 @@
 			<enemies />
 		</level1scene>
 		<forestscene>
-			<map path="Assets/Maps/Mapa_Nivel/" name="bosque.tmx" />
+			<map path="Assets/Maps/Forest-Scene/" name="bosque.tmx" />
 			<camera x="-32545" y="-4610" />
 			<player x="33536" y="5248" texturepath="Assets/Textures/Player.png" />
 			<enemies />
@@ -81,18 +81,26 @@
 				<Wasp x="650" y="2100" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
 			</enemies>
 			<Plants>
-				<ArnicaPlant x="1500" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png" />
-				<ArnicaPlant x="1700" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png" />
-				<ArnicaPlant x="1900" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png" />
-				<ArnicaPlant x="2100" y="2300" texturepath="Assets/Textures/Plants/HealPlant.png" />
-				<ComfreyPlant x="1500" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png" />
-				<ComfreyPlant x="1700" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png" />
-				<ComfreyPlant x="1900" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png" />
-				<ComfreyPlant x="2100" y="2600" texturepath="Assets/Textures/Plants/VeloPlant.png" />
-				<HepaticaPlant x="1500" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png" />
-				<HepaticaPlant x="1700" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png" />
-				<HepaticaPlant x="1900" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png" />
-				<HepaticaPlant x="2100" y="2900" texturepath="Assets/Textures/Plants/EnergyPlant.png" />
+				<ArnicaPlant x="1500" y="2300" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="1700" y="2300" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="1900" y="2300" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="2100" y="2300" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ComfreyPlant x="1500" y="2600" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="1700" y="2600" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="1900" y="2600" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="2100" y="2600" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<HepaticaPlant x="1500" y="2900" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="1700" y="2900" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="1900" y="2900" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="2100" y="2900" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<WitchHazelPlant x="1500" y="3200" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="1700" y="3200" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="1900" y="3200" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="2100" y="3200" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<HawthornPlant x="1500" y="3500" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="1700" y="3500" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="1900" y="3500" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="2100" y="3500" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
 			</Plants>
 		</tutorialscene>
 		<testscene>
