@@ -358,6 +358,7 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 15:
 		potionCreatePressed = true;
+		CreatePotion();
 		break;
 	case 10:
 		app->SaveRequest();
@@ -428,4 +429,50 @@ bool TavernScene::CheckIngredient(Inventory* playerInventory, const std::string&
 		}
 	}
 	return false;
+}
+
+void TavernScene::CreatePotion()
+{
+	Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
+
+	bool canCraft = false;
+	std::string potionName;
+	int requiredQuantity = 0;
+
+	switch (type) {
+	case 1: // CeleritaPotion
+		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 1);
+		potionName = "CeleritaPotion";
+		requiredQuantity = 1;
+		break;
+	case 2: // EtherPotion
+		//TODO: Añadir lógica si hay ingredientes específicos para EtherPotion
+		break;
+	case 3: // VitaPotion
+		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 3);
+		potionName = "VitaPotion";
+		requiredQuantity = 3;
+		break;
+	case 4: // OblitiusPotion
+		// TODO: Añadir lógica si hay ingredientes específicos para OblitiusPotion
+		break;
+	}
+
+	if (canCraft) {
+		player->inventory.AddItem(potionName); //TODO: Arreglar!! Porque no me esta sumando la cantidad de la pocion que he creado al darle al boton de accept??? Solo falta q funcione esto
+		RemoveIngredient(playerInventory, "Arnica Plant", requiredQuantity);
+	}
+}
+
+void TavernScene::RemoveIngredient(Inventory* playerInventory, const std::string& ingredientName, int quantity)
+{
+	for (auto& item : playerInventory->items) {
+		if (item->name == ingredientName) {
+			item->quantity -= quantity;
+			if (item->quantity < 0) {
+				item->quantity = 0; //Arreglar esto
+			}
+			return;
+		}
+	}
 }

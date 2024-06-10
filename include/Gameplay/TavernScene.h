@@ -47,6 +47,8 @@ public:
 	void ResetPotionPopUps();
 	void ManagePotionCreation(Inventory* playerInventory, SDL_Texture* craftableTex, SDL_Texture* notCraftableTex, GuiControlPopUp*& craftablePopup, GuiControlPopUp*& notCraftablePopup);
 	bool CheckIngredient(Inventory* playerInventory, const std::string& ingredientName, int requiredQuantity);
+	void CreatePotion();
+	void RemoveIngredient(Inventory* playerInventory, const std::string& ingredientName, int quantity);
 public:
 	bool winCondition = false;
 	Player* player;
