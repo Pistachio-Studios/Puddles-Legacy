@@ -28,7 +28,6 @@ private:
 	int loopCount = 0;
 	int pingpongCount = 0;
 	int pingpongDirection = 1;
-	float timeStep = 1000 / 60; //tiempo que se le resta a la duracion
 	float timeLeft = 0.0f; //tiempo de visualizaci?n que le queda al frame actual
 
 public:
@@ -89,7 +88,7 @@ public:
 			timeLeft += durations[currentFrame];
 		}
 		//vamos restando a la duraci?n del frame
-		timeLeft -= timeStep * speed;
+		timeLeft -= dt * speed;
 	}
 
 	int GetLoopCount() const

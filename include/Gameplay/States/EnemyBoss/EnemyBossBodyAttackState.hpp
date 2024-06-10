@@ -17,14 +17,11 @@ public:
     EnemyBossBodyAttackState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("EnemyBossBodyAttackState Enter()");
 
         enemyboss = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("EnemyBossBodyAttackState Update()");
-
         player = app->entityManager->GetPlayerEntity();
 
         app->render->DrawTexture(enemyboss->bossBodyAttack.texture, enemyboss->position.x - 60, enemyboss->position.y - 150, &enemyboss->bossBodyAttack.GetCurrentFrame(), 1.0f, enemyboss->pbody->body->GetAngle() * RADTODEG, 1.0f, 1.0f, enemyboss->flip);
@@ -42,7 +39,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("EnemyBossBodyAttackState Exit()");
     }
 };
 #endif // __ENEMYBOSSBODYATTACKSTATE_H__

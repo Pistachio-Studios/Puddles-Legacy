@@ -14,13 +14,11 @@ public:
     WaspHurtState(SString name) : State(name) {}
     inline void Enter() override
     {
-        LOG("WaspHurtState Enter()");
 
         wasp = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
-        LOG("WaspHurtState Update()");
 
         //Animation
         app->render->DrawTexture(wasp->waspDamage.texture, wasp->position.x - 88, wasp->position.y - 104, &wasp->waspDamage.GetCurrentFrame(), 1.0f, wasp->pbody->body->GetAngle() * RADTODEG, 0.8f, 1.0f, wasp->flip);
@@ -32,7 +30,6 @@ public:
     }
     inline void Exit() override
     {
-        LOG("WaspHurtState Exit()");
     }
 };
 #endif // __WASPHURTSTATE_H__

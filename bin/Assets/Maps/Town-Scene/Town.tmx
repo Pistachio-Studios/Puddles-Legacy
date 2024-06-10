@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="45" height="36" tilewidth="128" tileheight="128" infinite="0" nextlayerid="7" nextobjectid="127">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="45" height="36" tilewidth="128" tileheight="128" infinite="0" nextlayerid="8" nextobjectid="133">
  <tileset firstgid="1" name="PUEBLO" tilewidth="128" tileheight="128" tilecount="1620" columns="45">
   <image source="PUEBLO.png" width="5760" height="4608"/>
   <tile id="21">
@@ -1600,6 +1600,1587 @@
    </objectgroup>
   </tile>
  </tileset>
+ <tileset firstgid="1621" name="tiles_pueblo_sorting" tilewidth="128" tileheight="128" tilecount="396" columns="18">
+  <image source="tiles_pueblo_sorting.png" width="2373" height="2900"/>
+  <tile id="0">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="30">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="31">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="32">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="36">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="37">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="38">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="39">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="40">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="42">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="44">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="45">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="46">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="47">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="48">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="49">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="50">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="54">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="55">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="56">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="57">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="58">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="59">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="60">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="61">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="62">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="63">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="64">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="65">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="66">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="67">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="68">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="72">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="73">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="74">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="75">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="76">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="77">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="78">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="79">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="80">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="81">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="82">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="83">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="84">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="85">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="86">
+   <properties>
+    <property name="pivotY" type="int" value="767"/>
+   </properties>
+  </tile>
+  <tile id="90">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="91">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="92">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="93">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="94">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="95">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="96">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="97">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="98">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="99">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="100">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="101">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="102">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="103">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="104">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="105">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="108">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="109">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="110">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="111">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="112">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="113">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="114">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="115">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="116">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="117">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="118">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="119">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="120">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="121">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="122">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="123">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="126">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="127">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="128">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="129">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="130">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="131">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="132">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="133">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="134">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="135">
+   <properties>
+    <property name="pivotY" type="int" value="1664"/>
+   </properties>
+  </tile>
+  <tile id="136">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="137">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="138">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="139">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="140">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="141">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="144">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="145">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="146">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="147">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="148">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="149">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="150">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="151">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="152">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="153">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="154">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="155">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="156">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="157">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="158">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="159">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="162">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="163">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="164">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="165">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="166">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="167">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="168">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="169">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="170">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="171">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="172">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="173">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="174">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="175">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="176">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="177">
+   <properties>
+    <property name="pivotY" type="int" value="711"/>
+   </properties>
+  </tile>
+  <tile id="180">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="181">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="182">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="183">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="184">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="185">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="186">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="187">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="188">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="189">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="190">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="191">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="192">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="193">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="194">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="195">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="198">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="199">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="200">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="201">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="202">
+   <properties>
+    <property name="pivotY" type="int" value="1343"/>
+   </properties>
+  </tile>
+  <tile id="203">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="204">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="205">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="206">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="207">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="208">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="209">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="210">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="211">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="212">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="213">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="216">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="217">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="218">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="219">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="220">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="221">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="222">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="223">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="224">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="225">
+   <properties>
+    <property name="pivotY" type="int" value="513"/>
+   </properties>
+  </tile>
+  <tile id="226">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="227">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="228">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="229">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="230">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="231">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="234">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="235">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="236">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="237">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="238">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="239">
+   <properties>
+    <property name="pivotY" type="int" value="2048"/>
+   </properties>
+  </tile>
+  <tile id="240">
+   <properties>
+    <property name="pivotY" type="int" value="2048"/>
+   </properties>
+  </tile>
+  <tile id="244">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="245">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="246">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="247">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="248">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="249">
+   <properties>
+    <property name="pivotY" type="int" value="1320"/>
+   </properties>
+  </tile>
+  <tile id="252">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="253">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="254">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="255">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="256">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="257">
+   <properties>
+    <property name="pivotY" type="int" value="2048"/>
+   </properties>
+  </tile>
+  <tile id="258">
+   <properties>
+    <property name="pivotY" type="int" value="2048"/>
+   </properties>
+  </tile>
+  <tile id="260">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="261">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="262">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="263">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="264">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="265">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="266">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="267">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="268">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="269">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="270">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="271">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="272">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="273">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="274">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="275">
+   <properties>
+    <property name="pivotY" type="int" value="2048"/>
+   </properties>
+  </tile>
+  <tile id="276">
+   <properties>
+    <property name="pivotY" type="int" value="2048"/>
+   </properties>
+  </tile>
+  <tile id="278">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="279">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="280">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="281">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="282">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="283">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="284">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="285">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="286">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="287">
+   <properties>
+    <property name="pivotY" type="int" value="2036"/>
+   </properties>
+  </tile>
+  <tile id="288">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="289">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="290">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="291">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="292">
+   <properties>
+    <property name="pivotY" type="int" value="1152"/>
+   </properties>
+  </tile>
+  <tile id="293">
+   <properties>
+    <property name="pivotY" type="int" value="2048"/>
+   </properties>
+  </tile>
+  <tile id="294">
+   <properties>
+    <property name="pivotY" type="int" value="2048"/>
+   </properties>
+  </tile>
+  <tile id="296">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="297">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="298">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="299">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="300">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="301">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="302">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="303">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="304">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="306">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="307">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="308">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="309">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="310">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="311">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="312">
+   <properties>
+    <property name="pivotY" type="int" value="2048"/>
+   </properties>
+  </tile>
+  <tile id="314">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="315">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="316">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="317">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="318">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="319">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="320">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="321">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="322">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="324">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="325">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="326">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="327">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="328">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="329">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="332">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="333">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="334">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="335">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="336">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="337">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="338">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="339">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="340">
+   <properties>
+    <property name="pivotY" type="int" value="2785"/>
+   </properties>
+  </tile>
+  <tile id="342">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="343">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="344">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="345">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="346">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="347">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="360">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="361">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="362">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="363">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="364">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="365">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="378">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="379">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="380">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="381">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="382">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+  <tile id="383">
+   <properties>
+    <property name="pivotY" type="int" value="2645"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2017" name="tiles_pueblo" tilewidth="128" tileheight="128" tilecount="480" columns="30">
+  <image source="tiles_pueblo.png" width="3840" height="2160"/>
+ </tileset>
  <layer id="2" name="Fondo" width="45" height="36">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -1988,8 +3569,8 @@
    <tile gid="380"/>
    <tile gid="381"/>
    <tile gid="382"/>
-   <tile/>
-   <tile/>
+   <tile gid="383"/>
+   <tile gid="384"/>
    <tile gid="385"/>
    <tile gid="386"/>
    <tile gid="387"/>
@@ -2032,10 +3613,10 @@
    <tile gid="424"/>
    <tile gid="425"/>
    <tile gid="426"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="427"/>
+   <tile gid="428"/>
+   <tile gid="429"/>
+   <tile gid="430"/>
    <tile gid="431"/>
    <tile gid="432"/>
    <tile gid="433"/>
@@ -2074,16 +3655,16 @@
    <tile gid="466"/>
    <tile gid="467"/>
    <tile gid="468"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="469"/>
+   <tile gid="470"/>
+   <tile gid="471"/>
+   <tile gid="472"/>
+   <tile gid="473"/>
+   <tile gid="474"/>
+   <tile gid="475"/>
+   <tile gid="476"/>
+   <tile gid="477"/>
+   <tile gid="478"/>
    <tile gid="479"/>
    <tile gid="480"/>
    <tile gid="481"/>
@@ -2120,14 +3701,14 @@
    <tile gid="512"/>
    <tile gid="513"/>
    <tile gid="514"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="515"/>
+   <tile gid="516"/>
+   <tile gid="517"/>
+   <tile gid="518"/>
+   <tile gid="519"/>
+   <tile gid="520"/>
+   <tile gid="521"/>
+   <tile gid="522"/>
    <tile gid="523"/>
    <tile gid="524"/>
    <tile gid="525"/>
@@ -2165,14 +3746,14 @@
    <tile gid="557"/>
    <tile gid="558"/>
    <tile gid="559"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="560"/>
+   <tile gid="561"/>
+   <tile gid="562"/>
+   <tile gid="563"/>
+   <tile gid="564"/>
+   <tile gid="565"/>
+   <tile gid="566"/>
+   <tile gid="567"/>
    <tile gid="568"/>
    <tile gid="569"/>
    <tile gid="570"/>
@@ -2210,14 +3791,14 @@
    <tile gid="602"/>
    <tile gid="603"/>
    <tile gid="604"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="605"/>
+   <tile gid="606"/>
+   <tile gid="607"/>
+   <tile gid="608"/>
+   <tile gid="609"/>
+   <tile gid="610"/>
+   <tile gid="611"/>
+   <tile gid="612"/>
    <tile gid="613"/>
    <tile gid="614"/>
    <tile gid="615"/>
@@ -2255,14 +3836,14 @@
    <tile gid="647"/>
    <tile gid="648"/>
    <tile gid="649"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="650"/>
+   <tile gid="651"/>
+   <tile gid="652"/>
+   <tile gid="653"/>
+   <tile gid="654"/>
+   <tile gid="655"/>
+   <tile gid="656"/>
+   <tile gid="657"/>
    <tile gid="658"/>
    <tile gid="659"/>
    <tile gid="660"/>
@@ -2300,14 +3881,14 @@
    <tile gid="692"/>
    <tile gid="693"/>
    <tile gid="694"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="695"/>
+   <tile gid="696"/>
+   <tile gid="697"/>
+   <tile gid="698"/>
+   <tile gid="699"/>
+   <tile gid="700"/>
+   <tile gid="701"/>
+   <tile gid="702"/>
    <tile gid="703"/>
    <tile gid="704"/>
    <tile gid="705"/>
@@ -3228,10 +4809,10 @@
    <tile gid="1620"/>
   </data>
  </layer>
- <layer id="6" name="Capa-2" width="45" height="36">
+ <layer id="7" name="Decoraciones" width="45" height="36">
   <properties>
    <property name="Draw" type="bool" value="true"/>
-   <property name="layer" type="int" value="1"/>
+   <property name="layer" type="int" value="0"/>
   </properties>
   <data>
    <tile/>
@@ -3616,8 +5197,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="383"/>
-   <tile gid="384"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3660,10 +5239,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="427"/>
-   <tile gid="428"/>
-   <tile gid="429"/>
-   <tile gid="430"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3702,16 +5277,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="469"/>
-   <tile gid="470"/>
-   <tile gid="471"/>
-   <tile gid="472"/>
-   <tile gid="473"/>
-   <tile gid="474"/>
-   <tile gid="475"/>
-   <tile gid="476"/>
-   <tile gid="477"/>
-   <tile gid="478"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3748,14 +5313,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="515"/>
-   <tile gid="516"/>
-   <tile gid="517"/>
-   <tile gid="518"/>
-   <tile gid="519"/>
-   <tile gid="520"/>
-   <tile gid="521"/>
-   <tile gid="522"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3793,14 +5350,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="560"/>
-   <tile gid="561"/>
-   <tile gid="562"/>
-   <tile gid="563"/>
-   <tile gid="564"/>
-   <tile gid="565"/>
-   <tile gid="566"/>
-   <tile gid="567"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3838,14 +5387,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="605"/>
-   <tile gid="606"/>
-   <tile gid="607"/>
-   <tile gid="608"/>
-   <tile gid="609"/>
-   <tile gid="610"/>
-   <tile gid="611"/>
-   <tile gid="612"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3883,14 +5424,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="650"/>
-   <tile gid="651"/>
-   <tile gid="652"/>
-   <tile gid="653"/>
-   <tile gid="654"/>
-   <tile gid="655"/>
-   <tile gid="656"/>
-   <tile gid="657"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3928,14 +5461,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="695"/>
-   <tile gid="696"/>
-   <tile gid="697"/>
-   <tile gid="698"/>
-   <tile gid="699"/>
-   <tile gid="700"/>
-   <tile gid="701"/>
-   <tile gid="702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3959,6 +5484,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="2366"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4146,6 +5672,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="2365"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4228,6 +5755,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="2335"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4242,6 +5770,1687 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="2336"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="2365"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="2336"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="2335"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="2335"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="2366"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+  </data>
+ </layer>
+ <layer id="6" name="Capa-2" width="45" height="36">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+   <property name="layer" type="int" value="1"/>
+  </properties>
+  <data>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1770"/>
+   <tile gid="1771"/>
+   <tile gid="1772"/>
+   <tile gid="1773"/>
+   <tile gid="1774"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1788"/>
+   <tile gid="1789"/>
+   <tile gid="1790"/>
+   <tile gid="1791"/>
+   <tile gid="1792"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1631"/>
+   <tile gid="1632"/>
+   <tile gid="1633"/>
+   <tile gid="1634"/>
+   <tile gid="1635"/>
+   <tile/>
+   <tile/>
+   <tile gid="1721"/>
+   <tile gid="1722"/>
+   <tile gid="1723"/>
+   <tile gid="1724"/>
+   <tile gid="1725"/>
+   <tile gid="1726"/>
+   <tile gid="1727"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1806"/>
+   <tile gid="1807"/>
+   <tile gid="1808"/>
+   <tile gid="1809"/>
+   <tile gid="1810"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1649"/>
+   <tile gid="1650"/>
+   <tile gid="1651"/>
+   <tile gid="1652"/>
+   <tile gid="1653"/>
+   <tile/>
+   <tile/>
+   <tile gid="1739"/>
+   <tile gid="1740"/>
+   <tile gid="1741"/>
+   <tile gid="1742"/>
+   <tile gid="1743"/>
+   <tile gid="1744"/>
+   <tile gid="1745"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1824"/>
+   <tile gid="1825"/>
+   <tile gid="1826"/>
+   <tile gid="1827"/>
+   <tile gid="1828"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1667"/>
+   <tile gid="1668"/>
+   <tile gid="1669"/>
+   <tile gid="1670"/>
+   <tile gid="1671"/>
+   <tile/>
+   <tile/>
+   <tile gid="1757"/>
+   <tile gid="1758"/>
+   <tile gid="1759"/>
+   <tile gid="1760"/>
+   <tile gid="1761"/>
+   <tile gid="1762"/>
+   <tile gid="1763"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1842"/>
+   <tile gid="1843"/>
+   <tile gid="1844"/>
+   <tile gid="1845"/>
+   <tile gid="1846"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1685"/>
+   <tile gid="1686"/>
+   <tile gid="1687"/>
+   <tile gid="1688"/>
+   <tile gid="1689"/>
+   <tile/>
+   <tile/>
+   <tile gid="1775"/>
+   <tile gid="1776"/>
+   <tile gid="1777"/>
+   <tile gid="1778"/>
+   <tile gid="1779"/>
+   <tile gid="1780"/>
+   <tile gid="1781"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1837"/>
+   <tile gid="1838"/>
+   <tile gid="1839"/>
+   <tile gid="1840"/>
+   <tile gid="1841"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1703"/>
+   <tile gid="1704"/>
+   <tile gid="1705"/>
+   <tile gid="1706"/>
+   <tile gid="1707"/>
+   <tile/>
+   <tile/>
+   <tile gid="1793"/>
+   <tile gid="1794"/>
+   <tile gid="1795"/>
+   <tile gid="1796"/>
+   <tile gid="1797"/>
+   <tile gid="1798"/>
+   <tile gid="1799"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1855"/>
+   <tile gid="1856"/>
+   <tile gid="1857"/>
+   <tile gid="1858"/>
+   <tile gid="1859"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1765"/>
+   <tile gid="1766"/>
+   <tile gid="1767"/>
+   <tile gid="1768"/>
+   <tile gid="1769"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1621"/>
+   <tile gid="1622"/>
+   <tile gid="1623"/>
+   <tile gid="1624"/>
+   <tile gid="1625"/>
+   <tile gid="1626"/>
+   <tile gid="1627"/>
+   <tile gid="1628"/>
+   <tile gid="1629"/>
+   <tile gid="1873"/>
+   <tile gid="1874"/>
+   <tile gid="1875"/>
+   <tile gid="1876"/>
+   <tile gid="1877"/>
+   <tile gid="1811"/>
+   <tile gid="1812"/>
+   <tile gid="1813"/>
+   <tile gid="1814"/>
+   <tile gid="1815"/>
+   <tile gid="1816"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1783"/>
+   <tile gid="1784"/>
+   <tile gid="1785"/>
+   <tile gid="1786"/>
+   <tile gid="1787"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1639"/>
+   <tile gid="1640"/>
+   <tile gid="1641"/>
+   <tile gid="1642"/>
+   <tile gid="1643"/>
+   <tile gid="1644"/>
+   <tile gid="1645"/>
+   <tile gid="1646"/>
+   <tile gid="1647"/>
+   <tile gid="1891"/>
+   <tile gid="1892"/>
+   <tile gid="1893"/>
+   <tile gid="1894"/>
+   <tile gid="1895"/>
+   <tile gid="1829"/>
+   <tile gid="1830"/>
+   <tile gid="1831"/>
+   <tile gid="1832"/>
+   <tile gid="1833"/>
+   <tile gid="1834"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1801"/>
+   <tile gid="1802"/>
+   <tile gid="1803"/>
+   <tile gid="1804"/>
+   <tile gid="1805"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1657"/>
+   <tile gid="1658"/>
+   <tile gid="1659"/>
+   <tile gid="1660"/>
+   <tile gid="1661"/>
+   <tile gid="1662"/>
+   <tile gid="1663"/>
+   <tile gid="1664"/>
+   <tile gid="1665"/>
+   <tile gid="1909"/>
+   <tile gid="1910"/>
+   <tile gid="1911"/>
+   <tile gid="1912"/>
+   <tile gid="1913"/>
+   <tile gid="1847"/>
+   <tile gid="1848"/>
+   <tile gid="1849"/>
+   <tile gid="1850"/>
+   <tile gid="1851"/>
+   <tile gid="1852"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1819"/>
+   <tile gid="1820"/>
+   <tile gid="1821"/>
+   <tile gid="1822"/>
+   <tile gid="1823"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1675"/>
+   <tile gid="1676"/>
+   <tile gid="1677"/>
+   <tile gid="1678"/>
+   <tile gid="1679"/>
+   <tile gid="1680"/>
+   <tile gid="1681"/>
+   <tile gid="1682"/>
+   <tile gid="1683"/>
+   <tile gid="1684"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1865"/>
+   <tile gid="1866"/>
+   <tile gid="1867"/>
+   <tile gid="1868"/>
+   <tile gid="1869"/>
+   <tile gid="1870"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1693"/>
+   <tile gid="1694"/>
+   <tile gid="1695"/>
+   <tile gid="1696"/>
+   <tile gid="1697"/>
+   <tile gid="1698"/>
+   <tile gid="1699"/>
+   <tile gid="1700"/>
+   <tile gid="1701"/>
+   <tile gid="1702"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1711"/>
+   <tile gid="1712"/>
+   <tile gid="1713"/>
+   <tile gid="1714"/>
+   <tile gid="1715"/>
+   <tile gid="1716"/>
+   <tile gid="1717"/>
+   <tile gid="1718"/>
+   <tile gid="1719"/>
+   <tile gid="1720"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1860"/>
+   <tile gid="1861"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1729"/>
+   <tile gid="1730"/>
+   <tile gid="1731"/>
+   <tile gid="1732"/>
+   <tile gid="1733"/>
+   <tile gid="1734"/>
+   <tile gid="1735"/>
+   <tile gid="1736"/>
+   <tile gid="1737"/>
+   <tile gid="1738"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1878"/>
+   <tile gid="1879"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1881"/>
+   <tile gid="1882"/>
+   <tile gid="1883"/>
+   <tile gid="1884"/>
+   <tile gid="1885"/>
+   <tile gid="1886"/>
+   <tile gid="1887"/>
+   <tile gid="1888"/>
+   <tile gid="1889"/>
+   <tile gid="1890"/>
+   <tile gid="1747"/>
+   <tile gid="1748"/>
+   <tile gid="1749"/>
+   <tile gid="1750"/>
+   <tile gid="1751"/>
+   <tile gid="1752"/>
+   <tile gid="1753"/>
+   <tile gid="1754"/>
+   <tile gid="1755"/>
+   <tile gid="1756"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1896"/>
+   <tile gid="1897"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1899"/>
+   <tile gid="1900"/>
+   <tile gid="1901"/>
+   <tile gid="1902"/>
+   <tile gid="1903"/>
+   <tile gid="1904"/>
+   <tile gid="1905"/>
+   <tile gid="1906"/>
+   <tile gid="1907"/>
+   <tile gid="1908"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1914"/>
+   <tile gid="1915"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1927"/>
+   <tile gid="1928"/>
+   <tile gid="1929"/>
+   <tile gid="1930"/>
+   <tile gid="1931"/>
+   <tile gid="1932"/>
+   <tile gid="1933"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1945"/>
+   <tile gid="1946"/>
+   <tile gid="1947"/>
+   <tile gid="1948"/>
+   <tile gid="1949"/>
+   <tile gid="1950"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1963"/>
+   <tile gid="1964"/>
+   <tile gid="1965"/>
+   <tile gid="1966"/>
+   <tile gid="1967"/>
+   <tile gid="1968"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1917"/>
+   <tile gid="1918"/>
+   <tile gid="1919"/>
+   <tile gid="1920"/>
+   <tile gid="1921"/>
+   <tile gid="1922"/>
+   <tile gid="1923"/>
+   <tile gid="1924"/>
+   <tile gid="1925"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1981"/>
+   <tile gid="1982"/>
+   <tile gid="1983"/>
+   <tile gid="1984"/>
+   <tile gid="1985"/>
+   <tile gid="1986"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1935"/>
+   <tile gid="1936"/>
+   <tile gid="1937"/>
+   <tile gid="1938"/>
+   <tile gid="1939"/>
+   <tile gid="1940"/>
+   <tile gid="1941"/>
+   <tile gid="1942"/>
+   <tile gid="1943"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1999"/>
+   <tile gid="2000"/>
+   <tile gid="2001"/>
+   <tile gid="2002"/>
+   <tile gid="2003"/>
+   <tile gid="2004"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1953"/>
+   <tile gid="1954"/>
+   <tile gid="1955"/>
+   <tile gid="1956"/>
+   <tile gid="1957"/>
+   <tile gid="1958"/>
+   <tile gid="1959"/>
+   <tile gid="1960"/>
+   <tile gid="1961"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4860,128 +8069,117 @@
   <properties>
    <property name="objectType" value="collider"/>
   </properties>
-  <object id="1" x="3020" y="1406.67" width="410.667" height="544"/>
-  <object id="2" x="2432" y="1413.33" width="436" height="544"/>
-  <object id="3" x="2870.67" y="1408" width="145.333" height="384"/>
-  <object id="4" x="1010" y="469" width="402" height="459"/>
-  <object id="5" x="1116" y="1056" width="410" height="440"/>
-  <object id="6" x="1880" y="454" width="580" height="486"/>
-  <object id="7" x="3532" y="841.333" width="458.667" height="477.333"/>
-  <object id="8" x="3878.67" y="265.333" width="557.333" height="494.667"/>
-  <object id="9" x="4214.67" y="1072" width="577.333" height="444"/>
-  <object id="10" x="4125" y="1776" width="220" height="410"/>
-  <object id="11" x="1094.67" y="2004" width="793.333" height="22"/>
-  <object id="12" x="2032" y="1998.67" width="253.333" height="31.3333"/>
-  <object id="13" x="2256" y="2031.33" width="34.6667" height="715.333"/>
-  <object id="14" x="1212" y="2750.67" width="1066.67" height="24"/>
-  <object id="15" x="1169" y="2690" width="82" height="63.5"/>
-  <object id="64" x="2716" y="-4" width="37" height="476"/>
-  <object id="65" x="3097" y="0" width="47" height="461"/>
-  <object id="68" x="3064" y="3220" width="43" height="454"/>
-  <object id="69" x="2697" y="3286" width="39" height="358"/>
-  <object id="71" x="2350" y="1382" width="1143" height="32"/>
-  <object id="72" x="2433" y="1350" width="985" height="32"/>
-  <object id="73" x="2511" y="1317" width="845" height="32"/>
-  <object id="74" x="2573" y="1285" width="703" height="32"/>
-  <object id="75" x="2637" y="1252" width="565" height="32"/>
-  <object id="76" x="2710" y="1220" width="430" height="32"/>
-  <object id="77" x="2768" y="1187" width="309" height="32"/>
-  <object id="78" x="2822" y="1153" width="198" height="32"/>
-  <object id="79" x="2882" y="1119" width="83" height="32"/>
-  <object id="80" x="3821" y="2571" width="184" height="192"/>
-  <object id="81" x="3558" y="2376" width="660" height="192"/>
-  <object id="84" x="3839" y="2325" width="375" height="56"/>
-  <object id="85" x="3918" y="2291" width="184" height="32"/>
-  <object id="86" x="3579" y="2356" width="258" height="20"/>
+  <object id="3" type="rectangle" x="2432" y="1755.67" width="1006.67" height="71.1667"/>
+  <object id="131" type="rectangle" x="2993.33" y="1826.34" width="96.0033" height="53.6667"/>
+  <object id="132" type="rectangle" x="2787.33" y="1829" width="104.67" height="50.1667"/>
+  <object id="4" type="rectangle" x="1008" y="749.333" width="405.333" height="40"/>
+  <object id="5" type="rectangle" x="1113.33" y="1343" width="417.333" height="40"/>
+  <object id="6" type="rectangle" x="1879.67" y="740.667" width="587" height="82.6667"/>
+  <object id="7" type="rectangle" x="3536.67" y="1139.67" width="454" height="51.6663"/>
+  <object id="8" type="rectangle" x="3878.67" y="557.666" width="557.333" height="64.3337"/>
+  <object id="9" type="rectangle" x="4214.67" y="1322" width="577.333" height="75.3333"/>
+  <object id="10" type="rectangle" x="4124" y="2054.33" width="220" height="11.3333"/>
+  <object id="11" type="rectangle" x="1094.67" y="2032.33" width="793.333" height="4.66667"/>
+  <object id="12" type="rectangle" x="2032" y="2031" width="253.333" height="3.99997"/>
+  <object id="13" type="rectangle" x="2256" y="2031.33" width="34.6667" height="715.333"/>
+  <object id="14" type="rectangle" x="1212" y="2785.67" width="1066.67" height="5"/>
+  <object id="64" type="rectangle" x="2716" y="-4" width="37" height="437"/>
+  <object id="65" type="rectangle" x="3097" y="0" width="47" height="438"/>
+  <object id="68" type="rectangle" x="3064" y="3246" width="43" height="428"/>
+  <object id="69" type="rectangle" x="2697" y="3286" width="39" height="358"/>
+  <object id="80" type="rectangle" x="3711.67" y="2600.33" width="298.667" height="30.6667"/>
+  <object id="127" type="rectangle" x="1170.66" y="2733.83" width="5.67" height="20"/>
  </objectgroup>
  <objectgroup color="#aa0000" id="5" name="Limits" class="limits">
   <properties>
    <property name="objectType" value="collider"/>
   </properties>
-  <object id="17" x="160" y="1296" width="384" height="968.33"/>
-  <object id="25" x="902.818" y="607.03" width="98.7577" height="101.455"/>
-  <object id="26" x="549.455" y="705.091" width="361.212" height="97.3333"/>
-  <object id="27" x="548.121" y="805.091" width="237.212" height="97.3333"/>
-  <object id="28" x="545.455" y="906.424" width="147.879" height="97.3333"/>
-  <object id="29" x="544.121" y="1006.42" width="86.5455" height="317.333"/>
-  <object id="18" x="0" y="2272" width="168" height="1448"/>
-  <object id="19" x="1733.09" y="4356.48" width="1676" height="88"/>
-  <object id="30" x="3357.58" y="4236.36" width="530.42" height="113.212"/>
-  <object id="31" x="4068.21" y="3175.85" width="246.82" height="78.6967"/>
-  <object id="38" x="4881.82" y="2627.27" width="153.212" height="163.636"/>
-  <object id="116" x="5008.82" y="2437.27" width="35.212" height="186.636"/>
-  <object id="118" x="4953.82" y="2360.27" width="59.212" height="76.636"/>
-  <object id="119" x="4923.82" y="2012.27" width="69.712" height="73.636"/>
-  <object id="122" x="4981.82" y="2086.27" width="23.212" height="95.636"/>
-  <object id="123" x="5004.32" y="2316.27" width="23.212" height="44.136"/>
-  <object id="124" x="5025.82" y="2271.27" width="23.212" height="44.136"/>
-  <object id="125" x="5040.82" y="2202.77" width="23.212" height="67.136"/>
-  <object id="126" x="5005.82" y="2123.27" width="41.212" height="76.636"/>
-  <object id="120" x="4992.82" y="1906.27" width="16.212" height="104.636"/>
-  <object id="121" x="4939.82" y="1874.77" width="51.712" height="23.636"/>
-  <object id="117" x="4947.32" y="2530.27" width="60.212" height="58.636"/>
-  <object id="52" x="5029.82" y="1533.27" width="117.212" height="53.9733"/>
-  <object id="113" x="4911.15" y="1641.27" width="61.212" height="233.807"/>
-  <object id="114" x="4857.15" y="1751.27" width="53.8787" height="88.3067"/>
-  <object id="115" x="4973.15" y="1579.94" width="55.212" height="61.64"/>
-  <object id="53" x="5143.82" y="959.452" width="36.5453" height="575.454"/>
-  <object id="54" x="5013.82" y="865.27" width="127.212" height="107.636"/>
-  <object id="55" x="4972.82" y="745.27" width="48.8787" height="117.636"/>
-  <object id="56" x="4864.82" y="639.27" width="120.212" height="103.636"/>
-  <object id="57" x="4738.82" y="541.27" width="138.212" height="95.636"/>
-  <object id="58" x="4645.82" y="492.27" width="157.212" height="48.636"/>
-  <object id="59" x="4443.82" y="407.27" width="201.212" height="99.636"/>
-  <object id="60" x="3586.49" y="226.27" width="290.545" height="99.636"/>
-  <object id="61" x="3457.15" y="192.937" width="125.212" height="99.636"/>
-  <object id="62" x="3331.82" y="152.937" width="125.212" height="99.636"/>
-  <object id="63" x="3146.49" y="4.93667" width="183.879" height="164.969"/>
-  <object id="39" x="4303.03" y="2945.45" width="576.242" height="228.364"/>
-  <object id="40" x="4613.7" y="2866.79" width="266.909" height="77.697"/>
-  <object id="41" x="4731.03" y="2774.79" width="149.576" height="88.3636"/>
-  <object id="32" x="3887.88" y="3251.52" width="176.788" height="1028.36"/>
-  <object id="33" x="3636.36" y="3387.15" width="239.879" height="667.394"/>
-  <object id="34" x="3528.36" y="3452.48" width="106.545" height="582.061"/>
-  <object id="35" x="3417.7" y="3457.82" width="106.545" height="478.061"/>
-  <object id="36" x="3303.03" y="3425.82" width="106.545" height="495.394"/>
-  <object id="37" x="3197.7" y="3833.15" width="106.545" height="68.0606"/>
-  <object id="20" x="176" y="3708" width="212" height="246.545"/>
-  <object id="21" x="388" y="3904" width="212" height="245.455"/>
-  <object id="22" x="612" y="4076" width="212" height="167.394"/>
-  <object id="23" x="836" y="4136.73" width="212" height="139.03"/>
-  <object id="24" x="1060" y="4251.88" width="688" height="104.727"/>
-  <object id="42" x="2200" y="118" width="516" height="48"/>
-  <object id="43" x="1619" y="293" width="153.667" height="43"/>
-  <object id="48" x="2032" y="214.5" width="112.667" height="37"/>
-  <object id="49" x="1772.67" y="277.833" width="204.333" height="26.5"/>
-  <object id="50" x="1976.67" y="251.5" width="58" height="30.5"/>
-  <object id="51" x="2145.17" y="166.5" width="58" height="48"/>
-  <object id="44" x="1575" y="336.667" width="49.3333" height="27.3333"/>
-  <object id="45" x="1529.67" y="364.333" width="48" height="28"/>
-  <object id="46" x="1496" y="391.667" width="43.6667" height="34.3333"/>
-  <object id="47" x="1402" y="426" width="103" height="42"/>
-  <object id="87" x="3107" y="3418" width="194" height="21"/>
-  <object id="88" x="3108" y="3310" width="45" height="109"/>
-  <object id="89" x="2646" y="3408.67" width="47" height="28.3333"/>
-  <object id="90" x="2596.67" y="3354" width="48.3333" height="61"/>
-  <object id="91" x="2549.33" y="3324.67" width="45" height="31.6667"/>
-  <object id="92" x="2501.33" y="3340.67" width="45" height="24.3333"/>
-  <object id="93" x="2036" y="3327.33" width="462.333" height="32.3333"/>
-  <object id="94" x="1743" y="3358.33" width="290.333" height="21.3333"/>
-  <object id="95" x="1676" y="3267.33" width="65" height="95.6667"/>
-  <object id="96" x="1608" y="3221.33" width="66.3333" height="49"/>
-  <object id="97" x="1524" y="3207.33" width="82.3333" height="22.3333"/>
-  <object id="98" x="1412" y="3147.33" width="110.333" height="65"/>
-  <object id="99" x="1282.67" y="3118" width="127.667" height="33"/>
-  <object id="100" x="1152" y="3058" width="127.667" height="63"/>
-  <object id="101" x="1022.67" y="2995.33" width="127.667" height="61.6667"/>
-  <object id="103" x="970.167" y="2926.67" width="52.8333" height="31.1667"/>
-  <object id="105" x="518.667" y="2461.67" width="244.333" height="38.3333"/>
-  <object id="106" x="840.333" y="2763.67" width="60.6667" height="104.667"/>
-  <object id="108" x="763.667" y="2662.67" width="79.3333" height="99.6667"/>
-  <object id="109" x="765.667" y="2497.67" width="41.3333" height="162.667"/>
-  <object id="111" x="545.167" y="2372.67" width="56.8333" height="87.6667"/>
-  <object id="112" x="517.667" y="2264.67" width="25.8333" height="194.667"/>
-  <object id="104" x="1023.67" y="2956.67" width="42" height="37.3333"/>
-  <object id="107" x="900" y="2868" width="70.3333" height="58.3333"/>
+  <object id="17" type="rectangle" x="160" y="1296" width="384" height="968.33"/>
+  <object id="25" type="rectangle" x="902.818" y="509.697" width="98.7577" height="198.788"/>
+  <object id="26" type="rectangle" x="773.455" y="705.091" width="137.212" height="97.3333"/>
+  <object id="27" type="rectangle" x="682.788" y="805.091" width="102.545" height="97.3333"/>
+  <object id="28" type="rectangle" x="620.122" y="903.924" width="73.2123" height="99.8333"/>
+  <object id="29" type="rectangle" x="544.121" y="1006.42" width="86.5455" height="317.333"/>
+  <object id="18" type="rectangle" x="0" y="2272" width="168" height="1448"/>
+  <object id="19" type="rectangle" x="1733.09" y="4356.48" width="1676" height="88"/>
+  <object id="30" type="rectangle" x="3357.58" y="4236.36" width="530.42" height="113.212"/>
+  <object id="31" type="rectangle" x="4068.21" y="3175.85" width="246.82" height="78.6967"/>
+  <object id="38" type="rectangle" x="4881.82" y="2627.27" width="153.212" height="163.636"/>
+  <object id="116" type="rectangle" x="5008.82" y="2437.27" width="35.212" height="186.636"/>
+  <object id="118" type="rectangle" x="4953.82" y="2360.27" width="59.212" height="76.636"/>
+  <object id="119" type="rectangle" x="4923.82" y="2012.27" width="69.712" height="73.636"/>
+  <object id="122" type="rectangle" x="4981.82" y="2086.27" width="23.212" height="95.636"/>
+  <object id="123" type="rectangle" x="5004.32" y="2316.27" width="23.212" height="44.136"/>
+  <object id="124" type="rectangle" x="5025.82" y="2271.27" width="23.212" height="44.136"/>
+  <object id="125" type="rectangle" x="5040.82" y="2202.77" width="23.212" height="67.136"/>
+  <object id="126" type="rectangle" x="5005.82" y="2123.27" width="41.212" height="76.636"/>
+  <object id="120" type="rectangle" x="4992.82" y="1906.27" width="16.212" height="104.636"/>
+  <object id="121" type="rectangle" x="4939.82" y="1874.77" width="51.712" height="23.636"/>
+  <object id="117" type="rectangle" x="4947.32" y="2530.27" width="60.212" height="58.636"/>
+  <object id="52" type="rectangle" x="5029.82" y="1533.27" width="117.212" height="53.9733"/>
+  <object id="113" type="rectangle" x="4911.15" y="1641.27" width="61.212" height="233.807"/>
+  <object id="114" type="rectangle" x="4857.15" y="1751.27" width="53.8787" height="88.3067"/>
+  <object id="115" type="rectangle" x="4973.15" y="1579.94" width="55.212" height="61.64"/>
+  <object id="53" type="rectangle" x="5143.82" y="959.452" width="36.5453" height="575.454"/>
+  <object id="54" type="rectangle" x="5013.82" y="865.27" width="127.212" height="107.636"/>
+  <object id="55" type="rectangle" x="4972.82" y="745.27" width="48.8787" height="117.636"/>
+  <object id="56" type="rectangle" x="4864.82" y="639.27" width="120.212" height="103.636"/>
+  <object id="57" type="rectangle" x="4738.82" y="541.27" width="138.212" height="95.636"/>
+  <object id="58" type="rectangle" x="4645.82" y="492.27" width="157.212" height="48.636"/>
+  <object id="59" type="rectangle" x="4443.82" y="360.603" width="201.212" height="146.303"/>
+  <object id="60" type="rectangle" x="3586.49" y="226.27" width="290.545" height="99.636"/>
+  <object id="128" type="rectangle" x="3877.16" y="258.27" width="577.212" height="102.303"/>
+  <object id="61" type="rectangle" x="3457.15" y="192.937" width="125.212" height="99.636"/>
+  <object id="62" type="rectangle" x="3331.82" y="152.937" width="125.212" height="99.636"/>
+  <object id="63" type="rectangle" x="3146.49" y="4.93667" width="183.879" height="164.969"/>
+  <object id="39" type="rectangle" x="4303.03" y="2945.45" width="576.242" height="228.364"/>
+  <object id="40" type="rectangle" x="4613.7" y="2866.79" width="266.909" height="77.697"/>
+  <object id="41" type="rectangle" x="4731.03" y="2774.79" width="149.576" height="88.3636"/>
+  <object id="32" type="rectangle" x="3887.88" y="3251.52" width="176.788" height="1028.36"/>
+  <object id="33" type="rectangle" x="3636.36" y="3387.15" width="239.879" height="667.394"/>
+  <object id="34" type="rectangle" x="3528.36" y="3452.48" width="106.545" height="582.061"/>
+  <object id="35" type="rectangle" x="3417.7" y="3457.82" width="106.545" height="478.061"/>
+  <object id="36" type="rectangle" x="3303.03" y="3425.82" width="106.545" height="495.394"/>
+  <object id="37" type="rectangle" x="3197.7" y="3833.15" width="106.545" height="68.0606"/>
+  <object id="20" type="rectangle" x="176" y="3708" width="212" height="246.545"/>
+  <object id="21" type="rectangle" x="388" y="3904" width="212" height="245.455"/>
+  <object id="22" type="rectangle" x="612" y="4076" width="212" height="167.394"/>
+  <object id="23" type="rectangle" x="836" y="4136.73" width="212" height="139.03"/>
+  <object id="24" type="rectangle" x="1060" y="4251.88" width="688" height="104.727"/>
+  <object id="42" type="rectangle" x="2200" y="118" width="516" height="48"/>
+  <object id="43" type="rectangle" x="1619" y="293" width="153.667" height="43"/>
+  <object id="48" type="rectangle" x="2032" y="214.5" width="112.667" height="37"/>
+  <object id="49" type="rectangle" x="1772.67" y="277.833" width="204.333" height="26.5"/>
+  <object id="50" type="rectangle" x="1976.67" y="251.5" width="58" height="30.5"/>
+  <object id="51" type="rectangle" x="2145.17" y="166.5" width="58" height="48"/>
+  <object id="44" type="rectangle" x="1575" y="336.667" width="49.3333" height="27.3333"/>
+  <object id="45" type="rectangle" x="1529.67" y="364.333" width="48" height="28"/>
+  <object id="46" type="rectangle" x="1496" y="391.667" width="43.6667" height="34.3333"/>
+  <object id="47" type="rectangle" x="1207.33" y="426.667" width="297" height="42"/>
+  <object id="130" type="rectangle" x="984" y="466.667" width="226.333" height="42"/>
+  <object id="87" type="rectangle" x="3107" y="3418" width="194" height="21"/>
+  <object id="88" type="rectangle" x="3108" y="3310" width="45" height="109"/>
+  <object id="89" type="rectangle" x="2646" y="3408.67" width="47" height="28.3333"/>
+  <object id="90" type="rectangle" x="2596.67" y="3354" width="48.3333" height="61"/>
+  <object id="91" type="rectangle" x="2549.33" y="3324.67" width="45" height="31.6667"/>
+  <object id="92" type="rectangle" x="2501.33" y="3340.67" width="45" height="24.3333"/>
+  <object id="93" type="rectangle" x="2036" y="3327.33" width="462.333" height="54.3333"/>
+  <object id="94" type="rectangle" x="1743" y="3358.33" width="290.333" height="60.3333"/>
+  <object id="95" type="rectangle" x="1676" y="3267.33" width="65" height="95.6667"/>
+  <object id="96" type="rectangle" x="1608" y="3221.33" width="66.3333" height="84"/>
+  <object id="97" type="rectangle" x="1524" y="3207.33" width="82.3333" height="56.3333"/>
+  <object id="98" type="rectangle" x="1412" y="3147.33" width="110.333" height="78"/>
+  <object id="99" type="rectangle" x="1282.67" y="3118" width="127.667" height="64"/>
+  <object id="100" type="rectangle" x="1152" y="3058" width="127.667" height="75"/>
+  <object id="101" type="rectangle" x="1022.67" y="2995.33" width="127.667" height="73.6667"/>
+  <object id="103" type="rectangle" x="970.167" y="2926.67" width="52.8333" height="66.1667"/>
+  <object id="105" type="rectangle" x="518.667" y="2461.67" width="244.333" height="38.3333"/>
+  <object id="106" type="rectangle" x="840.333" y="2763.67" width="60.6667" height="104.667"/>
+  <object id="108" type="rectangle" x="763.667" y="2662.67" width="79.3333" height="99.6667"/>
+  <object id="109" type="rectangle" x="765.667" y="2497.67" width="41.3333" height="162.667"/>
+  <object id="111" type="rectangle" x="545.167" y="2372.67" width="56.8333" height="87.6667"/>
+  <object id="112" type="rectangle" x="517.667" y="2264.67" width="25.8333" height="194.667"/>
+  <object id="104" type="rectangle" x="1023.67" y="2956.67" width="42" height="37.3333"/>
+  <object id="107" type="rectangle" x="900" y="2868" width="70.3333" height="69.3333"/>
  </objectgroup>
 </map>

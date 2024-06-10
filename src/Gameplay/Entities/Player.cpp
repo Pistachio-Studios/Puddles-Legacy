@@ -53,6 +53,8 @@ bool Player::Start() {
 
 	playerHurtCultdown = Timer();
 
+	bestiary = new Bestiary();
+
 	dashTimer = Timer();
 
 	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
@@ -127,6 +129,8 @@ bool Player::Update(float dt)
 	movementFSM->Update(dt);
 	combatFSM->Update(dt);
 
+	inventory.Update(dt);
+
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
 	if (vida <= 0.0f) {
@@ -167,6 +171,18 @@ bool Player::Update(float dt)
 		else
 		{
 			currentClass = PlayerClass::KNIGHT;
+		}
+	}
+
+	if(app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	{
+		if(currentPotion != nullptr)
+		{
+			currentPotion->Use();
+		}
+		else
+		{
+			LOG("No potion selected!!");
 		}
 	}
 
@@ -211,10 +227,32 @@ void Player::DrawImGui()
 
 	ImGui::Text("Player Class: %s", currentClass == PlayerClass::KNIGHT ? "KNIGHT" : "WIZARD");
 
+	ImGui::Text("Player Movement State: %s", movementFSM->GetCurrentState().name.GetString());
+	ImGui::Text("Player Combat State: %s", combatFSM->GetCurrentState().name.GetString());
+
 	ImGui::Text("player hurt cooldown: %f", playerHurtCultdown.ReadMSec());
 
 	ImGui::Text("dash timer: %f", dashTimer.ReadMSec());
 
+	ImGui::Text("Player level: %d", level);
+	
+	if (ImGui::Button("Add Level"))
+		level++;
+	ImGui::SameLine();
+	if (ImGui::Button("Remove Level")) {
+		if (level > 0)
+			level--;
+	}
+
+	ImGui::Text("Player abylity points: %d", abylityPoints);
+	
+	if (ImGui::Button("Add ability Point"))
+		abylityPoints++;
+	ImGui::SameLine();
+	if (ImGui::Button("Remove ability Point")) {
+		if (abylityPoints > 0)
+			abylityPoints--;
+	}
 	ImGui::Separator();
 	ImGui::Text("Player Cheats");
 	ImGui::Checkbox("God Mode", &godMode);
@@ -228,6 +266,8 @@ bool Player::SaveState(pugi::xml_node& node) {
 	pugi::xml_node playerAttributes = node.append_child("player");
 	playerAttributes.append_attribute("x").set_value(this->position.x);
 	playerAttributes.append_attribute("y").set_value(this->position.y);
+
+	// TODO save inventory and bestiary
 
 	return true;
 }

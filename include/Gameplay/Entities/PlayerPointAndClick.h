@@ -2,9 +2,10 @@
 #define __PLAYERPOINTANDCLICK_H__
 
 #include "Gameplay/Entities/Entity.h"
+#include "Core/Textures.h"
+#include "Core/ParticleManager.h"
 
-class ParticleGenerator;
-class SDL_Texture;
+class b2MouseJoint;
 
 class PlayerPointAndClick : public Entity
 {
@@ -39,12 +40,16 @@ public:
 	PhysBody* pbody;
 	int margin = 50;
 
+	b2MouseJoint* mouseJoint;
+	PhysBody* ground;
+
 	ParticleGenerator* effects = nullptr;
 
 	SDL_Texture* mouseNoSelection = nullptr;
 	SDL_Texture* mouseSelection = nullptr;
 
 	bool hovering = false;
+	bool cauldronIsOpen = false;
 };
 
 #endif // __PLAYERPOINTANDCLICK_H__

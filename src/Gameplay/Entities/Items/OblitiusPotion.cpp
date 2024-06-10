@@ -12,5 +12,5 @@ OblitiusPotion::~OblitiusPotion() {}
 void OblitiusPotion::Use() {
     // Implement the logic for using the Oblitius potion
     LOG("Using ", name, ". ", description);
-    quantity--;
+    if(quantity > 0)quantity--;
 }
