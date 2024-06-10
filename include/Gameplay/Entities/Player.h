@@ -158,9 +158,9 @@ public:
 	SDL_Texture* texture = NULL;
 
 	float vida = 15.0f;
-	float str = 10.0f;
-	float inte = 14.0f;
-	float def;
+	float strength = 10.0f;
+	float intelligence = 14.0f;
+	float defense;
 
 	//Movement
 	float moveForce = 1.5f;

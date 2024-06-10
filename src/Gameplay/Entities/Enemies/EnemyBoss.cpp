@@ -251,7 +251,7 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::SWORD:
 		LOG("Collision ARMAPLAYER");
 		//if (state != EntityState::DEAD and !invencible){
-		vida -= player->str - (def / 2);
+		vida -= player->strength - (defense / 2);
 		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{
@@ -268,7 +268,7 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 
 	case ColliderType::MAGIC:
-		vida -= player->inte - (def / 2);
+		vida -= player->intelligence - (defense / 2);
 		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{

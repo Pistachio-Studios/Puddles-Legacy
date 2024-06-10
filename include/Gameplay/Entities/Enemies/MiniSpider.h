@@ -77,7 +77,7 @@ public:
 	
 	float vida = 21.0f;
 	float dano = 7.0f;
-	float def = 10.0f;
+	float defense = 10.0f;
 
 	int angle;
 	b2Vec2 movementDirection;
