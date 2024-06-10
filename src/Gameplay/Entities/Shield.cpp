@@ -1,6 +1,9 @@
 #include "Core/App.h"
 #include "Gameplay/Entities/Shield.h"
 #include "Core/Render.h"
+#include "Core/Audio.h"
+#include "Gameplay/Entities/Player.h"
+
 
 #include <imgui.h>
 
@@ -27,6 +30,8 @@ bool Shield::Update(float dt)
 {
 	pbody->GetPosition(position.x, position.y);
 	//app->render->DrawRectangle({ position.x, position.y, 30, 10 }, 255, 0, 0);
+	
+	app->audio->PlayFx(app->player->shieldFx);
 	return true;
 }
 

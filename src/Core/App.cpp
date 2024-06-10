@@ -18,6 +18,7 @@
 #include "Core/DialogManager.h"
 #include "Core/QuestManager.h"
 #include "Core/UI.h"
+#include "Gameplay/Entities/Player.h"
 
 #include "Utils/Defs.h"
 #include "Utils/Log.h"
