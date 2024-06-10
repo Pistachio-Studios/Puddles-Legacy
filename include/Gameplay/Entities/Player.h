@@ -308,6 +308,12 @@ public:
 	Timer dashTimer;
 	float dashCultdown = 5.0f;
 
+	Animation SabrinaEspadaIdle, SabrinaEspadaMovDelante, SabrinaEspadaMovDerecha, SabrinaEspadaMovIzquierda, SabrinaEspadaMovDetras,
+		SabrinaEspadaDano, SabrinaEspadaDash, SabrinaEspadaMuerte, SabrinaEspadaRecolectar,
+		SabrinaEspadaAtaque, SabrinaCetroIdle, SabrinaCetroMovDelante, SabrinaCetroMovDerecha, SabrinaCetroMovIzquierda,
+		SabrinaCetroMovDetras, SabrinaCetroDano, SabrinaCetroDash, SabrinaCetroMuerte, SabrinaCetroRecolectar, SabrinaCetroAtaque;
+	Animation* currentAnim;
+
 	//Cheats
 	bool godMode = false;
 	bool ghostMode = false;

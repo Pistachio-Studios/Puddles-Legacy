@@ -11,6 +11,7 @@
 #include "Core/SceneManager.h"
 #include "Core/Window.h"
 #include "Core/ParticleManager.h"
+#include "Core/AnimationManager.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -57,7 +58,7 @@ bool Player::Start() {
 
 	dashTimer = Timer();
 
-	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
+	//texture = app->tex->Load("Assets/Textures/playerx128-test.png");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
 	pbody->listener = this;
@@ -79,6 +80,67 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatIdleState("idle"));
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
+
+	//Anims
+	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");
+	SabrinaEspadaIdle.speed = 2.0f;
+
+	SabrinaCetroIdle = *app->animationManager->GetAnimByName("SabrinaCetroIdle");
+	SabrinaCetroIdle.speed = 2.0f;
+
+	SabrinaEspadaMovDelante = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_delante");
+	SabrinaEspadaMovDelante.speed = 2.0f;
+
+	SabrinaCetroMovDelante = *app->animationManager->GetAnimByName("SabrinaCetroCaminar_delante");
+	SabrinaCetroMovDelante.speed = 2.0f;
+
+	SabrinaEspadaMovDerecha = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_derecha");
+	SabrinaEspadaMovDerecha.speed = 2.0f;
+
+	SabrinaCetroMovDerecha = *app->animationManager->GetAnimByName("SabrinaCetroCaminar_derecha");
+	SabrinaCetroMovDerecha.speed = 2.0f;
+
+	SabrinaEspadaMovIzquierda = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_izquierda");
+	SabrinaEspadaMovIzquierda.speed = 2.0f;
+
+	SabrinaCetroMovIzquierda = *app->animationManager->GetAnimByName("SabrinaCetroCaminar_izquierda");
+	SabrinaCetroMovIzquierda.speed = 2.0f;
+
+	SabrinaEspadaMovDetras = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_detras");
+	SabrinaEspadaMovDetras.speed = 2.0f;
+
+	SabrinaCetroMovDetras = *app->animationManager->GetAnimByName("SabrinaCetroCaminar_detras");
+	SabrinaCetroMovDetras.speed = 2.0f;
+
+	SabrinaEspadaDano = *app->animationManager->GetAnimByName("SabrinaEspadaDano");
+	SabrinaEspadaDano.speed = 2.0f;
+
+	SabrinaCetroDano = *app->animationManager->GetAnimByName("SabrinaCetroDano");
+	SabrinaCetroDano.speed = 2.0f;
+
+	SabrinaEspadaDash = *app->animationManager->GetAnimByName("SabrinaEspadaDash");
+	SabrinaEspadaDash.speed = 2.0f;
+
+	SabrinaCetroDash = *app->animationManager->GetAnimByName("SabrinaCetroDash");
+	SabrinaCetroDash.speed = 2.0f;
+
+	SabrinaEspadaMuerte = *app->animationManager->GetAnimByName("SabrinaEspadaMuerte");
+	SabrinaEspadaMuerte.speed = 2.0f;
+
+	SabrinaCetroMuerte = *app->animationManager->GetAnimByName("SabrinaCetroMuerte");
+	SabrinaCetroMuerte.speed = 2.0f;
+
+	SabrinaEspadaRecolectar = *app->animationManager->GetAnimByName("SabrinaEspadaRecolectar");
+	SabrinaEspadaRecolectar.speed = 2.0f;
+
+	SabrinaCetroRecolectar = *app->animationManager->GetAnimByName("SabrinaCetroRecolectar");
+	SabrinaCetroRecolectar.speed = 2.0f;
+
+	SabrinaEspadaAtaque = *app->animationManager->GetAnimByName("SabrinaEspadaAtaque");
+	SabrinaEspadaAtaque.speed = 2.0f;
+
+	SabrinaCetroAtaque = *app->animationManager->GetAnimByName("SabrinaCetroAtaque");
+	SabrinaCetroAtaque.speed = 2.0f;
 
 	sceneChange = false;
 
@@ -141,6 +203,15 @@ bool Player::Update(float dt)
 
 	damage->position = { position.x + 46, position.y + 64};
 
+	//Animations
+	//Renderizar la animación actual
+	if (currentAnim != nullptr) {
+		app->render->DrawTexture(currentAnim->texture, position.x - 15, position.y - 25, &currentAnim->GetCurrentFrame());
+	}
+	else {
+		app->render->DrawTexture(texture, position.x - 15, position.y - 25);
+	}
+
 	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
@@ -199,6 +270,8 @@ bool Player::Update(float dt)
 			app->sceneManager->ChangeScene("townscene");
 		}
 	}
+
+
 
 	return true;
 }

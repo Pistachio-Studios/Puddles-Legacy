@@ -70,6 +70,9 @@ public:
                 attackValue += dt / 1000 * attackSpeed;
                 if(player->mana > 5.0f and attacking == false)player->mana -= 5.0f;
                 attacking = true;
+                //Animation
+                player->SabrinaEspadaAtaque.Update(dt);
+                player->currentAnim = &player->SabrinaEspadaAtaque;
             }
             else
             {
@@ -85,11 +88,15 @@ public:
 
             if (app->input->GetMouseButtonDown(1))
             {
+                //Animation
+                player->SabrinaCetroAtaque.Update(dt);
+                player->currentAnim = &player->SabrinaCetroAtaque;
+
                 if(spellTimer.ReadMSec() > 500 or firstSpell)
                 {
                     player->staffEntity->ThrowSpell();
                     spellTimer.Start();
-                    firstSpell = false;
+                    firstSpell = false;                    
                     if(player->mana > 10.0f)player->mana -= 10.0f;
                 }
             }

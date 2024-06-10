@@ -21,7 +21,7 @@ public:
     inline void Update(float dt) override
     {
 
-
+        
         PhysBody* pbody = player->pbody;
 
         b2Vec2 impulse = { 0, 0 };
@@ -30,15 +30,52 @@ public:
         {
             if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
                 impulse.x = -pbody->body->GetMass() * player->moveForce;
+                if (player->currentClass == KNIGHT) {
+                    //Animation
+                    player->SabrinaEspadaMovIzquierda.Update(dt);
+                    player->currentAnim = &player->SabrinaEspadaMovIzquierda;
+                }
+                if (player->currentClass == WIZARD) {
+                    //Animation
+                    player->SabrinaCetroMovIzquierda.Update(dt);
+                    player->currentAnim = &player->SabrinaCetroMovIzquierda;
+                }
             }
             if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
                 impulse.x = pbody->body->GetMass() * player->moveForce;
+                //Animation
+                if (player->currentClass == KNIGHT) {
+                    player->SabrinaEspadaMovDerecha.Update(dt);
+                    player->currentAnim = &player->SabrinaEspadaMovDerecha;
+                }
+                if (player->currentClass == WIZARD) {
+                    player->SabrinaCetroMovDerecha.Update(dt);
+                    player->currentAnim = &player->SabrinaCetroMovDerecha;
+                }                
             }
             if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
                impulse.y = -pbody->body->GetMass() * player->moveForce;
+               //Animation
+               if (player->currentClass == KNIGHT) {
+                   player->SabrinaEspadaMovDetras.Update(dt);
+                   player->currentAnim = &player->SabrinaEspadaMovDetras;
+               }
+               if (player->currentClass == WIZARD) {
+                   player->SabrinaCetroMovDetras.Update(dt);
+                   player->currentAnim = &player->SabrinaCetroMovDetras;
+               }
             }
             if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-                impulse.y = pbody->body->GetMass() * player->moveForce;
+                impulse.y = pbody->body->GetMass() * player->moveForce;                
+                //Animation
+                if (player->currentClass == KNIGHT) {
+                    player->SabrinaEspadaMovDelante.Update(dt);
+                    player->currentAnim = &player->SabrinaEspadaMovDelante;
+                }
+                if (player->currentClass == WIZARD) {
+                    player->SabrinaCetroMovDelante.Update(dt);
+                    player->currentAnim = &player->SabrinaCetroMovDelante;
+                }
             }
 
             pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
@@ -56,6 +93,16 @@ public:
             pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
 
             player->dashTimer.Start();
+
+            //Animation
+            if (player->currentClass == KNIGHT) {
+                player->SabrinaEspadaDash.Update(dt);
+                player->currentAnim = &player->SabrinaEspadaDash;
+            }
+            if (player->currentClass == WIZARD) {
+                player->SabrinaCetroDash.Update(dt);
+                player->currentAnim = &player->SabrinaCetroDash;
+            }
         }
 
         if (pbody->body->GetLinearVelocity().Length() < 1.0f)
