@@ -150,8 +150,8 @@ bool UI::Update(float dt)
 			Item* potion = playerInventory->items[i];
 			if(potion->quantity > 0)
 			{
-				int potionX = (int)windowW / 2 - 252 * sizeEase;
-				int potionY = (int)windowH / 2 - 446 * sizeEase;
+				int potionX = (int)windowW / 2 - 52 * sizeEase;
+				int potionY = (int)windowH / 2 - 259 * sizeEase;
 				int potionWidth = 250;
 				int potionHeight = 250;
 
