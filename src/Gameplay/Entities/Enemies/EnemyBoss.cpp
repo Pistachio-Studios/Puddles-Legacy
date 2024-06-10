@@ -62,7 +62,7 @@ bool EnemyBoss::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 230, 192, bodyType::DYNAMIC); 
 	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY; 
+	pbody->ctype = ColliderType::ENEMYBOSS; 
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
@@ -169,6 +169,7 @@ void EnemyBoss::DrawImGui()
 {
 	ImGui::Begin("Enemy");
 	ImGui::Text("Enemy Position: %d, %d", position.x, position.y);
+	ImGui::Text("Enemy Health: %f", vida);
 	ImGui::Text("Enemy Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
@@ -251,7 +252,7 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::SWORD:
 		LOG("Collision ARMAPLAYER");
 		//if (state != EntityState::DEAD and !invencible){
-		vida -= player->dano;
+		vida -= player->strength - (defense / 2);
 		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{
@@ -264,12 +265,30 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			app->audio->PlayFx(bossDamageFx);
 			bossDamage.Reset();
+
+			if (player->stealLife) {
+				player->vida += player->stealLifeRatio;
+				LOG("Player steal life %f", player->vida);
+			}
+
+			// TODO review this
+			bool bleedDamageDealt = false;
+			if (app->entityManager->GetPlayerEntity()->bleed) {
+				// 15% change to bleed
+				if (rand() % 100 < player->bleedChance && !bleedDamageDealt) {
+					// TODO add bleed effect
+					vida -= 1.0f;
+					bleedDamageDealt = true;
+					LOG("EnemyBoss Bleed! %f", vida);
+				}
+			}
+
 			movementFSM->ChangeState("hurt");
 		}
 		break;
 
 	case ColliderType::MAGIC:
-		vida -= player->dano;
+		vida -= player->intelligence - (defense / 2);
 		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{

@@ -80,8 +80,6 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
 
-	totalLivesPlayer = livesPlayer;
-
 	sceneChange = false;
 
 	damage = new ParticleGenerator();
@@ -107,7 +105,6 @@ bool Player::Update(float dt)
 	//CHEATS
 	if (godMode) {
 		vida = 10.0f;
-		livesPlayer = 10;
 	}
 	if (ghostMode) {
 		pbody->body->GetFixtureList()->SetSensor(ghostMode);
@@ -115,6 +112,15 @@ bool Player::Update(float dt)
 	}
 	else {
 		SDL_SetTextureAlphaMod(texture, 255);
+	}
+
+	if (currentClass == PlayerClass::KNIGHT)
+	{
+		defense = 15.0f;
+	}
+	else
+	{
+		defense = 3.0f;
 	}
 
 	movementFSM->Update(dt);
@@ -126,7 +132,7 @@ bool Player::Update(float dt)
 
 	if (vida <= 0.0f) {
 		pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0); //TODO: QUITAR ESTO!!! TIENE QUE SER EL SPAWNPOINT DEL PLAYER EN ESE MAPA
-		vida = 10.0f;
+		vida = maxVida;
 	}
 	
 	//Update player position in pixels
@@ -177,9 +183,6 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (livesPlayer == 0) deadPlayer;
-
-
 	//----Scene Change Management----
 	if(sceneChange)
 	{
@@ -205,8 +208,9 @@ void Player::DrawImGui()
 	ImGui::Begin("Player");
 
 	ImGui::Text("Player Position: %d, %d", position.x, position.y);
-	ImGui::Text("Player Lives: %d", livesPlayer);
-	ImGui::Text("Player Mana: %d", mana);
+	ImGui::Text("Player Vida: %f", vida);
+	ImGui::Text("Player Mana: %f", mana);
+	ImGui::Text("Player Mana Regeneration: %f", manaRegeneration);
 	ImGui::Text("Player Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
@@ -226,6 +230,12 @@ void Player::DrawImGui()
 	ImGui::Text("dash timer: %f", dashTimer.ReadMSec());
 
 	ImGui::Text("Player level: %d", level);
+
+	ImGui::Text("Player Strength: %f", strength);
+	ImGui::Text("Player Intelligence: %f", intelligence);
+
+	ImGui::Text("Blood: %s", bleed ? "true" : "false");
+	ImGui::Text("Bleed chance: %d", bleedChance);
 	
 	if (ImGui::Button("Add Level"))
 		level++;
@@ -273,6 +283,72 @@ bool Player::LoadState(pugi::xml_node& node)
 	return true;
 }
 
+#pragma region AbilitiesUnlock
+
+void Player::AbilitySword100() { // DONE
+	// Increase player strength +3
+	strength += 13.0f;
+}
+
+void Player::AbilitySword110() { // DONE
+	// 15% chance of bleed effect
+	bleed = true;
+}
+
+void Player::AbilitySword111() {
+	// When parry, stack armor 3 times
+}
+
+void Player::AbilitySword112() {
+	// Double attack
+}
+
+void Player::AbilitySword120() {
+	// +20% life regeneration
+	stealLife = true;
+}
+
+void Player::AbilitySword122() {
+	// Double attack
+}
+
+void Player::AbilitySword123() {
+	// Area sword attack 100% chance of bleed
+	// bleedChance = 100;
+}
+
+void Player::AbilityStaff100() { // DONE
+	// Increase player intelligence +3
+	intelligence = 17.0f;
+}
+
+void Player::AbilityStaff110() {
+	// +10% chance of paralysis effect
+}
+
+void Player::AbilityStaff111() {
+	// Tornado area that slows enemies
+}
+
+void Player::AbilityStaff112() {
+	// Double projectile
+}
+
+void Player::AbilityStaff120() {
+	// +15% energy regeneration
+	manaRegeneration = 5.0f;
+}
+
+void Player::AbilityStaff122() {
+	// Double projectile
+}
+
+void Player::AbilityStaff123() {
+	// Fireball that can pass through enemies and have a 70% chance of burn
+}
+
+#pragma endregion AbilitiesUnlock
+
 bool Player::CleanUp() {
 
 	app->tex->UnLoad(texture);
@@ -289,16 +365,32 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		sceneChange = true;
 		break;
 		//TODO: He a�adido esto para probar que la pocion de curar funcione, se puede borrar :)
-	case ColliderType::ENEMY:
+	case ColliderType::ENEMYWASP:
 		if(playerHurtCultdown.ReadMSec() > 1000.0f)
-			{
-				livesPlayer--; 
-				damage->emiting = true;
-				playerHurtCultdown.Start();
-			}
+		{
+			vida -= 5.0f;
+			damage->emiting = true;
+			playerHurtCultdown.Start();
+		}
+		break;
+	case ColliderType::ENEMYSPIDER:
+		if (playerHurtCultdown.ReadMSec() > 1000.0f)
+		{
+			vida -= 5.0f;
+			damage->emiting = true;
+			playerHurtCultdown.Start();
+		}
+		break;
+	case ColliderType::ENEMYBOSS:
+		if (playerHurtCultdown.ReadMSec() > 1000.0f)
+		{
+			vida -= 13.0f;
+			damage->emiting = true;
+			playerHurtCultdown.Start();
+		}
 		break;
 	case ColliderType::BULLET:
-		vida -= 2.0f;
+		vida -= 7.0f;
 		damage->emiting = true;
 		break;
 	}

@@ -67,16 +67,17 @@ public:
 	SDL_Texture* texture = NULL;
 
 	//Movement
-	int moveSpeed = 2;
+	float moveSpeed = 1.4f;
 	int noSpeed = 0;
 	int updateSpeed;
 	float moveForce = 1.0f;
 	float maxSpeed = 2.0f;
 
 	ParticleGenerator* damage = nullptr;
-
-	float vida = 5.0f;
-	float dano = 1.0f;
+	
+	float vida = 21.0f;
+	float dano = 7.0f;
+	float defense = 10.0f;
 
 	int angle;
 	b2Vec2 movementDirection;

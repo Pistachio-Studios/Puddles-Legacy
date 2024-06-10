@@ -58,7 +58,7 @@ bool Wasp::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 64, bodyType::DYNAMIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY; 
+	pbody->ctype = ColliderType::ENEMYWASP; 
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
@@ -227,7 +227,7 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::SWORD:
 		LOG("Collision SWORD");
 		//if (state != EntityState::DEAD and !invencible){
-		vida -= player->dano;
+		vida -= player->strength - (defense / 2);
 		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{
@@ -239,6 +239,21 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 		else if (vida > 0.0f) {
 			app->audio->PlayFx(damageFx);
 			waspDamage.Reset();
+
+			if (player->stealLife) {
+				player->vida += player->stealLifeRatio;
+				LOG("Player steal life %f", player->vida);
+			}
+
+			if (app->entityManager->GetPlayerEntity()->bleed) {
+				// 15% change to bleed
+				if (rand() % 100 < player->bleedChance) {
+					// TODO add bleed effect
+					vida -= 1.0f;
+					LOG("Wasp Bleed! %f", vida);
+				}
+			}
+
 			movementFSM->ChangeState("hurt");
 		}
 		//else {
@@ -254,7 +269,7 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 
 	case ColliderType::MAGIC:
-		vida -= player->dano;
+		vida -= player->intelligence - (defense / 2);
 		damage->emiting = true;
 		if (vida <= 0.0f)
 		{

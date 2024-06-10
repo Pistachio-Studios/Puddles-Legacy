@@ -73,7 +73,7 @@ public:
 	SDL_Texture* texture = NULL;
 
 	//Movement
-	int moveSpeed = 1;
+	float moveSpeed = 0.85f;
 	int noSpeed = 0;
 	int updateSpeed;
 	float moveForce = 3.0f;
@@ -90,9 +90,11 @@ public:
 	iPoint spawnPosition;
 
 	ParticleGenerator* damage = nullptr;
-
-	float vida = 100.0f;
-	float dano = 2.0f;
+	
+	float vida = 75.0f;
+	float strenght = 13.0f;
+	float intelligence = 17.0f;
+	float defense = 15.0f;
 
 	bool invencible = false;
 
