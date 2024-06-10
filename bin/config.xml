@@ -126,6 +126,27 @@
 				<Wasp x="23268" y="12880" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
 				<Wasp x="22700" y="14484" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
 			</enemies>
+			<Plants>
+				<ArnicaPlant x="572" y="5052" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="5324" y="5945" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="11873" y="9027" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="24485" y="14082" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ComfreyPlant x="3888" y="1342" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="16072" y="2392" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="25894" y="3876" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<HepaticaPlant x="15809" y="5927" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="924" y="11291" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="19264" y="2744" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="25842" y="5158" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<WitchHazelPlant x="15196" y="3544" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="15515" y="13939" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="19233" y="10111" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<HawthornPlant x="6020" y="11148" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="8896" y="9148" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="26873" y="1779" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="27282" y="11818" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+	
+			</Plants>
 		</forestscene>
 		<townscene>
 			<map path="Assets/Maps/Town-Scene/" name="Town.tmx" />
