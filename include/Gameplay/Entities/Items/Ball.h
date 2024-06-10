@@ -1,5 +1,5 @@
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef Ball_H
+#define Ball_H
 
 #include "Core/Animation.h"
 #include "Core/Physics.h"
@@ -13,18 +13,17 @@
 
 struct SDL_Texture;
 class Player;
-class Ball;
 
-class Button : public Entity {
+class Ball : public Entity {
 
 public:
 
 	bool startTimer = true;
 	Timer timer;
 
-	Button();
+	Ball();
 
-	virtual ~Button();
+	virtual ~Ball();
 
 	bool Awake() override;
 
@@ -50,13 +49,6 @@ public:
 
 public:
 
-    SDL_Texture* buttonTex = nullptr;
-    SDL_Texture* buttonPisadoTex = nullptr;
-	SDL_Texture* buttonVerde = nullptr;
-	SDL_Texture* buttonAzul = nullptr;
-	SDL_Texture* buttonLila = nullptr;
-	SDL_Texture* buttonRojo = nullptr;
-	SDL_Texture* buttonNaranja = nullptr;
 	SDL_Texture* puzzle3Tex = nullptr;
 
     const char* texturePath;
@@ -71,17 +63,13 @@ public:
 
 	Player* player;
 
-	Ball* ball;
-
-	int buttonType;
+	bool pickUp = false;
+	bool placed = false;
 
 	//bool changeColor;
 
 	int colour;
 
-	bool pisada = false;
-	bool isTouchingBall = false;
-
 };
 
-#endif // BUTTON_H
+#endif // Ball_H

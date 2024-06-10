@@ -9,7 +9,7 @@
 		<vsync value="false" />
 	</renderer>
 	<window>
-		<resolution width="1920" height="1080" scale="1" />
+		<resolution width="1360" height="768" scale="1" />
 		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="true" />
@@ -54,7 +54,10 @@
 				<button x=" 27392" y ="13312" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
 				<button x=" 28416" y ="14720" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
 				<button x=" 27904" y ="11520" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
-
+				<button x=" 896" y ="9216" type="3" colour="1" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
+				<button x=" 5376" y ="9216" type="3" colour="2" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
+				<ball x="2816" y= "13568" colour="1" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
+				<ball x="3968" y= "13568" colour="2" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
 			</assets>
 			<enemies />
 		</forestscene>

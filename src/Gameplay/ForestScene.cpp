@@ -13,6 +13,7 @@
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
 #include "Gameplay/Entities/Items/Button.h"
+#include "Gameplay/Entities/Items/Ball.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Utils/SString.h"
 #include "Utils/Timer.h"
@@ -131,6 +132,24 @@ bool ForestScene::Enter()
 		buttonNode = buttonNode.next_sibling("button");
 	}
 
+	for (int i = 0; buttonNode.attribute("type").as_int() == 3; ++i) {
+		buttonBallList[i] = new Button();
+		app->entityManager->AddEntity(buttonBallList[i]);
+		buttonBallList[i]->parameters = buttonNode;
+		buttonBallList[i]->Enable();
+		buttonNode = buttonNode.next_sibling("button");
+	}
+
+	pugi::xml_node ballNode = assetsNode.child("ball");
+	
+	for (int i = 0; ballNode; ++i){
+		ballList[i] = new Ball();
+		app->entityManager->AddEntity(ballList[i]);
+		ballList[i]->parameters = ballNode;
+		ballList[i]->Enable();
+		ballNode = ballNode.next_sibling("ball");
+	}
+
 	for (pugi::xml_node plantNode = parameters.child("Plants").first_child(); plantNode; plantNode = plantNode.next_sibling())
 	{
 		std::string plantType = plantNode.name();
@@ -214,13 +233,14 @@ bool ForestScene::Enter()
 	//changeTown->ctype = ColliderType::CHANGESCENE;
 	//changeTown->listener = player;
 
-	bush = app->tex->Load("Assets/Maps/Mapa_Nivel/bush.PNG");
+	bush = app->tex->Load("Assets/Maps/Forest-Scene/bush.PNG");
 
 	puzzleFx = app->audio->LoadFx(parameters.child("map").attribute("puzzleFxPath").as_string());
 
 	door1Closed = false;
 	door3Closed = false;
 	puzzle1 = false;
+	puzzle2 = false;
 	puzzle3 = false;
 
 	return true;
@@ -349,12 +369,25 @@ bool ForestScene::Update(float dt)
 
 	//puzzle 2
 
+	if (buttonBallList[0]->pisada) {
+		ballList[0]->placed;
+	}
+	else if (buttonBallList[1]->pisada) {
+		ballList[1]->placed;
+	}
 
+	else if (!buttonBallList[0]->pisada) {
+		!ballList[0]->placed;
+	}
+	else if (!buttonBallList[1]->pisada) {
+		!ballList[1]->placed;
+	}
+	
+	if (ballList[0]->placed && ballList[1]->placed && !puzzle2) {
+		puzzle2 = true;
+		app->audio->PlayFx(puzzleFx);
+	}
 
-
-
-
-	LOG("x: %i   y: %i", player->position.x, player->position.y);
 
 	//puzzle 3
 
@@ -385,14 +418,11 @@ bool ForestScene::Update(float dt)
 		app->physics->DestroyBody(bushPbody);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT){
-		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(25600), PIXEL_TO_METERS(14336)), 0);
-	}
-
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
-		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3840), PIXEL_TO_METERS(4352)), 0);
+		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(2816), PIXEL_TO_METERS(13568)), 0);
 	}
 	
+	LOG("x: %i   y: %i", player->position.x, player->position.y);
 
 	return true;
 }

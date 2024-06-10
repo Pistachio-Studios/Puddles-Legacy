@@ -26,6 +26,7 @@ enum class EntityType
 	ITEM,
 	BULLET,
 	BUTTON,
+	BALL,
 	UNKNOWN
 };
 

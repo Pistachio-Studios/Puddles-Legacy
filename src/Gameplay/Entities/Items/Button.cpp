@@ -1,4 +1,5 @@
 #include "Gameplay/Entities/Items/Button.h"
+#include "Gameplay/Entities/Items/Ball.h"
 #include "Core/App.h"
 #include "Gameplay/Entities/Entity.h"
 #include "Gameplay/Entities/Player.h"
@@ -41,6 +42,7 @@ bool Button::Start() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	buttonType = parameters.attribute("type").as_int();
+	colour = parameters.attribute("colour").as_int();
 	if (buttonType == 1) {
 		buttonTex = app->tex->Load(parameters.attribute("buttonTexPath").as_string());
 		buttonPisadoTex = app->tex->Load(parameters.attribute("buttonPisadoTexPath").as_string());
@@ -53,7 +55,9 @@ bool Button::Start() {
 		buttonNaranja = app->tex->Load(parameters.attribute("buttonNaranjaTexPath").as_string());
 		colour = 1 + rand() % 5;
 	}
-
+	else if (buttonType == 3) {
+		puzzle3Tex = app->tex->Load(parameters.attribute("puzzleTexPath").as_string());
+	}
 	newPosition = spawnPosition = position;
 
 	timer = Timer();
@@ -114,8 +118,28 @@ bool Button::Update(float dt)
 			break;
 		}
 	}
-	app->render->DrawTexture(texturaActiva, position.x-44, position.y-50, 0, 1.0f, 0.0f, 1.0f, 1);
+	if (buttonType == 3) {
+		texturaActiva = puzzle3Tex;
+		if (colour == 1) {
+			if (!pisada) {
+				rect = { 256, 0, 128, 128 };
+			}
+			else {
+				rect = { 512, 0, 128, 128 };
+			}
+		}
+		else if (colour == 2) {
+			if (!pisada) {
+				rect = { 384, 0, 128, 128 };
+			}
+			else {
+				rect = { 640, 0, 128, 128 };
+			}
+		}
+	}
 
+	app->render->DrawTexture(texturaActiva, position.x - 44, position.y - 50, &rect, 1.0f, 0.0f, 1.0f, 1U);
+	
 	return true;
 }
 
@@ -161,7 +185,15 @@ void Button::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		pisada = true;
+		if (buttonType == 1 || buttonType == 2) {
+			pisada = true;
+		}
+		break;
+	case ColliderType::BALLV:
+		if (buttonType==3 && colour==1) pisada = true;
+		break;
+	case ColliderType::BALLL:
+		if (buttonType == 3 && colour == 2) pisada = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Colision UNKNOWN");
@@ -170,7 +202,18 @@ void Button::OnCollision(PhysBody* physA, PhysBody* physB) {
 }
 
 void Button::EndCollision(PhysBody* physA, PhysBody* physB) {
-
+	switch (physB->ctype) {
+	
+	case ColliderType::BALLV:
+		if (buttonType == 3 && colour == 1) pisada = false;
+		break;
+	case ColliderType::BALLL:
+		if (buttonType == 3 && colour == 2) pisada = false;
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Colision UNKNOWN");
+		break;
+	}
 }
 
 void Button::OnRaycastHit(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {

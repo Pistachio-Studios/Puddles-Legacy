@@ -10,6 +10,7 @@
 
 struct SDL_Texture;
 class Button;
+class Ball;
 
 class ForestScene : public Scene
 {
@@ -71,6 +72,10 @@ private:
 
 	Button* buttonColourList[5];
 
+	Button* buttonBallList[2];
+
+	Ball* ballList[2];
+
 	int puzzleFx;
 
 	PhysBody* bushPbody;
@@ -78,6 +83,7 @@ private:
 	bool door1Closed = false;
 	bool door3Closed = false;
 	bool puzzle1 = false;
+	bool puzzle2 = false;
 	bool puzzle3 = false;
 
 };
