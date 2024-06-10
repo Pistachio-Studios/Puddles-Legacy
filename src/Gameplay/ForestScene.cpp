@@ -57,7 +57,7 @@ bool ForestScene::Enter()
 	if (parameters.child("enemies").child("EnemyBoss")) {
 		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
 		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
-		enemyboss->Start();
+		enemyboss->Enable();
 	}
 
 	if (parameters.child("enemies"))
@@ -68,14 +68,14 @@ bool ForestScene::Enter()
 		{
 			MiniSpider* minispider = (MiniSpider*)app->entityManager->CreateEntity(EntityType::MINISPIDER);
 			minispider->parameters = MiniSpiderNode;
-			minispider->Start();
+			minispider->Enable();
 		}
 
 		for (pugi::xml_node WaspNode = enemies.child("Wasp"); WaspNode; WaspNode = WaspNode.next_sibling("Wasp"))
 		{
 			Wasp* wasp = (Wasp*)app->entityManager->CreateEntity(EntityType::WASP);
 			wasp->parameters = WaspNode;
-			wasp->Start();
+			wasp->Enable();
 		}
 	}
 
