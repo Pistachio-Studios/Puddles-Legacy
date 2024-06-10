@@ -14,8 +14,6 @@ public:
     PlayerMoveState(SString name) : State(name) {}
     inline void Enter() override
     {
-
-
         player = StateMachineReference->owner;
     }
     inline void Update(float dt) override
@@ -62,6 +60,7 @@ public:
         {
             StateMachineReference->ChangeState("idle");
         }
+        app->audio->PlayFx(player->stepsFx);
     }
     inline void Exit() override
     {
