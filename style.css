@@ -112,10 +112,28 @@ h2 {
     transform: scale(1.05);
 }
 
+.left-image {
+    position: absolute;
+    left: 10px; /* Ajusta este valor según sea necesario */
+    bottom: 10px; /* Ajusta este valor según sea necesario */
+    top: 0px; /* Ajusta este valor según sea necesario */
+    max-height: 80%; /* Ajusta este valor según sea necesario */
+}
+.right-image {
+    position: absolute;
+    right: 10px; /* Ajusta este valor según sea necesario */
+    bottom: 10px; /* Ajusta este valor según sea necesario */
+    top: 0px; /* Ajusta este valor según sea necesario */
+    max-height: 80%; /* Ajusta este valor según sea necesario */
+}
+
+
 .authors {
     padding: 20px;
     background: rgba(31, 31, 31, 0.8);
     color: white;
+    position: relative;
+    overflow: hidden; /* Evita que las imágenes se salgan de la sección */
 }
 
 .authors-table {
