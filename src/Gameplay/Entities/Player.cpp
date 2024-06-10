@@ -12,7 +12,6 @@
 #include "Core/Window.h"
 #include "Core/ParticleManager.h"
 
-
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
 #include "Gameplay/States/Player/PlayerMoveState.hpp"
 #include "Gameplay/States/Player/PlayerCombatIdleState.hpp"
@@ -265,8 +264,10 @@ bool Player::SaveState(pugi::xml_node& node) {
 	Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
 	for (int i = 0; i < playerInventory->items.size(); i++)
 	{
-		Item* potion = playerInventory->items[i];
-		playerAttributes.append_child("items").append_attribute("quantity").set_value(playerInventory->items[i]->quantity); 
+		Item* item = playerInventory->items[i];
+		pugi::xml_node itemNode = playerAttributes.append_child("item"); 
+		itemNode.append_attribute("name").set_value(item->name.c_str());
+		itemNode.append_attribute("quantity").set_value(item->quantity);
 	}
 
 	return true;
@@ -274,6 +275,8 @@ bool Player::SaveState(pugi::xml_node& node) {
 
 bool Player::LoadState(pugi::xml_node& node)
 {
+	pugi::xml_node playerNode = node.child("player");
+
 	pbody->body->SetTransform({ PIXEL_TO_METERS(node.child("player").attribute("x").as_int()), PIXEL_TO_METERS(node.child("player").attribute("y").as_int()) }, node.child("player").attribute("angle").as_int());
 	// reset player physics
 	pbody->body->SetAwake(false);
@@ -284,12 +287,20 @@ bool Player::LoadState(pugi::xml_node& node)
 	this->level = node.child("player").attribute("Level").as_int();
 
 	Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
-	for (int i = 0; i < playerInventory->items.size(); i++)
-	{
-		Item* potion = playerInventory->items[i];
-		playerInventory->items[i]->quantity = node.child("player").child("items").attribute("quantity").as_int(); 
+	playerInventory->items.clear();
+
+	for (pugi::xml_node itemNode = playerNode.child("item"); itemNode; itemNode = itemNode.next_sibling("item")) {
+		std::string itemName = itemNode.attribute("name").as_string();
+		int itemQuantity = itemNode.attribute("quantity").as_int();
+
+		Item* newItem = nullptr;
+		newItem->name = itemName; 
+		newItem->quantity = itemQuantity;
+
+		playerInventory->items.push_back(newItem); 
 	}
-	return true;
+
+	return true; 
 }
 
 bool Player::CleanUp() {
