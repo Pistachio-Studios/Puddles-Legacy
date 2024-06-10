@@ -80,6 +80,11 @@ bool Player::Start() {
 
 	//Player Audios
 	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
+	swordFx = app->audio->LoadFx(parameters.attribute("swordFx").as_string());
+	staffFx = app->audio->LoadFx(parameters.attribute("staffFx").as_string());
+	deathFx = app->audio->LoadFx(parameters.attribute("deathFx").as_string());
+	damageFx = app->audio->LoadFx(parameters.attribute("damageFx").as_string());
+	blockFx = app->audio->LoadFx(parameters.attribute("blockFx").as_string());
 
 	totalLivesPlayer = livesPlayer;
 

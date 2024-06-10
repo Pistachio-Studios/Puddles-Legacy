@@ -59,6 +59,8 @@ public:
                 b2Vec2 swordPos = { playerPos.x + (float)cos(playerLookingAngle + attackValue * DEGTORAD) * radius, playerPos.y + (float)sin(playerLookingAngle + attackValue * DEGTORAD) * radius };
                 player->swordEntity->pbody->body->SetTransform(swordPos, playerLookingAngle + attackValue * DEGTORAD);
                 attackValue += dt / 1000 * attackSpeed;
+                app->audio->PlayFx(player->swordFx);
+
             }
             else
             {
@@ -77,6 +79,8 @@ public:
                 if(spellTimer.ReadMSec() > 500 or firstSpell)
                 {
                     player->staffEntity->ThrowSpell();
+                    app->audio->PlayFx(player->staffFx);
+
                     spellTimer.Start();
                     firstSpell = false;
                 }

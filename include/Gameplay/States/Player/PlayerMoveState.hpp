@@ -18,8 +18,6 @@ public:
     }
     inline void Update(float dt) override
     {
-
-
         PhysBody* pbody = player->pbody;
 
         b2Vec2 impulse = { 0, 0 };
@@ -41,6 +39,8 @@ public:
 
             pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
         }
+        app->audio->PlayFx(player->stepsFx);
+
 
         if(app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN and player->dashTimer.ReadSec() > player->dashCultdown)
         {
@@ -60,7 +60,6 @@ public:
         {
             StateMachineReference->ChangeState("idle");
         }
-        app->audio->PlayFx(player->stepsFx);
     }
     inline void Exit() override
     {
