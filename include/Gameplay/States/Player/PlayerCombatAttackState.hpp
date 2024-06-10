@@ -60,8 +60,8 @@ public:
                 player->swordEntity->pbody->body->SetTransform(swordPos, playerLookingAngle + attackValue * DEGTORAD);
                 attackValue += dt / 1000 * attackSpeed;
                 //Animation
-                app->render->DrawTexture(player->SabrinaAtaque.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaAtaque.GetCurrentFrame());
-                player->SabrinaAtaque.Update(dt);
+                player->SabrinaEspadaAtaque.Update(dt);
+                player->currentAnim = &player->SabrinaEspadaAtaque;
             }
             else
             {
@@ -78,8 +78,8 @@ public:
             if (app->input->GetMouseButtonDown(1))
             {
                 //Animation
-                app->render->DrawTexture(player->SabrinaAtaque.texture, player->position.x - 15, player->position.y - 25, &player->SabrinaAtaque.GetCurrentFrame());
-                player->SabrinaAtaque.Update(dt);
+                player->SabrinaCetroAtaque.Update(dt);
+                player->currentAnim = &player->SabrinaCetroAtaque;
 
                 if(spellTimer.ReadMSec() > 500 or firstSpell)
                 {

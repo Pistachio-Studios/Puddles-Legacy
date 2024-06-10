@@ -78,7 +78,6 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
 
-	//TODO parpadeos movimiento & overlay idle con ataque
 	//Anims
 	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");
 	SabrinaEspadaIdle.speed = 2.0f;
@@ -97,6 +96,12 @@ bool Player::Start() {
 
 	SabrinaCetroMovDerecha = *app->animationManager->GetAnimByName("SabrinaCetroCaminar_derecha");
 	SabrinaCetroMovDerecha.speed = 2.0f;
+
+	SabrinaEspadaMovIzquierda = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_izquierda");
+	SabrinaEspadaMovIzquierda.speed = 2.0f;
+
+	SabrinaCetroMovIzquierda = *app->animationManager->GetAnimByName("SabrinaCetroCaminar_izquierda");
+	SabrinaCetroMovIzquierda.speed = 2.0f;
 
 	SabrinaEspadaMovDetras = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_detras");
 	SabrinaEspadaMovDetras.speed = 2.0f;
@@ -128,8 +133,11 @@ bool Player::Start() {
 	SabrinaCetroRecolectar = *app->animationManager->GetAnimByName("SabrinaCetroRecolectar");
 	SabrinaCetroRecolectar.speed = 2.0f;
 
-	SabrinaAtaque = *app->animationManager->GetAnimByName("SabrinaAtaque");
-	SabrinaAtaque.speed = 2.0f;
+	SabrinaEspadaAtaque = *app->animationManager->GetAnimByName("SabrinaEspadaAtaque");
+	SabrinaEspadaAtaque.speed = 2.0f;
+
+	SabrinaCetroAtaque = *app->animationManager->GetAnimByName("SabrinaCetroAtaque");
+	SabrinaCetroAtaque.speed = 2.0f;
 
 	totalLivesPlayer = livesPlayer;
 
@@ -166,6 +174,15 @@ bool Player::Update(float dt)
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
+
+	//Animations
+	//Renderizar la animación actual
+	if (currentAnim != nullptr) {
+		app->render->DrawTexture(currentAnim->texture, position.x - 15, position.y - 25, &currentAnim->GetCurrentFrame());
+	}
+	else {
+		app->render->DrawTexture(texture, position.x - 15, position.y - 25);
+	}
 
 	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 
