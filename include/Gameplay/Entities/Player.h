@@ -254,12 +254,16 @@ public:
 	SDL_Texture* texture = NULL;
 
 	float vida = 15.0f;
+	float maxVida = 15.0f;
 	float str = 10.0f;
 	float inte = 14.0f;
 	float def;
 
 	bool bleed = false;
 	int bleedChance = 15; // 15% chance of bleeding
+
+	bool stealLife = false;
+	float stealLifeRatio = str * 0.1; // 10% of the damage dealt
 
 	// TODO add final stats
 	int level = 1;
@@ -291,8 +295,7 @@ public:
 
 	float mana = 100.0f;
 	float manaRegeneration = 2.0f; // 2 mana per second
-	uint livesPlayer = 10;
-	int totalLivesPlayer;
+
 	bool deadPlayer = false;
 
 	bool sceneChange = false;

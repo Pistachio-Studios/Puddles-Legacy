@@ -20,9 +20,10 @@ void VitaPotion::Use() {
     if(quantity > 0)
     {
         Player* player = app->entityManager->GetPlayerEntity();
-        if(player != nullptr and player->livesPlayer < player->totalLivesPlayer)
+        if(player != nullptr and player->vida < player->maxVida)
         {
-            player->livesPlayer++;
+            player->vida++;
+            // TODO curar vida
         }
         quantity--;
     }

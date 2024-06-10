@@ -245,6 +245,11 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 				app->audio->PlayFx(damageFx);
 				spiderDamage.Reset();
 
+				if (player->stealLife) {
+					player->vida += player->stealLifeRatio;
+					LOG("Player steal life %f", player->vida);
+				}
+
 				if (app->entityManager->GetPlayerEntity()->bleed) {
 					// 15% change to bleed
 					if (rand() % 100 < player->bleedChance) {

@@ -80,8 +80,6 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
 
-	totalLivesPlayer = livesPlayer;
-
 	sceneChange = false;
 
 	damage = new ParticleGenerator();
@@ -107,7 +105,6 @@ bool Player::Update(float dt)
 	//CHEATS
 	if (godMode) {
 		vida = 10.0f;
-		livesPlayer = 10;
 	}
 	if (ghostMode) {
 		pbody->body->GetFixtureList()->SetSensor(ghostMode);
@@ -135,7 +132,7 @@ bool Player::Update(float dt)
 
 	if (vida <= 0.0f) {
 		pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0); //TODO: QUITAR ESTO!!! TIENE QUE SER EL SPAWNPOINT DEL PLAYER EN ESE MAPA
-		vida = 10.0f;
+		vida = maxVida;
 	}
 	
 	//Update player position in pixels
@@ -186,9 +183,6 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (livesPlayer == 0) deadPlayer;
-
-
 	//----Scene Change Management----
 	if(sceneChange)
 	{
@@ -214,7 +208,7 @@ void Player::DrawImGui()
 	ImGui::Begin("Player");
 
 	ImGui::Text("Player Position: %d, %d", position.x, position.y);
-	ImGui::Text("Player Lives: %d", livesPlayer);
+	ImGui::Text("Player Vida: %f", vida);
 	ImGui::Text("Player Mana: %f", mana);
 	ImGui::Text("Player Mana Regeneration: %f", manaRegeneration);
 	ImGui::Text("Player Speed: %f", pbody->body->GetLinearVelocity().Length());
@@ -311,6 +305,7 @@ void Player::AbilitySword112() {
 
 void Player::AbilitySword120() {
 	// +20% life regeneration
+	stealLife = true;
 }
 
 void Player::AbilitySword122() {
@@ -374,7 +369,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if(playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 5.0f;
-			livesPlayer -= 3;
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
@@ -383,7 +377,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 5.0f;
-			livesPlayer -= 3;
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
@@ -392,14 +385,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 13.0f;
-			livesPlayer -= 8;
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
 		break;
 	case ColliderType::BULLET:
 		vida -= 7.0f;
-		livesPlayer -= 4;
 		damage->emiting = true;
 		break;
 	}

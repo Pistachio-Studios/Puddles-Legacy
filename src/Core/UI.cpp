@@ -225,8 +225,8 @@ bool UI::Update(float dt)
 
 		//Health Bar
 		#pragma region HealthBar
-		int health = player->livesPlayer;
-		app->render->DrawRectangle({ 200, 80, 295 * health / 10, 20 }, 33, 187, 129, 255, true, false);
+		int health = player->vida;
+		app->render->DrawRectangle({ 200, 80, 295 * health / 15, 20 }, 33, 187, 129, 255, true, false);
 		#pragma endregion HealthBar
 
 		//Mana Bar

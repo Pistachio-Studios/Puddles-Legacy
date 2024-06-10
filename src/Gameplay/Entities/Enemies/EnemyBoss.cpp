@@ -266,6 +266,11 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 			app->audio->PlayFx(bossDamageFx);
 			bossDamage.Reset();
 
+			if (player->stealLife) {
+				player->vida += player->stealLifeRatio;
+				LOG("Player steal life %f", player->vida);
+			}
+
 			// TODO review this
 			bool bleedDamageDealt = false;
 			if (app->entityManager->GetPlayerEntity()->bleed) {
