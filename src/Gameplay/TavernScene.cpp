@@ -386,7 +386,10 @@ void TavernScene::CreatePotion()
 		requiredHawthornQuantity = 2;
 		break;
 	case 4: // OblitiusPotion
-		// TODO: Añadir lógica si hay ingredientes específicos para OblitiusPotion
+		canCraft = CheckIngredient(playerInventory, "Hepatica Plant", 3) && CheckIngredient(playerInventory, "Comfrey Plant", 2);
+		potionName = "Oblitius Potion";
+		requiredHepaticQuantity = 3;
+		requiredComfreyQuantity = 2;
 		break;
 	}
 
