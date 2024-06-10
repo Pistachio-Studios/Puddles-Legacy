@@ -20,6 +20,7 @@
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
 #include "Core/Map.h"
+#include "Core/Lighting.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
@@ -60,6 +61,7 @@ bool TutorialScene::Enter()
 	//app->physics->Enable();
 	app->map->Enable();
 	app->entityManager->Enable();
+	app->lighting->Enable();
 
 	app->render->camera.target = player;
 	app->render->camera.useInterpolation = true;
@@ -67,6 +69,8 @@ bool TutorialScene::Enter()
 	app->render->camera.offset = { 0,0 };
 
 	playingTime = new Timer();
+
+	app->lighting->SetAmbientLight({ 60, 50, 70, 255 });
 
 	//Get the size of the texture
 	//app->tex->GetSize(img, texW, texH);

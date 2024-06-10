@@ -56,8 +56,8 @@ bool PlayerPointAndClick::Start()
     effects->emiting = true;
     app->particleManager->AddGenerator(effects);
 
-    mouseNoSelection = app->tex->Load("Assets/Textures/cursors/kenney_cursor-pack/Vector/Basic/gauntlet_open.svg");
-    mouseSelection = app->tex->Load("Assets/Textures/cursors/kenney_cursor-pack/Vector/Basic/gauntlet_default.svg");
+    mouseNoSelection = app->tex->Load("Assets/Textures/cursors/kenney_cursor-pack/Vector/Basic/hand_open.svg");
+    mouseSelection = app->tex->Load("Assets/Textures/cursors/kenney_cursor-pack/Vector/Basic/hand_point.svg");
 
     return true;
 }

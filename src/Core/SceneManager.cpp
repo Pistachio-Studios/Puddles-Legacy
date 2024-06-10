@@ -268,6 +268,9 @@ void SceneManager::ChangeScene(SString sceneName)
     Scene* newScene = FindScene(sceneName);
     if (newScene != nullptr){
         if (app->physics->DestroyAllWorldBodies()) {
+            app->lighting->RemoveAllLights();
+            app->lighting->SetAmbientLight({255, 255, 255, 255});
+
             prevScene = currentScene;
             currentScene = newScene;
         };

@@ -23,7 +23,8 @@ bool LightingDemo::Enter()
     {
         int x = rand() % 720;
         int y = rand() % 720;
-        int radius = rand() % 100;
+        //float radius = rand() % 100;
+        float radius = 1.0f;
         uint8 r = rand() % 256;
         uint8 g = rand() % 256;
         uint8 b = rand() % 256;

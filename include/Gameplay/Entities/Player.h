@@ -30,6 +30,7 @@ struct SDL_Texture;
 class Sword;
 class Staff;
 class ParticleGenerator;
+class Light;
 
 enum PlayerClass
 {
@@ -311,6 +312,8 @@ public:
 	//Cheats
 	bool godMode = false;
 	bool ghostMode = false;
+
+	Light* playerLight = nullptr;
 };
 
 #endif // __PLAYER_H__

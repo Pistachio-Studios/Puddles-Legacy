@@ -11,6 +11,7 @@
 #include "Core/SceneManager.h"
 #include "Core/Window.h"
 #include "Core/ParticleManager.h"
+#include "Core/Lighting.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -97,11 +98,18 @@ bool Player::Start() {
 	damage->color = { 255, 0, 0, 128 };
 	app->particleManager->AddGenerator(damage);
 
+	playerLight = app->lighting->AddLight({ position.x, position.y });
+	playerLight->radius = 5;
+	playerLight->color = { 255, 191, 87, 255 };
+
+
 	return true;
 }
 
 bool Player::Update(float dt)
 {
+	playerLight->position = { position.x, position.y };
+
 	//CHEATS
 	if (godMode) {
 		vida = 10.0f;
