@@ -287,17 +287,12 @@ bool Player::LoadState(pugi::xml_node& node)
 	this->level = node.child("player").attribute("Level").as_int();
 
 	Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
-	playerInventory->items.clear();
 
 	for (pugi::xml_node itemNode = playerNode.child("item"); itemNode; itemNode = itemNode.next_sibling("item")) {
 		std::string itemName = itemNode.attribute("name").as_string();
 		int itemQuantity = itemNode.attribute("quantity").as_int();
 
-		Item* newItem = nullptr;
-		newItem->name = itemName; 
-		newItem->quantity = itemQuantity;
-
-		playerInventory->items.push_back(newItem); 
+		app->entityManager->GetPlayerEntity()->inventory.AddNItems(itemName, itemQuantity);
 	}
 
 	return true; 
