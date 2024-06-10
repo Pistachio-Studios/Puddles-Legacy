@@ -256,6 +256,7 @@ public:
 
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
+	SDL_Texture* texture1 = NULL;
 
 	float vida = 15.0f;
 	float maxVida = 15.0f;

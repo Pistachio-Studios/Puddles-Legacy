@@ -11,7 +11,7 @@ Sword::Sword() : Entity(EntityType::PLAYER)
 	name.Create("Sword");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 20, bodyType::KINEMATIC);
-	texture = app->tex->Load("Assets/Textures/sword.png");
+	texture = app->tex->Load("Assets/Textures/espadatest.png");
 }
 
 Sword::~Sword() {
