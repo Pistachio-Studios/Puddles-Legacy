@@ -44,17 +44,11 @@ public:
 
 	void RenderGUI();
 
-	void ResetPotionPopUps();
-	void ManagePotionCreation(Inventory* playerInventory, SDL_Texture* craftableTex, SDL_Texture* notCraftableTex, GuiControlPopUp*& craftablePopup, GuiControlPopUp*& notCraftablePopup);
-	bool CheckIngredient(Inventory* playerInventory, const std::string& ingredientName, int requiredQuantity);
-	void CreatePotion();
-	void RemoveIngredient(Inventory* playerInventory, const std::string& ingredientName, int quantity);
 public:
 	bool winCondition = false;
 	Player* player;
 
 	PlayerPointAndClick* playerPointAndClick;
-	PhysBody* cauldronTrigger; 
 
 private:
 	SDL_Texture* img;
@@ -86,6 +80,7 @@ private:
 	GuiControlButton* gcSettings;
 	GuiControlButton* gcBackToTitle;
 	GuiControlButton* gcExit;
+	GuiControlButton* cauldronOpen;
 
 	GuiControlButton* cauldronSelectExit;
 	GuiControlButton* cauldronExit;
@@ -110,6 +105,7 @@ private:
 	bool cauldronExitPressed = false;
 	bool cauldronCreatePressed = false;
 	bool potionCreatePressed = false;
+	bool cauldronIsOpened = false;
 
 	int type = 1;
 

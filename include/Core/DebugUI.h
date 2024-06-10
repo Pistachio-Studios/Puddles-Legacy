@@ -38,8 +38,6 @@ public:
 
     bool particleManagerGenerators = false;
 
-    bool physicsInfo = false;
-
     bool renderLighting = false;
     bool renderInfo = false;
 

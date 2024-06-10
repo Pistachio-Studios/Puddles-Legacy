@@ -156,20 +156,6 @@ bool ForestScene::Enter()
 			plant->Start();
 		}
 
-		if (plantType == "WitchHazelPlant") {
-			Plant* plant = new WitchHazelPlant("Witch Hazel Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
-			app->entityManager->AddEntity(plant);
-			plant->parameters = plantNode;
-			plant->Start();
-		}
-
-		if (plantType == "HawthornPlant") {
-			Plant* plant = new HawthornPlant("Hawthorn Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
-			app->entityManager->AddEntity(plant);
-			plant->parameters = plantNode;
-			plant->Start();
-		}
-
 	}
 
 	//app->physics->Enable();

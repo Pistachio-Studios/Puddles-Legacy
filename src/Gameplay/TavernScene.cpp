@@ -77,7 +77,7 @@ bool TavernScene::Enter()
 
 	app->render->camera.target = playerPointAndClick;
 	app->render->camera.useInterpolation = true;
-	app->render->camera.lerpSpeed = 2.0f;
+	app->render->camera.lerpSpeed = 4.0f;
 	app->render->camera.offset = { 0,0 };
 
 	playingTime = new Timer();
@@ -109,8 +109,9 @@ bool TavernScene::Enter()
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
-	cauldronTrigger = app->physics->CreateRectangle(500, 700, 100, 100, bodyType::STATIC);
-	cauldronTrigger->ctype = ColliderType::CAULDRON;
+	cauldronOpen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "Open", { 500, 600, 150, 50 }, this);
+	cauldronOpen->SetObserver(this);
+	cauldronOpen->state = GuiControlState::DISABLED; 
 
 	cauldronTex = app->tex->Load("Assets/Textures/Potions/Cauldron/Cauldron.png");
 	cauldronSelectTex = app->tex->Load("Assets/Textures/Potions/Cauldron/CauldronSelect.png");
@@ -164,10 +165,7 @@ bool TavernScene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 
-	if(playerPointAndClick->cauldronIsOpen) app->render->camera.lerpSpeed = 0.0f;
-	else app->render->camera.lerpSpeed = 2.0f;
-
-	if (playerPointAndClick->cauldronIsOpen && cauldron == nullptr) {
+	if (cauldronIsOpened && cauldron == nullptr) {
 		cauldron = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronTex);
 		cauldronExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
 		cauldronCreate = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Create", { (int)windowW / 2 + 320, (int)windowH / 2 + 350, 200, 50 }, this);
@@ -176,13 +174,11 @@ bool TavernScene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && cauldronSelect != nullptr) {
 		if (type >= 1 && type < 4) {
 			type++;
-			ResetPotionPopUps();
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && cauldronSelect != nullptr) {
 		if (type > 1 && type <= 4) {
 			type--;
-			ResetPotionPopUps();
 		}
 	}
 
@@ -192,7 +188,7 @@ bool TavernScene::Update(float dt)
 			app->guiManager->RemoveGuiControl(cauldronExit);
 			app->guiManager->RemoveGuiControl(cauldron);
 			cauldronExitPressed = false;
-			playerPointAndClick->cauldronIsOpen = false;
+			cauldronIsOpened = false;
 			cauldron = nullptr;
 		}
 
@@ -208,23 +204,122 @@ bool TavernScene::Update(float dt)
 
 			potionCreatePressed = false;
 		}
-
 		Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory; 
 		Item* potion; 
 		if (cauldronSelect != nullptr) {
-			ResetPotionPopUps();
 			switch (type) {
-			case 1:
-				ManagePotionCreation(playerInventory, CeleritaPotionTex, NotCeleritaPotionTex, CrafteableCeleritaPotion, NotCrafteableCeleritaPotion); 
+			case 1:	 
+				for (int i = 0; i < playerInventory->items.size(); i++)
+				{
+					potion = playerInventory->items[i];
+					if (potion->quantity >= 3)
+					{
+						if (CrafteableCeleritaPotion == nullptr)
+							CrafteableCeleritaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, CeleritaPotionTex);
+					}
+					else if (potion->quantity < 3) {
+						if (NotCrafteableCeleritaPotion == nullptr)
+							NotCrafteableCeleritaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, NotCeleritaPotionTex);
+					}
+				}
+
+				app->guiManager->RemoveGuiControl(CrafteableEtherPotion);
+				CrafteableEtherPotion = nullptr;
+				app->guiManager->RemoveGuiControl(CrafteableVitaPotion);
+				CrafteableVitaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(CrafteableOblitiusPotion);
+				CrafteableOblitiusPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableEtherPotion);
+				NotCrafteableEtherPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableVitaPotion);
+				NotCrafteableVitaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableOblitiusPotion);
+				NotCrafteableOblitiusPotion = nullptr;
 				break;
 			case 2:
-				ManagePotionCreation(playerInventory, EtherPotionTex, NotEtherPotionTex, CrafteableEtherPotion, NotCrafteableEtherPotion); 
+				for (int i = 0; i < playerInventory->items.size(); i++)
+				{
+					potion = playerInventory->items[i];
+					if (potion->quantity >= 3)
+					{
+						if (CrafteableEtherPotion == nullptr)
+							CrafteableEtherPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, EtherPotionTex);
+					}
+					else if (potion->quantity < 3) {
+						if (NotCrafteableEtherPotion == nullptr)
+							NotCrafteableEtherPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, NotEtherPotionTex);
+					}
+				}
+
+				app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion);
+				CrafteableCeleritaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(CrafteableVitaPotion);
+				CrafteableVitaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(CrafteableOblitiusPotion);
+				CrafteableOblitiusPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableCeleritaPotion);
+				NotCrafteableCeleritaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableVitaPotion);
+				NotCrafteableVitaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableOblitiusPotion);
+				NotCrafteableOblitiusPotion = nullptr;
 				break;
 			case 3:
-				ManagePotionCreation(playerInventory, VitaPotionTex, NotVitaPotionTex, CrafteableVitaPotion, NotCrafteableVitaPotion); 
+				for (int i = 0; i < playerInventory->items.size(); i++)
+				{
+					potion = playerInventory->items[i];
+					if (potion->quantity >= 3)
+					{
+						if (CrafteableVitaPotion == nullptr)
+							CrafteableVitaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, VitaPotionTex);
+					}
+					else if (potion->quantity < 3) {
+						if (NotCrafteableVitaPotion == nullptr)
+							NotCrafteableVitaPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, NotVitaPotionTex);
+					}
+				}
+
+				app->guiManager->RemoveGuiControl(CrafteableEtherPotion);
+				CrafteableEtherPotion = nullptr;
+				app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion);
+				CrafteableCeleritaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(CrafteableOblitiusPotion);
+				CrafteableOblitiusPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableEtherPotion);
+				NotCrafteableEtherPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableCeleritaPotion);
+				NotCrafteableCeleritaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableOblitiusPotion);
+				NotCrafteableOblitiusPotion = nullptr;
+
 				break;
 			case 4:
-				ManagePotionCreation(playerInventory, OblitiusPotionTex, NotOblitiusPotionTex, CrafteableOblitiusPotion, NotCrafteableOblitiusPotion); 
+				for (int i = 0; i < playerInventory->items.size(); i++)
+				{
+					potion = playerInventory->items[i];
+					if (potion->quantity >= 3)
+					{
+						if (CrafteableOblitiusPotion == nullptr)
+							CrafteableOblitiusPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, OblitiusPotionTex);
+					}
+					else if (potion->quantity < 3) {
+						if (NotCrafteableOblitiusPotion == nullptr)
+							NotCrafteableOblitiusPotion = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, NotOblitiusPotionTex);
+					}
+				}
+
+				app->guiManager->RemoveGuiControl(CrafteableEtherPotion);
+				CrafteableEtherPotion = nullptr;
+				app->guiManager->RemoveGuiControl(CrafteableVitaPotion);
+				CrafteableVitaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion);
+				CrafteableCeleritaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableEtherPotion);
+				NotCrafteableEtherPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableVitaPotion);
+				NotCrafteableVitaPotion = nullptr;
+				app->guiManager->RemoveGuiControl(NotCrafteableCeleritaPotion);
+				NotCrafteableCeleritaPotion = nullptr;
 				break;
 			}
 		}
@@ -235,11 +330,26 @@ bool TavernScene::Update(float dt)
 			app->guiManager->RemoveGuiControl(potionCreateButton);
 			app->tex->UnLoad(currentPotion);
 
-			ResetPotionPopUps();
-
+			app->guiManager->RemoveGuiControl(CrafteableEtherPotion);
+			CrafteableEtherPotion = nullptr;
+			app->guiManager->RemoveGuiControl(CrafteableVitaPotion);
+			CrafteableVitaPotion = nullptr;
+			app->guiManager->RemoveGuiControl(CrafteableOblitiusPotion);
+			CrafteableOblitiusPotion = nullptr;
+			app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion);
+			CrafteableCeleritaPotion = nullptr;
+			app->guiManager->RemoveGuiControl(NotCrafteableEtherPotion);
+			NotCrafteableEtherPotion = nullptr;
+			app->guiManager->RemoveGuiControl(NotCrafteableVitaPotion);
+			NotCrafteableVitaPotion = nullptr;
+			app->guiManager->RemoveGuiControl(NotCrafteableOblitiusPotion);
+			NotCrafteableOblitiusPotion = nullptr;
+			app->guiManager->RemoveGuiControl(NotCrafteableCeleritaPotion);
+			NotCrafteableCeleritaPotion = nullptr;
+				
+			cauldronIsOpened = false;
 			cauldronSelect = nullptr; 
 			selectExitPressed = false; 
-			playerPointAndClick->cauldronIsOpen = false;
 			
 		}
 
@@ -283,6 +393,7 @@ bool TavernScene::PostUpdate()
 			gcSave->state = GuiControlState::DISABLED;
 		}
 	}
+	cauldronOpen->state = GuiControlState::NORMAL;  
 	if(exitPressed)
 		ret = false;
 
@@ -347,6 +458,9 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 9:
 		exitPressed = true;
 	break;
+	case 16:
+		cauldronIsOpened = true;
+		break;
 	case 14:
 		if(cauldronSelect == nullptr) cauldronExitPressed = true;
 		break;
@@ -358,7 +472,6 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 15:
 		potionCreatePressed = true;
-		CreatePotion();
 		break;
 	case 10:
 		app->SaveRequest();
@@ -367,112 +480,4 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	return true;
-}
-
-void TavernScene::ResetPotionPopUps() {
-	app->guiManager->RemoveGuiControl(CrafteableCeleritaPotion);
-	CrafteableCeleritaPotion = nullptr;
-	app->guiManager->RemoveGuiControl(CrafteableEtherPotion);
-	CrafteableEtherPotion = nullptr;
-	app->guiManager->RemoveGuiControl(CrafteableVitaPotion);
-	CrafteableVitaPotion = nullptr;
-	app->guiManager->RemoveGuiControl(CrafteableOblitiusPotion);
-	CrafteableOblitiusPotion = nullptr;
-	app->guiManager->RemoveGuiControl(NotCrafteableCeleritaPotion);
-	NotCrafteableCeleritaPotion = nullptr;
-	app->guiManager->RemoveGuiControl(NotCrafteableEtherPotion);
-	NotCrafteableEtherPotion = nullptr;
-	app->guiManager->RemoveGuiControl(NotCrafteableVitaPotion);
-	NotCrafteableVitaPotion = nullptr;
-	app->guiManager->RemoveGuiControl(NotCrafteableOblitiusPotion);
-	NotCrafteableOblitiusPotion = nullptr;
-}
-
-void TavernScene::ManagePotionCreation(Inventory* playerInventory, SDL_Texture* craftableTex, SDL_Texture* notCraftableTex, GuiControlPopUp*& craftablePopup, GuiControlPopUp*& notCraftablePopup)
-{
-	bool hasEnoughIngredients = false;
-
-	switch (type) {
-	case 1: // CeleritaPotion
-		hasEnoughIngredients = CheckIngredient(playerInventory, "Arnica Plant", 1);
-		break;
-	case 2: // EtherPotion
-		//TODO: Segun lo que hay en el libro d las pociones, nos falta implementar las otras plantas...... (hay 4 o 5 plantas creo y tenemos 3) :) 
-		break;
-	case 3: // VitaPotion
-		hasEnoughIngredients = CheckIngredient(playerInventory, "Arnica Plant", 3);
-		break;
-	case 4: // OblitiusPotion
-		//TODO
-		break;
-	}
-
-	if (hasEnoughIngredients) {
-		if (craftablePopup == nullptr) { 
-			ResetPotionPopUps(); 
-			craftablePopup = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, craftableTex);
-		}
-	}
-	else {
-		if (notCraftablePopup == nullptr) {
-			ResetPotionPopUps();
-			notCraftablePopup = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, notCraftableTex);
-		}
-	}
-}
-
-bool TavernScene::CheckIngredient(Inventory* playerInventory, const std::string& ingredientName, int requiredQuantity)
-{
-	for (const auto& item : playerInventory->items) {
-		if (item->name == ingredientName && item->quantity >= requiredQuantity) {
-			return true;
-		}
-	}
-	return false;
-}
-
-void TavernScene::CreatePotion()
-{
-	Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
-
-	bool canCraft = false;
-	std::string potionName;
-	int requiredQuantity = 0;
-
-	switch (type) {
-	case 1: // CeleritaPotion
-		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 1);
-		potionName = "Celerita Potion";
-		requiredQuantity = 1;
-		break;
-	case 2: // EtherPotion
-		//TODO: Añadir lógica si hay ingredientes específicos para EtherPotion
-		break;
-	case 3: // VitaPotion
-		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 3);
-		potionName = "Vita Potion";
-		requiredQuantity = 3;
-		break;
-	case 4: // OblitiusPotion
-		// TODO: Añadir lógica si hay ingredientes específicos para OblitiusPotion
-		break;
-	}
-
-	if (canCraft) {
-		player->inventory.AddItem(potionName); //TODO: Arreglar!! Porque no me esta sumando la cantidad de la pocion que he creado al darle al boton de accept??? Solo falta q funcione esto
-		RemoveIngredient(playerInventory, "Arnica Plant", requiredQuantity);
-	}
-}
-
-void TavernScene::RemoveIngredient(Inventory* playerInventory, const std::string& ingredientName, int quantity)
-{
-	for (auto& item : playerInventory->items) {
-		if (item->name == ingredientName) {
-			item->quantity -= quantity;
-			if (item->quantity < 0) {
-				item->quantity = 0; //Arreglar esto
-			}
-			return;
-		}
-	}
 }

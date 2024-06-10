@@ -49,6 +49,7 @@ public:
 
 	PhysBody* pbody;
 	PhysBody* npcSensor;
+	bool npcClick = false;
 
 	b2Vec2 mouseWorldPosition;
 

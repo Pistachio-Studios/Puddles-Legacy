@@ -8,8 +8,6 @@
 #include "Gameplay/Entities/Items/ArnicaPlant.h"
 #include "Gameplay/Entities/Items/HepaticaPlant.h"
 #include "Gameplay/Entities/Items/ComfreyPlant.h"
-#include "Gameplay/Entities/Items/WitchHazelPlant.h"
-#include "Gameplay/Entities/Items/HawthornPlant.h"
 #include "Gameplay/Entities/Items/VitaPotion.h"
 #include "Gameplay/Entities/Items/CeleritaPotion.h"
 #include "Gameplay/Entities/Items/EtherPotion.h"
@@ -110,11 +108,9 @@ public:
 	Inventory() {
 		// Plants
 		// TODO revisar descripciones 
-		items.push_back(new ArnicaPlant("Arnica Plant", 0, " Arreglar ------ Permite craftear la poción de cura"));
-		items.push_back(new HepaticaPlant("Hepatica Plant", 0, " Arreglar------ Permite craftear la poción de recuperación de energía"));
-		items.push_back(new ComfreyPlant("Comfrey Plant", 0, " Arreglar------ Permite craftear la poción de resetear árbol de habilidades"));
-		items.push_back(new WitchHazelPlant("Witch Hazel Plant", 0, " Arreglar------- Permite craftear la poción de resetear árbol de habilidades")); 
-		items.push_back(new HawthornPlant("Hawthorn Plant", 0, " Arreglar------- Permite craftear la poción de resetear árbol de habilidades"));
+		items.push_back(new ArnicaPlant("Arnica Plant", 0, "Permite craftear la poción de cura"));
+		items.push_back(new HepaticaPlant("Hepatica Plant", 0, "Permite craftear la poción de recuperación de energía"));
+		items.push_back(new ComfreyPlant("Comfrey Plant", 0, "Permite craftear la poción de resetear árbol de habilidades"));
 
 		// Potions
 		// TODO revisar descripciones 

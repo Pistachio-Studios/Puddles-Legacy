@@ -14,8 +14,6 @@
 #include "Gameplay/Entities/Items/ArnicaPlant.h"
 #include "Gameplay/Entities/Items/ComfreyPlant.h"
 #include "Gameplay/Entities/Items/HepaticaPlant.h"
-#include "Gameplay/Entities/Items/WitchHazelPlant.h"
-#include "Gameplay/Entities/Items/HawthornPlant.h"
 #include "Gameplay/Entities/Npcs/Loco.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
@@ -179,20 +177,6 @@ bool TutorialScene::Enter()
 
 		if (plantType == "ComfreyPlant") {
 			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
-			app->entityManager->AddEntity(plant);
-			plant->parameters = plantNode;
-			plant->Start();
-		}
-
-		if (plantType == "WitchHazelPlant") {
-			Plant* plant = new WitchHazelPlant("Witch Hazel Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
-			app->entityManager->AddEntity(plant);
-			plant->parameters = plantNode;
-			plant->Start();
-		}
-
-		if (plantType == "HawthornPlant") {
-			Plant* plant = new HawthornPlant("Hawthorn Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
 			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();

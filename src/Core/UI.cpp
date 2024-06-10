@@ -49,9 +49,9 @@ bool UI::Start() {
 
 	//Player UIGUI/
 	MenuPequeno = app->tex->Load("Assets/UI/GUI/MenuPequeno.PNG");
-	celeritaPotion = app->tex->Load("Assets/Textures/Potions/VeloPotion.png");
-	etherPotion = app->tex->Load("Assets/Textures/Potions/EnergyPotion.PNG");
-	oblitiusPotion = app->tex->Load("Assets/Textures/Potions/AbilityPotion.png");
+	celeritaPotion = app->tex->Load("Assets/Textures/Potions/EnergyPotion.png");
+	etherPotion = app->tex->Load("Assets/Textures/Potions/AbilityPotion.PNG");
+	oblitiusPotion = app->tex->Load("Assets/Textures/Potions/VeloPotion.png");
 	VitaPotion = app->tex->Load("Assets/Textures/Potions/HealPotion.png");
 
 	VidaBestiario = app->tex->Load("Assets/UI/GUI/VidaBestiario.PNG");
