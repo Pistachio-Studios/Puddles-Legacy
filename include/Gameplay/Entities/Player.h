@@ -267,7 +267,7 @@ public:
 	int bleedChance = 15; // 15% chance of bleeding
 
 	bool stealLife = false;
-	float stealLifeRatio = str * 0.1; // 10% of the damage dealt
+	float stealLifeRatio = strength * 0.1; // 10% of the damage dealt
 
 	// TODO add final stats
 	int level = 1;

@@ -231,8 +231,8 @@ void Player::DrawImGui()
 
 	ImGui::Text("Player level: %d", level);
 
-	ImGui::Text("Player Strength: %f", str);
-	ImGui::Text("Player Intelligence: %f", inte);
+	ImGui::Text("Player Strength: %f", strength);
+	ImGui::Text("Player Intelligence: %f", intelligence);
 
 	ImGui::Text("Blood: %s", bleed ? "true" : "false");
 	ImGui::Text("Bleed chance: %d", bleedChance);
@@ -287,7 +287,7 @@ bool Player::LoadState(pugi::xml_node& node)
 
 void Player::AbilitySword100() { // DONE
 	// Increase player strength +3
-	str += 13.0f;
+	strength += 13.0f;
 }
 
 void Player::AbilitySword110() { // DONE
@@ -319,7 +319,7 @@ void Player::AbilitySword123() {
 
 void Player::AbilityStaff100() { // DONE
 	// Increase player intelligence +3
-	inte = 17.0f;
+	intelligence = 17.0f;
 }
 
 void Player::AbilityStaff110() {
