@@ -197,6 +197,7 @@ bool TavernScene::Update(float dt)
 		}
 
 		if (cauldronCreatePressed && cauldronSelect == nullptr) {
+			app->guiManager->RemoveGuiControl(cauldronCreate);
 			cauldronSelect = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronSelectTex);
 			cauldronSelectExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
 			potionCreateButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Accept", { (int)windowW / 2 - 100, (int)windowH / 2 + 300, 200, 50 }, this);
@@ -205,7 +206,6 @@ bool TavernScene::Update(float dt)
 		}
 
 		if (potionCreatePressed && cauldronSelect != nullptr) {
-
 			potionCreatePressed = false;
 		}
 
@@ -394,16 +394,16 @@ void TavernScene::ManagePotionCreation(Inventory* playerInventory, SDL_Texture* 
 
 	switch (type) {
 	case 1: // CeleritaPotion
-		hasEnoughIngredients = CheckIngredient(playerInventory, "Arnica Plant", 1);
+		hasEnoughIngredients = CheckIngredient(playerInventory, "Arnica Plant", 1) && CheckIngredient(playerInventory, "Witch Hazel Plant", 4);
 		break;
 	case 2: // EtherPotion
-		//TODO: Segun lo que hay en el libro d las pociones, nos falta implementar las otras plantas...... (hay 4 o 5 plantas creo y tenemos 3) :) 
+		hasEnoughIngredients = CheckIngredient(playerInventory, "Comfrey Plant", 4) && CheckIngredient(playerInventory, "Hawthorn Plant", 1);
 		break;
 	case 3: // VitaPotion
-		hasEnoughIngredients = CheckIngredient(playerInventory, "Arnica Plant", 3);
+		hasEnoughIngredients = CheckIngredient(playerInventory, "Arnica Plant", 3) && CheckIngredient(playerInventory, "Hawthorn Plant", 2);
 		break;
 	case 4: // OblitiusPotion
-		//TODO
+		hasEnoughIngredients = CheckIngredient(playerInventory, "Hepatica Plant", 3) && CheckIngredient(playerInventory, "Comfrey Plant", 2);
 		break;
 	}
 
@@ -437,30 +437,56 @@ void TavernScene::CreatePotion()
 
 	bool canCraft = false;
 	std::string potionName;
-	int requiredQuantity = 0;
+	int requiredArnicaQuantity = 0; 
+	int requiredHepaticQuantity = 0; 
+	int requiredHawthornQuantity = 0;
+	int requiredWitchHazelQuantity = 0;
+	int requiredComfreyQuantity = 0;
 
 	switch (type) {
 	case 1: // CeleritaPotion
-		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 1);
+		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 1) && CheckIngredient(playerInventory, "Witch Hazel Plant", 4);
 		potionName = "Celerita Potion";
-		requiredQuantity = 1;
+		requiredArnicaQuantity = 1;
+		requiredWitchHazelQuantity = 4;
 		break;
 	case 2: // EtherPotion
-		//TODO: Añadir lógica si hay ingredientes específicos para EtherPotion
+		canCraft = CheckIngredient(playerInventory, "Comfrey Plant", 4) && CheckIngredient(playerInventory, "Hawthorn Plant", 1);
+		potionName = "Ether Potion";
+		requiredComfreyQuantity = 4;
+		requiredHawthornQuantity = 1; 
 		break;
 	case 3: // VitaPotion
-		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 3);
+		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 3) && CheckIngredient(playerInventory, "Hawthorn Plant", 2);
 		potionName = "Vita Potion";
-		requiredQuantity = 3;
+		requiredArnicaQuantity = 3;
+		requiredHawthornQuantity = 2;
 		break;
 	case 4: // OblitiusPotion
-		// TODO: Añadir lógica si hay ingredientes específicos para OblitiusPotion
+		canCraft = CheckIngredient(playerInventory, "Hepatica Plant", 3) && CheckIngredient(playerInventory, "Comfrey Plant", 2);
+		potionName = "Oblitius Potion";
+		requiredHepaticQuantity = 3;
+		requiredComfreyQuantity = 2;
 		break;
 	}
 
 	if (canCraft) {
-		player->inventory.AddItem(potionName); //TODO: Arreglar!! Porque no me esta sumando la cantidad de la pocion que he creado al darle al boton de accept??? Solo falta q funcione esto
-		RemoveIngredient(playerInventory, "Arnica Plant", requiredQuantity);
+		player->inventory.AddItem(potionName);
+		if (requiredArnicaQuantity > 0) { 
+			RemoveIngredient(playerInventory, "Arnica Plant", requiredArnicaQuantity);
+		}
+		if (requiredWitchHazelQuantity > 0) {
+			RemoveIngredient(playerInventory, "Witch Hazel Plant", requiredWitchHazelQuantity);
+		}
+		if (requiredHepaticQuantity > 0) {
+			RemoveIngredient(playerInventory, "Hepatica Plant", requiredHepaticQuantity);
+		}
+		if (requiredComfreyQuantity > 0) {
+			RemoveIngredient(playerInventory, "Comfrey Plant", requiredComfreyQuantity);
+		}
+		if (requiredHawthornQuantity > 0) {
+			RemoveIngredient(playerInventory, "Hawthorn Plant", requiredHawthornQuantity);
+		}
 	}
 }
 
