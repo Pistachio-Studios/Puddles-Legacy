@@ -238,6 +238,9 @@ void Player::DrawImGui()
 
 	ImGui::Text("Player Strength: %f", str);
 	ImGui::Text("Player Intelligence: %f", inte);
+
+	ImGui::Text("Blood: %s", bleed ? "true" : "false");
+	ImGui::Text("Bleed chance: %d", bleedChance);
 	
 	if (ImGui::Button("Add Level"))
 		level++;
@@ -315,6 +318,7 @@ void Player::AbilitySword122() {
 
 void Player::AbilitySword123() {
 	// Area sword attack 100% chance of bleed
+	// bleedChance = 100;
 }
 
 void Player::AbilityStaff100() { // DONE

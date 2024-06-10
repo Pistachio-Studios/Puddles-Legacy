@@ -259,6 +259,7 @@ public:
 	float def;
 
 	bool bleed = false;
+	int bleedChance = 15; // 15% chance of bleeding
 
 	// TODO add final stats
 	int level = 1;

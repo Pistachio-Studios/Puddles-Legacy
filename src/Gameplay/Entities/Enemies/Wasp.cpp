@@ -242,7 +242,7 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 			if (app->entityManager->GetPlayerEntity()->bleed) {
 				// 15% change to bleed
-				if (rand() % 100 < 15) {
+				if (rand() % 100 < player->bleedChance) {
 					// TODO add bleed effect
 					vida -= 1.0f;
 					LOG("Wasp Bleed! %f", vida);
