@@ -395,6 +395,312 @@
    </animation>
   </tile>
  </tileset>
+ <tileset firstgid="256" name="SabrinaCetroIdle" tilewidth="170" tileheight="256" tilecount="16" columns="16">
+  <image source="Sabrina/Cetro/SabrinaCetroIdle.png" width="2720" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+    <frame tileid="9" duration="100"/>
+    <frame tileid="10" duration="100"/>
+    <frame tileid="11" duration="100"/>
+    <frame tileid="12" duration="100"/>
+    <frame tileid="13" duration="100"/>
+    <frame tileid="14" duration="100"/>
+    <frame tileid="15" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="272" name="SabrinaEspadaIdle_1" tilewidth="180" tileheight="256" tilecount="4" columns="4">
+  <image source="Sabrina/Espada/SabrinaEspadaIdle_1.png" width="720" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="276" name="SabrinaEspadaCaminar_delante" tilewidth="190" tileheight="256" tilecount="9" columns="9">
+  <image source="Sabrina/Espada/SabrinaEspadaCaminar_delante.png" width="1710" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="285" name="SabrinaEspadaCaminar_derecha" tilewidth="180" tileheight="256" tilecount="8" columns="8">
+  <image source="Sabrina/Espada/SabrinaEspadaCaminar_derecha.png" width="1440" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="293" name="SabrinaEspadaCaminar_detras" tilewidth="200" tileheight="256" tilecount="7" columns="7">
+  <image source="Sabrina/Espada/SabrinaEspadaCaminar_detras.png" width="1400" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="300" name="SabrinaEspadaCaminar_izquierda" tilewidth="180" tileheight="256" tilecount="8" columns="8">
+  <image source="Sabrina/Espada/SabrinaEspadaCaminar_izquierda.png" width="1440" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="308" name="SabrinaEspadaDano" tilewidth="180" tileheight="256" tilecount="6" columns="6">
+  <image source="Sabrina/Espada/SabrinaEspadaDano.png" width="1080" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="314" name="SabrinaEspadaAtaque" tilewidth="310" tileheight="256" tilecount="9" columns="9">
+  <image source="Sabrina/Espada/SabrinaEspadaAtaque.png" width="2790" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="323" name="SabrinaEspadaDash" tilewidth="180" tileheight="256" tilecount="7" columns="7">
+  <image source="Sabrina/Espada/SabrinaEspadaDash.png" width="1260" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="330" name="SabrinaEspadaMuerte" tilewidth="240" tileheight="297" tilecount="11" columns="11">
+  <image source="Sabrina/Espada/SabrinaEspadaMuerte.png" width="2640" height="297"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+    <frame tileid="9" duration="100"/>
+    <frame tileid="10" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="341" name="SabrinaEspadaRecolectar" tilewidth="230" tileheight="256" tilecount="8" columns="8">
+  <image source="Sabrina/Espada/SabrinaEspadaRecolectar.png" width="1840" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="349" name="SabrinaCetroAtaque" tilewidth="310" tileheight="256" tilecount="9" columns="9">
+  <image source="Sabrina/Cetro/SabrinaCetroAtaque.png" width="2790" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="358" name="SabrinaCetroCaminar_delante" tilewidth="190" tileheight="256" tilecount="9" columns="9">
+  <image source="Sabrina/Cetro/SabrinaCetroCaminar_delante.png" width="1710" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="367" name="SabrinaCetroCaminar_derecha" tilewidth="180" tileheight="256" tilecount="8" columns="8">
+  <image source="Sabrina/Cetro/SabrinaCetroCaminar_derecha.png" width="1440" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="375" name="SabrinaCetroCaminar_detras" tilewidth="200" tileheight="256" tilecount="7" columns="7">
+  <image source="Sabrina/Cetro/SabrinaCetroCaminar_detras.png" width="1400" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="382" name="SabrinaCetroCaminar_izquierda" tilewidth="180" tileheight="256" tilecount="8" columns="8">
+  <image source="Sabrina/Cetro/SabrinaCetroCaminar_izquierda.png" width="1440" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="390" name="SabrinaCetroDano" tilewidth="180" tileheight="256" tilecount="6" columns="6">
+  <image source="Sabrina/Cetro/SabrinaCetroDano.png" width="1080" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="396" name="SabrinaCetroDash" tilewidth="180" tileheight="256" tilecount="7" columns="7">
+  <image source="Sabrina/Cetro/SabrinaCetroDash.png" width="1260" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="403" name="SabrinaCetroMuerte" tilewidth="240" tileheight="297" tilecount="11" columns="11">
+  <image source="Sabrina/Cetro/SabrinaCetroMuerte.png" width="2640" height="297"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+    <frame tileid="9" duration="100"/>
+    <frame tileid="10" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="414" name="SabrinaCetroRecolectar" tilewidth="230" tileheight="256" tilecount="8" columns="8">
+  <image source="Sabrina/Cetro/SabrinaCetroRecolectar.png" width="1840" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
  <layer id="1" name="Capa de patrones 1" width="30" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
