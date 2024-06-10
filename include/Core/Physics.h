@@ -49,6 +49,7 @@ enum class ColliderType {
 	LIMITS,
 	WIN,
 	NPC,
+	CAULDRON,
 	BUTTON,
 	UNKNOWN
 	// ..
@@ -106,6 +107,8 @@ public:
 	bool PreUpdate();
 	bool Update(float dt);
 	bool CleanUp();
+
+	void DrawImGui() override;
 
 	// Create basic physics objects
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bodyType type);

@@ -8,6 +8,7 @@
 #include "Core/Render.h"
 #include "Gameplay/Entities/Player.h"
 #include "Core/Window.h"
+#include "Core/DebugUI.h"
 
 #include <SDL_keycode.h>
 #include <box2d/b2_circle_shape.h>
@@ -433,6 +434,43 @@ bool Physics::CleanUp()
 	delete world;
 
 	return true;
+}
+
+void Physics::DrawImGui()
+{
+	if(app->debugUI->physicsInfo)
+	{
+		ImGui::Begin("Physics 2D");
+
+		ImGui::Text("Number of bodies: %d", world->GetBodyCount());
+		ImGui::Text("Number of contacts: %d", world->GetContactCount());
+		ImGui::Text("Number of joints: %d", world->GetJointCount());
+
+		ImGui::Separator();
+
+		if(ImGui::CollapsingHeader("Body List")){
+			int idx = 0;
+			// Iterate over all bodies
+			for (b2Body* b = world->GetBodyList(); b != nullptr; b = b->GetNext()) {
+				// Display body information
+				if (ImGui::TreeNode(b, "Body %d", idx))
+				{
+					ImGui::Text("Position: (%f, %f)", b->GetPosition().x, b->GetPosition().y);
+					ImGui::Text("Angle: %f", b->GetAngle());
+					ImGui::Text("Linear velocity: (%f, %f)", b->GetLinearVelocity().x, b->GetLinearVelocity().y);
+					ImGui::Text("Angular velocity: %f", b->GetAngularVelocity());
+					ImGui::Text("Mass: %f", b->GetMass());
+					ImGui::Text("Inertia: %f", b->GetInertia());
+					ImGui::Text("Is awake: %s", b->IsAwake() ? "Yes" : "No");
+
+					ImGui::TreePop();
+				}
+				idx++;
+			}
+		}
+
+		ImGui::End();
+	}
 }
 
 // Callback function to collisions with Box2D
