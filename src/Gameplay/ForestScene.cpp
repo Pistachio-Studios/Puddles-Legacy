@@ -15,6 +15,9 @@
 #include "Gameplay/Entities/Items/Button.h"
 #include "Gameplay/Entities/Items/Ball.h"
 #include "Gameplay/Entities/Items/Plant.h"
+#include "Gameplay/Entities/Enemies/EnemyBoss.h"
+#include "Gameplay/Entities/Enemies/Wasp.h"
+#include "Gameplay/Entities/Enemies/MiniSpider.h"
 #include "Utils/SString.h"
 #include "Utils/Timer.h"
 #include "Utils/Log.h"
@@ -51,34 +54,31 @@ bool ForestScene::Enter()
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
 	}
 
-	// Enemies
-	// TODO Load the enemies from the config file
-	/*
+	//Enemies
 	if (parameters.child("enemies").child("EnemyBoss")) {
 		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
 		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
-		enemyboss->Start();
+		enemyboss->Enable();
 	}
 
 	if (parameters.child("enemies"))
 	{
 		pugi::xml_node enemies = parameters.child("enemies");
 
-		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
+		for (pugi::xml_node MiniSpiderNode = enemies.child("MiniSpider"); MiniSpiderNode; MiniSpiderNode = MiniSpiderNode.next_sibling("MiniSpider"))
 		{
-			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
-			flyingenemy->parameters = FlyingEnemyNode;
-			flyingenemy->Start();
+			MiniSpider* minispider = (MiniSpider*)app->entityManager->CreateEntity(EntityType::MINISPIDER);
+			minispider->parameters = MiniSpiderNode;
+			minispider->Enable();
 		}
 
-		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
+		for (pugi::xml_node WaspNode = enemies.child("Wasp"); WaspNode; WaspNode = WaspNode.next_sibling("Wasp"))
 		{
-			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
-			centipidenemy->parameters = CentipideEnemyNode;
-			centipidenemy->Start();
+			Wasp* wasp = (Wasp*)app->entityManager->CreateEntity(EntityType::WASP);
+			wasp->parameters = WaspNode;
+			wasp->Enable();
 		}
 	}
-	*/
 
 	if (parameters.child("Npcs").child("loco")) {
 		Loco* loco = new Loco();
@@ -277,30 +277,6 @@ bool ForestScene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
-
-	//if (app->entityManager->GetPlayerEntity()->position.x <= 0 || app->render->camera.x <= 0) {
-
-	//	app->entityManager->GetPlayerEntity()->position.x = 0;
-	//	app->render->camera.x = 0;
-	//}
-
-	//if (app->entityManager->GetPlayerEntity()->position.x >= 5760 || app->render->camera.x >= 5760) {
-
-	//	app->entityManager->GetPlayerEntity()->position.x = 5760;
-	//	app->render->camera.x = 5760;
-	//}
-
-	//if (app->entityManager->GetPlayerEntity()->position.y <= 0 || app->render->camera.y <= 0) {
-
-	//	app->entityManager->GetPlayerEntity()->position.y = 0;
-	//	app->render->camera.x = 0;
-	//}
-
-	//if (app->entityManager->GetPlayerEntity()->position.y >= 5376 || app->render->camera.y >= 5376) {
-
-	//	app->entityManager->GetPlayerEntity()->position.y = 5376;
-	//	app->render->camera.x = 5376;
-	//}
 
 	//Cambios de escena sin collider
 	//Inicio a lvl1

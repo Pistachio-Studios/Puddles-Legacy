@@ -39251,7 +39251,7 @@
  <layer id="15" name="Piedras y Cristales" width="285" height="130">
   <properties>
    <property name="Draw" type="bool" value="true"/>
-   <property name="layer" type="int" value="1"/>
+   <property name="layer" type="int" value="3"/>
   </properties>
   <data>
    <tile/>
