@@ -11,6 +11,7 @@
 #include "Core/SceneManager.h"
 #include "Core/Window.h"
 #include "Core/ParticleManager.h"
+#include "Core/Audio.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -96,6 +97,13 @@ bool Player::Start() {
 	damage->opacityFade = 0.5f;
 	damage->color = { 255, 0, 0, 128 };
 	app->particleManager->AddGenerator(damage);
+
+	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
+	swordFx = app->audio->LoadFx(parameters.attribute("swordFx").as_string());
+	staffFx = app->audio->LoadFx(parameters.attribute("staffFx").as_string());
+	deathFx = app->audio->LoadFx(parameters.attribute("deathFx").as_string());
+	damageFx = app->audio->LoadFx(parameters.attribute("damageFx").as_string());
+	blockFx = app->audio->LoadFx(parameters.attribute("blockFx").as_string());
 
 	return true;
 }

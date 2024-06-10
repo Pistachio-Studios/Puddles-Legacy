@@ -208,6 +208,9 @@ public:
 
 	bool startTimer = true;
 	Timer timer;
+	
+	//SoundFX	
+	int stepsFx, swordFx, staffFx, damageFx, deathFx, blockFx;
 
 	Player();
 	

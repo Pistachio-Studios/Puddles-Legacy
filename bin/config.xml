@@ -74,7 +74,13 @@
 			<menu FxPath="Assets/Audio/Fx/UI/UIButton.ogg" />
 			<map path="Assets/Maps/Tutorial-Level/" name="Playa_tutorial.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
+			<player x="672" y="2032" texturepath="Assets/Textures/Player.png"
+              stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg"
+              swordFx="Assets/Audio/Fx/Player/SwordSlash.ogg"
+              staffFx="Assets/Audio/Fx/Player/FireStaff.ogg"
+              deathFx="Assets/Audio/Fx/Player/Death.ogg"
+              damageFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg"
+							blockFx="Assets/Audio/Fx/Player/Block.ogg"/>
 			<enemies>
 				<EnemyBoss x="300" y="1800" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
 				<MiniSpider x="800" y="2050" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />

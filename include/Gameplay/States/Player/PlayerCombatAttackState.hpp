@@ -68,13 +68,17 @@ public:
                 b2Vec2 swordPos = { playerPos.x + (float)cos(playerLookingAngle + attackValue * DEGTORAD) * radius, playerPos.y + (float)sin(playerLookingAngle + attackValue * DEGTORAD) * radius };
                 player->swordEntity->pbody->body->SetTransform(swordPos, playerLookingAngle + attackValue * DEGTORAD);
                 attackValue += dt / 1000 * attackSpeed;
+                app->audio->PlayFx(player->swordFx);
+
                 if(player->mana > 5.0f and attacking == false)player->mana -= 5.0f;
                 attacking = true;
+
             }
             else
             {
                 StateMachineReference->ChangeState("idle");
             }
+
         }
         else if(player->currentClass == PlayerClass::WIZARD and player->mana > 10.0f)
         {
@@ -92,16 +96,21 @@ public:
                     firstSpell = false;
                     if(player->mana > 10.0f)player->mana -= 10.0f;
                 }
+                app->audio->PlayFx(player->staffFx);
+
+
             }
             else if(spellTimer.ReadSec() > 5)
             {
                 StateMachineReference->ChangeState("idle");
             }
+
         }
         else
         {
             StateMachineReference->ChangeState("idle");
         }
+        
     }
     inline void Exit() override
     {
