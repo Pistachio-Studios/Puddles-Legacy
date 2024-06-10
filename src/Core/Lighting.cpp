@@ -16,7 +16,7 @@ void Light::Draw()
     SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_ADD);
     SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
     SDL_SetTextureAlphaMod(texture, color.a);
-    app->render->DrawTexture(texture, position.x, position.y, NULL);
+    app->render->DrawTextureLegacy(texture, position.x, position.y, NULL, 1.0f, 0.0f, radius, SDL_FLIP_NONE, INT_MAX, INT_MAX, false);
 }
 
 Lighting::Lighting() : Module()
@@ -49,10 +49,7 @@ bool Lighting::Start()
     LOG("Creating Lighting");
     lightTexture = app->tex->Load("Assets/Textures/light.png"); //MEJOR CARGAR ESTO DESDE EL CONFIG!!!
 
-    ambientLight = { 60, 50, 70, 255 };
-    //ambientLight = { 0, 0, 0, 255 };
-
-    AddLight({600,2000}, 0, {255,255,255,255});
+    ambientLight = { 255, 255, 255, 255 };
     
     return true;
 }
@@ -70,19 +67,8 @@ bool Lighting::PostUpdate()
 
 bool Lighting::Update(float dt)
 {
-    // Save the original render target
-    SDL_Texture* originalTarget;
-    originalTarget = SDL_GetRenderTarget(app->render->renderer);
-
-    // Get the window size
-    int windowWidth, windowHeight;
-    SDL_GetWindowSize(app->win->window, &windowWidth, &windowHeight);
-
-    // Create a texture with the window size
-    SDL_Texture* lightingTarget = SDL_CreateTexture(app->render->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, windowWidth, windowHeight);
-
     // Set the render target to the new texture
-    SDL_SetRenderTarget(app->render->renderer, lightingTarget);
+    SDL_SetRenderTarget(app->render->renderer, app->render->lightingTarget);
 
     // Set the color you want to multiply with
     SDL_SetRenderDrawColor(app->render->renderer, ambientLight.r, ambientLight.g, ambientLight.b, ambientLight.a);
@@ -104,21 +90,7 @@ bool Lighting::Update(float dt)
         }
     }
 
-    SDL_SetRenderTarget(app->render->renderer, originalTarget);
-
-    // Set the blend mode to multiply the colors
-    SDL_SetTextureBlendMode(lightingTarget, SDL_BLENDMODE_MUL); //o SDL_BLENDMODE_MOD
-
-    // Draw the lightingTarget
-    SDL_RenderCopy(app->render->renderer, lightingTarget, NULL, NULL);
-
-    SDL_DestroyTexture(lightingTarget);
-    //SDL_DestroyTexture(originalTarget);
-
-    // Reset the blend mode to its default value
-    SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
-
-    SDL_DestroyTexture(originalTarget);
+    SDL_SetRenderTarget(app->render->renderer, NULL);
 
     return true;
 }

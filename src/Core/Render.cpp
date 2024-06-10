@@ -96,6 +96,9 @@ bool Render::Start()
 
 	SDL_SetRenderTarget(renderer, NULL);
 
+	lightingTarget = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, camera.w, camera.h);
+    SDL_SetTextureBlendMode(lightingTarget, SDL_BLENDMODE_MUL); // o SDL_BLENDMODE_MOD
+
 	return true;
 }
 
@@ -151,9 +154,18 @@ bool Render::Update(float dt)
 		}
 	}
 
-	// Draw overlay
+
+	// ------DrawLighting------- //
+
+    // Draw the lightingTarget
+    SDL_RenderCopy(renderer, lightingTarget, NULL, NULL);
+
+	// Reset the blend mode to its default value
+    SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+
+
+	// ------Draw overlay------- //
 	SDL_RenderCopy(renderer, overlayTarget, NULL, NULL);
-	
 
 	return true;
 }
@@ -306,11 +318,11 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_Rect* section, 
 	return ret;
 }
 
-bool Render::DrawTextureLegacy(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, double angle, float size, SDL_RendererFlip flip, int pivotX, int pivotY)
+bool Render::DrawTextureLegacy(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, double angle, float size, SDL_RendererFlip flip, int pivotX, int pivotY, bool overlayTarget)
 {
 	bool ret = true;
 
-	SDL_SetRenderTarget(app->render->renderer, app->render->overlayTarget);
+	if(overlayTarget)SDL_SetRenderTarget(app->render->renderer, app->render->overlayTarget);
 
 	uint scale = app->win->GetScale();
 
@@ -346,7 +358,7 @@ bool Render::DrawTextureLegacy(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 		ret = false;
 	}
 
-	SDL_SetRenderTarget(app->render->renderer, NULL);
+	if(overlayTarget)SDL_SetRenderTarget(app->render->renderer, NULL);
 
 	return ret;
 }

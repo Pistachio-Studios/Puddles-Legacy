@@ -90,7 +90,7 @@ public:
 
 	// Drawing
 	bool DrawTexture(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, float size = 1.0f, uint layer = 1, SDL_RendererFlip flip = SDL_FLIP_NONE, int pivotX = INT_MAX, int pivotY = INT_MAX);
-	bool DrawTextureLegacy(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, float size = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE, int pivotX = INT_MAX, int pivotY = INT_MAX);
+	bool DrawTextureLegacy(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, float size = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE, int pivotX = INT_MAX, int pivotY = INT_MAX, bool overlayTarget = true);
 	bool DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool filled = true, bool useCamera = true) const;
 	bool DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 	bool DrawCircle(int x1, int y1, int redius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
@@ -135,6 +135,7 @@ public:
 
 	std::vector <Sprite> sprites;
 
+	SDL_Texture* lightingTarget;
 	SDL_Texture* overlayTarget;
 
 	bool showPivots = false;

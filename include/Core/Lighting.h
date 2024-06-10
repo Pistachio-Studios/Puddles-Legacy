@@ -14,6 +14,7 @@ class Light
 	public: //cambiar a privado en algun momento
 	bool active;
 	iPoint position;
+	float radius = 1.0f;
 	SDL_Color color;
 	SDL_Texture* texture;
 };
