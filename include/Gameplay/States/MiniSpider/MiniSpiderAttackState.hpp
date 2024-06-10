@@ -6,6 +6,8 @@
 #include "Utils/SString.h"
 #include "Utils/Defs.h"
 #include "Gameplay/Entities/Player.h"
+#include "Core/App.h"
+#include "Core/Audio.h"
 
 class Player;
 class MiniSpiderAttackState : public State<MiniSpider> {
@@ -34,6 +36,7 @@ public:
         //Attack
         if (minispider->spiderAttack.GetCurrentFrameCount() == 5 && PIXEL_TO_METERS(player->position.DistanceTo(minispider->position)) < 2.0f) {
             player->vida -= minispider->dano;
+            app->audio->PlayFx(player->damageFx);
         }
 
         //Sound

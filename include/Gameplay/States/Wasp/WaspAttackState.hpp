@@ -6,6 +6,8 @@
 #include "Utils/SString.h"
 #include "Utils/Defs.h"
 #include "Gameplay/Entities/Player.h"
+#include "Core/App.h"
+#include "Core/Audio.h"
 
 class Player;
 class WaspAttackState : public State<Wasp> {
@@ -40,6 +42,7 @@ public:
             wasp->attackMovement(wasp->force);
             if (PIXEL_TO_METERS(player->position.DistanceTo(wasp->position)) < 2.0f) {
                 player->vida -= wasp->dano;
+                app->audio->PlayFx(player->damageFx);
                 wasp->vida += wasp->dano;
             }
         }

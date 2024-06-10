@@ -6,6 +6,8 @@
 #include "Utils/SString.h"
 #include "Utils/Defs.h"
 #include "Gameplay/Entities/Player.h"
+#include "Core/App.h"
+#include "Core/Audio.h"
 
 class Player;
 class EnemyBossBodyAttackState : public State<EnemyBoss> {
@@ -32,6 +34,7 @@ public:
 
         if (enemyboss->bossBodyAttack.GetCurrentFrameCount() == 5 && PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 3.0f) {
             player->vida -= enemyboss->dano;
+            app->audio->PlayFx(player->damageFx);
         }
 
         if (enemyboss->bossBodyAttack.GetCurrentFrameCount() >= 8) {
