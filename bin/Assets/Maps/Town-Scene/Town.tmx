@@ -6440,7 +6440,7 @@
  <layer id="6" name="Capa-2" width="45" height="36">
   <properties>
    <property name="Draw" type="bool" value="true"/>
-   <property name="layer" type="int" value="1"/>
+   <property name="layer" type="int" value="3"/>
   </properties>
   <data>
    <tile/>
