@@ -96,7 +96,7 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	movementFSM->Update(dt);
-	combatFSM->Update(dt);
+	combatFSM->Update(dt); 
 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
