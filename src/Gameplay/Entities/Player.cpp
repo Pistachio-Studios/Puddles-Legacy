@@ -215,7 +215,8 @@ void Player::DrawImGui()
 
 	ImGui::Text("Player Position: %d, %d", position.x, position.y);
 	ImGui::Text("Player Lives: %d", livesPlayer);
-	ImGui::Text("Player Mana: %d", mana);
+	ImGui::Text("Player Mana: %f", mana);
+	ImGui::Text("Player Mana Regeneration: %f", manaRegeneration);
 	ImGui::Text("Player Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
@@ -340,6 +341,7 @@ void Player::AbilityStaff112() {
 
 void Player::AbilityStaff120() {
 	// +15% energy regeneration
+	manaRegeneration = 5.0f;
 }
 
 void Player::AbilityStaff122() {

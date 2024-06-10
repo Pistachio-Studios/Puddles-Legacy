@@ -290,6 +290,7 @@ public:
 	ParticleGenerator* damage = nullptr;
 
 	float mana = 100.0f;
+	float manaRegeneration = 2.0f; // 2 mana per second
 	uint livesPlayer = 10;
 	int totalLivesPlayer;
 	bool deadPlayer = false;
