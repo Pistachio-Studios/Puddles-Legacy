@@ -114,7 +114,7 @@ bool Button::Update(float dt)
 			break;
 		}
 	}
-	app->render->DrawTexture(texturaActiva, position.x-44, position.y-50, 0, 1.0f);
+	app->render->DrawTexture(texturaActiva, position.x-44, position.y-50, 0, 1.0f, 0.0f, 1.0f, 1);
 
 	return true;
 }
