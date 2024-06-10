@@ -6,6 +6,7 @@
 #include "Core/ParticleManager.h"
 #include "Core/Textures.h"
 #include "Core/Render.h"
+#include "Utils/Log.h"
 #include <box2d/b2_math.h>
 #include <box2d/b2_body.h>
 #include <box2d/b2_fixture.h>

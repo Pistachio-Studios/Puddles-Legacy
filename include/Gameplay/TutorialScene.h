@@ -4,9 +4,6 @@
 #include "Core/GuiControlLabel.h"
 #include "Core/Module.h"
 #include "Gameplay/Entities/Player.h"
-#include "Gameplay/Entities/Enemies/EnemyBoss.h"
-#include "Gameplay/Entities/Enemies/MiniSpider.h"
-#include "Gameplay/Entities/Enemies/Wasp.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
 #include "Gameplay/Scene.h"
@@ -48,9 +45,6 @@ public:
 public:
 	bool winCondition = false;
 	Player* player;
-	EnemyBoss* enemyboss;
-	MiniSpider* minispider;
-	Wasp* wasp;
 
 private:
 	SDL_Texture* img;

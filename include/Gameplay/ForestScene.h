@@ -6,6 +6,9 @@
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
 #include "Gameplay/Entities/Player.h"
+#include "Gameplay/Entities/Enemies/EnemyBoss.h"
+#include "Gameplay/Entities/Enemies/MiniSpider.h"
+#include "Gameplay/Entities/Enemies/Wasp.h"
 #include "Gameplay/Scene.h"
 
 struct SDL_Texture;
@@ -46,6 +49,9 @@ public:
 public:
 	bool winCondition = false;
 	Player* player;
+	EnemyBoss* enemyboss;
+	MiniSpider* minispider;
+	Wasp* wasp;
 
 private:
 	float textPosX, textPosY = 0;
