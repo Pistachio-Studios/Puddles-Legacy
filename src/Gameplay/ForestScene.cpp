@@ -256,6 +256,11 @@ bool ForestScene::Update(float dt)
 		player->pbody->body->SetTransform({ 673,295 }, 0);
 	}
 
+	if (player->deadPlayer) {
+		app->sceneManager->ChangeScene("tavernscene");
+		player->vida = player->maxVida;
+	}
+
 	return true;
 }
 
