@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="285" height="130" tilewidth="128" tileheight="128" infinite="0" nextlayerid="16" nextobjectid="471">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="285" height="130" tilewidth="128" tileheight="128" infinite="0" nextlayerid="16" nextobjectid="473">
  <tileset firstgid="1" name="Pueblo" tilewidth="128" tileheight="128" tilecount="480" columns="30">
   <image source="tiles_pueblo.png" width="3840" height="2160"/>
  </tileset>
  <tileset firstgid="481" name="Bosque_assets" tilewidth="128" tileheight="128" tilecount="688" columns="43">
   <image source="Arbol_assets con hierba.PNG" width="5508" height="2053"/>
+  <tile id="431">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="432">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="433">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="434">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
   <tile id="440">
    <properties>
     <property name="pivotY" type="int" value="5876"/>
@@ -27,22 +47,42 @@
   </tile>
   <tile id="444">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="445">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="446">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="447">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
+   </properties>
+  </tile>
+  <tile id="474">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="475">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="476">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="477">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
    </properties>
   </tile>
   <tile id="483">
@@ -67,22 +107,42 @@
   </tile>
   <tile id="487">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="488">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="489">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="490">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
+   </properties>
+  </tile>
+  <tile id="517">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="518">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="519">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="520">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
    </properties>
   </tile>
   <tile id="526">
@@ -107,22 +167,42 @@
   </tile>
   <tile id="530">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="531">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="532">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="533">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
+   </properties>
+  </tile>
+  <tile id="560">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="561">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="562">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="563">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
    </properties>
   </tile>
   <tile id="569">
@@ -147,22 +227,42 @@
   </tile>
   <tile id="573">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="574">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="575">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="576">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
+   </properties>
+  </tile>
+  <tile id="603">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="604">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="605">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="606">
+   <properties>
+    <property name="pivotY" type="int" value="0"/>
    </properties>
   </tile>
   <tile id="612">
@@ -187,22 +287,22 @@
   </tile>
   <tile id="616">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="617">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="618">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
   <tile id="619">
    <properties>
-    <property name="pivotY" type="int" value="5890"/>
+    <property name="pivotY" type="int" value="5876"/>
    </properties>
   </tile>
  </tileset>
@@ -64158,10 +64258,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="912"/>
+   <tile gid="913"/>
+   <tile gid="914"/>
+   <tile gid="915"/>
    <tile/>
    <tile/>
    <tile/>
@@ -64443,10 +64543,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="955"/>
+   <tile gid="956"/>
+   <tile gid="957"/>
+   <tile gid="958"/>
    <tile/>
    <tile/>
    <tile/>
@@ -64728,10 +64828,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="998"/>
+   <tile gid="999"/>
+   <tile gid="1000"/>
+   <tile gid="1001"/>
    <tile/>
    <tile/>
    <tile/>
@@ -65013,10 +65113,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1041"/>
+   <tile gid="1042"/>
+   <tile gid="1043"/>
+   <tile gid="1044"/>
    <tile/>
    <tile/>
    <tile/>
@@ -65298,10 +65398,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1084"/>
+   <tile gid="1085"/>
+   <tile gid="1086"/>
+   <tile gid="1087"/>
    <tile/>
    <tile/>
    <tile/>
@@ -65461,9 +65561,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="718"/>
+   <tile gid="719"/>
+   <tile gid="720"/>
    <tile/>
    <tile/>
    <tile/>
@@ -65746,9 +65846,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="761"/>
+   <tile gid="762"/>
+   <tile gid="763"/>
    <tile/>
    <tile/>
    <tile/>
@@ -66031,9 +66131,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="804"/>
+   <tile gid="805"/>
+   <tile gid="806"/>
    <tile/>
    <tile/>
    <tile/>
@@ -66316,9 +66416,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="847"/>
+   <tile gid="848"/>
+   <tile gid="849"/>
    <tile/>
    <tile/>
    <tile/>
@@ -66601,9 +66701,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="890"/>
+   <tile gid="891"/>
+   <tile gid="892"/>
    <tile/>
    <tile/>
    <tile/>
@@ -76206,7 +76306,7 @@
  <layer id="9" name="Hierbajos" width="285" height="130">
   <properties>
    <property name="Draw" type="bool" value="true"/>
-   <property name="layer" type="int" value="1"/>
+   <property name="layer" type="int" value="0"/>
   </properties>
   <data>
    <tile/>
@@ -101216,10 +101316,10 @@
    <tile/>
    <tile/>
    <tile gid="1905"/>
-   <tile gid="1906"/>
-   <tile gid="1907"/>
-   <tile gid="1908"/>
-   <tile gid="1909"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -101501,10 +101601,10 @@
    <tile/>
    <tile/>
    <tile gid="1948"/>
-   <tile gid="1949"/>
-   <tile gid="1950"/>
-   <tile gid="1951"/>
-   <tile gid="1952"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -101786,10 +101886,10 @@
    <tile/>
    <tile/>
    <tile gid="1991"/>
-   <tile gid="1992"/>
-   <tile gid="1993"/>
-   <tile gid="1994"/>
-   <tile gid="1995"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile gid="1738"/>
    <tile/>
    <tile/>
@@ -102071,10 +102171,10 @@
    <tile/>
    <tile/>
    <tile gid="2034"/>
-   <tile gid="2035"/>
-   <tile gid="2036"/>
-   <tile gid="2037"/>
-   <tile gid="2038"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile gid="1781"/>
    <tile/>
    <tile/>
@@ -102356,10 +102456,6 @@
    <tile/>
    <tile/>
    <tile gid="2077"/>
-   <tile gid="1738"/>
-   <tile gid="2079"/>
-   <tile gid="2080"/>
-   <tile gid="2081"/>
    <tile/>
    <tile/>
    <tile/>
@@ -102519,9 +102615,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="718"/>
-   <tile gid="719"/>
-   <tile gid="720"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -102804,9 +102904,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="761"/>
-   <tile gid="762"/>
-   <tile gid="763"/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -103089,9 +103189,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="804"/>
-   <tile gid="805"/>
-   <tile gid="806"/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -103374,9 +103474,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="847"/>
-   <tile gid="848"/>
-   <tile gid="849"/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -103659,9 +103759,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="890"/>
-   <tile gid="891"/>
-   <tile gid="892"/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -113264,7 +113364,7 @@
  <layer id="8" name="plantitas" width="285" height="130">
   <properties>
    <property name="Draw" type="bool" value="true"/>
-   <property name="layer1" type="int" value="1"/>
+   <property name="layer1" type="int" value="0"/>
   </properties>
   <data>
    <tile/>
@@ -187380,7 +187480,7 @@
  <layer id="6" name="Caminos" width="285" height="130">
   <properties>
    <property name="Draw" type="bool" value="true"/>
-   <property name="layer" type="int" value="1"/>
+   <property name="layer" type="int" value="0"/>
   </properties>
   <data>
    <tile/>
@@ -224438,7 +224538,7 @@
  <layer id="4" name="Bordes_Mapa" width="285" height="130">
   <properties>
    <property name="Draw" type="bool" value="true"/>
-   <property name="layer" type="int" value="1"/>
+   <property name="layer" type="int" value="0"/>
   </properties>
   <data>
    <tile gid="2765"/>
@@ -261497,107 +261597,96 @@
   <properties>
    <property name="objectType" value="collider"/>
   </properties>
-  <object id="1" type="rectangle" x="1427.33" y="3198.67" width="233.333" height="130.667"/>
-  <object id="24" type="rectangle" x="1934.85" y="2174.06" width="233.333" height="130.667"/>
-  <object id="25" type="rectangle" x="1556.06" y="1143.76" width="233.333" height="130.667"/>
-  <object id="26" type="rectangle" x="1677.27" y="643.757" width="233.333" height="130.667"/>
-  <object id="27" type="rectangle" x="2577.27" y="383.151" width="233.333" height="130.667"/>
-  <object id="29" type="rectangle" x="5709.09" y="3351.33" width="372.727" height="495.515"/>
-  <object id="30" type="rectangle" x="498.485" y="5383.15" width="393.03" height="469.697"/>
-  <object id="31" type="rectangle" x="2474.49" y="5767.15" width="303.03" height="243.697"/>
-  <object id="32" type="rectangle" x="2188.49" y="4117.15" width="357.03" height="213.697"/>
-  <object id="33" type="rectangle" x="5506.49" y="5907.15" width="237.03" height="227.697"/>
-  <object id="35" type="rectangle" x="5381.48" y="4370.15" width="361.03" height="213.697"/>
-  <object id="36" type="rectangle" x="5765.48" y="1816.15" width="363.03" height="213.697"/>
-  <object id="37" type="rectangle" x="4653.48" y="1162.15" width="133.03" height="113.697"/>
-  <object id="38" type="rectangle" x="5265.48" y="772.151" width="215.03" height="133.697"/>
-  <object id="39" type="rectangle" x="2563.48" y="1294.15" width="237.03" height="219.697"/>
-  <object id="224" type="rectangle" x="11653.5" y="3470.15" width="369.03" height="219.697"/>
-  <object id="225" type="rectangle" x="9481.49" y="2336.82" width="509.03" height="369.03"/>
-  <object id="226" type="rectangle" x="11349.5" y="2317.48" width="525.03" height="395.697"/>
-  <object id="227" type="rectangle" x="11259.5" y="526.151" width="369.03" height="219.697"/>
-  <object id="228" type="rectangle" x="9479.49" y="522.151" width="369.03" height="219.697"/>
+  <object id="1" type="rectangle" x="1426.33" y="3258.17" width="233.333" height="8.667"/>
+  <object id="24" type="rectangle" x="1934.85" y="2236.06" width="233.333" height="9.167"/>
+  <object id="25" type="rectangle" x="1556.06" y="1206.76" width="233.333" height="11.3337"/>
+  <object id="26" type="rectangle" x="1677.77" y="706.257" width="236.333" height="11.667"/>
+  <object id="27" type="rectangle" x="2577.27" y="445.151" width="233.333" height="12.0003"/>
+  <object id="29" type="rectangle" x="5866.09" y="3826.33" width="87.727" height="20.515"/>
+  <object id="30" type="rectangle" x="652.985" y="5838.65" width="59.03" height="25.697"/>
+  <object id="31" type="rectangle" x="2481.82" y="5881.82" width="300.363" height="18.3637"/>
+  <object id="32" type="rectangle" x="2213.82" y="4263.05" width="332.056" height="7.197" rotation="348.886"/>
+  <object id="471" type="rectangle" x="5412.82" y="4518.55" width="332.056" height="7.197" rotation="348.886"/>
+  <object id="33" type="rectangle" x="5515.82" y="6025.82" width="233.363" height="8.36367"/>
+  <object id="36" type="rectangle" x="5795.98" y="1960.35" width="332.55" height="9.03033" rotation="348.757"/>
+  <object id="37" type="rectangle" x="4657.15" y="1173.15" width="129.363" height="102.697"/>
+  <object id="38" type="rectangle" x="5275.48" y="772.151" width="205.03" height="121.697"/>
+  <object id="39" type="rectangle" x="2573.48" y="1420.15" width="227.03" height="8.697"/>
+  <object id="224" type="rectangle" x="11684.2" y="3625.12" width="333.703" height="8.36367" rotation="348.835"/>
+  <object id="227" type="rectangle" x="11302.4" y="675.682" width="329.636" height="8.197" rotation="348.785"/>
+  <object id="228" type="rectangle" x="9506.16" y="648.151" width="288.363" height="13.697"/>
   <object id="229" type="rectangle" x="15359.5" y="1398.15" width="245.03" height="143.697"/>
-  <object id="230" type="rectangle" x="14463.5" y="510.151" width="253.03" height="135.697"/>
-  <object id="231" type="rectangle" x="13047.5" y="506.151" width="281.03" height="135.697"/>
-  <object id="232" type="rectangle" x="13059.5" y="2286.15" width="245.03" height="279.697"/>
-  <object id="234" type="rectangle" x="15107.5" y="3854.15" width="369.03" height="239.697"/>
-  <object id="235" type="rectangle" x="16031.5" y="3826.15" width="345.03" height="279.697"/>
-  <object id="239" type="rectangle" x="13047.5" y="4722.15" width="265.03" height="267.697"/>
-  <object id="240" type="rectangle" x="14327.5" y="3454.15" width="249.03" height="219.697"/>
-  <object id="241" type="rectangle" x="14999.5" y="5254.15" width="349.03" height="251.697"/>
-  <object id="242" type="rectangle" x="16079.1" y="5563.36" width="195.697" height="531.333"/>
-  <object id="245" type="rectangle" x="22095.5" y="5614.15" width="273.03" height="167.697"/>
-  <object id="246" type="rectangle" x="19207.5" y="4742.15" width="233.03" height="223.697"/>
-  <object id="248" type="rectangle" x="20227.5" y="3724.15" width="233.03" height="223.697"/>
-  <object id="249" type="rectangle" x="20215.5" y="2688.15" width="269.03" height="139.697"/>
-  <object id="250" type="rectangle" x="19207.5" y="764.151" width="233.03" height="147.697"/>
-  <object id="251" type="rectangle" x="21515.5" y="1808.15" width="357.03" height="223.697"/>
-  <object id="252" type="rectangle" x="21515.5" y="2688.15" width="253.03" height="123.697"/>
-  <object id="253" type="rectangle" x="23747.5" y="3968.15" width="441.03" height="466.97"/>
-  <object id="254" type="rectangle" x="24847.5" y="3852.15" width="373.03" height="223.697"/>
-  <object id="256" type="rectangle" x="24849.7" y="4640.39" width="350.727" height="199.455"/>
-  <object id="257" type="rectangle" x="26023.5" y="5116.15" width="325.03" height="251.697"/>
-  <object id="258" type="rectangle" x="24067.5" y="372.151" width="257.03" height="139.697"/>
-  <object id="259" type="rectangle" x="24101.7" y="1408.15" width="444.788" height="486.242"/>
-  <object id="260" type="rectangle" x="24439.5" y="10236.2" width="1797.03" height="235.697"/>
+  <object id="230" type="rectangle" x="14474.5" y="588.151" width="242.03" height="4.697"/>
+  <object id="231" type="rectangle" x="13071.5" y="574.151" width="236.03" height="8.197"/>
+  <object id="232" type="rectangle" x="13090.5" y="2454.15" width="193.03" height="14.697"/>
+  <object id="234" type="rectangle" x="15126.2" y="3973.48" width="346.363" height="9.03033"/>
+  <object id="235" type="rectangle" x="16061.5" y="3988.15" width="292.03" height="17.697"/>
+  <object id="239" type="rectangle" x="13090.2" y="4888.82" width="192.363" height="11.0303"/>
+  <object id="240" type="rectangle" x="14349.5" y="3594.15" width="232.53" height="9.197"/>
+  <object id="241" type="rectangle" x="15028.8" y="5393.48" width="304.363" height="11.0303"/>
+  <object id="242" type="rectangle" x="16070.1" y="5950.36" width="244.697" height="14.333"/>
+  <object id="245" type="rectangle" x="22105.5" y="5636.15" width="250.03" height="119.697"/>
+  <object id="246" type="rectangle" x="19211.5" y="4874.15" width="232.03" height="9.197"/>
+  <object id="248" type="rectangle" x="20236.5" y="3851.65" width="233.03" height="9.697"/>
+  <object id="249" type="rectangle" x="20238.5" y="2758.15" width="239.03" height="9.697"/>
+  <object id="250" type="rectangle" x="19222.5" y="777.151" width="208.53" height="56.697"/>
+  <object id="251" type="rectangle" x="21524.5" y="1924.15" width="348.03" height="13.197"/>
+  <object id="252" type="rectangle" x="21514.5" y="2751.15" width="245.697" height="7.03033"/>
+  <object id="254" type="rectangle" x="24851.5" y="3973.15" width="351.53" height="10.697"/>
+  <object id="256" type="rectangle" x="24870.6" y="4780.17" width="331.263" height="7.455" rotation="347.331"/>
+  <object id="257" type="rectangle" x="26038" y="5275.15" width="300.53" height="7.197"/>
+  <object id="258" type="rectangle" x="24076.2" y="447.151" width="242.03" height="9.36367"/>
+  <object id="260" type="rectangle" x="24439.5" y="10270.2" width="1797.03" height="115.697"/>
   <object id="263" type="rectangle" x="26143.5" y="14828.2" width="161.03" height="155.697"/>
-  <object id="265" type="rectangle" x="22143.5" y="12288.2" width="233.03" height="223.697"/>
-  <object id="266" type="rectangle" x="23688.5" y="12318.2" width="361.03" height="192.697"/>
-  <object id="267" type="rectangle" x="19207.5" y="11276.2" width="233.03" height="223.697"/>
-  <object id="268" type="rectangle" x="19203.5" y="9728.15" width="233.03" height="259.697"/>
-  <object id="269" type="rectangle" x="19847.5" y="12457.2" width="359.03" height="186.697"/>
-  <object id="270" type="rectangle" x="19083.5" y="12412.2" width="357.03" height="367.697"/>
-  <object id="271" type="rectangle" x="27135.5" y="14732.2" width="233.03" height="223.697"/>
-  <object id="272" type="rectangle" x="27907.5" y="11136.2" width="1017.03" height="247.697"/>
-  <object id="273" type="rectangle" x="27146.2" y="11165.5" width="505.03" height="393.03"/>
-  <object id="274" type="rectangle" x="16004.7" y="13963.9" width="372.424" height="223.697"/>
-  <object id="275" type="rectangle" x="16689.5" y="10473" width="314.848" height="272.182"/>
-  <object id="276" type="rectangle" x="16650.2" y="8694.21" width="363.333" height="266.121"/>
-  <object id="277" type="rectangle" x="15101.7" y="8709.36" width="233.03" height="223.697"/>
-  <object id="278" type="rectangle" x="13825.9" y="8703.3" width="233.03" height="223.697"/>
-  <object id="279" type="rectangle" x="11519.8" y="8712.39" width="233.03" height="505.515"/>
-  <object id="280" type="rectangle" x="11525.9" y="10506.3" width="233.03" height="223.697"/>
-  <object id="281" type="rectangle" x="13183.5" y="10503.3" width="233.03" height="223.697"/>
-  <object id="282" type="rectangle" x="13704.7" y="10509.4" width="369.394" height="223.697"/>
-  <object id="283" type="rectangle" x="13825.9" y="10127.5" width="233.03" height="223.697"/>
-  <object id="284" type="rectangle" x="11653.2" y="14221.5" width="369.394" height="223.697"/>
-  <object id="287" type="rectangle" x="10628.9" y="13042.7" width="378.485" height="250.97"/>
-  <object id="288" type="rectangle" x="10750.2" y="11273" width="233.03" height="223.697"/>
-  <object id="289" type="rectangle" x="10371.4" y="9212.39" width="233.03" height="223.697"/>
-  <object id="290" type="rectangle" x="10638" y="9345.73" width="233.03" height="223.697"/>
-  <object id="291" type="rectangle" x="10113.8" y="9100.27" width="233.03" height="223.697"/>
-  <object id="292" type="rectangle" x="8783.49" y="9460.88" width="436.06" height="873.52"/>
-  <object id="293" type="rectangle" x="2919.49" y="8820.15" width="137.03" height="367.697"/>
-  <object id="294" type="rectangle" x="3823.49" y="8816.15" width="137.03" height="367.697"/>
-  <object id="295" type="rectangle" x="5239.49" y="8830.15" width="265.03" height="267.697"/>
-  <object id="296" type="rectangle" x="6043.49" y="8818.15" width="341.03" height="267.697"/>
-  <object id="297" type="rectangle" x="5255.49" y="11134.2" width="369.03" height="371.697"/>
-  <object id="298" type="rectangle" x="5883.49" y="11378.2" width="265.03" height="139.697"/>
-  <object id="300" type="rectangle" x="4723.49" y="12002.2" width="265.03" height="267.697"/>
-  <object id="302" type="rectangle" x="2799.49" y="13826.2" width="265.03" height="267.697"/>
-  <object id="303" type="rectangle" x="2419.49" y="12014.2" width="265.03" height="259.697"/>
+  <object id="265" type="rectangle" x="22156.8" y="12420.5" width="229.363" height="9.03033"/>
+  <object id="266" type="rectangle" x="23718.1" y="12461.5" width="332.453" height="8.697" rotation="347.69"/>
+  <object id="267" type="rectangle" x="19207.5" y="11398.7" width="238.03" height="15.197"/>
+  <object id="268" type="rectangle" x="19223" y="9750.48" width="206.03" height="232.364"/>
+  <object id="269" type="rectangle" x="19878.6" y="12587.4" width="330.953" height="6.697" rotation="347.22"/>
+  <object id="270" type="rectangle" x="19094.2" y="12672.9" width="337.697" height="12.3637"/>
+  <object id="271" type="rectangle" x="27149" y="14860.7" width="229.03" height="10.197"/>
+  <object id="272" type="rectangle" x="27907.5" y="11136.2" width="1017.03" height="145.03"/>
+  <object id="274" type="rectangle" x="16036.9" y="14121.4" width="332.316" height="6.03033" rotation="348.026"/>
+  <object id="275" type="rectangle" x="16688.8" y="10632.3" width="314.848" height="10.182"/>
+  <object id="276" type="rectangle" x="16672.7" y="8822.71" width="333.333" height="12.621"/>
+  <object id="277" type="rectangle" x="15117.2" y="8838.36" width="230.03" height="8.197"/>
+  <object id="278" type="rectangle" x="13835.4" y="8845.3" width="233.03" height="8.197"/>
+  <object id="279" type="rectangle" x="11531.8" y="8841.06" width="232.363" height="10.8483"/>
+  <object id="472" type="rectangle" x="11530.5" y="9100.39" width="232.363" height="10.8483"/>
+  <object id="280" type="rectangle" x="11532.2" y="10633.6" width="233.697" height="10.0303"/>
+  <object id="281" type="rectangle" x="13196.2" y="10635.6" width="234.03" height="7.36367"/>
+  <object id="282" type="rectangle" x="13732.4" y="10651" width="329.044" height="7.197" rotation="350.008"/>
+  <object id="283" type="rectangle" x="13835.9" y="10253.5" width="232.697" height="6.697"/>
+  <object id="284" type="rectangle" x="11686.3" y="14374.4" width="329.487" height="8.697" rotation="348.622"/>
+  <object id="287" type="rectangle" x="10643.9" y="13180.7" width="348.485" height="10.97"/>
+  <object id="288" type="rectangle" x="10764.2" y="11406.3" width="234.363" height="8.697"/>
+  <object id="289" type="rectangle" x="10380.4" y="9356.39" width="232.697" height="8.03033"/>
+  <object id="290" type="rectangle" x="10638" y="9487.23" width="233.03" height="8.197"/>
+  <object id="291" type="rectangle" x="10123.3" y="9224.27" width="233.03" height="10.697"/>
+  <object id="293" type="rectangle" x="2944.16" y="8820.15" width="112.363" height="354.364"/>
+  <object id="294" type="rectangle" x="3840.49" y="8816.15" width="111.03" height="356.697"/>
+  <object id="295" type="rectangle" x="5276.99" y="8988.15" width="201.53" height="15.697"/>
+  <object id="296" type="rectangle" x="6060.99" y="8980.65" width="310.03" height="9.697"/>
+  <object id="297" type="rectangle" x="5275.49" y="11379.2" width="330.03" height="12.697"/>
+  <object id="298" type="rectangle" x="5910.49" y="11402.2" width="208.03" height="115.697"/>
+  <object id="300" type="rectangle" x="4746.49" y="12173.2" width="234.53" height="11.197"/>
+  <object id="302" type="rectangle" x="2827.49" y="13962.2" width="236.53" height="11.197"/>
+  <object id="303" type="rectangle" x="2448.16" y="12166.9" width="225.697" height="13.697"/>
   <object id="305" type="rectangle" x="1437.48" y="11390.2" width="169.03" height="135.697"/>
-  <object id="306" type="rectangle" x="513.485" y="8834.15" width="237.03" height="227.697"/>
-  <object id="307" type="rectangle" x="1285.48" y="8838.15" width="381.03" height="227.697"/>
-  <object id="308" type="rectangle" x="513.485" y="11118.2" width="373.03" height="391.697"/>
-  <object id="309" type="rectangle" x="3861.48" y="14838.2" width="353.03" height="255.697"/>
-  <object id="310" type="rectangle" x="5769.48" y="16134.2" width="237.03" height="227.697"/>
-  <object id="311" type="rectangle" x="5765.48" y="14846.2" width="237.03" height="227.697"/>
-  <object id="315" type="rectangle" x="33065.5" y="9874.15" width="1293.03" height="441.697"/>
-  <object id="316" type="rectangle" x="33211.5" y="11436.2" width="815.03" height="291.697"/>
-  <object id="317" type="rectangle" x="33465.5" y="10926.2" width="311.03" height="519.697"/>
-  <object id="318" type="rectangle" x="32791.5" y="10618.2" width="1751.03" height="377.697"/>
-  <object id="319" type="rectangle" x="33131.5" y="10320.2" width="1171.03" height="227.697"/>
-  <object id="320" type="rectangle" x="33001.5" y="10530.2" width="1295.03" height="109.697"/>
-  <object id="321" type="rectangle" x="32921.5" y="10958.2" width="1287.03" height="91.697"/>
-  <object id="322" type="rectangle" x="33165.5" y="11044.2" width="927.03" height="77.697"/>
-  <object id="324" type="rectangle" x="31925.5" y="3786.15" width="87.03" height="147.697"/>
-  <object id="326" type="rectangle" x="32505.5" y="2916.15" width="117.03" height="493.697"/>
-  <object id="327" type="rectangle" x="31957.5" y="2632.15" width="81.03" height="333.697"/>
-  <object id="328" type="rectangle" x="32995.5" y="2424.15" width="131.03" height="387.697"/>
-  <object id="329" type="rectangle" x="34115.5" y="2426.15" width="117.03" height="381.697"/>
-  <object id="331" type="rectangle" x="34700.5" y="2905.15" width="119.03" height="494.697"/>
+  <object id="306" type="rectangle" x="523.985" y="8971.65" width="233.03" height="12.0303"/>
+  <object id="307" type="rectangle" x="1316.21" y="8995.22" width="332.184" height="9.697" rotation="348.474"/>
+  <object id="308" type="rectangle" x="536.818" y="11379.5" width="334.363" height="12.3637"/>
+  <object id="309" type="rectangle" x="3886.48" y="14998.7" width="309.53" height="9.697"/>
+  <object id="310" type="rectangle" x="5772.98" y="16268.7" width="233.53" height="12.697"/>
+  <object id="311" type="rectangle" x="5773.48" y="14988.2" width="232.53" height="10.197"/>
+  <object id="315" type="rectangle" x="33065.5" y="9874.15" width="1293.03" height="413.697"/>
+  <object id="317" type="rectangle" x="33465.5" y="11388.2" width="319.03" height="57.697"/>
+  <object id="324" type="rectangle" x="31925.5" y="3799.15" width="87.03" height="134.697"/>
+  <object id="326" type="rectangle" x="32404" y="3245.65" width="226.03" height="30.697"/>
+  <object id="327" type="rectangle" x="31924.8" y="2821.48" width="137.03" height="13.697"/>
+  <object id="328" type="rectangle" x="33010.5" y="2687.15" width="122.03" height="18.0303"/>
+  <object id="329" type="rectangle" x="34117.5" y="2688.82" width="117.03" height="13.0303"/>
+  <object id="331" type="rectangle" x="34700.5" y="3249.82" width="226.863" height="40.3637"/>
   <object id="334" type="rectangle" x="33875.5" y="1850.15" width="23.03" height="227.697"/>
   <object id="339" type="rectangle" x="34543.5" y="1278.15" width="339.03" height="369.697"/>
   <object id="340" type="rectangle" x="33291.5" y="1846.15" width="63.03" height="239.697"/>
@@ -261606,24 +261695,10 @@
   <object id="345" type="rectangle" x="34095.5" y="2052" width="1295.03" height="85.697"/>
   <object id="346" type="rectangle" x="32669.5" y="789.151" width="809.03" height="595.697"/>
   <object id="347" type="rectangle" x="33732.5" y="790.151" width="853.03" height="595.697"/>
-  <object id="348" type="rectangle" x="32437.5" y="3101.15" width="73.03" height="308.697"/>
-  <object id="349" type="rectangle" x="32390.5" y="3242.15" width="51.03" height="167.697"/>
-  <object id="350" type="rectangle" x="32553" y="3633.15" width="117.03" height="493.697"/>
-  <object id="351" type="rectangle" x="32485" y="3818.15" width="73.03" height="308.697"/>
-  <object id="352" type="rectangle" x="32438" y="3959.15" width="51.03" height="167.697"/>
-  <object id="353" type="rectangle" x="35372.8" y="3131.15" width="67.2499" height="283.697"/>
-  <object id="354" type="rectangle" x="35330.9" y="3225.46" width="44.8047" height="189.389"/>
-  <object id="355" type="rectangle" x="35294" y="3305.96" width="39.3075" height="108.884"/>
-  <object id="356" type="rectangle" x="32022.5" y="2752.15" width="38.03" height="213.697"/>
-  <object id="357" type="rectangle" x="31919.5" y="2797.15" width="73.03" height="168.697"/>
-  <object id="358" type="rectangle" x="34955.5" y="2355.15" width="81.03" height="333.697"/>
-  <object id="359" type="rectangle" x="35020.5" y="2475.15" width="38.03" height="213.697"/>
-  <object id="360" type="rectangle" x="34917.5" y="2520.15" width="73.03" height="168.697"/>
-  <object id="361" type="rectangle" x="34813.5" y="3076.65" width="60.03" height="323.697"/>
-  <object id="362" type="rectangle" x="34862" y="3202.15" width="69.03" height="182.697"/>
-  <object id="363" type="rectangle" x="34657.7" y="3630.4" width="119.03" height="494.697"/>
-  <object id="364" type="rectangle" x="34770.7" y="3801.9" width="60.03" height="323.697"/>
-  <object id="365" type="rectangle" x="34819.2" y="3927.4" width="69.03" height="182.697"/>
+  <object id="350" type="rectangle" x="32457.5" y="3964.15" width="221.53" height="36.197"/>
+  <object id="353" type="rectangle" x="35298.3" y="3309.15" width="148.25" height="18.197"/>
+  <object id="358" type="rectangle" x="34923.5" y="2561.15" width="137.03" height="12.697"/>
+  <object id="363" type="rectangle" x="34650.7" y="3972.4" width="224.53" height="28.197"/>
   <object id="368" type="rectangle" x="31870.7" y="2123.82" width="673.818" height="85.697"/>
   <object id="374" type="rectangle" x="34787.3" y="2117.76" width="673.818" height="85.697"/>
   <object id="387" type="rectangle" x="32991.9" y="1814.73" width="352.606" height="85.697"/>
@@ -261636,68 +261711,31 @@
   <object id="394" type="rectangle" x="34235.8" y="1666.24" width="331.394" height="61.4546"/>
   <object id="395" type="rectangle" x="34402.5" y="1608.67" width="192" height="67.5152"/>
   <object id="396" type="rectangle" x="34484.3" y="1566.24" width="125.334" height="61.4546"/>
-  <object id="405" type="rectangle" x="32892.5" y="11842.2" width="89.1242" height="367.03"/>
-  <object id="406" type="rectangle" x="32964" y="11974.2" width="41.8289" height="235.043"/>
-  <object id="407" type="rectangle" x="32850.7" y="12023.7" width="80.325" height="185.548"/>
-  <object id="408" type="rectangle" x="34033.9" y="12125.6" width="89.1242" height="367.03"/>
-  <object id="409" type="rectangle" x="34105.4" y="12257.6" width="41.8289" height="235.043"/>
-  <object id="410" type="rectangle" x="33992.1" y="12307.1" width="80.325" height="185.548"/>
-  <object id="411" type="rectangle" x="35069.3" y="10679.4" width="79.4614" height="335.212"/>
-  <object id="412" type="rectangle" x="35019.8" y="10790.8" width="52.9405" height="223.779"/>
-  <object id="413" type="rectangle" x="34976.2" y="10885.9" width="46.4451" height="128.656"/>
-  <object id="414" type="rectangle" x="32377.7" y="11246" width="80.1797" height="338.242"/>
-  <object id="415" type="rectangle" x="32327.7" y="11358.5" width="53.4191" height="225.802"/>
-  <object id="416" type="rectangle" x="32283.7" y="11454.4" width="46.865" height="129.819"/>
-  <object id="417" type="rectangle" x="24544.2" y="13451.1" width="89.1242" height="367.03"/>
-  <object id="418" type="rectangle" x="24615.7" y="13583.1" width="41.8289" height="235.043"/>
-  <object id="419" type="rectangle" x="24502.4" y="13632.6" width="80.325" height="185.548"/>
-  <object id="420" type="rectangle" x="11655.5" y="11849.8" width="122.235" height="503.387"/>
-  <object id="421" type="rectangle" x="11753.6" y="12030.8" width="57.3689" height="322.365"/>
-  <object id="422" type="rectangle" x="11598.2" y="12098.7" width="110.167" height="254.482"/>
-  <object id="423" type="rectangle" x="11997.6" y="15622.5" width="89.1242" height="367.03"/>
-  <object id="424" type="rectangle" x="12069.1" y="15754.5" width="41.8289" height="235.043"/>
-  <object id="425" type="rectangle" x="11955.8" y="15804" width="80.325" height="185.548"/>
-  <object id="426" type="rectangle" x="2012.72" y="13698.3" width="89.1242" height="367.03"/>
-  <object id="427" type="rectangle" x="2084.22" y="13830.3" width="41.8289" height="235.043"/>
-  <object id="428" type="rectangle" x="1970.92" y="13879.8" width="80.325" height="185.548"/>
-  <object id="429" type="rectangle" x="3206.08" y="3122.54" width="126.65" height="521.568"/>
-  <object id="430" type="rectangle" x="3307.68" y="3310.12" width="59.4409" height="334.008"/>
-  <object id="431" type="rectangle" x="3146.68" y="3380.46" width="114.146" height="263.673"/>
-  <object id="432" type="rectangle" x="14427.9" y="4607.39" width="89.1242" height="367.03"/>
-  <object id="433" type="rectangle" x="14499.4" y="4739.39" width="41.8289" height="235.043"/>
-  <object id="434" type="rectangle" x="14386.1" y="4788.89" width="80.325" height="185.548"/>
-  <object id="435" type="rectangle" x="9949.08" y="5764.96" width="89.1242" height="367.03"/>
-  <object id="436" type="rectangle" x="10020.6" y="5896.96" width="41.8289" height="235.043"/>
-  <object id="437" type="rectangle" x="9907.28" y="5946.46" width="80.325" height="185.548"/>
-  <object id="438" type="rectangle" x="19291.5" y="5640.72" width="89.1242" height="367.03"/>
-  <object id="439" type="rectangle" x="19363" y="5772.72" width="41.8289" height="235.043"/>
-  <object id="440" type="rectangle" x="19249.7" y="5822.22" width="80.325" height="185.548"/>
-  <object id="441" type="rectangle" x="26203.6" y="3707.39" width="89.1242" height="367.03"/>
-  <object id="442" type="rectangle" x="26275.1" y="3839.39" width="41.8289" height="235.043"/>
-  <object id="443" type="rectangle" x="26161.8" y="3888.89" width="80.325" height="185.548"/>
-  <object id="444" type="rectangle" x="23870.4" y="4387.73" width="201.636" height="209.394"/>
-  <object id="445" type="rectangle" x="24226.1" y="1899.3" width="178.121" height="131.697"/>
-  <object id="446" type="rectangle" x="14611.1" y="2204.16" width="77.6427" height="327.54"/>
-  <object id="447" type="rectangle" x="14566" y="2326.89" width="48.4512" height="204.803"/>
-  <object id="448" type="rectangle" x="14534.8" y="2420.44" width="33.8555" height="111.257"/>
-  <object id="449" type="rectangle" x="6288.41" y="11162.2" width="76.0853" height="320.97"/>
-  <object id="450" type="rectangle" x="6244.21" y="11282.5" width="47.4794" height="200.695"/>
-  <object id="451" type="rectangle" x="6213.65" y="11374.2" width="33.1764" height="109.026"/>
-  <object id="452" type="rectangle" x="4872.03" y="13710.7" width="80.3482" height="338.953"/>
-  <object id="453" type="rectangle" x="4825.34" y="13837.7" width="50.1395" height="211.939"/>
-  <object id="454" type="rectangle" x="4793.08" y="13934.5" width="35.0352" height="115.134"/>
-  <object id="455" type="rectangle" x="23945" y="13589.2" width="80.9987" height="341.697"/>
-  <object id="456" type="rectangle" x="23898" y="13717.2" width="50.5454" height="213.655"/>
-  <object id="457" type="rectangle" x="23865.4" y="13814.8" width="35.3188" height="116.066"/>
-  <object id="458" type="rectangle" x="26250.2" y="13593.2" width="75.7836" height="319.697"/>
-  <object id="459" type="rectangle" x="26206.2" y="13712.9" width="47.2911" height="199.899"/>
-  <object id="460" type="rectangle" x="26175.8" y="13804.3" width="33.0448" height="108.593"/>
-  <object id="461" type="rectangle" x="27336.8" y="11559.5" width="183.697" height="217.03"/>
-  <object id="462" type="rectangle" x="8892.15" y="10331.5" width="211.697" height="153.03"/>
-  <object id="464" type="rectangle" x="936.151" y="5384.82" width="434.364" height="451.697"/>
-  <object id="466" type="rectangle" x="5812.15" y="3831.49" width="183.697" height="125.03"/>
-  <object id="467" type="rectangle" x="9678.82" y="2698.15" width="183.697" height="245.03"/>
-  <object id="468" type="rectangle" x="11556.2" y="2712.82" width="183.697" height="229.03"/>
+  <object id="405" type="rectangle" x="32845" y="12040.2" width="155.624" height="17.53"/>
+  <object id="408" type="rectangle" x="33995.9" y="12326.1" width="150.124" height="21.03"/>
+  <object id="411" type="rectangle" x="35008" y="10866.1" width="146.128" height="25.5453"/>
+  <object id="414" type="rectangle" x="32313.2" y="11432.5" width="155.18" height="28.742"/>
+  <object id="417" type="rectangle" x="24490.2" y="13707.6" width="170.624" height="10.03"/>
+  <object id="420" type="rectangle" x="11592.2" y="12211.8" width="240.902" height="18.0537"/>
+  <object id="423" type="rectangle" x="11947.1" y="15878" width="168.124" height="12.53"/>
+  <object id="426" type="rectangle" x="1957.39" y="13979.6" width="177.791" height="9.69667"/>
+  <object id="429" type="rectangle" x="3142.75" y="3493.21" width="235.983" height="12.2347"/>
+  <object id="432" type="rectangle" x="14382.4" y="4846.39" width="162.624" height="17.53"/>
+  <object id="435" type="rectangle" x="9900.41" y="6022.29" width="167.124" height="13.03"/>
+  <object id="438" type="rectangle" x="19244.5" y="5901.72" width="169.124" height="10.53"/>
+  <object id="441" type="rectangle" x="26157.6" y="3969.39" width="165.791" height="15.03"/>
+  <object id="444" type="rectangle" x="23948.4" y="4475.06" width="56.9693" height="17.394"/>
+  <object id="445" type="rectangle" x="24300.6" y="1899.3" width="57.621" height="23.697"/>
+  <object id="446" type="rectangle" x="14533.8" y="2418.16" width="164.976" height="10.8733"/>
+  <object id="449" type="rectangle" x="6206.41" y="11398.2" width="170.085" height="11.47"/>
+  <object id="453" type="rectangle" x="4801.34" y="13952.2" width="167.64" height="13.939"/>
+  <object id="456" type="rectangle" x="23880" y="13808.5" width="160.545" height="12.9883"/>
+  <object id="458" type="rectangle" x="26184.2" y="13811.7" width="162.784" height="11.697"/>
+  <object id="461" type="rectangle" x="27406.1" y="11646.2" width="57.0303" height="19.03"/>
+  <object id="462" type="rectangle" x="8974.15" y="10354.8" width="54.3637" height="18.3633"/>
+  <object id="464" type="rectangle" x="1131.82" y="5830.82" width="59.6973" height="31.697"/>
+  <object id="467" type="rectangle" x="9742.82" y="2794.15" width="54.3637" height="22.3633"/>
+  <object id="468" type="rectangle" x="11613.5" y="2813.49" width="61.697" height="17.03"/>
   <object id="470" type="rectangle" x="12432.2" y="1935.49" width="235.697" height="105.03"/>
  </objectgroup>
  <objectgroup color="#aa0000" id="13" name="Limits">

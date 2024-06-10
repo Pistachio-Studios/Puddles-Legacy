@@ -40,7 +40,9 @@ enum class ColliderType {
 	POTION,
 	SCOREITEM,
 	CHECKPOINT,
-	ENEMY,
+	ENEMYWASP,
+	ENEMYSPIDER,
+	ENEMYBOSS,
 	BULLET,
 	MAGIC,
 	OBSTACLE,
@@ -106,6 +108,8 @@ public:
 	bool PreUpdate();
 	bool Update(float dt);
 	bool CleanUp();
+
+	void DrawImGui() override;
 
 	// Create basic physics objects
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bodyType type);

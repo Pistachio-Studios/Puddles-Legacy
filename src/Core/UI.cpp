@@ -6,6 +6,7 @@
 #include "Gameplay/Scene.h"
 #include "Gameplay/Entities/Items/Potion.h"
 #include "Core/EntityManager.h"
+#include "Core/SceneManager.h"
 #include "Gameplay/Entities/Player.h"
 #include "Utils/Point.h"
 #include "Core/Physics.h"
@@ -33,6 +34,9 @@ bool UI::Awake() {
 }
 
 bool UI::Start() {
+
+	//Get the size of the window
+	app->win->GetWindowSize(windowW, windowH);
 
 	texture_inventory = app->tex->Load("Assets/Textures/Potions/Inventory/noPotions.png");
 	
@@ -99,6 +103,27 @@ bool UI::Start() {
 	// Textures for the known npcs
 	klausUnlockedTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag4/1_klaus.png");
 	bountyUnlockedTexture = app->tex->Load("Assets/UI/GUI/Bestiario/pag4/2_bounty.png");
+
+	//Pause Menu UI
+	gcResume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 20, "Resume", { (int)windowW / 2 - 175, (int)windowH / 2 - 100, 300, 50 }, this);
+	gcResume->SetObserver(this);
+	gcResume->state = GuiControlState::DISABLED;
+
+	gcSave = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 21, "Save", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
+	gcSave->SetObserver(this);
+	gcSave->state = GuiControlState::DISABLED;
+
+	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 22, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
+	gcSettings->SetObserver(this);
+	gcSettings->state = GuiControlState::DISABLED;
+
+	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 23, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
+	gcBackToTitle->SetObserver(this);
+	gcBackToTitle->state = GuiControlState::DISABLED;
+
+	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 24, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 100, 300, 50 }, this);
+	gcExit->SetObserver(this);
+	gcExit->state = GuiControlState::DISABLED;
 
 	return true;
 }
@@ -189,6 +214,8 @@ bool UI::Update(float dt)
 	Player* player = app->entityManager->GetPlayerEntity();
 
 	if(player != nullptr){
+
+
 
 		//Menu Pequeño
 		app->render->DrawTextureLegacy(MenuPequeno, 275, 650, 0, 0);
@@ -413,6 +440,32 @@ bool UI::Update(float dt)
 		#pragma endregion Bestiary
 	}
 	
+	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		if(paused)
+		{
+			PauseMenuVisibility(paused);
+			paused = false;
+		}
+		else
+		{
+			PauseMenuVisibility(paused);
+			paused = true;
+		}
+	}
+
+	if(exitPressed)
+		return false;
+	
+	if(mainMenuPressed)
+	{
+		app->sceneManager->ChangeScene("mainmenu");
+		mainMenuPressed = false;
+		paused = false;
+		PauseMenuVisibility(!paused);
+		
+	}
+
 	return true;
 }
 
@@ -722,7 +775,47 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 
 			}
 			break;
+		case 20:
+			paused = false;
+			gcResume->state = GuiControlState::DISABLED;
+			gcSettings->state = GuiControlState::DISABLED;
+			gcBackToTitle->state = GuiControlState::DISABLED;
+			gcExit->state = GuiControlState::DISABLED;
+			gcSave->state = GuiControlState::DISABLED;
+			break;
+		case 21:
+			app->SaveRequest();
+			break;
+		case 22:
+			
+			break;
+		case 23:
+			mainMenuPressed = true;
+		break;
+		case 24:
+		exitPressed = true;
+		break;
 		}
 	}
 	return true;
+}
+
+void UI::PauseMenuVisibility(bool visible)
+{
+	if(visible)
+		{
+			gcResume->state = GuiControlState::DISABLED;
+			gcSettings->state = GuiControlState::DISABLED;
+			gcBackToTitle->state = GuiControlState::DISABLED;
+			gcExit->state = GuiControlState::DISABLED;
+			gcSave->state = GuiControlState::DISABLED;
+		}
+		else
+		{
+			gcResume->state = GuiControlState::NORMAL;
+			gcSettings->state = GuiControlState::NORMAL;
+			gcBackToTitle->state = GuiControlState::NORMAL;
+			gcExit->state = GuiControlState::NORMAL;
+			gcSave->state = GuiControlState::NORMAL;
+		}
 }

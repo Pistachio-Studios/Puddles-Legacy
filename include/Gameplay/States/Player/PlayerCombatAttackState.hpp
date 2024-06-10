@@ -41,6 +41,12 @@ public:
         radius = 2.5;
         attacking = false;
 
+        if(player->mana <= 10.0f)
+        {
+            player->combatFSM->ChangeState("idle");
+            return;
+        }
+
         if(player->currentClass == PlayerClass::KNIGHT)
         {
             player->swordEntity->Equip();

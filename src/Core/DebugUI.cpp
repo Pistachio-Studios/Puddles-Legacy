@@ -83,6 +83,11 @@ bool DebugUI::Update(float dt)
             if (ImGui::MenuItem("Generators", NULL, particleManagerGenerators)) {particleManagerGenerators = !particleManagerGenerators;}
             ImGui::EndMenu();
         }
+        if(ImGui::BeginMenu("Physics"))
+        {
+            if (ImGui::MenuItem("Info", NULL, physicsInfo)) {physicsInfo = !physicsInfo;}
+            ImGui::EndMenu();
+        }
         if (ImGui::BeginMenu("Render"))
         {
             if (ImGui::MenuItem("Lighting", NULL, renderLighting)) {renderLighting = !renderLighting;}

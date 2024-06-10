@@ -43,6 +43,10 @@ bool MainMenu::Enter()
 
 	FxId = app->audio->LoadFx(parameters.child("gameTitle").attribute("FxPath").as_string());
 
+	app->render->camera.target = nullptr;
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
+
 	return true;
 }
 

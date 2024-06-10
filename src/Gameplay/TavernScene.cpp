@@ -88,27 +88,6 @@ bool TavernScene::Enter()
 	//Get the size of the texture
 	//app->tex->GetSize(img, texW, texH);
 
-	//Pause Menu UI
-	gcResume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Resume", { (int)windowW / 2 - 175, (int)windowH / 2 - 100, 300, 50 }, this);
-	gcResume->SetObserver(this);
-	gcResume->state = GuiControlState::DISABLED;
-
-	gcSave = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Save", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
-	gcSave->SetObserver(this);
-	gcSave->state = GuiControlState::DISABLED;
-
-	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
-	gcSettings->SetObserver(this);
-	gcSettings->state = GuiControlState::DISABLED;
-
-	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
-	gcBackToTitle->SetObserver(this);
-	gcBackToTitle->state = GuiControlState::DISABLED;
-
-	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 100, 300, 50 }, this);
-	gcExit->SetObserver(this);
-	gcExit->state = GuiControlState::DISABLED;
-
 	cauldronTrigger = app->physics->CreateRectangle(500, 700, 100, 100, bodyType::STATIC);
 	cauldronTrigger->ctype = ColliderType::CAULDRON;
 
@@ -197,6 +176,7 @@ bool TavernScene::Update(float dt)
 		}
 
 		if (cauldronCreatePressed && cauldronSelect == nullptr) {
+			app->guiManager->RemoveGuiControl(cauldronCreate);
 			cauldronSelect = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronSelectTex);
 			cauldronSelectExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
 			potionCreateButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Accept", { (int)windowW / 2 - 100, (int)windowH / 2 + 300, 200, 50 }, this);
@@ -205,7 +185,6 @@ bool TavernScene::Update(float dt)
 		}
 
 		if (potionCreatePressed && cauldronSelect != nullptr) {
-
 			potionCreatePressed = false;
 		}
 
@@ -262,30 +241,6 @@ bool TavernScene::PostUpdate()
 
 	bool ret = true;
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	{
-		if(paused)
-		{
-			paused = false;
-			gcResume->state = GuiControlState::NORMAL;
-			gcSettings->state = GuiControlState::NORMAL;
-			gcBackToTitle->state = GuiControlState::NORMAL;
-			gcExit->state = GuiControlState::NORMAL;
-			gcSave->state = GuiControlState::NORMAL;
-		}
-		else
-		{
-			paused = true;
-			gcResume->state = GuiControlState::DISABLED;
-			gcSettings->state = GuiControlState::DISABLED;
-			gcBackToTitle->state = GuiControlState::DISABLED;
-			gcExit->state = GuiControlState::DISABLED;
-			gcSave->state = GuiControlState::DISABLED;
-		}
-	}
-	if(exitPressed)
-		ret = false;
-
 	return ret;
 }
 
@@ -295,13 +250,6 @@ bool TavernScene::Exit()
 	app->entityManager->Disable();
 	app->map->Disable();
 
-	app->guiManager->RemoveGuiControl(gcScore);
-	app->guiManager->RemoveGuiControl(gcLives);
-	app->guiManager->RemoveGuiControl(gcResume);
-	app->guiManager->RemoveGuiControl(gcSettings);
-	app->guiManager->RemoveGuiControl(gcBackToTitle);
-	app->guiManager->RemoveGuiControl(gcExit);
-	app->guiManager->RemoveGuiControl(gcSave);
 
 	SDL_ShowCursor(SDL_ENABLE);
 
@@ -312,15 +260,6 @@ bool TavernScene::Exit()
 bool TavernScene::CleanUp()
 {
 	LOG("Freeing testscene");
-
-	app->guiManager->RemoveGuiControl(gcScore);
-	app->guiManager->RemoveGuiControl(gcLives);
-	app->guiManager->RemoveGuiControl(gcResume);
-	app->guiManager->RemoveGuiControl(gcSettings);
-	app->guiManager->RemoveGuiControl(gcBackToTitle);
-	app->guiManager->RemoveGuiControl(gcExit);
-	app->guiManager->RemoveGuiControl(gcSave);
-
 	return true;
 }
 
@@ -331,22 +270,6 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	switch (control->id)
 	{
-	case 6:
-		paused = true;
-		gcResume->state = GuiControlState::DISABLED;
-		gcSettings->state = GuiControlState::DISABLED;
-		gcBackToTitle->state = GuiControlState::DISABLED;
-		gcExit->state = GuiControlState::DISABLED;
-		gcSave->state = GuiControlState::DISABLED;
-		break;
-	case 7:
-		break;
-	case 8:
-		app->sceneManager->ChangeScene("mainmenu");
-		break;
-	case 9:
-		exitPressed = true;
-	break;
 	case 14:
 		if(cauldronSelect == nullptr) cauldronExitPressed = true;
 		break;
@@ -394,16 +317,16 @@ void TavernScene::ManagePotionCreation(Inventory* playerInventory, SDL_Texture* 
 
 	switch (type) {
 	case 1: // CeleritaPotion
-		hasEnoughIngredients = CheckIngredient(playerInventory, "Arnica Plant", 1);
+		hasEnoughIngredients = CheckIngredient(playerInventory, "Arnica Plant", 1) && CheckIngredient(playerInventory, "Witch Hazel Plant", 4);
 		break;
 	case 2: // EtherPotion
-		//TODO: Segun lo que hay en el libro d las pociones, nos falta implementar las otras plantas...... (hay 4 o 5 plantas creo y tenemos 3) :) 
+		hasEnoughIngredients = CheckIngredient(playerInventory, "Comfrey Plant", 4) && CheckIngredient(playerInventory, "Hawthorn Plant", 1);
 		break;
 	case 3: // VitaPotion
-		hasEnoughIngredients = CheckIngredient(playerInventory, "Arnica Plant", 3);
+		hasEnoughIngredients = CheckIngredient(playerInventory, "Arnica Plant", 3) && CheckIngredient(playerInventory, "Hawthorn Plant", 2);
 		break;
 	case 4: // OblitiusPotion
-		//TODO
+		hasEnoughIngredients = CheckIngredient(playerInventory, "Hepatica Plant", 3) && CheckIngredient(playerInventory, "Comfrey Plant", 2);
 		break;
 	}
 
@@ -437,30 +360,56 @@ void TavernScene::CreatePotion()
 
 	bool canCraft = false;
 	std::string potionName;
-	int requiredQuantity = 0;
+	int requiredArnicaQuantity = 0; 
+	int requiredHepaticQuantity = 0; 
+	int requiredHawthornQuantity = 0;
+	int requiredWitchHazelQuantity = 0;
+	int requiredComfreyQuantity = 0;
 
 	switch (type) {
 	case 1: // CeleritaPotion
-		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 1);
+		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 1) && CheckIngredient(playerInventory, "Witch Hazel Plant", 4);
 		potionName = "Celerita Potion";
-		requiredQuantity = 1;
+		requiredArnicaQuantity = 1;
+		requiredWitchHazelQuantity = 4;
 		break;
 	case 2: // EtherPotion
-		//TODO: Añadir lógica si hay ingredientes específicos para EtherPotion
+		canCraft = CheckIngredient(playerInventory, "Comfrey Plant", 4) && CheckIngredient(playerInventory, "Hawthorn Plant", 1);
+		potionName = "Ether Potion";
+		requiredComfreyQuantity = 4;
+		requiredHawthornQuantity = 1; 
 		break;
 	case 3: // VitaPotion
-		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 3);
+		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 3) && CheckIngredient(playerInventory, "Hawthorn Plant", 2);
 		potionName = "Vita Potion";
-		requiredQuantity = 3;
+		requiredArnicaQuantity = 3;
+		requiredHawthornQuantity = 2;
 		break;
 	case 4: // OblitiusPotion
-		// TODO: Añadir lógica si hay ingredientes específicos para OblitiusPotion
+		canCraft = CheckIngredient(playerInventory, "Hepatica Plant", 3) && CheckIngredient(playerInventory, "Comfrey Plant", 2);
+		potionName = "Oblitius Potion";
+		requiredHepaticQuantity = 3;
+		requiredComfreyQuantity = 2;
 		break;
 	}
 
 	if (canCraft) {
-		player->inventory.AddItem(potionName); //TODO: Arreglar!! Porque no me esta sumando la cantidad de la pocion que he creado al darle al boton de accept??? Solo falta q funcione esto
-		RemoveIngredient(playerInventory, "Arnica Plant", requiredQuantity);
+		player->inventory.AddItem(potionName);
+		if (requiredArnicaQuantity > 0) { 
+			RemoveIngredient(playerInventory, "Arnica Plant", requiredArnicaQuantity);
+		}
+		if (requiredWitchHazelQuantity > 0) {
+			RemoveIngredient(playerInventory, "Witch Hazel Plant", requiredWitchHazelQuantity);
+		}
+		if (requiredHepaticQuantity > 0) {
+			RemoveIngredient(playerInventory, "Hepatica Plant", requiredHepaticQuantity);
+		}
+		if (requiredComfreyQuantity > 0) {
+			RemoveIngredient(playerInventory, "Comfrey Plant", requiredComfreyQuantity);
+		}
+		if (requiredHawthornQuantity > 0) {
+			RemoveIngredient(playerInventory, "Hawthorn Plant", requiredHawthornQuantity);
+		}
 	}
 }
 
