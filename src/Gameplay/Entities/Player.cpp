@@ -130,10 +130,10 @@ bool Player::Update(float dt)
 
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
-	if (vida <= 0.0f) {
-		pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0); //TODO: QUITAR ESTO!!! TIENE QUE SER EL SPAWNPOINT DEL PLAYER EN ESE MAPA
-		vida = maxVida;
-	}
+	//if (vida <= 0.0f) {
+	//	pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0); //TODO: QUITAR ESTO!!! TIENE QUE SER EL SPAWNPOINT DEL PLAYER EN ESE MAPA
+	//	vida = maxVida;
+	//}
 	
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
@@ -199,6 +199,8 @@ bool Player::Update(float dt)
 			app->sceneManager->ChangeScene("townscene");
 		}
 	}
+
+	if (vida <= 0) deadPlayer = true;
 
 	return true;
 }

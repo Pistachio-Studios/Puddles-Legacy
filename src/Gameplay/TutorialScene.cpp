@@ -255,6 +255,11 @@ bool TutorialScene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 
+	if (player->deadPlayer) {
+		app->sceneManager->ChangeScene("tavernscene");
+		player->vida = player->maxVida;
+	}
+
 	return true;
 }
 
