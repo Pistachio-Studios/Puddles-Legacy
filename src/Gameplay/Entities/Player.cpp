@@ -58,7 +58,7 @@ bool Player::Start() {
 
 	dashTimer = Timer();
 
-	//texture = app->tex->Load("Assets/Textures/playerx128-test.png");
+	texture = app->tex->Load("Assets/Textures/sombraSabrina.png");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
 	pbody->listener = this;
@@ -83,10 +83,10 @@ bool Player::Start() {
 
 	//Anims
 	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");
-	SabrinaEspadaIdle.speed = 2.0f;
+	SabrinaEspadaIdle.speed = 0.5f;
 
 	SabrinaCetroIdle = *app->animationManager->GetAnimByName("SabrinaCetroIdle");
-	SabrinaCetroIdle.speed = 2.0f;
+	SabrinaCetroIdle.speed = 1.0f;
 
 	SabrinaEspadaMovDelante = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_delante");
 	SabrinaEspadaMovDelante.speed = 2.0f;
@@ -206,13 +206,16 @@ bool Player::Update(float dt)
 	//Animations
 	//Renderizar la animación actual
 	if (currentAnim != nullptr) {
-		app->render->DrawTexture(currentAnim->texture, position.x - 15, position.y - 25, &currentAnim->GetCurrentFrame());
+		SDL_Rect currentFrame = currentAnim->GetCurrentFrame();
+		int textureX = position.x - (currentFrame.w / 2) - 15;
+		int textureY = position.y - (currentFrame.h / 2) - 25;
+		app->render->DrawTexture(currentAnim->texture, textureX, textureY, &currentAnim->GetCurrentFrame());
 	}
 	else {
 		app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 	}
 
-	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
+	app->render->DrawTexture(texture, position.x + 10, position.y + 200, NULL, 1.0f, 0.0, 1.0f, 2);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 
