@@ -214,13 +214,13 @@ bool Player::Update(float dt)
 	//Animations
 	//Renderizar la animación actual
 	if (currentAnim != nullptr) {
-		app->render->DrawTexture(currentAnim->texture, position.x - 15, position.y - 25, &currentAnim->GetCurrentFrame());
+		app->render->DrawTexture(currentAnim->texture, position.x - 40, position.y - 80, &currentAnim->GetCurrentFrame());
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 15, position.y - 25);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 80);
 	}
 
-	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
+	app->render->DrawTexture(texture, position.x - 40, position.y - 80);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 

@@ -50,7 +50,7 @@ bool Npc::Start() {
 	texture2 = app->tex->Load("Assets/Textures/PressE.png");
 	texture3 = app->tex->Load("Assets/Textures/ClickHere.png");
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 256, 256, bodyType::STATIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 128, 256, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
