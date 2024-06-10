@@ -93,14 +93,14 @@
 				<HepaticaPlant x="1700" y="2900" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
 				<HepaticaPlant x="1900" y="2900" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
 				<HepaticaPlant x="2100" y="2900" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
-				<WitchHazelPlant x="1500" y="3200" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
-				<WitchHazelPlant x="1700" y="3200" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
-				<WitchHazelPlant x="1900" y="3200" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
-				<WitchHazelPlant x="2100" y="3200" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
-				<HawthornPlant x="1500" y="3500" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
-				<HawthornPlant x="1700" y="3500" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
-				<HawthornPlant x="1900" y="3500" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
-				<HawthornPlant x="2100" y="3500" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<WitchHazelPlant x="1500" y="3200" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="1700" y="3200" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="1900" y="3200" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="2100" y="3200" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<HawthornPlant x="1500" y="3500" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="1700" y="3500" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="1900" y="3500" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="2100" y="3500" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
 			</Plants>
 		</tutorialscene>
 		<testscene>
