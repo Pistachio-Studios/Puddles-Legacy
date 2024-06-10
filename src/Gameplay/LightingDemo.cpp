@@ -30,6 +30,10 @@ bool LightingDemo::Enter()
         lights[i] = app->lighting->AddLight({ x, y }, radius, { r, g, b, 255 });
     }
 
+    app->render->camera.target = nullptr;
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
+
     return true;
 }
 
