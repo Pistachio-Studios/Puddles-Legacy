@@ -67,7 +67,7 @@ public:
 	SDL_Texture* texture = NULL;
 
 	//Movement
-	int moveSpeed = 2;
+	float moveSpeed = 1.4f;
 	int noSpeed = 0;
 	int updateSpeed;
 	float moveForce = 1.0f;
