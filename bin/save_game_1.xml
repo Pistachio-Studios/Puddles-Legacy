@@ -11,23 +11,25 @@
 	<:anonymous />
 	<animation_manager />
 	<entitymanager>
-		<player x="1464" y="4947" lives="8" mana="46.977623" Level="1">
-			<items quantity="3" />
-			<items quantity="2" />
-			<items quantity="1" />
-			<items quantity="4" />
-			<items quantity="2" />
-			<items quantity="4" />
-			<items quantity="0" />
+		<player x="2806" y="4993" lives="9" mana="5.02241135" Level="1">
+			<item name="Arnica Plant" quantity="1" />
+			<item name="Hepatica Plant" quantity="3" />
+			<item name="Comfrey Plant" quantity="4" />
+			<item name="Witch Hazel Plant" quantity="2" />
+			<item name="Hawthorn Plant" quantity="4" />
+			<item name="Vita Potion" quantity="1" />
+			<item name="Celerita Potion" quantity="5" />
+			<item name="Ether Potion" quantity="2" />
+			<item name="Oblitius Potion" quantity="0" />
 		</player>
 		<enemies>
-			<EnemyBoss x="1396" y="4754" lives="100" />
+			<EnemyBoss x="518" y="2004" lives="100" />
 		</enemies>
 		<enemies>
-			<MiniSpider x="1341" y="4847" lives="1" />
+			<MiniSpider x="2672" y="4973" lives="1" />
 		</enemies>
 		<enemies>
-			<Wasp x="1424" y="4962" lives="7" />
+			<Wasp x="2685" y="5203" lives="15" />
 		</enemies>
 	</entitymanager>
 	<particleManager />
@@ -39,6 +41,6 @@
 	<UI />
 	<debugUI />
 	<renderer>
-		<camera x="-520" y="-4409" />
+		<camera x="-1848" y="-4455" />
 	</renderer>
 </game_state>
