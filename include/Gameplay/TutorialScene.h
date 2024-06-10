@@ -62,13 +62,6 @@ private:
 	GuiControlLabel* gcLives;
 	GuiControlLabel* gcTime;
 
-	GuiControlButton* gcResume;
-	GuiControlButton* gcSave;
-	GuiControlButton* gcSettings;
-	GuiControlButton* gcBackToTitle;
-	GuiControlButton* gcExit;
-
-	bool paused = false;
 	bool exitPressed = false;
 
 	int UIFx;

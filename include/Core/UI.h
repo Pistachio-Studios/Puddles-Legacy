@@ -120,9 +120,16 @@ public:
 	SDL_Texture* klausUnlockedTexture = nullptr;
 	SDL_Texture* bountyUnlockedTexture = nullptr;
 
+	GuiControlButton* gcResume;
+	GuiControlButton* gcSave;
+	GuiControlButton* gcSettings;
+	GuiControlButton* gcBackToTitle;
+	GuiControlButton* gcExit;
+
 	uint windowW, windowH;
 
 	bool openBestiary = false;
+	bool exitPressed = false;
 };
 
 #endif // __UI_H__
