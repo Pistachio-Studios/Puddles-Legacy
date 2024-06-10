@@ -37084,8 +37084,6 @@
    <tile/>
   </data>
  </layer>
-<<<<<<< Updated upstream:bin/Assets/Maps/Mapa_Nivel/bosque.tmx
-=======
  <layer id="15" name="Piedras y Cristales" width="285" height="130">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -74144,7 +74142,6 @@
    <tile/>
   </data>
  </layer>
->>>>>>> Stashed changes:bin/Assets/Maps/Forest-Scene/bosque.tmx
  <layer id="9" name="Hierbajos" width="285" height="130">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -148262,10 +148259,7 @@
  <layer id="5" name="Assets" width="285" height="130">
   <properties>
    <property name="Draw" type="bool" value="true"/>
-<<<<<<< Updated upstream:bin/Assets/Maps/Mapa_Nivel/bosque.tmx
-=======
    <property name="layer" type="int" value="3"/>
->>>>>>> Stashed changes:bin/Assets/Maps/Forest-Scene/bosque.tmx
   </properties>
   <data>
    <tile/>
