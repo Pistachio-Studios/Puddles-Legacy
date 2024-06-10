@@ -259,9 +259,9 @@ public:
 
 	float vida = 15.0f;
 	float maxVida = 15.0f;
-	float str = 10.0f;
-	float inte = 14.0f;
-	float def;
+	float strength = 10.0f;
+	float intelligence = 14.0f;
+	float defense;
 
 	bool bleed = false;
 	int bleedChance = 15; // 15% chance of bleeding
@@ -274,8 +274,8 @@ public:
 	int abylityPoints = 0;
 
 	//Movement
-	float moveForce = 1.0f;
-	float maxSpeed = 5.0f;
+	float moveForce = 1.5f;
+	float maxSpeed = 6.0f;
 
 	//State Machines
 	StateMachine<Player>* movementFSM = nullptr;

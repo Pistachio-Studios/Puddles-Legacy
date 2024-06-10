@@ -116,11 +116,11 @@ bool Player::Update(float dt)
 
 	if (currentClass == PlayerClass::KNIGHT)
 	{
-		def = 15.0f;
+		defense = 15.0f;
 	}
 	else
 	{
-		def = 3.0f;
+		defense = 3.0f;
 	}
 
 	movementFSM->Update(dt);

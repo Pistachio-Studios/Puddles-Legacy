@@ -29,7 +29,7 @@ public:
 
         if (enemyboss->bossBodyAttack.GetCurrentFrameCount() == 5 && enemyboss->isTouchingPlayer) {
             app->audio->PlayFx(enemyboss->bossAttackFx);
-            player->vida -= enemyboss->str;
+            player->vida -= enemyboss->strenght;
         }
 
         if (enemyboss->bossBodyAttack.GetCurrentFrameCount() >= 8) {
