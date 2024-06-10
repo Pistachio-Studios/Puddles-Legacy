@@ -286,12 +286,13 @@ bool Player::LoadState(pugi::xml_node& node)
 }
 
 #pragma region AbilitiesUnlock
-void Player::AbilitySword100() {
+
+void Player::AbilitySword100() { // DONE
 	// Increase player strength +3
 	str += 13.0f;
 }
 
-void Player::AbilitySword110() {
+void Player::AbilitySword110() { // DONE
 	// 15% chance of bleed effect
 	bleed = true;
 }
@@ -316,7 +317,7 @@ void Player::AbilitySword123() {
 	// Area sword attack 100% chance of bleed
 }
 
-void Player::AbilityStaff100() {
+void Player::AbilityStaff100() { // DONE
 	// Increase player intelligence +3
 	inte = 17.0f;
 }
@@ -344,6 +345,7 @@ void Player::AbilityStaff122() {
 void Player::AbilityStaff123() {
 	// Fireball that can pass through enemies and have a 70% chance of burn
 }
+
 #pragma endregion AbilitiesUnlock
 
 bool Player::CleanUp() {
