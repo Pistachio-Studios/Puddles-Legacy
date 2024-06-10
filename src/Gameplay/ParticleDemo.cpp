@@ -63,6 +63,10 @@ bool ParticleDemo::Enter()
 
   /*  particleSource1->anim = smoke;*/
 
+    app->render->camera.target = nullptr;
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
+
     return true;
 }
 
