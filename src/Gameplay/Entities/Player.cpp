@@ -271,7 +271,8 @@ bool Player::Update(float dt)
 		}
 	}
 
-
+	//NO borrar T-T
+	if (vida <= 0) deadPlayer = true;
 
 	return true;
 }

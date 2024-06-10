@@ -27,7 +27,7 @@ bool WitchHazelPlant::Update(float dt)
     app->render->DrawTexture(texture, position.x - 40, position.y - 40);
 
     if (isColliding) {
-        app->render->DrawTexture(texture1, position.x - 40, position.y - 50);
+        app->render->DrawTexture(texture1, position.x - 40, position.y - 90);
         if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
             app->entityManager->GetPlayerEntity()->inventory.AddItem("Witch Hazel Plant");
             app->entityManager->GetPlayerEntity()->bestiary->witchhazelPlantCollected = true;
