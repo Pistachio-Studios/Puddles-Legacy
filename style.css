@@ -1,9 +1,14 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'MiFuentePersonalizada', sans-serif;
     background: url('img/background.jpg') no-repeat center center fixed;
     background-size: cover;
     color: black;
+}
+
+@font-face {
+    font-family: 'MiFuentePersonalizada';
+    src: url('fonts/GFSDidot-Regular.ttf') format('truetype');
 }
 
 header {
@@ -96,7 +101,7 @@ h2 {
     align-items: center;
     flex-wrap: wrap;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(31, 31, 31, 0.8);
     margin: 20px 0;
 }
 
@@ -110,6 +115,22 @@ h2 {
 
 .gallery img:hover {
     transform: scale(1.05);
+}
+
+.about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: rgba(31, 31, 31, 0.8);
+    margin: 20px 0;
+}
+.about-info p{
+    margin-left: 200px;
+    margin-right: 200px;
+    font-size: 17px;
+    color: white;
 }
 
 .left-image {
@@ -200,18 +221,19 @@ h2 {
 .author-info h4 {
     margin-top: 10px;
     margin-bottom: 5px;
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #333;
 }
 
 .author-info p {
     margin: 0;
-    font-size: 0.9em;
+    font-size: 17px;
     color:rgba(31, 31, 31, 0.8);
 }
 
 .author-info a {
     color: #ECAD47;
+    font-size: 17px;
     text-decoration: none;
 }
 
