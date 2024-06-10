@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: url('img/GameTitle.png') no-repeat center center fixed;
+    background: url('img/background.jpg') no-repeat center center fixed;
     background-size: cover;
     color: black;
 }
@@ -20,7 +20,34 @@ header {
 h2 {
     text-align: center;
     color: white;
+    font-size: 40px;
 }
+
+.button-link {
+    position: relative;
+    display: inline-block;
+}
+
+.button-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:  #4d211b;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    pointer-events: none; /* Esto asegura que el texto no sea clickeable */
+}
+
+.button-link img {
+    transition: transform 0.3s ease;
+}
+
+.button-link:hover img {
+    transform: scale(1.1);
+}
+
 
 .nav-buttons a {
     color: white;
@@ -31,7 +58,7 @@ h2 {
 }
 
 .nav-buttons a:hover, .nav-buttons .special-btn {
-    background-color: #ff4081;
+    background-color: #ECAD47;
 }
 
 .hero {
@@ -50,7 +77,7 @@ h2 {
 }
 
 .hero-buttons .hero-btn {
-    background-color: #ff4081;
+    background-color: #ECAD47;
     color: white;
     text-decoration: none;
     padding: 10px 20px;
@@ -60,7 +87,7 @@ h2 {
 }
 
 .hero-buttons .hero-btn:hover {
-    background-color: #e0356f;
+    background-color: #ECAD47;
 }
 
 .gallery {
@@ -92,21 +119,22 @@ h2 {
 }
 
 .authors-table {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 25px;
-    margin-left: 350px;
-    margin-right: 350px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin: 0 auto; /* Centrar horizontalmente */
+    max-width: 1200px; /* Cambia este valor según sea necesario */
 }
 
 .author-card {
+    flex: 1 1 300px;
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
     text-align: center;
-    
 }
 
 .author-card:hover {
@@ -132,14 +160,28 @@ h2 {
     margin-top: 10px;
     margin-bottom: 5px;
     font-size: 1.2em;
+    color: #333;
 }
 
 .author-info p {
     margin: 0;
     font-size: 0.9em;
+    color:rgba(31, 31, 31, 0.8);
 }
 
 .author-info a {
-    color: #ff4081;
+    color: #ECAD47;
     text-decoration: none;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
 }
