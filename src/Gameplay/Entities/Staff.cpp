@@ -67,9 +67,12 @@ void Magic::Delete() {
 }
 
 void Magic::OnCollision(PhysBody* physA, PhysBody* physB) {
-	active = false;
-	explosion->position = { position.x, position.y };
-	explosion->emiting = true;
+	if(!physB->body->GetFixtureList()->IsSensor())
+	{
+		active = false;
+		explosion->position = { position.x, position.y };
+		explosion->emiting = true;
+	}
 }
 
 Staff::Staff() : Entity(EntityType::PLAYER)
@@ -78,6 +81,7 @@ Staff::Staff() : Entity(EntityType::PLAYER)
 
 	texture = app->tex->Load("Assets/Textures/cetro.png");
 	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 20, bodyType::KINEMATIC);
+	pbody->body->GetFixtureList()->SetSensor(true);
 }
 
 Staff::~Staff() {
