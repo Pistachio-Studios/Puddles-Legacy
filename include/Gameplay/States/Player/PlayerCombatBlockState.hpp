@@ -33,6 +33,7 @@ public:
         b2Vec2 playerPos = player->pbody->body->GetPosition();
         b2Vec2 swordPos = { playerPos.x + (float)cos(player->lookingAngle) * radius, playerPos.y + (float)sin(player->lookingAngle) * radius };
         shieldEntity->pbody->body->SetTransform(swordPos, player->lookingAngle);
+        app->audio->PlayFx(player->blockFx);
         if (!app->input->GetMouseButtonDown(3))
         {
             StateMachineReference->ChangeState("idle");
