@@ -442,7 +442,7 @@ void TavernScene::CreatePotion()
 	switch (type) {
 	case 1: // CeleritaPotion
 		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 1);
-		potionName = "CeleritaPotion";
+		potionName = "Celerita Potion";
 		requiredQuantity = 1;
 		break;
 	case 2: // EtherPotion
@@ -450,7 +450,7 @@ void TavernScene::CreatePotion()
 		break;
 	case 3: // VitaPotion
 		canCraft = CheckIngredient(playerInventory, "Arnica Plant", 3);
-		potionName = "VitaPotion";
+		potionName = "Vita Potion";
 		requiredQuantity = 3;
 		break;
 	case 4: // OblitiusPotion
