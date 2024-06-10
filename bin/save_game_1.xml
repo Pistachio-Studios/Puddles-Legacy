@@ -11,25 +11,26 @@
 	<:anonymous />
 	<animation_manager />
 	<entitymanager>
-		<player x="2806" y="4993" lives="9" mana="5.02241135" Level="1">
-			<item name="Arnica Plant" quantity="1" />
-			<item name="Hepatica Plant" quantity="3" />
-			<item name="Comfrey Plant" quantity="4" />
-			<item name="Witch Hazel Plant" quantity="2" />
-			<item name="Hawthorn Plant" quantity="4" />
-			<item name="Vita Potion" quantity="1" />
-			<item name="Celerita Potion" quantity="5" />
-			<item name="Ether Potion" quantity="2" />
-			<item name="Oblitius Potion" quantity="0" />
+		<player x="1481" y="3810" lives="9" mana="93.1583328" Level="1">
+			<inventory name="Arnica Plant" quantity="0" />
+			<inventory name="Hepatica Plant" quantity="0" />
+			<inventory name="Comfrey Plant" quantity="0" />
+			<inventory name="Witch Hazel Plant" quantity="0" />
+			<inventory name="Hawthorn Plant" quantity="0" />
+			<inventory name="Vita Potion" quantity="0" />
+			<inventory name="Celerita Potion" quantity="0" />
+			<inventory name="Ether Potion" quantity="0" />
+			<inventory name="Oblitius Potion" quantity="0" />
+			<bestiary mission1Completed="false" mission2Completed="false" swordAbility100Unlocked="false" swordAbility110Unlocked="false" swordAbility111Unlocked="false" swordAbility112Unlocked="false" swordAbility120Unlocked="false" swordAbility122Unlocked="false" swordAbility123Unlocked="false" staffAbility100Unlocked="false" staffAbility110Unlocked="false" staffAbility111Unlocked="false" staffAbility112Unlocked="false" staffAbility120Unlocked="false" staffAbility122Unlocked="false" staffAbility123Unlocked="false" enemy1Killed="false" enemy2Killed="false" enemy3Killed="false" hepaticaPlantCollected="false" comfreyPlantCollected="false" hawthornPlantCollected="true" witchhazelPlantCollected="false" arnicaPlantCollected="true" klausUnlocked="false" bountyUnlocked="false" />
 		</player>
 		<enemies>
-			<EnemyBoss x="518" y="2004" lives="100" />
+			<EnemyBoss x="1287" y="3600" lives="100" />
 		</enemies>
 		<enemies>
-			<MiniSpider x="2672" y="4973" lives="1" />
+			<MiniSpider x="1391" y="3695" lives="5" />
 		</enemies>
 		<enemies>
-			<Wasp x="2685" y="5203" lives="15" />
+			<Wasp x="1504" y="3854" lives="15" />
 		</enemies>
 	</entitymanager>
 	<particleManager />
@@ -41,6 +42,6 @@
 	<UI />
 	<debugUI />
 	<renderer>
-		<camera x="-1848" y="-4455" />
+		<camera x="-524" y="-3273" />
 	</renderer>
 </game_state>

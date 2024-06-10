@@ -260,15 +260,55 @@ bool Player::SaveState(pugi::xml_node& node) {
 	playerAttributes.append_attribute("mana").set_value(this->mana);
 	playerAttributes.append_attribute("Level").set_value(this->level);
 
-	// TODO save inventory and bestiary
+	//INVENTORY SAVE
 	Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
 	for (int i = 0; i < playerInventory->items.size(); i++)
 	{
 		Item* item = playerInventory->items[i];
-		pugi::xml_node itemNode = playerAttributes.append_child("item"); 
+		pugi::xml_node itemNode = playerAttributes.append_child("inventory"); 
 		itemNode.append_attribute("name").set_value(item->name.c_str());
 		itemNode.append_attribute("quantity").set_value(item->quantity);
 	}
+
+	//BESTIARY SAVE
+	pugi::xml_node bestiaryNode = playerAttributes.append_child("bestiary");
+	// Pag 1 attributes
+	bestiaryNode.append_attribute("mission1Completed").set_value(bestiary->mission1Completed);
+	bestiaryNode.append_attribute("mission2Completed").set_value(bestiary->mission2Completed);
+
+	bestiaryNode.append_attribute("swordAbility100Unlocked").set_value(bestiary->swordAbility100Unlocked);
+	bestiaryNode.append_attribute("swordAbility110Unlocked").set_value(bestiary->swordAbility110Unlocked);
+	bestiaryNode.append_attribute("swordAbility111Unlocked").set_value(bestiary->swordAbility111Unlocked);
+	bestiaryNode.append_attribute("swordAbility112Unlocked").set_value(bestiary->swordAbility112Unlocked);
+	bestiaryNode.append_attribute("swordAbility120Unlocked").set_value(bestiary->swordAbility120Unlocked);
+	bestiaryNode.append_attribute("swordAbility122Unlocked").set_value(bestiary->swordAbility122Unlocked);
+	bestiaryNode.append_attribute("swordAbility123Unlocked").set_value(bestiary->swordAbility123Unlocked); 
+
+	bestiaryNode.append_attribute("staffAbility100Unlocked").set_value(bestiary->staffAbility100Unlocked);
+	bestiaryNode.append_attribute("staffAbility110Unlocked").set_value(bestiary->staffAbility110Unlocked);
+	bestiaryNode.append_attribute("staffAbility111Unlocked").set_value(bestiary->staffAbility111Unlocked); 
+	bestiaryNode.append_attribute("staffAbility112Unlocked").set_value(bestiary->staffAbility112Unlocked);
+	bestiaryNode.append_attribute("staffAbility120Unlocked").set_value(bestiary->staffAbility120Unlocked);
+	bestiaryNode.append_attribute("staffAbility122Unlocked").set_value(bestiary->staffAbility122Unlocked);
+	bestiaryNode.append_attribute("staffAbility123Unlocked").set_value(bestiary->staffAbility123Unlocked);
+	
+	// Pag 2 attributes
+	bestiaryNode.append_attribute("enemy1Killed").set_value(bestiary->enemy1Killed);
+	bestiaryNode.append_attribute("enemy2Killed").set_value(bestiary->enemy2Killed);
+	bestiaryNode.append_attribute("enemy3Killed").set_value(bestiary->enemy3Killed);
+
+	// Pag 3 attributes
+	bestiaryNode.append_attribute("hepaticaPlantCollected").set_value(bestiary->hepaticaPlantCollected); 
+	bestiaryNode.append_attribute("comfreyPlantCollected").set_value(bestiary->comfreyPlantCollected);
+	bestiaryNode.append_attribute("hawthornPlantCollected").set_value(bestiary->hawthornPlantCollected);
+	bestiaryNode.append_attribute("witchhazelPlantCollected").set_value(bestiary->witchhazelPlantCollected);
+	bestiaryNode.append_attribute("arnicaPlantCollected").set_value(bestiary->arnicaPlantCollected);
+
+	// Pag 4 attributes
+	bestiaryNode.append_attribute("klausUnlocked").set_value(bestiary->klausUnlocked); 
+	bestiaryNode.append_attribute("bountyUnlocked").set_value(bestiary->bountyUnlocked);
+
+	//QUESTS SAVE
 
 	return true;
 }
@@ -286,14 +326,54 @@ bool Player::LoadState(pugi::xml_node& node)
 	this->mana = node.child("player").attribute("mana").as_int();
 	this->level = node.child("player").attribute("Level").as_int();
 
+	//INVENTORY LOAD
 	Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
-
-	for (pugi::xml_node itemNode = playerNode.child("item"); itemNode; itemNode = itemNode.next_sibling("item")) {
+	for (pugi::xml_node itemNode = playerNode.child("inventory"); itemNode; itemNode = itemNode.next_sibling("inventory")) {
 		std::string itemName = itemNode.attribute("name").as_string();
 		int itemQuantity = itemNode.attribute("quantity").as_int();
 
 		app->entityManager->GetPlayerEntity()->inventory.AddNItems(itemName, itemQuantity);
 	}
+
+	//BESTIARY LOAD
+	pugi::xml_node bestiaryNode = playerNode.child("bestiary");
+	// Pag 1 attributes
+	bestiary->mission1Completed = bestiaryNode.attribute("mission1Completed").as_bool();
+	bestiary->mission2Completed = bestiaryNode.attribute("mission2Completed").as_bool();
+
+	bestiary->swordAbility100Unlocked = bestiaryNode.attribute("swordAbility100Unlocked").as_bool();
+	bestiary->swordAbility110Unlocked = bestiaryNode.attribute("swordAbility110Unlocked").as_bool();
+	bestiary->swordAbility111Unlocked = bestiaryNode.attribute("swordAbility111Unlocked").as_bool();
+	bestiary->swordAbility112Unlocked = bestiaryNode.attribute("swordAbility112Unlocked").as_bool();
+	bestiary->swordAbility120Unlocked = bestiaryNode.attribute("swordAbility120Unlocked").as_bool();
+	bestiary->swordAbility122Unlocked = bestiaryNode.attribute("swordAbility122Unlocked").as_bool();
+	bestiary->swordAbility123Unlocked = bestiaryNode.attribute("swordAbility123Unlocked").as_bool();
+
+	bestiary->staffAbility100Unlocked = bestiaryNode.attribute("staffAbility100Unlocked").as_bool();
+	bestiary->staffAbility110Unlocked = bestiaryNode.attribute("staffAbility110Unlocked").as_bool();
+	bestiary->staffAbility111Unlocked = bestiaryNode.attribute("staffAbility111Unlocked").as_bool();
+	bestiary->staffAbility112Unlocked = bestiaryNode.attribute("staffAbility112Unlocked").as_bool();
+	bestiary->staffAbility120Unlocked = bestiaryNode.attribute("staffAbility120Unlocked").as_bool();
+	bestiary->staffAbility122Unlocked = bestiaryNode.attribute("staffAbility122Unlocked").as_bool();
+	bestiary->staffAbility123Unlocked = bestiaryNode.attribute("staffAbility123Unlocked").as_bool();
+
+	// Pag 2 attributes
+	bestiary->enemy1Killed = bestiaryNode.attribute("enemy1Killed").as_bool();
+	bestiary->enemy2Killed = bestiaryNode.attribute("enemy2Killed").as_bool(); 
+	bestiary->enemy3Killed = bestiaryNode.attribute("enemy3Killed").as_bool(); 
+
+	// Pag 3 attributes
+	bestiary->hepaticaPlantCollected = bestiaryNode.attribute("hepaticaPlantCollected").as_bool();
+	bestiary->comfreyPlantCollected = bestiaryNode.attribute("comfreyPlantCollected").as_bool();
+	bestiary->hawthornPlantCollected = bestiaryNode.attribute("hawthornPlantCollected").as_bool();
+	bestiary->witchhazelPlantCollected = bestiaryNode.attribute("witchhazelPlantCollected").as_bool();
+	bestiary->arnicaPlantCollected = bestiaryNode.attribute("arnicaPlantCollected").as_bool();
+
+	// Pag 4 attributes
+	bestiary->klausUnlocked = bestiaryNode.attribute("klausUnlocked").as_bool();
+	bestiary->bountyUnlocked = bestiaryNode.attribute("bountyUnlocked").as_bool();
+
+	//QUESTS LOAD
 
 	return true; 
 }
