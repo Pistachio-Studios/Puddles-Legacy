@@ -140,35 +140,35 @@ bool TutorialScene::Enter()
 		std::string plantType = plantNode.name();
 
 		if (plantType == "ArnicaPlant") {
-			Plant* plant = new ArnicaPlant("Arnica Plant", 1, "Permite craftear la poción de cura");
+			Plant* plant = new ArnicaPlant("Arnica Plant", 1, "Para craftear la poción de cura o la de aumentar velocidad");
 			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "HepaticaPlant") {
-			Plant* plant = new HepaticaPlant("Hepatica Plant", 1, "Permite craftear la poción de recuperación de energía");
+			Plant* plant = new HepaticaPlant("Hepatica Plant", 1, "Para craftear la poción de resetear árbol de habilidades");
 			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "ComfreyPlant") {
-			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
+			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Para craftear la poción de resetear árbol de habilidades o la de recuperar energia");
 			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "WitchHazelPlant") {
-			Plant* plant = new WitchHazelPlant("Witch Hazel Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
+			Plant* plant = new WitchHazelPlant("Witch Hazel Plant", 1, "Para craftear la poción de aumentar velocidad");
 			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "HawthornPlant") {
-			Plant* plant = new HawthornPlant("Hawthorn Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
+			Plant* plant = new HawthornPlant("Hawthorn Plant", 1, "Para craftear la poción de cura o la de recuperar energia");
 			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();

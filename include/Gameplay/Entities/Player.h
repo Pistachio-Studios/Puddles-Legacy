@@ -109,15 +109,15 @@ public:
 
 	Inventory() {
 		// Plants
-		// TODO revisar descripciones 
-		items.push_back(new ArnicaPlant("Arnica Plant", 0, " Arreglar ------ Permite craftear la poción de cura"));
-		items.push_back(new HepaticaPlant("Hepatica Plant", 0, " Arreglar------ Permite craftear la poción de recuperación de energía"));
-		items.push_back(new ComfreyPlant("Comfrey Plant", 0, " Arreglar------ Permite craftear la poción de resetear árbol de habilidades"));
-		items.push_back(new WitchHazelPlant("Witch Hazel Plant", 0, " Arreglar------- Permite craftear la poción de resetear árbol de habilidades")); 
-		items.push_back(new HawthornPlant("Hawthorn Plant", 0, " Arreglar------- Permite craftear la poción de resetear árbol de habilidades"));
+		// TODO revisar descripciones - DONE
+		items.push_back(new ArnicaPlant("Arnica Plant", 0, "Para craftear la poción de cura o la de aumentar velocidad"));
+		items.push_back(new HepaticaPlant("Hepatica Plant", 0, "Para craftear la poción de resetear árbol de habilidades"));
+		items.push_back(new ComfreyPlant("Comfrey Plant", 0, "Para craftear la poción de resetear árbol de habilidades o la de recuperar energia"));
+		items.push_back(new WitchHazelPlant("Witch Hazel Plant", 0, "Para craftear la poción de aumentar velocidad")); 
+		items.push_back(new HawthornPlant("Hawthorn Plant", 0, "Para craftear la poción de cura o la de recuperar energia"));
 
 		// Potions
-		// TODO revisar descripciones 
+		// TODO revisar descripciones - DONE
 		items.push_back(new VitaPotion("Vita Potion", 0, "Cura vida"));
 		items.push_back(new CeleritaPotion("Celerita Potion", 0, "Aumenta velocidad"));
 		items.push_back(new EtherPotion("Ether Potion", 0, "Recupera energia"));
