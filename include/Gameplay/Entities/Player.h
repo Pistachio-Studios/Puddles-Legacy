@@ -233,6 +233,22 @@ public:
 	bool SaveState(pugi::xml_node& node) override;
 	bool LoadState(pugi::xml_node& node) override;
 
+	void AbilitySword100();
+	void AbilitySword110();
+	void AbilitySword111();
+	void AbilitySword112();
+	void AbilitySword120();
+	void AbilitySword122();
+	void AbilitySword123();
+
+	void AbilityStaff100();
+	void AbilityStaff110();
+	void AbilityStaff111();
+	void AbilityStaff112();
+	void AbilityStaff120();
+	void AbilityStaff122();
+	void AbilityStaff123();
+
 public:
 
 	Sword* swordEntity = nullptr;
@@ -241,8 +257,17 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
-	float vida = 10.0f;
-	float dano = 4.0f;
+	float vida = 15.0f;
+	float maxVida = 15.0f;
+	float str = 10.0f;
+	float inte = 14.0f;
+	float def;
+
+	bool bleed = false;
+	int bleedChance = 15; // 15% chance of bleeding
+
+	bool stealLife = false;
+	float stealLifeRatio = str * 0.1; // 10% of the damage dealt
 
 	// TODO add final stats
 	int level = 1;
@@ -273,8 +298,8 @@ public:
 	ParticleGenerator* damage = nullptr;
 
 	float mana = 100.0f;
-	uint livesPlayer = 10;
-	int totalLivesPlayer;
+	float manaRegeneration = 2.0f; // 2 mana per second
+
 	bool deadPlayer = false;
 
 	bool sceneChange = false;

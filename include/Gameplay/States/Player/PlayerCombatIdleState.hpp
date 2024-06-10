@@ -28,7 +28,10 @@ public:
         {
             StateMachineReference->ChangeState("block");
         }
-        if(player->mana < 100.0f)player->mana += dt / 1000;
+
+        if ( player->mana < 100.0f ) {
+            player->mana += player->manaRegeneration * (dt / 1000);
+        }
     }
     inline void Exit() override
     {

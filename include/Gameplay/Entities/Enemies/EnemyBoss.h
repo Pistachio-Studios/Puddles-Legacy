@@ -90,9 +90,11 @@ public:
 	iPoint spawnPosition;
 
 	ParticleGenerator* damage = nullptr;
-
-	float vida = 100.0f;
-	float dano = 2.0f;
+	
+	float vida = 75.0f;
+	float str = 13.0f;
+	float inte = 17.0f;
+	float def = 15.0f;
 
 	bool invencible = false;
 
