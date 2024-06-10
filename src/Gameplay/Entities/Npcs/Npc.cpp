@@ -47,8 +47,8 @@ bool Npc::Start() {
 		texture = app->tex->Load(path);
 	}
  
-	texture2 = app->tex->Load("Assets/Textures/pressE.png");
-	texture3 = app->tex->Load("Assets/Textures/click.png");
+	texture2 = app->tex->Load("Assets/Textures/PressE.png");
+	texture3 = app->tex->Load("Assets/Textures/ClickHere.png");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 256, 256, bodyType::STATIC);
 	pbody->listener = this;
@@ -73,18 +73,18 @@ bool Npc::Update(float dt)
 		if (app->sceneManager->GetCurrentScene()->name == "tavernscene") { 
 			int mouseX = METERS_TO_PIXELS(mouseWorldPosition.x);
 			int mouseY = METERS_TO_PIXELS(mouseWorldPosition.y);
-			if (mouseX > position.x - 100 && mouseX < position.x - 100 + width && mouseY > position.y - 150 && mouseY < position.y -150 + height) {
-				app->render->DrawTexture(texture3, position.x, position.y -200);
+			if (touchingNpc) {
+				app->render->DrawTexture(texture3, position.x - 60, position.y - 180);
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
-					npcClick = true;
 					//sale dialogo
 					app->dialogManager->StartDialog(1);
+					app->render->camera.lerpSpeed = 0.0f;
 				}
 			}
 		}
 		else {
 			if (touchingNpc) {
-				app->render->DrawTexture(texture2, position.x, position.y - 150);
+				app->render->DrawTexture(texture2, position.x - 60, position.y - 180);
 				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 					//sale dialogo
 					app->dialogManager->StartDialog(1);
@@ -97,6 +97,8 @@ bool Npc::Update(float dt)
 	else {
 		app->render->DrawTexture(texture, position.x - 128, position.y - 128);
 	}
+
+
 
 	return true;
 }

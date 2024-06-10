@@ -49,6 +49,7 @@ public:
 	SDL_Texture* mouseSelection = nullptr;
 
 	bool hovering = false;
+	bool cauldronIsOpen = false;
 };
 
 #endif // __PLAYERPOINTANDCLICK_H__
