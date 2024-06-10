@@ -31,7 +31,8 @@ bool Shield::Update(float dt)
 	pbody->GetPosition(position.x, position.y);
 	//app->render->DrawRectangle({ position.x, position.y, 30, 10 }, 255, 0, 0);
 	
-	app->audio->PlayFx(app->player->shieldFx);
+	//Revisar para mas tarde
+	//app->audio->PlayFx(player->shieldFx);
 	return true;
 }
 

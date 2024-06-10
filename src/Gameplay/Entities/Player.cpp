@@ -139,6 +139,7 @@ bool Player::Update(float dt)
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
 	if (vida <= 0.0f) {
+		app->audio->PlayFx(deathFx);
 		pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0); //TODO: QUITAR ESTO!!! TIENE QUE SER EL SPAWNPOINT DEL PLAYER EN ESE MAPA
 		vida = maxVida;
 	}
