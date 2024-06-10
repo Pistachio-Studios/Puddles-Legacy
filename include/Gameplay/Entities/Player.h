@@ -163,8 +163,8 @@ public:
 	float def;
 
 	//Movement
-	float moveForce = 1.0f;
-	float maxSpeed = 5.0f;
+	float moveForce = 1.5f;
+	float maxSpeed = 6.0f;
 
 	//State Machines
 	StateMachine<Player>* movementFSM = nullptr;
