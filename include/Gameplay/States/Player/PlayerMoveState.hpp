@@ -20,9 +20,10 @@ public:
     }
     inline void Update(float dt) override
     {
-
         
         PhysBody* pbody = player->pbody;
+
+        player->flip = SDL_FLIP_NONE;
 
         b2Vec2 impulse = { 0, 0 };
 
