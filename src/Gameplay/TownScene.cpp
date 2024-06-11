@@ -182,7 +182,8 @@ bool TownScene::Update(float dt)
 		}
 		return false; // Add a default return statement
 	});
-	movementQuest->SetActive(true);
+	if (!app->questManager->GetQuestById(0)->IsCompleted())
+		movementQuest->SetActive(true);
 
 	Quest* combatQuest = app->questManager->GetQuestById(1);
 	combatQuest->SetCompletionAction([=, this]() -> bool {
@@ -199,7 +200,8 @@ bool TownScene::Update(float dt)
 		}
 		return false; // Add a default return statement
 	});
-	combatQuest->SetActive(true);
+	if (!app->questManager->GetQuestById(1)->IsCompleted())
+		combatQuest->SetActive(true);
 
 	Quest* dodingQuest = app->questManager->GetQuestById(2);
 	dodingQuest->SetCompletionAction([=, this]() -> bool {
@@ -216,7 +218,8 @@ bool TownScene::Update(float dt)
 		}
 		return false; // Add a default return statement
 	});
-	dodingQuest->SetActive(true);
+	if (!app->questManager->GetQuestById(2)->IsCompleted())
+		dodingQuest->SetActive(true);
 
 	Quest* bookQuest = app->questManager->GetQuestById(3);
 	bookQuest->SetCompletionAction([=, this]() -> bool {
@@ -233,7 +236,8 @@ bool TownScene::Update(float dt)
 		}
 		return false; // Add a default return statement
 	});
-	bookQuest->SetActive(true);
+	if (!app->questManager->GetQuestById(3)->IsCompleted())
+		bookQuest->SetActive(true);
 
 	Quest* potionQuest = app->questManager->GetQuestById(4);
 	potionQuest->SetCompletionAction([=, this]() -> bool {
@@ -255,7 +259,34 @@ bool TownScene::Update(float dt)
 		}
 		return false; // Add a default return statement
 	});
-	potionQuest->SetActive(true);
+	if (!app->questManager->GetQuestById(4)->IsCompleted())
+		potionQuest->SetActive(true);
+
+	Quest* speakBarkeeper = app->questManager->GetQuestById(5);
+	speakBarkeeper->SetCompletionAction([=, this]() -> bool {
+		static bool speak;
+		if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			speak = true;
+			speakBarkeeper->AddCompletionValue(100);
+		}
+		if(speak)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(5)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+
+	if (
+		(app->questManager->GetQuestById(0)->IsCompleted() and 
+		app->questManager->GetQuestById(1)->IsCompleted() and 
+		app->questManager->GetQuestById(2)->IsCompleted() and 
+		app->questManager->GetQuestById(3)->IsCompleted() and 
+		app->questManager->GetQuestById(4)->IsCompleted()) or
+		!app->questManager->GetQuestById(5)->IsCompleted()) {
+			app->questManager->GetQuestById(5)->SetActive(true);
+		}
 	#pragma endregion
 
 
