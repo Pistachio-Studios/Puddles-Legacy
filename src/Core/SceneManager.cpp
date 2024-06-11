@@ -2,6 +2,7 @@
 #include "Core/App.h"
 #include "Core/DebugUI.h"
 #include "Core/Render.h"
+#include "Core/Textures.h"
 #include "Gameplay/LightingDemo.h"
 #include "Gameplay/MainMenu.h"
 #include "Gameplay/TeamLogo.h"
@@ -84,6 +85,12 @@ bool SceneManager::Start()
     bool ret = true;
 
     ret = currentScene->Enter();
+
+    for(int i = 0; i < NUMBER_OF_LOADING_TEXTURES; i++)
+    {
+        std::string path = "Assets/Textures/Ilustration/loading" + std::to_string(i + 1) + ".png";
+        loadingTextures.PushBack(app->tex->Load(path.c_str()));
+    }
 
     return ret;
 }
@@ -168,6 +175,15 @@ bool SceneManager::PostUpdate()
             SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 255);
             SDL_Rect rect = {0, 0, app->render->camera.w * fadeRatio, app->render->camera.h};
             SDL_RenderFillRect(app->render->renderer, &rect);
+        }
+        break;
+        case TRANSITION_TYPE::LOADING_SCREEN:
+        {
+            
+            SDL_Rect rect = {0, 0, app->render->camera.w, app->render->camera.h};
+            SDL_RenderCopy(app->render->renderer, loadingTextures[currentLoadingTexture], NULL, &rect);
+            SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)((1 - fadeRatio) * 255.0f));
+            SDL_RenderFillRect(app->render->renderer, &screenRect);
         }
     }
 
@@ -338,6 +354,7 @@ void SceneManager::ChangeScene(SString sceneName, float frames, TRANSITION_TYPE 
             frameCount = 0;
             maxFadeFrames = frames;
             transitionType = transition;
+            currentLoadingTexture = rand() % loadingTextures.Count();
             nextScene = newScene;
         }
     }
