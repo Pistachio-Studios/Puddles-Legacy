@@ -74,6 +74,7 @@ bool PlayerPointAndClick::Update(float dt)
     // In your update function
     mouseJoint->SetTarget(mouseWorldPosition);
 
+    LOG("Pos mouse: %d %d", position.x, position.y);
 
     // effects->position = { position.x, position.y };
 
@@ -137,6 +138,10 @@ void PlayerPointAndClick::OnCollision(PhysBody* physA, PhysBody* physB)
         if (physB->ctype == ColliderType::CAULDRON) {
             LOG("Cauldron open true");
             cauldronIsOpen = true; 
+        }
+        if (physB->ctype == ColliderType::CHOSEWEAPON) {
+            LOG("Chose weapon open true");
+            chooseWeaponIsOpen = true;
         }
     }
 }
