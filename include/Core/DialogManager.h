@@ -80,7 +80,7 @@ private:
 
     // Font
     TTF_Font* font;
-    SDL_Color textColor = { 255, 255, 255, 255 }; // White color
+    SDL_Color textColor = { 0, 0, 0, 255 }; // Black color
     SDL_Color selectedColor = { 255, 0, 255, 255 };
     SDL_Rect textRect;
 
