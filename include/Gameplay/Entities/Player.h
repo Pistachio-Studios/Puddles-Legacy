@@ -278,6 +278,8 @@ public:
 	int level = 1;
 	int abylityPoints = 0;
 
+	iPoint shadowPosition = { 0,0 };
+
 	//Movement
 	float moveForce = 1.5f;
 	float maxSpeed = 6.0f;

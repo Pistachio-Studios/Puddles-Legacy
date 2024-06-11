@@ -211,6 +211,8 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
 
+	shadowPosition = {position.x - 20, position.y + 150};
+
 	movementFSM->Update(dt);
 	combatFSM->Update(dt);
 
@@ -236,7 +238,7 @@ bool Player::Update(float dt)
 		app->render->DrawTexture(texture, position.x - 40, position.y - 80);
 	}
 
-	app->render->DrawTexture(texture1, position.x - 20, position.y + 150);
+	app->render->DrawTexture(texture1, shadowPosition.x, shadowPosition.y);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 
