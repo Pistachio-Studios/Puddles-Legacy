@@ -75,6 +75,11 @@ bool DialogManager::PostUpdate() {
 bool DialogManager::CleanUp() {
     // Cleanup code
     dialogs.clear();
+
+    app->tex->UnLoad(background);
+    app->tex->UnLoad(characterTextures["Sabrina"]);
+    app->tex->UnLoad(characterTextures["Klaus"]);
+    app->tex->UnLoad(characterTextures["Bounty"]);
     return true;
 }
 
