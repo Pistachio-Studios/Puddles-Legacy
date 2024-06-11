@@ -77,6 +77,8 @@ bool TavernScene::Enter()
 	app->map->Enable();
 	app->entityManager->Enable();
 
+	app->render->camera.x = -playerPointAndClick->position.x + (app->render->camera.w / 2);
+	app->render->camera.y = -playerPointAndClick->position.y + (app->render->camera.h / 2);
 	app->render->camera.target = playerPointAndClick;
 	app->render->camera.useInterpolation = true;
 	app->render->camera.lerpSpeed = 2.0f;
