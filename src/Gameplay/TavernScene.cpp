@@ -60,6 +60,7 @@ bool TavernScene::Enter()
 			Npc* npcs = new Npc();
 			app->entityManager->AddEntity(npcs);
 			npcs->parameters = npcsNode;
+			npcs->mouseMode = true;
 			npcs->Start();
 		}
 	}
@@ -125,6 +126,9 @@ bool TavernScene::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	player->pbody->body->GetFixtureList()->SetSensor(true);
+	player->pbody->body->SetTransform(b2Vec2(500, 500), 0);
 	
 	if(freeCam)
 	{
@@ -177,11 +181,13 @@ bool TavernScene::Update(float dt)
 
 		if (cauldronCreatePressed && cauldronSelect == nullptr) {
 			app->guiManager->RemoveGuiControl(cauldronCreate);
+			app->guiManager->RemoveGuiControl(cauldronExit);
+			cauldronCreatePressed = false;
+			cauldronExitPressed = false;
+
 			cauldronSelect = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronSelectTex);
 			cauldronSelectExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
 			potionCreateButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Accept", { (int)windowW / 2 - 100, (int)windowH / 2 + 300, 200, 50 }, this);
-
-			cauldronCreatePressed = false;
 		}
 
 		if (potionCreatePressed && cauldronSelect != nullptr) {
@@ -216,10 +222,13 @@ bool TavernScene::Update(float dt)
 
 			ResetPotionPopUps();
 
+			//cauldron = nullptr; 
+			cauldronExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
+			cauldronCreate = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Create", { (int)windowW / 2 + 320, (int)windowH / 2 + 350, 200, 50 }, this);
+
 			cauldronSelect = nullptr; 
 			selectExitPressed = false; 
-			playerPointAndClick->cauldronIsOpen = false;
-			
+			playerPointAndClick->cauldronIsOpen = true; 
 		}
 
 		

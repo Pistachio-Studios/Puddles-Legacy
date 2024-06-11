@@ -11,6 +11,7 @@
 #include "Core/SceneManager.h"
 #include "Core/Window.h"
 #include "Core/ParticleManager.h"
+#include "Core/Lighting.h"
 #include "Core/AnimationManager.h"
 
 
@@ -160,14 +161,22 @@ bool Player::Start() {
 	damage->color = { 255, 0, 0, 128 };
 	app->particleManager->AddGenerator(damage);
 
+/* 	playerLight = app->lighting->AddLight({ position.x, position.y });
+	playerLight->radius = 5;
+	playerLight->color = { 255, 191, 87, 255 }; */
+
+
 	return true;
 }
 
 bool Player::Update(float dt)
 {
+	/* playerLight->position = { position.x, position.y }; */
+
 	//CHEATS
 	if (godMode) {
 		vida = 10.0f;
+		mana = 100.0f;
 	}
 	if (ghostMode) {
 		pbody->body->GetFixtureList()->SetSensor(ghostMode);
@@ -186,6 +195,10 @@ bool Player::Update(float dt)
 		defense = 3.0f;
 	}
 
+	//Update player position in pixels
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
+
 	movementFSM->Update(dt);
 	combatFSM->Update(dt);
 
@@ -197,10 +210,6 @@ bool Player::Update(float dt)
 	//	pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0); //TODO: QUITAR ESTO!!! TIENE QUE SER EL SPAWNPOINT DEL PLAYER EN ESE MAPA
 	//	vida = maxVida;
 	//}
-	
-	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
 
 	damage->position = { position.x + 46, position.y + 64};
 
@@ -210,13 +219,13 @@ bool Player::Update(float dt)
 	int textureY = position.y - (currentFrame.h / 2) - 25;
 	//Renderizar la animación actual
 	if (currentAnim != nullptr) {
-		app->render->DrawTexture(currentAnim->texture, textureX, textureY, &currentAnim->GetCurrentFrame());
+		app->render->DrawTexture(currentAnim->texture, position.x - 40, position.y - 80, &currentAnim->GetCurrentFrame(), 1.0f, 0.0f, 1.0f, 3, flip);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 15, position.y - 25);
+		app->render->DrawTexture(texture, position.x - 40, position.y - 80);
 	}
 
-	app->render->DrawTexture(texture1, textureX + 20, textureY + 230, NULL, 1.0f, 0.0, 1.0f, 2);
+	app->render->DrawTexture(texture, position.x - 40, position.y - 80);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 
@@ -275,7 +284,8 @@ bool Player::Update(float dt)
 		}
 	}
 
-
+	//NO borrar T-T
+	if (vida <= 0) deadPlayer = true;
 
 	return true;
 }
@@ -310,6 +320,8 @@ void Player::DrawImGui()
 
 	ImGui::Text("Player Strength: %f", strength);
 	ImGui::Text("Player Intelligence: %f", intelligence);
+
+	ImGui::Text("Player Paralysis: %s", paralysis ? "true" : "false");
 
 	ImGui::Text("Blood: %s", bleed ? "true" : "false");
 	ImGui::Text("Bleed chance: %d", bleedChance);
@@ -401,6 +413,7 @@ void Player::AbilityStaff100() { // DONE
 
 void Player::AbilityStaff110() {
 	// +10% chance of paralysis effect
+	paralysis = true;
 }
 
 void Player::AbilityStaff111() {

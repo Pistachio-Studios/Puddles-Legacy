@@ -30,6 +30,7 @@ struct SDL_Texture;
 class Sword;
 class Staff;
 class ParticleGenerator;
+class Light;
 
 enum PlayerClass
 {
@@ -267,6 +268,9 @@ public:
 	bool bleed = false;
 	int bleedChance = 15; // 15% chance of bleeding
 
+	bool paralysis = false;
+	int paralysisChance = 10; // 10% chance of paralysis
+
 	bool stealLife = false;
 	float stealLifeRatio = strength * 0.1; // 10% of the damage dealt
 
@@ -305,6 +309,8 @@ public:
 
 	bool sceneChange = false;
 
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+
 	Timer playerHurtCultdown;
 	Timer dashTimer;
 	float dashCultdown = 5.0f;
@@ -318,6 +324,8 @@ public:
 	//Cheats
 	bool godMode = false;
 	bool ghostMode = false;
+
+	Light* playerLight = nullptr;
 };
 
 #endif // __PLAYER_H__

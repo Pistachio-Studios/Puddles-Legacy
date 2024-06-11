@@ -48,7 +48,11 @@ public:
 
 	void SetAmbientLight(const SDL_Color& color);
 
-	Light* AddLight(iPoint position, int radius, const SDL_Color& color);
+	Light* AddLight(iPoint position, float radius = 1.0f, const SDL_Color& color = { 255, 255, 255, 255 });
+
+	void RemoveLight(Light* light);
+
+	void RemoveAllLights();
 
 private:
 	List<Light*> lights;

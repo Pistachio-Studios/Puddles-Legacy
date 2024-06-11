@@ -20,6 +20,7 @@
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
 #include "Core/Map.h"
+#include "Core/Lighting.h"
 #include "Core/SceneManager.h"
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
@@ -60,6 +61,7 @@ bool TutorialScene::Enter()
 	//app->physics->Enable();
 	app->map->Enable();
 	app->entityManager->Enable();
+	app->lighting->Enable();
 
 	app->render->camera.target = player;
 	app->render->camera.useInterpolation = true;

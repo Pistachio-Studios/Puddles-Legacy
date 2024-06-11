@@ -22,6 +22,7 @@
 #include "Gameplay/States/EnemyBoss/EnemyBossMoveState.hpp"
 #include "Gameplay/States/EnemyBoss/EnemyBossHurtState.hpp"
 #include "Gameplay/States/EnemyBoss/EnemyBossDeadState.hpp"
+#include "Gameplay/States/EnemyBoss/EnemyBossParalyzedState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -78,6 +79,7 @@ bool EnemyBoss::Start() {
 	movementFSM->AddState(new EnemyBossBodyAttackState("bodyAttack"));
 	movementFSM->AddState(new EnemyBossDistanceAttackState("distanceAttack"));
 	movementFSM->AddState(new EnemyBossDeadState("die"));
+	movementFSM->AddState(new EnemyBossParalyzedState("paralyzed"));
 
 	//Animations
 	bossIdle = *app->animationManager->GetAnimByName("Boss_Spider_Idle");
@@ -121,6 +123,21 @@ bool EnemyBoss::Start() {
 	damage->opacityFade = 0.5f;
 	damage->color = { 0, 200, 100, 128 };
 	app->particleManager->AddGenerator(damage);
+
+	paralyzedParticles = new ParticleGenerator();
+	paralyzedParticles->emiting = false;
+	paralyzedParticles->oneShoot = true;
+	paralyzedParticles->lifetime = 0.25f;
+	paralyzedParticles->explosiveness = 1.0f;
+	paralyzedParticles->spawnRadius = 90;
+	paralyzedParticles->size = 30;
+	paralyzedParticles->initialVelocity = 0;
+	paralyzedParticles->Damping = 0.0f;
+	paralyzedParticles->spread = 180;
+	paralyzedParticles->sizeFade = -1.0f;
+	paralyzedParticles->opacityFade = 0.5f;
+	paralyzedParticles->color = { 100, 255, 255, 255 };
+	app->particleManager->AddGenerator(paralyzedParticles);
 
 	return true;
 }

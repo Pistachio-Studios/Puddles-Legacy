@@ -67,6 +67,8 @@ bool MainMenu::Update(float dt)
 
 	app->render->DrawTexture(gameTitle, 0, 0);
 
+	app->render->DrawText("v1.0.0", windowW - 150, windowH - 150, 25, 25, { 255, 255, 255, 255 });
+
 	return true;
 }
 

@@ -16,7 +16,7 @@ void Light::Draw()
     SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_ADD);
     SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
     SDL_SetTextureAlphaMod(texture, color.a);
-    app->render->DrawTextureLegacy(texture, position.x, position.y, NULL, 1.0f, 0.0f, radius, SDL_FLIP_NONE, INT_MAX, INT_MAX, false);
+    app->render->DrawTextureLegacy(texture, position.x - 256 * radius / 2, position.y - 256 * radius / 2, NULL, 1.0f, 0.0f, radius, SDL_FLIP_NONE, INT_MAX, INT_MAX, false);
 }
 
 Lighting::Lighting() : Module()
@@ -142,6 +142,15 @@ void Lighting::DrawImGui()
 bool Lighting::CleanUp()
 {
     LOG("Freeing Lighting");
+    for(ListItem<Light*>* item = lights.start; item; item = item->next)
+    {
+        delete item->data;
+    }
+    lights.Clear();
+
+    app->tex->UnLoad(lightTexture);
+
+    ambientLight = { 255, 255, 255, 255 };
     return true;
 }
 
@@ -150,13 +159,28 @@ void Lighting::SetAmbientLight(const SDL_Color& color)
     ambientLight = color;
 }
 
-Light* Lighting::AddLight(iPoint position, int radius, const SDL_Color& color)
+Light* Lighting::AddLight(iPoint position, float radius, const SDL_Color& color)
 {
     Light* light = new Light();
     light->position = position;
     light->color = color;
+    light->radius = radius;
     light->active = true;
     light->texture = lightTexture;
     lights.Add(light);
     return light;
+}
+void Lighting::RemoveLight(Light *light)
+{
+    lights.Del(lights.At(lights.Find(light)));
+    delete light;
+}
+
+void Lighting::RemoveAllLights()
+{
+    for(ListItem<Light*>* item = lights.start; item; item = item->next)
+    {
+        RemoveLight(item->data);
+    }
+    lights.Clear();
 }

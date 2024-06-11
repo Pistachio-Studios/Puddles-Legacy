@@ -20,6 +20,7 @@
 #include "Gameplay/States/Wasp/WaspMoveState.hpp"
 #include "Gameplay/States/Wasp/WaspHurtState.hpp"
 #include "Gameplay/States/Wasp/WaspDeadState.hpp"
+#include "Gameplay/States/Wasp/WaspParalyzedState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -75,6 +76,7 @@ bool Wasp::Start() {
 	movementFSM->AddState(new WaspHurtState("hurt"));
 	movementFSM->AddState(new WaspAttackState("attack"));
 	movementFSM->AddState(new WaspDeadState("die"));
+	movementFSM->AddState(new WaspParalyzedState("paralyzed"));
 
 	//Animations
 	waspIdle = *app->animationManager->GetAnimByName("Avispa_Idle");
@@ -110,6 +112,21 @@ bool Wasp::Start() {
 	damage->opacityFade = 0.5f;
 	damage->color = { 128, 128, 0, 128 };
 	app->particleManager->AddGenerator(damage);
+
+	paralyzedParticles = new ParticleGenerator();
+	paralyzedParticles->emiting = false;
+	paralyzedParticles->oneShoot = true;
+	paralyzedParticles->lifetime = 0.25f;
+	paralyzedParticles->explosiveness = 1.0f;
+	paralyzedParticles->spawnRadius = 50;
+	paralyzedParticles->size = 30;
+	paralyzedParticles->initialVelocity = 0;
+	paralyzedParticles->Damping = 0.0f;
+	paralyzedParticles->spread = 180;
+	paralyzedParticles->sizeFade = -1.0f;
+	paralyzedParticles->opacityFade = 0.5f;
+	paralyzedParticles->color = { 50, 128, 128, 255 };
+	app->particleManager->AddGenerator(paralyzedParticles);
 
 	return true;
 }
