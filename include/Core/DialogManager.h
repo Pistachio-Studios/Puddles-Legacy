@@ -61,7 +61,6 @@ public:
     bool SaveState(pugi::xml_node&) const;
 
     // Dialog methods
-    void StartDialog(int dialogId);
     void StartDialog(int startDialogId, int endDialogId);
     void NextDialog();
     void EndDialog();
@@ -76,6 +75,7 @@ private:
     map<int, Dialog> dialogs;   // Map of dialog ID to Dialog data
     Dialog* currentDialog;
     int currentDialogId;
+    int endDialogId;
     string currentDialogLine;
 
     // Font
