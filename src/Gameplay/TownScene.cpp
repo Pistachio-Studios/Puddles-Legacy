@@ -12,6 +12,7 @@
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
+#include "Core/QuestManager.h"
   
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
@@ -147,6 +148,115 @@ bool TownScene::Update(float dt)
 		body->body->ApplyLinearImpulseToCenter({ 0.25,0 }, true);
 		t->Start();
 	}
+
+	//Quests
+	#pragma region Quests
+	Quest* movementQuest = app->questManager->GetQuestById(0);
+	movementQuest->SetCompletionAction([=, this]() -> bool {
+		static bool W,S,A,D;
+		if(app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN and !W)
+		{
+			W = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
+		if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN and !S)
+		{
+			S = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
+		if(app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN and !A)
+		{
+			A = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
+		if(app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN and !D)
+		{
+			D = true;
+			movementQuest->AddCompletionValue(100/4);
+		}
+
+		if(W and S and A and D)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(0)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+	movementQuest->SetActive(true);
+
+	Quest* combatQuest = app->questManager->GetQuestById(1);
+	combatQuest->SetCompletionAction([=, this]() -> bool {
+		static bool click;
+		if(app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		{
+			click = true;
+			combatQuest->AddCompletionValue(100);
+		}
+		if(click)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(1)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+	combatQuest->SetActive(true);
+
+	Quest* dodingQuest = app->questManager->GetQuestById(2);
+	dodingQuest->SetCompletionAction([=, this]() -> bool {
+		static bool shift;
+		if(app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN)
+		{
+			shift = true;
+			dodingQuest->AddCompletionValue(100);
+		}
+		if(shift)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(2)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+	dodingQuest->SetActive(true);
+
+	Quest* bookQuest = app->questManager->GetQuestById(3);
+	bookQuest->SetCompletionAction([=, this]() -> bool {
+		static bool book;
+		if(app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+		{
+			book = true;
+			bookQuest->AddCompletionValue(100);
+		}
+		if(book)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(3)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+	bookQuest->SetActive(true);
+
+	Quest* potionQuest = app->questManager->GetQuestById(4);
+	potionQuest->SetCompletionAction([=, this]() -> bool {
+		static bool potion, menu;
+		if(app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+		{
+			potion = true;
+			potionQuest->AddCompletionValue(100 / 2);
+		}
+		if(app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+		{
+			menu = true;
+			potionQuest->AddCompletionValue(100 / 2);
+		}
+		if(potion and menu)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(4)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+	potionQuest->SetActive(true);
+	#pragma endregion
 
 
 	//Cambios de escena sin collider
