@@ -60,7 +60,7 @@ public:
     {
         if(player->currentClass == PlayerClass::KNIGHT and player->mana > 10.0f)
         {
-            
+           
             if (player->timerSword >= player->time)
             {
                 app->audio->PlayFx(player->swordSlashFx);
@@ -93,6 +93,11 @@ public:
 
             if (app->input->GetMouseButtonDown(1))
             {
+                if (player->timerSword >= player->time)
+                {
+                    app->audio->PlayFx(player->firestaffFx);
+                    player->timerSword = 0.0f;
+                }
                 //Animation
                 player->SabrinaCetroAtaque.Update(dt);
                 player->currentAnim = &player->SabrinaCetroAtaque;

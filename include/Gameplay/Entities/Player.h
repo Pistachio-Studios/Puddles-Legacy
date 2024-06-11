@@ -300,7 +300,7 @@ public:
 	PhysBody* sword;
 
 	//soundFX
-	int stepsFx, swordSlashFx;
+	int stepsFx, swordSlashFx, firestaffFx;
 
 	ParticleGenerator* damage = nullptr;
 
