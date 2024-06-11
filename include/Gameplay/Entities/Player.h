@@ -295,7 +295,7 @@ public:
 	b2Vec2 lookingDir;
 	float lookingAngle = 0;
 
-	PlayerClass currentClass = KNIGHT;
+	PlayerClass currentClass;
 
 	Inventory inventory;
 	Bestiary* bestiary = nullptr;

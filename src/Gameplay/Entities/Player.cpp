@@ -174,6 +174,7 @@ bool Player::Start() {
 	playerLight->radius = 5;
 	playerLight->color = { 255, 191, 87, 255 }; */
 
+	currentClass = (PlayerClass)playerCurrentClass;
 
 	return true;
 }
@@ -364,6 +365,7 @@ bool Player::SaveState(pugi::xml_node& node) {
 	pugi::xml_node playerAttributes = node.append_child("player");
 	playerAttributes.append_attribute("x").set_value(this->position.x);
 	playerAttributes.append_attribute("y").set_value(this->position.y);
+	playerAttributes.append_attribute("playerClass").set_value((int)currentClass);
 
 	return true;
 }
@@ -374,6 +376,9 @@ bool Player::LoadState(pugi::xml_node& node)
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
+
+	currentClass = (PlayerClass)node.child("player").attribute("playerClass").as_int();
+	playerCurrentClass = (int)currentClass;
 
 	return true;
 }

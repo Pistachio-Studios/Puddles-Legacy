@@ -167,5 +167,6 @@ extern bool fpsLimiter;
 extern bool freeCam;
 extern bool paused;
 extern int currentSlot;
+extern int playerCurrentClass;
 
 #endif	// __APP_H__

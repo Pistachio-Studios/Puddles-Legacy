@@ -348,11 +348,14 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 21:
 		chooseSwordPressed = true;
+		chooseCetroPressed = false;
+		playerCurrentClass = 0;
 		break;
 	case 22:
 		chooseCetroPressed = true;
+		chooseSwordPressed = false;
+		playerCurrentClass = 1;
 		break;
-
 	}
 
 	return true;
