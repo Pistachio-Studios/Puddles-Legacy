@@ -160,9 +160,9 @@ bool Player::Start() {
 	damage->color = { 255, 0, 0, 128 };
 	app->particleManager->AddGenerator(damage);
 
-	playerLight = app->lighting->AddLight({ position.x, position.y });
+/* 	playerLight = app->lighting->AddLight({ position.x, position.y });
 	playerLight->radius = 5;
-	playerLight->color = { 255, 191, 87, 255 };
+	playerLight->color = { 255, 191, 87, 255 }; */
 
 
 	return true;
@@ -170,7 +170,7 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	playerLight->position = { position.x, position.y };
+	/* playerLight->position = { position.x, position.y }; */
 
 	//CHEATS
 	if (godMode) {

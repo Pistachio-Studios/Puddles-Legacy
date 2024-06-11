@@ -6,6 +6,7 @@
 #include "Core/Map.h"
 #include "Core/Physics.h"
 #include "Core/Window.h"
+#include "Core/Lighting.h"
 #include "Gameplay/Scene.h"
 
 #include "Utils/Defs.h"
@@ -256,6 +257,11 @@ bool Map::Load(SString mapFileName)
     if (ret == true)
     {
         ret = LoadColliders(mapFileXML);
+    }
+
+    if (ret == true)
+    {
+        ret = LoadLights(mapFileXML);
     }
     
     if(ret == true)
@@ -532,7 +538,56 @@ bool Map::LoadColliders(pugi::xml_node mapFile)
     return ret;
 }
 
-// L13: Create navigationMap map for pathfinding
+bool Map::LoadLights(pugi::xml_node mapFile)
+{
+    bool ret = true; 
+    uint scale = app->win->GetScale();
+
+    pugi::xml_node objectGroup;
+    for (objectGroup = mapFile.child("map").child("objectgroup"); objectGroup && ret; objectGroup = objectGroup.next_sibling("objectgroup"))
+    {
+        if(SString(objectGroup.attribute("class").as_string()) == "lighting")
+        {
+            pugi::xml_node properties = objectGroup.child("properties");
+            pugi::xml_node property = properties.child("property");
+            SString ambientColorProperty = property.attribute("value").as_string();
+            
+            if (ambientColorProperty == "")
+            {
+                app->lighting->SetAmbientLight({ 255, 255, 255, 255 });
+            }else
+            {
+                SDL_Color ambientColor;
+                sscanf(ambientColorProperty.GetString(), "#%02hhx%02hhx%02hhx%02hhx", &ambientColor.a, &ambientColor.r, &ambientColor.g, &ambientColor.b);
+                app->lighting->SetAmbientLight(ambientColor);
+            }
+
+            pugi::xml_node light;
+            for (light = objectGroup.child("object"); light && ret; light = light.next_sibling("object"))
+            {
+                float radius = light.attribute("width").as_float() / 256;
+                iPoint pos = { light.attribute("x").as_int() + light.attribute("width").as_int() / 2, light.attribute("y").as_int() + light.attribute("width").as_int() / 2 };
+                SString colorProperty = light.child("properties").child("property").attribute("value").as_string();
+                SDL_Color color;
+
+                if(colorProperty == "")
+                {
+                    color = { 255, 255, 255, 255 };
+                }
+                else
+                {
+                    sscanf(colorProperty.GetString(), "#%02hhx%02hhx%02hhx%02hhx", &color.a, &color.r, &color.g, &color.b);
+                }
+
+                app->lighting->AddLight(pos, radius, color);
+            }
+        }
+    }
+
+    return true;
+}
+
+ // L13: Create navigationMap map for pathfinding
 void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
 {
     bool ret = false;

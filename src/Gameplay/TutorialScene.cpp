@@ -70,8 +70,6 @@ bool TutorialScene::Enter()
 
 	playingTime = new Timer();
 
-	app->lighting->SetAmbientLight({ 60, 50, 70, 255 });
-
 	//Get the size of the texture
 	//app->tex->GetSize(img, texW, texH);
 
