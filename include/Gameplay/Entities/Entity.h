@@ -25,6 +25,8 @@ enum class EntityType
 	MAGIC,
 	ITEM,
 	BULLET,
+	BUTTON,
+	BALL,
 	UNKNOWN
 };
 
@@ -111,6 +113,7 @@ public:
 	// want our Entity class, maybe it's not renderable...
 	iPoint position; 
 	iPoint newPosition;
+
 	bool renderable = true;
 
 	bool entityDebugDraw = false;

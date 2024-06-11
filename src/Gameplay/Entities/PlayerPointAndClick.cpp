@@ -52,9 +52,11 @@ bool PlayerPointAndClick::Start()
     // Create the mouse joint
     mouseJoint = (b2MouseJoint*)pbody->body->GetWorld()->CreateJoint(&jointDef);
 
+    /*
     effects = new ParticleGenerator();
     effects->emiting = true;
     app->particleManager->AddGenerator(effects);
+    */
 
     mouseNoSelection = app->tex->Load("Assets/Textures/cursors/kenney_cursor-pack/Vector/Basic/hand_open.svg");
     mouseSelection = app->tex->Load("Assets/Textures/cursors/kenney_cursor-pack/Vector/Basic/hand_point.svg");
@@ -73,7 +75,7 @@ bool PlayerPointAndClick::Update(float dt)
     mouseJoint->SetTarget(mouseWorldPosition);
 
 
-    effects->position = { position.x, position.y };
+    // effects->position = { position.x, position.y };
 
    if(hovering)
         app->render->DrawTextureLegacy(mouseSelection, app->input->GetMouseX(), app->input->GetMouseY(), NULL, 0.0f);

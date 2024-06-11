@@ -13,6 +13,7 @@
 #include "Core/ParticleManager.h"
 #include "Core/Lighting.h"
 #include "Core/AnimationManager.h"
+#include "Core/Audio.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -82,6 +83,15 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatIdleState("idle"));
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
+
+	// Audios
+
+	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
+	swordSlashFx = app->audio->LoadFx(parameters.attribute("swordSlashFx").as_string());
+	firestaffFx = app->audio->LoadFx(parameters.attribute("fireStaffFx").as_string());
+	deathSabrinaFx = app->audio->LoadFx(parameters.attribute("deathSabrinaFx").as_string());
+	damagedSabrinaFx = app->audio->LoadFx(parameters.attribute("damagedSabrinaFx").as_string());
+	blockFx = app->audio->LoadFx(parameters.attribute("blockFx").as_string());
 
 	//Anims
 	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");
@@ -172,6 +182,8 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	/* playerLight->position = { position.x, position.y }; */
+	timerSteps += dt;
+	timerSword += dt;
 
 	//CHEATS
 	if (godMode) {
@@ -202,8 +214,6 @@ bool Player::Update(float dt)
 	movementFSM->Update(dt);
 	combatFSM->Update(dt);
 
-	inventory.Update(dt);
-
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
 	//if (vida <= 0.0f) {
@@ -211,6 +221,7 @@ bool Player::Update(float dt)
 	//	vida = maxVida;
 	//}
 
+	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 	damage->position = { position.x + 46, position.y + 64};
 
 	//Animations
@@ -288,11 +299,8 @@ bool Player::Update(float dt)
 	if (vida <= 0) {
 		vida = 0.0f;
 		deadPlayer = true;
+		app->audio->PlayFx(deathSabrinaFx);
 	}
-
-	LOG("Vida: %f", vida);
-	LOG("Dead: %x", deadPlayer);
-	LOG("Pos: %d, %d", position.x, position.y);
 
 	return true;
 }
@@ -315,9 +323,6 @@ void Player::DrawImGui()
 	inventory.DrawImGui();
 
 	ImGui::Text("Player Class: %s", currentClass == PlayerClass::KNIGHT ? "KNIGHT" : "WIZARD");
-
-	ImGui::Text("Player Movement State: %s", movementFSM->GetCurrentState().name.GetString());
-	ImGui::Text("Player Combat State: %s", combatFSM->GetCurrentState().name.GetString());
 
 	ImGui::Text("player hurt cooldown: %f", playerHurtCultdown.ReadMSec());
 
@@ -363,8 +368,6 @@ bool Player::SaveState(pugi::xml_node& node) {
 	pugi::xml_node playerAttributes = node.append_child("player");
 	playerAttributes.append_attribute("x").set_value(this->position.x);
 	playerAttributes.append_attribute("y").set_value(this->position.y);
-
-	// TODO save inventory and bestiary
 
 	return true;
 }
@@ -466,6 +469,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if(playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 5.0f;
+			app->audio->PlayFx(damagedSabrinaFx);
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
@@ -474,6 +478,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 5.0f;
+			app->audio->PlayFx(damagedSabrinaFx);
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
@@ -482,12 +487,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 13.0f;
+			app->audio->PlayFx(damagedSabrinaFx);
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
 		break;
 	case ColliderType::BULLET:
 		vida -= 7.0f;
+		app->audio->PlayFx(damagedSabrinaFx);
 		damage->emiting = true;
 		break;
 	}

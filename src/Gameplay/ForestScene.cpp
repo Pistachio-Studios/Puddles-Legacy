@@ -1,6 +1,8 @@
 #include "Core/App.h"
 #include "Core/Input.h"
 #include "Core/Render.h"
+#include "Core/Audio.h"
+#include "Core/Textures.h"
 #include "Core/Window.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
@@ -10,7 +12,12 @@
 #include "Gameplay/Entities/Npcs/Loco.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
+#include "Gameplay/Entities/Items/Button.h"
+#include "Gameplay/Entities/Items/Ball.h"
 #include "Gameplay/Entities/Items/Plant.h"
+#include "Gameplay/Entities/Enemies/EnemyBoss.h"
+#include "Gameplay/Entities/Enemies/Wasp.h"
+#include "Gameplay/Entities/Enemies/MiniSpider.h"
 #include "Utils/SString.h"
 #include "Utils/Timer.h"
 #include "Utils/Log.h"
@@ -47,40 +54,30 @@ bool ForestScene::Enter()
 		app->render->camera.y = parameters.child("camera").attribute("y").as_int();
 	}
 
-	// Enemies
-	// TODO Load the enemies from the config file
-	/*
+	//Enemies
 	if (parameters.child("enemies").child("EnemyBoss")) {
 		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
 		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
-		enemyboss->Start();
+		enemyboss->Enable();
 	}
 
 	if (parameters.child("enemies"))
 	{
 		pugi::xml_node enemies = parameters.child("enemies");
 
-		for (pugi::xml_node FlyingEnemyNode = enemies.child("FlyingEnemy"); FlyingEnemyNode; FlyingEnemyNode = FlyingEnemyNode.next_sibling("FlyingEnemy"))
+		for (pugi::xml_node MiniSpiderNode = enemies.child("MiniSpider"); MiniSpiderNode; MiniSpiderNode = MiniSpiderNode.next_sibling("MiniSpider"))
 		{
-			FlyingEnemy* flyingenemy = (FlyingEnemy*)app->entityManager->CreateEntity(EntityType::FLYINGENEMY);
-			flyingenemy->parameters = FlyingEnemyNode;
-			flyingenemy->Start();
+			MiniSpider* minispider = (MiniSpider*)app->entityManager->CreateEntity(EntityType::MINISPIDER);
+			minispider->parameters = MiniSpiderNode;
+			minispider->Enable();
 		}
 
-		for (pugi::xml_node CentipideEnemyNode = enemies.child("CentipideEnemy"); CentipideEnemyNode; CentipideEnemyNode = CentipideEnemyNode.next_sibling("CentipideEnemy"))
+		for (pugi::xml_node WaspNode = enemies.child("Wasp"); WaspNode; WaspNode = WaspNode.next_sibling("Wasp"))
 		{
-			CentipideEnemy* centipidenemy = (CentipideEnemy*)app->entityManager->CreateEntity(EntityType::CENTIPIDEENEMY);
-			centipidenemy->parameters = CentipideEnemyNode;
-			centipidenemy->Start();
+			Wasp* wasp = (Wasp*)app->entityManager->CreateEntity(EntityType::WASP);
+			wasp->parameters = WaspNode;
+			wasp->Enable();
 		}
-	}
-	*/
-
-	//PARA PRUEBAS, BORRAR CUANDO SE HAGA MERGE CON LEVEL DESIGN!!!!
-	if (parameters.child("enemies").child("EnemyBoss")) {
-		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
-		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
-		enemyboss->Start();
 	}
 
 	if (parameters.child("Npcs").child("loco")) {
@@ -115,42 +112,74 @@ bool ForestScene::Enter()
 			player->inventory.AddItem("Oblitius Potion");
 	}
 
+	pugi::xml_node assetsNode = parameters.child("assets");
+
+	pugi::xml_node buttonNode = assetsNode.child("button");
+
+	for (int i = 0; buttonNode.attribute("type").as_int() == 1; ++i) {
+		buttonList[i] = new Button();
+		app->entityManager->AddEntity(buttonList[i]);
+		buttonList[i]->parameters = buttonNode;
+		buttonList[i]->Enable();
+		buttonNode = buttonNode.next_sibling("button");
+	}
+
+	for (int i = 0; buttonNode.attribute("type").as_int() == 2; ++i) {
+		buttonColourList[i] = new Button();
+		app->entityManager->AddEntity(buttonColourList[i]);
+		buttonColourList[i]->parameters = buttonNode;
+		buttonColourList[i]->Enable();
+		buttonNode = buttonNode.next_sibling("button");
+	}
+
+	for (int i = 0; buttonNode.attribute("type").as_int() == 3; ++i) {
+		buttonBallList[i] = new Button();
+		app->entityManager->AddEntity(buttonBallList[i]);
+		buttonBallList[i]->parameters = buttonNode;
+		buttonBallList[i]->Enable();
+		buttonNode = buttonNode.next_sibling("button");
+	}
+
+	pugi::xml_node ballNode = assetsNode.child("ball");
 	
+	for (int i = 0; ballNode; ++i){
+		ballList[i] = new Ball();
+		app->entityManager->AddEntity(ballList[i]);
+		ballList[i]->parameters = ballNode;
+		ballList[i]->Enable();
+		ballNode = ballNode.next_sibling("ball");
+	}
+
 	for (pugi::xml_node plantNode = parameters.child("Plants").first_child(); plantNode; plantNode = plantNode.next_sibling())
 	{
 		std::string plantType = plantNode.name();
 
 		if (plantType == "ArnicaPlant") {
-			Plant* plant = new ArnicaPlant("Arnica Plant", 1, "Para craftear la poción de cura o la de aumentar velocidad");
-			app->entityManager->AddEntity(plant);
+			Plant* plant = new ArnicaPlant("Arnica Plant", 1, "Para craftear la poción de cura o la de aumentar velocidad");			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "HepaticaPlant") {
-			Plant* plant = new HepaticaPlant("Hepatica Plant", 1, "Para craftear la poción de resetear árbol de habilidades");
-			app->entityManager->AddEntity(plant);
+			Plant* plant = new HepaticaPlant("Hepatica Plant", 1, "Para craftear la poción de resetear árbol de habilidades");			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "ComfreyPlant") {
-			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Para craftear la poción de resetear árbol de habilidades o la de recuperar energia");
-			app->entityManager->AddEntity(plant);
+			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Para craftear la poción de resetear árbol de habilidades o la de recuperar energia");			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "WitchHazelPlant") {
-			Plant* plant = new WitchHazelPlant("Witch Hazel Plant", 1, "Para craftear la poción de aumentar velocidad");
-			app->entityManager->AddEntity(plant);
+			Plant* plant = new WitchHazelPlant("Witch Hazel Plant", 1, "Para craftear la poción de aumentar velocidad");			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "HawthornPlant") {
-			Plant* plant = new HawthornPlant("Hawthorn Plant", 1, "Para craftear la poción de cura o la de recuperar energia");
-			app->entityManager->AddEntity(plant);
+			Plant* plant = new HawthornPlant("Hawthorn Plant", 1, "Para craftear la poción de cura o la de recuperar energia");			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
@@ -161,6 +190,8 @@ bool ForestScene::Enter()
 	app->map->Enable();
 	app->entityManager->Enable();
 
+	app->render->camera.x = -player->position.x + (app->render->camera.w / 2);
+	app->render->camera.y = -player->position.y + (app->render->camera.h / 2);
 	app->render->camera.target = player;
 	app->render->camera.useInterpolation = true;
 	app->render->camera.lerpSpeed = 4.0f;
@@ -176,6 +207,16 @@ bool ForestScene::Enter()
 
 	loseScreenTex = app->tex->Load("Assets/Textures/loseScreen.png"); 
 	winScreenTex = app->tex->Load("Assets/Textures/winScreenProvisional.png"); 
+
+	bush = app->tex->Load("Assets/Maps/Forest-Scene/bush.PNG");
+
+	puzzleFx = app->audio->LoadFx(parameters.child("map").attribute("puzzleFxPath").as_string());
+
+	door1Closed = false;
+	door3Closed = false;
+	puzzle1 = false;
+	puzzle2 = false;
+	puzzle3 = false;
 
 	return true;
 }
@@ -212,30 +253,6 @@ bool ForestScene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 
-	//if (app->entityManager->GetPlayerEntity()->position.x <= 0 || app->render->camera.x <= 0) {
-
-	//	app->entityManager->GetPlayerEntity()->position.x = 0;
-	//	app->render->camera.x = 0;
-	//}
-
-	//if (app->entityManager->GetPlayerEntity()->position.x >= 5760 || app->render->camera.x >= 5760) {
-
-	//	app->entityManager->GetPlayerEntity()->position.x = 5760;
-	//	app->render->camera.x = 5760;
-	//}
-
-	//if (app->entityManager->GetPlayerEntity()->position.y <= 0 || app->render->camera.y <= 0) {
-
-	//	app->entityManager->GetPlayerEntity()->position.y = 0;
-	//	app->render->camera.x = 0;
-	//}
-
-	//if (app->entityManager->GetPlayerEntity()->position.y >= 5376 || app->render->camera.y >= 5376) {
-
-	//	app->entityManager->GetPlayerEntity()->position.y = 5376;
-	//	app->render->camera.x = 5376;
-	//}
-
 	//Cambios de escena sin collider
 	//Inicio a lvl1
 	if (app->entityManager->GetPlayerEntity()->position.x >= 33408 && app->entityManager->GetPlayerEntity()->position.x <= 33792 && app->entityManager->GetPlayerEntity()->position.y >= 896 && app->entityManager->GetPlayerEntity()->position.y <= 1024) {
@@ -265,6 +282,95 @@ bool ForestScene::Update(float dt)
 	if (app->entityManager->GetPlayerEntity()->position.x >= 29111 && app->entityManager->GetPlayerEntity()->position.x <= 29184 && app->entityManager->GetPlayerEntity()->position.y >= 13696 && app->entityManager->GetPlayerEntity()->position.y <= 14208) {
 		player->pbody->body->SetTransform({ 673,295 }, 0);
 	}
+
+	//puzzle1
+	if (player->position.y > 4350 && player->position.x > 3776 && player->position.x < 4297 && !door1Closed && !puzzle1) {
+		door1Closed = true;
+		bushPbody = app->physics->CreateRectangle(4096, 4096, 512, 384, bodyType::STATIC);
+		bushPbody->ctype = ColliderType::LIMITS;
+		int i= 4297;
+		/*if(i > 3776)
+		{
+			app->render->DrawTexture(bush, i-1, 4000, 0, 1.0f);
+		}*/
+	}
+
+	if (door1Closed) {
+		app->render->DrawTexture(bush, 3776, 3953, 0, 1.0f, 0.0f, 0.6f);
+	}
+
+	if (buttonList[0]->pisada && buttonList[1]->pisada && buttonList[2]->pisada && buttonList[3]->pisada && door1Closed && !puzzle1) {
+		puzzle1 = true;
+		app->audio->PlayFx(puzzleFx);
+		door1Closed = false;
+		int i = 3776;
+		/*if (i < 4297)
+		{
+			app->render->DrawTexture(bush, i + 1, 4000, 0, 1.0f);
+		}*/
+		app->physics->DestroyBody(bushPbody);
+	}
+
+	if ((buttonList[4]->pisada || buttonList[5]->pisada) && !puzzle1) {
+		for (int i = 0; i < 6; i++)
+		{
+			buttonList[i]->pisada = false;
+		}
+	}
+
+
+	//puzzle 2
+	
+	if ((PIXEL_TO_METERS(ballList[0]->position.DistanceTo(buttonBallList[0]->position)) < 0.5f)) {
+		buttonBallList[0]->pisada = true;
+		ballList[0]->placed = true;
+	}
+
+	if ((PIXEL_TO_METERS(ballList[1]->position.DistanceTo(buttonBallList[1]->position)) < 0.5f)) {
+		buttonBallList[1]->pisada = true;
+		ballList[1]->placed = true;
+	}
+
+	if (buttonBallList[0]->pisada && buttonBallList[1]->pisada && !puzzle2) {
+		puzzle2 = true;
+		app->audio->PlayFx(puzzleFx);
+	}
+
+
+	//puzzle 3
+
+	if (player->position.x > 26900 && player->position.y > 14066 && player->position.y < 144475 && !door3Closed && !puzzle3) {
+		door3Closed = true;
+		bushPbody = app->physics->CreateRectangle(26668, 14311, 384, 512, bodyType::STATIC);
+		bushPbody->ctype = ColliderType::LIMITS;
+		int i = 4297;
+		/*if(i > 3776)
+		{
+			app->render->DrawTexture(bush, i-1, 4000, 0, 1.0f);
+		}*/
+	}
+
+	if (door3Closed) {
+		app->render->DrawTexture(bush, 26386, 14166, 0, 1.0f, 90.0f, 0.6f);
+	}
+
+	if (buttonColourList[0]->colour == 2 && buttonColourList[1]->colour == 5 && buttonColourList[2]->colour == 1 && buttonColourList[3]->colour == 4 && buttonColourList[4]->colour == 3 && door3Closed && !puzzle3) {
+		puzzle3 = true;
+		app->audio->PlayFx(puzzleFx);
+		door3Closed = false;
+		int i = 3776;
+		/*if (i < 4297)
+		{
+			app->render->DrawTexture(bush, i + 1, 4000, 0, 1.0f);
+		}*/
+		app->physics->DestroyBody(bushPbody);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
+		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(2816), PIXEL_TO_METERS(13568)), 0);
+	}
+	
+	LOG("x: %i   y: %i", player->position.x, player->position.y);
 
 	if (player->deadPlayer) {
 		app->render->camera.lerpSpeed = 0.0f; 
@@ -322,6 +428,8 @@ bool ForestScene::Exit()
 bool ForestScene::CleanUp()
 {
 	LOG("Freeing testscene");
+
+	app->tex->UnLoad(bush);
 
 	return true;
 }

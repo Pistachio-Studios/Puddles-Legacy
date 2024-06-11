@@ -32,6 +32,7 @@
 		<mainmenu>
 			<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png" FxPath="Assets/Audio/Fx/UI/UIButton.ogg" />
 		</mainmenu>
+		<credits x="0" y="0" texturepath="Assets/Textures/Credits.png" FxPath="Assets/Audio/Fx/UI/UIButton.ogg" />
 		<level1scene>
 			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx" />
 			<camera x="-530" y="-1949" />
@@ -39,12 +40,117 @@
 			<enemies />
 		</level1scene>
 		<forestscene>
-			<map path="Assets/Maps/Forest-Scene/" name="bosque.tmx" />
+			<map path="Assets/Maps/Forest-Scene/" name="bosque.tmx" puzzleFxPath="Assets/Audio/Others/puzzleFx.ogg" />
 			<camera x="-32545" y="-4610" />
 			<player x="33536" y="5248" texturepath="Assets/Textures/Player.png" />
+			<assets>
+				<button x=" 3840" y ="5632" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
+				<button x=" 3840" y ="4992" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
+				<button x=" 4864" y ="4480" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
+				<button x=" 5504" y ="5504" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
+				<button x=" 4352" y ="6016" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
+				<button x=" 5376" y ="4736" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
+				<button x=" 27264" y ="12160" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
+				<button x=" 28544" y ="12544" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
+				<button x=" 27392" y ="13312" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
+				<button x=" 28416" y ="14720" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
+				<button x=" 27904" y ="11520" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
+				<button x=" 896" y ="9216" type="3" colour="1" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
+				<button x=" 5376" y ="9216" type="3" colour="2" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
+				<ball x="2816" y= "13568" colour="1" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
+				<ball x="3968" y= "13568" colour="2" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
+			</assets>
 			<enemies>
-				<EnemyBoss x="32769" y="3488" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
+				<EnemyBoss x="25088" y="11515" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
+				<MiniSpider x="1021" y="2560" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="4224" y="5632" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="5246" y="4736" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="3779" y="512" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="5385" y="3139" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="11008" y="1928" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="15748" y="3196" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="13440" y="3840" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="15485" y="5624" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="10232" y="4736" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="3964" y="13312" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="2806" y="15352" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="1188" y="9600" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="764" y="10870" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="5932" y="9256" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="5748" y="10992" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="13040" y="9344" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="15424" y="9308" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="15380" y="11904" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="15276" y="13476" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="12860" y="15356" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="12160" y="12416" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="19968" y="1156" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="21112" y="1488" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="19720" y="5248" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="25672" y="3372" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="25592" y="4860" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="25432" y="616" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="20384" y="12872" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="20664" y="14336" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="22268" y="10992" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<MiniSpider x="22408" y="13428" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
+				<Wasp x="894" y="4858" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="2048" y="4608" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="2861" y="1021" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="4030" y="1021" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="5370" y="2261" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="13440" y="1028" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="13704" y="2052" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="15488" y="2428" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="13873" y="4352" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="11516" y="4100" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="11264" y="5508" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="3324" y="9592" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="2684" y="12800" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="4868" y="15740" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="703" y="9209" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="1145" y="10445" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="5436" y="9632" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="5876" y="10348" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="10036" y="9564" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="12280" y="9928" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="15896" y="12684" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="12128" y="13612" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="13436" y="12536" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="9920" y="11776" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="19624" y="3088" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="22016" y="3820" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="22784" y="2952" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="23292" y="3964" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="24708" y="1476" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="26072" y="1328" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="19608" y="13416" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="19696" y="10760" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="20456" y="10248" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="22784" y="10376" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="23268" y="12880" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
+				<Wasp x="22700" y="14484" damageFxPath="Assets/Audio/Fx/Enemies/Wasp/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/Wasp/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/Wasp/dieFx.ogg" />
 			</enemies>
+			<Plants>
+				<ArnicaPlant x="572" y="5052" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="5324" y="5945" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="11873" y="9027" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="24485" y="14082" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ComfreyPlant x="3888" y="1342" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="16072" y="2392" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="25894" y="3876" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<HepaticaPlant x="15809" y="5927" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="924" y="11291" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="19264" y="2744" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="25842" y="5158" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<WitchHazelPlant x="15196" y="3544" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="15515" y="13939" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="19233" y="10111" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<HawthornPlant x="6020" y="11148" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="8896" y="9148" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="26873" y="1779" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="27282" y="11818" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+			</Plants>
 		</forestscene>
 		<townscene>
 			<map path="Assets/Maps/Town-Scene/" name="Town.tmx" />
@@ -59,7 +165,23 @@
 				<npc x="3550" y="650" type="2" texturepath="Assets/Textures/NoDialogNpcs/squirrel.PNG" />
 			</npcs>
 			<loco x="3200" y="2900" type="1" />
-			<enemies />
+			<Plants>
+				<ArnicaPlant x="1922" y="3158" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="2176" y="3114" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ComfreyPlant x="5010" y="1288" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="3802" y="1866" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="716" y="1074" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="788" y="1238" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<HepaticaPlant x="2337" y="227" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="2464" y="308" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<WitchHazelPlant x="3378" y="3258" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="3640" y="3154" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="3468" y="3090" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="4309" y="2773" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<HawthornPlant x="4854" y="2198" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="626" y="2090" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="804" y="2330" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+			</Plants>
 		</townscene>
 		<tavernscene>
 			<map path="Assets/Maps/Tavern/" name="Tavern.tmx" />
@@ -76,7 +198,8 @@
 			<menu FxPath="Assets/Audio/Fx/UI/UIButton.ogg" />
 			<map path="Assets/Maps/Tutorial-Level/" name="Playa_tutorial.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
+			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg" swordSlashFx="Assets/Audio/Fx/Player/SwordSlash.ogg" fireStaffFx="Assets/Audio/Fx/Player/FireStaff.ogg" deathSabrinaFx="Assets/Audio/Fx/Player/Death.ogg" damagedSabrinaFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg" blockFx="Assets/Audio/Fx/Player/Block.ogg"/>
+			
 			<enemies>
 				<EnemyBoss x="300" y="1800" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
 				<MiniSpider x="800" y="2050" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />

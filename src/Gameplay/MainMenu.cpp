@@ -441,7 +441,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 24:
 		// Change to credits scene
-		app->sceneManager->ChangeScene("creditsScene");
+		app->sceneManager->ChangeScene("credits");
 		break;
 	case 25:
 		if (popUpLoad != nullptr) {

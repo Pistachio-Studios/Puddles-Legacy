@@ -36,7 +36,7 @@ find_package(Tracy CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(FFMPEG REQUIRED)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES} "include/Gameplay/Entities/Items/Button.h" "src/Gameplay/Entities/Items/Button.cpp" "src/Gameplay/Entities/Items/Ball.cpp" "include/Gameplay/Entities/Items/Ball.h")
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
 
