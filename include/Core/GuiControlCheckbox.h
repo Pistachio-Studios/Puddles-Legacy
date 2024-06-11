@@ -4,6 +4,7 @@
 #include "Core/GuiControl.h"
 #include "Utils/Point.h"
 #include "Utils/SString.h"
+#include "Utils/Timer.h"
 
 class GuiControlCheckbox : public GuiControl
 {
@@ -18,6 +19,8 @@ public:
 public:
 	bool isPressed = false;
 	bool checked = false;
+
+	Timer controlEaseTimer;
 
 private:
 	SDL_Rect rect2;

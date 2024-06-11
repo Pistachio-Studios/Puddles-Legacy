@@ -7,6 +7,7 @@
 #include "Core/GuiManager.h"
 #include "Utils/Log.h"
 #include "Core/Textures.h"
+#include "Utils/Easings.h"
 
 GuiControlDropDownBox::GuiControlDropDownBox(uint32 id, const char* text, SDL_Rect bounds) : GuiControl(GuiControlType::DROPDOWNBOX, id)
 {
@@ -28,6 +29,9 @@ GuiControlDropDownBox::~GuiControlDropDownBox()
 
 bool GuiControlDropDownBox::Update(float dt)
 {
+	Easings easings = Easings();
+	float controlEase = easings.easeInQuad(controlEaseTimer.ReadMSec() / 500);
+
 	app->render->DrawText(text.GetString(), bounds.x - 90, bounds.y - 10, 80, 30);
 	if (state != GuiControlState::DISABLED)
 	{
@@ -49,6 +53,7 @@ bool GuiControlDropDownBox::Update(float dt)
 		case GuiControlState::NORMAL:
 		case GuiControlState::PRESSED:
 			//app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false);
+			//app->render->DrawTexture(texture, (bounds.x + 550)* controlEase, bounds.y * controlEase); //TODO comprovar porq se ve mal
 			app->render->DrawTexture(texture, bounds.x + 550, bounds.y);
 			if (isOpen) {
 				// Draw a checkmark or some other indicator when the checkbox is checked
