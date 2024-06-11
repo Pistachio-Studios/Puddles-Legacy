@@ -42,6 +42,7 @@ bool Ball::Start() {
 	position.y = parameters.attribute("y").as_int();
 	colour = parameters.attribute("colour").as_int();
 	puzzle3Tex = app->tex->Load(parameters.attribute("puzzleTexPath").as_string());
+	textureE = app->tex->Load("Assets/Textures/pressE.png");
 
 	newPosition = spawnPosition = position;
 
@@ -49,8 +50,7 @@ bool Ball::Start() {
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 32, bodyType::DYNAMIC);
 	pbody->listener = this;
-	if (colour == 1) pbody->ctype = ColliderType::BALLV;
-	else if (colour == 2) pbody->ctype = ColliderType::BALLL;
+	pbody->ctype = ColliderType::BALL;
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
@@ -65,6 +65,9 @@ bool Ball::Start() {
 
 bool Ball::Update(float dt)
 {
+
+	player = app->entityManager->GetPlayerEntity();
+
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
 	//Update player position in pixels
@@ -82,13 +85,16 @@ bool Ball::Update(float dt)
 		rect = { 0, 0, 128, 128 };
 	}
 
-	app->render->DrawTexture(texturaActiva, position.x + 10, position.y + 10, &rect, 1.0f, 0.0f, 0.5f, 2U);
+	app->render->DrawTexture(texturaActiva, position.x - 22, position.y - 22, &rect, 1.0f, 0.0f, 0.5f, 2U);
 
 	if (!placed) {
+		if (isColliding && !pickUp) {
+			app->render->DrawTexture(textureE, position.x - 40, position.y - 50);
+		}
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 			if (pickUp) {
 				pickUp = false;
-				//pbody->body->GetFixtureList()->SetSensor(false);
+				pbody->body->GetFixtureList()->SetSensor(false);
 			}
 			else if (isColliding && !pickUp) {
 				pickUp = true;
@@ -96,9 +102,23 @@ bool Ball::Update(float dt)
 			}
 		}
 	}
+	
+	if (placed) {
+		pickUp = false;
+		pbody->body->GetFixtureList()->SetSensor(true);
+	}
 
-	if (pickUp && !placed) {
+	if (pickUp) {
+		pbody->body->GetFixtureList()->SetSensor(true);
 		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(player->position.x), PIXEL_TO_METERS(player->position.y-1)), 0);
+	}
+
+	if ((PIXEL_TO_METERS(player->position.DistanceTo(position)) < 3.0f)) {
+		isColliding = true;
+	}
+
+	else {
+		isColliding = false;
 	}
 
 	return true;
@@ -145,7 +165,7 @@ void Ball::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype) {
 
 	case ColliderType::PLAYER:
-		isColliding = true;
+		//isColliding = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Colision UNKNOWN");
@@ -157,7 +177,7 @@ void Ball::EndCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype) {
 
 	case ColliderType::PLAYER:
-		isColliding = false;
+		//isColliding = false;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Colision UNKNOWN");

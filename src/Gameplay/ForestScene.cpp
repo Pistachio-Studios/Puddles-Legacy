@@ -343,23 +343,20 @@ bool ForestScene::Update(float dt)
 		}
 	}
 
+
 	//puzzle 2
-
-	if (buttonBallList[0]->pisada) {
-		ballList[0]->placed;
-	}
-	else if (buttonBallList[1]->pisada) {
-		ballList[1]->placed;
-	}
-
-	else if (!buttonBallList[0]->pisada) {
-		!ballList[0]->placed;
-	}
-	else if (!buttonBallList[1]->pisada) {
-		!ballList[1]->placed;
-	}
 	
-	if (ballList[0]->placed && ballList[1]->placed && !puzzle2) {
+	if ((PIXEL_TO_METERS(ballList[0]->position.DistanceTo(buttonBallList[0]->position)) < 0.5f)) {
+		buttonBallList[0]->pisada = true;
+		ballList[0]->placed = true;
+	}
+
+	if ((PIXEL_TO_METERS(ballList[1]->position.DistanceTo(buttonBallList[1]->position)) < 0.5f)) {
+		buttonBallList[1]->pisada = true;
+		ballList[1]->placed = true;
+	}
+
+	if (buttonBallList[0]->pisada && buttonBallList[1]->pisada && !puzzle2) {
 		puzzle2 = true;
 		app->audio->PlayFx(puzzleFx);
 	}

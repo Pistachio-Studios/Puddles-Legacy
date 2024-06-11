@@ -189,12 +189,12 @@ void Button::OnCollision(PhysBody* physA, PhysBody* physB) {
 			pisada = true;
 		}
 		break;
-	case ColliderType::BALLV:
-		if (buttonType==3 && colour==1) pisada = true;
-		break;
-	case ColliderType::BALLL:
-		if (buttonType == 3 && colour == 2) pisada = true;
-		break;
+	//case ColliderType::BALLV:
+	//	if (buttonType==3 && colour==1) pisada = true;
+	//	break;
+	//case ColliderType::BALLL:
+	//	if (buttonType == 3 && colour == 2) pisada = true;
+	//	break;
 	case ColliderType::UNKNOWN:
 		LOG("Colision UNKNOWN");
 		break;
@@ -204,12 +204,12 @@ void Button::OnCollision(PhysBody* physA, PhysBody* physB) {
 void Button::EndCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype) {
 	
-	case ColliderType::BALLV:
-		if (buttonType == 3 && colour == 1) pisada = false;
-		break;
-	case ColliderType::BALLL:
-		if (buttonType == 3 && colour == 2) pisada = false;
-		break;
+	//case ColliderType::BALLV:
+	//	if (buttonType == 3 && colour == 1) pisada = false;
+	//	break;
+	//case ColliderType::BALLL:
+	//	if (buttonType == 3 && colour == 2) pisada = false;
+	//	break;
 	case ColliderType::UNKNOWN:
 		LOG("Colision UNKNOWN");
 		break;

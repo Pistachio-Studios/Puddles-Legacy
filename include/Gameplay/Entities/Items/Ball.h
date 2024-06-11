@@ -50,6 +50,7 @@ public:
 public:
 
 	SDL_Texture* puzzle3Tex = nullptr;
+	SDL_Texture* textureE = nullptr;
 
     const char* texturePath;
 
