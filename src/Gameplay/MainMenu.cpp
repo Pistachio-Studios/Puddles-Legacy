@@ -425,18 +425,25 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			loadButton->state = GuiControlState::DISABLED;
 
 			// Create the popUp
-			popUpLoad = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", { 0,0,0,0 }, this);
+			SDL_Rect popUpOptionsPos;
+			popUpOptionsPos.w = 1444;
+			popUpOptionsPos.h = 952;
+			popUpOptionsPos.x = (windowW - popUpOptionsPos.w) / 2;
+			popUpOptionsPos.y = (windowH - popUpOptionsPos.h) / 2;
+
+			// Create the popUp
+			popUpLoad = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", popUpOptionsPos, this, settingsTexture);
 
 			// Create the cross button
 			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 100), static_cast<int>(windowH / 2 - 25), 30, 30 };
 			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
 
 			// Create the saves slots
-			saveSlot1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 25, "Save Slot 1", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 50), 150, 20 }, this);
-			saveSlot2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 26, "Save Slot 2", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 150), 150, 20 }, this);
-			saveSlot3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 27, "Save Slot 3", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 250), 150, 20 }, this);
-			saveSlot4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 28, "Save Slot 4", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 350), 150, 20 }, this);
-			saveSlot5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 29, "Save Slot 5", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 450), 150, 20 }, this);
+			saveSlot1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 25, "Save Slot 1", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 - 175), 150, 60 }, this);
+			saveSlot2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 26, "Save Slot 2", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 - 75), 150, 60 }, this);
+			saveSlot3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 27, "Save Slot 3", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 25), 150, 60 }, this);
+			saveSlot4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 28, "Save Slot 4", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 125), 150, 60 }, this);
+			saveSlot5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 29, "Save Slot 5", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 225), 150, 60 }, this);
 		}
 		break;
 	case 24:
@@ -467,6 +474,9 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 				LOG("Creating save_game_1.xml file");
 				app->SaveRequest();
 			}
+
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
 		}
 		break;
 	case 26:
@@ -493,6 +503,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 				LOG("Creating save_game_2.xml file");
 				app->SaveRequest();
 			}
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
 		}
 		break;
 	case 27:
@@ -519,6 +531,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 				LOG("Creating save_game_3.xml file");
 				app->SaveRequest();
 			}
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
 		}
 		break;
 	case 28:
@@ -545,6 +559,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 				LOG("Creating save_game_4.xml file");
 				app->SaveRequest();
 			}
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
 		}
 		break;
 	case 29:
@@ -571,6 +587,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 				LOG("Creating save_game_5.xml file");
 				app->SaveRequest();
 			}
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
 		}
 		break;
 	}
