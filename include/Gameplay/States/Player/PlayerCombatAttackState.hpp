@@ -72,7 +72,17 @@ public:
                 attacking = true;
                 //Animation
                 player->SabrinaEspadaAtaque.Update(dt);
+                if(player->lookingAngle > 4.7f or player->lookingAngle < 1.5f)
+                {
+                    player->flip = SDL_FLIP_HORIZONTAL;
+                }
+                else
+                {
+                    player->flip = SDL_FLIP_NONE;
+                }
                 player->currentAnim = &player->SabrinaEspadaAtaque;
+
+                player->position.x -= 64;
             }
             else
             {
