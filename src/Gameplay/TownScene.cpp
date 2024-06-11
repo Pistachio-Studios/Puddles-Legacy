@@ -403,6 +403,7 @@ bool TownScene::Update(float dt)
 	});
 	if (!app->questManager->GetQuestById(9)->IsCompleted() and app->questManager->GetQuestById(5)->IsCompleted())
 		classQuest->SetActive(true);
+
 	#pragma endregion
 
 

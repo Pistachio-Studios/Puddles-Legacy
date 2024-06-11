@@ -242,6 +242,72 @@ bool ForestScene::Update(float dt)
 		app->questManager->GetQuestById(7)->SetCompleted(true);
 	}
 
+	#pragma region Quests
+	Quest* exploreForestQuest = app->questManager->GetQuestById(10);
+	exploreForestQuest->SetCompletionAction([=, this]() -> bool {
+		static bool explore;
+		int totalObjectives = 8; // total number of objectives
+		int completedObjectives = 0; // completed objectives
+
+		static bool enemy1KilledFlag = false;
+		static bool enemy2KilledFlag = false;
+		static bool enemy3KilledFlag = false;
+		static bool arnicaPlantCollectedFlag = false;
+		static bool comfreyPlantCollectedFlag = false;
+		static bool hawthornPlantCollectedFlag = false;
+		static bool witchhazelPlantCollectedFlag = false;
+		static bool hepaticaPlantCollectedFlag = false;
+		
+		if(player->bestiary->enemy1Killed && !enemy1KilledFlag) {
+			completedObjectives++;
+			enemy1KilledFlag = true;
+		}
+		if(player->bestiary->enemy2Killed && !enemy2KilledFlag) {
+			completedObjectives++;
+			enemy2KilledFlag = true;
+		}
+		if(player->bestiary->enemy3Killed && !enemy3KilledFlag) {
+			completedObjectives++;
+			enemy3KilledFlag = true;
+		}
+		if(player->bestiary->arnicaPlantCollected && !arnicaPlantCollectedFlag) {
+			completedObjectives++;
+			arnicaPlantCollectedFlag = true;
+		}
+		if(player->bestiary->comfreyPlantCollected && !comfreyPlantCollectedFlag) {
+			completedObjectives++;
+			comfreyPlantCollectedFlag = true;
+		}
+		if(player->bestiary->hawthornPlantCollected && !hawthornPlantCollectedFlag) {
+			completedObjectives++;
+			hawthornPlantCollectedFlag = true;
+		}
+		if(player->bestiary->witchhazelPlantCollected && !witchhazelPlantCollectedFlag) {
+			completedObjectives++;
+			witchhazelPlantCollectedFlag = true;
+		}
+		if(player->bestiary->hepaticaPlantCollected && !hepaticaPlantCollectedFlag) {
+			completedObjectives++;
+			hepaticaPlantCollectedFlag = true;
+		}
+
+		// Calculate the completion value based on the percentage of completed objectives
+		exploreForestQuest->AddCompletionValue((completedObjectives * 100) / totalObjectives);
+
+		// Check if all objectives are completed
+		if(completedObjectives == totalObjectives)
+		{
+			explore = true;
+			LOG("Quest completed: %s", app->questManager->GetQuestById(10)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+	#pragma endregion Quests
+
+	if (!app->questManager->GetQuestById(10)->IsCompleted() and app->questManager->GetQuestById(7)->IsCompleted())
+		exploreForestQuest->SetActive(true);
+
 	if (freeCam)
 	{
 		float camSpeed = 1;
