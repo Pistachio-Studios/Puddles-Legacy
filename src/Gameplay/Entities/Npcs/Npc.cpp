@@ -89,6 +89,13 @@ bool Npc::Update(float dt)
 				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 					//sale dialogo
 					app->dialogManager->StartDialog(1);
+					//if the npc is bounty change his bool talked to true
+					if (name == "Loco") {
+						bountytalked = true;
+					}
+					if (name == "Tabernero") {
+						klaustalked = true;
+					}
 				}
 			}
 		}

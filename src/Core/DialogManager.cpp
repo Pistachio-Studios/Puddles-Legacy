@@ -101,7 +101,6 @@ void DialogManager::StartDialog(int dialogId) {
     currentDialogLine = dialogs.at(dialogId).ES;
 
     currentDialog = &dialogs.at(currentDialogId);
-
     isDialogStarted = true; // TODO change this when fixed dialog bug
 }
 

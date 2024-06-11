@@ -17,6 +17,7 @@ class Tabernero : public Npc
 public:
 
 	bool startTimer = true;
+	bool talked = false;
 	Timer timer;
 
 	Tabernero();
