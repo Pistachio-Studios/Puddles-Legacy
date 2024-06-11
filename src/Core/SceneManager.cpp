@@ -117,11 +117,11 @@ bool SceneManager::Update(float dt)
             currentScene->Exit();
 
             if (app->physics->DestroyAllWorldBodies()) {
-            //app->lighting->RemoveAllLights();
-            app->lighting->SetAmbientLight({255, 255, 255, 255});
+                //app->lighting->RemoveAllLights();
+                app->lighting->SetAmbientLight({255, 255, 255, 255});
 
-            prevScene = currentScene;
-            currentScene = nextScene;
+                prevScene = currentScene;
+                currentScene = nextScene;
             };
 
             currentScene->Enter();

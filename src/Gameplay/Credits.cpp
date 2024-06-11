@@ -28,6 +28,8 @@ bool Credits::Enter()
 
 	FxId = app->audio->LoadFx(parameters.child("credits").attribute("FxPath").as_string());
 
+	selectBack = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Back",  { 1262, 818, 200, 50 }, (Module*)this);
+
 	return true;
 }
 
@@ -47,10 +49,6 @@ bool Credits::Update(float dt)
 	ZoneScoped;
 
     app->render->DrawTexture(credits, 0, 0);
-
-	if (selectBack == nullptr){
-		selectBack = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Back",  { 1262, 818, 200, 50 }, (Module*)this);
-	}
 	
 	return true;
 }
@@ -68,15 +66,9 @@ bool Credits::PostUpdate()
 
 bool Credits::Exit()
 {
-	return true;
-}
-
-// Called before quitting
-bool Credits::CleanUp()
-{
-	//app->tex->UnLoad(credits);
-	//app->guiManager->RemoveGuiControl(selectBack);
-	//selectBack = nullptr;
+	app->tex->UnLoad(credits);
+	app->guiManager->RemoveGuiControl(selectBack);
+	selectBack = nullptr;
 
 	return true;
 }
@@ -87,13 +79,7 @@ bool Credits::OnGuiMouseClickEvent(GuiControl *control)
 
 	switch (control->id) {
 	case 1:
-		selectBackPressed = true;
-		app->tex->UnLoad(credits);
-		app->guiManager->RemoveGuiControl(selectBack);
-		selectBack = nullptr;
 		app->sceneManager->ChangeScene("mainmenu");
-
-
 		break;
 	}
     return true;

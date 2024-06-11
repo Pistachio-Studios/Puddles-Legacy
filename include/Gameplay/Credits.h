@@ -34,9 +34,6 @@ public:
 
 	bool Exit() override;
 
-	// Called before quitting
-	bool CleanUp() override;
-
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control) override;
 
