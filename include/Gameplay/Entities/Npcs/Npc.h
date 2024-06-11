@@ -13,6 +13,8 @@ class Npc : public Entity
 public:
 
 	bool startTimer = true;
+	bool klaustalked = false;
+	bool bountytalked = false;
 	Timer timer;
 
 	Npc();
