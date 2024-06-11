@@ -127,8 +127,12 @@ h2 {
     margin: 20px 0;
 }
 .about-info p{
-    margin-left: 200px;
-    margin-right: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin: 0 auto; /* Centrar horizontalmente */
+    max-width: 1200px; /* Cambia este valor según sea necesario */
     font-size: 17px;
     color: white;
 }
