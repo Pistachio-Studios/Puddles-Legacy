@@ -21,7 +21,14 @@ public:
     inline void Update(float dt) override
     {
 
-        
+        player->timerSteps += dt;
+
+        if (player->timerSteps >= player->time)
+        {
+            app->audio->PlayFx(player->stepsFx);
+            player->timerSteps = 0.0f;
+        }
+
         PhysBody* pbody = player->pbody;
 
         b2Vec2 impulse = { 0, 0 };

@@ -299,6 +299,9 @@ public:
 	//tmps
 	PhysBody* sword;
 
+	//soundFX
+	int stepsFx;
+
 	ParticleGenerator* damage = nullptr;
 
 	float mana = 100.0f;
@@ -311,6 +314,9 @@ public:
 	Timer playerHurtCultdown;
 	Timer dashTimer;
 	float dashCultdown = 5.0f;
+
+	float timerSteps = 0.0f;
+	float time = 300.0f;
 
 	Animation SabrinaEspadaIdle, SabrinaEspadaMovDelante, SabrinaEspadaMovDerecha, SabrinaEspadaMovIzquierda, SabrinaEspadaMovDetras,
 		SabrinaEspadaDano, SabrinaEspadaDash, SabrinaEspadaMuerte, SabrinaEspadaRecolectar,

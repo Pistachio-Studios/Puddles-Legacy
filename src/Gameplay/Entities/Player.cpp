@@ -13,6 +13,7 @@
 #include "Core/ParticleManager.h"
 #include "Core/Lighting.h"
 #include "Core/AnimationManager.h"
+#include "Core/Audio.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -81,6 +82,10 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatIdleState("idle"));
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
+
+	// Audios
+
+	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
 
 	//Anims
 	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");
