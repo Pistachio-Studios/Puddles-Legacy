@@ -31,7 +31,7 @@ bool GuiControlPopUp::Update(float dt)
 
 	//TODO pre
 	if (texture1) {
-		app->render->DrawTextureLegacy(texture1, posX * controlEase, posY * controlEase, 0, 0, 0, controlEase);
+		app->render->DrawTextureLegacy(texture1, (posX + windowW / 2) - (windowW * controlEase) / 2, (posY + windowH / 2) - (windowH * controlEase) / 2, 0, 0, 0, controlEase);
 	}
 	else {
 		app->render->DrawRectangle({ static_cast<int>(windowW / 2 - 200), static_cast<int>(windowH / 2 - 50), 350,300 }, 192, 103, 252, 240);
