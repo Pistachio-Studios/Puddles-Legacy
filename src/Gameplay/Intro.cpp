@@ -22,7 +22,7 @@ bool Intro::Enter()
 	app->win->GetWindowSize(windowW, windowH);
 
 	// Load the intro video
-	app->videoPlayer->Start("Assets/Video/Intro/example.mp4");
+	app->videoPlayer->Start("Assets/Video/Intro/intro.mp4");
 
 	return true;
 }
@@ -44,7 +44,7 @@ bool Intro::Update(float dt)
 
 	//Check if video ended revisar
 	if (app->videoPlayer->ConvertPixels(0, 1)) {
-		app->sceneManager->ChangeScene("mainmenu");
+		app->sceneManager->ChangeScene("townscene");
 	}
 
 	return true;
