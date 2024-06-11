@@ -78,7 +78,7 @@ bool Npc::Update(float dt)
 				app->render->DrawTexture(texture3, position.x - 60, position.y - 180);
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 					//sale dialogo
-					app->dialogManager->StartDialog(1);
+					app->dialogManager->StartDialog(1,27); // first dialog - sabrina klaus
 					app->render->camera.lerpSpeed = 0.0f;
 				}
 			}
@@ -88,7 +88,7 @@ bool Npc::Update(float dt)
 				app->render->DrawTexture(texture2, position.x - 60, position.y - 180);
 				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 					//sale dialogo
-					app->dialogManager->StartDialog(1);
+					app->dialogManager->StartDialog(1,27);
 				}
 			}
 		}
