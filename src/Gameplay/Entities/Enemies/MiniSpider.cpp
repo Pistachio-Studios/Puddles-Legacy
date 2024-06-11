@@ -21,6 +21,7 @@
 #include "Gameplay/States/MiniSpider/MiniSpiderMoveState.hpp"
 #include "Gameplay/States/MiniSpider/MiniSpiderHurtState.hpp"
 #include "Gameplay/States/MiniSpider/MiniSpiderDeadState.hpp"
+#include "Gameplay/States/MiniSpider/MiniSpiderParalyzedState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -75,6 +76,7 @@ bool MiniSpider::Start() {
 	movementFSM->AddState(new MiniSpiderHurtState("hurt"));
 	movementFSM->AddState(new MiniSpiderAttackState("attack"));
 	movementFSM->AddState(new MiniSpiderDeadState("die"));
+	movementFSM->AddState(new MiniSpiderParalyzedState("paralyzed"));
 
 	//Animations
 	spiderIdle = *app->animationManager->GetAnimByName("Mini_Spider_Idle");
@@ -110,6 +112,21 @@ bool MiniSpider::Start() {
 	damage->opacityFade = 0.5f;
 	damage->color = { 50, 128, 128, 255 };
 	app->particleManager->AddGenerator(damage);
+
+	paralyzedParticles = new ParticleGenerator();
+	paralyzedParticles->emiting = false;
+	paralyzedParticles->oneShoot = true;
+	paralyzedParticles->lifetime = 0.25f;
+	paralyzedParticles->explosiveness = 1.0f;
+	paralyzedParticles->spawnRadius = 50;
+	paralyzedParticles->size = 30;
+	paralyzedParticles->initialVelocity = 0;
+	paralyzedParticles->Damping = 0.0f;
+	paralyzedParticles->spread = 180;
+	paralyzedParticles->sizeFade = -1.0f;
+	paralyzedParticles->opacityFade = 0.5f;
+	paralyzedParticles->color = { 50, 128, 128, 255 };
+	app->particleManager->AddGenerator(paralyzedParticles);
 
 	return true;
 }
