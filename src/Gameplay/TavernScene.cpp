@@ -96,7 +96,7 @@ bool TavernScene::Enter()
 	cauldronTrigger = app->physics->CreateRectangle(500, 700, 100, 100, bodyType::STATIC);
 	cauldronTrigger->ctype = ColliderType::CAULDRON;
 
-	weaponsTrigger = app->physics->CreateRectangle(700, 1390, 100, 100, bodyType::STATIC);
+	weaponsTrigger = app->physics->CreateRectangle(740, 1420, 100, 100, bodyType::STATIC);
 	weaponsTrigger->ctype = ColliderType::CHOSEWEAPON;
 
 	cauldronTex = app->tex->Load("Assets/Textures/Potions/Cauldron/Cauldron.png");
