@@ -194,6 +194,10 @@ bool Player::Update(float dt)
 		defense = 3.0f;
 	}
 
+	//Update player position in pixels
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
+
 	movementFSM->Update(dt);
 	combatFSM->Update(dt);
 
@@ -205,17 +209,13 @@ bool Player::Update(float dt)
 	//	pbody->body->SetTransform({ PIXEL_TO_METERS(672),PIXEL_TO_METERS(2032) }, 0); //TODO: QUITAR ESTO!!! TIENE QUE SER EL SPAWNPOINT DEL PLAYER EN ESE MAPA
 	//	vida = maxVida;
 	//}
-	
-	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
 
 	damage->position = { position.x + 46, position.y + 64};
 
 	//Animations
 	//Renderizar la animación actual
 	if (currentAnim != nullptr) {
-		app->render->DrawTexture(currentAnim->texture, position.x - 40, position.y - 80, &currentAnim->GetCurrentFrame());
+		app->render->DrawTexture(currentAnim->texture, position.x - 40, position.y - 80, &currentAnim->GetCurrentFrame(), 1.0f, 0.0f, 1.0f, 3, flip);
 	}
 	else {
 		app->render->DrawTexture(texture, position.x - 40, position.y - 80);

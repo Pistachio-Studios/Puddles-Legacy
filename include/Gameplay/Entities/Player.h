@@ -308,6 +308,8 @@ public:
 
 	bool sceneChange = false;
 
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+
 	Timer playerHurtCultdown;
 	Timer dashTimer;
 	float dashCultdown = 5.0f;

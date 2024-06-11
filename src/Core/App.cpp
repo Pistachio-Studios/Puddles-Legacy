@@ -263,7 +263,7 @@ void App::FinishUpdate()
 	}
 
 
-	// Shows the time measurements in the window title
+/* 	// Shows the time measurements in the window title
 	static char title[256];
 	#ifdef __linux__
 	sprintf_s(title, 256, "%s: Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %u Frame Count: %lu ",
@@ -273,7 +273,7 @@ void App::FinishUpdate()
 		gameTitle.GetString(), averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
 	#endif
 
-	app->win->SetTitle(title);
+	app->win->SetTitle(title); */
 
 	if (loadRequest) {
 		loadRequest = false;
