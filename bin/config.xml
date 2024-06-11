@@ -9,7 +9,7 @@
 		<vsync value="false" />
 	</renderer>
 	<window>
-		<resolution width="1920" height="1080" scale="1" />
+		<resolution width="1360" height="768" scale="1" />
 		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="true" />
@@ -50,18 +50,18 @@
 				<button x=" 5504" y ="5504" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
 				<button x=" 4352" y ="6016" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
 				<button x=" 5376" y ="4736" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
-				<button x=" 27264" y ="12160" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
-				<button x=" 28544" y ="12544" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
-				<button x=" 27392" y ="13312" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
-				<button x=" 28416" y ="14720" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
-				<button x=" 27904" y ="11520" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
+				<button x=" 24704" y ="11392" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
+				<button x=" 25984" y ="11776" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
+				<button x=" 24832" y ="12544" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
+				<button x=" 25856" y ="13952" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
+				<button x=" 25344" y ="10752" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
 				<button x=" 896" y ="9216" type="3" colour="1" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
 				<button x=" 5376" y ="9216" type="3" colour="2" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
 				<ball x="2816" y= "13568" colour="1" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
 				<ball x="3968" y= "13568" colour="2" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
 			</assets>
 			<enemies>
-				<EnemyBoss x="25088" y="11515" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
+				<EnemyBoss x="27648" y="11515" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
 				<MiniSpider x="1021" y="2560" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
 				<MiniSpider x="4224" y="5632" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
 				<MiniSpider x="5246" y="4736" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
