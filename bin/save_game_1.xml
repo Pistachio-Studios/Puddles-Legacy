@@ -11,7 +11,7 @@
 	<:anonymous />
 	<animation_manager />
 	<entitymanager>
-		<player x="2394" y="3371" lives="15" mana="95" Level="1">
+		<player x="606" y="1982" lives="15" mana="95.0202408" Level="1">
 			<inventory name="Arnica Plant" quantity="0" />
 			<inventory name="Hepatica Plant" quantity="0" />
 			<inventory name="Comfrey Plant" quantity="0" />
@@ -57,19 +57,19 @@
 	<VideoPlayer />
 	<dialog_manager />
 	<questmanager>
-		<quests id="0" title="Master of Movement" description="Learn and master the art of movement (use WASD)." completed="true" active="false" />
-		<quests id="1" title="Dragon Slayer" description="Defeat the Dragon terrorizing the nearby village." completed="false" active="false" />
-		<quests id="2" title="Royal Messenger" description="Deliver a message to the Queen in the neighboring kingdom." completed="false" active="false" />
-		<quests id="3" title="Herbalist's Request" description="Collect 10 rare herbs for the local healer." completed="false" active="false" />
-		<quests id="4" title="City's Secret" description="Investigate the mysterious disappearances in the city." completed="false" active="false" />
-		<quests id="5" title="Goblin Defense" description="Protect the village from an incoming goblin raid." completed="false" active="false" />
-		<quests id="6" title="Lost Pet" description="Find and return the lost pet of the town's blacksmith." completed="false" active="false" />
-		<quests id="7" title="Brewmaster's Aid" description="Help the local innkeeper gather ingredients for a special brew." completed="false" active="false" />
-		<quests id="8" title="Forest's Curse" description="Explore the haunted forest and find the source of its curse." completed="false" active="false" />
+		<quests id="8" completed="false" active="true" />
+		<quests id="7" completed="false" active="true" />
+		<quests id="6" completed="false" active="true" />
+		<quests id="5" completed="false" active="true" />
+		<quests id="4" completed="false" active="true" />
+		<quests id="3" completed="false" active="true" />
+		<quests id="2" completed="false" active="false" />
+		<quests id="1" completed="false" active="true" />
+		<quests id="0" completed="true" active="false" />
 	</questmanager>
 	<UI />
 	<debugUI />
 	<renderer>
-		<camera x="-1500" y="-2833" />
+		<camera x="289" y="-1443" />
 	</renderer>
 </game_state>

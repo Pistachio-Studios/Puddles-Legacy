@@ -110,9 +110,7 @@ bool QuestManager::SaveState(pugi::xml_node node)
 	for (const auto& pair : quests) {
 		pugi::xml_node questsAttributes = node.append_child("quests");
 
-		questsAttributes.append_attribute("id") = pair.first; 
-		questsAttributes.append_attribute("title") = pair.second->GetTitle().GetString(); 
-		questsAttributes.append_attribute("description") = pair.second->GetDescription().GetString(); 
+		questsAttributes.append_attribute("id") = pair.first;
 		questsAttributes.append_attribute("completed") = pair.second->IsCompleted();
 		questsAttributes.append_attribute("active") = pair.second->IsActive();
 	}
@@ -124,18 +122,13 @@ bool QuestManager::LoadState(pugi::xml_node node)
 	bool ret = true;
 
 	//QUESTS LOAD
-	for (pugi::xml_node questNode = node.child("quest"); questNode; questNode = questNode.next_sibling("quest")) {
+	for (pugi::xml_node questNode = node.child("quests"); questNode; questNode = questNode.next_sibling("quests")) {
 		int id = questNode.attribute("id").as_int();
-		std::string title = questNode.attribute("title").as_string();
-		std::string description = questNode.attribute("description").as_string();
 		bool completed = questNode.attribute("completed").as_bool();
 		bool active = questNode.attribute("active").as_bool();
 
-		Quest* quest = new Quest(title.c_str(), description.c_str());
-		quest->SetCompleted(completed);
-		quest->SetActive(active);
-
-		quests[id] = quest;
+		quests[id]->SetCompleted(completed);
+		quests[id]->SetActive(active);
 	}
 
 	return ret;
