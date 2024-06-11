@@ -62,6 +62,7 @@ public:
 
     // Dialog methods
     void StartDialog(int dialogId);
+    void StartDialog(int startDialogId, int endDialogId);
     void NextDialog();
     void EndDialog();
     void ShowDialog(int x = 0, int y = 0);

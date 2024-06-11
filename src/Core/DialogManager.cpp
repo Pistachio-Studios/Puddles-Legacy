@@ -36,9 +36,9 @@ bool DialogManager::Start() {
 
     background = app->tex->Load(parameters.child("background").attribute("path").as_string());
 
-    for (pugi::xml_node node = parameters.child("character_1"); node; node = node.next_sibling()) {
-        characterTextures[node.name()] = app->tex->Load(node.attribute("path").as_string());
-    }
+    characterTextures["Sabrina"] = app->tex->Load("Assets/Dialog/Sabrina.png");
+    characterTextures["Klaus"] = app->tex->Load("Assets/Dialog/Klaus.png");
+    characterTextures["Bounty"] = app->tex->Load("Assets/Dialog/Bounty.png");
     
     // app->dialogManager->StartDialog(1); TODO change this when fixed dialog bug
 
@@ -98,11 +98,32 @@ void DialogManager::StartDialog(int dialogId) {
     }
     currentDialogId = dialogId;
     // Set the current dialog text to the first line of the dialog
-    currentDialogLine = dialogs.at(dialogId).ES;
+    currentDialogLine = dialogs.at(dialogId).EN;
 
     currentDialog = &dialogs.at(currentDialogId);
 
     isDialogStarted = true; // TODO change this when fixed dialog bug
+}
+
+void DialogManager::StartDialog(int startDialogId, int endDialogId) {
+
+    if (startDialogId < 0 || endDialogId < 0) return;
+
+    if (dialogs.at(startDialogId).type == DialogType::ANSWER or dialogs.at(startDialogId).type == DialogType::DIALOG) {
+        vector<int>* choices = &dialogs.at(startDialogId).choices;
+        if (!choices->empty()) startDialogId = dialogs.at(startDialogId).choices[0];
+    }
+    currentDialogId = startDialogId;
+    // Set the current dialog text to the first line of the dialog
+    currentDialogLine = dialogs.at(startDialogId).EN;
+
+    currentDialog = &dialogs.at(currentDialogId);
+
+    isDialogStarted = true; // TODO change this when fixed dialog bug
+
+    // Add logic here to handle the endDialogId
+    // For example, you could store it in a member variable and check it in your update function
+    endDialogId = endDialogId;
 }
 
 void DialogManager::NextDialog() {
@@ -149,22 +170,22 @@ void DialogManager::ShowDialog(int x, int y) {
 
         // Render the current dialog text on the screen
 
-        app->render->DrawTexture(background, x + 200, y + 200, 0, 0);
+        app->render->DrawTextureLegacy(background, x + 200, y + 200, 0, 0);
 
         texture = CreateTextTexture(font, currentDialog->character.c_str(), textColor, 200/*TODO text bound widht*/);
-        app->render->DrawTexture(texture, x + 375, y + 225, 0, 0);
+        app->render->DrawTextureLegacy(texture, x + 375, y + 225, 0, 0);
         SDL_DestroyTexture(texture);
 
         //texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
-        //app->render->DrawTexture(texture, x, y, 0, 0);
+        //app->render->DrawTextureLegacy(texture, x, y, 0, 0);
         //SDL_DestroyTexture(texture);
         if (currentDialog->type == DialogType::DIALOG) {
             texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
-            app->render->DrawTexture(texture, x + 285, y + 290, 0, 0);
+            app->render->DrawTextureLegacy(texture, x + 285, y + 290, 0, 0);
             SDL_DestroyTexture(texture);
         } else if (currentDialog->type == DialogType::QUESTION) {
             texture = CreateTextTexture(font, actualText.c_str(), textColor, 200/*TODO text bound widht*/);
-            app->render->DrawTexture(texture, x + 285, y + 280, 0, 0);
+            app->render->DrawTextureLegacy(texture, x + 285, y + 280, 0, 0);
             SDL_DestroyTexture(texture);
             
             // Select the choice
@@ -176,19 +197,19 @@ void DialogManager::ShowDialog(int x, int y) {
             // Render the choices
             for (int i = 0; i < currentDialog->choices.size(); i++) {
                 Dialog& dialog = dialogs.at(currentDialog->choices[i]);
-                string choiceText = dialog.ES;
+                string choiceText = dialog.EN;
                 texture = CreateTextTexture(font, choiceText.c_str(), currentDialog->choices[i] == choice ? selectedColor : textColor, 200/*TODO text bound widht*/);
-                app->render->DrawTexture(texture, x + 285, y + 50 * (i+6.75), 0, 0);
+                app->render->DrawTextureLegacy(texture, x + 285, y + 50 * (i+6.75), 0, 0);
                 SDL_DestroyTexture(texture);
             }
         }
 
         // TODO draw character texture
         //if (dialog->character != nullptr) {
-        //    app->render->DrawTexture(dialog->character, 100, 100, 0, 0);
+        //    app->render->DrawTextureLegacy(dialog->character, 100, 100, 0, 0);
         //}
 
-        app->render->DrawTexture(characterTextures[currentDialog->character], x + 35, y + 250, 0, 0);
+        app->render->DrawTextureLegacy(characterTextures[currentDialog->character], x + 35, y + 250, 0, 0);
 
         if (actualText.size() < currentDialogLine.size()) {
 
