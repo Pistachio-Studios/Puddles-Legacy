@@ -66,7 +66,6 @@ private:
 	GuiControlLabel* gcTime;
 	GuiControlPopUp* loseScreen = nullptr;
 
-	bool paused = false;
 	bool exitPressed = false;
 
 	Timer* playingTime;

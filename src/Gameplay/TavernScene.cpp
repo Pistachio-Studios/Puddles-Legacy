@@ -14,6 +14,7 @@
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
+#include "Core/QuestManager.h"
   
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
@@ -69,6 +70,7 @@ bool TavernScene::Enter()
 		Tabernero* tabernero = new Tabernero();
 		app->entityManager->AddEntity(tabernero);
 		tabernero->parameters = parameters.child("tabernero");
+		tabernero->mouseMode = true;
 		tabernero->Start();
 	}
 
@@ -76,6 +78,8 @@ bool TavernScene::Enter()
 	app->map->Enable();
 	app->entityManager->Enable();
 
+	app->render->camera.x = -playerPointAndClick->position.x + (app->render->camera.w / 2);
+	app->render->camera.y = -playerPointAndClick->position.y + (app->render->camera.h / 2);
 	app->render->camera.target = playerPointAndClick;
 	app->render->camera.useInterpolation = true;
 	app->render->camera.lerpSpeed = 2.0f;
@@ -127,6 +131,10 @@ bool TavernScene::Update(float dt)
 	// OPTICK PROFILIN
 	ZoneScoped;
 
+	if (player->bestiary->cauldronUnlocked) {
+		app->questManager->GetQuestById(6)->SetCompleted(true);
+	}
+
 	player->pbody->body->GetFixtureList()->SetSensor(true);
 	player->pbody->body->SetTransform(b2Vec2(500, 500), 0);
 	
@@ -154,6 +162,8 @@ bool TavernScene::Update(float dt)
 		cauldron = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronTex);
 		cauldronExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
 		cauldronCreate = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Create", { (int)windowW / 2 + 320, (int)windowH / 2 + 350, 200, 50 }, this);
+
+		player->bestiary->cauldronUnlocked = true;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && cauldronSelect != nullptr) {
@@ -230,12 +240,13 @@ bool TavernScene::Update(float dt)
 			selectExitPressed = false; 
 			playerPointAndClick->cauldronIsOpen = true; 
 		}
-
 		
 	}
 
+	iPoint mouseWorldPosition = { app->input->GetMouseX() + -app->render->camera.x, app->input->GetMouseY() + -app->render->camera.y };
+
 	//Cambios de escena sin collider
-	if (app->entityManager->GetPlayerEntity()->position.x <= 1390 && app->entityManager->GetPlayerEntity()->position.x >= 1150 && app->entityManager->GetPlayerEntity()->position.y <= 3835 && app->entityManager->GetPlayerEntity()->position.y >= 3670) {
+	if (mouseWorldPosition.x <= 1390 && mouseWorldPosition.x >= 1150 && mouseWorldPosition.y <= 3835 && mouseWorldPosition.y >= 3670) {
 		app->sceneManager->ChangeScene("townscene");
 	}
 

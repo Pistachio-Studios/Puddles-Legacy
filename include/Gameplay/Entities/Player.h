@@ -77,11 +77,16 @@ public:
 	bool arnicaPlantCollected = false;
 
 	// Pag 4 attributes
-	bool klausUnlocked = false;
+	bool klausUnlocked = true;
 	bool bountyUnlocked = false;
 
 	// Pag 5 attributes
 	// Nothing cause there are no draws 💀
+
+	// Mission Booleans
+	bool forestUnlocked = false;
+	bool cauldronUnlocked = false;
+	bool changedClassUnlocked = false; // TODO change to true when the player changes class
 
 public:
 

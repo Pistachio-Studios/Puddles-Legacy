@@ -21,6 +21,7 @@
 #include "Utils/SString.h"
 #include "Utils/Timer.h"
 #include "Utils/Log.h"
+#include "Core/QuestManager.h"
 
 
 #include <box2d/b2_body.h>
@@ -190,6 +191,8 @@ bool ForestScene::Enter()
 	app->map->Enable();
 	app->entityManager->Enable();
 
+	app->render->camera.x = -player->position.x + (app->render->camera.w / 2);
+	app->render->camera.y = -player->position.y + (app->render->camera.h / 2);
 	app->render->camera.target = player;
 	app->render->camera.useInterpolation = true;
 	app->render->camera.lerpSpeed = 4.0f;
@@ -216,6 +219,8 @@ bool ForestScene::Enter()
 	puzzle2 = false;
 	puzzle3 = false;
 
+	player->bestiary->forestUnlocked = true;
+
 	return true;
 }
 
@@ -233,6 +238,160 @@ bool ForestScene::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	if (player->bestiary->forestUnlocked) {
+		app->questManager->GetQuestById(7)->SetCompleted(true);
+	}
+
+	#pragma region Quests
+	Quest* exploreForestQuest = app->questManager->GetQuestById(10);
+	exploreForestQuest->SetCompletionAction([=, this]() -> bool {
+		static bool explore;
+		int totalObjectives = 8; // total number of objectives
+		int completedObjectives = 0; // completed objectives
+
+		static bool enemy1KilledFlag = false;
+		static bool enemy2KilledFlag = false;
+		static bool enemy3KilledFlag = false;
+		static bool arnicaPlantCollectedFlag = false;
+		static bool comfreyPlantCollectedFlag = false;
+		static bool hawthornPlantCollectedFlag = false;
+		static bool witchhazelPlantCollectedFlag = false;
+		static bool hepaticaPlantCollectedFlag = false;
+		
+		if(player->bestiary->enemy1Killed && !enemy1KilledFlag) {
+			completedObjectives++;
+			enemy1KilledFlag = true;
+		}
+		if(player->bestiary->enemy2Killed && !enemy2KilledFlag) {
+			completedObjectives++;
+			enemy2KilledFlag = true;
+		}
+		if(player->bestiary->enemy3Killed && !enemy3KilledFlag) {
+			completedObjectives++;
+			enemy3KilledFlag = true;
+		}
+		if(player->bestiary->arnicaPlantCollected && !arnicaPlantCollectedFlag) {
+			completedObjectives++;
+			arnicaPlantCollectedFlag = true;
+		}
+		if(player->bestiary->comfreyPlantCollected && !comfreyPlantCollectedFlag) {
+			completedObjectives++;
+			comfreyPlantCollectedFlag = true;
+		}
+		if(player->bestiary->hawthornPlantCollected && !hawthornPlantCollectedFlag) {
+			completedObjectives++;
+			hawthornPlantCollectedFlag = true;
+		}
+		if(player->bestiary->witchhazelPlantCollected && !witchhazelPlantCollectedFlag) {
+			completedObjectives++;
+			witchhazelPlantCollectedFlag = true;
+		}
+		if(player->bestiary->hepaticaPlantCollected && !hepaticaPlantCollectedFlag) {
+			completedObjectives++;
+			hepaticaPlantCollectedFlag = true;
+		}
+
+		// Calculate the completion value based on the percentage of completed objectives
+		exploreForestQuest->AddCompletionValue((completedObjectives * 100) / totalObjectives);
+
+		// Check if all objectives are completed
+		if(completedObjectives == totalObjectives)
+		{
+			explore = true;
+			LOG("Quest completed: %s", app->questManager->GetQuestById(10)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+
+	if (!app->questManager->GetQuestById(10)->IsCompleted() and app->questManager->GetQuestById(7)->IsCompleted())
+		exploreForestQuest->SetActive(true);
+
+	Quest* collectItemsQuest = app->questManager->GetQuestById(11);
+	collectItemsQuest->SetCompletionAction([=, this]() -> bool {
+		static bool collect;
+		int totalObjectives = 5; // total number of objectives
+		int completedObjectives = 0; // completed objectives
+
+		static bool arnicaPlantCollectedFlag = false;
+		static bool comfreyPlantCollectedFlag = false;
+		static bool hawthornPlantCollectedFlag = false;
+		static bool witchhazelPlantCollectedFlag = false;
+		static bool hepaticaPlantCollectedFlag = false;
+
+		if(player->bestiary->arnicaPlantCollected && !arnicaPlantCollectedFlag) {
+			completedObjectives++;
+			arnicaPlantCollectedFlag = true;
+		}
+		if(player->bestiary->comfreyPlantCollected && !comfreyPlantCollectedFlag) {
+			completedObjectives++;
+			comfreyPlantCollectedFlag = true;
+		}
+		if(player->bestiary->hawthornPlantCollected && !hawthornPlantCollectedFlag) {
+			completedObjectives++;
+			hawthornPlantCollectedFlag = true;
+		}
+		if(player->bestiary->witchhazelPlantCollected && !witchhazelPlantCollectedFlag) {
+			completedObjectives++;
+			witchhazelPlantCollectedFlag = true;
+		}
+		if(player->bestiary->hepaticaPlantCollected && !hepaticaPlantCollectedFlag) {
+			completedObjectives++;
+			hepaticaPlantCollectedFlag = true;
+		}
+
+		// Calculate the completion value based on the percentage of completed objectives
+		collectItemsQuest->AddCompletionValue((completedObjectives * 100) / totalObjectives);
+
+		// Check if all objectives are completed
+		if(completedObjectives == totalObjectives)
+		{
+			collect = true;
+			LOG("Quest completed: %s", app->questManager->GetQuestById(11)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+
+	if (!app->questManager->GetQuestById(11)->IsCompleted() and app->questManager->GetQuestById(7)->IsCompleted())
+		collectItemsQuest->SetActive(true);
+
+	Quest* defeatEnemiesQuest = app->questManager->GetQuestById(12);
+	defeatEnemiesQuest->SetCompletionAction([=, this]() -> bool {
+		static bool defeat;
+		int totalObjectives = 2; // total number of objectives
+		int completedObjectives = 0; // completed objectives
+
+		static bool enemy1KilledFlag = false;
+		static bool enemy2KilledFlag = false;
+
+		if(player->bestiary->enemy1Killed && !enemy1KilledFlag) {
+			completedObjectives++;
+			enemy1KilledFlag = true;
+		}
+		if(player->bestiary->enemy2Killed && !enemy2KilledFlag) {
+			completedObjectives++;
+			enemy2KilledFlag = true;
+		}
+
+		// Calculate the completion value based on the percentage of completed objectives
+		defeatEnemiesQuest->AddCompletionValue((completedObjectives * 100) / totalObjectives);
+
+		// Check if all objectives are completed
+		if(completedObjectives == totalObjectives)
+		{
+			defeat = true;
+			LOG("Quest completed: %s", app->questManager->GetQuestById(12)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+
+	if (!app->questManager->GetQuestById(12)->IsCompleted() and app->questManager->GetQuestById(7)->IsCompleted())
+		defeatEnemiesQuest->SetActive(true);
+
+	#pragma endregion Quests
 
 	if (freeCam)
 	{
@@ -382,14 +541,15 @@ bool ForestScene::Update(float dt)
 	if (player->deadPlayer) {
 		if (loseScreen == nullptr) {
 			loseScreen = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "", { (int)windowW / 2 - 960, (int)windowH / 2 - 540 }, this, loseScreenTex);
+			paused = true; 
 		}
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && loseScreen != nullptr) {
+				paused = false;
 				player->vida = player->maxVida;
 				player->deadPlayer = false;
 				app->guiManager->RemoveGuiControl(loseScreen);
 				loseScreen = nullptr; 
 				app->sceneManager->ChangeScene("tavernscene");
-		
 		}
 	}
 
