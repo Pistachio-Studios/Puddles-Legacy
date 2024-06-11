@@ -76,6 +76,13 @@ bool ForestScene::Enter()
 	}
 	*/
 
+	//PARA PRUEBAS, BORRAR CUANDO SE HAGA MERGE CON LEVEL DESIGN!!!!
+	if (parameters.child("enemies").child("EnemyBoss")) {
+		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
+		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
+		enemyboss->Start();
+	}
+
 	if (parameters.child("Npcs").child("loco")) {
 		Loco* loco = new Loco();
 		app->entityManager->AddEntity(loco);
@@ -167,6 +174,8 @@ bool ForestScene::Enter()
 	//Get the size of the texture
 	//app->tex->GetSize(img, texW, texH);
 
+	loseScreenTex = app->tex->Load("Assets/Textures/loseScreen.png"); 
+
 	return true;
 }
 
@@ -257,8 +266,17 @@ bool ForestScene::Update(float dt)
 	}
 
 	if (player->deadPlayer) {
-		app->sceneManager->ChangeScene("tavernscene");
-		player->vida = player->maxVida;
+		if (loseScreen == nullptr) {
+			loseScreen = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "", { (int)windowW / 2 - 960, (int)windowH / 2 - 540 }, this, loseScreenTex);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && loseScreen != nullptr) {
+				player->vida = player->maxVida;
+				player->deadPlayer = false;
+				app->guiManager->RemoveGuiControl(loseScreen);
+				loseScreen = nullptr; 
+				app->sceneManager->ChangeScene("tavernscene");
+		
+		}
 	}
 
 	return true;

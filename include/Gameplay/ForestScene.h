@@ -6,6 +6,7 @@
 #include "Core/GuiControl.h"
 #include "Core/GuiControlButton.h"
 #include "Gameplay/Entities/Player.h"
+#include "Gameplay/Entities/Enemies/EnemyBoss.h"
 #include "Gameplay/Scene.h"
 
 struct SDL_Texture;
@@ -45,9 +46,11 @@ public:
 public:
 	bool winCondition = false;
 	Player* player;
+	EnemyBoss* enemyboss;
 
 private:
 	SDL_Texture* img;
+	SDL_Texture* loseScreenTex;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
@@ -55,6 +58,7 @@ private:
 	GuiControlLabel* gcScore;
 	GuiControlLabel* gcLives;
 	GuiControlLabel* gcTime;
+	GuiControlPopUp* loseScreen = nullptr;
 
 	bool paused = false;
 	bool exitPressed = false;
