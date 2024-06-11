@@ -11,7 +11,7 @@
 	<:anonymous />
 	<animation_manager />
 	<entitymanager>
-		<player x="1481" y="3810" lives="9" mana="93.1583328" Level="1">
+		<player x="2394" y="3371" lives="15" mana="95" Level="1">
 			<inventory name="Arnica Plant" quantity="0" />
 			<inventory name="Hepatica Plant" quantity="0" />
 			<inventory name="Comfrey Plant" quantity="0" />
@@ -21,27 +21,55 @@
 			<inventory name="Celerita Potion" quantity="0" />
 			<inventory name="Ether Potion" quantity="0" />
 			<inventory name="Oblitius Potion" quantity="0" />
-			<bestiary mission1Completed="false" mission2Completed="false" swordAbility100Unlocked="false" swordAbility110Unlocked="false" swordAbility111Unlocked="false" swordAbility112Unlocked="false" swordAbility120Unlocked="false" swordAbility122Unlocked="false" swordAbility123Unlocked="false" staffAbility100Unlocked="false" staffAbility110Unlocked="false" staffAbility111Unlocked="false" staffAbility112Unlocked="false" staffAbility120Unlocked="false" staffAbility122Unlocked="false" staffAbility123Unlocked="false" enemy1Killed="false" enemy2Killed="false" enemy3Killed="false" hepaticaPlantCollected="false" comfreyPlantCollected="false" hawthornPlantCollected="true" witchhazelPlantCollected="false" arnicaPlantCollected="true" klausUnlocked="false" bountyUnlocked="false" />
+			<bestiary>
+				<pag1 mission1Completed="false" />
+				<pag1 mission2Completed="false" />
+				<pag1 swordAbility100Unlocked="false" />
+				<pag1 swordAbility110Unlocked="false" />
+				<pag1 swordAbility111Unlocked="false" />
+				<pag1 swordAbility112Unlocked="false" />
+				<pag1 swordAbility120Unlocked="false" />
+				<pag1 swordAbility122Unlocked="false" />
+				<pag1 swordAbility123Unlocked="false" />
+				<pag1 staffAbility100Unlocked="false" />
+				<pag1 staffAbility110Unlocked="false" />
+				<pag1 staffAbility111Unlocked="false" />
+				<pag1 staffAbility112Unlocked="false" />
+				<pag1 staffAbility120Unlocked="false" />
+				<pag1 staffAbility122Unlocked="false" />
+				<pag1 staffAbility123Unlocked="false" />
+				<pag2 enemy1Killed="false" />
+				<pag2 enemy2Killed="false" />
+				<pag2 enemy3Killed="false" />
+				<pag3 hepaticaPlantCollected="false" />
+				<pag3 comfreyPlantCollected="false" />
+				<pag3 hawthornPlantCollected="false" />
+				<pag3 witchhazelPlantCollected="false" />
+				<pag3 arnicaPlantCollected="false" />
+				<pag4 klausUnlocked="false" />
+				<pag4 bountyUnlocked="false" />
+			</bestiary>
 		</player>
-		<enemies>
-			<EnemyBoss x="1287" y="3600" lives="100" />
-		</enemies>
-		<enemies>
-			<MiniSpider x="1391" y="3695" lives="5" />
-		</enemies>
-		<enemies>
-			<Wasp x="1504" y="3854" lives="15" />
-		</enemies>
 	</entitymanager>
 	<particleManager />
 	<lighting />
 	<guiManager />
 	<VideoPlayer />
 	<dialog_manager />
-	<questmanager />
+	<questmanager>
+		<quests id="0" title="Master of Movement" description="Learn and master the art of movement (use WASD)." completed="true" active="false" />
+		<quests id="1" title="Dragon Slayer" description="Defeat the Dragon terrorizing the nearby village." completed="false" active="false" />
+		<quests id="2" title="Royal Messenger" description="Deliver a message to the Queen in the neighboring kingdom." completed="false" active="false" />
+		<quests id="3" title="Herbalist's Request" description="Collect 10 rare herbs for the local healer." completed="false" active="false" />
+		<quests id="4" title="City's Secret" description="Investigate the mysterious disappearances in the city." completed="false" active="false" />
+		<quests id="5" title="Goblin Defense" description="Protect the village from an incoming goblin raid." completed="false" active="false" />
+		<quests id="6" title="Lost Pet" description="Find and return the lost pet of the town's blacksmith." completed="false" active="false" />
+		<quests id="7" title="Brewmaster's Aid" description="Help the local innkeeper gather ingredients for a special brew." completed="false" active="false" />
+		<quests id="8" title="Forest's Curse" description="Explore the haunted forest and find the source of its curse." completed="false" active="false" />
+	</questmanager>
 	<UI />
 	<debugUI />
 	<renderer>
-		<camera x="-524" y="-3273" />
+		<camera x="-1500" y="-2833" />
 	</renderer>
 </game_state>
