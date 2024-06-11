@@ -44,6 +44,8 @@ public:
             pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);
         }
 
+        app->audio->PlayFx(player->stepsFx);
+
         if(app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN and player->dashTimer.ReadSec() > player->dashCultdown)
         {
             b2Vec2 dir = pbody->body->GetLinearVelocity();
