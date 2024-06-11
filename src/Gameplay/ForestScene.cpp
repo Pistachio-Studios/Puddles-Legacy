@@ -175,6 +175,7 @@ bool ForestScene::Enter()
 	//app->tex->GetSize(img, texW, texH);
 
 	loseScreenTex = app->tex->Load("Assets/Textures/loseScreen.png"); 
+	winScreenTex = app->tex->Load("Assets/Textures/winScreenProvisional.png"); 
 
 	return true;
 }
@@ -266,6 +267,8 @@ bool ForestScene::Update(float dt)
 	}
 
 	if (player->deadPlayer) {
+		app->render->camera.lerpSpeed = 0.0f; 
+		//TODO: animation player death
 		if (loseScreen == nullptr) {
 			loseScreen = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "", { (int)windowW / 2 - 960, (int)windowH / 2 - 540 }, this, loseScreenTex);
 		}
@@ -276,6 +279,19 @@ bool ForestScene::Update(float dt)
 				loseScreen = nullptr; 
 				app->sceneManager->ChangeScene("tavernscene");
 		
+		}
+	}
+
+	if (!player->deadPlayer && enemyboss->dead) {
+		app->render->camera.lerpSpeed = 0.0f;
+		if (winScreen == nullptr) {
+			winScreen = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "", { (int)windowW / 2 - 960, (int)windowH / 2 - 540 }, this, winScreenTex);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && winScreen != nullptr) {
+			app->guiManager->RemoveGuiControl(winScreen);
+			winScreen = nullptr;
+			app->sceneManager->ChangeScene("tavernscene");
+
 		}
 	}
 

@@ -51,6 +51,7 @@ public:
 private:
 	SDL_Texture* img;
 	SDL_Texture* loseScreenTex;
+	SDL_Texture* winScreenTex;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
@@ -59,6 +60,7 @@ private:
 	GuiControlLabel* gcLives;
 	GuiControlLabel* gcTime;
 	GuiControlPopUp* loseScreen = nullptr;
+	GuiControlPopUp* winScreen = nullptr;
 
 	bool paused = false;
 	bool exitPressed = false;
