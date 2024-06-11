@@ -531,14 +531,15 @@ bool ForestScene::Update(float dt)
 	if (player->deadPlayer) {
 		if (loseScreen == nullptr) {
 			loseScreen = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "", { (int)windowW / 2 - 960, (int)windowH / 2 - 540 }, this, loseScreenTex);
+			paused = true; 
 		}
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && loseScreen != nullptr) {
+				paused = false;
 				player->vida = player->maxVida;
 				player->deadPlayer = false;
 				app->guiManager->RemoveGuiControl(loseScreen);
 				loseScreen = nullptr; 
 				app->sceneManager->ChangeScene("tavernscene");
-		
 		}
 	}
 
