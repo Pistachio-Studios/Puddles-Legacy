@@ -186,7 +186,7 @@ bool Player::Update(float dt)
 
 	//CHEATS
 	if (godMode) {
-		vida = 10.0f;
+		vida = 15.0f;
 		mana = 100.0f;
 	}
 	if (ghostMode) {
