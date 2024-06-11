@@ -36,7 +36,7 @@ bool PlayerPointAndClick::Start()
     pbody = app->physics->CreateRectangle(position.x, position.y, 16, 16, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
-    pbody->body->GetFixtureList()->SetSensor(true);
+    //pbody->body->GetFixtureList()->SetSensor(true);
 
     ground = app->physics->CreateRectangle(0, 0, 1, 1, bodyType::STATIC);
 

@@ -226,7 +226,7 @@ bool UI::Update(float dt)
 	//Player UI
 	Player* player = app->entityManager->GetPlayerEntity();
 
-	if(player != nullptr){
+	if(player != nullptr and app->sceneManager->GetCurrentScene()->name != "tavernscene"){
 
 
 

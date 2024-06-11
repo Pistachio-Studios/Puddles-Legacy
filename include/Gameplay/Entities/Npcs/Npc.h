@@ -52,6 +52,8 @@ public:
 
 	b2Vec2 mouseWorldPosition;
 
+	bool mouseMode = false;
+
 private:
 	int mouseX, mouseY;
 };

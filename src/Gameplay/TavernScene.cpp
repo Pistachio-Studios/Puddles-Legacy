@@ -60,6 +60,7 @@ bool TavernScene::Enter()
 			Npc* npcs = new Npc();
 			app->entityManager->AddEntity(npcs);
 			npcs->parameters = npcsNode;
+			npcs->mouseMode = true;
 			npcs->Start();
 		}
 	}
@@ -125,6 +126,9 @@ bool TavernScene::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	player->pbody->body->GetFixtureList()->SetSensor(true);
+	player->pbody->body->SetTransform(b2Vec2(500, 500), 0);
 	
 	if(freeCam)
 	{

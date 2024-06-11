@@ -53,6 +53,7 @@ bool Npc::Start() {
 	pbody = app->physics->CreateRectangle(position.x, position.y, 128, 256, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
+	if(mouseMode)pbody->body->GetFixtureList()->SetSensor(true);
 
 	npcSensor = app->physics->CreateRectangleSensor(position.x, position.y, 456, 456, bodyType::STATIC);
 	npcSensor->listener = this;
