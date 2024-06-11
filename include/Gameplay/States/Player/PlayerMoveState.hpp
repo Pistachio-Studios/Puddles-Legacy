@@ -20,7 +20,12 @@ public:
     }
     inline void Update(float dt) override
     {
-        
+        if (player->timerSteps >= player->time)
+        {
+            app->audio->PlayFx(player->stepsFx);
+            player->timerSteps = 0.0f;
+        }
+
         PhysBody* pbody = player->pbody;
 
         player->flip = SDL_FLIP_NONE;

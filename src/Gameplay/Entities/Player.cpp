@@ -13,6 +13,7 @@
 #include "Core/ParticleManager.h"
 #include "Core/Lighting.h"
 #include "Core/AnimationManager.h"
+#include "Core/Audio.h"
 
 
 #include "Gameplay/States/Player/PlayerIdleState.hpp"
@@ -81,6 +82,15 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatIdleState("idle"));
 	combatFSM->AddState(new PlayerCombatAttackState("attack"));
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
+
+	// Audios
+
+	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
+	swordSlashFx = app->audio->LoadFx(parameters.attribute("swordSlashFx").as_string());
+	firestaffFx = app->audio->LoadFx(parameters.attribute("fireStaffFx").as_string());
+	deathSabrinaFx = app->audio->LoadFx(parameters.attribute("deathSabrinaFx").as_string());
+	damagedSabrinaFx = app->audio->LoadFx(parameters.attribute("damagedSabrinaFx").as_string());
+	blockFx = app->audio->LoadFx(parameters.attribute("blockFx").as_string());
 
 	//Anims
 	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");
@@ -171,6 +181,8 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	/* playerLight->position = { position.x, position.y }; */
+	timerSteps += dt;
+	timerSword += dt;
 
 	//CHEATS
 	if (godMode) {
@@ -284,11 +296,8 @@ bool Player::Update(float dt)
 	if (vida <= 0) {
 		vida = 0.0f;
 		deadPlayer = true;
+		app->audio->PlayFx(deathSabrinaFx);
 	}
-
-	LOG("Vida: %f", vida);
-	LOG("Dead: %x", deadPlayer);
-	LOG("Pos: %d, %d", position.x, position.y);
 
 	return true;
 }
@@ -462,6 +471,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if(playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 5.0f;
+			app->audio->PlayFx(damagedSabrinaFx);
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
@@ -470,6 +480,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 5.0f;
+			app->audio->PlayFx(damagedSabrinaFx);
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
@@ -478,12 +489,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
 			vida -= 13.0f;
+			app->audio->PlayFx(damagedSabrinaFx);
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
 		break;
 	case ColliderType::BULLET:
 		vida -= 7.0f;
+		app->audio->PlayFx(damagedSabrinaFx);
 		damage->emiting = true;
 		break;
 	}

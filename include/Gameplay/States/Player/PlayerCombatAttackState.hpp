@@ -30,8 +30,6 @@ public:
     PlayerCombatAttackState(SString name) : State(name) {}
     inline void Enter() override
     {
-
-
         player = StateMachineReference->owner;
 
         attackRange = 150;
@@ -62,6 +60,13 @@ public:
     {
         if(player->currentClass == PlayerClass::KNIGHT and player->mana > 10.0f)
         {
+           
+            if (player->timerSword >= player->time)
+            {
+                app->audio->PlayFx(player->swordSlashFx);
+                player->timerSword = 0.0f;
+            }
+
             if (attackValue < attackRange / 2)
             {
                 b2Vec2 playerPos = player->pbody->body->GetPosition();
@@ -98,6 +103,11 @@ public:
 
             if (app->input->GetMouseButtonDown(1))
             {
+                if (player->timerSword >= player->time)
+                {
+                    app->audio->PlayFx(player->firestaffFx);
+                    player->timerSword = 0.0f;
+                }
                 //Animation
                 player->SabrinaCetroAtaque.Update(dt);
                 player->currentAnim = &player->SabrinaCetroAtaque;
