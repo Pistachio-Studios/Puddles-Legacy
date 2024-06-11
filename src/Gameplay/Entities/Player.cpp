@@ -221,7 +221,7 @@ bool Player::Update(float dt)
 	//	vida = maxVida;
 	//}
 
-	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
+	//app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 	damage->position = { position.x + 46, position.y + 64};
 
 	//Animations
