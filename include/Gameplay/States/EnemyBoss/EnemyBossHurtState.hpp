@@ -5,11 +5,11 @@
 #include "Utils/State.h"
 #include "Utils/SString.h"
 #include "Utils/Defs.h"
+#include "Gameplay/Entities/Player.h"
 
 class EnemyBossHurtState : public State<EnemyBoss> {
 private:
     EnemyBoss* enemyboss;
-
 public:
     EnemyBossHurtState(SString name) : State(name) {}
     inline void Enter() override
@@ -24,8 +24,17 @@ public:
         enemyboss->bossDamage.Update(dt);
 
         if (enemyboss->bossDamage.GetCurrentFrameCount() >= 3) {
-            enemyboss->hurtTimer.Start();
-            StateMachineReference->ChangeState("move");
+            if (app->entityManager->GetPlayerEntity()->paralysis) {
+				// 10% chance to paralyze
+				if (rand() % 100 < app->entityManager->GetPlayerEntity()->paralysisChance) {
+					// TODO add paralysis effect
+					StateMachineReference->ChangeState("paralyzed");
+					LOG("EnemyBoss Paralyzed!");
+				}
+			} else {
+                enemyboss->hurtTimer.Start();
+                StateMachineReference->ChangeState("move");
+            }
         }
     }
     inline void Exit() override

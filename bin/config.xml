@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
 	<app>
-		<title>Proyecto-2</title>
+		<title>Puddles Legacy</title>
 		<maxFrameDuration value="16.666" />
 		<icon path="Assets/Textures/icon.png" />
 	</app>
@@ -9,7 +9,7 @@
 		<vsync value="false" />
 	</renderer>
 	<window>
-		<resolution width="1360" height="768" scale="1" />
+		<resolution width="1920" height="1080" scale="1" />
 		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="true" />

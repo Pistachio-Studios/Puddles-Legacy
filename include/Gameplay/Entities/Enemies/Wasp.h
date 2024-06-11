@@ -69,7 +69,7 @@ public:
 	SDL_Texture* texture = NULL;
 
 	//Movement
-	int moveSpeed = 1;
+	float moveSpeed = 3.0f;
 	int noSpeed = 0;
 	int updateSpeed;
 	float moveForce = 1.0f;
@@ -86,9 +86,11 @@ public:
 	iPoint spawnPosition;
 
 	ParticleGenerator* damage = nullptr;
-
-	float vida=15.0f;
-	float dano = 3.0f;
+	ParticleGenerator* paralyzedParticles = nullptr;
+	
+	float vida=12.0f;
+	float dano = 5.0f;
+	float defense = 2.0f;
 	bool invencible = false;
 
 	Timer reviveTimer;

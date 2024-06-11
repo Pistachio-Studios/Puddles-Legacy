@@ -25,7 +25,16 @@ public:
         wasp->waspDamage.Update(dt);
 
         if (wasp->waspDamage.GetCurrentFrameCount() >= 13) {
-            StateMachineReference->ChangeState("idle");
+            if (app->entityManager->GetPlayerEntity()->paralysis) {
+				// 10% chance to paralyze
+				if (rand() % 100 < app->entityManager->GetPlayerEntity()->paralysisChance) {
+					// TODO add paralysis effect
+					StateMachineReference->ChangeState("paralyzed");
+					LOG("Wasp Paralyzed!");
+				}
+			} else {
+                StateMachineReference->ChangeState("idle");
+            }
         }
     }
     inline void Exit() override

@@ -50,7 +50,9 @@ bool Loco::Update(float dt)
 	Npc::Update(dt);
 
 	// TODO add to bestiary when player interacts with tabernero for the first time
-	// app->entityManager->GetPlayerEntity()->bestiary->bountyUnlocked = true;
+	if (Npc::bountytalked == true) {
+		app->entityManager->GetPlayerEntity()->bestiary->bountyUnlocked = true;
+	}
 
 	return true;
 }

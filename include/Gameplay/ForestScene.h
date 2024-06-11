@@ -55,6 +55,10 @@ public:
 	Wasp* wasp;
 
 private:
+
+private:
+	SDL_Texture* img;
+	SDL_Texture* loseScreenTex;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
@@ -62,12 +66,7 @@ private:
 	GuiControlLabel* gcScore;
 	GuiControlLabel* gcLives;
 	GuiControlLabel* gcTime;
-
-	GuiControlButton* gcResume;
-	GuiControlButton* gcSave;
-	GuiControlButton* gcSettings;
-	GuiControlButton* gcBackToTitle;
-	GuiControlButton* gcExit;
+	GuiControlPopUp* loseScreen = nullptr;
 
 	bool paused = false;
 	bool exitPressed = false;

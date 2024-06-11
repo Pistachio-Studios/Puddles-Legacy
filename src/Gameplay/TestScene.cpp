@@ -85,27 +85,6 @@ bool TestScene::Enter()
 	//Get the size of the texture
 	//app->tex->GetSize(img, texW, texH);
 
-	//Pause Menu UI
-	gcResume = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Resume", { (int)windowW / 2 - 175, (int)windowH / 2 - 100, 300, 50 }, this);
-	gcResume->SetObserver(this);
-	gcResume->state = GuiControlState::DISABLED;
-
-	gcSave = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Save", { (int)windowW / 2 - 175, (int)windowH / 2 - 50, 300, 50 }, this);
-	gcSave->SetObserver(this);
-	gcSave->state = GuiControlState::DISABLED;
-
-	gcSettings = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Settings", { (int)windowW / 2 - 175, (int)windowH / 2, 300, 50 }, this);
-	gcSettings->SetObserver(this);
-	gcSettings->state = GuiControlState::DISABLED;
-
-	gcBackToTitle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Back to Title", { (int)windowW / 2 - 175, (int)windowH / 2 + 50, 300, 50 }, this);
-	gcBackToTitle->SetObserver(this);
-	gcBackToTitle->state = GuiControlState::DISABLED;
-
-	gcExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Exit", { (int)windowW / 2 - 175, (int)windowH / 2 + 100, 300, 50 }, this);
-	gcExit->SetObserver(this);
-	gcExit->state = GuiControlState::DISABLED;
-
 	return true;
 }
 
@@ -152,31 +131,6 @@ bool TestScene::PostUpdate()
 
 	bool ret = true;
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	{
-		if(paused)
-		{
-			paused = false;
-			gcResume->state = GuiControlState::DISABLED;
-			gcSettings->state = GuiControlState::DISABLED;
-			gcBackToTitle->state = GuiControlState::DISABLED;
-			gcExit->state = GuiControlState::DISABLED;
-			gcSave->state = GuiControlState::DISABLED;
-		}
-		else
-		{
-			paused = true;
-			gcResume->state = GuiControlState::NORMAL;
-			gcSettings->state = GuiControlState::NORMAL;
-			gcBackToTitle->state = GuiControlState::NORMAL;
-			gcExit->state = GuiControlState::NORMAL;
-			gcSave->state = GuiControlState::NORMAL;
-		}
-	}
-
-	if(exitPressed)
-		ret = false;
-
 	return ret;
 }
 
@@ -186,14 +140,6 @@ bool TestScene::Exit()
 	app->entityManager->Disable();
 	app->map->Disable();
 
-	app->guiManager->RemoveGuiControl(gcScore);
-	app->guiManager->RemoveGuiControl(gcLives);
-	app->guiManager->RemoveGuiControl(gcResume);
-	app->guiManager->RemoveGuiControl(gcSettings);
-	app->guiManager->RemoveGuiControl(gcBackToTitle);
-	app->guiManager->RemoveGuiControl(gcExit);
-	app->guiManager->RemoveGuiControl(gcSave);
-
 	return true;
 }
 
@@ -202,14 +148,6 @@ bool TestScene::CleanUp()
 {
 	LOG("Freeing testscene");
 
-	app->guiManager->RemoveGuiControl(gcScore);
-	app->guiManager->RemoveGuiControl(gcLives);
-	app->guiManager->RemoveGuiControl(gcResume);
-	app->guiManager->RemoveGuiControl(gcSettings);
-	app->guiManager->RemoveGuiControl(gcBackToTitle);
-	app->guiManager->RemoveGuiControl(gcExit);
-	app->guiManager->RemoveGuiControl(gcSave);
-
 	return true;
 }
 
@@ -217,30 +155,6 @@ bool TestScene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
-
-	switch (control->id)
-	{
-	case 6:
-		paused = true;
-		gcResume->state = GuiControlState::DISABLED;
-		gcSettings->state = GuiControlState::DISABLED;
-		gcBackToTitle->state = GuiControlState::DISABLED;
-		gcExit->state = GuiControlState::DISABLED;
-		gcSave->state = GuiControlState::DISABLED;
-		break;
-	case 7:
-		break;
-	case 8:
-		paused = false;
-		app->sceneManager->ChangeScene("mainmenu");
-		break;
-	case 9:
-		exitPressed = true;
-		break;
-	case 10:
-		app->SaveRequest();
-		break;
-	}
 
 	return true;
 }

@@ -81,12 +81,6 @@ private:
 	GuiControlLabel* gcLives;
 	GuiControlLabel* gcTime;
 
-	GuiControlButton* gcResume;
-	GuiControlButton* gcSave;
-	GuiControlButton* gcSettings;
-	GuiControlButton* gcBackToTitle;
-	GuiControlButton* gcExit;
-
 	GuiControlButton* cauldronSelectExit;
 	GuiControlButton* cauldronExit;
 	GuiControlButton* cauldronCreate;

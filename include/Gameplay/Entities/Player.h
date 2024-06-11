@@ -30,6 +30,7 @@ struct SDL_Texture;
 class Sword;
 class Staff;
 class ParticleGenerator;
+class Light;
 
 enum PlayerClass
 {
@@ -109,15 +110,15 @@ public:
 
 	Inventory() {
 		// Plants
-		// TODO revisar descripciones 
-		items.push_back(new ArnicaPlant("Arnica Plant", 0, " Arreglar ------ Permite craftear la poción de cura"));
-		items.push_back(new HepaticaPlant("Hepatica Plant", 0, " Arreglar------ Permite craftear la poción de recuperación de energía"));
-		items.push_back(new ComfreyPlant("Comfrey Plant", 0, " Arreglar------ Permite craftear la poción de resetear árbol de habilidades"));
-		items.push_back(new WitchHazelPlant("Witch Hazel Plant", 0, " Arreglar------- Permite craftear la poción de resetear árbol de habilidades")); 
-		items.push_back(new HawthornPlant("Hawthorn Plant", 0, " Arreglar------- Permite craftear la poción de resetear árbol de habilidades"));
+		// TODO revisar descripciones - DONE
+		items.push_back(new ArnicaPlant("Arnica Plant", 0, "Para craftear la poción de cura o la de aumentar velocidad"));
+		items.push_back(new HepaticaPlant("Hepatica Plant", 0, "Para craftear la poción de resetear árbol de habilidades"));
+		items.push_back(new ComfreyPlant("Comfrey Plant", 0, "Para craftear la poción de resetear árbol de habilidades o la de recuperar energia"));
+		items.push_back(new WitchHazelPlant("Witch Hazel Plant", 0, "Para craftear la poción de aumentar velocidad")); 
+		items.push_back(new HawthornPlant("Hawthorn Plant", 0, "Para craftear la poción de cura o la de recuperar energia"));
 
 		// Potions
-		// TODO revisar descripciones 
+		// TODO revisar descripciones - DONE
 		items.push_back(new VitaPotion("Vita Potion", 0, "Cura vida"));
 		items.push_back(new CeleritaPotion("Celerita Potion", 0, "Aumenta velocidad"));
 		items.push_back(new EtherPotion("Ether Potion", 0, "Recupera energia"));
@@ -233,6 +234,22 @@ public:
 	bool SaveState(pugi::xml_node& node) override;
 	bool LoadState(pugi::xml_node& node) override;
 
+	void AbilitySword100();
+	void AbilitySword110();
+	void AbilitySword111();
+	void AbilitySword112();
+	void AbilitySword120();
+	void AbilitySword122();
+	void AbilitySword123();
+
+	void AbilityStaff100();
+	void AbilityStaff110();
+	void AbilityStaff111();
+	void AbilityStaff112();
+	void AbilityStaff120();
+	void AbilityStaff122();
+	void AbilityStaff123();
+
 public:
 
 	Sword* swordEntity = nullptr;
@@ -241,16 +258,28 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 
-	float vida = 10.0f;
-	float dano = 4.0f;
+	float vida = 15.0f;
+	float maxVida = 15.0f;
+	float strength = 10.0f;
+	float intelligence = 14.0f;
+	float defense;
+
+	bool bleed = false;
+	int bleedChance = 15; // 15% chance of bleeding
+
+	bool paralysis = false;
+	int paralysisChance = 10; // 10% chance of paralysis
+
+	bool stealLife = false;
+	float stealLifeRatio = strength * 0.1; // 10% of the damage dealt
 
 	// TODO add final stats
 	int level = 1;
 	int abylityPoints = 0;
 
 	//Movement
-	float moveForce = 1.0f;
-	float maxSpeed = 5.0f;
+	float moveForce = 1.5f;
+	float maxSpeed = 6.0f;
 
 	//State Machines
 	StateMachine<Player>* movementFSM = nullptr;
@@ -273,19 +302,29 @@ public:
 	ParticleGenerator* damage = nullptr;
 
 	float mana = 100.0f;
-	uint livesPlayer = 10;
-	int totalLivesPlayer;
+	float manaRegeneration = 2.0f; // 2 mana per second
+
 	bool deadPlayer = false;
 
 	bool sceneChange = false;
+
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 	Timer playerHurtCultdown;
 	Timer dashTimer;
 	float dashCultdown = 5.0f;
 
+	Animation SabrinaEspadaIdle, SabrinaEspadaMovDelante, SabrinaEspadaMovDerecha, SabrinaEspadaMovIzquierda, SabrinaEspadaMovDetras,
+		SabrinaEspadaDano, SabrinaEspadaDash, SabrinaEspadaMuerte, SabrinaEspadaRecolectar,
+		SabrinaEspadaAtaque, SabrinaCetroIdle, SabrinaCetroMovDelante, SabrinaCetroMovDerecha, SabrinaCetroMovIzquierda,
+		SabrinaCetroMovDetras, SabrinaCetroDano, SabrinaCetroDash, SabrinaCetroMuerte, SabrinaCetroRecolectar, SabrinaCetroAtaque;
+	Animation* currentAnim;
+
 	//Cheats
 	bool godMode = false;
 	bool ghostMode = false;
+
+	Light* playerLight = nullptr;
 };
 
 #endif // __PLAYER_H__

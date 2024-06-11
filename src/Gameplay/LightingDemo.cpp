@@ -23,12 +23,17 @@ bool LightingDemo::Enter()
     {
         int x = rand() % 720;
         int y = rand() % 720;
-        int radius = rand() % 100;
+        //float radius = rand() % 100;
+        float radius = 1.0f;
         uint8 r = rand() % 256;
         uint8 g = rand() % 256;
         uint8 b = rand() % 256;
         lights[i] = app->lighting->AddLight({ x, y }, radius, { r, g, b, 255 });
     }
+
+    app->render->camera.target = nullptr;
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
 
     return true;
 }

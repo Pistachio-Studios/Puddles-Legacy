@@ -14,6 +14,7 @@ class Light
 	public: //cambiar a privado en algun momento
 	bool active;
 	iPoint position;
+	float radius = 1.0f;
 	SDL_Color color;
 	SDL_Texture* texture;
 };
@@ -47,7 +48,11 @@ public:
 
 	void SetAmbientLight(const SDL_Color& color);
 
-	Light* AddLight(iPoint position, int radius, const SDL_Color& color);
+	Light* AddLight(iPoint position, float radius = 1.0f, const SDL_Color& color = { 255, 255, 255, 255 });
+
+	void RemoveLight(Light* light);
+
+	void RemoveAllLights();
 
 private:
 	List<Light*> lights;

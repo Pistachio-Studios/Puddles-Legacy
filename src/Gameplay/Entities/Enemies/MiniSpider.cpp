@@ -21,6 +21,7 @@
 #include "Gameplay/States/MiniSpider/MiniSpiderMoveState.hpp"
 #include "Gameplay/States/MiniSpider/MiniSpiderHurtState.hpp"
 #include "Gameplay/States/MiniSpider/MiniSpiderDeadState.hpp"
+#include "Gameplay/States/MiniSpider/MiniSpiderParalyzedState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -60,7 +61,7 @@ bool MiniSpider::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 90, 90, bodyType::DYNAMIC);
 	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY;
+	pbody->ctype = ColliderType::ENEMYSPIDER;
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
@@ -75,6 +76,7 @@ bool MiniSpider::Start() {
 	movementFSM->AddState(new MiniSpiderHurtState("hurt"));
 	movementFSM->AddState(new MiniSpiderAttackState("attack"));
 	movementFSM->AddState(new MiniSpiderDeadState("die"));
+	movementFSM->AddState(new MiniSpiderParalyzedState("paralyzed"));
 
 	//Animations
 	spiderIdle = *app->animationManager->GetAnimByName("Mini_Spider_Idle");
@@ -110,6 +112,21 @@ bool MiniSpider::Start() {
 	damage->opacityFade = 0.5f;
 	damage->color = { 50, 128, 128, 255 };
 	app->particleManager->AddGenerator(damage);
+
+	paralyzedParticles = new ParticleGenerator();
+	paralyzedParticles->emiting = false;
+	paralyzedParticles->oneShoot = true;
+	paralyzedParticles->lifetime = 0.25f;
+	paralyzedParticles->explosiveness = 1.0f;
+	paralyzedParticles->spawnRadius = 50;
+	paralyzedParticles->size = 30;
+	paralyzedParticles->initialVelocity = 0;
+	paralyzedParticles->Damping = 0.0f;
+	paralyzedParticles->spread = 180;
+	paralyzedParticles->sizeFade = -1.0f;
+	paralyzedParticles->opacityFade = 0.5f;
+	paralyzedParticles->color = { 50, 128, 128, 255 };
+	app->particleManager->AddGenerator(paralyzedParticles);
 
 	return true;
 }
@@ -232,7 +249,7 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::SWORD:
 			LOG("Collision ARMAPLAYER");
 		 	//if (state != EntityState::DEAD and !invencible){
-			vida -= player->dano;
+			vida -= player->strength - (defense / 2);
 			damage->emiting = true;
 			if (vida <= 0.0f)
 			{
@@ -244,6 +261,21 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 			else if (vida > 0.0f) {
 				app->audio->PlayFx(damageFx);
 				spiderDamage.Reset();
+
+				if (player->stealLife) {
+					player->vida += player->stealLifeRatio;
+					LOG("Player steal life %f", player->vida);
+				}
+
+				if (app->entityManager->GetPlayerEntity()->bleed) {
+					// 15% change to bleed
+					if (rand() % 100 < player->bleedChance) {
+						// TODO add bleed effect
+						vida -= 1.0f;
+						LOG("MiniSpider Bleed! %f", vida);
+					}
+				}
+
 				movementFSM->ChangeState("hurt");
 			}
 				//else {
@@ -259,7 +291,7 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 
 	case ColliderType::MAGIC:
-		vida -= player->dano;
+		vida -= player->intelligence - (defense /2);
 		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{

@@ -22,6 +22,7 @@
 #include "Gameplay/States/EnemyBoss/EnemyBossMoveState.hpp"
 #include "Gameplay/States/EnemyBoss/EnemyBossHurtState.hpp"
 #include "Gameplay/States/EnemyBoss/EnemyBossDeadState.hpp"
+#include "Gameplay/States/EnemyBoss/EnemyBossParalyzedState.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -62,7 +63,7 @@ bool EnemyBoss::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 230, 192, bodyType::DYNAMIC); 
 	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY; 
+	pbody->ctype = ColliderType::ENEMYBOSS; 
 
 	//si quieres dar vueltos como la helice de un helicoptero Boeing AH-64 Apache pon en false la siguiente funcion
 	pbody->body->SetFixedRotation(true);
@@ -78,6 +79,7 @@ bool EnemyBoss::Start() {
 	movementFSM->AddState(new EnemyBossBodyAttackState("bodyAttack"));
 	movementFSM->AddState(new EnemyBossDistanceAttackState("distanceAttack"));
 	movementFSM->AddState(new EnemyBossDeadState("die"));
+	movementFSM->AddState(new EnemyBossParalyzedState("paralyzed"));
 
 	//Animations
 	bossIdle = *app->animationManager->GetAnimByName("Boss_Spider_Idle");
@@ -121,6 +123,21 @@ bool EnemyBoss::Start() {
 	damage->opacityFade = 0.5f;
 	damage->color = { 0, 200, 100, 128 };
 	app->particleManager->AddGenerator(damage);
+
+	paralyzedParticles = new ParticleGenerator();
+	paralyzedParticles->emiting = false;
+	paralyzedParticles->oneShoot = true;
+	paralyzedParticles->lifetime = 0.25f;
+	paralyzedParticles->explosiveness = 1.0f;
+	paralyzedParticles->spawnRadius = 90;
+	paralyzedParticles->size = 30;
+	paralyzedParticles->initialVelocity = 0;
+	paralyzedParticles->Damping = 0.0f;
+	paralyzedParticles->spread = 180;
+	paralyzedParticles->sizeFade = -1.0f;
+	paralyzedParticles->opacityFade = 0.5f;
+	paralyzedParticles->color = { 100, 255, 255, 255 };
+	app->particleManager->AddGenerator(paralyzedParticles);
 
 	return true;
 }
@@ -169,6 +186,7 @@ void EnemyBoss::DrawImGui()
 {
 	ImGui::Begin("Enemy");
 	ImGui::Text("Enemy Position: %d, %d", position.x, position.y);
+	ImGui::Text("Enemy Health: %f", vida);
 	ImGui::Text("Enemy Speed: %f", pbody->body->GetLinearVelocity().Length());
 	ImGui::SliderFloat("max speed", &maxSpeed, 1.0f, 10.0f);
 	ImGui::SliderFloat("move force", &moveForce, 1.0f, 10.0f);
@@ -251,7 +269,7 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::SWORD:
 		LOG("Collision ARMAPLAYER");
 		//if (state != EntityState::DEAD and !invencible){
-		vida -= player->dano;
+		vida -= player->strength - (defense / 2);
 		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{
@@ -264,12 +282,30 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			app->audio->PlayFx(bossDamageFx);
 			bossDamage.Reset();
+
+			if (player->stealLife) {
+				player->vida += player->stealLifeRatio;
+				LOG("Player steal life %f", player->vida);
+			}
+
+			// TODO review this
+			bool bleedDamageDealt = false;
+			if (app->entityManager->GetPlayerEntity()->bleed) {
+				// 15% change to bleed
+				if (rand() % 100 < player->bleedChance && !bleedDamageDealt) {
+					// TODO add bleed effect
+					vida -= 1.0f;
+					bleedDamageDealt = true;
+					LOG("EnemyBoss Bleed! %f", vida);
+				}
+			}
+
 			movementFSM->ChangeState("hurt");
 		}
 		break;
 
 	case ColliderType::MAGIC:
-		vida -= player->dano;
+		vida -= player->intelligence - (defense / 2);
 		damage->emiting = true;
 		if (vida <= 0.0f && !dead)
 		{

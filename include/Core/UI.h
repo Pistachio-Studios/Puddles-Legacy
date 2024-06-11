@@ -32,6 +32,8 @@ public:
 	// OnGuiMouseClickEvent
 	bool OnGuiMouseClickEvent(GuiControl* control) override;
 
+	void PauseMenuVisibility(bool visible);
+
 public:
 
 	// Potions Inventory
@@ -120,9 +122,19 @@ public:
 	SDL_Texture* klausUnlockedTexture = nullptr;
 	SDL_Texture* bountyUnlockedTexture = nullptr;
 
+	GuiControlButton* gcResume;
+	GuiControlButton* gcSave;
+	GuiControlButton* gcSettings;
+	GuiControlButton* gcBackToTitle;
+	GuiControlButton* gcExit;
+
 	uint windowW, windowH;
 
 	bool openBestiary = false;
+	bool exitPressed = false;
+	bool mainMenuPressed = false;
+
+	Timer potionEaseTimer;
 };
 
 #endif // __UI_H__
