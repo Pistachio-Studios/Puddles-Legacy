@@ -69,6 +69,7 @@ bool TavernScene::Enter()
 		Tabernero* tabernero = new Tabernero();
 		app->entityManager->AddEntity(tabernero);
 		tabernero->parameters = parameters.child("tabernero");
+		tabernero->mouseMode = true;
 		tabernero->Start();
 	}
 
