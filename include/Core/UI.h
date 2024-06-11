@@ -134,6 +134,18 @@ public:
 	bool exitPressed = false;
 	bool mainMenuPressed = false;
 
+	bool PotionCeleritaAdded = false;
+	bool PotionEtherAdded = false;
+	bool PotionOblitiusAdded = false;
+	bool PotionVitaAdded = false;
+
+	int PotionCeleritaQuantity = 0;
+	int PotionEtherQuantity = 0;
+	int PotionOblitiusQuantity = 0;
+	int PotionVitaQuantity = 0;
+
+	Timer potionPopUpTimer;
+
 	Timer potionEaseTimer;
 };
 

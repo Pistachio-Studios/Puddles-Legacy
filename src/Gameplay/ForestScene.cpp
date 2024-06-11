@@ -214,6 +214,7 @@ bool ForestScene::Enter()
 
 	door1Closed = false;
 	door3Closed = false;
+	doorBossClosed = false;
 	puzzle1 = false;
 	puzzle2 = false;
 	puzzle3 = false;
@@ -435,7 +436,7 @@ bool ForestScene::Update(float dt)
 		player->pbody->body->SetTransform({ 380,283 }, 0);
 	}
 	//lvl6 a final
-	if (app->entityManager->GetPlayerEntity()->position.x >= 29111 && app->entityManager->GetPlayerEntity()->position.x <= 29184 && app->entityManager->GetPlayerEntity()->position.y >= 13696 && app->entityManager->GetPlayerEntity()->position.y <= 14208) {
+	if (enemyboss->dead && app->entityManager->GetPlayerEntity()->position.x >= 29111 && app->entityManager->GetPlayerEntity()->position.x <= 29184 && app->entityManager->GetPlayerEntity()->position.y >= 13696 && app->entityManager->GetPlayerEntity()->position.y <= 14208) {
 		player->pbody->body->SetTransform({ 673,295 }, 0);
 	}
 
@@ -490,43 +491,75 @@ bool ForestScene::Update(float dt)
 	if (buttonBallList[0]->pisada && buttonBallList[1]->pisada && !puzzle2) {
 		puzzle2 = true;
 		app->audio->PlayFx(puzzleFx);
+
+		int randomValue = rand() % 3;
+		SString potionName = "";
+		switch (randomValue)
+		{
+		case 0:
+			potionName = "Vita Potion";
+			break;
+		case 1:
+			potionName = "Celerita Potion";
+			break;
+		case 2:
+			potionName = "Ether Potion";
+			break;
+		case 3:
+			potionName = "Oblitius Potion";
+			break;
+		}
+
+		if(player->inventory.HasItem(potionName.GetString()))
+		{
+			player->inventory.GetItem(potionName.GetString())->quantity++;
+		}
 	}
 
 
 	//puzzle 3
 
-	if (player->position.x > 26900 && player->position.y > 14066 && player->position.y < 144475 && !door3Closed && !puzzle3) {
+	if (player->position.x > 24340 && player->position.y > 14450 && player->position.y < 144859 && !door3Closed && !puzzle3) {
 		door3Closed = true;
-		bushPbody = app->physics->CreateRectangle(26668, 14311, 384, 512, bodyType::STATIC);
+		bushPbody = app->physics->CreateRectangle(24108, 14695, 384, 512, bodyType::STATIC);
 		bushPbody->ctype = ColliderType::LIMITS;
-		int i = 4297;
-		/*if(i > 3776)
-		{
-			app->render->DrawTexture(bush, i-1, 4000, 0, 1.0f);
-		}*/
 	}
 
 	if (door3Closed) {
-		app->render->DrawTexture(bush, 26386, 14166, 0, 1.0f, 90.0f, 0.6f);
+		app->render->DrawTexture(bush, 23826, 14550, 0, 1.0f, 90.0f, 0.6f);
 	}
 
 	if (buttonColourList[0]->colour == 2 && buttonColourList[1]->colour == 5 && buttonColourList[2]->colour == 1 && buttonColourList[3]->colour == 4 && buttonColourList[4]->colour == 3 && door3Closed && !puzzle3) {
 		puzzle3 = true;
 		app->audio->PlayFx(puzzleFx);
 		door3Closed = false;
-		int i = 3776;
-		/*if (i < 4297)
-		{
-			app->render->DrawTexture(bush, i + 1, 4000, 0, 1.0f);
-		}*/
 		app->physics->DestroyBody(bushPbody);
 	}
 
+	//boss
+
+	if (player->position.x > 26900 && player->position.y > 14066 && player->position.y < 144475 && !doorBossClosed && !enemyboss->dead || !door3Closed && !enemyboss->dead) {
+		doorBossClosed = true;
+		bushPbody = app->physics->CreateRectangle(26668, 14311, 384, 512, bodyType::STATIC);
+		bushPbody->ctype = ColliderType::LIMITS;
+	}
+
+	if (doorBossClosed) {
+		app->render->DrawTexture(bush, 26386, 14166, 0, 1.0f, 90.0f, 0.6f);
+	}
+
+	if (doorBossClosed && puzzle3 && !enemyboss->dead || enemyboss->dead) {
+		doorBossClosed == false;
+		app->physics->DestroyBody(bushPbody);
+	}
+
+
+
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
-		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(2816), PIXEL_TO_METERS(13568)), 0);
+		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(180*128), PIXEL_TO_METERS(113*128)), 0);
 	}
 	
-	LOG("x: %i   y: %i", player->position.x, player->position.y);
+	//LOG("x: %i   y: %i", player->position.x, player->position.y);
 
 	if (player->deadPlayer) {
 		if (loseScreen == nullptr) {
