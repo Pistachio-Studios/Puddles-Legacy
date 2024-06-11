@@ -1,18 +1,19 @@
 #include "Core/App.h"
 #include "Core/Input.h"
-#include "Utils/SString.h"
 #include "Core/Render.h"
-#include "Utils/Timer.h"
 #include "Core/Window.h"
+#include "Core/Map.h"
+#include "Core/SceneManager.h"
+#include "Core/GuiControl.h"
+#include "Core/GuiManager.h"
 #include "Gameplay/TownScene.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Loco.h"
-#include "Core/Map.h"
-#include "Core/SceneManager.h"
+#include "Gameplay/Entities/Items/Plant.h"
 #include "Utils/Log.h"
-#include "Core/GuiControl.h"
-#include "Core/GuiManager.h"
-  
+#include "Utils/Timer.h"
+#include "Utils/SString.h"
+
 #include <box2d/b2_body.h>
 #include <tracy/Tracy.hpp>
 
@@ -72,6 +73,47 @@ bool TownScene::Enter()
 		app->entityManager->AddEntity(loco);
 		loco->parameters = parameters.child("loco");
 		loco->Start();
+	}
+
+	for (pugi::xml_node plantNode = parameters.child("Plants").first_child(); plantNode; plantNode = plantNode.next_sibling())
+	{
+		std::string plantType = plantNode.name();
+
+		if (plantType == "ArnicaPlant") {
+			Plant* plant = new ArnicaPlant("Arnica Plant", 1, "Permite craftear la poción de cura");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+		if (plantType == "HepaticaPlant") {
+			Plant* plant = new HepaticaPlant("Hepatica Plant", 1, "Permite craftear la poción de recuperación de energía");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+		if (plantType == "ComfreyPlant") {
+			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+		if (plantType == "WitchHazelPlant") {
+			Plant* plant = new WitchHazelPlant("Witch Hazel Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
+		if (plantType == "HawthornPlant") {
+			Plant* plant = new HawthornPlant("Hawthorn Plant", 1, "Permite craftear la poción de resetear árbol de habilidades");
+			app->entityManager->AddEntity(plant);
+			plant->parameters = plantNode;
+			plant->Start();
+		}
+
 	}
 
 	//app->physics->Enable();

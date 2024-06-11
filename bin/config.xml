@@ -149,7 +149,6 @@
 				<HawthornPlant x="8896" y="9148" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
 				<HawthornPlant x="26873" y="1779" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
 				<HawthornPlant x="27282" y="11818" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
-	
 			</Plants>
 		</forestscene>
 		<townscene>
@@ -165,7 +164,23 @@
 				<npc x="3550" y="650" type="2" texturepath="Assets/Textures/NoDialogNpcs/squirrel.PNG" />
 			</npcs>
 			<loco x="3200" y="2900" type="1" />
-			<enemies />
+			<Plants>
+				<ArnicaPlant x="1922" y="3158" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ArnicaPlant x="2176" y="3114" texturepath="Assets/Textures/Plants/ArnicaPlant.png" />
+				<ComfreyPlant x="5010" y="1288" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="3802" y="1866" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="716" y="1074" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<ComfreyPlant x="788" y="1238" texturepath="Assets/Textures/Plants/ComfreyPlant.png" />
+				<HepaticaPlant x="2337" y="227" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<HepaticaPlant x="2464" y="308" texturepath="Assets/Textures/Plants/HepaticaPlant.png" />
+				<WitchHazelPlant x="3378" y="3258" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="3640" y="3154" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="3468" y="3090" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<WitchHazelPlant x="4309" y="2773" texturepath="Assets/Textures/Plants/WitchHazelPlant.png" />
+				<HawthornPlant x="4854" y="2198" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="626" y="2090" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+				<HawthornPlant x="804" y="2330" texturepath="Assets/Textures/Plants/HawthornPlant.png" />
+			</Plants>
 		</townscene>
 		<tavernscene>
 			<map path="Assets/Maps/Tavern/" name="Tavern.tmx" />
