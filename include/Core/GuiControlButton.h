@@ -28,6 +28,8 @@ private:
 
 	bool canClick = true;
 	bool drawBasic = false;
+
+	SDL_Color textColor = { 255, 255, 255, 255 };
 };
 
 #endif // __GUICONTROLBUTTON_H__
