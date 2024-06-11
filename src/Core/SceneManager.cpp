@@ -5,6 +5,7 @@
 #include "Gameplay/LightingDemo.h"
 #include "Gameplay/MainMenu.h"
 #include "Gameplay/TeamLogo.h"
+#include "Gameplay/Credits.h"
 #include "Gameplay/ParticleDemo.h"
 #include "Gameplay/Scene.h"
 #include "Gameplay/TestScene.h"
@@ -116,11 +117,11 @@ bool SceneManager::Update(float dt)
             currentScene->Exit();
 
             if (app->physics->DestroyAllWorldBodies()) {
-            //app->lighting->RemoveAllLights();
-            app->lighting->SetAmbientLight({255, 255, 255, 255});
+                //app->lighting->RemoveAllLights();
+                app->lighting->SetAmbientLight({255, 255, 255, 255});
 
-            prevScene = currentScene;
-            currentScene = nextScene;
+                prevScene = currentScene;
+                currentScene = nextScene;
             };
 
             currentScene->Enter();
@@ -252,6 +253,10 @@ Scene* SceneManager::CreateScene(SString sceneName)
     else if (sceneName == "teamlogo")
     {
         return new TeamLogo(sceneName);
+    }
+    else if (sceneName == "credits")
+    {
+        return new Credits(sceneName);
     }
     else if(sceneName == "testscene")
     {
