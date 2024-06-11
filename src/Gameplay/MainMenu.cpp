@@ -43,6 +43,8 @@ bool MainMenu::Enter()
 
 	FxId = app->audio->LoadFx(parameters.child("gameTitle").attribute("FxPath").as_string());
 
+	settingsTexture = app->tex->Load("Assets/UI/PopUps/settingsBackground.png");
+
 	app->render->camera.target = nullptr;
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
@@ -126,6 +128,7 @@ bool MainMenu::CleanUp()
 {
 	LOG("Freeing MainMenu");
 	app->tex->UnLoad(gameTitle);
+	app->tex->UnLoad(settingsTexture);
 	app->guiManager->RemoveGuiControl(playButton);
 	app->guiManager->RemoveGuiControl(optionsButton);
 	app->guiManager->RemoveGuiControl(exitButton);
@@ -180,9 +183,19 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			loadButton->state = GuiControlState::DISABLED;
 
 			// Create the popUp
-			popUpOptions = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", { 0,0,0,0 }, this);
+			SDL_Rect popUpOptionsPos;
+			popUpOptionsPos.w = 1444;
+			popUpOptionsPos.h = 952;
+			popUpOptionsPos.x = (windowW - popUpOptionsPos.w) / 2;
+			popUpOptionsPos.y = (windowH - popUpOptionsPos.h) / 2;
+			popUpOptions = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", popUpOptionsPos, this, settingsTexture);
 
-			SDL_Rect crossOButtonPos = { static_cast<int>(popUpOptions->bounds.w), static_cast<int>(popUpOptions->bounds.h), 30, 30 };
+			SDL_Rect crossOButtonPos = { 
+				static_cast<int>(popUpOptionsPos.x + popUpOptionsPos.w), 
+				static_cast<int>(popUpOptionsPos.y), 
+				30, 
+				30 
+			};
 			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
 
 			SDL_Rect musicPos = { static_cast<int>(windowW / 2 - 300), static_cast<int>(windowH / 2 - 200), 150, 20 };
