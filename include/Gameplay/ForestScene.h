@@ -47,6 +47,8 @@ public:
 
 	void RenderGUI();
 
+	void generateRandomPotion();
+
 public:
 	bool winCondition = false;
 	Player* player;
@@ -82,11 +84,15 @@ private:
 
 	int puzzleFx;
 
-	PhysBody* bushPbody;
+	PhysBody* bushPbody1;
+	PhysBody* bushPbody2;
+	PhysBody* bushPbody3;
+	PhysBody* bushPbody4;
 	SDL_Texture* bush = nullptr;
 	bool door1Closed = false;
 	bool door3Closed = false;
 	bool doorBossClosed = false;
+	bool doorBoss2Closed = false;
 	bool puzzle1 = false;
 	bool puzzle2 = false;
 	bool puzzle3 = false;

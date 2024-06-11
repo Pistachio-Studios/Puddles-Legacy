@@ -216,6 +216,7 @@ bool ForestScene::Enter()
 	door1Closed = false;
 	door3Closed = false;
 	doorBossClosed = false;
+	doorBoss2Closed = false;
 	puzzle1 = false;
 	puzzle2 = false;
 	puzzle3 = false;
@@ -223,6 +224,31 @@ bool ForestScene::Enter()
 	player->bestiary->forestUnlocked = true;
 
 	return true;
+}
+
+void ForestScene::generateRandomPotion() {
+	int randomValue = rand() % 3;
+	SString potionName = "";
+	switch (randomValue)
+	{
+	case 0:
+		potionName = "Vita Potion";
+		break;
+	case 1:
+		potionName = "Celerita Potion";
+		break;
+	case 2:
+		potionName = "Ether Potion";
+		break;
+	case 3:
+		potionName = "Oblitius Potion";
+		break;
+	}
+
+	if (player->inventory.HasItem(potionName.GetString()))
+	{
+		player->inventory.GetItem(potionName.GetString())->quantity++;
+	}
 }
 
 // Called each loop iteration
@@ -444,8 +470,8 @@ bool ForestScene::Update(float dt)
 	//puzzle1
 	if (player->position.y > 4350 && player->position.x > 3776 && player->position.x < 4297 && !door1Closed && !puzzle1) {
 		door1Closed = true;
-		bushPbody = app->physics->CreateRectangle(4096, 4096, 512, 384, bodyType::STATIC);
-		bushPbody->ctype = ColliderType::LIMITS;
+		bushPbody1 = app->physics->CreateRectangle(4096, 4096, 512, 384, bodyType::STATIC);
+		bushPbody1->ctype = ColliderType::LIMITS;
 		int i= 4297;
 		/*if(i > 3776)
 		{
@@ -457,23 +483,19 @@ bool ForestScene::Update(float dt)
 		app->render->DrawTexture(bush, 3776, 3953, 0, 1.0f, 0.0f, 0.6f);
 	}
 
-	if (buttonList[0]->pisada && buttonList[1]->pisada && buttonList[2]->pisada && buttonList[3]->pisada && door1Closed && !puzzle1) {
-		puzzle1 = true;
-		app->audio->PlayFx(puzzleFx);
-		door1Closed = false;
-		int i = 3776;
-		/*if (i < 4297)
-		{
-			app->render->DrawTexture(bush, i + 1, 4000, 0, 1.0f);
-		}*/
-		app->physics->DestroyBody(bushPbody);
-	}
-
 	if ((buttonList[4]->pisada || buttonList[5]->pisada) && !puzzle1) {
 		for (int i = 0; i < 6; i++)
 		{
 			buttonList[i]->pisada = false;
 		}
+	}
+
+	if (buttonList[0]->pisada && buttonList[1]->pisada && buttonList[2]->pisada && buttonList[3]->pisada && door1Closed && !puzzle1) {
+		puzzle1 = true;
+		app->audio->PlayFx(puzzleFx);
+		door1Closed = false;
+		app->physics->DestroyBody(bushPbody1);
+		generateRandomPotion();
 	}
 
 
@@ -492,29 +514,7 @@ bool ForestScene::Update(float dt)
 	if (buttonBallList[0]->pisada && buttonBallList[1]->pisada && !puzzle2) {
 		puzzle2 = true;
 		app->audio->PlayFx(puzzleFx);
-
-		int randomValue = rand() % 3;
-		SString potionName = "";
-		switch (randomValue)
-		{
-		case 0:
-			potionName = "Vita Potion";
-			break;
-		case 1:
-			potionName = "Celerita Potion";
-			break;
-		case 2:
-			potionName = "Ether Potion";
-			break;
-		case 3:
-			potionName = "Oblitius Potion";
-			break;
-		}
-
-		if(player->inventory.HasItem(potionName.GetString()))
-		{
-			player->inventory.GetItem(potionName.GetString())->quantity++;
-		}
+		generateRandomPotion();
 	}
 
 
@@ -522,8 +522,8 @@ bool ForestScene::Update(float dt)
 
 	if (player->position.x > 24340 && player->position.y > 14450 && player->position.y < 144859 && !door3Closed && !puzzle3) {
 		door3Closed = true;
-		bushPbody = app->physics->CreateRectangle(24108, 14695, 384, 512, bodyType::STATIC);
-		bushPbody->ctype = ColliderType::LIMITS;
+		bushPbody2 = app->physics->CreateRectangle(24108, 14695, 384, 512, bodyType::STATIC);
+		bushPbody2->ctype = ColliderType::LIMITS;
 	}
 
 	if (door3Closed) {
@@ -534,24 +534,42 @@ bool ForestScene::Update(float dt)
 		puzzle3 = true;
 		app->audio->PlayFx(puzzleFx);
 		door3Closed = false;
-		app->physics->DestroyBody(bushPbody);
+		app->physics->DestroyBody(bushPbody2);
+		generateRandomPotion();
 	}
 
-	//boss
+	//boss2
 
-	if (player->position.x > 26900 && player->position.y > 14066 && player->position.y < 144475 && !doorBossClosed && !enemyboss->dead || !door3Closed && !enemyboss->dead) {
+	if (player->position.x > 26900 && player->position.y > 14066 && player->position.y < 144475 && !doorBoss2Closed && !enemyboss->dead && puzzle3) {
+		doorBoss2Closed = true;
+		bushPbody3 = app->physics->CreateRectangle(26668, 14311, 384, 512, bodyType::STATIC);
+		bushPbody3->ctype = ColliderType::LIMITS;
+	}
+
+	if (doorBoss2Closed) {
+		app->render->DrawTexture(bush, 26386, 14166, 0, 1.0f, 90.0f, 0.6f);
+	}
+
+	if (doorBoss2Closed && enemyboss->dead) {
+		doorBoss2Closed = false;
+		app->physics->DestroyBody(bushPbody3);
+	}
+
+	//boss1
+
+	if (player->position.x > 24340 && player->position.y > 14450 && player->position.y < 144859 && !doorBossClosed && !puzzle3) {
 		doorBossClosed = true;
-		bushPbody = app->physics->CreateRectangle(26668, 14311, 384, 512, bodyType::STATIC);
-		bushPbody->ctype = ColliderType::LIMITS;
+		bushPbody4 = app->physics->CreateRectangle(26668, 14311, 384, 512, bodyType::STATIC);
+		bushPbody4->ctype = ColliderType::LIMITS;
 	}
 
 	if (doorBossClosed) {
 		app->render->DrawTexture(bush, 26386, 14166, 0, 1.0f, 90.0f, 0.6f);
 	}
 
-	if (doorBossClosed && puzzle3 && !enemyboss->dead || enemyboss->dead) {
-		doorBossClosed == false;
-		app->physics->DestroyBody(bushPbody);
+	if (doorBossClosed && puzzle3) {
+		doorBossClosed = false;
+		app->physics->DestroyBody(bushPbody4);
 	}
 
 
