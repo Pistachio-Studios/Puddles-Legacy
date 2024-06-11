@@ -8,6 +8,13 @@
 
 class Scene;
 
+enum TRANSITION_TYPE
+{
+    NONE,
+    FADE_TO_BLACK,
+    SWEEP
+};
+
 class SceneManager : public Module
 {
 public:
@@ -43,7 +50,7 @@ public:
 
     Scene* FindScene(SString sceneName) const;
 
-    void ChangeScene(SString sceneName);
+    void ChangeScene(SString sceneName, float frames = 60, TRANSITION_TYPE type = TRANSITION_TYPE::FADE_TO_BLACK);
 
     Scene* GetCurrentScene();
 
@@ -55,10 +62,25 @@ public:
 
 public:
 private:
+    Scene* nextScene = nullptr;
     Scene* currentScene = nullptr;
     Scene* prevScene = nullptr;
 
     DynArray<Scene*> scenes;
+
+    enum Fade_Step
+	{
+		NONE,
+		TO_BLACK,
+		FROM_BLACK
+	} currentStep = Fade_Step::NONE;
+    
+        uint32_t frameCount = 0;
+        uint32_t maxFadeFrames = 0;
+    
+        SDL_Rect screenRect;
+
+    TRANSITION_TYPE transitionType;
 };
 
 #endif // !__SCENE_MANAGER_H__

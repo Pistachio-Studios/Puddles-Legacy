@@ -1,6 +1,7 @@
 #include "Core/SceneManager.h"
 #include "Core/App.h"
 #include "Core/DebugUI.h"
+#include "Core/Render.h"
 #include "Gameplay/LightingDemo.h"
 #include "Gameplay/MainMenu.h"
 #include "Gameplay/TeamLogo.h"
@@ -18,6 +19,7 @@
 #include <cassert>
 #include <imgui.h>
 #include <vector>
+
 
 SceneManager::SceneManager() : Module()
 {
@@ -102,6 +104,39 @@ bool SceneManager::Update(float dt)
 
     ret = currentScene->Update(dt);
 
+    if(currentStep == Fade_Step::NONE) return true;
+
+    screenRect = {0, 0, app->render->camera.w, app->render->camera.h};
+
+    if(currentStep == Fade_Step::TO_BLACK)
+    {
+        ++frameCount;
+        if(frameCount >= maxFadeFrames)
+        {
+            currentScene->Exit();
+
+            if (app->physics->DestroyAllWorldBodies()) {
+            //app->lighting->RemoveAllLights();
+            app->lighting->SetAmbientLight({255, 255, 255, 255});
+
+            prevScene = currentScene;
+            currentScene = nextScene;
+            };
+
+            currentScene->Enter();
+
+            currentStep = Fade_Step::FROM_BLACK;
+        }
+    }
+    else
+    {
+        --frameCount;
+        if(frameCount <= 0)
+        {
+            currentStep = Fade_Step::NONE;
+        }
+    }
+
     return ret;
 }
 
@@ -110,6 +145,30 @@ bool SceneManager::PostUpdate()
     bool ret = true;
 
     ret = currentScene->PostUpdate();
+
+    // Exit this function if we are not performing a fade
+	if (currentStep == Fade_Step::NONE) return true;
+
+    float fadeRatio = (float)frameCount / (float)maxFadeFrames;
+    
+    switch (transitionType)
+    {
+        case TRANSITION_TYPE::NONE:
+        break;
+        case TRANSITION_TYPE::FADE_TO_BLACK:
+        {
+            // Render the black square with alpha on the screen
+            SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
+            SDL_RenderFillRect(app->render->renderer, &screenRect);
+        }
+        break;
+        case TRANSITION_TYPE::SWEEP:
+        {
+            SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 255);
+            SDL_Rect rect = {0, 0, app->render->camera.w * fadeRatio, app->render->camera.h};
+            SDL_RenderFillRect(app->render->renderer, &rect);
+        }
+    }
 
     return ret;
 }
@@ -262,23 +321,24 @@ Scene* SceneManager::FindScene(SString sceneName) const
     return scene;
 }
 
-void SceneManager::ChangeScene(SString sceneName)
+void SceneManager::ChangeScene(SString sceneName, float frames, TRANSITION_TYPE transition)
 {
-    currentScene->Exit();
+
     Scene* newScene = FindScene(sceneName);
     if (newScene != nullptr){
-        if (app->physics->DestroyAllWorldBodies()) {
-            //app->lighting->RemoveAllLights();
-            app->lighting->SetAmbientLight({255, 255, 255, 255});
 
-            prevScene = currentScene;
-            currentScene = newScene;
-        };
+        if(currentStep == Fade_Step::NONE)
+        {
+            currentStep = Fade_Step::TO_BLACK;
+            frameCount = 0;
+            maxFadeFrames = frames;
+            transitionType = transition;
+            nextScene = newScene;
+        }
     }
     else{
         LOG("Scene %s not found\n", sceneName.GetString());
     }
-    currentScene->Enter();
 }
 
 // Load / Save
