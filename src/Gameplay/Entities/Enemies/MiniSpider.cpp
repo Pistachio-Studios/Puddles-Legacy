@@ -256,6 +256,7 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 				// AUDIO DONE boss death
 				app->audio->PlayFx(dieFx);
 				player->bestiary->enemy2Killed = true;
+				player->currentExperience += 20;
 				movementFSM->ChangeState("die");
 			}
 			else if (vida > 0.0f) {
@@ -298,6 +299,7 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 			dead = true;
 			app->audio->PlayFx(dieFx);
 			player->bestiary->enemy2Killed = true;
+			player->currentExperience += 20;
 			movementFSM->ChangeState("die");
 		}
 		else if (vida > 0.0f) {

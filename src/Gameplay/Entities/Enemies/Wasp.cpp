@@ -251,6 +251,7 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 			dead = true;
 			app->audio->PlayFx(dieFx);
 			player->bestiary->enemy1Killed = true;
+			player->currentExperience += 10;
 			movementFSM->ChangeState("die");
 		}
 		else if (vida > 0.0f) {
@@ -293,6 +294,7 @@ void Wasp::OnCollision(PhysBody* physA, PhysBody* physB) {
 			// AUDIO DONE boss death
 			app->audio->PlayFx(dieFx);
 			player->bestiary->enemy1Killed = true;
+			player->currentExperience += 10;
 			movementFSM->ChangeState("die");
 		}
 		else if (vida > 0.0f) {

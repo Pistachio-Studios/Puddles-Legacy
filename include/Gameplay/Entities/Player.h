@@ -77,11 +77,16 @@ public:
 	bool arnicaPlantCollected = false;
 
 	// Pag 4 attributes
-	bool klausUnlocked = false;
+	bool klausUnlocked = true;
 	bool bountyUnlocked = false;
 
 	// Pag 5 attributes
 	// Nothing cause there are no draws 💀
+
+	// Mission Booleans
+	bool forestUnlocked = false;
+	bool cauldronUnlocked = false;
+	bool changedClassUnlocked = false; // TODO change to true when the player changes class
 
 public:
 
@@ -264,6 +269,12 @@ public:
 	float strength = 10.0f;
 	float intelligence = 14.0f;
 	float defense;
+
+	int currentExperience = 0;
+	int experienceToNextLevel;
+	int level = 1;
+	int levelCap = 6;
+	int abilityPoints = 0;
 
 	bool bleed = false;
 	int bleedChance = 15; // 15% chance of bleeding

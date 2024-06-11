@@ -55,6 +55,8 @@ bool GuiControlButton::Update(float dt)
 			state = GuiControlState::NORMAL;
 		}
 
+		color = { 255, 255, 255, 255 };
+
 		//L15: DONE 4: Draw the button according the GuiControl State
 		switch (state)
 		{
@@ -70,11 +72,13 @@ bool GuiControlButton::Update(float dt)
 			app->render->DrawTexture(textureSelectedRight, bounds.x + bounds.w - 10 * controlEase, bounds.y *controlEase);
 			break;
 		case GuiControlState::PRESSED:
-			app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+			//app->render->DrawRectangle(bounds, 0, 128, 0, 255, true, false);
+			
+			color = { 255, 191, 0, 255 };
 			break;
 		}
 
-		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
+		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, color);
 
 	}
 
