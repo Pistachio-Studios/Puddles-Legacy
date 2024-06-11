@@ -6,6 +6,7 @@
 #include "Utils/Point.h"
 #include "Utils/SString.h"
 #include "Core/Textures.h"
+#include "Utils/Timer.h"
 
 class GuiControlPopUp : public GuiControl
 {
@@ -17,6 +18,9 @@ public:
 
 	// Called each loop iteration
 	bool Update(float dt);
+
+	//easings
+	Timer controlEaseTimer;
 
 private:
 
