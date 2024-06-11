@@ -22,7 +22,7 @@ bool Sword::Update(float dt)
 	if(active)
 	{
 		pbody->GetPosition(position.x, position.y);
-		app->render->DrawTexture(texture, position.x + 35, position.y - 35, 0, 1.0f, pbody->body->GetAngle()*RADTODEG+90);
+		//app->render->DrawTexture(texture, position.x + 35, position.y - 35, 0, 1.0f, pbody->body->GetAngle()*RADTODEG+90);
 	}
 	return true;
 }
