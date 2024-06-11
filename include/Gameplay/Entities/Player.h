@@ -300,7 +300,7 @@ public:
 	PhysBody* sword;
 
 	//soundFX
-	int stepsFx;
+	int stepsFx, swordSlashFx;
 
 	ParticleGenerator* damage = nullptr;
 
@@ -315,8 +315,14 @@ public:
 	Timer dashTimer;
 	float dashCultdown = 5.0f;
 
+	// Steps sound timer
 	float timerSteps = 0.0f;
+
+	// Sword sound timer
+	float timerSword = 0.0f;
+
 	float time = 300.0f;
+
 
 	Animation SabrinaEspadaIdle, SabrinaEspadaMovDelante, SabrinaEspadaMovDerecha, SabrinaEspadaMovIzquierda, SabrinaEspadaMovDetras,
 		SabrinaEspadaDano, SabrinaEspadaDash, SabrinaEspadaMuerte, SabrinaEspadaRecolectar,

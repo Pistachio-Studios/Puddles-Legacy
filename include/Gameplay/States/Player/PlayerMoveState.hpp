@@ -20,9 +20,6 @@ public:
     }
     inline void Update(float dt) override
     {
-
-        player->timerSteps += dt;
-
         if (player->timerSteps >= player->time)
         {
             app->audio->PlayFx(player->stepsFx);

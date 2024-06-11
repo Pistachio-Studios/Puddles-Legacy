@@ -86,6 +86,7 @@ bool Player::Start() {
 	// Audios
 
 	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
+	swordSlashFx = app->audio->LoadFx(parameters.attribute("swordSlashFx").as_string());
 
 	//Anims
 	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");
@@ -176,6 +177,8 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	/* playerLight->position = { position.x, position.y }; */
+	timerSteps += dt;
+	timerSword += dt;
 
 	//CHEATS
 	if (godMode) {
