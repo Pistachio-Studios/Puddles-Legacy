@@ -59,6 +59,8 @@ bool TutorialScene::Enter()
 	app->entityManager->Enable();
 	app->lighting->Enable();
 
+	app->render->camera.x = -player->position.x + (app->render->camera.w / 2);
+	app->render->camera.y = -player->position.y + (app->render->camera.h / 2);
 	app->render->camera.target = player;
 	app->render->camera.useInterpolation = true;
 	app->render->camera.lerpSpeed = 4.0f;
