@@ -491,6 +491,29 @@ bool ForestScene::Update(float dt)
 	if (buttonBallList[0]->pisada && buttonBallList[1]->pisada && !puzzle2) {
 		puzzle2 = true;
 		app->audio->PlayFx(puzzleFx);
+
+		int randomValue = rand() % 3;
+		SString potionName = "";
+		switch (randomValue)
+		{
+		case 0:
+			potionName = "Vita Potion";
+			break;
+		case 1:
+			potionName = "Celerita Potion";
+			break;
+		case 2:
+			potionName = "Ether Potion";
+			break;
+		case 3:
+			potionName = "Oblitius Potion";
+			break;
+		}
+
+		if(player->inventory.HasItem(potionName.GetString()))
+		{
+			player->inventory.GetItem(potionName.GetString())->quantity++;
+		}
 	}
 
 
