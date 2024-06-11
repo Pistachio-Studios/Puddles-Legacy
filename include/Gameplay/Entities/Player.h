@@ -285,8 +285,6 @@ public:
 	bool stealLife = false;
 	float stealLifeRatio = strength * 0.1; // 10% of the damage dealt
 
-	// TODO add final stats
-	int level = 1;
 	int abylityPoints = 0;
 
 	iPoint shadowPosition = { 0,0 };
