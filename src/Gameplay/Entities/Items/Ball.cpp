@@ -154,7 +154,7 @@ bool Ball::LoadState(pugi::xml_node& node)
 bool Ball::CleanUp() {
 
 	app->tex->UnLoad(puzzle3Tex);
-	app->tex->UnLoad(puzzle3Tex);
+	app->tex->UnLoad(textureE);
 	app->physics->DestroyBody(pbody);
 
 	return true;

@@ -174,6 +174,12 @@ bool Button::CleanUp() {
 
 	app->tex->UnLoad(buttonTex);
 	app->tex->UnLoad(buttonPisadoTex);
+	app->tex->UnLoad(buttonVerde);
+	app->tex->UnLoad(buttonAzul);
+	app->tex->UnLoad(buttonLila);
+	app->tex->UnLoad(buttonRojo);
+	app->tex->UnLoad(buttonNaranja);
+	app->tex->UnLoad(puzzle3Tex);
 	app->physics->DestroyBody(pbody);
 
 	return true;

@@ -80,13 +80,6 @@ bool ForestScene::Enter()
 		}
 	}
 
-	//PARA PRUEBAS, BORRAR CUANDO SE HAGA MERGE CON LEVEL DESIGN!!!!
-	if (parameters.child("enemies").child("EnemyBoss")) {
-		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
-		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
-		enemyboss->Start();
-	}
-
 	if (parameters.child("Npcs").child("loco")) {
 		Loco* loco = new Loco();
 		app->entityManager->AddEntity(loco);
@@ -162,36 +155,31 @@ bool ForestScene::Enter()
 		std::string plantType = plantNode.name();
 
 		if (plantType == "ArnicaPlant") {
-			Plant* plant = new ArnicaPlant("Arnica Plant", 1, "Para craftear la poción de cura o la de aumentar velocidad");
-			app->entityManager->AddEntity(plant);
+			Plant* plant = new ArnicaPlant("Arnica Plant", 1, "Para craftear la poción de cura o la de aumentar velocidad");			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "HepaticaPlant") {
-			Plant* plant = new HepaticaPlant("Hepatica Plant", 1, "Para craftear la poción de resetear árbol de habilidades");
-			app->entityManager->AddEntity(plant);
+			Plant* plant = new HepaticaPlant("Hepatica Plant", 1, "Para craftear la poción de resetear árbol de habilidades");			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "ComfreyPlant") {
-			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Para craftear la poción de resetear árbol de habilidades o la de recuperar energia");
-			app->entityManager->AddEntity(plant);
+			Plant* plant = new ComfreyPlant("Comfrey Plant", 1, "Para craftear la poción de resetear árbol de habilidades o la de recuperar energia");			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "WitchHazelPlant") {
-			Plant* plant = new WitchHazelPlant("Witch Hazel Plant", 1, "Para craftear la poción de aumentar velocidad");
-			app->entityManager->AddEntity(plant);
+			Plant* plant = new WitchHazelPlant("Witch Hazel Plant", 1, "Para craftear la poción de aumentar velocidad");			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
 
 		if (plantType == "HawthornPlant") {
-			Plant* plant = new HawthornPlant("Hawthorn Plant", 1, "Para craftear la poción de cura o la de recuperar energia");
-			app->entityManager->AddEntity(plant);
+			Plant* plant = new HawthornPlant("Hawthorn Plant", 1, "Para craftear la poción de cura o la de recuperar energia");			app->entityManager->AddEntity(plant);
 			plant->parameters = plantNode;
 			plant->Start();
 		}
@@ -423,13 +411,6 @@ bool ForestScene::CleanUp()
 {
 	LOG("Freeing testscene");
 
-	app->guiManager->RemoveGuiControl(gcScore);
-	app->guiManager->RemoveGuiControl(gcLives);
-	app->guiManager->RemoveGuiControl(gcResume);
-	app->guiManager->RemoveGuiControl(gcSettings);
-	app->guiManager->RemoveGuiControl(gcBackToTitle);
-	app->guiManager->RemoveGuiControl(gcExit);
-	app->guiManager->RemoveGuiControl(gcSave);
 	app->tex->UnLoad(bush);
 
 	return true;
