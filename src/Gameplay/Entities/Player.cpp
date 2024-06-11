@@ -285,7 +285,14 @@ bool Player::Update(float dt)
 	}
 
 	//NO borrar T-T
-	if (vida <= 0) deadPlayer = true;
+	if (vida <= 0) {
+		vida = 0.0f;
+		deadPlayer = true;
+	}
+
+	LOG("Vida: %f", vida);
+	LOG("Dead: %x", deadPlayer);
+	LOG("Pos: %d, %d", position.x, position.y);
 
 	return true;
 }

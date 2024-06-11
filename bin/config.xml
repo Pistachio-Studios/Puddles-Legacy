@@ -42,7 +42,9 @@
 			<map path="Assets/Maps/Forest-Scene/" name="bosque.tmx" />
 			<camera x="-32545" y="-4610" />
 			<player x="33536" y="5248" texturepath="Assets/Textures/Player.png" />
-			<enemies />
+			<enemies>
+				<EnemyBoss x="32769" y="3488" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
+			</enemies>
 		</forestscene>
 		<townscene>
 			<map path="Assets/Maps/Town-Scene/" name="Town.tmx" />
