@@ -278,25 +278,25 @@ bool UI::Update(float dt)
 			{
 				app->render->DrawRectangle({ 1700, 800, 300, 50 }, 171, 58, 23, 255, true, false);
 				app->render->DrawTextureLegacy(celeritaPotion, 1700, 800, 0, 0, 0, 0.75f);
-				app->render->DrawText("Celerita Potion Added!", 1750, 810, 20, 20, { 255, 255, 255, 255 });
+				app->render->DrawText("Celerita Potion Added!", 1750, 815, 20, 20, { 255, 255, 255, 255 });
 			}
 			if(PotionEtherAdded)
 			{
 				app->render->DrawRectangle({ 1700, 800, 300, 50 }, 34, 44, 120, 255, true, false);
 				app->render->DrawTextureLegacy(etherPotion, 1700, 800, 0, 0, 0, 0.75f);
-				app->render->DrawText("Ether Potion Added!", 1700, 800, 20, 20, { 255, 255, 255, 255 });
+				app->render->DrawText("Ether Potion Added!", 1750, 815, 20, 20, { 255, 255, 255, 255 });
 			}
 			if(PotionOblitiusAdded)
 			{
 				app->render->DrawRectangle({ 1700, 800, 300, 50 }, 75, 51, 121, 255, true, false);
 				app->render->DrawTextureLegacy(oblitiusPotion, 1700, 800, 0, 0, 0, 0.75f);
-				app->render->DrawText("Oblitius Potion Added!", 1700, 800, 20, 20, { 255, 255, 255, 255 });
+				app->render->DrawText("Oblitius Potion Added!", 1750, 815, 20, 20, { 255, 255, 255, 255 });
 			}
 			if(PotionVitaAdded)
 			{
 				app->render->DrawRectangle({ 1700, 800, 300, 50 }, 25, 114, 82, 255, true, false);
 				app->render->DrawTextureLegacy(VitaPotion, 1700, 800, 0, 0, 0, 0.75f);
-				app->render->DrawText("Vita Potion Added!", 1700, 800, 20, 20, { 255, 255, 255, 255 });
+				app->render->DrawText("Vita Potion Added!", 1750, 815, 20, 20, { 255, 255, 255, 255 });
 			}
 		}
 	}

@@ -24,19 +24,19 @@ bool MainMenu::Enter()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	SDL_Rect playPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 50), 340,75};
+	SDL_Rect playPos = { static_cast<int>(windowW / 2 - 830), static_cast<int>(windowH / 2 - 200), 340,75};
 	playButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "  Play  ", playPos, this);
 
-	SDL_Rect loadPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 150), 340,75};
+	SDL_Rect loadPos = { static_cast<int>(windowW / 2 - 845), static_cast<int>(windowH / 2 - 100), 340,75};
 	loadButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 23, "  Load  ", loadPos, this);
 
-	SDL_Rect optionsPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 250), 340,75};
+	SDL_Rect optionsPos = { static_cast<int>(windowW / 2 - 860), static_cast<int>(windowH / 2 - 0), 340,75};
 	optionsButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, " Options ", optionsPos, this);
 
-	SDL_Rect creditsPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 350), 340,75};
+	SDL_Rect creditsPos = { static_cast<int>(windowW / 2 - 850), static_cast<int>(windowH / 2 - -100), 340,75};
 	creditsButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 24, " Credits ", creditsPos, this);
 
-	SDL_Rect exitPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 450), 340,75};
+	SDL_Rect exitPos = { static_cast<int>(windowW / 2 - 830), static_cast<int>(windowH / 2 - -200), 340,75};
 	exitButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "  Exit  ", exitPos, this);
 
 	gameTitle = app->tex->Load(parameters.child("gameTitle").attribute("texturepath").as_string());
@@ -69,7 +69,7 @@ bool MainMenu::Update(float dt)
 
 	app->render->DrawTexture(gameTitle, 0, 0);
 
-	app->render->DrawText("v1.0.0", windowW - 150, windowH - 150, 25, 25, { 255, 255, 255, 255 });
+	app->render->DrawText("v1.0.0", windowW - 150, windowH - 100, 25, 25, { 255, 255, 255, 255 });
 
 	return true;
 }
