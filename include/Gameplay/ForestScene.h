@@ -51,8 +51,6 @@ public:
 	bool winCondition = false;
 	Player* player;
 	EnemyBoss* enemyboss;
-	MiniSpider* minispider;
-	Wasp* wasp;
 
 private:
 
@@ -86,6 +84,7 @@ private:
 	SDL_Texture* bush = nullptr;
 	bool door1Closed = false;
 	bool door3Closed = false;
+	bool doorBossClosed = false;
 	bool puzzle1 = false;
 	bool puzzle2 = false;
 	bool puzzle3 = false;
