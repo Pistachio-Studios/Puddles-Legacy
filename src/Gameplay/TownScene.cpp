@@ -309,7 +309,7 @@ bool TownScene::Update(float dt)
 	Quest* speakBarkeeper = app->questManager->GetQuestById(5);
 	speakBarkeeper->SetCompletionAction([=, this]() -> bool {
 		static bool speak;
-		if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if(player->bestiary->klausUnlocked)
 		{
 			speak = true;
 			speakBarkeeper->AddCompletionValue(100);
@@ -331,6 +331,78 @@ bool TownScene::Update(float dt)
 		!app->questManager->GetQuestById(5)->IsCompleted()) {
 			app->questManager->GetQuestById(5)->SetActive(true);
 		}
+
+	Quest* villageQuest = app->questManager->GetQuestById(6);
+	villageQuest->SetCompletionAction([=, this]() -> bool {
+		static bool speak;
+		if(player->bestiary->bountyUnlocked)
+		{
+			speak = true;
+			villageQuest->AddCompletionValue(100);
+		}
+		if(speak)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(6)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+	if (!app->questManager->GetQuestById(6)->IsCompleted() and app->questManager->GetQuestById(5)->IsCompleted())
+		villageQuest->SetActive(true);
+
+	Quest* forestQuest = app->questManager->GetQuestById(7);
+	forestQuest->SetCompletionAction([=, this]() -> bool {
+		static bool speak;
+		if(player->bestiary->forestUnlocked)
+		{
+			speak = true;
+			forestQuest->AddCompletionValue(100);
+		}
+		if(speak)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(7)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+	if (!app->questManager->GetQuestById(7)->IsCompleted() and app->questManager->GetQuestById(5)->IsCompleted())
+		forestQuest->SetActive(true);
+
+	Quest* cauldronQuest = app->questManager->GetQuestById(8);
+	cauldronQuest->SetCompletionAction([=, this]() -> bool {
+		static bool speak;
+		if(player->bestiary->cauldronUnlocked)
+		{
+			speak = true;
+			cauldronQuest->AddCompletionValue(100);
+		}
+		if(speak)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(8)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+	if (!app->questManager->GetQuestById(8)->IsCompleted() and app->questManager->GetQuestById(5)->IsCompleted())
+		cauldronQuest->SetActive(true);
+
+	Quest* classQuest = app->questManager->GetQuestById(9);
+	classQuest->SetCompletionAction([=, this]() -> bool {
+		static bool speak;
+		if(player->bestiary->changedClassUnlocked)
+		{
+			speak = true;
+			classQuest->AddCompletionValue(100);
+		}
+		if(speak)
+		{
+			LOG("Quest completed: %s", app->questManager->GetQuestById(9)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+	if (!app->questManager->GetQuestById(9)->IsCompleted() and app->questManager->GetQuestById(5)->IsCompleted())
+		classQuest->SetActive(true);
 	#pragma endregion
 
 

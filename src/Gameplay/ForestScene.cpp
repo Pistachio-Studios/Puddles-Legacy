@@ -21,6 +21,7 @@
 #include "Utils/SString.h"
 #include "Utils/Timer.h"
 #include "Utils/Log.h"
+#include "Core/QuestManager.h"
 
 
 #include <box2d/b2_body.h>
@@ -217,6 +218,8 @@ bool ForestScene::Enter()
 	puzzle2 = false;
 	puzzle3 = false;
 
+	player->bestiary->forestUnlocked = true;
+
 	return true;
 }
 
@@ -234,6 +237,10 @@ bool ForestScene::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	if (player->bestiary->forestUnlocked) {
+		app->questManager->GetQuestById(7)->SetCompleted(true);
+	}
 
 	if (freeCam)
 	{
