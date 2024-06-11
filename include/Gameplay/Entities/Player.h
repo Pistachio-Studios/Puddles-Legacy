@@ -307,7 +307,7 @@ public:
 	PhysBody* sword;
 
 	//soundFX
-	int stepsFx, swordSlashFx, firestaffFx, deathSabrinaFx, damagedSabrinaFx, blockFx;
+	int stepsFx, swordSlashFx, firestaffFx, deathSabrinaFx, damagedSabrinaFx, blockFx, potionFx;
 
 	ParticleGenerator* damage = nullptr;
 

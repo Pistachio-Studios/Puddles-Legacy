@@ -1,6 +1,7 @@
 #include "Gameplay/Entities/Items/EtherPotion.h"
 #include "Utils/Log.h"
 #include "Core/App.h"
+#include "Core/Audio.h"
 #include "Core/EntityManager.h"
 #include "Gameplay/Entities/Player.h"
 
@@ -18,6 +19,7 @@ void EtherPotion::Use() {
     if(quantity > 0)
     {
         Player* player = app->entityManager->GetPlayerEntity();
+        app->audio->PlayFx(player->potionFx);
         if(player != nullptr and player->mana < 100)
         {
             player->mana = 100.0f;

@@ -47,6 +47,8 @@ public:
 
 	void RenderGUI();
 
+	void generateRandomPotion();
+
 public:
 	bool winCondition = false;
 	Player* player;
