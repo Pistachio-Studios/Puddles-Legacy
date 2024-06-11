@@ -237,8 +237,10 @@ bool TavernScene::Update(float dt)
 		
 	}
 
+	iPoint mouseWorldPosition = { app->input->GetMouseX() + -app->render->camera.x, app->input->GetMouseY() + -app->render->camera.y };
+
 	//Cambios de escena sin collider
-	if (app->entityManager->GetPlayerEntity()->position.x <= 1390 && app->entityManager->GetPlayerEntity()->position.x >= 1150 && app->entityManager->GetPlayerEntity()->position.y <= 3835 && app->entityManager->GetPlayerEntity()->position.y >= 3670) {
+	if (mouseWorldPosition.x <= 1390 && mouseWorldPosition.x >= 1150 && mouseWorldPosition.y <= 3835 && mouseWorldPosition.y >= 3670) {
 		app->sceneManager->ChangeScene("townscene");
 	}
 
