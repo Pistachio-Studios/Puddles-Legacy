@@ -266,6 +266,9 @@ public:
 	bool bleed = false;
 	int bleedChance = 15; // 15% chance of bleeding
 
+	bool paralysis = false;
+	int paralysisChance = 100; // 10% chance of paralysis
+
 	bool stealLife = false;
 	float stealLifeRatio = strength * 0.1; // 10% of the damage dealt
 

@@ -86,6 +86,7 @@ public:
 	iPoint spawnPosition;
 
 	ParticleGenerator* damage = nullptr;
+	ParticleGenerator* paralyzedParticles = nullptr;
 	
 	float vida=12.0f;
 	float dano = 5.0f;

@@ -74,6 +74,7 @@ public:
 	float maxSpeed = 2.0f;
 
 	ParticleGenerator* damage = nullptr;
+	ParticleGenerator* paralyzedParticles = nullptr;
 	
 	float vida = 21.0f;
 	float dano = 7.0f;

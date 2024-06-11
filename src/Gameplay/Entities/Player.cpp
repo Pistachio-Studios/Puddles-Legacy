@@ -105,6 +105,7 @@ bool Player::Update(float dt)
 	//CHEATS
 	if (godMode) {
 		vida = 10.0f;
+		mana = 100.0f;
 	}
 	if (ghostMode) {
 		pbody->body->GetFixtureList()->SetSensor(ghostMode);
@@ -234,6 +235,8 @@ void Player::DrawImGui()
 	ImGui::Text("Player Strength: %f", strength);
 	ImGui::Text("Player Intelligence: %f", intelligence);
 
+	ImGui::Text("Player Paralysis: %s", paralysis ? "true" : "false");
+
 	ImGui::Text("Blood: %s", bleed ? "true" : "false");
 	ImGui::Text("Bleed chance: %d", bleedChance);
 	
@@ -324,6 +327,7 @@ void Player::AbilityStaff100() { // DONE
 
 void Player::AbilityStaff110() {
 	// +10% chance of paralysis effect
+	paralysis = true;
 }
 
 void Player::AbilityStaff111() {

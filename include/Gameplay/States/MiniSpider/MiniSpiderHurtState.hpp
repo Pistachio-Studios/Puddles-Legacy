@@ -25,7 +25,16 @@ public:
         minispider->spiderDamage.Update(dt);
 
         if (minispider->spiderDamage.GetCurrentFrameCount() >= 7) {
-            StateMachineReference->ChangeState("idle");
+            if (app->entityManager->GetPlayerEntity()->paralysis) {
+				// 10% chance to paralyze
+				if (rand() % 100 < app->entityManager->GetPlayerEntity()->paralysisChance) {
+					// TODO add paralysis effect
+					StateMachineReference->ChangeState("paralyzed");
+					LOG("MiniSpider Paralyzed!");
+				}
+			} else {
+                StateMachineReference->ChangeState("idle");
+            }
         }
     }
     inline void Exit() override
