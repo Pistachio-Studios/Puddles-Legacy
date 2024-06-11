@@ -7,9 +7,6 @@
 #include "Core/Audio.h"
 #include "Core/Textures.h"
 #include "Gameplay/TutorialScene.h"
-#include "Gameplay/Entities/Enemies/EnemyBoss.h"
-#include "Gameplay/Entities/Enemies/Wasp.h"
-#include "Gameplay/Entities/Enemies/MiniSpider.h"
 #include "Gameplay/Entities/Items/Plant.h"
 #include "Gameplay/Entities/Items/ArnicaPlant.h"
 #include "Gameplay/Entities/Items/ComfreyPlant.h"
@@ -77,32 +74,6 @@ bool TutorialScene::Enter()
 	//PhysBody* changeTown = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
 	//changeTown->ctype = ColliderType::CHANGESCENE;
 	//changeTown->listener = player;
-
-
-	if (parameters.child("enemies").child("EnemyBoss")) {
-		enemyboss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::ENEMYBOSS);
-		enemyboss->parameters = parameters.child("enemies").child("EnemyBoss");
-		enemyboss->Start();
-	}
-
-	if (parameters.child("enemies"))
-	{
-		pugi::xml_node enemies = parameters.child("enemies");
-
-		for (pugi::xml_node MiniSpiderNode = enemies.child("MiniSpider"); MiniSpiderNode; MiniSpiderNode = MiniSpiderNode.next_sibling("MiniSpider"))
-		{
-			MiniSpider* minispider = (MiniSpider*)app->entityManager->CreateEntity(EntityType::MINISPIDER);
-			minispider->parameters = MiniSpiderNode;
-			minispider->Start();
-		}
-
-		for (pugi::xml_node WaspNode = enemies.child("Wasp"); WaspNode; WaspNode = WaspNode.next_sibling("Wasp"))
-		{
-			Wasp* wasp = (Wasp*)app->entityManager->CreateEntity(EntityType::WASP);
-			wasp->parameters = WaspNode;
-			wasp->Start();
-		}
-	}
 
 	if (parameters.child("Npcs").child("loco")) {
 		Loco* loco = new Loco();
