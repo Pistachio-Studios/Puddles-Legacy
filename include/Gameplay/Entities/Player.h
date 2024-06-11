@@ -269,6 +269,12 @@ public:
 	float intelligence = 14.0f;
 	float defense;
 
+	int currentExperience = 0;
+	int experienceToNextLevel;
+	int level = 1;
+	int levelCap = 6;
+	int abilityPoints = 0;
+
 	bool bleed = false;
 	int bleedChance = 15; // 15% chance of bleeding
 
@@ -277,10 +283,6 @@ public:
 
 	bool stealLife = false;
 	float stealLifeRatio = strength * 0.1; // 10% of the damage dealt
-
-	// TODO add final stats
-	int level = 1;
-	int abylityPoints = 0;
 
 	//Movement
 	float moveForce = 1.5f;

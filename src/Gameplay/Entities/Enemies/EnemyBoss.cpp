@@ -276,6 +276,7 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 			dead = true;
 			app->audio->PlayFx(bossDieFx);
 			player->bestiary->enemy3Killed = true;
+			player->currentExperience += 50;
 			movementFSM->ChangeState("die");
 		}
 		else if(vida > 0.0f)
@@ -312,6 +313,7 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 			dead = true;
 			app->audio->PlayFx(bossDieFx);
 			player->bestiary->enemy3Killed = true;
+			player->currentExperience += 50;
 			movementFSM->ChangeState("die");
 		}
 		else if (vida > 0.0f) {

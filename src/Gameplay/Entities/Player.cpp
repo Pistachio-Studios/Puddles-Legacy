@@ -298,6 +298,14 @@ bool Player::Update(float dt)
 		app->audio->PlayFx(deathSabrinaFx);
 	}
 
+	experienceToNextLevel = level * 50;
+	if (currentExperience >= experienceToNextLevel and level <= levelCap)
+	{
+		currentExperience -= experienceToNextLevel;
+		level++;
+		abilityPoints++;
+	}
+
 	return true;
 }
 
@@ -325,6 +333,7 @@ void Player::DrawImGui()
 	ImGui::Text("dash timer: %f", dashTimer.ReadMSec());
 
 	ImGui::Text("Player level: %d", level);
+	ImGui::Text("Player experience: %d", currentExperience);
 
 	ImGui::Text("Player Strength: %f", strength);
 	ImGui::Text("Player Intelligence: %f", intelligence);
@@ -342,14 +351,14 @@ void Player::DrawImGui()
 			level--;
 	}
 
-	ImGui::Text("Player abylity points: %d", abylityPoints);
+	ImGui::Text("Player abylity points: %d", abilityPoints);
 	
 	if (ImGui::Button("Add ability Point"))
-		abylityPoints++;
+		abilityPoints++;
 	ImGui::SameLine();
 	if (ImGui::Button("Remove ability Point")) {
-		if (abylityPoints > 0)
-			abylityPoints--;
+		if (abilityPoints > 0)
+			abilityPoints--;
 	}
 	ImGui::Separator();
 	ImGui::Text("Player Cheats");
