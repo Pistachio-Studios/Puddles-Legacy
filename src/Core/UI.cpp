@@ -12,6 +12,7 @@
 #include "Core/Physics.h"
 #include "Core/Window.h"
 #include "Core/UI.h"
+#include "Core/AnimationManager.h"
 #include "Utils/Easings.h"
 
 
@@ -63,6 +64,15 @@ bool UI::Start() {
 	Espada = app->tex->Load("Assets/UI/GUI/Armas/Espada.PNG");
 	Cetro = app->tex->Load("Assets/UI/GUI/Armas/Cetro.PNG");
 	Seleccion = app->tex->Load("Assets/UI/GUI/Seleccion.PNG");
+
+	//Bestiary animation
+	bestiarioOpen = *app->animationManager->GetAnimByName("bestiario-opening");
+	bestiarioOpen.speed = 1.0f;
+	bestiarioOpen.loop = false;
+
+	bestiarioClosed = *app->animationManager->GetAnimByName("bestiario-closed");
+	bestiarioClosed.speed = 1.0f;
+	bestiarioClosed.loop = false;
 
 	// Textures for the bestiary
 	bestiaryPage1Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/pag1.png");
@@ -414,9 +424,9 @@ bool UI::Update(float dt)
 
 		#pragma endregion AbilitiesButtons
 
-		if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN) 
+		if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 			openBestiary = !openBestiary;
-
+			
 		if (openBestiary) {
 			switch (player->bestiary->currentPage) {
 				case 1:

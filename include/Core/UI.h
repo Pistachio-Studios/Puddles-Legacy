@@ -147,6 +147,13 @@ public:
 	Timer potionPopUpTimer;
 
 	Timer potionEaseTimer;
+
+	Animation bestiarioOpen, bestiarioClosed;
+	Animation* currentAnim = nullptr;
+
+	bool isAnimating = false;
+	bool openingAnimation = false;
+	bool closingAnimation = false;
 };
 
 #endif // __UI_H__

@@ -262,6 +262,7 @@ public:
 
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
+	SDL_Texture* texture1 = NULL;
 
 	float vida = 15.0f;
 	float maxVida = 15.0f;
@@ -283,6 +284,10 @@ public:
 
 	bool stealLife = false;
 	float stealLifeRatio = strength * 0.1; // 10% of the damage dealt
+
+	int abylityPoints = 0;
+
+	iPoint shadowPosition = { 0,0 };
 
 	//Movement
 	float moveForce = 1.5f;
