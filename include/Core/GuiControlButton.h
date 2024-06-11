@@ -5,6 +5,7 @@
 
 #include "Utils/Point.h"
 #include "Utils/SString.h"
+#include "Utils/Timer.h"
 
 class GuiControlButton : public GuiControl
 {
@@ -17,6 +18,9 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	//easings
+	Timer controlEaseTimer;
+
 private:
 
 	int mouseX, mouseY;
@@ -24,6 +28,8 @@ private:
 
 	bool canClick = true;
 	bool drawBasic = false;
+
+	SDL_Color textColor = { 255, 255, 255, 255 };
 };
 
 #endif // __GUICONTROLBUTTON_H__

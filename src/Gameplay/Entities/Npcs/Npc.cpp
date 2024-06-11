@@ -50,9 +50,10 @@ bool Npc::Start() {
 	texture2 = app->tex->Load("Assets/Textures/PressE.png");
 	texture3 = app->tex->Load("Assets/Textures/ClickHere.png");
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 256, 256, bodyType::STATIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 128, 256, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
+	if(mouseMode)pbody->body->GetFixtureList()->SetSensor(true);
 
 	npcSensor = app->physics->CreateRectangleSensor(position.x, position.y, 456, 456, bodyType::STATIC);
 	npcSensor->listener = this;
@@ -77,7 +78,7 @@ bool Npc::Update(float dt)
 				app->render->DrawTexture(texture3, position.x - 60, position.y - 180);
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 					//sale dialogo
-					app->dialogManager->StartDialog(1);
+					app->dialogManager->StartDialog(1,27); // first dialog - sabrina klaus
 					app->render->camera.lerpSpeed = 0.0f;
 				}
 			}
@@ -87,7 +88,13 @@ bool Npc::Update(float dt)
 				app->render->DrawTexture(texture2, position.x - 60, position.y - 180);
 				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 					//sale dialogo
-					app->dialogManager->StartDialog(1);
+					app->dialogManager->StartDialog(1,27);
+					if (name == "Loco") {
+						bountytalked = true;
+					}
+					if (name == "Tabernero") {
+						klaustalked = true;
+					}
 				}
 			}
 		}

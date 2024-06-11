@@ -52,6 +52,8 @@ enum class ColliderType {
 	WIN,
 	NPC,
 	CAULDRON,
+	BUTTON,
+	BALL,
 	UNKNOWN
 	// ..
 };

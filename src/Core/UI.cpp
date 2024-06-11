@@ -12,6 +12,7 @@
 #include "Core/Physics.h"
 #include "Core/Window.h"
 #include "Core/UI.h"
+#include "Utils/Easings.h"
 
 
 UI::UI()
@@ -125,6 +126,8 @@ bool UI::Start() {
 	gcExit->SetObserver(this);
 	gcExit->state = GuiControlState::DISABLED;
 
+	potionEaseTimer = Timer();
+
 	return true;
 }
 
@@ -132,17 +135,23 @@ bool UI::Update(float dt)
 {
 	//Potions Inventory
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
+
+		Easings easings = Easings();		
+		float sizeEase = easings.easeInQuad(potionEaseTimer.ReadMSec() / 200); //hint: from 0 to 1
+		LOG("sizeEase %f", sizeEase);
+
 		//Get the size of the window
 		app->win->GetWindowSize(windowW, windowH);
-		app->render->DrawTextureLegacy(texture_inventory, (int)windowW / 2 - 350, (int)windowH / 2 - 350, 0, 0);
+		app->render->DrawTextureLegacy(texture_inventory, (int)windowW / 2 - 350 * sizeEase, (int)windowH / 2 - 350 * sizeEase, 0, 0, 0, sizeEase);
+		//FixThis- SDL_SetTextureAlphaMod(texture_inventory, easeInQuad(dt));
 		Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory;
 		for(int i = 0; i < playerInventory->items.size(); i++)
 		{
 			Item* potion = playerInventory->items[i];
 			if(potion->quantity > 0)
 			{
-				int potionX = (int)windowW / 2 - 52; //252
-				int potionY = (int)windowH / 2 - 259; //446
+				int potionX = (int)windowW / 2 - 52 * sizeEase;
+				int potionY = (int)windowH / 2 - 259 * sizeEase;
 				int potionWidth = 250;
 				int potionHeight = 250;
 
@@ -150,12 +159,12 @@ bool UI::Update(float dt)
 				{
 					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight + 30)
 					{
-						app->render->DrawTextureLegacy(celeritaPotionSelected, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(celeritaPotionSelected, potionX, potionY, 0, 0, 0, sizeEase);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
 					}
 					else
 					{
-						app->render->DrawTextureLegacy(celeritaPotionCreated, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(celeritaPotionCreated, potionX, potionY, 0, 0, 0, sizeEase);
 					}
 					
 					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 + 230, (int)windowH / 2 - 100, 50, 50, { 0, 0, 0, 255 }); 
@@ -166,12 +175,12 @@ bool UI::Update(float dt)
 					potionY = (int)windowH / 2 - 446; //12
 					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight)
 					{
-						app->render->DrawTextureLegacy(etherPotionSelected, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(etherPotionSelected, potionX, potionY, 0, 0, 0, sizeEase);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
 					}
 					else
 					{
-						app->render->DrawTextureLegacy(etherPotionCreated, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(etherPotionCreated, potionX, potionY, 0, 0, 0, sizeEase);
 					}
 					
 					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 + 40, (int)windowH / 2 - 250, 50, 50, { 0, 0, 0, 255 }); 
@@ -182,12 +191,12 @@ bool UI::Update(float dt)
 					potionY = (int)windowH / 2 - 12; //259
 					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight + 30)
 					{
-						app->render->DrawTextureLegacy(oblitiusPotionSelected, potionX, potionY - 2, 0, 0);
+						app->render->DrawTextureLegacy(oblitiusPotionSelected, potionX, potionY - 2, 0, 0, 0, sizeEase);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
 					}
 					else
 					{
-						app->render->DrawTextureLegacy(oblitiusPotionCreated, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(oblitiusPotionCreated, potionX, potionY, 0, 0, 0, sizeEase);
 					}
 					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 + 40, (int)windowH / 2 + 170, 50, 50, { 0, 0, 0, 255 }); 
 				}
@@ -197,23 +206,27 @@ bool UI::Update(float dt)
 					potionY = (int)windowH / 2 - 255;
 					if(app->input->GetMouseX() > potionX + 80 && app->input->GetMouseX() < potionX + potionWidth + 50 && app->input->GetMouseY() > potionY && app->input->GetMouseY() < potionY + potionHeight + 30)
 					{
-						app->render->DrawTextureLegacy(VitaPotionSelected, potionX - 2, potionY, 0, 0);
+						app->render->DrawTextureLegacy(VitaPotionSelected, potionX - 2, potionY, 0, 0, 0, sizeEase);
 						if(app->input->GetMouseButtonDown(1))app->entityManager->GetPlayerEntity()->currentPotion = (Potion*)potion;
 					}
 					else
 					{
-						app->render->DrawTextureLegacy(VitaPotionCreated, potionX, potionY, 0, 0);
+						app->render->DrawTextureLegacy(VitaPotionCreated, potionX, potionY, 0, 0, 0, sizeEase);
 					}
 					app->render->DrawText(std::to_string(potion->quantity).c_str(), (int)windowW / 2 - 230, (int)windowH / 2 - 100, 50, 50, { 0, 0, 0, 255 });
 				}
 			}
 		}
 	}
+	else
+	{
+		potionEaseTimer.Start();
+	}
 
 	//Player UI
 	Player* player = app->entityManager->GetPlayerEntity();
 
-	if(player != nullptr){
+	if(player != nullptr and app->sceneManager->GetCurrentScene()->name != "tavernscene"){
 
 
 
@@ -243,7 +256,9 @@ bool UI::Update(float dt)
 
 		//Dash
 		#pragma region Dash
-		float dashSelectionValue = SDL_min(player->dashTimer.ReadMSec() / 1000 / player->dashCultdown * 255, 255);
+		Easings easings1 = Easings();
+		float test = easings1.easeInQuad(player->dashTimer.ReadMSec() / 1000);
+		float dashSelectionValue = SDL_min(test * 255, 255);
 		SDL_SetTextureAlphaMod(Seleccion, dashSelectionValue);
 		app->render->DrawTextureLegacy(Seleccion, 280, 695, 0, 0);
 		SDL_SetTextureAlphaMod(Seleccion, 0);
@@ -252,8 +267,8 @@ bool UI::Update(float dt)
 
 		//Health Bar
 		#pragma region HealthBar
-		int health = player->livesPlayer;
-		app->render->DrawRectangle({ 200, 80, 295 * health / 10, 20 }, 33, 187, 129, 255, true, false);
+		int health = player->vida;
+		app->render->DrawRectangle({ 200, 80, 295 * health / 15, 20 }, 33, 187, 129, 255, true, false);
 		#pragma endregion HealthBar
 
 		//Mana Bar
@@ -598,6 +613,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 6:
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilitySword100();
 
 			// disable other sword abilities
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked = false;
@@ -609,6 +625,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 7:
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilitySword110();
 
 			// disable other sword abilities
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -621,6 +638,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 8:
 			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility111Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword111();
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -635,6 +653,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 9:
 			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility112Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword112();
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -649,6 +668,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			
 		case 10:
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilitySword120();
 
 			// disable other sword abilities
 			app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -661,6 +681,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 11:
 			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility122Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword122();
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -675,6 +696,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 12:
 			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility123Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword123();
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -688,6 +710,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 13:
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilityStaff100();
 
 			// disable other staff abilities
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked = false;
@@ -699,6 +722,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 14:
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilityStaff110();
 
 			// disable other staff abilities
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -711,6 +735,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 15:
 			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility111Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff111();
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -725,6 +750,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 16:
 			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility112Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff112();
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -738,6 +764,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 17:
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked = true;
+			app->entityManager->GetPlayerEntity()->AbilityStaff120();
 
 			// disable other staff abilities
 			app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -750,6 +777,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 18:
 			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility122Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff122();
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -764,6 +792,7 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 		case 19:
 			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility123Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff123();
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -799,7 +828,6 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	return true;
 }
-
 void UI::PauseMenuVisibility(bool visible)
 {
 	if(visible)

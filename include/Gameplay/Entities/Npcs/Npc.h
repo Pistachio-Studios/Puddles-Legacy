@@ -13,6 +13,8 @@ class Npc : public Entity
 public:
 
 	bool startTimer = true;
+	bool klaustalked = false;
+	bool bountytalked = false;
 	Timer timer;
 
 	Npc();
@@ -51,6 +53,8 @@ public:
 	PhysBody* npcSensor;
 
 	b2Vec2 mouseWorldPosition;
+
+	bool mouseMode = false;
 
 private:
 	int mouseX, mouseY;

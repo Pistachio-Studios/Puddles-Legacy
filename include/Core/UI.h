@@ -133,6 +133,8 @@ public:
 	bool openBestiary = false;
 	bool exitPressed = false;
 	bool mainMenuPressed = false;
+
+	Timer potionEaseTimer;
 };
 
 #endif // __UI_H__

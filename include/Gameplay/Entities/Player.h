@@ -30,6 +30,7 @@ struct SDL_Texture;
 class Sword;
 class Staff;
 class ParticleGenerator;
+class Light;
 
 enum PlayerClass
 {
@@ -242,6 +243,22 @@ public:
 	bool SaveState(pugi::xml_node& node) override;
 	bool LoadState(pugi::xml_node& node) override;
 
+	void AbilitySword100();
+	void AbilitySword110();
+	void AbilitySword111();
+	void AbilitySword112();
+	void AbilitySword120();
+	void AbilitySword122();
+	void AbilitySword123();
+
+	void AbilityStaff100();
+	void AbilityStaff110();
+	void AbilityStaff111();
+	void AbilityStaff112();
+	void AbilityStaff120();
+	void AbilityStaff122();
+	void AbilityStaff123();
+
 public:
 
 	Sword* swordEntity = nullptr;
@@ -251,9 +268,19 @@ public:
 	SDL_Texture* texture = NULL;
 
 	float vida = 15.0f;
+	float maxVida = 15.0f;
 	float strength = 10.0f;
 	float intelligence = 14.0f;
 	float defense;
+
+	bool bleed = false;
+	int bleedChance = 15; // 15% chance of bleeding
+
+	bool paralysis = false;
+	int paralysisChance = 10; // 10% chance of paralysis
+
+	bool stealLife = false;
+	float stealLifeRatio = strength * 0.1; // 10% of the damage dealt
 
 	// TODO add final stats
 	int level = 1;
@@ -281,22 +308,44 @@ public:
 	//tmps
 	PhysBody* sword;
 
+	//soundFX
+	int stepsFx, swordSlashFx, firestaffFx, deathSabrinaFx, damagedSabrinaFx, blockFx;
+
 	ParticleGenerator* damage = nullptr;
 
 	float mana = 100.0f;
-	uint livesPlayer = 10;
-	int totalLivesPlayer;
+	float manaRegeneration = 2.0f; // 2 mana per second
+
 	bool deadPlayer = false;
 
 	bool sceneChange = false;
+
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 	Timer playerHurtCultdown;
 	Timer dashTimer;
 	float dashCultdown = 5.0f;
 
+	// Steps sound timer
+	float timerSteps = 0.0f;
+
+	// Sword sound timer
+	float timerSword = 0.0f;
+
+	float time = 300.0f;
+
+
+	Animation SabrinaEspadaIdle, SabrinaEspadaMovDelante, SabrinaEspadaMovDerecha, SabrinaEspadaMovIzquierda, SabrinaEspadaMovDetras,
+		SabrinaEspadaDano, SabrinaEspadaDash, SabrinaEspadaMuerte, SabrinaEspadaRecolectar,
+		SabrinaEspadaAtaque, SabrinaCetroIdle, SabrinaCetroMovDelante, SabrinaCetroMovDerecha, SabrinaCetroMovIzquierda,
+		SabrinaCetroMovDetras, SabrinaCetroDano, SabrinaCetroDash, SabrinaCetroMuerte, SabrinaCetroRecolectar, SabrinaCetroAtaque;
+	Animation* currentAnim;
+
 	//Cheats
 	bool godMode = false;
 	bool ghostMode = false;
+
+	Light* playerLight = nullptr;
 };
 
 #endif // __PLAYER_H__

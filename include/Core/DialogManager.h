@@ -61,7 +61,7 @@ public:
     bool SaveState(pugi::xml_node&) const;
 
     // Dialog methods
-    void StartDialog(int dialogId);
+    void StartDialog(int startDialogId, int endDialogId);
     void NextDialog();
     void EndDialog();
     void ShowDialog(int x = 0, int y = 0);
@@ -75,11 +75,12 @@ private:
     map<int, Dialog> dialogs;   // Map of dialog ID to Dialog data
     Dialog* currentDialog;
     int currentDialogId;
+    int endDialogId;
     string currentDialogLine;
 
     // Font
     TTF_Font* font;
-    SDL_Color textColor = { 255, 255, 255, 255 }; // White color
+    SDL_Color textColor = { 0, 0, 0, 255 }; // Black color
     SDL_Color selectedColor = { 255, 0, 255, 255 };
     SDL_Rect textRect;
 

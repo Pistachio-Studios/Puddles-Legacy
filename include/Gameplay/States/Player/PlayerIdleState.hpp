@@ -20,7 +20,16 @@ public:
     }
     inline void Update(float dt) override
     {
-
+        //Animation
+        if (player->currentClass == KNIGHT) {
+            player->SabrinaEspadaIdle.Update(dt);
+            player->currentAnim = &player->SabrinaEspadaIdle;
+        }
+        if (player->currentClass == WIZARD) {
+            player->SabrinaCetroIdle.Update(dt);
+            player->currentAnim = &player->SabrinaCetroIdle;
+        }
+        
 
         if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT or
             app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT or

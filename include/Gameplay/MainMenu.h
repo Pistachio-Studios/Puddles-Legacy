@@ -87,7 +87,8 @@ private:
 	bool exitPressed = false;
 
 	const char* texturePath;
-	SDL_Texture* gameTitle = NULL;
+	SDL_Texture* gameTitle = nullptr;
+	SDL_Texture* settingsTexture = nullptr;
 
 	//Audio fx
 	int FxId;

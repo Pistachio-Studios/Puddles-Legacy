@@ -4,6 +4,7 @@
 #include "Core/Audio.h"
 #include "Core/Window.h"
 #include "Core/Textures.h"
+#include "Utils/Easings.h"
 
 GuiControlButton::GuiControlButton(uint32_t id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -24,6 +25,12 @@ GuiControlButton::~GuiControlButton()
 
 bool GuiControlButton::Update(float dt)
 {
+	//easing
+	//float controlEase = easeInQuad(controlEaseTimer.ReadMSec() / 200);
+
+	Easings easings = Easings();
+	float controlEase = easings.easeInQuad(controlEaseTimer.ReadSec() / 0.2);
+
 	if (state != GuiControlState::DISABLED)
 	{
 		// L15: DONE 3: Update the state of the GUiButton according to the mouse position
@@ -48,6 +55,8 @@ bool GuiControlButton::Update(float dt)
 			state = GuiControlState::NORMAL;
 		}
 
+		color = { 255, 255, 255, 255 };
+
 		//L15: DONE 4: Draw the button according the GuiControl State
 		switch (state)
 		{
@@ -59,15 +68,17 @@ bool GuiControlButton::Update(float dt)
 			break;
 		case GuiControlState::FOCUSED:
 			// TODO fix bounds positions to fit the text size
-			app->render->DrawTexture(textureSelectedLeft, bounds.x - 10, bounds.y);
-			app->render->DrawTexture(textureSelectedRight, bounds.x + bounds.w - 10, bounds.y);
+			app->render->DrawTexture(textureSelectedLeft, bounds.x - 10 * controlEase, bounds.y * controlEase);
+			app->render->DrawTexture(textureSelectedRight, bounds.x + bounds.w - 10 * controlEase, bounds.y *controlEase);
 			break;
 		case GuiControlState::PRESSED:
-			app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+			//app->render->DrawRectangle(bounds, 0, 128, 0, 255, true, false);
+			
+			color = { 255, 191, 0, 255 };
 			break;
 		}
 
-		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
+		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, color);
 
 	}
 

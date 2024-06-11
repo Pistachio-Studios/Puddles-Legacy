@@ -60,6 +60,7 @@ bool TavernScene::Enter()
 			Npc* npcs = new Npc();
 			app->entityManager->AddEntity(npcs);
 			npcs->parameters = npcsNode;
+			npcs->mouseMode = true;
 			npcs->Start();
 		}
 	}
@@ -68,6 +69,7 @@ bool TavernScene::Enter()
 		Tabernero* tabernero = new Tabernero();
 		app->entityManager->AddEntity(tabernero);
 		tabernero->parameters = parameters.child("tabernero");
+		tabernero->mouseMode = true;
 		tabernero->Start();
 	}
 
@@ -75,6 +77,8 @@ bool TavernScene::Enter()
 	app->map->Enable();
 	app->entityManager->Enable();
 
+	app->render->camera.x = -playerPointAndClick->position.x + (app->render->camera.w / 2);
+	app->render->camera.y = -playerPointAndClick->position.y + (app->render->camera.h / 2);
 	app->render->camera.target = playerPointAndClick;
 	app->render->camera.useInterpolation = true;
 	app->render->camera.lerpSpeed = 2.0f;
@@ -125,6 +129,9 @@ bool TavernScene::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	player->pbody->body->GetFixtureList()->SetSensor(true);
+	player->pbody->body->SetTransform(b2Vec2(500, 500), 0);
 	
 	if(freeCam)
 	{
@@ -177,11 +184,13 @@ bool TavernScene::Update(float dt)
 
 		if (cauldronCreatePressed && cauldronSelect == nullptr) {
 			app->guiManager->RemoveGuiControl(cauldronCreate);
+			app->guiManager->RemoveGuiControl(cauldronExit);
+			cauldronCreatePressed = false;
+			cauldronExitPressed = false;
+
 			cauldronSelect = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronSelectTex);
 			cauldronSelectExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
 			potionCreateButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Accept", { (int)windowW / 2 - 100, (int)windowH / 2 + 300, 200, 50 }, this);
-
-			cauldronCreatePressed = false;
 		}
 
 		if (potionCreatePressed && cauldronSelect != nullptr) {
@@ -216,17 +225,22 @@ bool TavernScene::Update(float dt)
 
 			ResetPotionPopUps();
 
+			//cauldron = nullptr; 
+			cauldronExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
+			cauldronCreate = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Create", { (int)windowW / 2 + 320, (int)windowH / 2 + 350, 200, 50 }, this);
+
 			cauldronSelect = nullptr; 
 			selectExitPressed = false; 
-			playerPointAndClick->cauldronIsOpen = false;
-			
+			playerPointAndClick->cauldronIsOpen = true; 
 		}
 
 		
 	}
 
+	iPoint mouseWorldPosition = { app->input->GetMouseX() + -app->render->camera.x, app->input->GetMouseY() + -app->render->camera.y };
+
 	//Cambios de escena sin collider
-	if (app->entityManager->GetPlayerEntity()->position.x <= 1390 && app->entityManager->GetPlayerEntity()->position.x >= 1150 && app->entityManager->GetPlayerEntity()->position.y <= 3835 && app->entityManager->GetPlayerEntity()->position.y >= 3670) {
+	if (mouseWorldPosition.x <= 1390 && mouseWorldPosition.x >= 1150 && mouseWorldPosition.y <= 3835 && mouseWorldPosition.y >= 3670) {
 		app->sceneManager->ChangeScene("townscene");
 	}
 

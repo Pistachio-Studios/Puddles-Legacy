@@ -72,6 +72,9 @@ void Magic::OnCollision(PhysBody* physA, PhysBody* physB) {
 		active = false;
 		explosion->position = { position.x, position.y };
 		explosion->emiting = true;
+		pbody->body->GetFixtureList()->SetSensor(true);
+		pbody->body->SetTransform(b2Vec2(-100, -100), 0); // Guarrada de manual
+		//pbody->body->GetFixtureList()->SetSensor(false);
 	}
 }
 

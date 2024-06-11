@@ -30,8 +30,6 @@ public:
     PlayerCombatAttackState(SString name) : State(name) {}
     inline void Enter() override
     {
-
-
         player = StateMachineReference->owner;
 
         attackRange = 150;
@@ -62,6 +60,13 @@ public:
     {
         if(player->currentClass == PlayerClass::KNIGHT and player->mana > 10.0f)
         {
+           
+            if (player->timerSword >= player->time)
+            {
+                app->audio->PlayFx(player->swordSlashFx);
+                player->timerSword = 0.0f;
+            }
+
             if (attackValue < attackRange / 2)
             {
                 b2Vec2 playerPos = player->pbody->body->GetPosition();
@@ -70,6 +75,19 @@ public:
                 attackValue += dt / 1000 * attackSpeed;
                 if(player->mana > 5.0f and attacking == false)player->mana -= 5.0f;
                 attacking = true;
+                //Animation
+                player->SabrinaEspadaAtaque.Update(dt);
+                if(player->lookingAngle > 4.7f or player->lookingAngle < 1.5f)
+                {
+                    player->flip = SDL_FLIP_HORIZONTAL;
+                }
+                else
+                {
+                    player->flip = SDL_FLIP_NONE;
+                }
+                player->currentAnim = &player->SabrinaEspadaAtaque;
+
+                player->position.x -= 64;
             }
             else
             {
@@ -85,11 +103,20 @@ public:
 
             if (app->input->GetMouseButtonDown(1))
             {
+                if (player->timerSword >= player->time)
+                {
+                    app->audio->PlayFx(player->firestaffFx);
+                    player->timerSword = 0.0f;
+                }
+                //Animation
+                player->SabrinaCetroAtaque.Update(dt);
+                player->currentAnim = &player->SabrinaCetroAtaque;
+
                 if(spellTimer.ReadMSec() > 500 or firstSpell)
                 {
                     player->staffEntity->ThrowSpell();
                     spellTimer.Start();
-                    firstSpell = false;
+                    firstSpell = false;                    
                     if(player->mana > 10.0f)player->mana -= 10.0f;
                 }
             }
