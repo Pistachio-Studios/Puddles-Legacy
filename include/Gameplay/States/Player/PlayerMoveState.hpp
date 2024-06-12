@@ -14,12 +14,14 @@ public:
     PlayerMoveState(SString name) : State(name) {}
     inline void Enter() override
     {
-
+        GamePad& pad = app->input->pads[0];
 
         player = StateMachineReference->owner;
     }
     inline void Update(float dt) override
     {
+        GamePad& pad = app->input->pads[0];
+
         if (player->timerSteps >= player->time)
         {
             int randomIndex = rand() % 4; // Genera un índice aleatorio entre 0 y 3
@@ -38,7 +40,7 @@ public:
 
         if (pbody->body->GetLinearVelocity().Length() < player->maxSpeed)
         {
-            if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+            if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0.0f) {
                 impulse.x = -pbody->body->GetMass() * player->moveForce;
                 if (player->currentClass == KNIGHT) {
                     //Animation
@@ -51,7 +53,7 @@ public:
                     player->currentAnim = &player->SabrinaCetroMovIzquierda;
                 }
             }
-            if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+            if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || pad.l_x > 0.0f) {
                 impulse.x = pbody->body->GetMass() * player->moveForce;
                 //Animation
                 if (player->currentClass == KNIGHT) {
@@ -63,7 +65,7 @@ public:
                     player->currentAnim = &player->SabrinaCetroMovDerecha;
                 }                
             }
-            if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+            if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || pad.l_y < 0.0f) {
                impulse.y = -pbody->body->GetMass() * player->moveForce;
                //Animation
                if (player->currentClass == KNIGHT) {
@@ -75,7 +77,7 @@ public:
                    player->currentAnim = &player->SabrinaCetroMovDetras;
                }
             }
-            if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+            if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || pad.l_y > 0.0f) {
                 impulse.y = pbody->body->GetMass() * player->moveForce;                
                 //Animation
                 if (player->currentClass == KNIGHT) {

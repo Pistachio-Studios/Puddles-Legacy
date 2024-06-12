@@ -13,9 +13,6 @@ GuiControlButton::GuiControlButton(uint32_t id, SDL_Rect bounds, const char* tex
 
 	canClick = true;
 	drawBasic = false;
-
-	textureSelectedLeft = app->tex->Load("Assets/UI/Buttons/selectedLeft.png");
-	textureSelectedRight = app->tex->Load("Assets/UI/Buttons/selectedRight.png");
 }
 
 GuiControlButton::~GuiControlButton()
@@ -68,8 +65,6 @@ bool GuiControlButton::Update(float dt)
 			break;
 		case GuiControlState::FOCUSED:
 			// TODO fix bounds positions to fit the text size
-			app->render->DrawTexture(textureSelectedLeft, bounds.x - 10 * controlEase, bounds.y * controlEase);
-			app->render->DrawTexture(textureSelectedRight, bounds.x + bounds.w - 10 * controlEase, bounds.y *controlEase);
 			break;
 		case GuiControlState::PRESSED:
 			//app->render->DrawRectangle(bounds, 0, 128, 0, 255, true, false);
