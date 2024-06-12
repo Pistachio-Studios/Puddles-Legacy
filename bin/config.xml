@@ -33,12 +33,6 @@
 			<gameTitle x="0" y="0" texturepath="Assets/Textures/GameTitle.png" FxPath="Assets/Audio/Fx/UI/UIButton.ogg"/>
 		</mainmenu>
 		<credits x="0" y="0" texturepath="Assets/Textures/Credits.png" FxPath="Assets/Audio/Fx/UI/UIButton.ogg" />
-		<level1scene>
-			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx"/>
-			<camera x="-530" y="-1949" />
-			<player x="672" y="2032" texturepath="Assets/Textures/Player.png"  potionFx="Assets/Audio/Fx/Player/Potion.ogg" stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg" swordSlashFx="Assets/Audio/Fx/Player/SwordSlash.ogg" fireStaffFx="Assets/Audio/Fx/Player/FireStaff.ogg" deathSabrinaFx="Assets/Audio/Fx/Player/Death.ogg" damagedSabrinaFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg" blockFx="Assets/Audio/Fx/Player/Block.ogg" />
-			<enemies />
-		</level1scene>
 		<forestscene>
 			<map path="Assets/Maps/Forest-Scene/" name="bosque.tmx" puzzleFxPath="Assets/Audio/Others/puzzleFx.ogg" ForestMusic="Assets/Audio/Others/Exploring_music.ogg"/>
 			<camera x="-32545" y="-4610" />
