@@ -137,9 +137,9 @@ bool TownScene::Enter()
 	//Get the size of the texture
 	//app->tex->GetSize(img, texW, texH);
 
-	PhysBody* changeForest = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
-	changeForest->ctype = ColliderType::CHANGESCENE;
-	changeForest->listener = player;
+	//PhysBody* changeForest = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
+	//changeForest->ctype = ColliderType::CHANGESCENE;
+	//changeForest->listener = player;
 
 	Music = app->audio->PlayMusic(parameters.child("map").attribute("TownMusic").as_string());
 
