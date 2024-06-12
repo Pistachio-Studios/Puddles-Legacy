@@ -50,15 +50,8 @@ bool Tabernero::Update(float dt)
 	Npc::Update(dt);
 
 	// TODO add to bestiary when player interacts with tabernero for the first time
-	if (touchingNpc) {
-		app->render->DrawTexture(texture2, position.x - 60, position.y - 180);
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
-			//sale dialogo
-			klaustalked = true;
-			app->dialogManager->StartDialog(1,27);
-			app->entityManager->GetPlayerEntity()->bestiary->klausUnlocked = true;
-
-		}
+	if (klaustalked) {
+		app->entityManager->GetPlayerEntity()->bestiary->klausUnlocked = true;
 	}
 	return true;
 }
