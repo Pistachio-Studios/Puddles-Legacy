@@ -143,8 +143,10 @@ bool UI::Start() {
 
 bool UI::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
+
 	//Potions Inventory
-	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) {
+	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT or pad.l1) {
 
 		Easings easings = Easings();		
 		float sizeEase = easings.easeInQuad(potionEaseTimer.ReadMSec() / 200); //hint: from 0 to 1
@@ -425,7 +427,7 @@ bool UI::Update(float dt)
 
 		#pragma endregion AbilitiesButtons
 
-		if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN or pad.y)
 			openBestiary = !openBestiary;
 			
 		if (openBestiary) {

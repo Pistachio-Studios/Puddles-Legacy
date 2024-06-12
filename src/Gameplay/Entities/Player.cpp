@@ -180,6 +180,8 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
+
 	/* playerLight->position = { position.x, position.y }; */
 	timerSteps += dt;
 	timerSword += dt;
@@ -255,7 +257,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if(app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	if(app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN || pad.x)
 	{
 		if(currentPotion != nullptr)
 		{

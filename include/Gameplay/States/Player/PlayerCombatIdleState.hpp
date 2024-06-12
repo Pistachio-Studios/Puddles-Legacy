@@ -20,11 +20,13 @@ public:
     }
     inline void Update(float dt) override
     {
-        if (app->input->GetMouseButtonDown(1)) {
+        GamePad& pad = app->input->pads[0];
+
+        if (app->input->GetMouseButtonDown(1) || pad.r2 > 0.0f) {
 
             StateMachineReference->ChangeState("attack");
         }
-        else if (app->input->GetMouseButtonDown(3))
+        else if (app->input->GetMouseButtonDown(3) || pad.l2 > 0.0f)
         {
             StateMachineReference->ChangeState("block");
         }
