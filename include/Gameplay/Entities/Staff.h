@@ -61,7 +61,7 @@ public:
 public:
 	PhysBody* pbody;
 
-	SDL_Texture* texture = nullptr;
+	//SDL_Texture* texture = nullptr;
 
 	Magic* magicArray[10];
 

@@ -84,7 +84,10 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
 
 	// Audios
-	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
+	footstepFx[0] = app->audio->LoadFx(parameters.attribute("footstep1Fx").as_string());
+	footstepFx[1] = app->audio->LoadFx(parameters.attribute("footstep2Fx").as_string());
+	footstepFx[2] = app->audio->LoadFx(parameters.attribute("footstep3Fx").as_string());
+	footstepFx[3] = app->audio->LoadFx(parameters.attribute("footstep4Fx").as_string());
 	swordSlashFx = app->audio->LoadFx(parameters.attribute("swordSlashFx").as_string());
 	firestaffFx = app->audio->LoadFx(parameters.attribute("fireStaffFx").as_string());
 	damagedSabrinaFx = app->audio->LoadFx(parameters.attribute("damagedSabrinaFx").as_string());

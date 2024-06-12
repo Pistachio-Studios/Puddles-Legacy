@@ -22,7 +22,11 @@ public:
     {
         if (player->timerSteps >= player->time)
         {
-            app->audio->PlayFx(player->stepsFx);
+            int randomIndex = rand() % 4; // Genera un índice aleatorio entre 0 y 3
+            player->currentFootstepFx = player->footstepFx[randomIndex];
+
+            // Reproduce el sonido
+            app->audio->PlayFx(player->currentFootstepFx);
             player->timerSteps = 0.0f;
         }
 
