@@ -112,13 +112,13 @@ bool QuestManager::SaveState(pugi::xml_node node)
 void QuestManager::DrawQuest(Quest *quest, int x, int y)
 {
 	// Draw the quest background
-	app->render->DrawRectangle({x - 5, y - 5, 500, 45},25, 50, 50, 255, true, false);
+	app->render->DrawRectangle({x - 5, y - 5, 500, 45},128, 128, 128, 128, true, false);
 
 	//Draw the quest completion status
 	app->render->DrawRectangle({x - 5, y - 5, quest->GetCompletionValue() * 5, 45},128, 128, 50, 255, true, false);
 
 	// Draw the quest title
-	app->render->DrawText(quest->GetTitle().GetString(), x, y, 20, 20, { 255, 0, 0, 255 });
+	app->render->DrawText(quest->GetTitle().GetString(), x, y, 20, 20, { 0, 51, 153, 255 });
 
 	// Draw the quest description
 	app->render->DrawText(quest->GetDescription().GetString(), x, y + 20, 20, 20);
