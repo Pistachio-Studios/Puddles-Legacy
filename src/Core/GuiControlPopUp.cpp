@@ -25,7 +25,7 @@ GuiControlPopUp::~GuiControlPopUp()
 bool GuiControlPopUp::Update(float dt)
 {
 	Easings easings = Easings();
-	float controlEase = easings.easeInQuad(controlEaseTimer.ReadMSec() / 500);
+	float controlEase = easings.easeInQuad(controlEaseTimer.ReadMSec() / 200);
 
 	app->win->GetWindowSize(windowW, windowH);
 
