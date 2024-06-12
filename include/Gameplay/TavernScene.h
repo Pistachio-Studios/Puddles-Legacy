@@ -55,6 +55,7 @@ public:
 
 	PlayerPointAndClick* playerPointAndClick;
 	PhysBody* cauldronTrigger; 
+	PhysBody* weaponsTrigger; 
 
 private:
 	SDL_Texture* img;
@@ -72,6 +73,8 @@ private:
 
 	SDL_Texture* currentPotion;
 
+	SDL_Texture* chooseWeaponTex;
+
 	SDL_Texture* prueba;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
@@ -85,8 +88,11 @@ private:
 	GuiControlButton* cauldronExit;
 	GuiControlButton* cauldronCreate;
 	GuiControlButton* potionCreateButton;
+	GuiControlButton* chooseSword;
+	GuiControlButton* chooseCetro;
 	GuiControlPopUp* cauldron = nullptr;
 	GuiControlPopUp* cauldronSelect = nullptr;
+	GuiControlPopUp* chooseWeapon = nullptr;
 
 	GuiControlPopUp* CrafteableCeleritaPotion = nullptr;
 	GuiControlPopUp* CrafteableVitaPotion = nullptr;
@@ -104,10 +110,14 @@ private:
 	bool cauldronExitPressed = false;
 	bool cauldronCreatePressed = false;
 	bool potionCreatePressed = false;
+	bool chooseSwordPressed = false;
+	bool chooseCetroPressed = false;
 
 	int type = 1;
 
 	Timer* playingTime;
+
+	int Music;
 };
 
 #endif // __TAVERNSCENE_H__

@@ -5,6 +5,7 @@
 #include "Core/Textures.h"
 #include "Utils/Timer.h"
 #include "Core/Window.h"
+#include "Core/Audio.h"
 #include "Gameplay/TavernScene.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
@@ -96,6 +97,9 @@ bool TavernScene::Enter()
 	cauldronTrigger = app->physics->CreateRectangle(500, 700, 100, 100, bodyType::STATIC);
 	cauldronTrigger->ctype = ColliderType::CAULDRON;
 
+	weaponsTrigger = app->physics->CreateRectangle(740, 1420, 100, 100, bodyType::STATIC);
+	weaponsTrigger->ctype = ColliderType::CHOSEWEAPON;
+
 	cauldronTex = app->tex->Load("Assets/Textures/Potions/Cauldron/Cauldron.png");
 	cauldronSelectTex = app->tex->Load("Assets/Textures/Potions/Cauldron/CauldronSelect.png");
 
@@ -111,7 +115,11 @@ bool TavernScene::Enter()
 	OblitiusPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/CrafteableOblitiusPotion.png");
 	NotOblitiusPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/NotCrafteableOblitiusPotion.png");
 
+	chooseWeaponTex = app->tex->Load("Assets/Textures/chooseWeapon.png");
+
 	currentPotion = CeleritaPotionTex;
+
+	Music = app->audio->PlayMusic(parameters.child("map").attribute("TavernMusic").as_string());
 
 	return true;
 }
@@ -155,9 +163,44 @@ bool TavernScene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 
-	if(playerPointAndClick->cauldronIsOpen) app->render->camera.lerpSpeed = 0.0f;
+	if (playerPointAndClick->cauldronIsOpen || playerPointAndClick->chooseWeaponIsOpen) {
+		app->render->camera.lerpSpeed = 0.0f;
+	}
 	else app->render->camera.lerpSpeed = 2.0f;
 
+	//CHOOSE WEAPON MENU
+	if (playerPointAndClick->chooseWeaponIsOpen && chooseWeapon == nullptr) {
+		chooseWeapon = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 955, (int)windowH / 2 - 540 }, this, chooseWeaponTex);
+		chooseSword = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 21, "Choose", { (int)windowW / 2 + 270, (int)windowH / 2 + 400, 200, 50 }, this);
+		chooseCetro = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 22, "Choose", { (int)windowW / 2 - 475, (int)windowH / 2 + 400, 200, 50 }, this);
+	}
+
+	if (chooseWeapon != nullptr) {
+		if (chooseSwordPressed) {
+			//codigo seleccionar espada
+			app->guiManager->RemoveGuiControl(chooseSword);
+			app->guiManager->RemoveGuiControl(chooseCetro);
+			app->guiManager->RemoveGuiControl(chooseWeapon);
+			chooseSwordPressed = false;
+			chooseCetroPressed = false;
+			playerPointAndClick->chooseWeaponIsOpen = false;
+			chooseSword = nullptr;
+			chooseWeapon = nullptr;
+		}
+		if (chooseCetroPressed) {
+			//codigo seleccionar cetro
+			app->guiManager->RemoveGuiControl(chooseSword);
+			app->guiManager->RemoveGuiControl(chooseCetro);
+			app->guiManager->RemoveGuiControl(chooseWeapon);
+			chooseSwordPressed = false;
+			chooseCetroPressed = false;
+			playerPointAndClick->chooseWeaponIsOpen = false;
+			chooseCetro = nullptr;
+			chooseWeapon = nullptr;
+		}
+	}
+
+	//CAULDRON MENU
 	if (playerPointAndClick->cauldronIsOpen && cauldron == nullptr) {
 		cauldron = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 800, (int)windowH / 2 - 450 }, this, cauldronTex);
 		cauldronExit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Exit", { (int)windowW / 2 + 550, (int)windowH / 2 + 350, 200, 50 }, this);
@@ -279,7 +322,7 @@ bool TavernScene::Exit()
 // Called before quitting
 bool TavernScene::CleanUp()
 {
-	LOG("Freeing testscene");
+		app->audio->CleanUp();
 	return true;
 }
 
@@ -306,7 +349,16 @@ bool TavernScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 10:
 		app->SaveRequest();
 		break;
-
+	case 21:
+		chooseSwordPressed = true;
+		chooseCetroPressed = false;
+		playerCurrentClass = 0;
+		break;
+	case 22:
+		chooseCetroPressed = true;
+		chooseSwordPressed = false;
+		playerCurrentClass = 1;
+		break;
 	}
 
 	return true;

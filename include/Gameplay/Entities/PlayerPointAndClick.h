@@ -50,6 +50,7 @@ public:
 
 	bool hovering = false;
 	bool cauldronIsOpen = false;
+	bool chooseWeaponIsOpen = false;
 };
 
 #endif // __PLAYERPOINTANDCLICK_H__

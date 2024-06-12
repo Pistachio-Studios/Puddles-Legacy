@@ -75,7 +75,7 @@ bool QuestManager::Update(float dt)
 	for (auto& quest : quests) {
 		if (quest.second->IsActive()) {
 			quest.second->Update();
-			DrawQuest(quest.second, 25, 25 + 50 * activeQuests);
+			DrawQuest(quest.second, globalPositionX, globalPositionY + 75 * activeQuests);
 			activeQuests++;
 		}
 	}
@@ -112,10 +112,10 @@ bool QuestManager::SaveState(pugi::xml_node node)
 void QuestManager::DrawQuest(Quest *quest, int x, int y)
 {
 	// Draw the quest background
-	app->render->DrawRectangle({x - 5, y - 5, 500, 45},25, 50, 50, 255, true, false);
+	app->render->DrawRectangle({x - 5, y - 5, 500, 70},25, 50, 50, 255, true, false);
 
 	//Draw the quest completion status
-	app->render->DrawRectangle({x - 5, y - 5, quest->GetCompletionValue() * 5, 45},128, 128, 50, 255, true, false);
+	app->render->DrawRectangle({x - 5, y - 5, quest->GetCompletionValue() * 5, 70},128, 128, 50, 255, true, false);
 
 	// Draw the quest title
 	app->render->DrawText(quest->GetTitle().GetString(), x, y, 20, 20, { 255, 0, 0, 255 });
