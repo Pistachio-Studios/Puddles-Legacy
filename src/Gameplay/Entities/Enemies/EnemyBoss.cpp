@@ -144,7 +144,6 @@ bool EnemyBoss::Start() {
 
 bool EnemyBoss::Update(float dt)
 {
-	
 	movementFSM->Update(dt);
 	pbody->body->SetTransform(pbody->body->GetPosition(), 0);
 
@@ -219,7 +218,9 @@ bool EnemyBoss::SaveState(pugi::xml_node& node) {
 	pugi::xml_node enemybossAttributes = node.append_child("enemies").append_child("EnemyBoss");
 	enemybossAttributes.append_attribute("x").set_value(this->position.x);
 	enemybossAttributes.append_attribute("y").set_value(this->position.y);
-
+	enemybossAttributes.append_attribute("lives").set_value(this->vida);
+	//enemybossAttributes.append_attribute("state").set_value(movementFSM->GetCurrentState().name.GetString());
+	
 	return true;
 }
 
@@ -230,6 +231,8 @@ bool EnemyBoss::LoadState(pugi::xml_node& node)
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
 
+	this->vida = node.child("enemies").child("EnemyBoss").attribute("lives").as_float(); 
+	//movementFSM->ChangeState(enemybossAttributes)
 	return true;
 }
 

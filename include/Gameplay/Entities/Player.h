@@ -136,6 +136,15 @@ public:
 		}
 	}
 
+	void AddNItems(std::string itemName, int n) {
+		for (auto& item : items) {
+			if (item->name == itemName) {
+				item->quantity += n;
+				break;
+			}
+		}
+	}
+
 	void AddItem(std::string itemName) {
 		for (auto& item : items) {
 			if (item->name == itemName) {

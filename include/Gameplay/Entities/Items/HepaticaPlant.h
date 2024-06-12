@@ -20,6 +20,7 @@ public:
     void OnCollision(PhysBody* physA, PhysBody* physB) override;
 
 	void EndCollision(PhysBody* physA, PhysBody* physB) override;
+
 };
 
 #endif // HEPATICAPLANT_H
