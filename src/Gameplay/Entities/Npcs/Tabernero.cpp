@@ -9,6 +9,7 @@
 #include "Utils/Point.h"
 #include "Core/Physics.h"
 #include "Gameplay/Entities/Player.h"
+#include "Core/DialogManager.h"
 
 #include <cmath>
 #include <iostream>
@@ -49,8 +50,15 @@ bool Tabernero::Update(float dt)
 	Npc::Update(dt);
 
 	// TODO add to bestiary when player interacts with tabernero for the first time
-	if (Npc::klaustalked == true) {
-		app->entityManager->GetPlayerEntity()->bestiary->klausUnlocked = true;
+	if (touchingNpc) {
+		app->render->DrawTexture(texture2, position.x - 60, position.y - 180);
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+			//sale dialogo
+			klaustalked = true;
+			app->dialogManager->StartDialog(1,27);
+			app->entityManager->GetPlayerEntity()->bestiary->klausUnlocked = true;
+
+		}
 	}
 	return true;
 }
@@ -58,4 +66,29 @@ bool Tabernero::Update(float dt)
 bool Tabernero::CleanUp() {
 	Npc::CleanUp();
 	return true; 
+}
+
+void Tabernero::OnCollision(PhysBody* physA, PhysBody* physB) {
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		touchingNpc = true; 
+		break;
+	}
+}
+
+void Tabernero::EndCollision(PhysBody* physA, PhysBody* physB)
+{
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+	        
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		touchingNpc = false;
+		break;
+	}
 }

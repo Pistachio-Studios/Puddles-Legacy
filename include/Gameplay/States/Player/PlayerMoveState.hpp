@@ -99,7 +99,7 @@ public:
             dir.Normalize();
 
             float dashForce = 100.0f;
-
+            app->audio->PlayFx(player->dashFx);
             b2Vec2 impulse = { dir.x * pbody->body->GetMass() * player->moveForce * dashForce, dir.y * pbody->body->GetMass() * player->moveForce * dashForce};
 
             pbody->body->ApplyLinearImpulse(impulse, pbody->body->GetWorldCenter(), true);

@@ -83,21 +83,7 @@ bool Npc::Update(float dt)
 				}
 			}
 		}
-		else {
-			if (touchingNpc) {
-				app->render->DrawTexture(texture2, position.x - 60, position.y - 180);
-				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
-					//sale dialogo
-					app->dialogManager->StartDialog(1,27);
-					if (name == "Loco") {
-						bountytalked = true;
-					}
-					if (name == "Tabernero") {
-						klaustalked = true;
-					}
-				}
-			}
-		}
+			
 		app->render->DrawTexture(anim.texture, position.x - 100, position.y - 200, &anim.GetCurrentFrame());
 		anim.Update(dt);
 	}

@@ -5,6 +5,7 @@
 #include "Core/Textures.h"
 #include "Core/Audio.h"
 #include "Core/Render.h"
+#include "Core/QuestManager.h"
 
 #include "Utils/Log.h"
 #include "Core/GuiControl.h"
@@ -33,6 +34,21 @@ bool Credits::Enter()
 	app->render->camera.target = nullptr;
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
+
+	// Deactivate quests
+	app->questManager->GetQuestById(0)->SetActive(false);
+	app->questManager->GetQuestById(1)->SetActive(false);
+	app->questManager->GetQuestById(2)->SetActive(false);
+	app->questManager->GetQuestById(3)->SetActive(false);
+	app->questManager->GetQuestById(4)->SetActive(false);
+	app->questManager->GetQuestById(5)->SetActive(false);
+	app->questManager->GetQuestById(6)->SetActive(false);
+	app->questManager->GetQuestById(7)->SetActive(false);
+	app->questManager->GetQuestById(8)->SetActive(false);
+	app->questManager->GetQuestById(9)->SetActive(false);
+	app->questManager->GetQuestById(10)->SetActive(false);
+	app->questManager->GetQuestById(11)->SetActive(false);
+	app->questManager->GetQuestById(12)->SetActive(false);
 
 	return true;
 }

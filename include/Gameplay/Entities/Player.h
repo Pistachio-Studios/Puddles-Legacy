@@ -275,7 +275,7 @@ public:
 
 	float vida = 15.0f;
 	float maxVida = 15.0f;
-	float strength = 10.0f;
+	float strength = 12.0f;
 	float intelligence = 14.0f;
 	float defense;
 
@@ -321,7 +321,7 @@ public:
 	PhysBody* sword;
 
 	//soundFX
-	int footstep1Fx, footstep2Fx, footstep3Fx, footstep4Fx, swordSlashFx, firestaffFx, deathSabrinaFx, damagedSabrinaFx, blockFx, potionFx;
+	int footstep1Fx, footstep2Fx, footstep3Fx, footstep4Fx, swordSlashFx, firestaffFx, deathSabrinaFx, damagedSabrinaFx, blockFx, potionFx, dashFx;
 
 	int footstepFx[4];
 	int currentFootstepFx;
@@ -339,7 +339,7 @@ public:
 
 	Timer playerHurtCultdown;
 	Timer dashTimer;
-	float dashCultdown = 5.0f;
+	float dashCultdown = 2.0f;
 
 	// Steps sound timer
 	float timerSteps = 0.0f;
