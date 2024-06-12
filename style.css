@@ -193,11 +193,17 @@ h2 {
 
 .video-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.video-tutorial {
+    max-width: 100%; /* Para asegurarte de que no sobrepasa el ancho del contenedor */
+}
+
+
 
 .authors {
     padding: 20px;
