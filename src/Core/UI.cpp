@@ -349,6 +349,7 @@ bool UI::Update(float dt)
 		SDL_SetTextureAlphaMod(Seleccion, 0);
 
 		app->render->DrawTextureLegacy(Seleccion, 235, 770, 0, 0);
+		#pragma endregion Dash
 
 		//Health Bar
 		#pragma region HealthBar
@@ -428,9 +429,19 @@ bool UI::Update(float dt)
 			openBestiary = !openBestiary;
 			
 		if (openBestiary) {
-			switch (player->bestiary->currentPage) {
+			cleanedLoopBestiarioClosed = true;
+			app->render->DrawTextureLegacy(bestiarioOpen.texture, 0, 0, &bestiarioOpen.GetCurrentFrame(), 0);
+			bestiarioOpen.Update(dt);
+			if (bestiarioOpen.HasFinished()) {
+				if (cleanedLoopBestiarioOpen) {
+					bestiarioOpen.Reset();
+					bestiarioOpen.ResetLoopCount();
+					cleanedLoopBestiarioOpen = false;
+				}
+				switch (player->bestiary->currentPage) {
 				case 1:
 					app->render->DrawTextureLegacy(bestiaryPage1Texture, 0, 0, NULL, 0);
+					gameStarted = false;
 
 					#pragma region AbilitiesTextures
 					if (player->bestiary->swordAbility100Unlocked)
@@ -536,7 +547,22 @@ bool UI::Update(float dt)
 					app->render->DrawTextureLegacy(bestiaryPage5Texture, 0, 0, NULL, 0);
 					break;
 				}
+			}
 		};
+		
+		if (!openBestiary) {
+			if (!gameStarted) { // Skip the first play when the game starts
+				cleanedLoopBestiarioOpen = true;
+				app->render->DrawTextureLegacy(bestiarioClosed.texture, 0, 0, &bestiarioClosed.GetCurrentFrame(), 0);
+				bestiarioClosed.Update(dt);
+			}
+			if (cleanedLoopBestiarioClosed) {
+				bestiarioClosed.Reset();
+				bestiarioClosed.ResetLoopCount();
+				cleanedLoopBestiarioClosed = false;
+			}
+		}
+		
 		#pragma endregion Bestiary
 	}
 	
