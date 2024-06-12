@@ -2,6 +2,7 @@
 #include "Core/App.h"
 #include "Core/Window.h"
 #include "Gameplay/Entities/Entity.h"
+#include "Gameplay/Entities/Player.h"
 #include "Core/Textures.h"
 #include "Core/Input.h"
 #include "Core/Animation.h"
@@ -10,6 +11,7 @@
 #include "Core/SceneManager.h"
 #include "Utils/Point.h"
 #include "Utils/Log.h"
+#include "Core/QuestManager.h"
 
 #include "Core/DialogManager.h"
 
@@ -80,6 +82,9 @@ bool Npc::Update(float dt)
 					//sale dialogo
 					app->dialogManager->StartDialog(1,27); // first dialog - sabrina klaus
 					app->render->camera.lerpSpeed = 0.0f;
+					klaustalked = true;
+					app->entityManager->GetPlayerEntity()->bestiary->klausUnlocked = true;
+					app->questManager->GetQuestById(5)->SetCompleted(true);
 				}
 			}
 		}

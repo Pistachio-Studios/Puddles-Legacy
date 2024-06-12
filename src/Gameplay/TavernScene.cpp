@@ -139,8 +139,17 @@ bool TavernScene::Update(float dt)
 	// OPTICK PROFILIN
 	ZoneScoped;
 
+	if (!app->questManager->GetQuestById(8)->IsCompleted() and app->questManager->GetQuestById(5)->IsCompleted())
+		app->questManager->GetQuestById(8)->SetActive(true);
+	if (!app->questManager->GetQuestById(9)->IsCompleted() and app->questManager->GetQuestById(5)->IsCompleted())
+		app->questManager->GetQuestById(9)->SetActive(true);
+
 	if (player->bestiary->cauldronUnlocked) {
-		app->questManager->GetQuestById(6)->SetCompleted(true);
+		app->questManager->GetQuestById(8)->SetCompleted(true);
+	}
+
+	if (player->bestiary->changedClassUnlocked) {
+		app->questManager->GetQuestById(9)->SetCompleted(true);
 	}
 
 	player->pbody->body->GetFixtureList()->SetSensor(true);
@@ -173,6 +182,8 @@ bool TavernScene::Update(float dt)
 		chooseWeapon = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "test", { (int)windowW / 2 - 955, (int)windowH / 2 - 540 }, this, chooseWeaponTex);
 		chooseSword = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 21, "Choose", { (int)windowW / 2 + 270, (int)windowH / 2 + 400, 200, 50 }, this);
 		chooseCetro = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 22, "Choose", { (int)windowW / 2 - 475, (int)windowH / 2 + 400, 200, 50 }, this);
+
+		player->bestiary->changedClassUnlocked = true;
 	}
 
 	if (chooseWeapon != nullptr) {
