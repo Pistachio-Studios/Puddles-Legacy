@@ -275,7 +275,7 @@ public:
 
 	float vida = 15.0f;
 	float maxVida = 15.0f;
-	float strength = 10.0f;
+	float strength = 12.0f;
 	float intelligence = 14.0f;
 	float defense;
 

@@ -89,7 +89,7 @@ public:
 	ParticleGenerator* paralyzedParticles = nullptr;
 	
 	float vida=12.0f;
-	float dano = 5.0f;
+	float dano = 6.0f;
 	float defense = 2.0f;
 	bool invencible = false;
 
