@@ -23,6 +23,7 @@ bool Intro::Enter()
 
 	// Load the intro video
 	app->videoPlayer->Start("Assets/Video/Intro/intro.webm");
+	music = app->audio->PlayMusic("Assets/Audio/Others/cinematic_music.ogg");
 
 	return true;
 }
@@ -75,6 +76,7 @@ bool Intro::Exit()
 // Called before quitting
 bool Intro::CleanUp()
 {
+	app->audio->CleanUp();
 	LOG("Freeing Intro");
 
 	return true;
