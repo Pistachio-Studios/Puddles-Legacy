@@ -85,7 +85,6 @@ bool Player::Start() {
 	combatFSM->AddState(new PlayerCombatBlockState("block"));
 
 	// Audios
-
 	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
 	swordSlashFx = app->audio->LoadFx(parameters.attribute("swordSlashFx").as_string());
 	firestaffFx = app->audio->LoadFx(parameters.attribute("fireStaffFx").as_string());
@@ -253,18 +252,6 @@ bool Player::Update(float dt)
 		app->render->DrawLine(METERS_TO_PIXELS(pbody->body->GetPosition().x), METERS_TO_PIXELS(pbody->body->GetPosition().y), METERS_TO_PIXELS(pbody->body->GetPosition().x) + pbody->body->GetLinearVelocity().x*10, METERS_TO_PIXELS(pbody->body->GetPosition().y) + + pbody->body->GetLinearVelocity().y * 10, 255, 255, 0);
 		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
 			freeCam = !freeCam;
-		}
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
-	{
-		if (currentClass == PlayerClass::KNIGHT)
-		{
-			currentClass = PlayerClass::WIZARD;
-		}
-		else
-		{
-			currentClass = PlayerClass::KNIGHT;
 		}
 	}
 
