@@ -207,7 +207,7 @@ bool ForestScene::Enter()
 	//app->tex->GetSize(img, texW, texH);
 
 	loseScreenTex = app->tex->Load("Assets/Textures/loseScreen.png"); 
-	winScreenTex = app->tex->Load("Assets/Textures/winScreenProvisional.png"); 
+	winScreenTex = app->tex->Load("Assets/Textures/winScreen.png"); 
 
 	bush = app->tex->Load("Assets/Maps/Forest-Scene/bush.PNG");
 
@@ -222,6 +222,9 @@ bool ForestScene::Enter()
 	puzzle3 = false;
 
 	player->bestiary->forestUnlocked = true;
+
+	winTrigger = app->physics->CreateRectangle(33630, 11524, 600, 200, bodyType::STATIC);
+	winTrigger->ctype = ColliderType::WINCONDITION;
 
 	return true;
 }
@@ -573,9 +576,14 @@ bool ForestScene::Update(float dt)
 	}
 
 
-
+	//SHORTCUT FINAL LEVEL
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
 		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(180*128), PIXEL_TO_METERS(113*128)), 0);
+	}
+
+	//SHORTCUT TREE FINAL SCENE
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
+		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(262 * 128), PIXEL_TO_METERS(111 * 128)), 0);
 	}
 	
 	//LOG("x: %i   y: %i", player->position.x, player->position.y);
@@ -597,15 +605,20 @@ bool ForestScene::Update(float dt)
 		}
 	}
 
-	if (!player->deadPlayer && enemyboss->dead) {
+	if (!player->deadPlayer && player->winCondition) {
 		app->render->camera.lerpSpeed = 0.0f;
 		if (winScreen == nullptr) {
 			winScreen = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "", { (int)windowW / 2 - 960, (int)windowH / 2 - 540 }, this, winScreenTex);
+			paused = true; 
 		}
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && winScreen != nullptr) {
+			paused = false;
+			player->vida = player->maxVida;
+			player->deadPlayer = false;
+			player->winCondition = false;
 			app->guiManager->RemoveGuiControl(winScreen);
 			winScreen = nullptr;
-			app->sceneManager->ChangeScene("tavernscene");
+			app->sceneManager->ChangeScene("credits");
 
 		}
 	}
