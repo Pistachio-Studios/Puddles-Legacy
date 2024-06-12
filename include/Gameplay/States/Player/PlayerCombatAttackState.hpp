@@ -58,6 +58,8 @@ public:
     }
     inline void Update(float dt) override
     {
+        GamePad& pad = app->input->pads[0];
+
         if(player->currentClass == PlayerClass::KNIGHT and player->mana > 10.0f)
         {
            
@@ -101,7 +103,7 @@ public:
             player->staffEntity->pbody->body->SetTransform(staffPos, player->lookingAngle);
             player->staffEntity->pbody->GetPosition(player->staffEntity->position.x, player->staffEntity->position.y);
 
-            if (app->input->GetMouseButtonDown(1))
+            if (app->input->GetMouseButtonDown(1) or pad.r2 > 0.0f)
             {
                 if (player->timerSword >= player->time)
                 {
