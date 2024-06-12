@@ -6,22 +6,22 @@
 	<audio />
 	<:anonymous />
 	<scene_manager>
-		<currentScene name="tavernscene" />
+		<currentScene name="townscene" />
 	</scene_manager>
 	<:anonymous />
 	<animation_manager />
 	<entitymanager>
-		<player x="635" y="718" />
+		<player x="2790" y="2016" />
 	</entitymanager>
 	<particleManager />
 	<lighting />
 	<guiManager />
 	<VideoPlayer />
-	<debugUI />
 	<dialog_manager />
 	<questmanager />
 	<UI />
+	<debugUI />
 	<renderer>
-		<camera x="309" y="-180" />
+		<camera x="-1921" y="-1477" />
 	</renderer>
 </game_state>

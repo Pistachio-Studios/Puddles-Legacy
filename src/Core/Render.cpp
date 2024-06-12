@@ -11,6 +11,8 @@
 #include <SDL_render.h>
 #include <tracy/Tracy.hpp>
 #include <imgui.h>
+#include <sstream>
+#include <regex>
 
 #define VSYNC true
 
@@ -462,39 +464,48 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 
 bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Color color) {
 
-	SDL_SetRenderTarget(renderer, overlayTarget);
+    SDL_SetRenderTarget(renderer, overlayTarget);
 
-	TTF_SetFontSize(app->render->font, h * 0.75);
+    TTF_SetFontSize(app->render->font, h * 0.75);
 
-	SDL_Surface* surface = TTF_RenderUTF8_Blended(app->render->font, text, color);
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	std::string textRaw = text;
+	std::string normalText = std::regex_replace(textRaw, std::regex("\\\\n"), "\n");
+
+    std::istringstream stream(normalText);
+    std::string line;
+    int lineNum = 0;
+    while (std::getline(stream, line)) {
+        SDL_Surface* surface = TTF_RenderUTF8_Blended(app->render->font, line.c_str(), color);
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+        uint scale = app->win->GetScale();
+
+        SDL_Rect rect;
+        rect.x = ((int)posx + w / 4) * scale;
+        rect.y = ((int)posy + lineNum * h) * scale; // Adjust the y position for each line
+
+        SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+
+        rect.w *= scale;
+        rect.h *= scale;
+
+        SDL_Rect dstrect = { rect.x,  rect.y, rect.w, rect.h };
+
+        SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
+        SDL_DestroyTexture(texture);
+        SDL_FreeSurface(surface);
+
+        lineNum++;
+    }
 
 	//Reset font size
 	TTF_SetFontSize(app->render->font, 25);
-
-	uint scale = app->win->GetScale();
-
-	SDL_Rect rect;
-	rect.x = ((int)posx + w / 4) * scale; //TODO: revisar este / 4 porque no lo entiendo muy bien
-	rect.y = ((int)posy) * scale;
-
-	SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-
-	rect.w *= scale;
-	rect.h *= scale;
-
-	SDL_Rect dstrect = { rect.x * scale,  rect.y * scale, rect.w * scale, rect.h * scale };
-
-	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
-
-	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);
 
 	SDL_SetRenderTarget(renderer, NULL);
 
 	return true;
 }
-
 // for now load camera's x and y
 bool Render::LoadState(pugi::xml_node node) {
 

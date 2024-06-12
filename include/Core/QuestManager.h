@@ -83,6 +83,9 @@ private:
 
 	std::unordered_map<int, Quest*> quests;
 
+	int globalPositionX = 1400;
+	int globalPositionY = 550;
+
 };
 
 #endif // __QUESTMANAGER_H__

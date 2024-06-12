@@ -77,7 +77,7 @@ public:
 	bool arnicaPlantCollected = false;
 
 	// Pag 4 attributes
-	bool klausUnlocked = true;
+	bool klausUnlocked = false;
 	bool bountyUnlocked = false;
 
 	// Pag 5 attributes
