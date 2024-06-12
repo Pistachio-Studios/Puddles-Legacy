@@ -254,6 +254,16 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 		 	//if (state != EntityState::DEAD and !invencible){
 			vida -= player->strength - (defense / 2);
 			damage->emiting = true;
+
+			if (player->stealLife) {
+				player->vida += player->stealLifeRatio;
+				if (player->vida >= 15.0f or player->vida == 15.0f)
+				{
+					player->vida = 15.0f;
+				}
+				LOG("Player steal life %f", player->vida);
+			}
+
 			if (vida <= 0.0f)
 			{
 				// AUDIO DONE boss death
@@ -265,11 +275,6 @@ void MiniSpider::OnCollision(PhysBody* physA, PhysBody* physB) {
 			else if (vida > 0.0f) {
 				app->audio->PlayFx(damageFx);
 				spiderDamage.Reset();
-
-				if (player->stealLife) {
-					player->vida += player->stealLifeRatio;
-					LOG("Player steal life %f", player->vida);
-				}
 
 				if (app->entityManager->GetPlayerEntity()->bleed) {
 					// 15% change to bleed

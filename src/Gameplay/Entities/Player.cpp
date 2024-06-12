@@ -507,7 +507,7 @@ bool Player::LoadState(pugi::xml_node& node)
 
 void Player::AbilitySword100() { // DONE
 	// Increase player strength +3
-	strength += 15.0f;
+	strength = 15.0f;
 }
 
 void Player::AbilitySword110() { // DONE

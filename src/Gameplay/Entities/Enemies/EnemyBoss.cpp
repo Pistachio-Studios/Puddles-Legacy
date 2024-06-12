@@ -274,6 +274,16 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//if (state != EntityState::DEAD and !invencible){
 		vida -= player->strength - (defense / 2);
 		damage->emiting = true;
+
+		if (player->stealLife) {
+			player->vida += player->stealLifeRatio;
+			if (player->vida >= 15.0f or player->vida == 15.0f)
+			{
+				player->vida = 15.0f;
+			}
+			LOG("Player steal life %f", player->vida);
+		}
+
 		if (vida <= 0.0f && !dead)
 		{
 			dead = true;
@@ -286,11 +296,6 @@ void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			app->audio->PlayFx(bossDamageFx);
 			bossDamage.Reset();
-
-			if (player->stealLife) {
-				player->vida += player->stealLifeRatio;
-				LOG("Player steal life %f", player->vida);
-			}
 
 			// TODO review this
 			bool bleedDamageDealt = false;
