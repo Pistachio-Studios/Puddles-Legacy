@@ -551,6 +551,50 @@ bool UI::Update(float dt)
 		};
 		
 		if (!openBestiary) {
+			// Unload the bestiary button textures
+			#pragma region UnloadButtons
+			app->guiManager->RemoveGuiControl(buttonPag1);
+			app->guiManager->RemoveGuiControl(buttonPag2);
+			app->guiManager->RemoveGuiControl(buttonPag3);
+			app->guiManager->RemoveGuiControl(buttonPag4);
+			app->guiManager->RemoveGuiControl(buttonPag5);
+			buttonPag1 = nullptr;
+			buttonPag2 = nullptr;
+			buttonPag3 = nullptr;
+			buttonPag4 = nullptr;
+			buttonPag5 = nullptr;
+
+			app->guiManager->RemoveGuiControl(buttonSwordAbility100);
+			app->guiManager->RemoveGuiControl(buttonSwordAbility110);
+			app->guiManager->RemoveGuiControl(buttonSwordAbility111);
+			app->guiManager->RemoveGuiControl(buttonSwordAbility112);
+			app->guiManager->RemoveGuiControl(buttonSwordAbility120);
+			app->guiManager->RemoveGuiControl(buttonSwordAbility122);
+			app->guiManager->RemoveGuiControl(buttonSwordAbility123);
+			buttonSwordAbility100 = nullptr;
+			buttonSwordAbility110 = nullptr;
+			buttonSwordAbility111 = nullptr;
+			buttonSwordAbility112 = nullptr;
+			buttonSwordAbility120 = nullptr;
+			buttonSwordAbility122 = nullptr;
+			buttonSwordAbility123 = nullptr;
+
+			app->guiManager->RemoveGuiControl(buttonStaffAbility100);
+			app->guiManager->RemoveGuiControl(buttonStaffAbility110);
+			app->guiManager->RemoveGuiControl(buttonStaffAbility111);
+			app->guiManager->RemoveGuiControl(buttonStaffAbility112);
+			app->guiManager->RemoveGuiControl(buttonStaffAbility120);
+			app->guiManager->RemoveGuiControl(buttonStaffAbility122);
+			app->guiManager->RemoveGuiControl(buttonStaffAbility123);
+			buttonStaffAbility100 = nullptr;
+			buttonStaffAbility110 = nullptr;
+			buttonStaffAbility111 = nullptr;
+			buttonStaffAbility112 = nullptr;
+			buttonStaffAbility120 = nullptr;
+			buttonStaffAbility122 = nullptr;
+			buttonStaffAbility123 = nullptr;
+			#pragma endregion UnloadButtons
+
 			if (!gameStarted) { // Skip the first play when the game starts
 				cleanedLoopBestiarioOpen = true;
 				app->render->DrawTextureLegacy(bestiarioClosed.texture, 0, 0, &bestiarioClosed.GetCurrentFrame(), 0);
