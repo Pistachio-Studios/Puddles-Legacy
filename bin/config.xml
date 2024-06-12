@@ -186,7 +186,7 @@
 		<tavernscene>
 			<map path="Assets/Maps/Tavern/" name="Tavern.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="1260" y="3535" texturepath="Assets/Textures/Player.png"  potionFx="Assets/Audio/Fx/Player/Potion.ogg" stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg" swordSlashFx="Assets/Audio/Fx/Player/SwordSlash.ogg" fireStaffFx="Assets/Audio/Fx/Player/FireStaff.ogg" deathSabrinaFx="Assets/Audio/Fx/Player/Death.ogg" damagedSabrinaFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg" blockFx="Assets/Audio/Fx/Player/Block.ogg" />
+			<player x="1260" y="3535" texturepath="Assets/Textures/Player.png"/>
 			<npcs>
 				<npc x="1620" y="2300" type="2" texturepath="Assets/Textures/NoDialogNpcs/whiteCat.PNG" />
 				<npc x="1360" y="2700" type="2" texturepath="Assets/Textures/NoDialogNpcs/redPanda.PNG" />
