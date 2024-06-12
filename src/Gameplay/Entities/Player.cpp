@@ -429,6 +429,11 @@ bool Player::SaveState(pugi::xml_node& node) {
 	bestiaryNode.append_child("pag4").append_attribute("klausUnlocked").set_value(bestiary->klausUnlocked);
 	bestiaryNode.append_child("pag4").append_attribute("bountyUnlocked").set_value(bestiary->bountyUnlocked);
 
+	pugi::xml_node missionNode = playerAttributes.append_child("missionFases");
+	missionNode.append_attribute("forestUnlocked").set_value(forestUnlocked);
+	missionNode.append_attribute("cauldronUnlocked").set_value(cauldronUnlocked);
+	missionNode.append_attribute("changedClassUnlocked").set_value(changedClassUnlocked);
+
 	return true;
 }
 
@@ -491,6 +496,11 @@ bool Player::LoadState(pugi::xml_node& node)
 	// Pag 4 attributes
 	bestiary->klausUnlocked = bestiaryNode.child("pag4").attribute("klausUnlocked").as_bool();
 	bestiary->bountyUnlocked = bestiaryNode.child("pag4").attribute("bountyUnlocked").as_bool();
+
+	//MISSION FASES LOAD
+	forestUnlocked = playerNode.child("missionFases").attribute("forestUnlocked").as_bool();
+	cauldronUnlocked = playerNode.child("missionFases").attribute("cauldronUnlocked").as_bool();
+	changedClassUnlocked = playerNode.child("missionFases").attribute("changedClassUnlocked").as_bool();
 
 	return true; 
 }
