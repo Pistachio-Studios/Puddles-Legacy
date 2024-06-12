@@ -2,6 +2,7 @@
 #include "Utils/Log.h"
 #include "Gameplay/Entities/Player.h"
 #include "Core/App.h"
+#include "Core/Audio.h"
 #include "Core/EntityManager.h"
 
 // Constructor
@@ -23,6 +24,8 @@ void CeleritaPotion::Use() {
     LOG("Using ", name, ". ", description);
     if(quantity > 0 and player != nullptr)
     {
+
+        app->audio->PlayFx(player->potionFx);
         quantity--;
         if(player->maxSpeed <= 10)player->maxSpeed *= 2;
         if(player->moveForce <= 2)player->moveForce *= 2;

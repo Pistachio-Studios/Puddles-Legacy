@@ -4,6 +4,7 @@
 #include "Core/Audio.h"
 #include "Core/Window.h"
 #include "Core/Textures.h"
+#include "Utils/Easings.h"
 
 GuiControlPopUp::GuiControlPopUp(uint32_t id, SDL_Rect bounds, SDL_Texture* texture) : GuiControl(GuiControlType::POPUP, id)
 {
@@ -23,10 +24,14 @@ GuiControlPopUp::~GuiControlPopUp()
 
 bool GuiControlPopUp::Update(float dt)
 {
+	Easings easings = Easings();
+	float controlEase = easings.easeInQuad(controlEaseTimer.ReadMSec() / 500);
+
 	app->win->GetWindowSize(windowW, windowH);
 
+	//TODO pre
 	if (texture1) {
-		app->render->DrawTexture(texture1, posX, posY, 0, 0);
+		app->render->DrawTextureLegacy(texture1, (posX + windowW / 2) - (windowW * controlEase) / 2, (posY + windowH / 2) - (windowH * controlEase) / 2, 0, 0, 0, controlEase);
 	}
 	else {
 		app->render->DrawRectangle({ static_cast<int>(windowW / 2 - 200), static_cast<int>(windowH / 2 - 50), 350,300 }, 192, 103, 252, 240);

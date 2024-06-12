@@ -6,6 +6,7 @@
 
 #include "Core/Map.h"
 #include "Core/Animation.h"
+#include "Utils/Easings.h"
 
 GuiControlLabel::GuiControlLabel(uint32_t id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -20,6 +21,9 @@ GuiControlLabel::~GuiControlLabel()
 
 bool GuiControlLabel::Update(float dt)
 {
+	Easings easings = Easings();
+	float controlEase = easings.easeInQuad(controlEaseTimer.ReadMSec() / 500);
+
 	//L15: DONE 4: Draw the button according the GuiControl State
 	/* switch (state)
 	{
@@ -38,7 +42,7 @@ bool GuiControlLabel::Update(float dt)
 	} */
 
 
-	if(texture != nullptr)app->render->DrawTexture(texture, bounds.x,bounds.y, &section, 0.0f);
+	if(texture != nullptr)app->render->DrawTexture(texture, bounds.x * controlEase,bounds.y * controlEase, &section, 0.0f);
 	app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
 
 	return false;

@@ -130,11 +130,34 @@ public:
 
 	uint windowW, windowH;
 
+	bool gameStarted = true;
 	bool openBestiary = false;
 	bool exitPressed = false;
 	bool mainMenuPressed = false;
 
+	bool PotionCeleritaAdded = false;
+	bool PotionEtherAdded = false;
+	bool PotionOblitiusAdded = false;
+	bool PotionVitaAdded = false;
+
+	int PotionCeleritaQuantity = 0;
+	int PotionEtherQuantity = 0;
+	int PotionOblitiusQuantity = 0;
+	int PotionVitaQuantity = 0;
+
+	Timer potionPopUpTimer;
+
 	Timer potionEaseTimer;
+
+	Animation bestiarioOpen, bestiarioClosed;
+	Animation* currentAnim = nullptr;
+
+	bool cleanedLoopBestiarioOpen = false;
+	bool cleanedLoopBestiarioClosed = false;
+
+	bool isAnimating = false;
+	bool openingAnimation = false;
+	bool closingAnimation = false;
 };
 
 #endif // __UI_H__

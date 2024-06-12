@@ -23,9 +23,9 @@ public:
 
 	int currentFrame = 0.0f;
 	int totalFrames = 0;
+	int loopCount = 0;
 
 private:
-	int loopCount = 0;
 	int pingpongCount = 0;
 	int pingpongDirection = 1;
 	float timeLeft = 0.0f; //tiempo de visualizaci?n que le queda al frame actual

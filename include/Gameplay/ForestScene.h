@@ -47,18 +47,19 @@ public:
 
 	void RenderGUI();
 
+	void generateRandomPotion();
+
 public:
 	bool winCondition = false;
 	Player* player;
 	EnemyBoss* enemyboss;
-	MiniSpider* minispider;
-	Wasp* wasp;
 
 private:
 
 private:
 	SDL_Texture* img;
 	SDL_Texture* loseScreenTex;
+	SDL_Texture* winScreenTex;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
@@ -67,8 +68,8 @@ private:
 	GuiControlLabel* gcLives;
 	GuiControlLabel* gcTime;
 	GuiControlPopUp* loseScreen = nullptr;
+	GuiControlPopUp* winScreen = nullptr;
 
-	bool paused = false;
 	bool exitPressed = false;
 
 	Timer* playingTime;
@@ -83,10 +84,15 @@ private:
 
 	int puzzleFx;
 
-	PhysBody* bushPbody;
+	PhysBody* bushPbody1;
+	PhysBody* bushPbody2;
+	PhysBody* bushPbody3;
+	PhysBody* bushPbody4;
 	SDL_Texture* bush = nullptr;
 	bool door1Closed = false;
 	bool door3Closed = false;
+	bool doorBossClosed = false;
+	bool doorBoss2Closed = false;
 	bool puzzle1 = false;
 	bool puzzle2 = false;
 	bool puzzle3 = false;

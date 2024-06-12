@@ -23,6 +23,8 @@ public:
 public:
 	bool isPressed = false;
 	bool isOpen = false; // Changed from 'checked' to 'isOpen'
+	//easings
+	Timer controlEaseTimer;
 
 private:
 	std::list<GuiControlButton*> options;

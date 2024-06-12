@@ -36,32 +36,32 @@
 		<level1scene>
 			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" />
+			<player x="672" y="2032" texturepath="Assets/Textures/Player.png"  potionFx="Assets/Audio/Fx/Player/Potion.ogg" stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg" swordSlashFx="Assets/Audio/Fx/Player/SwordSlash.ogg" fireStaffFx="Assets/Audio/Fx/Player/FireStaff.ogg" deathSabrinaFx="Assets/Audio/Fx/Player/Death.ogg" damagedSabrinaFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg" blockFx="Assets/Audio/Fx/Player/Block.ogg" />
 			<enemies />
 		</level1scene>
 		<forestscene>
 			<map path="Assets/Maps/Forest-Scene/" name="bosque.tmx" puzzleFxPath="Assets/Audio/Others/puzzleFx.ogg" />
 			<camera x="-32545" y="-4610" />
-			<player x="33536" y="5248" texturepath="Assets/Textures/Player.png" />
+			<player x="33536" y="5248" texturepath="Assets/Textures/Player.png"  potionFx="Assets/Audio/Fx/Player/Potion.ogg" stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg" swordSlashFx="Assets/Audio/Fx/Player/SwordSlash.ogg" fireStaffFx="Assets/Audio/Fx/Player/FireStaff.ogg" deathSabrinaFx="Assets/Audio/Fx/Player/Death.ogg" damagedSabrinaFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg" blockFx="Assets/Audio/Fx/Player/Block.ogg" />
 			<assets>
-				<button x=" 3840" y ="5632" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
-				<button x=" 3840" y ="4992" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
-				<button x=" 4864" y ="4480" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
-				<button x=" 5504" y ="5504" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
-				<button x=" 4352" y ="6016" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
-				<button x=" 5376" y ="4736" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png"/>
-				<button x=" 27264" y ="12160" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
-				<button x=" 28544" y ="12544" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
-				<button x=" 27392" y ="13312" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
-				<button x=" 28416" y ="14720" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
-				<button x=" 27904" y ="11520" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png"/>
-				<button x=" 896" y ="9216" type="3" colour="1" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
-				<button x=" 5376" y ="9216" type="3" colour="2" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
-				<ball x="2816" y= "13568" colour="1" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
-				<ball x="3968" y= "13568" colour="2" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png"/>
+				<button x=" 3840" y="5632" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png" />
+				<button x=" 3840" y="4992" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png" />
+				<button x=" 4864" y="4480" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png" />
+				<button x=" 5504" y="5504" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png" />
+				<button x=" 4352" y="6016" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png" />
+				<button x=" 5376" y="4736" type="1" buttonTexPath="Assets/Textures/baldosa.png" buttonPisadoTexPath="Assets/Textures/baldosa_pisada.png" />
+				<button x=" 24704" y="11392" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png" />
+				<button x=" 25984" y="11776" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png" />
+				<button x=" 24832" y="12544" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png" />
+				<button x=" 25856" y="13952" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png" />
+				<button x=" 25344" y="10752" type="2" buttonVerdeTexPath="Assets/Textures/baldosaVerde.png" buttonAzulTexPath="Assets/Textures/baldosaAzul.png" buttonLilaTexPath="Assets/Textures/baldosaLila.png" buttonRojoTexPath="Assets/Textures/baldosaRoja.png" buttonNaranjaTexPath="Assets/Textures/baldosaNaranja.png" />
+				<button x=" 896" y="9216" type="3" colour="1" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png" />
+				<button x=" 5376" y="9216" type="3" colour="2" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png" />
+				<ball x="2816" y="13568" colour="1" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png" />
+				<ball x="3968" y="13568" colour="2" puzzleTexPath="Assets/Maps/Forest-Scene/Puzzle_Piso3.png" />
 			</assets>
 			<enemies>
-				<EnemyBoss x="25088" y="11515" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
+				<EnemyBoss x="27648" y="11515" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
 				<MiniSpider x="1021" y="2560" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
 				<MiniSpider x="4224" y="5632" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
 				<MiniSpider x="5246" y="4736" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
@@ -155,7 +155,7 @@
 		<townscene>
 			<map path="Assets/Maps/Town-Scene/" name="Town.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="335" y="2700" texturepath="Assets/Textures/Player.png" />
+			<player x="335" y="2700" texturepath="Assets/Textures/Player.png"  potionFx="Assets/Audio/Fx/Player/Potion.ogg" stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg" swordSlashFx="Assets/Audio/Fx/Player/SwordSlash.ogg" fireStaffFx="Assets/Audio/Fx/Player/FireStaff.ogg" deathSabrinaFx="Assets/Audio/Fx/Player/Death.ogg" damagedSabrinaFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg" blockFx="Assets/Audio/Fx/Player/Block.ogg" />
 			<npcs>
 				<npc x="2100" y="2350" type="2" texturepath="Assets/Textures/NoDialogNpcs/blackCat.PNG" />
 				<npc x="2250" y="1250" type="2" texturepath="Assets/Textures/NoDialogNpcs/bunny.PNG" />
@@ -186,7 +186,7 @@
 		<tavernscene>
 			<map path="Assets/Maps/Tavern/" name="Tavern.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="1260" y="3535" texturepath="Assets/Textures/Player.png" />
+			<player x="1260" y="3535" texturepath="Assets/Textures/Player.png"  potionFx="Assets/Audio/Fx/Player/Potion.ogg" stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg" swordSlashFx="Assets/Audio/Fx/Player/SwordSlash.ogg" fireStaffFx="Assets/Audio/Fx/Player/FireStaff.ogg" deathSabrinaFx="Assets/Audio/Fx/Player/Death.ogg" damagedSabrinaFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg" blockFx="Assets/Audio/Fx/Player/Block.ogg" />
 			<npcs>
 				<npc x="1620" y="2300" type="2" texturepath="Assets/Textures/NoDialogNpcs/whiteCat.PNG" />
 				<npc x="1360" y="2700" type="2" texturepath="Assets/Textures/NoDialogNpcs/redPanda.PNG" />
@@ -198,8 +198,7 @@
 			<menu FxPath="Assets/Audio/Fx/UI/UIButton.ogg" />
 			<map path="Assets/Maps/Tutorial-Level/" name="Playa_tutorial.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg" swordSlashFx="Assets/Audio/Fx/Player/SwordSlash.ogg" fireStaffFx="Assets/Audio/Fx/Player/FireStaff.ogg" deathSabrinaFx="Assets/Audio/Fx/Player/Death.ogg" damagedSabrinaFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg" blockFx="Assets/Audio/Fx/Player/Block.ogg"/>
-			
+			<player x="672" y="2032" texturepath="Assets/Textures/Player.png" potionFx="Assets/Audio/Fx/Player/Potion.ogg" stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg" swordSlashFx="Assets/Audio/Fx/Player/SwordSlash.ogg" fireStaffFx="Assets/Audio/Fx/Player/FireStaff.ogg" deathSabrinaFx="Assets/Audio/Fx/Player/Death.ogg" damagedSabrinaFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg" blockFx="Assets/Audio/Fx/Player/Block.ogg" />
 			<enemies>
 				<EnemyBoss x="300" y="1800" BossDamagePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDamage.ogg" BossAttackPath="Assets/Audio/Fx/Enemies/BossEnemy/BossAttack.ogg" BossDiePath="Assets/Audio/Fx/Enemies/BossEnemy/BossDie.ogg" />
 				<MiniSpider x="800" y="2050" damageFxPath="Assets/Audio/Fx/Enemies/MiniSpider/damageFx.ogg" attackFxPath="Assets/Audio/Fx/Enemies/MiniSpider/attackFx.ogg" dieFxPath="Assets/Audio/Fx/Enemies/MiniSpider/dieFx.ogg" />
@@ -231,7 +230,7 @@
 		<testscene>
 			<map path="Assets/Maps/Level-1/" name="Level-1-map.tmx" />
 			<camera x="-530" y="-1949" />
-			<player x="672" y="2032" texturepath="Assets/Textures/playerx128-test.png" />
+			<player x="672" y="2032" texturepath="Assets/Textures/playerx128-test.png"  potionFx="Assets/Audio/Fx/Player/Potion.ogg" stepsFx="Assets/Audio/Fx/Player/Footsteps.ogg" swordSlashFx="Assets/Audio/Fx/Player/SwordSlash.ogg" fireStaffFx="Assets/Audio/Fx/Player/FireStaff.ogg" deathSabrinaFx="Assets/Audio/Fx/Player/Death.ogg" damagedSabrinaFx="Assets/Audio/Fx/Player/DamagedPlayer.ogg" blockFx="Assets/Audio/Fx/Player/Block.ogg" />
 			<enemies />
 		</testscene>
 		<particle_demo />

@@ -4,6 +4,7 @@
 #include "Core/Window.h"
 #include "Core/GuiControlCheckbox.h"
 #include "Core/Textures.h"
+#include "Utils/Easings.h"
 
 GuiControlCheckbox::GuiControlCheckbox(uint32 id, const char* text, SDL_Rect bounds) : GuiControl(GuiControlType::CHECKBOX, id)
 {
@@ -25,6 +26,9 @@ GuiControlCheckbox::~GuiControlCheckbox()
 
 bool GuiControlCheckbox::Update(float dt)
 {
+	Easings easings = Easings();
+	float controlEase = easings.easeInQuad(controlEaseTimer.ReadMSec() / 500);
+
 	int textureWidth, textureHeight;
 	SDL_QueryTexture(texture, NULL, NULL, &textureWidth, &textureHeight);
 	int textureSelectedWidth, textureSelectedHeight;
@@ -51,7 +55,7 @@ bool GuiControlCheckbox::Update(float dt)
 		case GuiControlState::PRESSED:
 			app->render->DrawTexture(texture, bounds.x + bounds.w / 2 - textureWidth / 2 + 550, bounds.y + bounds.h / 2 - textureHeight / 2);
 			if (checked) {
-				app->render->DrawTexture(textureSelected, bounds.x + bounds.w / 2 - textureSelectedWidth / 2 + 550, bounds.y + bounds.h / 2 - textureSelectedHeight / 2);
+				app->render->DrawTexture(textureSelected, (bounds.x + bounds.w / 2 - textureSelectedWidth / 2 + 550) * controlEase, (bounds.y + bounds.h / 2 - textureSelectedHeight / 2)*controlEase);
 			}
 			break;
 		}

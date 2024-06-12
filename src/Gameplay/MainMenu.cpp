@@ -24,19 +24,19 @@ bool MainMenu::Enter()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	SDL_Rect playPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 50), 340,75};
+	SDL_Rect playPos = { static_cast<int>(windowW / 2 - 830), static_cast<int>(windowH / 2 - 200), 340,75};
 	playButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "  Play  ", playPos, this);
 
-	SDL_Rect loadPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 150), 340,75};
+	SDL_Rect loadPos = { static_cast<int>(windowW / 2 - 845), static_cast<int>(windowH / 2 - 100), 340,75};
 	loadButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 23, "  Load  ", loadPos, this);
 
-	SDL_Rect optionsPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 250), 340,75};
+	SDL_Rect optionsPos = { static_cast<int>(windowW / 2 - 860), static_cast<int>(windowH / 2 - 0), 340,75};
 	optionsButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, " Options ", optionsPos, this);
 
-	SDL_Rect creditsPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 350), 340,75};
+	SDL_Rect creditsPos = { static_cast<int>(windowW / 2 - 850), static_cast<int>(windowH / 2 - -100), 340,75};
 	creditsButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 24, " Credits ", creditsPos, this);
 
-	SDL_Rect exitPos = { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 450), 340,75};
+	SDL_Rect exitPos = { static_cast<int>(windowW / 2 - 830), static_cast<int>(windowH / 2 - -200), 340,75};
 	exitButton = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "  Exit  ", exitPos, this);
 
 	gameTitle = app->tex->Load(parameters.child("gameTitle").attribute("texturepath").as_string());
@@ -69,7 +69,7 @@ bool MainMenu::Update(float dt)
 
 	app->render->DrawTexture(gameTitle, 0, 0);
 
-	app->render->DrawText("v1.0.0", windowW - 150, windowH - 150, 25, 25, { 255, 255, 255, 255 });
+	app->render->DrawText("v1.0.0", windowW - 150, windowH - 100, 25, 25, { 255, 255, 255, 255 });
 
 	return true;
 }
@@ -167,7 +167,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 
 	switch (control->id) {
 	case 1:
-		app->sceneManager->ChangeScene("tutorialscene");
+		app->sceneManager->ChangeScene("intro");
         app->guiManager->RemoveGuiControl(crossOButton);
         crossOButton = nullptr;
         app->guiManager->RemoveGuiControl(music);
@@ -425,18 +425,25 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			loadButton->state = GuiControlState::DISABLED;
 
 			// Create the popUp
-			popUpLoad = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", { 0,0,0,0 }, this);
+			SDL_Rect popUpOptionsPos;
+			popUpOptionsPos.w = 1444;
+			popUpOptionsPos.h = 952;
+			popUpOptionsPos.x = (windowW - popUpOptionsPos.w) / 2;
+			popUpOptionsPos.y = (windowH - popUpOptionsPos.h) / 2;
+
+			// Create the popUp
+			popUpLoad = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", popUpOptionsPos, this, settingsTexture);
 
 			// Create the cross button
 			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 100), static_cast<int>(windowH / 2 - 25), 30, 30 };
 			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
 
 			// Create the saves slots
-			saveSlot1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 25, "Save Slot 1", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 50), 150, 20 }, this);
-			saveSlot2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 26, "Save Slot 2", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 150), 150, 20 }, this);
-			saveSlot3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 27, "Save Slot 3", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 250), 150, 20 }, this);
-			saveSlot4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 28, "Save Slot 4", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 350), 150, 20 }, this);
-			saveSlot5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 29, "Save Slot 5", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 450), 150, 20 }, this);
+			saveSlot1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 25, "Save Slot 1", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 - 175), 150, 60 }, this);
+			saveSlot2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 26, "Save Slot 2", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 - 75), 150, 60 }, this);
+			saveSlot3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 27, "Save Slot 3", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 25), 150, 60 }, this);
+			saveSlot4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 28, "Save Slot 4", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 125), 150, 60 }, this);
+			saveSlot5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 29, "Save Slot 5", { static_cast<int>(windowW / 2 - 170), static_cast<int>(windowH / 2 + 225), 150, 60 }, this);
 		}
 		break;
 	case 24:
@@ -468,6 +475,9 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 				LOG("Creating save_game_1.xml file");
 				app->SaveRequest();
 			}
+
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
 		}
 		break;
 	case 26:
@@ -495,6 +505,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 				LOG("Creating save_game_2.xml file");
 				app->SaveRequest();
 			}
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
 		}
 		break;
 	case 27:
@@ -522,6 +534,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 				LOG("Creating save_game_3.xml file");
 				app->SaveRequest();
 			}
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
 		}
 		break;
 	case 28:
@@ -549,6 +563,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 				LOG("Creating save_game_4.xml file");
 				app->SaveRequest();
 			}
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
 		}
 		break;
 	case 29:
@@ -576,6 +592,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 				LOG("Creating save_game_5.xml file");
 				app->SaveRequest();
 			}
+			app->guiManager->RemoveGuiControl(popUpLoad);
+			popUpLoad = nullptr;
 		}
 		break;
 	}

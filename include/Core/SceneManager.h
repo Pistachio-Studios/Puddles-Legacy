@@ -12,7 +12,8 @@ enum TRANSITION_TYPE
 {
     NONE,
     FADE_TO_BLACK,
-    SWEEP
+    SWEEP,
+    LOADING_SCREEN
 };
 
 class SceneManager : public Module
@@ -50,7 +51,7 @@ public:
 
     Scene* FindScene(SString sceneName) const;
 
-    void ChangeScene(SString sceneName, float frames = 60, TRANSITION_TYPE type = TRANSITION_TYPE::FADE_TO_BLACK);
+    void ChangeScene(SString sceneName, float frames = 60, TRANSITION_TYPE type = TRANSITION_TYPE::LOADING_SCREEN);
 
     Scene* GetCurrentScene();
 
@@ -81,6 +82,12 @@ private:
         SDL_Rect screenRect;
 
     TRANSITION_TYPE transitionType;
+
+    DynArray<SDL_Texture*> loadingTextures;
+
+    int currentLoadingTexture = 0;
+
+    const int NUMBER_OF_LOADING_TEXTURES = 8;
 };
 
 #endif // !__SCENE_MANAGER_H__

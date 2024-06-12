@@ -59,7 +59,8 @@ bool Player::Start() {
 
 	dashTimer = Timer();
 
-	//texture = app->tex->Load("Assets/Textures/playerx128-test.png");
+	texture = app->tex->Load("Assets/Textures/playerx128-test.png");
+	texture1 = app->tex->Load("Assets/Textures/sombraSabrina.png");
 
 	pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::DYNAMIC);
 	pbody->listener = this;
@@ -87,16 +88,16 @@ bool Player::Start() {
 	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
 	swordSlashFx = app->audio->LoadFx(parameters.attribute("swordSlashFx").as_string());
 	firestaffFx = app->audio->LoadFx(parameters.attribute("fireStaffFx").as_string());
-	deathSabrinaFx = app->audio->LoadFx(parameters.attribute("deathSabrinaFx").as_string());
 	damagedSabrinaFx = app->audio->LoadFx(parameters.attribute("damagedSabrinaFx").as_string());
 	blockFx = app->audio->LoadFx(parameters.attribute("blockFx").as_string());
+	potionFx = app->audio->LoadFx(parameters.attribute("potionFx").as_string());
 
 	//Anims
 	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");
-	SabrinaEspadaIdle.speed = 2.0f;
+	SabrinaEspadaIdle.speed = 0.5f;
 
 	SabrinaCetroIdle = *app->animationManager->GetAnimByName("SabrinaCetroIdle");
-	SabrinaCetroIdle.speed = 2.0f;
+	SabrinaCetroIdle.speed = 1.0f;
 
 	SabrinaEspadaMovDelante = *app->animationManager->GetAnimByName("SabrinaEspadaCaminar_delante");
 	SabrinaEspadaMovDelante.speed = 2.0f;
@@ -185,7 +186,7 @@ bool Player::Update(float dt)
 
 	//CHEATS
 	if (godMode) {
-		vida = 10.0f;
+		vida = 15.0f;
 		mana = 100.0f;
 	}
 	if (ghostMode) {
@@ -209,6 +210,8 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 46;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
 
+	shadowPosition = {position.x - 20, position.y + 150};
+
 	movementFSM->Update(dt);
 	combatFSM->Update(dt);
 
@@ -219,10 +222,13 @@ bool Player::Update(float dt)
 	//	vida = maxVida;
 	//}
 
-	app->render->DrawTexture(texture, position.x - 15, position.y - 25);
+	//app->render->DrawTexture(texture, position.x - 15, position.y - 25);
 	damage->position = { position.x + 46, position.y + 64};
 
 	//Animations
+	SDL_Rect currentFrame = currentAnim->GetCurrentFrame();
+	int textureX = position.x - (currentFrame.w / 2) - 15;
+	int textureY = position.y - (currentFrame.h / 2) - 25;
 	//Renderizar la animación actual
 	if (currentAnim != nullptr) {
 		app->render->DrawTexture(currentAnim->texture, position.x - 40, position.y - 80, &currentAnim->GetCurrentFrame(), 1.0f, 0.0f, 1.0f, 3, flip);
@@ -231,7 +237,7 @@ bool Player::Update(float dt)
 		app->render->DrawTexture(texture, position.x - 40, position.y - 80);
 	}
 
-	app->render->DrawTexture(texture, position.x - 40, position.y - 80);
+	app->render->DrawTexture(texture1, shadowPosition.x, shadowPosition.y);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 
@@ -294,7 +300,14 @@ bool Player::Update(float dt)
 	if (vida <= 0) {
 		vida = 0.0f;
 		deadPlayer = true;
-		app->audio->PlayFx(deathSabrinaFx);
+	}
+
+	experienceToNextLevel = level * 50;
+	if (currentExperience >= experienceToNextLevel and level <= levelCap)
+	{
+		currentExperience -= experienceToNextLevel;
+		level++;
+		abilityPoints++;
 	}
 
 	return true;
@@ -324,6 +337,7 @@ void Player::DrawImGui()
 	ImGui::Text("dash timer: %f", dashTimer.ReadMSec());
 
 	ImGui::Text("Player level: %d", level);
+	ImGui::Text("Player experience: %d", currentExperience);
 
 	ImGui::Text("Player Strength: %f", strength);
 	ImGui::Text("Player Intelligence: %f", intelligence);
@@ -341,14 +355,14 @@ void Player::DrawImGui()
 			level--;
 	}
 
-	ImGui::Text("Player abylity points: %d", abylityPoints);
+	ImGui::Text("Player abylity points: %d", abilityPoints);
 	
 	if (ImGui::Button("Add ability Point"))
-		abylityPoints++;
+		abilityPoints++;
 	ImGui::SameLine();
 	if (ImGui::Button("Remove ability Point")) {
-		if (abylityPoints > 0)
-			abylityPoints--;
+		if (abilityPoints > 0)
+			abilityPoints--;
 	}
 	ImGui::Separator();
 	ImGui::Text("Player Cheats");

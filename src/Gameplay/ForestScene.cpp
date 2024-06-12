@@ -21,6 +21,7 @@
 #include "Utils/SString.h"
 #include "Utils/Timer.h"
 #include "Utils/Log.h"
+#include "Core/QuestManager.h"
 
 
 #include <box2d/b2_body.h>
@@ -206,6 +207,7 @@ bool ForestScene::Enter()
 	//app->tex->GetSize(img, texW, texH);
 
 	loseScreenTex = app->tex->Load("Assets/Textures/loseScreen.png"); 
+	winScreenTex = app->tex->Load("Assets/Textures/winScreenProvisional.png"); 
 
 	bush = app->tex->Load("Assets/Maps/Forest-Scene/bush.PNG");
 
@@ -213,11 +215,40 @@ bool ForestScene::Enter()
 
 	door1Closed = false;
 	door3Closed = false;
+	doorBossClosed = false;
+	doorBoss2Closed = false;
 	puzzle1 = false;
 	puzzle2 = false;
 	puzzle3 = false;
 
+	player->bestiary->forestUnlocked = true;
+
 	return true;
+}
+
+void ForestScene::generateRandomPotion() {
+	int randomValue = rand() % 3;
+	SString potionName = "";
+	switch (randomValue)
+	{
+	case 0:
+		potionName = "Vita Potion";
+		break;
+	case 1:
+		potionName = "Celerita Potion";
+		break;
+	case 2:
+		potionName = "Ether Potion";
+		break;
+	case 3:
+		potionName = "Oblitius Potion";
+		break;
+	}
+
+	if (player->inventory.HasItem(potionName.GetString()))
+	{
+		player->inventory.GetItem(potionName.GetString())->quantity++;
+	}
 }
 
 // Called each loop iteration
@@ -234,6 +265,160 @@ bool ForestScene::Update(float dt)
 {
 	// OPTICK PROFILIN
 	ZoneScoped;
+
+	if (player->bestiary->forestUnlocked) {
+		app->questManager->GetQuestById(7)->SetCompleted(true);
+	}
+
+	#pragma region Quests
+	Quest* exploreForestQuest = app->questManager->GetQuestById(10);
+	exploreForestQuest->SetCompletionAction([=, this]() -> bool {
+		static bool explore;
+		int totalObjectives = 8; // total number of objectives
+		int completedObjectives = 0; // completed objectives
+
+		static bool enemy1KilledFlag = false;
+		static bool enemy2KilledFlag = false;
+		static bool enemy3KilledFlag = false;
+		static bool arnicaPlantCollectedFlag = false;
+		static bool comfreyPlantCollectedFlag = false;
+		static bool hawthornPlantCollectedFlag = false;
+		static bool witchhazelPlantCollectedFlag = false;
+		static bool hepaticaPlantCollectedFlag = false;
+		
+		if(player->bestiary->enemy1Killed && !enemy1KilledFlag) {
+			completedObjectives++;
+			enemy1KilledFlag = true;
+		}
+		if(player->bestiary->enemy2Killed && !enemy2KilledFlag) {
+			completedObjectives++;
+			enemy2KilledFlag = true;
+		}
+		if(player->bestiary->enemy3Killed && !enemy3KilledFlag) {
+			completedObjectives++;
+			enemy3KilledFlag = true;
+		}
+		if(player->bestiary->arnicaPlantCollected && !arnicaPlantCollectedFlag) {
+			completedObjectives++;
+			arnicaPlantCollectedFlag = true;
+		}
+		if(player->bestiary->comfreyPlantCollected && !comfreyPlantCollectedFlag) {
+			completedObjectives++;
+			comfreyPlantCollectedFlag = true;
+		}
+		if(player->bestiary->hawthornPlantCollected && !hawthornPlantCollectedFlag) {
+			completedObjectives++;
+			hawthornPlantCollectedFlag = true;
+		}
+		if(player->bestiary->witchhazelPlantCollected && !witchhazelPlantCollectedFlag) {
+			completedObjectives++;
+			witchhazelPlantCollectedFlag = true;
+		}
+		if(player->bestiary->hepaticaPlantCollected && !hepaticaPlantCollectedFlag) {
+			completedObjectives++;
+			hepaticaPlantCollectedFlag = true;
+		}
+
+		// Calculate the completion value based on the percentage of completed objectives
+		exploreForestQuest->AddCompletionValue((completedObjectives * 100) / totalObjectives);
+
+		// Check if all objectives are completed
+		if(completedObjectives == totalObjectives)
+		{
+			explore = true;
+			LOG("Quest completed: %s", app->questManager->GetQuestById(10)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+
+	if (!app->questManager->GetQuestById(10)->IsCompleted() and app->questManager->GetQuestById(7)->IsCompleted())
+		exploreForestQuest->SetActive(true);
+
+	Quest* collectItemsQuest = app->questManager->GetQuestById(11);
+	collectItemsQuest->SetCompletionAction([=, this]() -> bool {
+		static bool collect;
+		int totalObjectives = 5; // total number of objectives
+		int completedObjectives = 0; // completed objectives
+
+		static bool arnicaPlantCollectedFlag = false;
+		static bool comfreyPlantCollectedFlag = false;
+		static bool hawthornPlantCollectedFlag = false;
+		static bool witchhazelPlantCollectedFlag = false;
+		static bool hepaticaPlantCollectedFlag = false;
+
+		if(player->bestiary->arnicaPlantCollected && !arnicaPlantCollectedFlag) {
+			completedObjectives++;
+			arnicaPlantCollectedFlag = true;
+		}
+		if(player->bestiary->comfreyPlantCollected && !comfreyPlantCollectedFlag) {
+			completedObjectives++;
+			comfreyPlantCollectedFlag = true;
+		}
+		if(player->bestiary->hawthornPlantCollected && !hawthornPlantCollectedFlag) {
+			completedObjectives++;
+			hawthornPlantCollectedFlag = true;
+		}
+		if(player->bestiary->witchhazelPlantCollected && !witchhazelPlantCollectedFlag) {
+			completedObjectives++;
+			witchhazelPlantCollectedFlag = true;
+		}
+		if(player->bestiary->hepaticaPlantCollected && !hepaticaPlantCollectedFlag) {
+			completedObjectives++;
+			hepaticaPlantCollectedFlag = true;
+		}
+
+		// Calculate the completion value based on the percentage of completed objectives
+		collectItemsQuest->AddCompletionValue((completedObjectives * 100) / totalObjectives);
+
+		// Check if all objectives are completed
+		if(completedObjectives == totalObjectives)
+		{
+			collect = true;
+			LOG("Quest completed: %s", app->questManager->GetQuestById(11)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+
+	if (!app->questManager->GetQuestById(11)->IsCompleted() and app->questManager->GetQuestById(7)->IsCompleted())
+		collectItemsQuest->SetActive(true);
+
+	Quest* defeatEnemiesQuest = app->questManager->GetQuestById(12);
+	defeatEnemiesQuest->SetCompletionAction([=, this]() -> bool {
+		static bool defeat;
+		int totalObjectives = 2; // total number of objectives
+		int completedObjectives = 0; // completed objectives
+
+		static bool enemy1KilledFlag = false;
+		static bool enemy2KilledFlag = false;
+
+		if(player->bestiary->enemy1Killed && !enemy1KilledFlag) {
+			completedObjectives++;
+			enemy1KilledFlag = true;
+		}
+		if(player->bestiary->enemy2Killed && !enemy2KilledFlag) {
+			completedObjectives++;
+			enemy2KilledFlag = true;
+		}
+
+		// Calculate the completion value based on the percentage of completed objectives
+		defeatEnemiesQuest->AddCompletionValue((completedObjectives * 100) / totalObjectives);
+
+		// Check if all objectives are completed
+		if(completedObjectives == totalObjectives)
+		{
+			defeat = true;
+			LOG("Quest completed: %s", app->questManager->GetQuestById(12)->GetTitle().GetString());
+			return true; // Add a return statement
+		}
+		return false; // Add a default return statement
+	});
+
+	if (!app->questManager->GetQuestById(12)->IsCompleted() and app->questManager->GetQuestById(7)->IsCompleted())
+		defeatEnemiesQuest->SetActive(true);
+
+	#pragma endregion Quests
 
 	if (freeCam)
 	{
@@ -278,15 +463,15 @@ bool ForestScene::Update(float dt)
 		player->pbody->body->SetTransform({ 380,283 }, 0);
 	}
 	//lvl6 a final
-	if (app->entityManager->GetPlayerEntity()->position.x >= 29111 && app->entityManager->GetPlayerEntity()->position.x <= 29184 && app->entityManager->GetPlayerEntity()->position.y >= 13696 && app->entityManager->GetPlayerEntity()->position.y <= 14208) {
+	if (enemyboss->dead && app->entityManager->GetPlayerEntity()->position.x >= 29111 && app->entityManager->GetPlayerEntity()->position.x <= 29184 && app->entityManager->GetPlayerEntity()->position.y >= 13696 && app->entityManager->GetPlayerEntity()->position.y <= 14208) {
 		player->pbody->body->SetTransform({ 673,295 }, 0);
 	}
 
 	//puzzle1
 	if (player->position.y > 4350 && player->position.x > 3776 && player->position.x < 4297 && !door1Closed && !puzzle1) {
 		door1Closed = true;
-		bushPbody = app->physics->CreateRectangle(4096, 4096, 512, 384, bodyType::STATIC);
-		bushPbody->ctype = ColliderType::LIMITS;
+		bushPbody1 = app->physics->CreateRectangle(4096, 4096, 512, 384, bodyType::STATIC);
+		bushPbody1->ctype = ColliderType::LIMITS;
 		int i= 4297;
 		/*if(i > 3776)
 		{
@@ -298,23 +483,19 @@ bool ForestScene::Update(float dt)
 		app->render->DrawTexture(bush, 3776, 3953, 0, 1.0f, 0.0f, 0.6f);
 	}
 
-	if (buttonList[0]->pisada && buttonList[1]->pisada && buttonList[2]->pisada && buttonList[3]->pisada && door1Closed && !puzzle1) {
-		puzzle1 = true;
-		app->audio->PlayFx(puzzleFx);
-		door1Closed = false;
-		int i = 3776;
-		/*if (i < 4297)
-		{
-			app->render->DrawTexture(bush, i + 1, 4000, 0, 1.0f);
-		}*/
-		app->physics->DestroyBody(bushPbody);
-	}
-
 	if ((buttonList[4]->pisada || buttonList[5]->pisada) && !puzzle1) {
 		for (int i = 0; i < 6; i++)
 		{
 			buttonList[i]->pisada = false;
 		}
+	}
+
+	if (buttonList[0]->pisada && buttonList[1]->pisada && buttonList[2]->pisada && buttonList[3]->pisada && door1Closed && !puzzle1) {
+		puzzle1 = true;
+		app->audio->PlayFx(puzzleFx);
+		door1Closed = false;
+		app->physics->DestroyBody(bushPbody1);
+		generateRandomPotion();
 	}
 
 
@@ -333,55 +514,99 @@ bool ForestScene::Update(float dt)
 	if (buttonBallList[0]->pisada && buttonBallList[1]->pisada && !puzzle2) {
 		puzzle2 = true;
 		app->audio->PlayFx(puzzleFx);
+		generateRandomPotion();
 	}
 
 
 	//puzzle 3
 
-	if (player->position.x > 26900 && player->position.y > 14066 && player->position.y < 144475 && !door3Closed && !puzzle3) {
+	if (player->position.x > 24340 && player->position.y > 14450 && player->position.y < 144859 && !door3Closed && !puzzle3) {
 		door3Closed = true;
-		bushPbody = app->physics->CreateRectangle(26668, 14311, 384, 512, bodyType::STATIC);
-		bushPbody->ctype = ColliderType::LIMITS;
-		int i = 4297;
-		/*if(i > 3776)
-		{
-			app->render->DrawTexture(bush, i-1, 4000, 0, 1.0f);
-		}*/
+		bushPbody2 = app->physics->CreateRectangle(24108, 14695, 384, 512, bodyType::STATIC);
+		bushPbody2->ctype = ColliderType::LIMITS;
 	}
 
 	if (door3Closed) {
-		app->render->DrawTexture(bush, 26386, 14166, 0, 1.0f, 90.0f, 0.6f);
+		app->render->DrawTexture(bush, 23826, 14550, 0, 1.0f, 90.0f, 0.6f);
 	}
 
 	if (buttonColourList[0]->colour == 2 && buttonColourList[1]->colour == 5 && buttonColourList[2]->colour == 1 && buttonColourList[3]->colour == 4 && buttonColourList[4]->colour == 3 && door3Closed && !puzzle3) {
 		puzzle3 = true;
 		app->audio->PlayFx(puzzleFx);
 		door3Closed = false;
-		int i = 3776;
-		/*if (i < 4297)
-		{
-			app->render->DrawTexture(bush, i + 1, 4000, 0, 1.0f);
-		}*/
-		app->physics->DestroyBody(bushPbody);
+		app->physics->DestroyBody(bushPbody2);
+		generateRandomPotion();
 	}
+
+	//boss2
+
+	if (player->position.x > 26900 && player->position.y > 14066 && player->position.y < 144475 && !doorBoss2Closed && !enemyboss->dead && puzzle3) {
+		doorBoss2Closed = true;
+		bushPbody3 = app->physics->CreateRectangle(26668, 14311, 384, 512, bodyType::STATIC);
+		bushPbody3->ctype = ColliderType::LIMITS;
+	}
+
+	if (doorBoss2Closed) {
+		app->render->DrawTexture(bush, 26386, 14166, 0, 1.0f, 90.0f, 0.6f);
+	}
+
+	if (doorBoss2Closed && enemyboss->dead) {
+		doorBoss2Closed = false;
+		app->physics->DestroyBody(bushPbody3);
+	}
+
+	//boss1
+
+	if (player->position.x > 24340 && player->position.y > 14450 && player->position.y < 144859 && !doorBossClosed && !puzzle3) {
+		doorBossClosed = true;
+		bushPbody4 = app->physics->CreateRectangle(26668, 14311, 384, 512, bodyType::STATIC);
+		bushPbody4->ctype = ColliderType::LIMITS;
+	}
+
+	if (doorBossClosed) {
+		app->render->DrawTexture(bush, 26386, 14166, 0, 1.0f, 90.0f, 0.6f);
+	}
+
+	if (doorBossClosed && puzzle3) {
+		doorBossClosed = false;
+		app->physics->DestroyBody(bushPbody4);
+	}
+
+
 
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
-		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(2816), PIXEL_TO_METERS(13568)), 0);
+		player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(180*128), PIXEL_TO_METERS(113*128)), 0);
 	}
 	
-	LOG("x: %i   y: %i", player->position.x, player->position.y);
+	//LOG("x: %i   y: %i", player->position.x, player->position.y);
 
 	if (player->deadPlayer) {
+		app->render->camera.lerpSpeed = 0.0f; 
+		//TODO: animation player death
 		if (loseScreen == nullptr) {
 			loseScreen = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "", { (int)windowW / 2 - 960, (int)windowH / 2 - 540 }, this, loseScreenTex);
+			paused = true; 
 		}
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && loseScreen != nullptr) {
+				paused = false;
 				player->vida = player->maxVida;
 				player->deadPlayer = false;
 				app->guiManager->RemoveGuiControl(loseScreen);
 				loseScreen = nullptr; 
 				app->sceneManager->ChangeScene("tavernscene");
-		
+		}
+	}
+
+	if (!player->deadPlayer && enemyboss->dead) {
+		app->render->camera.lerpSpeed = 0.0f;
+		if (winScreen == nullptr) {
+			winScreen = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 13, "", { (int)windowW / 2 - 960, (int)windowH / 2 - 540 }, this, winScreenTex);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && winScreen != nullptr) {
+			app->guiManager->RemoveGuiControl(winScreen);
+			winScreen = nullptr;
+			app->sceneManager->ChangeScene("tavernscene");
+
 		}
 	}
 

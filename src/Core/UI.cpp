@@ -12,6 +12,7 @@
 #include "Core/Physics.h"
 #include "Core/Window.h"
 #include "Core/UI.h"
+#include "Core/AnimationManager.h"
 #include "Utils/Easings.h"
 
 
@@ -63,6 +64,15 @@ bool UI::Start() {
 	Espada = app->tex->Load("Assets/UI/GUI/Armas/Espada.PNG");
 	Cetro = app->tex->Load("Assets/UI/GUI/Armas/Cetro.PNG");
 	Seleccion = app->tex->Load("Assets/UI/GUI/Seleccion.PNG");
+
+	//Bestiary animation
+	bestiarioOpen = *app->animationManager->GetAnimByName("bestiario-opening");
+	bestiarioOpen.speed = 1.0f;
+	bestiarioOpen.loop = false;
+
+	bestiarioClosed = *app->animationManager->GetAnimByName("bestiario-closed");
+	bestiarioClosed.speed = 1.0f;
+	bestiarioClosed.loop = false;
 
 	// Textures for the bestiary
 	bestiaryPage1Texture = app->tex->Load("Assets/UI/GUI/Bestiario/pag1/pag1.png");
@@ -226,6 +236,81 @@ bool UI::Update(float dt)
 	//Player UI
 	Player* player = app->entityManager->GetPlayerEntity();
 
+	//Draw New Potion Adquisitions
+	if(player)
+	{
+		for(Item* i: player->inventory.items)
+		{
+			if(i->name == "Celerita Potion")
+			{
+				if(PotionCeleritaQuantity < i->quantity){
+					PotionCeleritaAdded = true;
+					potionPopUpTimer.Start();
+				}
+				PotionCeleritaQuantity = i->quantity;
+			}
+			if(i->name == "Ether Potion")
+			{
+				if(PotionEtherQuantity < i->quantity){
+					PotionEtherAdded = true;
+					potionPopUpTimer.Start();
+				}
+				PotionEtherQuantity = i->quantity;
+			}
+			if(i->name == "Oblitius Potion")
+			{
+				if(PotionOblitiusQuantity < i->quantity){
+					PotionOblitiusAdded = true;
+					potionPopUpTimer.Start();
+				}
+				PotionOblitiusQuantity = i->quantity;
+			}
+			if(i->name == "Vita Potion")
+			{
+				if(PotionVitaQuantity < i->quantity){
+					PotionVitaAdded = true;
+					potionPopUpTimer.Start();
+				}
+				PotionVitaQuantity = i->quantity;
+			}
+		}
+
+		if(potionPopUpTimer.ReadSec() >= 2)
+		{
+			PotionCeleritaAdded = false;
+			PotionEtherAdded = false;
+			PotionOblitiusAdded = false;
+			PotionVitaAdded = false;
+		}
+		else
+		{
+			if(PotionCeleritaAdded)
+			{
+				app->render->DrawRectangle({ 1700, 800, 300, 50 }, 171, 58, 23, 255, true, false);
+				app->render->DrawTextureLegacy(celeritaPotion, 1700, 800, 0, 0, 0, 0.75f);
+				app->render->DrawText("Celerita Potion Added!", 1750, 815, 20, 20, { 255, 255, 255, 255 });
+			}
+			if(PotionEtherAdded)
+			{
+				app->render->DrawRectangle({ 1700, 800, 300, 50 }, 34, 44, 120, 255, true, false);
+				app->render->DrawTextureLegacy(etherPotion, 1700, 800, 0, 0, 0, 0.75f);
+				app->render->DrawText("Ether Potion Added!", 1750, 815, 20, 20, { 255, 255, 255, 255 });
+			}
+			if(PotionOblitiusAdded)
+			{
+				app->render->DrawRectangle({ 1700, 800, 300, 50 }, 75, 51, 121, 255, true, false);
+				app->render->DrawTextureLegacy(oblitiusPotion, 1700, 800, 0, 0, 0, 0.75f);
+				app->render->DrawText("Oblitius Potion Added!", 1750, 815, 20, 20, { 255, 255, 255, 255 });
+			}
+			if(PotionVitaAdded)
+			{
+				app->render->DrawRectangle({ 1700, 800, 300, 50 }, 25, 114, 82, 255, true, false);
+				app->render->DrawTextureLegacy(VitaPotion, 1700, 800, 0, 0, 0, 0.75f);
+				app->render->DrawText("Vita Potion Added!", 1750, 815, 20, 20, { 255, 255, 255, 255 });
+			}
+		}
+	}
+	
 	if(player != nullptr and app->sceneManager->GetCurrentScene()->name != "tavernscene"){
 
 
@@ -264,6 +349,7 @@ bool UI::Update(float dt)
 		SDL_SetTextureAlphaMod(Seleccion, 0);
 
 		app->render->DrawTextureLegacy(Seleccion, 235, 770, 0, 0);
+		#pragma endregion Dash
 
 		//Health Bar
 		#pragma region HealthBar
@@ -339,13 +425,23 @@ bool UI::Update(float dt)
 
 		#pragma endregion AbilitiesButtons
 
-		if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN) 
+		if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 			openBestiary = !openBestiary;
-
+			
 		if (openBestiary) {
-			switch (player->bestiary->currentPage) {
+			cleanedLoopBestiarioClosed = true;
+			app->render->DrawTextureLegacy(bestiarioOpen.texture, 0, 0, &bestiarioOpen.GetCurrentFrame(), 0);
+			bestiarioOpen.Update(dt);
+			if (bestiarioOpen.HasFinished()) {
+				if (cleanedLoopBestiarioOpen) {
+					bestiarioOpen.Reset();
+					bestiarioOpen.ResetLoopCount();
+					cleanedLoopBestiarioOpen = false;
+				}
+				switch (player->bestiary->currentPage) {
 				case 1:
 					app->render->DrawTextureLegacy(bestiaryPage1Texture, 0, 0, NULL, 0);
+					gameStarted = false;
 
 					#pragma region AbilitiesTextures
 					if (player->bestiary->swordAbility100Unlocked)
@@ -451,7 +547,22 @@ bool UI::Update(float dt)
 					app->render->DrawTextureLegacy(bestiaryPage5Texture, 0, 0, NULL, 0);
 					break;
 				}
+			}
 		};
+		
+		if (!openBestiary) {
+			if (!gameStarted) { // Skip the first play when the game starts
+				cleanedLoopBestiarioOpen = true;
+				app->render->DrawTextureLegacy(bestiarioClosed.texture, 0, 0, &bestiarioClosed.GetCurrentFrame(), 0);
+				bestiarioClosed.Update(dt);
+			}
+			if (cleanedLoopBestiarioClosed) {
+				bestiarioClosed.Reset();
+				bestiarioClosed.ResetLoopCount();
+				cleanedLoopBestiarioClosed = false;
+			}
+		}
+		
 		#pragma endregion Bestiary
 	}
 	
@@ -612,33 +723,47 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			app->entityManager->GetPlayerEntity()->bestiary->setPage(5);
 			break;
 		case 6:
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = true;
-			app->entityManager->GetPlayerEntity()->AbilitySword100();
+			if (app->entityManager->GetPlayerEntity()->abilityPoints >= 1)
+			{
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword100();
 
-			// disable other sword abilities
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility111Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility112Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility122Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility123Unlocked = false;
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
+
+				// disable other sword abilities
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility111Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility112Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility122Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility123Unlocked = false;
+			}
+			
 			break;
 		case 7:
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked = true;
-			app->entityManager->GetPlayerEntity()->AbilitySword110();
+			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1)
+			{
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword110();
 
-			// disable other sword abilities
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility111Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility112Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility122Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility123Unlocked = false;
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
+
+				// disable other sword abilities
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility111Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility112Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility122Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility123Unlocked = false;
+			}
+			
 			break;
 		case 8:
-			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked) {
+			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility111Unlocked = true;
 				app->entityManager->GetPlayerEntity()->AbilitySword111();
+
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -651,9 +776,11 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			break;
 		case 9:
-			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked) {
+			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility112Unlocked = true;
 				app->entityManager->GetPlayerEntity()->AbilitySword112();
+
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -667,21 +794,28 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 			
 		case 10:
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked = true;
-			app->entityManager->GetPlayerEntity()->AbilitySword120();
+			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilitySword120();
 
-			// disable other sword abilities
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility111Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility112Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility122Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->swordAbility123Unlocked = false;
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
+
+				// disable other sword abilities
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility110Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility111Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility112Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility122Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->swordAbility123Unlocked = false;
+
+			}
 			break;
 		case 11:
-			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked) {
+			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility122Unlocked = true;
 				app->entityManager->GetPlayerEntity()->AbilitySword122();
+
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -694,9 +828,11 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			break;
 		case 12:
-			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked) {
+			if (app->entityManager->GetPlayerEntity()->bestiary->swordAbility120Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility123Unlocked = true;
 				app->entityManager->GetPlayerEntity()->AbilitySword123();
+
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
 
 				// disable other sword abilities
 				app->entityManager->GetPlayerEntity()->bestiary->swordAbility100Unlocked = false;
@@ -709,33 +845,45 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			break;
 		case 13:
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = true;
-			app->entityManager->GetPlayerEntity()->AbilityStaff100();
+			if (app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff100();
 
-			// disable other staff abilities
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility111Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility112Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility122Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility123Unlocked = false;
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
+
+				// disable other staff abilities
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility111Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility112Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility122Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility123Unlocked = false;
+
+			}
 			break;
 		case 14:
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked = true;
-			app->entityManager->GetPlayerEntity()->AbilityStaff110();
+			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff110();
 
-			// disable other staff abilities
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility111Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility112Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility122Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility123Unlocked = false;
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
+
+				// disable other staff abilities
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility111Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility112Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility122Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility123Unlocked = false;
+
+			}
 			break;
 		case 15:
-			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked) {
+			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility111Unlocked = true;
 				app->entityManager->GetPlayerEntity()->AbilityStaff111();
+
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -748,9 +896,11 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			break;
 		case 16:
-			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked) {
+			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility112Unlocked = true;
 				app->entityManager->GetPlayerEntity()->AbilityStaff112();
+
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -763,21 +913,29 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			break;
 		case 17:
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked = true;
-			app->entityManager->GetPlayerEntity()->AbilityStaff120();
+			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1)
+			{
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked = true;
+				app->entityManager->GetPlayerEntity()->AbilityStaff120();
 
-			// disable other staff abilities
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility111Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility112Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility122Unlocked = false;
-			app->entityManager->GetPlayerEntity()->bestiary->staffAbility123Unlocked = false;
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
+
+				// disable other staff abilities
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility110Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility111Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility112Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility122Unlocked = false;
+				app->entityManager->GetPlayerEntity()->bestiary->staffAbility123Unlocked = false;
+
+			}
 			break;
 		case 18:
-			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked) {
+			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility122Unlocked = true;
 				app->entityManager->GetPlayerEntity()->AbilityStaff122();
+
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
@@ -790,9 +948,11 @@ bool UI::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			break;
 		case 19:
-			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked) {
+			if (app->entityManager->GetPlayerEntity()->bestiary->staffAbility120Unlocked and app->entityManager->GetPlayerEntity()->abilityPoints >= 1) {
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility123Unlocked = true;
 				app->entityManager->GetPlayerEntity()->AbilityStaff123();
+
+				app->entityManager->GetPlayerEntity()->abilityPoints -= 1;
 
 				// disable other staff abilities
 				app->entityManager->GetPlayerEntity()->bestiary->staffAbility100Unlocked = false;
