@@ -499,6 +499,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		app->audio->PlayFx(damagedSabrinaFx);
 		damage->emiting = true;
 		break;
+	case ColliderType::WINCONDITION:
+		winCondition = true; 
+		break;
 	}
 
 	

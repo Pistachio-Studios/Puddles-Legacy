@@ -30,6 +30,10 @@ bool Credits::Enter()
 
 	selectBack = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Back",  { 1262, 818, 200, 50 }, (Module*)this);
 
+	app->render->camera.target = nullptr;
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
+
 	return true;
 }
 

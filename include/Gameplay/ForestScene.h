@@ -53,6 +53,7 @@ public:
 	bool winCondition = false;
 	Player* player;
 	EnemyBoss* enemyboss;
+	PhysBody* winTrigger;
 
 private:
 

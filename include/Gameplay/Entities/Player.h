@@ -349,6 +349,8 @@ public:
 	bool ghostMode = false;
 
 	Light* playerLight = nullptr;
+
+	bool winCondition = false;
 };
 
 #endif // __PLAYER_H__
