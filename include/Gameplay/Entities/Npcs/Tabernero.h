@@ -32,6 +32,10 @@ public:
 
 	bool CleanUp() override;
 
+	void OnCollision(PhysBody* physA, PhysBody* physB) override;
+
+	void EndCollision(PhysBody* physA, PhysBody* physB) override;
+
 public:
 
 	const char* texturePath;

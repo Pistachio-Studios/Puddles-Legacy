@@ -10,6 +10,7 @@
 #include "Utils/Point.h"
 #include "Core/Physics.h"
 #include "Gameplay/Entities/Player.h"
+#include "Core/DialogManager.h"
 
 #include <cmath>
 #include <iostream>
@@ -50,13 +51,44 @@ bool Loco::Update(float dt)
 	Npc::Update(dt);
 
 	// TODO add to bestiary when player interacts with tabernero for the first time
-	if (Npc::bountytalked == true) {
-		app->entityManager->GetPlayerEntity()->bestiary->bountyUnlocked = true;
+	if (touchingNpc) {
+		app->render->DrawTexture(texture2, position.x - 60, position.y - 180);
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+			//sale dialogo
+			bountytalked = true;
+			app->dialogManager->StartDialog(32,36);
+			app->entityManager->GetPlayerEntity()->bestiary->bountyUnlocked = true;
+
+		}
 	}
 
 	return true;
 }
 
+void Loco::OnCollision(PhysBody* physA, PhysBody* physB) {
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		touchingNpc = true; 
+		break;
+	}
+}
+
+void Loco::EndCollision(PhysBody* physA, PhysBody* physB)
+{
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+	        
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		touchingNpc = false;
+		break;
+	}
+}
 
 bool Loco::CleanUp() {
 	Npc::CleanUp();
