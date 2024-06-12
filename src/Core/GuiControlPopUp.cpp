@@ -5,6 +5,7 @@
 #include "Core/Window.h"
 #include "Core/Textures.h"
 #include "Utils/Easings.h"
+#include "Utils/Log.h"
 
 GuiControlPopUp::GuiControlPopUp(uint32_t id, SDL_Rect bounds, SDL_Texture* texture) : GuiControl(GuiControlType::POPUP, id)
 {
@@ -15,6 +16,8 @@ GuiControlPopUp::GuiControlPopUp(uint32_t id, SDL_Rect bounds, SDL_Texture* text
 	//drawBasic = false;
 
 	//texture = app->tex->Load("Assets/UI/PopUps/settingsBackground.png");
+
+	controlEaseTimer = Timer();
 }
 
 GuiControlPopUp::~GuiControlPopUp()
@@ -26,6 +29,12 @@ bool GuiControlPopUp::Update(float dt)
 {
 	Easings easings = Easings();
 	float controlEase = easings.easeInQuad(controlEaseTimer.ReadMSec() / 200);
+
+	if(controlEase < 0.01f)
+	{
+		LOG("ControlEase: %f", controlEase);
+		LOG("ControlEaseTimer: %f", controlEaseTimer.ReadMSec() / 1000);
+	}
 
 	app->win->GetWindowSize(windowW, windowH);
 

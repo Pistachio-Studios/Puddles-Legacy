@@ -250,7 +250,7 @@ bool TavernScene::Update(float dt)
 		Inventory* playerInventory = &app->entityManager->GetPlayerEntity()->inventory; 
 		Item* potion; 
 		if (cauldronSelect != nullptr) {
-			ResetPotionPopUps();
+			//ResetPotionPopUps();
 			switch (type) {
 			case 1:
 				ManagePotionCreation(playerInventory, CeleritaPotionTex, NotCeleritaPotionTex, CrafteableCeleritaPotion, NotCrafteableCeleritaPotion); 
