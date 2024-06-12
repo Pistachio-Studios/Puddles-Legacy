@@ -8069,9 +8069,9 @@
   <properties>
    <property name="objectType" value="collider"/>
   </properties>
-  <object id="3" type="rectangle" x="2432" y="1755.67" width="1006.67" height="71.1667"/>
-  <object id="131" type="rectangle" x="2993.33" y="1826.34" width="96.0033" height="53.6667"/>
-  <object id="132" type="rectangle" x="2787.33" y="1829" width="104.67" height="50.1667"/>
+  <object id="3" type="rectangle" x="2432" y="1739.67" width="1006.67" height="71.1667"/>
+  <object id="131" type="rectangle" x="2993.33" y="1810.34" width="96.0033" height="53.6667"/>
+  <object id="132" type="rectangle" x="2787.33" y="1813" width="104.67" height="50.1667"/>
   <object id="4" type="rectangle" x="1008" y="749.333" width="405.333" height="40"/>
   <object id="5" type="rectangle" x="1113.33" y="1343" width="417.333" height="40"/>
   <object id="6" type="rectangle" x="1879.67" y="740.667" width="587" height="82.6667"/>
