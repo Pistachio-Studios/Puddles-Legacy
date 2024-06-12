@@ -30,12 +30,6 @@ bool GuiControlPopUp::Update(float dt)
 	Easings easings = Easings();
 	float controlEase = easings.easeInQuad(controlEaseTimer.ReadMSec() / 200);
 
-	if(controlEase < 0.01f)
-	{
-		LOG("ControlEase: %f", controlEase);
-		LOG("ControlEaseTimer: %f", controlEaseTimer.ReadMSec() / 1000);
-	}
-
 	app->win->GetWindowSize(windowW, windowH);
 
 	//TODO pre
