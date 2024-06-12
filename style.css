@@ -144,7 +144,6 @@ h2 {
 .right-image {
     position: absolute;
     right: 10px; /* Ajusta este valor según sea necesario */
-
 }
 
 .leftn-image {
@@ -160,6 +159,7 @@ h2 {
     bottom: 0px; /* Ajusta este valor según sea necesario */
     max-height: 80%; /* Ajusta este valor según sea necesario */
 }
+
 .title-container {
     display: flex;
     align-items: center;
@@ -182,7 +182,6 @@ h2 {
     margin: 0;
 }
 
-
 @media (max-width: 100px) {
     .left-image,
     .right-image,
@@ -190,6 +189,14 @@ h2 {
     .leftn-image {
         max-height: 20%; /* Ajusta este valor según sea necesario */
     }
+}
+
+.video-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .authors {
