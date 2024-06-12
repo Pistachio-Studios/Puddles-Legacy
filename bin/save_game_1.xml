@@ -57,15 +57,15 @@
 	<VideoPlayer />
 	<dialog_manager />
 	<questmanager>
-		<quests id="8" completed="false" active="true" />
-		<quests id="7" completed="false" active="true" />
-		<quests id="6" completed="false" active="true" />
-		<quests id="5" completed="false" active="true" />
-		<quests id="4" completed="false" active="true" />
-		<quests id="3" completed="false" active="true" />
+		<quests id="8" completed="false" active="false" />
+		<quests id="7" completed="false" active="false" />
+		<quests id="6" completed="false" active="false" />
+		<quests id="5" completed="false" active="false" />
+		<quests id="4" completed="false" active="false" />
+		<quests id="3" completed="false" active="false" />
 		<quests id="2" completed="false" active="false" />
-		<quests id="1" completed="false" active="true" />
-		<quests id="0" completed="true" active="false" />
+		<quests id="1" completed="false" active="false" />
+		<quests id="0" completed="false" active="false" />
 	</questmanager>
 	<UI />
 	<debugUI />

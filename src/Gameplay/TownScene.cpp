@@ -246,7 +246,7 @@ bool TownScene::Update(float dt)
 	Quest* dodingQuest = app->questManager->GetQuestById(2);
 	dodingQuest->SetCompletionAction([=, this]() -> bool {
 		static bool shift;
-		if(app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN)
+		if(app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN and (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN or app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) or app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN or app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		{
 			shift = true;
 			dodingQuest->AddCompletionValue(100);
@@ -281,13 +281,13 @@ bool TownScene::Update(float dt)
 
 	Quest* potionQuest = app->questManager->GetQuestById(4);
 	potionQuest->SetCompletionAction([=, this]() -> bool {
-		static bool potion, menu;
-		if(app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+		static bool potion = false, menu = false;
+		if(!potion && app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 		{
 			potion = true;
 			potionQuest->AddCompletionValue(100 / 2);
 		}
-		if(app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+		if(!menu && app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 		{
 			menu = true;
 			potionQuest->AddCompletionValue(100 / 2);
