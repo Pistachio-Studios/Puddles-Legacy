@@ -93,6 +93,7 @@ bool Player::Start() {
 	damagedSabrinaFx = app->audio->LoadFx(parameters.attribute("damagedSabrinaFx").as_string());
 	blockFx = app->audio->LoadFx(parameters.attribute("blockFx").as_string());
 	potionFx = app->audio->LoadFx(parameters.attribute("potionFx").as_string());
+	dashFx = app->audio->LoadFx(parameters.attribute("dashFx").as_string());
 
 	//Anims
 	SabrinaEspadaIdle = *app->animationManager->GetAnimByName("SabrinaEspadaIdle_1");

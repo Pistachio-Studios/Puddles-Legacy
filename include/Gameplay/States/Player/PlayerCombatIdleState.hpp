@@ -26,13 +26,13 @@ public:
 
             StateMachineReference->ChangeState("attack");
         }
-        else if (app->input->GetMouseButtonDown(3) || pad.l2 > 0.0f)
+        /*else if (app->input->GetMouseButtonDown(3) || pad.l2 > 0.0f)
         {
             StateMachineReference->ChangeState("block");
-        }
+        }*/
 
         if ( player->mana < 100.0f ) {
-            player->mana += player->manaRegeneration * (dt / 1000);
+            player->mana += player->manaRegeneration * (dt / 500);
         }
     }
     inline void Exit() override
