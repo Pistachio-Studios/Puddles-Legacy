@@ -246,7 +246,7 @@ bool TownScene::Update(float dt)
 	Quest* dodingQuest = app->questManager->GetQuestById(2);
 	dodingQuest->SetCompletionAction([=, this]() -> bool {
 		static bool shift;
-		if(app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN and (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN or app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) or app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN or app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		if(app->input->GetKey(SDL_SCANCODE_LSHIFT))
 		{
 			shift = true;
 			dodingQuest->AddCompletionValue(100);
