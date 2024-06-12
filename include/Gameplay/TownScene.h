@@ -56,6 +56,8 @@ private:
 	GuiControlLabel* gcLives;
 	GuiControlLabel* gcTime;
 
+	int Music;
+
 	bool paused = false;
 	bool exitPressed = false;
 	bool comesFromForest = false;

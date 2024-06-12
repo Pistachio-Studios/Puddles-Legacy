@@ -212,6 +212,7 @@ bool ForestScene::Enter()
 	bush = app->tex->Load("Assets/Maps/Forest-Scene/bush.PNG");
 
 	puzzleFx = app->audio->LoadFx(parameters.child("map").attribute("puzzleFxPath").as_string());
+	Music =app->audio->PlayMusic(parameters.child("map").attribute("ForestMusic").as_string());
 
 	door1Closed = false;
 	door3Closed = false;
@@ -222,6 +223,8 @@ bool ForestScene::Enter()
 	puzzle3 = false;
 
 	player->bestiary->forestUnlocked = true;
+
+
 
 	return true;
 }
@@ -636,8 +639,7 @@ bool ForestScene::Exit()
 // Called before quitting
 bool ForestScene::CleanUp()
 {
-	LOG("Freeing testscene");
-
+	app->audio->CleanUp();
 	app->tex->UnLoad(bush);
 
 	return true;

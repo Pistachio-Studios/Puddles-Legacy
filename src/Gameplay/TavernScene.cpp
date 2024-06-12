@@ -5,6 +5,7 @@
 #include "Core/Textures.h"
 #include "Utils/Timer.h"
 #include "Core/Window.h"
+#include "Core/Audio.h"
 #include "Gameplay/TavernScene.h"
 #include "Gameplay/Entities/Npcs/Tabernero.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
@@ -112,6 +113,8 @@ bool TavernScene::Enter()
 	NotOblitiusPotionTex = app->tex->Load("Assets/Textures/Potions/CreatePotion/NotCrafteableOblitiusPotion.png");
 
 	currentPotion = CeleritaPotionTex;
+
+	Music = app->audio->PlayMusic(parameters.child("map").attribute("TavernMusic").as_string());
 
 	return true;
 }
@@ -279,7 +282,7 @@ bool TavernScene::Exit()
 // Called before quitting
 bool TavernScene::CleanUp()
 {
-	LOG("Freeing testscene");
+		app->audio->CleanUp();
 	return true;
 }
 
