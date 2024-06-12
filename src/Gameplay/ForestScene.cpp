@@ -393,8 +393,8 @@ bool ForestScene::Update(float dt)
 	Quest* defeatEnemiesQuest = app->questManager->GetQuestById(12);
 	defeatEnemiesQuest->SetCompletionAction([=, this]() -> bool {
 		static bool defeat;
-		int totalObjectives = 2; // total number of objectives
-		int completedObjectives = 0; // completed objectives
+		static int totalObjectives = 2; // total number of objectives
+		static int completedObjectives = 0; // completed objectives
 
 		static bool enemy1KilledFlag = false;
 		static bool enemy2KilledFlag = false;
@@ -402,14 +402,15 @@ bool ForestScene::Update(float dt)
 		if(player->bestiary->enemy1Killed && !enemy1KilledFlag) {
 			completedObjectives++;
 			enemy1KilledFlag = true;
+			// Calculate the completion value based on the percentage of completed objectives
+			defeatEnemiesQuest->AddCompletionValue((completedObjectives * 100) / totalObjectives);
 		}
 		if(player->bestiary->enemy2Killed && !enemy2KilledFlag) {
 			completedObjectives++;
 			enemy2KilledFlag = true;
+			// Calculate the completion value based on the percentage of completed objectives
+			defeatEnemiesQuest->AddCompletionValue((completedObjectives * 100) / totalObjectives);
 		}
-
-		// Calculate the completion value based on the percentage of completed objectives
-		defeatEnemiesQuest->AddCompletionValue((completedObjectives * 100) / totalObjectives);
 
 		// Check if all objectives are completed
 		if(completedObjectives == totalObjectives)
