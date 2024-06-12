@@ -194,6 +194,7 @@ bool Wasp::SaveState(pugi::xml_node& node) {
 	pugi::xml_node WaspAttributes = node.append_child("enemies").append_child("Wasp");
 	WaspAttributes.append_attribute("x").set_value(this->position.x);
 	WaspAttributes.append_attribute("y").set_value(this->position.y);
+	WaspAttributes.append_attribute("lives").set_value(this->vida);
 
 	return true;
 }
@@ -204,6 +205,8 @@ bool Wasp::LoadState(pugi::xml_node& node)
 	// reset player physics
 	pbody->body->SetAwake(false);
 	pbody->body->SetAwake(true);
+
+	this->vida = node.child("enemies").child("Wasp").attribute("lives").as_float(); 
 
 	return true;
 }

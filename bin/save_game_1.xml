@@ -6,22 +6,70 @@
 	<audio />
 	<:anonymous />
 	<scene_manager>
-		<currentScene name="townscene" />
+		<currentScene name="tutorialscene" />
 	</scene_manager>
 	<:anonymous />
 	<animation_manager />
 	<entitymanager>
-		<player x="2790" y="2016" />
+		<player x="606" y="1982" lives="15" mana="95.0202408" Level="1">
+			<inventory name="Arnica Plant" quantity="0" />
+			<inventory name="Hepatica Plant" quantity="0" />
+			<inventory name="Comfrey Plant" quantity="0" />
+			<inventory name="Witch Hazel Plant" quantity="0" />
+			<inventory name="Hawthorn Plant" quantity="0" />
+			<inventory name="Vita Potion" quantity="0" />
+			<inventory name="Celerita Potion" quantity="0" />
+			<inventory name="Ether Potion" quantity="0" />
+			<inventory name="Oblitius Potion" quantity="0" />
+			<bestiary>
+				<pag1 mission1Completed="false" />
+				<pag1 mission2Completed="false" />
+				<pag1 swordAbility100Unlocked="false" />
+				<pag1 swordAbility110Unlocked="false" />
+				<pag1 swordAbility111Unlocked="false" />
+				<pag1 swordAbility112Unlocked="false" />
+				<pag1 swordAbility120Unlocked="false" />
+				<pag1 swordAbility122Unlocked="false" />
+				<pag1 swordAbility123Unlocked="false" />
+				<pag1 staffAbility100Unlocked="false" />
+				<pag1 staffAbility110Unlocked="false" />
+				<pag1 staffAbility111Unlocked="false" />
+				<pag1 staffAbility112Unlocked="false" />
+				<pag1 staffAbility120Unlocked="false" />
+				<pag1 staffAbility122Unlocked="false" />
+				<pag1 staffAbility123Unlocked="false" />
+				<pag2 enemy1Killed="false" />
+				<pag2 enemy2Killed="false" />
+				<pag2 enemy3Killed="false" />
+				<pag3 hepaticaPlantCollected="false" />
+				<pag3 comfreyPlantCollected="false" />
+				<pag3 hawthornPlantCollected="false" />
+				<pag3 witchhazelPlantCollected="false" />
+				<pag3 arnicaPlantCollected="false" />
+				<pag4 klausUnlocked="false" />
+				<pag4 bountyUnlocked="false" />
+			</bestiary>
+		</player>
 	</entitymanager>
 	<particleManager />
 	<lighting />
 	<guiManager />
 	<VideoPlayer />
 	<dialog_manager />
-	<questmanager />
+	<questmanager>
+		<quests id="8" completed="false" active="true" />
+		<quests id="7" completed="false" active="true" />
+		<quests id="6" completed="false" active="true" />
+		<quests id="5" completed="false" active="true" />
+		<quests id="4" completed="false" active="true" />
+		<quests id="3" completed="false" active="true" />
+		<quests id="2" completed="false" active="false" />
+		<quests id="1" completed="false" active="true" />
+		<quests id="0" completed="true" active="false" />
+	</questmanager>
 	<UI />
 	<debugUI />
 	<renderer>
-		<camera x="-1921" y="-1477" />
+		<camera x="289" y="-1443" />
 	</renderer>
 </game_state>
