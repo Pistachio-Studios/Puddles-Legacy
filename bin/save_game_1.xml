@@ -6,12 +6,12 @@
 	<audio />
 	<:anonymous />
 	<scene_manager>
-		<currentScene name="tutorialscene" />
+		<currentScene name="townscene" />
 	</scene_manager>
 	<:anonymous />
 	<animation_manager />
 	<entitymanager>
-		<player x="606" y="1982" lives="15" mana="95.0202408" Level="1">
+		<player x="2790" y="2016" lives="15" mana="95.0202408" Level="1">
 			<inventory name="Arnica Plant" quantity="0" />
 			<inventory name="Hepatica Plant" quantity="0" />
 			<inventory name="Comfrey Plant" quantity="0" />
@@ -70,6 +70,6 @@
 	<UI />
 	<debugUI />
 	<renderer>
-		<camera x="289" y="-1443" />
+		<camera x="-1921" y="-1477" />
 	</renderer>
 </game_state>
