@@ -36,7 +36,7 @@ public:
         attackValue = -attackRange / 2;
         playerLookingAngle = player->lookingAngle;
         attackSpeed = 500;
-        radius = 2.5;
+        radius = 3.5;
         attacking = false;
 
         if(player->mana <= 10.0f)

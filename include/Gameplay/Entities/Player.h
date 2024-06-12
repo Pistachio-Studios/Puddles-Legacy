@@ -321,7 +321,7 @@ public:
 	PhysBody* sword;
 
 	//soundFX
-	int footstep1Fx, footstep2Fx, footstep3Fx, footstep4Fx, swordSlashFx, firestaffFx, deathSabrinaFx, damagedSabrinaFx, blockFx, potionFx;
+	int footstep1Fx, footstep2Fx, footstep3Fx, footstep4Fx, swordSlashFx, firestaffFx, deathSabrinaFx, damagedSabrinaFx, blockFx, potionFx, dashFx;
 
 	int footstepFx[4];
 	int currentFootstepFx;
@@ -339,7 +339,7 @@ public:
 
 	Timer playerHurtCultdown;
 	Timer dashTimer;
-	float dashCultdown = 5.0f;
+	float dashCultdown = 2.0f;
 
 	// Steps sound timer
 	float timerSteps = 0.0f;
