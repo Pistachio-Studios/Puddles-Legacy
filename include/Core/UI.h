@@ -130,6 +130,7 @@ public:
 
 	uint windowW, windowH;
 
+	bool gameStarted = true;
 	bool openBestiary = false;
 	bool exitPressed = false;
 	bool mainMenuPressed = false;
@@ -150,6 +151,9 @@ public:
 
 	Animation bestiarioOpen, bestiarioClosed;
 	Animation* currentAnim = nullptr;
+
+	bool cleanedLoopBestiarioOpen = false;
+	bool cleanedLoopBestiarioClosed = false;
 
 	bool isAnimating = false;
 	bool openingAnimation = false;

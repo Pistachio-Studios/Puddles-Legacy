@@ -701,11 +701,10 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="422" name="bestiario-opening" tilewidth="1920" tileheight="1080" tilecount="9" columns="9">
-  <image source="Bestiario/bestiario-opening.png" width="17280" height="1080"/>
-  <tile id="0">
+ <tileset firstgid="422" name="bestiario-opening" tilewidth="1920" tileheight="1080" tilecount="10" columns="5">
+  <image source="Bestiario/bestiario-opening.png" width="9600" height="2160"/>
+  <tile id="1">
    <animation>
-    <frame tileid="0" duration="100"/>
     <frame tileid="1" duration="100"/>
     <frame tileid="2" duration="100"/>
     <frame tileid="3" duration="100"/>
@@ -714,11 +713,12 @@
     <frame tileid="6" duration="100"/>
     <frame tileid="7" duration="100"/>
     <frame tileid="8" duration="100"/>
+    <frame tileid="9" duration="100"/>
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="431" name="bestiario-closed" tilewidth="1920" tileheight="1080" tilecount="9" columns="9">
-  <image source="Bestiario/bestiario-closed.png" width="17280" height="1080"/>
+ <tileset firstgid="432" name="bestiario-closed" tilewidth="1920" tileheight="1080" tilecount="10" columns="5">
+  <image source="Bestiario/bestiario-closed.png" width="9600" height="2160"/>
   <tile id="8">
    <animation>
     <frame tileid="8" duration="100"/>
