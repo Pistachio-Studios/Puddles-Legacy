@@ -28,7 +28,7 @@ public:
 
         player = app->entityManager->GetPlayerEntity();
 
-        if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 3.0f && PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 13.0f)
+        if (PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) > 3.0f && PIXEL_TO_METERS(player->position.DistanceTo(enemyboss->position)) < 60.0f)
         {
             StateMachineReference->ChangeState("move");
             // AUDIO DONE dog idle

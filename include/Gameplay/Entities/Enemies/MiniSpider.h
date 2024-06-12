@@ -77,7 +77,7 @@ public:
 	ParticleGenerator* paralyzedParticles = nullptr;
 	
 	float vida = 21.0f;
-	float dano = 8.0f;
+	float dano = 4.0f;
 	float defense = 10.0f;
 
 	int angle;
