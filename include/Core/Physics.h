@@ -54,6 +54,7 @@ enum class ColliderType {
 	CAULDRON,
 	BUTTON,
 	BALL,
+	WINCONDITION,
 	UNKNOWN
 	// ..
 };
