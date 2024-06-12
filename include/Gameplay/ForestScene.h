@@ -82,7 +82,7 @@ private:
 
 	Ball* ballList[2];
 
-	int puzzleFx;
+	int puzzleFx, Music;
 
 	PhysBody* bushPbody1;
 	PhysBody* bushPbody2;

@@ -6,6 +6,7 @@
 #include "Core/SceneManager.h"
 #include "Core/GuiControl.h"
 #include "Core/GuiManager.h"
+#include "Core/Audio.h"
 #include "Gameplay/TownScene.h"
 #include "Gameplay/Entities/Npcs/Npc.h"
 #include "Gameplay/Entities/Npcs/Loco.h"
@@ -139,6 +140,8 @@ bool TownScene::Enter()
 	PhysBody* changeForest = app->physics->CreateRectangleSensor(1000, 1800, 100, 50, STATIC);
 	changeForest->ctype = ColliderType::CHANGESCENE;
 	changeForest->listener = player;
+
+	Music = app->audio->PlayMusic(parameters.child("map").attribute("TownMusic").as_string());
 
 	return true;
 }
@@ -443,7 +446,7 @@ bool TownScene::Exit()
 // Called before quitting
 bool TownScene::CleanUp()
 {
-	LOG("Freeing TownScene");
+	app->audio->CleanUp();
 
 	return true;
 }

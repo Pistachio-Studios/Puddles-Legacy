@@ -108,6 +108,8 @@ private:
 	int type = 1;
 
 	Timer* playingTime;
+
+	int Music;
 };
 
 #endif // __TAVERNSCENE_H__
