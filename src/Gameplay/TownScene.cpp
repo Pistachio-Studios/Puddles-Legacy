@@ -290,6 +290,7 @@ bool TownScene::Update(float dt)
 		if(!menu && app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 		{
 			menu = true;
+			player->inventory.AddItem("Vita Potion"); 
 			potionQuest->AddCompletionValue(100 / 2);
 		}
 		if(potion and menu)
