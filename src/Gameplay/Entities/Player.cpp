@@ -89,7 +89,6 @@ bool Player::Start() {
 	stepsFx = app->audio->LoadFx(parameters.attribute("stepsFx").as_string());
 	swordSlashFx = app->audio->LoadFx(parameters.attribute("swordSlashFx").as_string());
 	firestaffFx = app->audio->LoadFx(parameters.attribute("fireStaffFx").as_string());
-	deathSabrinaFx = app->audio->LoadFx(parameters.attribute("deathSabrinaFx").as_string());
 	damagedSabrinaFx = app->audio->LoadFx(parameters.attribute("damagedSabrinaFx").as_string());
 	blockFx = app->audio->LoadFx(parameters.attribute("blockFx").as_string());
 	potionFx = app->audio->LoadFx(parameters.attribute("potionFx").as_string());
@@ -302,7 +301,6 @@ bool Player::Update(float dt)
 	if (vida <= 0) {
 		vida = 0.0f;
 		deadPlayer = true;
-		app->audio->PlayFx(deathSabrinaFx);
 	}
 
 	experienceToNextLevel = level * 50;
