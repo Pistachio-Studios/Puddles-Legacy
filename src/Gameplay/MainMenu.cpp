@@ -191,8 +191,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			popUpOptions = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", popUpOptionsPos, this, settingsTexture);
 
 			SDL_Rect crossOButtonPos = { 
-				static_cast<int>(popUpOptionsPos.x + popUpOptionsPos.w), 
-				static_cast<int>(popUpOptionsPos.y), 
+				static_cast<int>(popUpOptionsPos.x + popUpOptionsPos.w/2 + 565), 
+				static_cast<int>(popUpOptionsPos.y + 120), 
 				30, 
 				30 
 			};
@@ -435,7 +435,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			popUpLoad = (GuiControlPopUp*)app->guiManager->CreateGuiControl(GuiControlType::POPUP, 4, "", popUpOptionsPos, this, settingsTexture);
 
 			// Create the cross button
-			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 100), static_cast<int>(windowH / 2 - 25), 30, 30 };
+			SDL_Rect crossOButtonPos = { static_cast<int>(windowW / 2 + 565), static_cast<int>(windowH / 2 - 365), 30, 30 };
 			crossOButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "X", crossOButtonPos, this);
 
 			// Create the saves slots
