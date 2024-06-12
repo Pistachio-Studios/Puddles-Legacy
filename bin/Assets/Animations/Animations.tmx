@@ -719,9 +719,8 @@
  </tileset>
  <tileset firstgid="432" name="bestiario-opening" tilewidth="1920" tileheight="1080" tilecount="10" columns="5">
   <image source="Bestiario/bestiario-opening.png" width="9600" height="2160"/>
-  <tile id="0">
+  <tile id="1">
    <animation>
-    <frame tileid="0" duration="100"/>
     <frame tileid="1" duration="100"/>
     <frame tileid="2" duration="100"/>
     <frame tileid="3" duration="100"/>
@@ -730,6 +729,7 @@
     <frame tileid="6" duration="100"/>
     <frame tileid="7" duration="100"/>
     <frame tileid="8" duration="100"/>
+    <frame tileid="0" duration="100"/>
    </animation>
   </tile>
  </tileset>
