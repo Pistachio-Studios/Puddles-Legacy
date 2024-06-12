@@ -144,7 +144,7 @@ bool UI::Start() {
 bool UI::Update(float dt)
 {
 	//Potions Inventory
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT) {
+	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_REPEAT) {
 
 		Easings easings = Easings();		
 		float sizeEase = easings.easeInQuad(potionEaseTimer.ReadMSec() / 200); //hint: from 0 to 1

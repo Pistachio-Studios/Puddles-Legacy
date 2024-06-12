@@ -237,7 +237,7 @@ bool Player::Update(float dt)
 		app->render->DrawTexture(texture, position.x - 40, position.y - 80);
 	}
 
-	app->render->DrawTexture(texture1, shadowPosition.x, shadowPosition.y);
+	app->render->DrawTexture(texture1, shadowPosition.x, shadowPosition.y, NULL, 1.0f, 0.0f, 1.0f, 2);
 
 	b2Vec2 mouseWorldPosition = { PIXEL_TO_METERS(app->input->GetMouseX()) + PIXEL_TO_METERS(-app->render->camera.x), PIXEL_TO_METERS(app->input->GetMouseY()) + PIXEL_TO_METERS(-app->render->camera.y) };
 
