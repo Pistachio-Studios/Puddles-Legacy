@@ -205,7 +205,7 @@ bool Player::Update(float dt)
 
 	if (currentClass == PlayerClass::KNIGHT)
 	{
-		defense = 15.0f;
+		defense = 10.0f;
 	}
 	else
 	{
@@ -507,7 +507,7 @@ bool Player::LoadState(pugi::xml_node& node)
 
 void Player::AbilitySword100() { // DONE
 	// Increase player strength +3
-	strength += 13.0f;
+	strength += 15.0f;
 }
 
 void Player::AbilitySword110() { // DONE
@@ -589,7 +589,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMYWASP:
 		if(playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
-			vida -= 5.0f;
+			vida -= 6.0f - (defense/2);
 			app->audio->PlayFx(damagedSabrinaFx);
 			damage->emiting = true;
 			playerHurtCultdown.Start();
@@ -598,7 +598,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMYSPIDER:
 		if (playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
-			vida -= 5.0f;
+			vida -= 8.0f - (defense / 2);
 			app->audio->PlayFx(damagedSabrinaFx);
 			damage->emiting = true;
 			playerHurtCultdown.Start();
@@ -607,14 +607,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMYBOSS:
 		if (playerHurtCultdown.ReadMSec() > 1000.0f)
 		{
-			vida -= 13.0f;
+			vida -= 13.0f - (defense / 2);
 			app->audio->PlayFx(damagedSabrinaFx);
 			damage->emiting = true;
 			playerHurtCultdown.Start();
 		}
 		break;
 	case ColliderType::BULLET:
-		vida -= 7.0f;
+		vida -= 7.0f - (defense / 2);
 		app->audio->PlayFx(damagedSabrinaFx);
 		damage->emiting = true;
 		break;
